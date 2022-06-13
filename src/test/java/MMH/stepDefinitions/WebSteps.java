@@ -180,6 +180,7 @@ public class WebSteps {
 
     @And("I navigate to {string} page")
     public void iNavigateToPage(String strAppointments) {
+        Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
         Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToBookAppointmentPage(strAppointments));
     }
 
@@ -193,22 +194,7 @@ public class WebSteps {
     public void iShouldSeeAllTheFutureDateAppointmentsInGridView() {
         demoPageContainer.appointmentsPage.getAllAppointmentDatesInGrid();
         Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAllAppointmentDatesInGrid());
-    }
 
-    @Then("I should see video icon in join tab in all appointment time")
-    public void iShouldSeeVideoIconInJoinTabInAllAppointmentTime() {
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
-        demoPageContainer.appointmentsPage.clickMaxvalue();
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoIcons());
-
-    }
-
-    @And("I should navigate to new window with Icons.")
-    public void iShouldNavigateToNewWindowWithIcons() {
-        demoPageContainer.appointmentsPage.clickFirstIcon();
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAllIcons());
-        demoPageContainer.appointmentsPage.clickEndIcon();
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
     }
 
     @And("I enter the phone appointment details {string}")
@@ -268,5 +254,38 @@ public class WebSteps {
     @And("I logout from tha application")
     public void iLogoutFromThaApplication() {
         Assert.assertTrue(demoPageContainer.homePage.clickLogoutButton());
+    }
+
+    @And("I enter reason to cancel appointment")
+    public void iEnterReasonToCancelAppointment() {
+        Assert.assertTrue(demoPageContainer.appointmentsPage.entereasonForCancelAppointment());
+    }
+
+    @When("I click cancel your appointment button")
+    public void iClickCancelYourAppointmentButton() {
+        Assert.assertTrue(demoPageContainer.appointmentsPage.clickCancelYourAppointment());
+    }
+
+    @Then("I should see Appointment cancelled message {string}")
+    public void iShouldSeeAppointmentCancelledMessage(String strAppointmentCancel) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentCancel);
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyCancelAppointmentMessage(lstDetails));
+    }
+
+    @Then("I should see all the all the video appointments invites sent from PMS Provider in grid view")
+    public void iShouldSeeAllTheAllTheVideoAppointmentsInvitesSentFromPMSProviderInGridView() {
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
+        demoPageContainer.appointmentsPage.clickMaxvalue();
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAlltheVideoAppointments());
+    }
+
+    @And("I join Video Consultation by clicking Join now Icon in Video invitations Gid {string}")
+    public void iJoinVideoConsultationByClickingJoinNowIconInVideoInvitationsGid(String strAllIcons) {
+        System.out.println("All Icons Value:::>>" + strAllIcons);
+        List<String> lstIcons = TestDataUtil.getListOfValue(strAllIcons);
+        demoPageContainer.appointmentsPage.clickFirstIcon();
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAllIcons(lstIcons));
+        demoPageContainer.appointmentsPage.clickEndIcon();
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
     }
 }
