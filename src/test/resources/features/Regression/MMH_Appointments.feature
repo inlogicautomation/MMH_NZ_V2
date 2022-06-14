@@ -1,6 +1,6 @@
 Feature: Appointments
 
-  @WEB @Mobile @Batch1
+  @WEB @Mobile @Batch1 @VideoCheck @Test1
   Scenario Template: Prep- User Successfully logs in to the MMH v2 Portal.
 
     Given As a user I am on MMH login Page
@@ -12,21 +12,21 @@ Feature: Appointments
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @APP @Batch1
+  @WEB @APP @Batch1 @Test1
   Scenario Template: S1 Patient Booking Appointment - Visit Appointment
 
     Given As a user I am on HomePage
     And I navigate to the "<Appointment>" page
     And I enter the visit appointment details "<Appointment_Details>"
     When I click confirm button
-    Then I should see details of created appointment "<Details_For_Appointment>"
+    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
     And I accept the terms & conditions and confirm my booking
     And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
     And I logout from tha application
 
     Examples:
-      | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         |
-      | Book Appointment | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &VISIT_APPOINTMENT_SUMMARY& |
+      | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
+      | Book Appointment | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &VISIT_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
   @WEB @Mobile @Batch1
   Scenario Template: Prep- User Successfully logs in to the MMH v2 Portal.
@@ -53,20 +53,20 @@ Feature: Appointments
       | Appointment         | Appointment_Cancel_Button        | Appointment_After_Cancel              |
       | Future Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
-  @WEB @APP @Batch1
+  @WEB @APP @Batch1 @VideoCheck
   Scenario Template: S2 - Patient Booking Appointment - Video Appointment
 
     Given As a user I am on HomePage
     And I navigate to the "<Appointment>" page
     And I enter the video appointment details "<Appointment_Details>"
     When I click confirm button
-    Then I should see details of created appointment "<Details_For_Appointment>"
+    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
     And I accept the terms & conditions and confirm my booking
     And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
 
     Examples:
-      | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         |
-      | Book Appointment | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &VIDEO_APPOINTMENT_SUMMARY& |
+      | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
+      | Book Appointment | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
   @WEB @APP @Batch1
   Scenario Template: S3 - Patient Booking Appointment - Visit in video slot Appointment
@@ -75,13 +75,13 @@ Feature: Appointments
     And I navigate to the "<Appointment>" page
     And I enter the video appointment details "<Appointment_Details>"
     When I click confirm button
-    Then I should see details of created appointment "<Details_For_Appointment>"
+    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
     And I accept the terms & conditions and confirm my booking
     And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
 
     Examples:
-      | Appointment      | Appointment_Details               | Details_For_Appointment              | Appointment_Summary                  |
-      | Book Appointment | &BOOK_VISIT_IN_VIDEO_APPOINTMENT& | &VISIT_IN_VIDEO_APPOINTMENT_DETAILS& | &VISIT_IN_VIDEO_APPOINTMENT_SUMMARY& |
+      | Appointment      | Appointment_Details               | Details_For_Appointment              | Appointment_Summary                  | Future_Date   |
+      | Book Appointment | &BOOK_VISIT_IN_VIDEO_APPOINTMENT& | &VISIT_IN_VIDEO_APPOINTMENT_DETAILS& | &VISIT_IN_VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
   @WEB @APP @Batch1
   Scenario Template: S4 - Patient Booking Appointment - Phone Appointment
@@ -90,13 +90,13 @@ Feature: Appointments
     And I navigate to the "<Appointment>" page
     And I enter the phone appointment details "<Appointment_Details>"
     When I click confirm button
-    Then I should see details of created appointment "<Details_For_Appointment>"
+    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
     And I accept the terms & conditions and confirm my booking
     And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
 
     Examples:
-      | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         |
-      | Book Appointment | &BOOK_PHONE_APPOINTMENT& | &PHONE_APPOINTMENT_DETAILS& | &PHONE_APPOINTMENT_SUMMARY& |
+      | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
+      | Book Appointment | &BOOK_PHONE_APPOINTMENT& | &PHONE_APPOINTMENT_DETAILS& | &PHONE_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
 
   @WEB @APP @Batch1
@@ -106,11 +106,11 @@ Feature: Appointments
     And I navigate to the "<Appointment>" page
     And I enter the visit appointment details "<Appointment_Details>"
     When I click confirm button
-    Then I should see details of created appointment "<Details_For_Appointment>"
+    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
 
     Examples:
-      | Appointment      | Appointment_Details                         | Details_For_Appointment                        |
-      | Book Appointment | &BOOK_VISIT_APPOINTMENT_USING_CARD_PAYMENT& | &VISIT_APPOINTMENT_DETAILS_USING_CARD_PAYMENT& |
+      | Appointment      | Appointment_Details                         | Details_For_Appointment                        | Future_Date   |
+      | Book Appointment | &BOOK_VISIT_APPOINTMENT_USING_CARD_PAYMENT& | &VISIT_APPOINTMENT_DETAILS_USING_CARD_PAYMENT& | &FUTURE_DATE& |
 
   @WEB @APP @S1 @Batch1
   Scenario Template: S5 - Patient Booking Appointment - Using Card Payment
@@ -170,11 +170,11 @@ Feature: Appointments
   @WEB @APP @Batch1
   Scenario Template: S9 - Patient can view all the video appointments invites sent from PMS/Provider in grid view
 
-    Given I am on "<Tab>" page
+    Given As a user I am on HomePage
     When I navigate to "<Appointments>" page
     Then I should see all the all the video appointments invites sent from PMS Provider in grid view
     And I join Video Consultation by clicking Join now Icon in Video invitations Gid "<All_Icons>"
 
     Examples:
-      | Tab               | Appointments      | All_Icons     |
-      | Past Appointments | Video Invitations | &VIDEO_ICONS& |
+      | Appointments      | All_Icons     |
+      | Video Invitations | &VIDEO_ICONS& |

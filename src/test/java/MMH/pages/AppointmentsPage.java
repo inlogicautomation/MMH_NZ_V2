@@ -391,7 +391,6 @@ public class AppointmentsPage extends BasePage {
             WebElement elmntTypeOfAppointment = waitForElement(By.xpath(elmntBookingType.replace("<<REPLACEMENT>>", strBookingType)));
             click(elmntTypeOfAppointment);
             waitForElement(elmntSpinner);
-            takeScreenshot(driver);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -399,11 +398,11 @@ public class AppointmentsPage extends BasePage {
         return blResult;
     }
 
-    public boolean selectFutureDateOnCalender() {
+    public boolean selectFutureDateOnCalender(String strFutureDate) {
         boolean blResult = false;
         try {
             String strDatePattern1 = "d";
-            String strDate = "AFTER_THREE_DAYS";
+            String strDate = strFutureDate;
 
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
             System.out.println("DATE" + strDateValue);
@@ -455,7 +454,6 @@ public class AppointmentsPage extends BasePage {
 //                lstAvailableSlots.get(i).click();
 //            }
 
-            takeScreenshot(driver);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -478,13 +476,13 @@ public class AppointmentsPage extends BasePage {
 
     }
 
-    public boolean verifyDetailsOfCreatedAppointment(List<String> lstDetails) {
+    public boolean verifyDetailsOfCreatedAppointment(List<String> lstDetails, String strFutureDate) {
         boolean blResult = false;
         try {
             waitForSeconds(2);
             waitForElement(elmntPaymentProfile);
             String strDatePattern1 = "dd/MM/yyyy";
-            String strDate = "AFTER_THREE_DAYS";
+            String strDate = TestDataUtil.getValue(strFutureDate);
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
             System.out.println("DATE" + strDateValue);
             WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strDateValue)));
@@ -504,7 +502,7 @@ public class AppointmentsPage extends BasePage {
                 waitForSeconds(2);
                 waitForElement(elmntPaymentProfile);
                 String strDatePattern1 = "dd/MM/yyyy";
-                String strDate = "AFTER_THREE_DAYS";
+                String strDate = TestDataUtil.getValue(strFutureDate);
                 String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
                 System.out.println("DATE" + strDateValue);
                 WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strDateValue)));
@@ -579,7 +577,7 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(2);
             waitForElement(elmntFutureAppointmentTab);
             String strDatePattern1 = "dd MMM yyyy";
-            String strDate = "AFTER_THREE_DAYS";
+            String strDate = TestDataUtil.getValue(lstDetails.get(2));
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
             System.out.println("DATE" + strDateValue);
 
@@ -609,19 +607,30 @@ public class AppointmentsPage extends BasePage {
         } catch (Exception e) {
             try {
                 waitForSeconds(2);
+                System.out.println("Catch Block 1 executed");
                 waitForElement(elmntFutureAppointmentTab);
                 String strDatePattern1 = "dd MMM yyyy";
-                String strDate = "AFTER_THREE_DAYS";
+                String strDate = TestDataUtil.getValue(lstDetails.get(2));
                 String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
                 System.out.println("DATE" + strDateValue);
                 String strDateMonth = strDateValue;
                 String strTime = strSlotDate;
-                String strFinalOutDateTime = strDateMonth + " " + strTime;
-                System.out.println(strFinalOutDateTime);
-                WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
-                verifyElement(elmntAppointmentDetails);
-                jsScrollIntoView(elmntAppointmentDetails);
-                WebElement elmntReservationDetails = waitForElement(By.xpath(elmntAppointmentDetailInFutureAppoinments.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0).replace("<<REPLACEMENT3>>", lstDetails.get(1)))));
+                String strFinalOutDateTime1 = strDateMonth + " " + strTime;
+                System.out.println(strFinalOutDateTime1);
+
+                WebElement elmntAppointmentDetails1 = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime1).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
+                verifyElement(elmntAppointmentDetails1);
+                jsScrollIntoView(elmntAppointmentDetails1);
+
+                System.out.println("TEST" + lstDetails.get(1));
+
+
+                System.out.println("TEST" + lstDetails.get(1));
+                WebElement elmntReservationDetails = waitForElement(By.xpath(elmntAppointmentDetailInFutureAppoinments
+                        .replace("<<REPLACEMENT1>>", strFinalOutDateTime1)
+                        .replace("<<REPLACEMENT2>>", lstDetails.get(0))
+                        .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
+                System.out.println("TEST" + lstDetails.get(1));
                 blResult = verifyElement(elmntReservationDetails);
             } catch (Exception d) {
                 e.printStackTrace();
@@ -1049,7 +1058,7 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(2);
             waitForElement(elmntFutureAppointmentTab);
             String strDatePattern1 = "dd MMM yyyy";
-            String strDate = "AFTER_THREE_DAYS";
+            String strDate = TestDataUtil.getValue(lstDetails.get(2));
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
             System.out.println("DATE" + strDateValue);
 
@@ -1086,7 +1095,7 @@ public class AppointmentsPage extends BasePage {
                 waitForSeconds(2);
                 waitForElement(elmntFutureAppointmentTab);
                 String strDatePattern1 = "dd MMM yyyy";
-                String strDate = "AFTER_THREE_DAYS";
+                String strDate = TestDataUtil.getValue(lstDetails.get(2));
                 String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
                 System.out.println("DATE" + strDateValue);
                 String strDateMonth = strDateValue;
@@ -1149,7 +1158,7 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(2);
             waitForElement(elmntFutureAppointmentTab);
             String strDatePattern1 = "dd MMM yyyy";
-            String strDate = "AFTER_THREE_DAYS";
+            String strDate = TestDataUtil.getValue(lstDetails.get(2));
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
             System.out.println("DATE" + strDateValue);
 
@@ -1177,6 +1186,7 @@ public class AppointmentsPage extends BasePage {
                     .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
             System.out.println("TEST" + lstDetails.get(1));
             verifyElement(elmntReservationDetails);;
+            takeScreenshot(driver);
             waitForSeconds(3);
             blResult = true;
 
@@ -1185,7 +1195,7 @@ public class AppointmentsPage extends BasePage {
                 waitForSeconds(2);
                 waitForElement(elmntFutureAppointmentTab);
                 String strDatePattern1 = "dd MMM yyyy";
-                String strDate = "AFTER_THREE_DAYS";
+                String strDate = TestDataUtil.getValue(lstDetails.get(2));
                 String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
                 System.out.println("DATE" + strDateValue);
                 String strDateMonth = strDateValue;
@@ -1203,7 +1213,8 @@ public class AppointmentsPage extends BasePage {
                         .replace("<<REPLACEMENT2>>", lstDetails.get(0))
                         .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
                 System.out.println("TEST" + lstDetails.get(1));
-                verifyElement(elmntReservationDetails);;
+                verifyElement(elmntReservationDetails);
+                takeScreenshot(driver);
                 waitForSeconds(3);
                 blResult = true;
                 blResult = true;
