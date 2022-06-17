@@ -234,8 +234,6 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.appointmentsPage.enterCVCNumber(TestDataUtil.getValue(lstPayOnlineDetails.get(3))));
         Assert.assertTrue(demoPageContainer.appointmentsPage.clickSubmitPayment());
         Assert.assertTrue(demoPageContainer.appointmentsPage.clickPaymentCheckOut());
-
-
     }
 
     @Then("I should see payment has been processed successfully with appointment details {string}")
@@ -248,11 +246,11 @@ public class WebSteps {
     public void iClickCancelButtonForTheCreatedAppointment(String strAppointmentCancel) {
         List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentCancel);
         Assert.assertTrue(demoPageContainer.appointmentsPage.clickCancelButtonForTheCreatedAppointment(lstDetails));
-
     }
 
     @And("I logout from tha application")
     public void iLogoutFromThaApplication() {
+
         Assert.assertTrue(demoPageContainer.homePage.clickLogoutButton());
     }
 
@@ -287,5 +285,11 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAllIcons(lstIcons));
         demoPageContainer.appointmentsPage.clickEndIcon();
         Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
+    }
+
+    @And("I navigate to Messages page {string}")
+    public void iNavigateToMessagesPage(String strMessages) {
+        Assert.assertTrue(demoPageContainer.homePage.clickMesagesExpandIcon());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToMessagesPage(strMessages));
     }
 }

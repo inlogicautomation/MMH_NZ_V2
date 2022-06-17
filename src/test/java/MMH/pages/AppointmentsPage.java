@@ -44,7 +44,10 @@ public class AppointmentsPage extends BasePage {
     protected String strAppointments = new StringBuilder().append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-name='healthCenter']")
+    protected String strMessages = new StringBuilder().append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]").toString();
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
     protected WebElement elmntHealtCenter;
 
     @FindBy(how = How.XPATH, using = "(//div[@class='toast toast-warning'])[1]")
@@ -59,7 +62,7 @@ public class AppointmentsPage extends BasePage {
     protected String elmntLocation = new StringBuilder().append("//h6[text()='")
             .append("<<REPLACEMENT>>").append("']").toString();
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-name='locationCenter']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationCenter']")
     protected WebElement elmntLocationCenter;
 
     @FindBy(how = How.XPATH, using = "//div[contains(@id,'cdk-overlay')]")
@@ -74,13 +77,13 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Close']//parent::button")
     protected WebElement elmntCloseAppointmentPreScreening;
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-name='personData']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='personData']")
     protected WebElement elmntFamilyMemberCenter;
 
     protected String elmntFamilyMember = new StringBuilder().append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-name='reason']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='reason']")
     protected WebElement elmntReason;
 
     protected String strReasonForAppointment = new StringBuilder().append("//span[contains(text(),'")
@@ -92,7 +95,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='doctor-list']")
     protected WebElement elmntProviderList;
 
-    protected String elmntBookingType = new StringBuilder().append("//a[contains(text(),'")
+    protected String elmntBookingType = new StringBuilder().append("//div[@class='mat-tab-links']//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
     protected String elmntSelectProvider = new StringBuilder().append("//div[@class='profile']//child::p[contains(text(),'")
@@ -126,9 +129,9 @@ public class AppointmentsPage extends BasePage {
 //    protected WebElement btnConfirmYourBookingEnabled;
 
     @FindAll({
-            @FindBy(how = How.XPATH, using = "//div[@id='desktop-view']//button[@ng-reflect-disabled='false']/span[text()='Confirm your booking now']"), // Without Fees
-            @FindBy(how = How.XPATH, using = "//div[@id='desktop-view']//button[@ng-reflect-disabled='false']/span[text()='Confirm & Continue']"),//With Fees
-            @FindBy(how = How.XPATH, using = "//div[@id='desktop-view']//button[@ng-reflect-disabled='false']/span[text()='Pay & Continue']"),//PayOnline
+            @FindBy(how = How.XPATH, using = "//div[@id='desktop-view']//button/span[text()='Confirm your booking now']"), // Without Fees
+            @FindBy(how = How.XPATH, using = "//div[@id='desktop-view']//button/span[text()='Confirm & Continue']"),//With Fees
+            @FindBy(how = How.XPATH, using = "//div[@id='desktop-view']//button/span[text()='Pay & Continue']"),//PayOnline
 
     })
     protected WebElement btnConfirmYourBookingEnabled;
@@ -150,7 +153,7 @@ public class AppointmentsPage extends BasePage {
             .append("<<REPLACEMENT2>>")
             .append("')]/ancestor::mat-card//child::div/p[contains(text(),'")
             .append("<<REPLACEMENT3>>")
-            .append("')]/ancestor::mat-card/child::mat-card-footer/button[@ng-reflect-disabled='false']").toString();
+            .append("')]/ancestor::mat-card/child::mat-card-footer/button").toString();
 
 
     protected String elmntDetailsAfterCancelingAppointment = new StringBuilder().append("(//mat-card//following-sibling::div//mat-card-title[contains(text(),'")
@@ -159,7 +162,7 @@ public class AppointmentsPage extends BasePage {
             .append("<<REPLACEMENT2>>")
             .append("')]/ancestor::mat-card//child::div/p[contains(text(),'")
             .append("<<REPLACEMENT3>>")
-            .append("')]/ancestor::mat-card/child::mat-card-footer/button[@ng-reflect-disabled='true'])[1]").toString();
+            .append("')]/ancestor::mat-card/child::mat-card-footer/button)[1]").toString();
 
 //    protected String elmntFutureAppointmentDetail = new StringBuilder().append("//mat-card-title[contains(text(),'")
 //            .append("<<REPLACEMENT>>").append("')]").toString();
@@ -198,13 +201,13 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Video Invitations')]")
     protected WebElement elmntVideoPage;
 
-    @FindBy(how = How.XPATH, using = "//td[@ng-reflect-logical-col-index='1']/mat-icon[contains(text(),'videocam')]")
+    @FindBy(how = How.XPATH, using = "//td/mat-icon[contains(text(),'videocam')]")
     protected List<WebElement> elmntsVideoIcons;
 
-    @FindBy(how = How.XPATH, using = "(//td[@ng-reflect-logical-col-index='1']/mat-icon[contains(text(),'videocam')])[1]")
+    @FindBy(how = How.XPATH, using = "(//td/mat-icon[contains(text(),'videocam')])[1]")
     protected WebElement elmntFirstVideoIcon;
 
-    @FindBy(how = How.XPATH, using = "(//td[@ng-reflect-logical-col-index='1']/mat-icon[contains(text(),'videocam')])[1]")
+    @FindBy(how = How.XPATH, using = "(//td/mat-icon[contains(text(),'videocam')])[1]")
     protected List<WebElement> elmntInsideAllIcons;
 
     @FindBy(how = How.XPATH, using = "//img[@title='Close']")
@@ -213,7 +216,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[contains(text(),'Yes')]")
     protected WebElement btnYes;
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-name='phoneCode']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='phoneCode']")
     protected WebElement elmntPhoneCode;
 
     @FindBy(how = How.XPATH, using = "//div[@class='alert-header-content']/h3[contains(text(),'Payment')]")
@@ -326,8 +329,8 @@ public class AppointmentsPage extends BasePage {
             waitForElementClickable(elmntCovidPreScreeningPopup);
             waitAndClick(elmntDeclineCovidPreScreening);
             waitForSeconds(2);
-            waitForElement(elmntAppointmentPreScreening);
-            waitAndClick(elmntCloseAppointmentPreScreening);
+//            waitForElement(elmntAppointmentPreScreening);
+//            waitAndClick(elmntCloseAppointmentPreScreening);
             blResult = verifyElement(elmntAppointmentPanel);
         } catch (Exception e) {
             e.printStackTrace();
@@ -481,7 +484,7 @@ public class AppointmentsPage extends BasePage {
         try {
             waitForSeconds(2);
             waitForElement(elmntPaymentProfile);
-            String strDatePattern1 = "dd/MM/yyyy";
+            String strDatePattern1 = "dd MMM yyyy";
             String strDate = TestDataUtil.getValue(strFutureDate);
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
             System.out.println("DATE" + strDateValue);
@@ -813,6 +816,7 @@ public class AppointmentsPage extends BasePage {
     }
 
     public void clickMaxvalue() {
+        waitForSeconds(3);
         waitForElement(elmntDownArrow);
         click(elmntDownArrow);
         elmntDownArrow.sendKeys(Keys.ARROW_DOWN);
@@ -832,6 +836,7 @@ public class AppointmentsPage extends BasePage {
 
     public boolean verifyAlltheVideoAppointments() {
         boolean isVerifed = false;
+        waitForSeconds(2);
         waitForElements(elmntsVideoIcons);
         int countVideoIcons = elmntsVideoIcons.size();
         int countTotalRow = elmntsAppointmentDatesInGrid.size();
@@ -1222,6 +1227,20 @@ public class AppointmentsPage extends BasePage {
                 e.printStackTrace();
             }
 
+        }
+        return blResult;
+    }
+
+    public boolean navigateToMessagesPage(String strMessages) {
+        boolean blResult = false;
+        try {
+            waitForElement(elmntWelcomeMessage);
+            WebElement elmntBookAppointment = waitForElement(By.xpath(strMessages.replace("<<REPLACEMENT>>", strMessages)));
+            click(elmntBookAppointment);
+            waitForElement(elmntAppointmentPanel);
+            blResult = verifyElement(elmntAppointmentPanel);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return blResult;
     }

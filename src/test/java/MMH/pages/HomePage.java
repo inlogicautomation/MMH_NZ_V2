@@ -42,6 +42,9 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[contains(@class,'header')]/span[text()='Appointments']//following-sibling::mat-icon")
     protected WebElement btnAppointmentExpand;
 
+    @FindBy(how = How.XPATH, using = "//a[contains(@class,'header')]/span[text()='Messages']//following-sibling::mat-icon")
+    protected WebElement btnMessagesExpand;
+
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Future Appointments')]")
     protected WebElement elmntFutureAppointment;
 
@@ -188,6 +191,14 @@ public class HomePage extends BasePage {
         waitForSeconds(120);
         waitForElement(txtEmail);
         return verifyElement(txtEmail);
+    }
+
+    public boolean clickMesagesExpandIcon() {
+        waitForSeconds(3);
+        waitForElement(elmntDashBoard);
+        waitForElement(btnMessagesExpand);
+        jsClick(btnMessagesExpand);
+        return verifyElement(elmntFutureAppointment);
     }
 }
 
