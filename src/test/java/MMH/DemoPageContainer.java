@@ -1,7 +1,6 @@
 package MMH;
 
 import MMH.pages.AppointmentsPage;
-import MMH.pages.MessagesPage;
 import cap.utilities.SharedDriver;
 
 import io.cucumber.java.After;
@@ -25,7 +24,7 @@ public class DemoPageContainer {
 
     public HomePage homePage;
     public AppointmentsPage appointmentsPage;
-    public MessagesPage messagesPage;
+
 
     public DemoPageContainer() {
         driver = SharedDriver.getDriver();
@@ -35,7 +34,6 @@ public class DemoPageContainer {
     private void initPages() {
         homePage = new HomePage(driver);
         appointmentsPage = new AppointmentsPage(driver);
-        messagesPage = new MessagesPage(driver);
     }
 
     @After("@WEB")
