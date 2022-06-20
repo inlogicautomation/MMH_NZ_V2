@@ -1,0 +1,1569 @@
+package MMH.pages;
+
+import cap.common.BasePage;
+import cap.utilities.TestDataUtil;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.Select;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+public class RepeatPrescription extends BasePage {
+
+    public RepeatPrescription(WebDriver driver){
+        super(driver);
+    }
+
+
+
+    @FindBy(how = How.XPATH, using = "//div[@class='navbar-header']")
+    protected WebElement elmntLogo;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Repeat Prescriptions')]")
+    protected WebElement elmntRepeatPrescriptions;
+
+    @FindBy(how = How.XPATH, using = "//mat-progress-spinner[@mode='indeterminate']")
+    protected WebElement elmntLoadingSpinner;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Request New Script')]")
+    protected WebElement elmntRequestNewScript;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'View Previous Requests')]")
+    protected WebElement elmntViewPreviousRequests;
+
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Request New Script')]")
+    protected WebElement txtRequestNewScript;
+
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'View History')]")
+    protected WebElement txtViewHistory;
+
+    @FindBy(how = How.XPATH, using = "(//a[text()='MORE INFO'])[1]")
+    protected WebElement elmntMoreInfo;
+
+    @FindBy(how = How.XPATH, using = "//h6[text()='Request Details']")
+    protected WebElement txtRequestDetails;
+
+    @FindBy(how = How.XPATH, using = "//h5[contains(text(),'REPEAT REQUEST')]")
+    protected WebElement txtRepeatRequest;
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-placeholder='Select Location' or  ng-reflect-name='Location']")
+    protected WebElement drpdownLocation;
+    protected String selectLocation = new StringBuilder()
+            .append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]/parent::mat-option").toString();
+
+
+    //(//mat-card-header/div[./mat-card-title[contains(text(),'13 Jun 2022')]][./mat-card-subtitle[contains(text(),'VM04Practice')]])[1]
+    protected String elmntDateAndHealthCenter = new StringBuilder()
+            .append("(//mat-card-header/div[./mat-card-title[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]][./mat-card-subtitle[contains(text(),'")
+            .append("<<REPLACEMENT1>>")
+            .append("')]])[1]").toString();
+
+    //    (//mat-card-header/div[./mat-card-subtitle[contains(text(),'VM04Practice')]])[1]
+    protected String elmntHealthCenter = new StringBuilder()
+            .append("(//mat-card-header/div[./mat-card-subtitle[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]])[1]").toString();
+
+    //div[@class='repeat-content-wrapper']//p[contains(text(),'')]
+    protected String elmntMoreInfoFields = new StringBuilder()
+            .append("//div[@class='repeat-content-wrapper']//p[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+
+    //h2[contains(text(),'')]
+    protected String elmntDoctorAndMedicine = new StringBuilder()
+            .append("//h2[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-placeholder='Select a Doctor' or  @name='clinicalUser']//span[text()]")
+    protected WebElement drpdownDoctor;
+
+    //span[text()=' Dr Tim ']
+    //mat-option/span[contains(text(),'Dr Tim')]
+    protected String selectDoctor = new StringBuilder()
+            .append("//mat-option/span[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-placeholder='Select script instructions' or ng-reflect-name='ScriptInstructions'] ")
+    protected WebElement drpdownInstructions;
+
+    //span[text()=' Dr Tim ']
+    protected String selectInstructions = new StringBuilder()
+            .append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-placeholder='Select script urgency' or @ng-reflect-name='ScriptUrgency']")
+    protected WebElement drpdownUrgrency;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Select Script Urgency')]/parent::mat-option")
+    protected WebElement elmntSelectScriptUrgency;
+
+    //span[contains(text(),'Fee: NZ')]
+    protected String elmntScriptUrgency = new StringBuilder()
+            .append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+
+    protected String selectUrgrency = new StringBuilder()
+            .append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+    //tr//td[contains(text(),'Panadol (Optizorb) 500mg Caplets')]/preceding-sibling::td/input
+    protected String chkMedication = new StringBuilder()
+            .append("//tr//td[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]/preceding-sibling::td/input").toString();
+
+    //input[@aria-label='Select All Rows']
+    @FindBy(how = How.XPATH, using = "//input[@aria-label='Select All Rows']")
+    protected WebElement chkAllMedication;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'mat-form-field')]/child::textarea[contains(@class,'mat-form-field')][@formcontrolname='MessageBody']")
+    protected WebElement txaMessage;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'I accept the Repeat Precriptions')]/preceding-sibling::mat-checkbox/label/div")
+    protected WebElement chkTermsAndCondion;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Pay at health centre')]")
+    protected WebElement btnPayAtHealthCentre;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Pay Now']")
+    protected WebElement btnPayNow;
+
+    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Payment')]")
+    protected WebElement txtPayment;
+
+    @FindBy(how = How.XPATH, using = "//h2[text()='Payment Checkout']")
+    protected WebElement txtPaymentCheckOut;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Transaction Approved') and @id='Success']")
+    protected WebElement elmntPaymentSuccessForCard;
+
+    @FindBy(how = How.XPATH, using = "//input[@name='CardNumber']")
+    protected WebElement txtboxCardNumber;
+
+    @FindBy(how = How.XPATH, using = "//input[@name='CardHolderName']")
+    protected WebElement txtboxNameOnCard;
+
+    @FindBy(how = How.XPATH, using = "//input[@name='CustomerId']")
+    protected WebElement txtboxCustomerNumber;
+
+    @FindBy(how = How.XPATH, using = "//input[@name='CustomerPassword']")
+    protected WebElement txtboxPassword;
+
+    @FindBy(how = How.XPATH, using = "//input[@name='Cvc2']")
+    protected WebElement txtboxCVC;
+
+    @FindBy(how = How.XPATH, using = "//input[@id='CreditCard' or @value='CreditCard']/parent::div")
+    protected WebElement btnCreditCard;
+
+    @FindBy(how = How.XPATH, using = "//div[text()='Submit']")
+    protected WebElement btnSubmit;
+
+    @FindBy(how = How.XPATH, using = "//a[text()='Next']")
+    protected WebElement btnNextCrdCard;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='alert alert-success m-t-40']/b[text()='Success']")
+    protected WebElement elmntOnlineCardSuccessPopUp;
+
+    @FindBy(how = How.XPATH, using = "//span[text()=' Back to RRP ']")
+    protected WebElement btnBackToRRP;
+
+    @FindBy(how = How.XPATH, using = "//input[@id='Account2Account' or @value='Account2Account']/parent::div")
+    protected WebElement btnAccount2Account;
+
+    @FindBy(how = How.XPATH, using = "//div[@id='PxPayAccount2AccountAuth_Logo' and @name='PxPayAccount2AccountAuth_Logo']")
+    protected WebElement txtAccount2Account;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Please enter the A2A test credentials:']")
+    protected WebElement txtA2ACredentials;
+
+    @FindBy(how = How.XPATH, using = "//h2[text()='Credit Card Payment']")
+    protected WebElement txtCreditCardPayment;
+
+    @FindBy(how = How.XPATH, using = "//div[text()='NEXT']")
+    protected WebElement btnNextA2A;
+
+    @FindBy(how = How.XPATH, using = "//div[@id='PxPayAccount2AccountAuth_PaymentSuccess' and @title='Payment Success']")
+    protected WebElement elmntSuccessA2A;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Thank you, your payment has completed successfully!']")
+    protected WebElement txtSuccessA2A;
+
+    @FindBy(how = How.ID, using = "TnC")
+    protected WebElement chkBoxA2ATnC;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Please select an account you would like us to deduct your payment from:']")
+    protected WebElement txtSelectAccountForPayment;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Please review the following references that will appear on your statement:']")
+    protected WebElement txtReferenceDetails;
+
+
+    @FindBy(how = How.XPATH, using = "//tr/td/span")
+    protected WebElement referenceDetails;
+
+    //input[@id='Account2Account' or @value='Account2Account']/parent::div
+    protected String paymentMethod = new StringBuilder()
+            .append("//input[@id='")
+            .append("<<REPLACEMENT>>")
+            .append("' or @value='")
+            .append("<<REPLACEMENT>>")
+            .append("']/parent::div").toString();
+
+    //label[contains(text(),'Payment Success')]/preceding-sibling::input[@name='SelectAccount']
+    protected String rdoBtnSelectAccount = new StringBuilder()
+            .append("//label[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]/preceding-sibling::input[@name='SelectAccount']").toString();
+
+
+    //input[@id='AnzNZ' and @name='SelectBank']
+    protected String rdoBtnBank = new StringBuilder()
+            .append("//input[@id='")
+            .append("<<REPLACEMENT>>")
+            .append("' and @name='SelectBank']").toString();
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'OK')]")
+    protected WebElement btnPaymentOk;
+
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Your request has been sent successfully. Once the request has been processed, you will get an email ')]")
+    protected WebElement emlntSuccessPopUp;
+
+    @FindBy(how = How.XPATH, using = "(//div[@class='repeat-card-block yellow ng-star-inserted'])[1]")
+    protected WebElement emlntPrescriptionStatus;
+
+    @FindBy(how = How.XPATH, using = "(//mat-card-title[@class='mat-card-title'])[1]")
+    protected WebElement txtPrescriptionDate;
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@name='ddlSelectOrSearchFax' or @placeholder='Select or search for a pharmacy']")
+    protected WebElement drpDownPharmacy;
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@name='ddlSelectorSearchDelivery' or @id='mat-select-28']")
+    protected WebElement drpDownSearchPharmacy;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Search Pharmacy')]")
+    protected WebElement ddlPharmacy;
+
+    @FindBy(how = How.XPATH, using = "(//button/preceding::div/h3[text()='Search Pharmacy'])[1]")
+    protected WebElement txtSearchPharmacyForSentScript;
+
+    @FindBy(how = How.XPATH, using = "(//button/preceding::div/h3[text()='Search Pharmacy'])[2]")
+    protected WebElement txtSearchPharmacyForDelivery;
+
+    @FindBy(how = How.XPATH, using = "(//mat-select[@ng-reflect-model='SearchPharmacy' or @id='mat-select-2'])[2]")
+    protected WebElement drpDownSelectForSentScript;
+
+    //mat-select[@ng-reflect-model='SearchPharmacy' and @id='mat-select-0']/descendant::span
+    @FindBy(how = How.XPATH, using = "(//mat-select[@ng-reflect-model='SearchPharmacy' or @id='mat-select-2'])[3]")
+    protected WebElement drpDownSelectForDelivery;
+
+
+    @FindBy(how = How.XPATH, using = "(//mat-select[@formcontrolname='PharmacyName' or @ng-reflect-placeholder='Select Pharmacy'])[1]")
+    protected WebElement drpDownSelectPharmacyForSentScript;
+
+    @FindBy(how = How.XPATH, using = "(//mat-select[@formcontrolname='PharmacyName' or @ng-reflect-placeholder='Select Pharmacy'])[2]")
+    protected WebElement drpDownSelectPharmacyForDelivery;
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@placeholder='Select City/Region']")
+    protected WebElement drpDownSelectCityRegion;
+
+    @FindBy(how = How.XPATH, using = "(//button//span[text()='Select'])[1]")
+    protected WebElement btnSelectForSentScript;
+
+    @FindBy(how = How.XPATH, using = "(//button//span[text()='Select'])[2]")
+    protected WebElement btnSelectForDelivery;
+
+    @FindBy(how = How.XPATH, using = "(//span[text()='Cancel'])[2]")
+    protected WebElement btnCancel;
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@name='selectOrAddDeliveryAddress' or @id='mat-select-52']")
+    protected WebElement drpDownAddress;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='field-list']")
+    protected List<WebElement> moreInfoFields;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='field-list']")
+    protected WebElement moreInfoField;
+
+
+    @FindBy(how = How.XPATH, using = "//select[@id='DateExpiry_1' or @name='DateExpiry_1']")
+    protected WebElement drpDownMonth;
+
+    @FindBy(how = How.XPATH, using = "//select[@id='DateExpiry_2' or @name='DateExpiry_2']")
+    protected WebElement drpDownYear;
+
+    //span[@class='mat-option-text' and contains(text(),'Find a pharmacy')]
+    protected String ddlSelect = new StringBuilder()
+            .append("//span[@class='mat-option-text' and contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+    //option[contains(text(),'24')]
+    protected String drpDownExpiryDate = new StringBuilder()
+            .append("//option[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+    protected String elmntMedicationFields = new StringBuilder()
+            .append("(//mat-card-content[@class='mat-card-content']/following::div[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')])[1]").toString();
+
+
+    protected String elmntMedicine = new StringBuilder()
+            .append("(//*[.='")
+            .append("<<REPLACEMENT>>")
+            .append("'])[1]").toString();
+
+    //mat-card-content/div/p[contains(text(),'Kevin Peterson')]
+    protected String elmntDoctorName = new StringBuilder()
+            .append("//mat-card-content/div/p[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+
+    //span[contains(text(),' 2: 456, demo')]
+    protected String ddlSelectAddress = new StringBuilder()
+            .append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+    //span[@class='mat-option-text' and contains(text(),'Chemist Warehouse Auckland')]
+    protected String ddlSelectPharmacy = new StringBuilder()
+            .append("//span[@class='mat-option-text' and contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+
+    //span[contains(text(),'Bay of Plenty')]
+    protected String ddlSelectCityRegion = new StringBuilder()
+            .append("//span[@class='mat-option-text' and contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+
+    public boolean navigateToHomePage() {
+        boolean blResult = false;
+        try {
+            waitForElementClickable(elmntLogo);
+            click(elmntLogo);
+            refreshPage();
+            waitForSeconds(3);
+            String pageTitle = driver.getTitle();
+            System.out.println("pageTitle >>> : " + pageTitle);
+            try {
+                pageTitle.equalsIgnoreCase("PostRegistration");
+
+                System.out.println("User on the HomePage and Verified the HomePage >>>>");
+                blResult = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("User not in the HomePage >>>>");
+            }
+
+
+        } catch (Exception e) {
+            System.out.println("Failed to Navigate the HomePage >>>>");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+
+
+    public boolean navigateToRequestNewScript() {
+        boolean blResult = false;
+        try {
+
+            waitForSeconds(3);
+            waitForElementClickable(elmntRepeatPrescriptions);
+            click(elmntRepeatPrescriptions);
+            waitForSeconds(3);
+            waitForElementClickable(elmntRequestNewScript);
+            click(elmntRequestNewScript);
+//            waitForInvisibilityOfElement(elmntLoadingSpinner);
+            blResult = verifyElement(txtRequestNewScript);
+            System.out.println("Navigated To Request Medication >>>>");
+
+        } catch (Exception e) {
+            System.out.println("Failed to Navigate To Request Medication >>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean navigateToViewPreviousRequests() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElementClickable(elmntRepeatPrescriptions);
+            mouseClick(elmntRepeatPrescriptions);
+            waitForSeconds(2);
+            waitForElementClickable(elmntViewPreviousRequests);
+            mouseClick(elmntViewPreviousRequests);
+//            waitForInvisibilityOfElement(elmntLoadingSpinner);
+
+            blResult = verifyElement(txtViewHistory);
+            System.out.println("Navigated To View Previous Scripts >>>>");
+
+        } catch (Exception e) {
+            System.out.println("Failed to Navigate To View Previous Scripts >>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean clickMoreInfo() {
+        boolean blResult = false;
+
+        try {
+            waitForSeconds(2);
+            waitForElement(txtViewHistory);
+            waitForElementClickable(elmntMoreInfo);
+            click(elmntMoreInfo);
+            waitForElement(txtRequestDetails);
+            blResult = verifyElement(txtRequestDetails);
+
+            System.out.println("Successfully Navigated to More info >>>> ");
+
+        } catch (Exception e) {
+
+            System.out.println("Failed to Navigated More info >>>> ");
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+
+    public boolean verifyMoreInfoDetails(String strMoreInfoDetails) {
+        boolean blResult = false;
+
+        try {
+
+            waitForSeconds(2);
+            waitForElement(txtRequestDetails);
+            waitForElement(txtRepeatRequest);
+
+            ArrayList<String> lstMoreInfoDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strMoreInfoDetails);
+
+            System.out.println("Contents of list >>> ::" + lstMoreInfoDetails);
+            System.out.println("Size of Contents >>> ::" + lstMoreInfoDetails.size());
+            List<String> strDetails = lstMoreInfoDetails.subList(1, 4);
+            System.out.println("\nContent of strDetails :: >>> " + strDetails);
+
+            WebElement DateAndHealthCenter = waitForElement(By.xpath(elmntDoctorAndMedicine.replace("<<REPLACEMENT>>", lstMoreInfoDetails.get(0))));
+            waitForSeconds(2);
+            System.out.println("Xpath for DateAndHealthCenter Field >>>>> : " + elmntDoctorAndMedicine.replace("<<REPLACEMENT>>", lstMoreInfoDetails.get(0)));
+            waitForElement(DateAndHealthCenter);
+            verifyElement(DateAndHealthCenter);
+            System.out.println("\n Verified DateAndHealthCenter >>>> \n");
+
+            for (String strDetail : strDetails) {
+                waitForSeconds(2);
+                System.out.println("\n Xpath for medicine Field >>>>> : " + elmntMoreInfoFields.replace("<<REPLACEMENT>>", strDetail));
+                WebElement medicineField = waitForElement(By.xpath(elmntMoreInfoFields.replace("<<REPLACEMENT>>", strDetail)));
+                waitForElement(medicineField);
+                System.out.println("verified medicineField >>> :: " + verifyElement(medicineField));
+
+            }
+            System.out.println("Xpath for DateAndHealthCenter Field >>>>> : " + elmntDoctorAndMedicine.replace("<<REPLACEMENT>>", lstMoreInfoDetails.get(4)));
+            WebElement medicine = waitForElement(By.xpath(elmntDoctorAndMedicine.replace("<<REPLACEMENT>>", lstMoreInfoDetails.get(4))));
+            waitForSeconds(2);
+            waitForElement(medicine);
+            verifyElement(medicine);
+            System.out.println("\n Verified medicine Name >>>> \n");
+
+            System.out.println("Xpath for doctorName Field >>>>> : " + elmntMoreInfoFields.replace("<<REPLACEMENT>>", lstMoreInfoDetails.get(5)));
+            WebElement requestStatus = waitForElement(By.xpath(elmntMoreInfoFields.replace("<<REPLACEMENT>>", lstMoreInfoDetails.get(5))));
+            waitForSeconds(2);
+            waitForElement(requestStatus);
+            verifyElement(requestStatus);
+
+            System.out.println("Successfully verified the More Info details>>>");
+            blResult = true;
+
+
+        } catch (Exception e) {
+
+            System.out.println("Failed to verify More Info Details info >>>> ");
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+
+    public boolean selectHealthCentreLocation(String strLocation) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElementClickable(drpdownLocation);
+            waitForSeconds(2);
+            jsClick(drpdownLocation);
+            System.out.println(" select Location Locator :: " + selectLocation.replace("<<REPLACEMENT>>", strLocation) + "\n");
+            WebElement ddlLocation = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
+            waitForElementClickable(ddlLocation);
+            waitForSeconds(2);
+            System.out.println("Location was selected in the Request Medication >>> ::");
+
+//            waitForInvisibilityOfElement(elmntLoadingSpinner);
+            mouseClick(ddlLocation);
+            System.out.println("Location was selected in the Request Medication");
+
+
+            blResult = true;
+
+
+        } catch (Exception e) {
+            System.out.println("Location not selected in the Request Medication");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean selectDoctor(String strDoctor) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(5);
+
+            waitForElement(drpdownDoctor);
+            click(drpdownDoctor);
+            waitForSeconds(2);
+
+            System.out.println("Doctor xpath >>> : " + selectDoctor.replace("<<REPLACEMENT>>", strDoctor));
+            WebElement ddlDoctor = waitForElement(By.xpath(selectDoctor.replace("<<REPLACEMENT>>", strDoctor)));
+            selectDoctor.replace("<<REPLACEMENT>>", strDoctor);
+            waitForElementClickable(ddlDoctor);
+            waitForSeconds(2);
+            mouseClick(ddlDoctor);
+            takeScreenshot(driver);
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Doctor not selected in the Request Medication");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean selectInstructions(String strInstruction) {
+        boolean blResult = false;
+        try {
+            waitForElementClickable(drpdownInstructions);
+            jsClick(drpdownInstructions);
+            waitForSeconds(2);
+            System.out.println(" SelectInstructions xpath >>> : " + selectInstructions.replace("<<REPLACEMENT>>", strInstruction));
+            WebElement ddlInstructions = waitForElement(By.xpath(selectInstructions.replace("<<REPLACEMENT>>", strInstruction)));
+            waitForElementClickable(ddlInstructions);
+            waitForSeconds(2);
+            mouseClick(ddlInstructions);
+//            waitForInvisibilityOfElement(elmntLoadingSpinner);
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Instructions not selected in the Request Medication");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean selectUrgency(String strUrgency) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElementClickable(drpdownUrgrency);
+            jsClick(drpdownUrgrency);
+            waitForSeconds(2);
+            System.out.println("Xpath for selectUrgrency Type >>> : " + selectUrgrency.replace("<<REPLACEMENT>>", strUrgency));
+            WebElement ddlUrgrencyType = waitForElement(By.xpath(selectUrgrency.replace("<<REPLACEMENT>>", strUrgency)));
+            waitForSeconds(2);
+            waitForElementClickable(ddlUrgrencyType);
+            mouseClick(ddlUrgrencyType);
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Failed to Select Urgency >>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean verifyScriptUrgencyPrice(List<String> strUrgencyPrice) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElementClickable(drpdownUrgrency);
+            jsClick(drpdownUrgrency);
+            waitForSeconds(2);
+            waitForElement(elmntSelectScriptUrgency);
+//            waitForElementClickable(elmntSelectScriptUrgency);
+
+            for (String urgencyPrice : strUrgencyPrice) {
+
+                System.out.println("Xpath for Element day Price >>>> : " + elmntScriptUrgency.replace("<<REPLACEMENT>>", urgencyPrice));
+                WebElement dayPrice = waitForElement(By.xpath(elmntScriptUrgency.replace("<<REPLACEMENT>>", urgencyPrice)));
+                blResult = verifyElement(dayPrice);
+
+                if (!blResult) {
+
+                    return blResult;
+                }
+            }
+            takeScreenshot(driver);
+
+
+        } catch (Exception e) {
+            System.out.println("Verify Script urgency price was Failed ");
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+
+    public boolean selectMedicationsToRepeat(String strMedication) {
+        boolean blResult = false;
+        try {
+
+            System.out.println("selectMedication XPath >>>>" + chkMedication.replace("<<REPLACEMENT>>", strMedication));
+            WebElement selectMedication = waitForElement(By.xpath(chkMedication.replace("<<REPLACEMENT>>", strMedication)));
+            waitForElementClickable(selectMedication);
+            jsClick(selectMedication);
+            waitForSeconds(2);
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Failed to Select Medications To Repeat >>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean addMessage(String strMessage) {
+        boolean blResult = false;
+        try {
+            waitForElementClickable(txaMessage);
+            click(txaMessage);
+            txaMessage.sendKeys(strMessage);
+            System.out.println("strMessage >>> :" + strMessage);
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Message is not added in the Request Medication");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean selectTermsAndCondition() {
+        boolean blResult = false;
+        try {
+            waitForElementClickable(chkTermsAndCondion);
+            click(chkTermsAndCondion);
+            takeScreenshot(driver);
+            System.out.println("Terms and Condition was selected in the Request Medication");
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Terms and Condition is not selected in the Request Medication");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean clickPayAtHealthCentre() {
+        boolean blResult = false;
+        try {
+            waitForElementClickable(btnPayAtHealthCentre);
+            click(btnPayAtHealthCentre);
+            System.out.println(" Successfully Selected Pay at Health centre Button >>>");
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Failed to Select Pay at Health centre Button >>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean clickPayNow() {
+        boolean blResult = false;
+        try {
+            waitForElementClickable(btnPayNow);
+            click(btnPayNow);
+            waitForSeconds(2);
+            takeScreenshot(driver);
+            System.out.println("Successfully clicked Pay now button >>>");
+            blResult = verifyElement(txtPayment);
+
+        } catch (Exception e) {
+            System.out.println("Failed to clicked Pay now button >>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean verifyTheSuccessAndNavigateToViewHistory() {
+        boolean blResult = false;
+        try {
+//            waitForElement(emlntSuccessPopUp);
+//            verifyElement(emlntSuccessPopUp);
+//      verifyElement(txtPayment);
+//            if (txtPayment.isDisplayed()){
+//            waitForElementClickable(btnPaymentOk);
+//            click(btnPaymentOk);}
+//            waitForSeconds(2);
+//         waitForInvisibilityOfElement(elmntLoadingSpinner);
+            waitForElement(txtViewHistory);
+            blResult = verifyElement(txtViewHistory);
+            System.out.println("Repeat Prescription was success  and Successfully to navigate the View History Page>>>>>>");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Repeat Prescription was not success and so failed to navigate to View History Page >>>");
+        }
+        return blResult;
+    }
+
+    public boolean verifyTheSuccessAndNavigateToPaymentPage() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtPayment);
+            verifyElement(txtPayment);
+            waitForElementClickable(btnPaymentOk);
+            click(btnPaymentOk);
+            waitForSeconds(2);
+//            waitForInvisibilityOfElement(elmntLoadingSpinner);
+            waitForElement(txtPaymentCheckOut);
+            blResult = verifyElement(txtPaymentCheckOut);
+            System.out.println("Repeat Prescription was success  and Successfully to navigate the View History Page>>>>>>");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Repeat Prescription was not success and so failed to navigate to View History Page >>>");
+        }
+        return blResult;
+    }
+
+
+    public boolean verifyThePaymentPage() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+//            waitForInvisibilityOfElement(elmntLoadingSpinner);
+            waitForElement(txtPaymentCheckOut);
+            blResult = verifyElement(txtPaymentCheckOut);
+            System.out.println("Successfully to verified the Payment Page >>>");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to verified the Payment Page >>>");
+        }
+        return blResult;
+    }
+
+    public boolean verifyThePrescriptionDetailsForDeliverMedsByPharmacyInCardView(String strPrescriptionDetails) {
+        boolean blResult = false;
+
+        try {
+            ArrayList<String> lstPrescriptionDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strPrescriptionDetails);
+
+            System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
+            List<String> strDetails = lstPrescriptionDetails.subList(2, 5);
+
+            System.out.println("\nContent of strDetails :: >>> " + strDetails);
+
+            waitForElement(txtViewHistory);
+            verifyElement(txtViewHistory);
+            waitForSeconds(3);
+            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+
+            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+
+            String currentDate = formatter.format(calendar.getTime());
+            System.out.println(currentDate);
+            System.out.println("currentDate >>>: " + currentDate);
+            String prescriptionDate = txtPrescriptionDate.getText();
+            System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
+            takeScreenshot(driver);
+            if (currentDate.equalsIgnoreCase(prescriptionDate)) {
+
+                System.out.println("Xpath for DateAndHealthCenter Field >>>>> :: " + elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0)));
+                WebElement healthCenter = waitForElement(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0))));
+                waitForSeconds(2);
+                waitForElement(healthCenter);
+                verifyElement(healthCenter);
+                System.out.println("\n Verified elmntHealthCenter >>>> \n");
+
+                for (String strDetail : strDetails) {
+                    waitForSeconds(2);
+                    System.out.println("Xpath for medicine Field >>>>> : " + elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail));
+                    WebElement medicineField = waitForElement(By.xpath(elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail)));
+                    waitForElement(medicineField);
+                    System.out.println("\n verified medicineField >>> :: " + verifyElement(medicineField));
+
+                }
+                System.out.println("Xpath for doctorName Field >>>>> : " + elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(5)));
+                WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(5))));
+                waitForSeconds(2);
+                waitForElement(doctorName);
+                verifyElement(doctorName);
+
+                System.out.println("Successfully verified the Prescription>>>");
+                blResult = true;
+            }
+            System.out.println("Prescription Status : " + emlntPrescriptionStatus.getText());
+        } catch (Exception e) {
+            System.out.println("verify The Prescription Details For Deliver Meds By Pharmacy In Card View was failed");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean verifyThePrescriptionDetailsForDeliverMedsByPharmacyByUsingCardInCardView(String strPrescriptionDetails) {
+        boolean blResult = false;
+
+        try {
+            waitForSeconds(2);
+            ArrayList<String> lstPrescriptionDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strPrescriptionDetails);
+
+            System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
+            List<String> strDetails = lstPrescriptionDetails.subList(2, 5);
+            System.out.println("\nContent of strDetails :: >>> " + strDetails);
+
+            waitForElement(txtViewHistory);
+            verifyElement(txtViewHistory);
+            waitForSeconds(2);
+            takeScreenshot(driver);
+            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+
+            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+
+            String currentDate = formatter.format(calendar.getTime());
+            System.out.println(currentDate);
+            System.out.println("currentDate >>>: " + currentDate);
+            String prescriptionDate = txtPrescriptionDate.getText();
+            System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
+
+            if (currentDate.equalsIgnoreCase(prescriptionDate)) {
+
+                System.out.println("Xpath for DateAndHealthCenter Field >>>>> : " + elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0)));
+                WebElement DateAndHealthCenter = waitForElement(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0))));
+                waitForSeconds(2);
+                waitForElement(DateAndHealthCenter);
+                verifyElement(DateAndHealthCenter);
+                System.out.println("\n Verified elmntHealthCenter >>>> \n");
+
+                for (String strDetail : strDetails) {
+                    waitForSeconds(2);
+                    WebElement medicineField = waitForElement(By.xpath(elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail)));
+                    System.out.println("\n Xpath for medicine Field >>>>> : " + medicineField);
+                    waitForElement(medicineField);
+                    System.out.println("verified medicineField >>> :: " + verifyElement(medicineField));
+
+                }
+
+                System.out.println("Xpath for doctorName Field >>>>> : " + elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(5)));
+                WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(5))));
+                waitForSeconds(2);
+                waitForElement(doctorName);
+                verifyElement(doctorName);
+
+                System.out.println("Successfully verified the Prescription>>>");
+                blResult = true;
+            }
+            System.out.println("Prescription Status : " + emlntPrescriptionStatus.getText());
+        } catch (Exception e) {
+            System.out.println("verify The Prescription Details For Deliver Meds By Pharmacy In Card View was failed ::>>>>");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean verifyThePrescriptionDetailsForSentScriptToPharmacyInCardView(String strPrescriptionDetails) {
+
+        boolean blResult = false;
+
+        try {
+            ArrayList<String> lstPrescriptionDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strPrescriptionDetails);
+
+            System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
+
+
+            List<String> strDetails = lstPrescriptionDetails.subList(2, 5);
+            System.out.println("\nContent of strDetails :: >>> " + strDetails);
+
+//          VM04Practice;
+//          panadol (optizorb) 500mg caplets(paracetamol);
+//          pending;
+//          Chemist Warehouse Auckland - Lower Queen St;
+//          48 Hours - Fee: NZ$21.00 (Incl. GST);
+//          Kevin Peterson
+            waitForElement(txtViewHistory);
+            verifyElement(txtViewHistory);
+            waitForSeconds(2);
+            takeScreenshot(driver);
+            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+
+            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+
+            String currentDate = formatter.format(calendar.getTime());
+            System.out.println(currentDate);
+            System.out.println("currentDate >>>: " + currentDate);
+            String prescriptionDate = txtPrescriptionDate.getText();
+            System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
+
+            if (currentDate.equalsIgnoreCase(prescriptionDate)) {
+
+                WebElement DateAndHealthCenter = waitForElement(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0))));
+                waitForSeconds(2);
+                System.out.println("Xpath for DateAndHealthCenter Field >>>>> : " + elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0)));
+                waitForElement(DateAndHealthCenter);
+                verifyElement(DateAndHealthCenter);
+                System.out.println("\n Verified elmntHealthCenter >>>> \n");
+
+                for (String strDetail : strDetails) {
+                    waitForSeconds(2);
+                    WebElement medicineField = waitForElement(By.xpath(elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail)));
+                    System.out.println("Xpath for medicine Field >>>>> : " + elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail));
+                    waitForElement(medicineField);
+                    System.out.println("\n verified medicineField >>> :: " + verifyElement(medicineField));
+//
+//                    if (!blResult){
+//                        break;
+//                    }
+                }
+                WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(5))));
+                waitForSeconds(2);
+                System.out.println("Xpath for doctorName Field >>>>> : " + elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(5)));
+                waitForElement(doctorName);
+                verifyElement(doctorName);
+
+                System.out.println("Successfully verified the Prescription>>>");
+                blResult = true;
+            }
+            System.out.println("Prescription Status : " + emlntPrescriptionStatus.getText());
+        } catch (Exception e) {
+            System.out.println(">>>>>>>>>>>>>>");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean verifyThePrescriptionDetailsForSentScriptByPostInCardView(String strPrescriptionDetails) {
+        boolean blResult = false;
+
+        try {
+            ArrayList<String> lstPrescriptionDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strPrescriptionDetails);
+
+            System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
+
+            List<String> strDetails = lstPrescriptionDetails.subList(2, 4);
+            System.out.println("\nContent of strDetails :: >>> " + strDetails);
+
+            waitForElement(txtViewHistory);
+            verifyElement(txtViewHistory);
+            waitForSeconds(2);
+            takeScreenshot(driver);
+            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+
+            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+
+            String currentDate = formatter.format(calendar.getTime());
+            System.out.println(currentDate);
+            System.out.println("currentDate >>>: " + currentDate);
+            String prescriptionDate = txtPrescriptionDate.getText();
+            System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
+
+            if (currentDate.equalsIgnoreCase(prescriptionDate)) {
+
+                WebElement DateAndHealthCenter = waitForElement(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0))));
+                waitForSeconds(2);
+                System.out.println("Xpath for DateAndHealthCenter Field >>>>> : " + elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0)));
+                waitForElement(DateAndHealthCenter);
+                verifyElement(DateAndHealthCenter);
+                System.out.println("\n Verified elmntHealthCenter >>>> \n");
+
+                for (String strDetail : strDetails) {
+                    waitForSeconds(2);
+                    WebElement medicineField = waitForElement(By.xpath(elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail)));
+                    System.out.println("Xpath for medicine Field >>>>> : " + elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail));
+                    waitForElement(medicineField);
+                    System.out.println("\n verified medicineField >>> :: " + verifyElement(medicineField));
+//
+//                    if (!blResult){
+//                        break;
+//                    }
+                }
+                WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(4))));
+                waitForSeconds(2);
+                System.out.println("Xpath for doctorName Field >>>>> : " + elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(4)));
+                waitForElement(doctorName);
+                verifyElement(doctorName);
+
+                System.out.println("Successfully verified the Prescription>>>");
+                blResult = true;
+            }
+            System.out.println("Prescription Status : " + emlntPrescriptionStatus.getText());
+        } catch (Exception e) {
+            System.out.println(">>>>>>>>>>>>>>");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean verifyThePrescriptionDetailsForPatientToCollectTheScriptInCardView(String strPrescriptionDetails) {
+        boolean blResult = false;
+        try {
+            ArrayList<String> lstPrescriptionDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strPrescriptionDetails);
+
+            System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
+
+            List<String> strDetails = lstPrescriptionDetails.subList(2, 4);
+            System.out.println("\nContent of strDetails :: >>> " + strDetails);
+
+//            VM04Practice;
+//            panadol (optizorb) 500mg caplets(paracetamol);
+//            pending;
+//            Next Day - Fee: NZ$12.00 (Incl. GST);
+//            Dr Tim
+            waitForElement(txtViewHistory);
+            verifyElement(txtViewHistory);
+            waitForSeconds(2);
+            takeScreenshot(driver);
+            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+
+            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+
+            String currentDate = formatter.format(calendar.getTime());
+            System.out.println(currentDate);
+            System.out.println("currentDate >>>: " + currentDate);
+            String prescriptionDate = txtPrescriptionDate.getText();
+            System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
+
+            if (currentDate.equalsIgnoreCase(prescriptionDate)) {
+
+                WebElement DateAndHealthCenter = waitForElement(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0))));
+                waitForSeconds(2);
+                System.out.println("Xpath for DateAndHealthCenter Field >>>>> : " + elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0)));
+                waitForElement(DateAndHealthCenter);
+                verifyElement(DateAndHealthCenter);
+                System.out.println("\n Verified elmntHealthCenter >>>> \n");
+
+                for (String strDetail : strDetails) {
+                    waitForSeconds(2);
+                    WebElement medicineField = waitForElement(By.xpath(elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail)));
+                    System.out.println("Xpath for medicine Field >>>>> : " + elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail));
+                    waitForElement(medicineField);
+                    System.out.println("\n verified medicineField >>> :: " + verifyElement(medicineField));
+//
+//                    if (!blResult){
+//                        break;
+//                    }
+                }
+                WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(4))));
+                waitForSeconds(2);
+                System.out.println("Xpath for doctorName Field >>>>> : " + elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(4)));
+                waitForElement(doctorName);
+                verifyElement(doctorName);
+
+                System.out.println("Successfully verified the Prescription>>>");
+                blResult = true;
+            }
+            System.out.println("Prescription Status : " + emlntPrescriptionStatus.getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(" Failed to verify the Prescription>>>");
+        }
+        return blResult;
+    }
+
+    public boolean verifyThePrescriptionDetailsInCardView1(String strPrescriptionDetails) {
+        boolean blResult = false;
+        try {
+            ArrayList<String> lstPrescriptionDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strPrescriptionDetails);
+
+            System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
+
+            List<String> strDetails = lstPrescriptionDetails.subList(2, 4);
+            System.out.println("\nContent of strDetails :: >>> " + strDetails);
+
+//            VM04Practice;
+//            panadol (optizorb) 500mg caplets(paracetamol);
+//            pending;
+//            Next Day - Fee: NZ$12.00 (Incl. GST);
+//            Dr Tim
+            waitForElement(txtViewHistory);
+            verifyElement(txtViewHistory);
+            waitForSeconds(2);
+            takeScreenshot(driver);
+            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+
+            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+
+            String currentDate = formatter.format(calendar.getTime());
+            System.out.println(currentDate);
+            System.out.println("currentDate >>>: " + currentDate);
+            String prescriptionDate = txtPrescriptionDate.getText();
+            System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
+
+            if (currentDate.equalsIgnoreCase(prescriptionDate)) {
+
+                WebElement DateAndHealthCenter = waitForElement(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0))));
+                waitForSeconds(2);
+                System.out.println("Xpath for DateAndHealthCenter Field >>>>> : " + elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0)));
+                waitForElement(DateAndHealthCenter);
+                verifyElement(DateAndHealthCenter);
+                System.out.println("\n Verified elmntHealthCenter >>>> \n");
+
+                for (String strDetail : strDetails) {
+                    waitForSeconds(2);
+                    WebElement medicineField = waitForElement(By.xpath(elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail)));
+                    System.out.println("Xpath for medicine Field >>>>> : " + elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail));
+                    waitForElement(medicineField);
+                    System.out.println("\n verified medicineField >>> :: " + verifyElement(medicineField));
+//
+//                    if (!blResult){
+//                        break;
+//                    }
+                }
+                WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(4))));
+                waitForSeconds(2);
+                System.out.println("Xpath for doctorName Field >>>>> : " + elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(4)));
+                waitForElement(doctorName);
+                verifyElement(doctorName);
+
+                System.out.println("Successfully verified the Prescription>>>");
+                blResult = true;
+            }
+            System.out.println("Prescription Status : " + emlntPrescriptionStatus.getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(" Failed to verify the Prescription>>>");
+        }
+        return blResult;
+    }
+
+    public boolean selectPharmacyForSentScriptToPharmacy() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElementClickable(drpDownPharmacy);
+            click(drpDownPharmacy);
+            waitForSeconds(2);
+            waitForElementClickable(ddlPharmacy);
+            click(ddlPharmacy);
+            blResult = true;
+
+
+        } catch (Exception e) {
+            System.out.println("Failed to select Pharmacy >>>>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean selectPharmacyForDeliveryMedsByPharmacy() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElementClickable(drpDownSearchPharmacy);
+            click(drpDownSearchPharmacy);
+            waitForSeconds(2);
+            waitForElementClickable(ddlPharmacy);
+            click(ddlPharmacy);
+            blResult = true;
+
+
+        } catch (Exception e) {
+            System.out.println("Failed to select Pharmacy >>>>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean selectPharmacyBySavedlistForSentScript(String strSelectType, String strSelectPharmacy) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtSearchPharmacyForSentScript);
+            verifyElement(txtSearchPharmacyForSentScript);
+            waitForSeconds(2);
+            waitForElementClickable(drpDownSelectForSentScript);
+            click(drpDownSelectForSentScript);
+            waitForSeconds(2);
+            WebElement selectType = waitForElement(By.xpath(ddlSelect.replace("<<REPLACEMENT>>", strSelectType)));
+            System.out.println("selectType XPath >>>" + ddlSelect.replace("<<REPLACEMENT>>", strSelectType));
+            mouseClick(selectType);
+            waitForSeconds(2);
+            waitForElementClickable(drpDownSelectPharmacyForSentScript);
+            click(drpDownSelectPharmacyForSentScript);
+            WebElement selectPharmacy = waitForElement(By.xpath(ddlSelectPharmacy.replace("<<REPLACEMENT>>", strSelectPharmacy)));
+            System.out.println("selectType XPath >>>" + ddlSelectPharmacy.replace("<<REPLACEMENT>>", strSelectPharmacy));
+            waitForSeconds(2);
+            mouseClick(selectPharmacy);
+            waitForSeconds(2);
+            waitForElementClickable(btnSelectForSentScript);
+            click(btnSelectForSentScript);
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println(" Failed to select Pharmacy By Savedlist >>>>>");
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+        return blResult;
+    }
+
+    public boolean selectPharmacyBySavedlistForDelivery(String strSelectType, String strSelectPharmacy) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtSearchPharmacyForDelivery);
+            verifyElement(txtSearchPharmacyForDelivery);
+            waitForSeconds(2);
+            waitForElementClickable(drpDownSelectForDelivery);
+            click(drpDownSelectForDelivery);
+            waitForSeconds(2);
+            WebElement selectType = waitForElement(By.xpath(ddlSelect.replace("<<REPLACEMENT>>", strSelectType)));
+            System.out.println("selectType XPath >>>" + selectType);
+            mouseClick(selectType);
+            waitForSeconds(2);
+            waitForElementClickable(drpDownSelectPharmacyForDelivery);
+            click(drpDownSelectPharmacyForDelivery);
+            WebElement selectPharmacy = waitForElement(By.xpath(ddlSelectPharmacy.replace("<<REPLACEMENT>>", strSelectPharmacy)));
+            System.out.println("selectType XPath >>>" + ddlSelectPharmacy.replace("<<REPLACEMENT>>", strSelectPharmacy));
+            waitForSeconds(2);
+            mouseClick(selectPharmacy);
+            waitForSeconds(2);
+            waitForElementClickable(btnSelectForDelivery);
+            click(btnSelectForDelivery);
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println(" Failed to select Pharmacy By Savedlist >>>>>");
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+        return blResult;
+    }
+
+    public boolean selectPharmacyByFindAPharmacy(String strSelectPharmacy) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+//            waitForElement(txtSearchPharmacy1);
+//            verifyElement(txtSearchPharmacy1);
+            waitForSeconds(2);
+            waitForElementClickable(drpDownSelectForSentScript);
+            click(drpDownSelectForSentScript);
+            WebElement selectPharmacy = waitForElement(By.xpath(ddlSelect.replace("<<REPLACEMENT>>", strSelectPharmacy)));
+            System.out.println("selectPharmacy XPath >>>" + ddlSelect.replace("<<REPLACEMENT>>", strSelectPharmacy));
+            click(selectPharmacy);
+            waitForElementClickable(drpDownSelectCityRegion);
+            click(drpDownSelectCityRegion);
+
+
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println();
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean selectAddress(String strSelectAddress) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtRequestNewScript);
+            verifyElement(txtRequestNewScript);
+            waitForSeconds(2);
+            waitForElementClickable(drpDownAddress);
+            click(drpDownAddress);
+            WebElement selectDdlAddress = waitForElement(By.xpath(ddlSelectAddress.replace("<<REPLACEMENT>>", strSelectAddress)));
+            System.out.println("ddlSelectAddress XPath >>>" + ddlSelectAddress.replace("<<REPLACEMENT>>", strSelectAddress));
+            waitForSeconds(2);
+            waitForElement(selectDdlAddress);
+            click(selectDdlAddress);
+
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Failed to Select Dropdown list Address >>>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean selectPaymentMethod(String strPaymentMethod) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtPaymentCheckOut);
+            verifyElement(txtPaymentCheckOut);
+            waitForSeconds(2);
+            WebElement selectPaymentMethod = waitForElement(By.xpath(paymentMethod.replace("<<REPLACEMENT>>", strPaymentMethod)));
+            System.out.println("selectPaymentMethod XPath >>>" + paymentMethod.replace("<<REPLACEMENT>>", strPaymentMethod));
+            waitForElementClickable(selectPaymentMethod);
+            click(selectPaymentMethod);
+            System.out.println("Successfully payment method was selected >>>>>");
+
+
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Failed to Select payment method  >>>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean enterCardDetails(String strCardNumber, String strNameOnCard, String strExpiryMonth, String strExpiryYear, String strCVC) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtCreditCardPayment);
+            verifyElement(txtCreditCardPayment);
+            waitForSeconds(2);
+            txtboxCardNumber.sendKeys(strCardNumber);
+            waitForSeconds(1);
+            txtboxNameOnCard.sendKeys(strNameOnCard);
+            waitForSeconds(2);
+            System.out.println("String strExpiryMonth >>> " + strExpiryMonth);
+            jsScroll();
+            waitForSeconds(2);
+
+            Select expiryMonth = new Select(driver.findElement
+                    (By.xpath("//select[@id='DateExpiry_1' or @name='DateExpiry_1']")));
+            expiryMonth.selectByVisibleText(strExpiryMonth);
+
+            waitForSeconds(2);
+            System.out.println("String strExpiryYear >>> " + strExpiryYear);
+
+            Select expiryYear = new Select(driver.findElement
+                    (By.xpath("//select[@id='DateExpiry_2' or @name='DateExpiry_2']")));
+            expiryYear.selectByVisibleText(strExpiryYear);
+
+            waitForSeconds(2);
+            waitForElement(txtboxCVC);
+            txtboxCVC.sendKeys(strCVC);
+            takeScreenshot(driver);
+            waitForElementClickable(btnSubmit);
+            click(btnSubmit);
+            System.out.println("Successfully Enter Card Details >>>>>");
+            blResult = verifyElement(elmntPaymentSuccessForCard);
+
+
+        } catch (Exception e) {
+            System.out.println("Failed to Enter Card Details >>>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean selectBank(String strBank) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtAccount2Account);
+            verifyElement(txtAccount2Account);
+            waitForSeconds(2);
+            WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
+            System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
+            waitForElementClickable(selectRdoBtnBank);
+            click(selectRdoBtnBank);
+            waitForElementClickable(chkBoxA2ATnC);
+            click(chkBoxA2ATnC);
+            waitForElementClickable(btnNextA2A);
+            click(btnNextA2A);
+
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Failed to Enter Account Details >>>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean enterAccountDetails(String strCustomerNumber, String strPassword) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtA2ACredentials);
+            verifyElement(txtA2ACredentials);
+            txtboxCustomerNumber.sendKeys(strCustomerNumber);
+            waitForSeconds(2);
+            txtboxPassword.sendKeys(strPassword);
+            waitForElementClickable(btnNextA2A);
+            click(btnNextA2A);
+
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Failed to Enter Account Details >>>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean selectAccountForPayment(String strAccountForPayment) {
+        boolean blResult = false;
+        try {
+
+            waitForElement(txtSelectAccountForPayment);
+            verifyElement(txtSelectAccountForPayment);
+            WebElement selectAccountForpayment = waitForElement(By.xpath(rdoBtnSelectAccount.replace("<<REPLACEMENT>>", strAccountForPayment)));
+            System.out.println("PaymentStatus Xpath >>>> " + rdoBtnSelectAccount.replace("<<REPLACEMENT>>", strAccountForPayment));
+            waitForElementClickable(selectAccountForpayment);
+            click(selectAccountForpayment);
+            waitForElementClickable(btnNextA2A);
+            takeScreenshot(driver);
+            click(btnNextA2A);
+            System.out.println("Select Account For Payment was Successful >>>");
+
+            blResult = verifyElement(txtReferenceDetails);
+        } catch (Exception e) {
+            System.out.println("Failed to Select Account For Payment >>>");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean referenceDetails() {
+        boolean blResult = false;
+        try {
+
+            waitForElement(txtReferenceDetails);
+            verifyElement(txtReferenceDetails);
+            waitForElement(referenceDetails);
+            System.out.println("reference Details >>>>> " + referenceDetails);
+            waitForElementClickable(btnNextA2A);
+            takeScreenshot(driver);
+            click(btnNextA2A);
+            waitForElement(elmntSuccessA2A);
+
+            System.out.println("Reference details was Successful >>>");
+            blResult = verifyElement(elmntSuccessA2A);
+        } catch (Exception e) {
+            System.out.println("Failed Reference details was Successful >>>");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean verifyPaymentSuccessForA2A() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntSuccessA2A);
+            waitForElement(txtSuccessA2A);
+            verifyElement(txtSuccessA2A);
+            waitForElementClickable(btnNextA2A);
+            click(btnNextA2A);
+
+            waitForElement(elmntOnlineCardSuccessPopUp);
+            waitForSeconds(1);
+            takeScreenshot(driver);
+            blResult = verifyElement(elmntOnlineCardSuccessPopUp);
+            System.out.println("Online Payment status was Successful >>>>>");
+        } catch (Exception e) {
+            System.out.println("Online Payment status was failed >>>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean verifyPaymentSuccessForCard() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntPaymentSuccessForCard);
+            verifyElement(elmntPaymentSuccessForCard);
+            waitForSeconds(2);
+            waitForElementClickable(btnNextCrdCard);
+            takeScreenshot(driver);
+            click(btnNextCrdCard);
+            waitForSeconds(2);
+            waitForElement(elmntOnlineCardSuccessPopUp);
+            waitForSeconds(1);
+            takeScreenshot(driver);
+            blResult = verifyElement(elmntOnlineCardSuccessPopUp);
+            System.out.println("Online cards Payment status was Successful >>>>>");
+        } catch (Exception e) {
+            System.out.println("Online Payment status was failed >>>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean verifyThePrescriptionDetails() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntOnlineCardSuccessPopUp);
+            verifyElement(elmntOnlineCardSuccessPopUp);
+            waitForSeconds(2);
+            takeScreenshot(driver);
+            waitForElementClickable(btnBackToRRP);
+            click(btnBackToRRP);
+
+            blResult = verifyElement(txtRequestNewScript);
+            System.out.println("verify The Prescription Details Online was Successful >>>>>");
+
+        } catch (Exception e) {
+            System.out.println("verify The Prescription Details Online was not Successful >>>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+
+}

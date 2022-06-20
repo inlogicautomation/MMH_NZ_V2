@@ -62,17 +62,17 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.homePage.verifyFutureAppoinmentsPage());
     }
 
-    @And("I switch to card view to see future appointments in card view")
-    public void iSwitchToCardViewToSeeFutureAppointmentsInCardView() {
-        demoPageContainer.homePage.clickCardView();
-        Assert.assertTrue(demoPageContainer.homePage.verifyAppointmentsInCardView());
-    }
+//    @And("I switch to card view to see future appointments in card view")
+//    public void iSwitchToCardViewToSeeFutureAppointmentsInCardView() {
+//        demoPageContainer.homePage.clickCardView();
+//        Assert.assertTrue(demoPageContainer.homePage.verifyAppointmentsInCardView());
+//    }
 
-    @And("I switch to grid view to see future appointments in grid view")
-    public void iSwitchToGridViewToSeeFutureAppointmentsInGridView() {
-        demoPageContainer.homePage.clickGridView();
-        Assert.assertTrue(demoPageContainer.homePage.verifyAppointmentsInGridView());
-    }
+//    @And("I switch to grid view to see future appointments in grid view")
+//    public void iSwitchToGridViewToSeeFutureAppointmentsInGridView() {
+//        demoPageContainer.homePage.clickGridView();
+//        Assert.assertTrue(demoPageContainer.homePage.verifyAppointmentsInGridView());
+//    }
 
     @And("I navigate to the {string} page")
     public void iNavigateToTheBookAAppointmentPage(String strAppointments) {
@@ -291,5 +291,323 @@ public class WebSteps {
     public void iNavigateToMessagesPage(String strMessages) {
         Assert.assertTrue(demoPageContainer.homePage.clickMesagesExpandIcon());
         Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToMessagesPage(strMessages));
+    }
+
+//    @Given("As a user I am on MMH login Page")
+//    public void asAUserIAmOnMMHLoginPage() {
+//        demoPageContainer.homePage.visit();
+////        Assert.assertTrue(demoPageContainer.homePage.waitForMMHLoginPage());
+//
+//    }
+
+//    @When("I enter {string} and {string}")
+//    public void iEnterEmailAddressAndPassword(String strEmail, String strPassword) {
+//        demoPageContainer.homePage.enterEmail(TestDataUtil.getValue(strEmail));
+//        demoPageContainer.homePage.enterpassword(TestDataUtil.getValue(strPassword));
+//
+//    }
+
+    @When("I enter {string} and {string} For Beta")
+    public void iEnterEmailAddressAndPasswordForBeta(String strEmail, String strPassword) {
+        demoPageContainer.homePage.enterEmailForBeta(TestDataUtil.getValue(strEmail));
+        demoPageContainer.homePage.enterpasswordForBeta(TestDataUtil.getValue(strPassword));
+
+    }
+
+//    @Then("I should see user successfully logs in to the MMH portal")
+//    public void iShouldSeeUserSuccessfullyLogsInToTheMMHPortal() {
+//        Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
+//    }
+
+//    @When("I click login button")
+//    public void iClickLoginButton() {
+//        demoPageContainer.homePage.clickLoginButton();
+//    }
+
+    @When("I click SignIn button")
+    public void iClickSignInButton() {
+        demoPageContainer.homePage.clickSignInButton();
+    }
+
+//    @Given("As a user I am on HomePage")
+//    public void asAUserIAmOnHomePage() {
+//        Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
+//    }
+//
+//    @When("I navigate to the Future Appointments page")
+//    public void iNavigateToTheFutureAppointmentsPage() {
+//        demoPageContainer.homePage.clickAppointmentOptionFromMenu();
+//    }
+//
+//    @Then("I should see all the future date booked appointments in future appointment page")
+//    public void iShouldSeeAllTheFutureDateBookedAppointmentsInFutureAppointmentPage() {
+//        Assert.assertTrue(demoPageContainer.homePage.verifyFutureAppoinmentsPage());
+//    }
+
+    @And("I switch to card view to see future appointments in card view")
+    public void iSwitchToCardViewToSeeFutureAppointmentsInCardView() {
+        demoPageContainer.homePage.clickCardView();
+        Assert.assertTrue(demoPageContainer.homePage.verifyAppointmentsInCardView());
+    }
+
+    @And("I switch to grid view to see future appointments in grid view")
+    public void iSwitchToGridViewToSeeFutureAppointmentsInGridView() {
+        demoPageContainer.homePage.clickGridView();
+        Assert.assertTrue(demoPageContainer.homePage.verifyAppointmentsInGridView());
+    }
+
+
+
+
+
+
+    @And("As a user I Accept Terms & Conditions and Click on Pay At Clinic")
+    public void asAUserIAcceptTermsConditionsAndClickOnPayAtClinic() {
+
+    }
+
+    @Then("As user I should see the created Appointment under the future Appointment Tab")
+    public void asUserIShouldSeeTheCreatedAppointmentUnderTheFutureAppointmentTab() {
+    }
+
+
+    @Given("As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription")
+    public void NavigateToRepeatMedicationPage() {
+        Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToRequestNewScript());
+
+    }
+
+    @And("I select the Medication details{string}")
+    public void SelectTheMedicationDetails(String strMedicationDetails) {
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(3)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicationDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(5)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+    }
+
+    @And("I should see the successful message and I navigate to view history of the Prescription")
+    public void NavigateToViewHistoryOfThePrescription() {
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyTheSuccessAndNavigateToViewHistory());
+
+
+    }
+
+
+    @Then("I should see the Prescription status Sent Script by Post{string}")
+    public void StatusOfThePrescription(String strMedicationDetails) {
+
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetailsForSentScriptByPostInCardView(strMedicationDetails));
+
+
+    }
+
+
+    @And("I select the Medication details for Sent Script by Pharmacy {string}")
+    public void MedicationDetailsForSentScriptByPharmacy(String strMedicationDetails) {
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForSentScriptToPharmacy());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedlistForSentScript(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(5)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicationDetails.get(6)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(7)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+    }
+
+    @And("I select the Medication details for Delivery Meds by Pharmacy {string}")
+    public void MedicationDetailsForDeliveryMedsByPharmacy(String strMedicationDetails) {
+
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForDeliveryMedsByPharmacy());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedlistForDelivery(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectAddress(lstMedicationDetails.get(5)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(6)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicationDetails.get(7)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(8)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+    }
+
+    @And("I select the Medication details for Delivery Meds by Pharmacy and Pay Online with Card {string}")
+    public void DeliveryMedsByPharmacyAndPayOnlineWithCard(String strMedicationDetails) {
+
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForDeliveryMedsByPharmacy());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedlistForDelivery(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectAddress(lstMedicationDetails.get(5)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(6)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicationDetails.get(7)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(8)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayNow());
+    }
+
+    @And("I enter the Card details on the Payment Page {string}")
+    public void EnterTheCardDetailsOnThePaymentPage(String strCardDetails) {
+
+        System.out.println("strCardDetails " + strCardDetails);
+        List<String> lstStrCardDetails = TestDataUtil.getListOfValue(strCardDetails);
+
+        System.out.println("\n >>> lstStrCardDetails : " + lstStrCardDetails);
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPaymentMethod(lstStrCardDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.enterCardDetails(lstStrCardDetails.get(1), lstStrCardDetails.get(2), lstStrCardDetails.get(3), lstStrCardDetails.get(4), lstStrCardDetails.get(5)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyPaymentSuccessForCard());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetails());
+
+    }
+
+    @And("I see the successful message and I navigate to Payment Page")
+    public void NavigateToPaymentPage() {
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyTheSuccessAndNavigateToPaymentPage());
+
+
+    }
+
+    @And("I enter the Account details on the Payment Page {string}")
+    public void iShouldEnterTheAccountDetailsOnThePaymentPage(String strAccountDetails) {
+
+        System.out.println("strCardDetails " + strAccountDetails);
+        List<String> lstStrAccountDetails = TestDataUtil.getListOfValue(strAccountDetails);
+
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPaymentMethod(lstStrAccountDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectBank(lstStrAccountDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.enterAccountDetails(lstStrAccountDetails.get(2), lstStrAccountDetails.get(3)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectAccountForPayment(lstStrAccountDetails.get((4))));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.referenceDetails());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyPaymentSuccessForA2A());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetails());
+    }
+
+    @Given("As a user I am on HomePage and navigate to View History Page in Repeat Prescription")
+    public void NavigateToViewHistoryPageInRepeatPrescription() {
+
+        Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToViewPreviousRequests());
+
+    }
+
+    @And("I click the more info option for Request repeat prescription on the view history")
+    public void iClickTheMoreInfoOptionForRequestRepeatPrescriptionOnTheViewHistory() {
+
+        Assert.assertTrue(demoPageContainer.repeatPrescription.clickMoreInfo());
+
+    }
+
+    @And("I select the {string}")
+    public void iSelectTheMedicationDetailsAndVerifyTheScriptUrgencyPrice(String strMedicationDetails) {
+
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+
+
+
+    }
+
+    @Then("I should see the Prescription status for Sent Script by Pharmacy{string}")
+    public void iShouldSeeThePrescriptionStatusForSentScriptByPharmacy(String strMedicationDetails) {
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetailsForSentScriptToPharmacyInCardView(strMedicationDetails));
+
+    }
+
+    @Then("I should see the Prescription status for Delivery Meds by Pharmacy{string}")
+    public void iShouldSeeThePrescriptionStatusForDeliveryMedsByPharmacy(String strMedicationDetails) {
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetailsForDeliverMedsByPharmacyInCardView(strMedicationDetails));
+
+    }
+
+    @Then("I see the status for Patient to collect the Prescription{string}")
+    public void iShouldSeeThePrescriptionStatusForPatientToCollectThePrescription(String strMedicationDetails) {
+
+//        System.out.println("MedicationDetails >>> :" +strMedicationDetails);
+//        List<String> lstMedicationDetails=TestDataUtil.getListOfValue(strMedicationDetails);
+//        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+//        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetailsForPatientToCollectTheScriptInCardView(strMedicationDetails));
+    }
+
+    @Given("As a user I am on beta MMH login Page")
+    public void asAUserIAmOnBetaMMHLoginPage() {
+
+        demoPageContainer.homePage.visit();
+        demoPageContainer.homePage.clickBetaLoginButton();
+
+
+    }
+
+
+    @Then("I should see the Prescription status for Request by card {string}")
+    public void iShouldSeeThePrescriptionStatusForRequestByCard(String strMedicationDetails) {
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+
+        Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToViewPreviousRequests());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetailsForDeliverMedsByPharmacyByUsingCardInCardView(strMedicationDetails));
+
+    }
+
+    @Then("I should see the more info details of the prescription in view history{string}")
+    public void iShouldSeeTheMoreInfoDetailsOfThePrescriptionInViewHistory(String strMoreInfoDetails) {
+
+        Assert.assertTrue(demoPageContainer.repeatPrescription.clickMoreInfo());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyMoreInfoDetails(strMoreInfoDetails));
+    }
+
+    @Then("I should verify the Script {string}")
+    public void iShouldVerifyTheScript(String strUrgencyDetails) {
+
+        System.out.println("MedicationDetails >>> :" + strUrgencyDetails);
+        List<String> lstUrgencyDetails = TestDataUtil.getListOfValue(strUrgencyDetails);
+        System.out.println("lstMedicationDetails >>> " + lstUrgencyDetails);
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgencyPrice(lstUrgencyDetails));
     }
 }

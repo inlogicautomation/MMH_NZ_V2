@@ -24,6 +24,9 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@id='Login']")
     protected WebElement btnLogin;
 
+    @FindBy(how = How.XPATH, using = "//span[text()='Login']")
+    protected WebElement betaLoginBtn;
+
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]")
     protected WebElement elmntWelcomeMessage;
 
@@ -72,6 +75,24 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//kendo-grid-group-panel[contains(@class,'grouping-header')]")
     protected WebElement elmntGroupingHeader;
 
+    @FindBy(how = How.XPATH, using = "//input[@data-placeholder='Email address']")
+    protected WebElement txtBoxEmail;
+
+
+    @FindBy(how = How.XPATH, using = "//input[@data-placeholder='Password']")
+    protected WebElement txtBoxPassword;
+
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Sign in']")
+    protected WebElement SignInBtn;
+
+
+
+    public void clickSignInButton() {
+        waitForElement(SignInBtn);
+        click(SignInBtn);
+    }
+
 
     public void visit() {
         visit(TestDataUtil.getValue("&URL&"));
@@ -79,10 +100,16 @@ public class HomePage extends BasePage {
 
     }
 
+    public void enterpasswordForBeta(String strPassword) {
+        waitForElementClickable(txtBoxPassword);
+        enterValue(txtBoxPassword, strPassword);
+    }
+
     public void enterEmail(String strEmail) {
         waitForElementClickable(txtEmail);
         enterValue(txtEmail, strEmail);
     }
+
 
 
     public boolean waitForMMHLoginPage() {
@@ -94,6 +121,11 @@ public class HomePage extends BasePage {
         return verifyElement(btnLogin);
     }
 
+
+    public void enterEmailForBeta(String strEmail) {
+        waitForElementClickable(txtBoxEmail);
+        enterValue(txtBoxEmail, strEmail);
+    }
     public void enterpassword(String strPassword) {
         waitForElementClickable(txtPassword);
         enterValue(txtPassword, strPassword);
@@ -102,6 +134,10 @@ public class HomePage extends BasePage {
     public void clickLoginButton() {
         waitForElement(btnLogin);
         click(btnLogin);
+    }
+    public void clickBetaLoginButton() {
+        waitForElement(betaLoginBtn);
+        click(betaLoginBtn);
     }
 
     public boolean verifyHomePageOfMMHPortal() {

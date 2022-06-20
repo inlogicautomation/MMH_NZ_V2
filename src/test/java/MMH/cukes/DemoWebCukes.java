@@ -4,9 +4,9 @@ package MMH.cukes;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-@CucumberOptions(features = {"src/test/resources/features/Regression"},
+@CucumberOptions(features = {"src/test/resources/features"},
         monochrome = true,
-        tags = "@APPOINTMENTS",
+        tags = "@BETA",
         glue = {"MMH"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

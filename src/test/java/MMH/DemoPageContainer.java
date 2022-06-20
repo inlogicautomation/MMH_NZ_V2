@@ -1,6 +1,7 @@
 package MMH;
 
 import MMH.pages.AppointmentsPage;
+import MMH.pages.RepeatPrescription;
 import cap.utilities.SharedDriver;
 
 import io.cucumber.java.After;
@@ -24,6 +25,7 @@ public class DemoPageContainer {
 
     public HomePage homePage;
     public AppointmentsPage appointmentsPage;
+    public RepeatPrescription repeatPrescription;
 
 
     public DemoPageContainer() {
@@ -34,6 +36,7 @@ public class DemoPageContainer {
     private void initPages() {
         homePage = new HomePage(driver);
         appointmentsPage = new AppointmentsPage(driver);
+        repeatPrescription = new RepeatPrescription(driver);
     }
 
     @After("@WEB")
