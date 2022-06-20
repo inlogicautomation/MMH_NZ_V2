@@ -1,6 +1,7 @@
 package MMH;
 
 import MMH.pages.AppointmentsPage;
+import MMH.pages.MyHealthRecordsPage;
 import MMH.pages.RepeatPrescription;
 import cap.utilities.SharedDriver;
 
@@ -27,6 +28,8 @@ public class DemoPageContainer {
     public AppointmentsPage appointmentsPage;
     public RepeatPrescription repeatPrescription;
 
+    public MyHealthRecordsPage myHealthRecordsPage;
+
 
     public DemoPageContainer() {
         driver = SharedDriver.getDriver();
@@ -37,6 +40,7 @@ public class DemoPageContainer {
         homePage = new HomePage(driver);
         appointmentsPage = new AppointmentsPage(driver);
         repeatPrescription = new RepeatPrescription(driver);
+        myHealthRecordsPage = new MyHealthRecordsPage(driver);
     }
 
     @After("@WEB")

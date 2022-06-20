@@ -564,4 +564,24 @@ public class BasePage {
         String trimmedUrl = StringUtils.substringBefore(currentWindowUrl, separator) + separator;
         return trimmedUrl.equals(urlToCompare);
     }
+    protected Boolean waitForInvisibility(By by) {
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+    }
+
+    public boolean notVerifyElement(By by) {
+        boolean isVerify = false;
+        try {
+            WebElement element = driver.findElement(by);
+            if (element.isDisplayed()) {
+                isVerify = false;
+            } else {
+                isVerify = true;
+            }
+
+        } catch (NoSuchElementException error) {
+            isVerify = true;
+        }
+        return isVerify;
+    }
+
 }
