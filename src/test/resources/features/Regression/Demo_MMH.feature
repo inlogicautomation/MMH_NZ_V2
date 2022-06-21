@@ -1,6 +1,6 @@
 Feature: MMH Demo
 
-  @WEB @Mobile
+  @WEB @Mobile @Login
   Scenario Template: S1- User Successfully logs in to the MMH v2 Portal.
 
     Given As a user I am on MMH login Page

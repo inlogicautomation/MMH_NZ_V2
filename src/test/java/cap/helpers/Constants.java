@@ -59,6 +59,7 @@ public class Constants {
     public static final String GECKO_DRIVER_PATH = CONFIG_FOLDER + "/" + DRIVERS_FOLDER + "/" + "geckodriver.exe";
     public static final String CHROME_DRIVER_PATH = CONFIG_FOLDER + "/" + DRIVERS_FOLDER + "/" + "chromedriver.exe";
     public static final String IE_DRIVER_PATH = CONFIG_FOLDER + "/" + DRIVERS_FOLDER + "/" + "IEDriverServer1.exe";
+    public static final String EDGE_DRIVER_PATH = CONFIG_FOLDER + "/" + DRIVERS_FOLDER + "/" + "msedgedriver.exe";
 
     //Drivers mac
     public static final String GECKO_DRIVER_MAC_PATH = CONFIG_FOLDER + "/" + DRIVERS_FOLDER + "/" + "geckodriver_mac";

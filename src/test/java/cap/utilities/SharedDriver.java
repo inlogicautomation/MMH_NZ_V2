@@ -33,7 +33,10 @@ public class SharedDriver {
         String strExecutionType = System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "");
         System.out.println("\n >> Execution String: " + strExecutionID);
 
-        if (strExecutionType.equalsIgnoreCase("BROWSER")) {
+        if (strExecutionType.equalsIgnoreCase("BROWSER")
+                    || strExecutionType.equalsIgnoreCase("MOBILEVIEW")
+                    || strExecutionType.equalsIgnoreCase("TABLETVIEW")) {
+
             //Launch WebDriver
             driver = DriverUtil.getDriver();
             System.out.println("<----------------------WeDriver is launched---------------------->");
@@ -78,6 +81,9 @@ public class SharedDriver {
                 driver.quit();
                 windowsDriver.quit();
             } else if (strExecutionType.equalsIgnoreCase("WEBMOBILE")) {
+                driver.quit();
+                mobileDriver.quit();
+            } else if (strExecutionType.equalsIgnoreCase("MOBILEVIEW")) {
                 driver.quit();
                 mobileDriver.quit();
             } else if(strExecutionType.equalsIgnoreCase("API")){

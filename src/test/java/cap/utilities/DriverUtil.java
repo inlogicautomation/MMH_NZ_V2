@@ -100,7 +100,7 @@ public class DriverUtil {
 
     private static WebDriver getLocalDriver(String strBrowserName) {
         WebDriver driver = null;
-
+        String strExecutionView = System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "");
         try {
             final String osName = OSValidator.getOSName();
             System.out.println(osName);
@@ -122,8 +122,14 @@ public class DriverUtil {
                     } else {
                         System.setProperty("webdriver.chrome.driver", Constants.CHROME_DRIVER_PATH);
                     }
-
-                    driver = new ChromeDriver(chromeCapabilities());
+                    if ("mobileview".equalsIgnoreCase(strExecutionView)) {
+                        driver = new ChromeDriver(chromeCapabilitiesForMobileView());
+                    } else if ("tabletview".equalsIgnoreCase(strExecutionView)) {
+                        driver = new ChromeDriver(chromeCapabilitiesForTabletView());
+                    } else {
+                        driver = new ChromeDriver(chromeCapabilities());
+                        driver.manage().window().maximize();
+                    }
                     break;
                 case "ie":
                     System.setProperty("webdriver.ie.driver", Constants.IE_DRIVER_PATH);
@@ -135,11 +141,11 @@ public class DriverUtil {
                     break;
 
                 case "edge":
-//                    if(osName.toUpperCase().equals(Constants.MAC)){
-//                        System.setProperty("webdriver.edge.driver", Constants.EDGE_DRIVER_PATH);
-//                    }else{
-//                        System.setProperty("webdriver.edge.driver", Constants.EDGE_DRIVER_PATH);
-//                    }
+                    if(osName.toUpperCase().equals(Constants.MAC)){
+                        System.setProperty("webdriver.edge.driver", Constants.EDGE_DRIVER_PATH);
+                    }else{
+                        System.setProperty("webdriver.edge.driver", Constants.EDGE_DRIVER_PATH);
+                    }
 
                     driver = new EdgeDriver();
                     break;
@@ -378,7 +384,7 @@ public class DriverUtil {
                 String USERNAME = "patrickfernandez2";
                 String AUTOMATE_KEY = "YeVMjcoDUTGYkx7zkXMj";
                 strURL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
-                System.out.println("URL   " +  strURL);
+                System.out.println("URL   " + strURL);
                 // strURL = new StringBuilder().append(Constants.KOBITONURL).toString();
                 int connectionTimeout = 20 * 60 * 1000;
                 int socketTimeout = 90 * 1000;
@@ -519,6 +525,63 @@ public class DriverUtil {
         options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
         options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 
+        return options;
+    }
+
+    public static ChromeOptions chromeCapabilitiesForMobileView() {
+        String strWorkingDirectory = System.getProperty("user.dir");
+        String strDownloadLocation = new StringBuilder(strWorkingDirectory)
+                .append(File.separator).append(Constants.DOWNLOAD_PATH).toString();
+        ChromeOptions options = new ChromeOptions();
+        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        // Hide save credentials prompt
+        chromePrefs.put("credentials_enable_service", false);
+        chromePrefs.put("profile.password_manager_enabled", false);
+        // Default download directory
+        chromePrefs.put("download.default_directory", strDownloadLocation);
+        chromePrefs.put("profile.default_content_setting_values.automatic_downloads", 1);
+        chromePrefs.put("safebrowsing.enabled", "true");
+        //Disable infobar in chrome instance
+        options.addArguments("disable-infobars");
+        options.setExperimentalOption("useAutomationExtension", false);
+        options.setExperimentalOption("excludeSwitches",
+                Collections.singletonList("enable-automation"));
+        options.setExperimentalOption("prefs", chromePrefs);
+        Map<String, String> mobileEmulation = new HashMap<>();
+        mobileEmulation.put("deviceName", "Pixel 2 XL");
+        options.setExperimentalOption("mobileEmulation", mobileEmulation);
+        DesiredCapabilities cap = DesiredCapabilities.chrome();
+        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        cap.setCapability(ChromeOptions.CAPABILITY, options);
+        return options;
+    }
+
+    public static ChromeOptions chromeCapabilitiesForTabletView() {
+        String strWorkingDirectory = System.getProperty("user.dir");
+        String strDownloadLocation = new StringBuilder(strWorkingDirectory)
+                .append(File.separator).append(Constants.DOWNLOAD_PATH).toString();
+        ChromeOptions options = new ChromeOptions();
+        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        // Hide save credentials prompt
+        chromePrefs.put("credentials_enable_service", false);
+        chromePrefs.put("profile.password_manager_enabled", false);
+        // Default download directory
+        chromePrefs.put("download.default_directory", strDownloadLocation);
+        chromePrefs.put("profile.default_content_setting_values.automatic_downloads", 1);
+        chromePrefs.put("safebrowsing.enabled", "true");
+        //Disable infobar in chrome instance
+        options.addArguments("disable-infobars");
+        Map<String, Object> deviceMetrics = new HashMap<>();
+        deviceMetrics.put("height", 1024);
+        deviceMetrics.put("width", 768);
+        deviceMetrics.put("pixelRatio", 3.0);
+        Map<String, Object> mobileEmulation = new HashMap<>();
+        mobileEmulation.put("deviceMetrics", deviceMetrics);
+        mobileEmulation.put("userAgent", "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19");
+        options.setExperimentalOption("mobileEmulation", mobileEmulation);
+        DesiredCapabilities cap = DesiredCapabilities.chrome();
+        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        cap.setCapability(ChromeOptions.CAPABILITY, options);
         return options;
     }
 
