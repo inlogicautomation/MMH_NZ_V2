@@ -51,15 +51,15 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//h5[contains(text(),'REPEAT REQUEST')]")
     protected WebElement txtRepeatRequest;
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-placeholder='Select Location' or  ng-reflect-name='Location']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='Location']")
     protected WebElement drpdownLocation;
+
     protected String selectLocation = new StringBuilder()
             .append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]/parent::mat-option").toString();
 
 
-    //(//mat-card-header/div[./mat-card-title[contains(text(),'13 Jun 2022')]][./mat-card-subtitle[contains(text(),'VM04Practice')]])[1]
     protected String elmntDateAndHealthCenter = new StringBuilder()
             .append("(//mat-card-header/div[./mat-card-title[contains(text(),'")
             .append("<<REPLACEMENT>>")
@@ -67,51 +67,48 @@ public class RepeatPrescription extends BasePage {
             .append("<<REPLACEMENT1>>")
             .append("')]])[1]").toString();
 
-    //    (//mat-card-header/div[./mat-card-subtitle[contains(text(),'VM04Practice')]])[1]
     protected String elmntHealthCenter = new StringBuilder()
             .append("(//mat-card-header/div[./mat-card-subtitle[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]])[1]").toString();
 
-    //div[@class='repeat-content-wrapper']//p[contains(text(),'')]
+
     protected String elmntMoreInfoFields = new StringBuilder()
             .append("//div[@class='repeat-content-wrapper']//p[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
 
-    //h2[contains(text(),'')]
+
     protected String elmntDoctorAndMedicine = new StringBuilder()
             .append("//h2[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-placeholder='Select a Doctor' or  @name='clinicalUser']//span[text()]")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='SelectedDoctor']")
     protected WebElement drpdownDoctor;
 
-    //span[text()=' Dr Tim ']
-    //mat-option/span[contains(text(),'Dr Tim')]
     protected String selectDoctor = new StringBuilder()
             .append("//mat-option/span[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-placeholder='Select script instructions' or ng-reflect-name='ScriptInstructions'] ")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='ScriptInstructions'] ")
     protected WebElement drpdownInstructions;
 
-    //span[text()=' Dr Tim ']
+
     protected String selectInstructions = new StringBuilder()
             .append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@ng-reflect-placeholder='Select script urgency' or @ng-reflect-name='ScriptUrgency']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='ScriptUrgency']")
     protected WebElement drpdownUrgrency;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Select Script Urgency')]/parent::mat-option")
     protected WebElement elmntSelectScriptUrgency;
 
-    //span[contains(text(),'Fee: NZ')]
+
     protected String elmntScriptUrgency = new StringBuilder()
             .append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
@@ -123,13 +120,12 @@ public class RepeatPrescription extends BasePage {
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
-    //tr//td[contains(text(),'Panadol (Optizorb) 500mg Caplets')]/preceding-sibling::td/input
     protected String chkMedication = new StringBuilder()
             .append("//tr//td[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]/preceding-sibling::td/input").toString();
 
-    //input[@aria-label='Select All Rows']
+
     @FindBy(how = How.XPATH, using = "//input[@aria-label='Select All Rows']")
     protected WebElement chkAllMedication;
 
@@ -226,14 +222,12 @@ public class RepeatPrescription extends BasePage {
             .append("<<REPLACEMENT>>")
             .append("']/parent::div").toString();
 
-    //label[contains(text(),'Payment Success')]/preceding-sibling::input[@name='SelectAccount']
     protected String rdoBtnSelectAccount = new StringBuilder()
             .append("//label[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]/preceding-sibling::input[@name='SelectAccount']").toString();
 
 
-    //input[@id='AnzNZ' and @name='SelectBank']
     protected String rdoBtnBank = new StringBuilder()
             .append("//input[@id='")
             .append("<<REPLACEMENT>>")
@@ -254,7 +248,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@name='ddlSelectOrSearchFax' or @placeholder='Select or search for a pharmacy']")
     protected WebElement drpDownPharmacy;
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@name='ddlSelectorSearchDelivery' or @id='mat-select-28']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@name='ddlSelectorSearchDelivery']")
     protected WebElement drpDownSearchPharmacy;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Search Pharmacy')]")
@@ -266,11 +260,10 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "(//button/preceding::div/h3[text()='Search Pharmacy'])[2]")
     protected WebElement txtSearchPharmacyForDelivery;
 
-    @FindBy(how = How.XPATH, using = "(//mat-select[@ng-reflect-model='SearchPharmacy' or @id='mat-select-2'])[2]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Find a pharmacy')]/preceding::mat-select[contains(@id,'mat-select-0')]")
     protected WebElement drpDownSelectForSentScript;
 
-    //mat-select[@ng-reflect-model='SearchPharmacy' and @id='mat-select-0']/descendant::span
-    @FindBy(how = How.XPATH, using = "(//mat-select[@ng-reflect-model='SearchPharmacy' or @id='mat-select-2'])[3]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Find a pharmacy')]//ancestor::mat-select)[2]")
     protected WebElement drpDownSelectForDelivery;
 
 
@@ -308,13 +301,12 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//select[@id='DateExpiry_2' or @name='DateExpiry_2']")
     protected WebElement drpDownYear;
 
-    //span[@class='mat-option-text' and contains(text(),'Find a pharmacy')]
     protected String ddlSelect = new StringBuilder()
             .append("//span[@class='mat-option-text' and contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
-    //option[contains(text(),'24')]
+
     protected String drpDownExpiryDate = new StringBuilder()
             .append("//option[contains(text(),'")
             .append("<<REPLACEMENT>>")
@@ -331,27 +323,23 @@ public class RepeatPrescription extends BasePage {
             .append("<<REPLACEMENT>>")
             .append("'])[1]").toString();
 
-    //mat-card-content/div/p[contains(text(),'Kevin Peterson')]
     protected String elmntDoctorName = new StringBuilder()
             .append("//mat-card-content/div/p[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
 
-    //span[contains(text(),' 2: 456, demo')]
     protected String ddlSelectAddress = new StringBuilder()
             .append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
-    //span[@class='mat-option-text' and contains(text(),'Chemist Warehouse Auckland')]
     protected String ddlSelectPharmacy = new StringBuilder()
             .append("//span[@class='mat-option-text' and contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
 
-    //span[contains(text(),'Bay of Plenty')]
     protected String ddlSelectCityRegion = new StringBuilder()
             .append("//span[@class='mat-option-text' and contains(text(),'")
             .append("<<REPLACEMENT>>")
@@ -397,7 +385,10 @@ public class RepeatPrescription extends BasePage {
             waitForSeconds(3);
             waitForElementClickable(elmntRequestNewScript);
             click(elmntRequestNewScript);
-//            waitForInvisibilityOfElement(elmntLoadingSpinner);
+            waitForSeconds(2);
+            refreshPage();
+            waitForSeconds(2);
+            waitForElement(txtRequestNewScript);
             blResult = verifyElement(txtRequestNewScript);
             System.out.println("Navigated To Request Medication >>>>");
 
@@ -513,20 +504,18 @@ public class RepeatPrescription extends BasePage {
     public boolean selectHealthCentreLocation(String strLocation) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            refreshPage();
+            waitForSeconds(5);
             waitForElementClickable(drpdownLocation);
             waitForSeconds(2);
-            jsClick(drpdownLocation);
+            click(drpdownLocation);
+            waitForSeconds(2);
             System.out.println(" select Location Locator :: " + selectLocation.replace("<<REPLACEMENT>>", strLocation) + "\n");
             WebElement ddlLocation = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
             waitForElementClickable(ddlLocation);
             waitForSeconds(2);
             System.out.println("Location was selected in the Request Medication >>> ::");
-
-//            waitForInvisibilityOfElement(elmntLoadingSpinner);
             mouseClick(ddlLocation);
-            System.out.println("Location was selected in the Request Medication");
-
 
             blResult = true;
 
@@ -700,7 +689,8 @@ public class RepeatPrescription extends BasePage {
             waitForElementClickable(btnPayAtHealthCentre);
             click(btnPayAtHealthCentre);
             System.out.println(" Successfully Selected Pay at Health centre Button >>>");
-            blResult = true;
+            waitForElement(emlntSuccessPopUp);
+            blResult = verifyElement(emlntSuccessPopUp);
 
         } catch (Exception e) {
             System.out.println("Failed to Select Pay at Health centre Button >>>");
@@ -733,12 +723,7 @@ public class RepeatPrescription extends BasePage {
         try {
 //            waitForElement(emlntSuccessPopUp);
 //            verifyElement(emlntSuccessPopUp);
-//      verifyElement(txtPayment);
-//            if (txtPayment.isDisplayed()){
-//            waitForElementClickable(btnPaymentOk);
-//            click(btnPaymentOk);}
-//            waitForSeconds(2);
-//         waitForInvisibilityOfElement(elmntLoadingSpinner);
+
             waitForElement(txtViewHistory);
             blResult = verifyElement(txtViewHistory);
             System.out.println("Repeat Prescription was success  and Successfully to navigate the View History Page>>>>>>");
@@ -835,11 +820,12 @@ public class RepeatPrescription extends BasePage {
                 waitForSeconds(2);
                 waitForElement(doctorName);
                 verifyElement(doctorName);
-
-                System.out.println("Successfully verified the Prescription>>>");
                 blResult = true;
+                System.out.println("verify The Prescription Details For Deliver Meds By Pharmacy In Card View was failed");
             }
-            System.out.println("Prescription Status : " + emlntPrescriptionStatus.getText());
+//            else {
+//                System.out.println("verify The Prescription Details For Deliver Meds By Pharmacy In Card View was failed");
+//                blResult=false; }
         } catch (Exception e) {
             System.out.println("verify The Prescription Details For Deliver Meds By Pharmacy In Card View was failed");
             e.printStackTrace();
@@ -900,7 +886,6 @@ public class RepeatPrescription extends BasePage {
                 System.out.println("Successfully verified the Prescription>>>");
                 blResult = true;
             }
-            System.out.println("Prescription Status : " + emlntPrescriptionStatus.getText());
         } catch (Exception e) {
             System.out.println("verify The Prescription Details For Deliver Meds By Pharmacy In Card View was failed ::>>>>");
             e.printStackTrace();
@@ -921,18 +906,12 @@ public class RepeatPrescription extends BasePage {
             List<String> strDetails = lstPrescriptionDetails.subList(2, 5);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
-//          VM04Practice;
-//          panadol (optizorb) 500mg caplets(paracetamol);
-//          pending;
-//          Chemist Warehouse Auckland - Lower Queen St;
-//          48 Hours - Fee: NZ$21.00 (Incl. GST);
-//          Kevin Peterson
             waitForElement(txtViewHistory);
             verifyElement(txtViewHistory);
             waitForSeconds(2);
             takeScreenshot(driver);
-            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
 
+            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
             DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
             formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
 
@@ -957,10 +936,7 @@ public class RepeatPrescription extends BasePage {
                     System.out.println("Xpath for medicine Field >>>>> : " + elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail));
                     waitForElement(medicineField);
                     System.out.println("\n verified medicineField >>> :: " + verifyElement(medicineField));
-//
-//                    if (!blResult){
-//                        break;
-//                    }
+
                 }
                 WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(5))));
                 waitForSeconds(2);
@@ -971,9 +947,12 @@ public class RepeatPrescription extends BasePage {
                 System.out.println("Successfully verified the Prescription>>>");
                 blResult = true;
             }
-            System.out.println("Prescription Status : " + emlntPrescriptionStatus.getText());
+//            else {
+//                System.out.println("Successfully verify The Prescription Details For Sent Script To Pharmacy In Card View");
+//                blResult=false;
+//            }
         } catch (Exception e) {
-            System.out.println(">>>>>>>>>>>>>>");
+            System.out.println("verify The Prescription Details For Sent Script To Pharmacy In Card View was failed");
             e.printStackTrace();
         }
         return blResult;
@@ -1020,10 +999,7 @@ public class RepeatPrescription extends BasePage {
                     System.out.println("Xpath for medicine Field >>>>> : " + elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail));
                     waitForElement(medicineField);
                     System.out.println("\n verified medicineField >>> :: " + verifyElement(medicineField));
-//
-//                    if (!blResult){
-//                        break;
-//                    }
+
                 }
                 WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(4))));
                 waitForSeconds(2);
@@ -1034,7 +1010,6 @@ public class RepeatPrescription extends BasePage {
                 System.out.println("Successfully verified the Prescription>>>");
                 blResult = true;
             }
-            System.out.println("Prescription Status : " + emlntPrescriptionStatus.getText());
         } catch (Exception e) {
             System.out.println(">>>>>>>>>>>>>>");
             e.printStackTrace();
@@ -1087,10 +1062,7 @@ public class RepeatPrescription extends BasePage {
                     System.out.println("Xpath for medicine Field >>>>> : " + elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail));
                     waitForElement(medicineField);
                     System.out.println("\n verified medicineField >>> :: " + verifyElement(medicineField));
-//
-//                    if (!blResult){
-//                        break;
-//                    }
+
                 }
                 WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(4))));
                 waitForSeconds(2);
@@ -1101,7 +1073,7 @@ public class RepeatPrescription extends BasePage {
                 System.out.println("Successfully verified the Prescription>>>");
                 blResult = true;
             }
-            System.out.println("Prescription Status : " + emlntPrescriptionStatus.getText());
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(" Failed to verify the Prescription>>>");
@@ -1119,11 +1091,6 @@ public class RepeatPrescription extends BasePage {
             List<String> strDetails = lstPrescriptionDetails.subList(2, 4);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
-//            VM04Practice;
-//            panadol (optizorb) 500mg caplets(paracetamol);
-//            pending;
-//            Next Day - Fee: NZ$12.00 (Incl. GST);
-//            Dr Tim
             waitForElement(txtViewHistory);
             verifyElement(txtViewHistory);
             waitForSeconds(2);
@@ -1154,10 +1121,7 @@ public class RepeatPrescription extends BasePage {
                     System.out.println("Xpath for medicine Field >>>>> : " + elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail));
                     waitForElement(medicineField);
                     System.out.println("\n verified medicineField >>> :: " + verifyElement(medicineField));
-//
-//                    if (!blResult){
-//                        break;
-//                    }
+
                 }
                 WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(4))));
                 waitForSeconds(2);
@@ -1168,7 +1132,7 @@ public class RepeatPrescription extends BasePage {
                 System.out.println("Successfully verified the Prescription>>>");
                 blResult = true;
             }
-            System.out.println("Prescription Status : " + emlntPrescriptionStatus.getText());
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(" Failed to verify the Prescription>>>");
@@ -1186,6 +1150,7 @@ public class RepeatPrescription extends BasePage {
             waitForElementClickable(ddlPharmacy);
             click(ddlPharmacy);
             blResult = true;
+            System.out.println("Successfully select Pharmacy For Sent Script To Pharmacy was selected");
 
 
         } catch (Exception e) {
@@ -1216,13 +1181,14 @@ public class RepeatPrescription extends BasePage {
         return blResult;
     }
 
-    public boolean selectPharmacyBySavedlistForSentScript(String strSelectType, String strSelectPharmacy) {
+    public boolean selectPharmacyBySavedListForSentScript(String strSelectType, String strSelectPharmacy) {
         boolean blResult = false;
         try {
             waitForSeconds(2);
             waitForElement(txtSearchPharmacyForSentScript);
             verifyElement(txtSearchPharmacyForSentScript);
-            waitForSeconds(2);
+            System.out.println("Verified >>>> ::");
+            waitForSeconds(3);
             waitForElementClickable(drpDownSelectForSentScript);
             click(drpDownSelectForSentScript);
             waitForSeconds(2);
@@ -1250,21 +1216,23 @@ public class RepeatPrescription extends BasePage {
         return blResult;
     }
 
-    public boolean selectPharmacyBySavedlistForDelivery(String strSelectType, String strSelectPharmacy) {
+    public boolean selectPharmacyBySavedListForDelivery(String strSelectType, String strSelectPharmacy) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver,elmntLoadingSpinner);
             waitForSeconds(2);
             waitForElement(txtSearchPharmacyForDelivery);
             verifyElement(txtSearchPharmacyForDelivery);
             waitForSeconds(2);
             waitForElementClickable(drpDownSelectForDelivery);
-            click(drpDownSelectForDelivery);
+            jsClick(drpDownSelectForDelivery);
             waitForSeconds(2);
             WebElement selectType = waitForElement(By.xpath(ddlSelect.replace("<<REPLACEMENT>>", strSelectType)));
             System.out.println("selectType XPath >>>" + selectType);
             mouseClick(selectType);
             waitForSeconds(2);
             waitForElementClickable(drpDownSelectPharmacyForDelivery);
+            waitForSeconds(1);
             click(drpDownSelectPharmacyForDelivery);
             WebElement selectPharmacy = waitForElement(By.xpath(ddlSelectPharmacy.replace("<<REPLACEMENT>>", strSelectPharmacy)));
             System.out.println("selectType XPath >>>" + ddlSelectPharmacy.replace("<<REPLACEMENT>>", strSelectPharmacy));
@@ -1272,6 +1240,7 @@ public class RepeatPrescription extends BasePage {
             mouseClick(selectPharmacy);
             waitForSeconds(2);
             waitForElementClickable(btnSelectForDelivery);
+            waitForSeconds(1);
             click(btnSelectForDelivery);
             blResult = true;
 
@@ -1564,6 +1533,7 @@ public class RepeatPrescription extends BasePage {
         }
         return blResult;
     }
+
 
 
 }

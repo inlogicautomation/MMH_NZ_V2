@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(features = {"src/test/resources/features/Regression"},
         monochrome = true,
-        tags = "@APPOINTMENTS",
+        tags = "@V2",
         glue = {"MMH"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

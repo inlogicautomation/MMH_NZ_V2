@@ -285,6 +285,38 @@ public class BasePage {
     public Boolean waitForInvisibilityOfElement(WebElement element) {
         return invisibleWait.until(ExpectedConditions.invisibilityOf(element));
     }
+    public static boolean waitForElementDisappear(WebDriver driver, By by) {
+        boolean isElementDisappear = false;
+        try {
+
+            new WebDriverWait(driver, 30).until(ExpectedConditions.invisibilityOfElementLocated(by));
+            isElementDisappear = true;
+
+        } catch (Exception e) {
+            System.out.println(new StringBuilder().append("************Exception:  ")
+                    .append(e.getLocalizedMessage())
+                    .append("   occured in:")
+                    .append(e.getStackTrace()[0])
+                    .append("********************"));
+        }
+        return isElementDisappear;
+    }
+    public static boolean waitForElementDisappear(WebDriver driver, WebElement element) {
+        boolean isElementDisappear = false;
+        try {
+
+            new WebDriverWait(driver, 30).until(ExpectedConditions.invisibilityOf(element));
+            isElementDisappear = true;
+
+        } catch (Exception e) {
+            System.out.println(new StringBuilder().append("************Exception:  ")
+                    .append(e.getLocalizedMessage())
+                    .append("   occured in:")
+                    .append(e.getStackTrace()[0])
+                    .append("********************"));
+        }
+        return isElementDisappear;
+    }
 
     public void waitForPresenceOfElement(By by) {
         wait.until(ExpectedConditions.presenceOfElementLocated(by));

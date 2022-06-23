@@ -423,7 +423,7 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForSentScriptToPharmacy());
-        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedlistForSentScript(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedListForSentScript(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(5)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicationDetails.get(6)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(7)));
@@ -442,7 +442,7 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForDeliveryMedsByPharmacy());
-        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedlistForDelivery(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedListForDelivery(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectAddress(lstMedicationDetails.get(5)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(6)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicationDetails.get(7)));
@@ -462,7 +462,7 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForDeliveryMedsByPharmacy());
-        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedlistForDelivery(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedListForDelivery(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectAddress(lstMedicationDetails.get(5)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(6)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicationDetails.get(7)));
