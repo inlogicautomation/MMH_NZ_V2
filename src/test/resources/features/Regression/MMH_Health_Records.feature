@@ -62,7 +62,7 @@ Feature: My Health Records Demo
     And I change "<FrequencyDrop>" in Prescription page
     When I am on "<Tab>" Prescriptions page
     And I delete Created "<Record>" in Prescriptions page
-    Then I confirm deleted Patient Record
+    Then I should see Patient Record is deleted
     And I navigate to the Homepage
     Examples:
       | Tab           | Record                | FrequencyDrop   |
@@ -120,7 +120,7 @@ Feature: My Health Records Demo
     And I change "<SeverityDrop>" in Allergies page
     When I am on "<Tab>" Allergies page
     And I delete Created "<Record>" in Allergies page
-    Then I confirm deleted Patient Record
+    Then I should see Patient Record is deleted
     And I navigate to the Homepage
     Examples:
       | Tab       | Record                | SeverityDrop |
@@ -171,7 +171,7 @@ Feature: My Health Records Demo
     And I change "<AdditionalName>" in Immunisations page
     When I am on "<Tab>" Immunisation page
     And I delete Created "<Record>" in Immunisations page
-    Then I confirm deleted Patient Record
+    Then I should see Patient Record is deleted
 
     Examples:
       | Tab           | Record                | AdditionalName    |
@@ -247,7 +247,7 @@ Feature: My Health Records Demo
     And I change "<StatusDrop>" in Classifications page
     When I am on "<Tab>" Classifications page
     And I delete Created "<Record>" in Classifications page
-    Then I confirm deleted Patient Record
+    Then I should see Patient Record is deleted
     And I navigate to the Homepage
     Examples:
       | Tab             | Record                | StatusDrop |
@@ -322,10 +322,10 @@ Feature: My Health Records Demo
     Given I am on "<Tab>" Clinic Notes page
     And I edit Created "<Record>" in My Health Records
     And I change "<Location>" in Clinic Notes
-    When I should see Edited "<Location>" record in Clinic Notes
+    And I should see Edited "<Location>" record in Clinic Notes
     And   I am on "<Tab>" Clinic Notes page
     And I delete Created "<Record>" in Clinic Notes
-    Then I confirm deleted Patient Record
+    Then I should see Patient Record is deleted
     And I navigate to the Homepage
     Examples:
       | Tab             | Record                | Location        |

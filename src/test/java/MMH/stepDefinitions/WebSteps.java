@@ -1283,11 +1283,6 @@ public class WebSteps {
         }
     }
 
-    @Then("I confirm deleted Patient Record")
-    public void iConfirmDeletedPatientRecord() {
-        Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyDeletedRecord());
-    }
-
     @And("I should see all My Entries Allergies page")
     public void iShouldSeeAllMyEntriesAllergiesPage(List<String> AllergiesMyEntries) {
         demoPageContainer.myHealthRecordsPage.clickMaxvalue();
@@ -1342,5 +1337,10 @@ public class WebSteps {
         demoPageContainer.myHealthRecordsPage.clickSignoutButton();
 
 
+    }
+
+    @Then("I should see Patient Record is deleted")
+    public void iShouldSeePatientRecordIsDeleted() {
+        Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyDeletedRecord());
     }
 }
