@@ -30,13 +30,7 @@ public class MyHealthRecordsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//span[text()='Classifications']")
     protected WebElement elmntClassifications;
-    //    protected String strPrescriptionsTableContentLocator = new StringBuilder()
-//            .append("//table[@role='presentation']//tr[./td[.='")
-//            .append("<<DATA1>>").append("']][./td[text()=\"")
-//            .append("<<DATA2>>").append("\"]][./td[contains(.,'")
-//            .append("<<DATA3>>").append("')]][./td[.='")
-//            .append("<<DATA4>>").append("']][./td[.='")
-//            .append("<<DATA5>>").append("']]").toString();
+
     protected String strPrescriptionsIconContentLocator = new StringBuilder()
             .append("//td[text()='")
             .append("<<REPLACEMENT1>>").append("']/following-sibling::td[text()='")
@@ -67,6 +61,13 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement elmntSummary;
     @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-file-export-files']/following::span[text()='Export']")
     protected WebElement elmntExport;
+
+
+    @FindBy(how = How.XPATH, using = "//img[@class='profile-pic img-fluid']")
+    protected WebElement elmntProfile;
+
+    @FindBy(how = How.XPATH, using = "//button[contains(text(),' Sign Out ')]")
+    protected WebElement elmntSignout;
 
 
     protected String strClinicalNotesIconLocator = new StringBuilder()
@@ -108,10 +109,10 @@ public class MyHealthRecordsPage extends BasePage {
             .append("<<REPLACEMENT3>>").append("')]/following-sibling::td[contains(.,'")
             .append("<<REPLACEMENT4>>").append("')]/following-sibling::td//following-sibling::span[@class=\"mat-ripple mat-button-ripple\"]").toString();
 
-    @FindBy(how = How.XPATH, using = "//span[@role='listbox']")
+    @FindBy(how = How.XPATH, using = "(//span[@role='listbox'])[1]")
     protected WebElement elmntDownArrow;
 
-    @FindBy(how = How.XPATH, using = "//p[text()='New health records are displayed with green background colour']/preceding::span[@role='listbox'][1]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'New health records are displayed in green')]/preceding::span[@role='listbox'][1]")
     protected WebElement elmntDownArrow1;
 
 
@@ -245,7 +246,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[text()='Write the name of the condition']//following::div[11]//input")
     protected WebElement elmntConditionName;
 
-    @FindBy(how = How.XPATH, using = "//p[text()='Write the name of the allergic']//following::div[11]//input")
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='allergicName'])[1]")
     protected WebElement elmntAllergicName;
 
     @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='medicationName'])[1]")
@@ -263,7 +264,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[text()='Do you know the period of condition?']//following::div[44]//textarea")
     protected WebElement elmntClassiAdditionalInformation;
 
-    @FindBy(how = How.XPATH, using = "//p[text()='Do you know the period of allergy?']//following::div[44]//textarea")
+    @FindBy(how = How.XPATH, using = "(//p[text()='Additional Information']//following::textarea[@formcontrolname='additionalInformation'])[2]")
     protected WebElement elmntAllergiesAdditionalInformation;
 
     @FindBy(how = How.XPATH, using = "(//textarea[@formcontrolname='additionalInformation'])[1]")
@@ -293,7 +294,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[text()='Do you know the period of condition?']//following::div[13]//input")
     protected WebElement elmntStartDate;
 
-    @FindBy(how = How.XPATH, using = "//p[text()='Do you know the period of allergy?']//following::div[13]//input")
+    @FindBy(how = How.XPATH, using = "(//p[text()='Do you know the period of your allergy?']/following::input[@formcontrolname='startDate'])[1]")
     protected WebElement elmntAllergiesStartDate;
 
     @FindBy(how = How.XPATH, using = "//p[text()='How often?']//following::div[49]")
@@ -303,7 +304,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[text()='Do you know the period of condition?']//following::div[29]//input")
     protected WebElement elmntEndDate;
 
-    @FindBy(how = How.XPATH, using = "//p[text()='Do you know the period of allergy?']//following::div[18]//input")
+    @FindBy(how = How.XPATH, using = "(//p[text()='Do you know the period of your allergy?']/following::input[@formcontrolname='endDate'])[1]")
     protected WebElement elmntAllergiesEndDate;
 
     @FindBy(how = How.XPATH, using = "//p[text()='How often?']//following::div[81]")
@@ -345,7 +346,7 @@ public class MyHealthRecordsPage extends BasePage {
 
 
     protected String strFloorplanFilePath = new StringBuilder().append(System.getProperty("user.dir")).append(File.separator).append(Constants.CONFIG_FOLDER).append(File.separator)
-            .append(Constants.DOWNLOADS_FOLDER).append(File.separator)
+            .append(Constants.IMAGES_FOLDER).append(File.separator)
             .append("<<FILENAME>>").toString();
 
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='uploadDocument']")
@@ -466,7 +467,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMyHealthRecordsExpand);
             waitForElementClickable(elmntPrescriptions);
             jsClick(elmntPrescriptions);
-//            waitForSeconds(20);
+
         }
     }
 
@@ -485,7 +486,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntFilterdropPrescriptions);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
-            //waitForElement(elmntBookAppointmentPanel);
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -497,14 +498,14 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean VerifyPrescriptionsTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
-            WebElement elmntReport = waitForElement(By.xpath(strPrescriptionsIconContentLocator
+            WebElement elmntPrescriptionTableData = waitForElement(By.xpath(strPrescriptionsIconContentLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
                     .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))));
-            waitForElement(elmntReport);
-            verifyElement(elmntReport);
+            waitForElement(elmntPrescriptionTableData);
+            verifyElement(elmntPrescriptionTableData);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -533,20 +534,20 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean ClickPrescriptionsIcon(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strPrescriptionsIconContentLocator
+            WebElement elmntPrescriptionIconData = waitForElement(By.xpath(strPrescriptionsIconContentLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
                     .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))));
 
-            waitForElementClickable(elmntReport1);
-            jsClick(elmntReport1);
+            waitForElementClickable(elmntPrescriptionIconData);
+            jsClick(elmntPrescriptionIconData);
             for (String str : lstDetails1) {
-//                System.out.println("Element is ::>>"+str);
+
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strPrescriptionsDetails.replace("<<REPLACEMENT>>", str)));
                 if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Displayed::>>");
+                    System.out.println("Element is Verify::>>");
                 }
             }
 
@@ -574,23 +575,22 @@ public class MyHealthRecordsPage extends BasePage {
             click(btnMyHealthRecordsExpand);
             waitForElementClickable(elmntClassifications);
             jsClick(elmntClassifications);
-//            waitForSeconds(20);
-//            doubleClick(driver,elmntClassifications);
+
         }
     }
 
     public boolean VerifyClassificationsTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strClassificationsIconLocator
+            WebElement elmntClassificationTableData = waitForElement(By.xpath(strClassificationsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
                     .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))));
 
-            waitForElement(elmntReport1);
-            verifyElement(elmntReport1);
+            waitForElement(elmntClassificationTableData);
+            verifyElement(elmntClassificationTableData);
 
             blResult = true;
         } catch (Exception e) {
@@ -603,21 +603,21 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean ClickClassificationsIconLocator(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strClassificationsIconLocator
+            WebElement elmntClassificationIconData = waitForElement(By.xpath(strClassificationsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
                     .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))));
 
-            waitForElementClickable(elmntReport1);
-            jsClick(elmntReport1);
+            waitForElementClickable(elmntClassificationIconData);
+            jsClick(elmntClassificationIconData);
 
             for (String str : lstDetails1) {
-//                System.out.println("Element is ::>>"+str);
+
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strClassificationsDetails.replace("<<REPLACEMENT>>", str)));
                 if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Displayed::>>");
+                    System.out.println("Element is Verify::>>");
                 }
             }
             waitForElementClickable(elmntIcon);
@@ -634,9 +634,10 @@ public class MyHealthRecordsPage extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
+            jsScrollIntoView(elmntClinicalNotes);
             waitForElementClickable(elmntClinicalNotes);
             jsClick(elmntClinicalNotes);
-//            waitForSeconds(20);
+
         }
     }
 
@@ -646,27 +647,36 @@ public class MyHealthRecordsPage extends BasePage {
             click(btnMyHealthRecordsExpand);
             waitForElementClickable(elmntSummary);
             jsClick(elmntSummary);
-//            waitForSeconds(20);
+
         }
     }
 
 
     public void clickExportButton(){
-//        waitForElementClickable(elmntExport);
-//        jsClick(elmntExport);
+
         click(elmntExport);
+    }
+
+
+    public void DeleteFile() {
+        File path = new File("config/Downloads");
+        File[] files = path.listFiles();
+        for (File file : files) {
+            System.out.println("Deleted filename :"+ file.getName());
+            file.delete();
+        }
     }
     public boolean VerifyClinicNotesTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strClinicalNotesIconLocator
+            WebElement elmntClinicNotesTableData = waitForElement(By.xpath(strClinicalNotesIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
 
-            waitForElement(elmntReport1);
-            verifyElement(elmntReport1);
+            waitForElement(elmntClinicNotesTableData);
+            verifyElement(elmntClinicNotesTableData);
 
             blResult = true;
         } catch (Exception e) {
@@ -679,20 +689,20 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean ClickClinicNotesIconLocator(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strClinicalNotesIconLocator
+            WebElement elmntClinicNotesIconData = waitForElement(By.xpath(strClinicalNotesIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
 
-            waitForElementClickable(elmntReport1);
-            jsClick(elmntReport1);
+            waitForElementClickable(elmntClinicNotesIconData);
+            jsClick(elmntClinicNotesIconData);
 
             for (String str : lstDetails1) {
-//                System.out.println("Element is ::>>"+str);
+
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strClinicalNotesDetails.replace("<<REPLACEMENT>>", str)));
                 if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Displayed::>>");
+                    System.out.println("Element is Verify::>>");
                 }
             }
             waitForElementClickable(elmntIcon);
@@ -711,8 +721,6 @@ public class MyHealthRecordsPage extends BasePage {
             click(btnMyHealthRecordsExpand);
             waitForElementClickable(elmntAllergies);
             jsClick(elmntAllergies);
-//            waitForSeconds(20);
-
 
         }
     }
@@ -723,9 +731,6 @@ public class MyHealthRecordsPage extends BasePage {
             click(btnMyHealthRecordsExpand);
             waitForElementClickable(elmntImmunisations);
             jsClick(elmntImmunisations);
-//            waitForSeconds(20);
-
-
         }
     }
 
@@ -736,8 +741,6 @@ public class MyHealthRecordsPage extends BasePage {
             click(btnMyHealthRecordsExpand);
             waitForElementClickable(elmntLabResults);
             jsClick(elmntLabResults);
-//            waitForSeconds(20);
-
 
         }
     }
@@ -745,14 +748,14 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean VerifyAllergiesTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strAllergiesNotesIconLocator
+            WebElement elmntAllergiesTableData = waitForElement(By.xpath(strAllergiesNotesIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
 
-            waitForElement(elmntReport1);
-            verifyElement(elmntReport1);
+            waitForElement(elmntAllergiesTableData);
+            verifyElement(elmntAllergiesTableData);
 
             blResult = true;
         } catch (Exception e) {
@@ -765,20 +768,20 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean ClickAllergiesIconLocator(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strAllergiesNotesIconLocator
+            WebElement elmntAllergiesIconData = waitForElement(By.xpath(strAllergiesNotesIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
 
-            waitForElementClickable(elmntReport1);
-            jsClick(elmntReport1);
+            waitForElementClickable(elmntAllergiesIconData);
+            jsClick(elmntAllergiesIconData);
 
             for (String str : lstDetails1) {
-//                System.out.println("Element is ::>>"+str);
+
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strAllergiesNotesDetails.replace("<<REPLACEMENT>>", str)));
                 if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Displayed::>>");
+                    System.out.println("Element is Verify::>>");
                 }
             }
             waitForElementClickable(elmntIcon);
@@ -795,14 +798,14 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean VerifyImmunisationsTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strImmunisationsIconLocator
+            WebElement elmntImmunisationTableData = waitForElement(By.xpath(strImmunisationsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
 
-            waitForElement(elmntReport1);
-            verifyElement(elmntReport1);
+            waitForElement(elmntImmunisationTableData);
+            verifyElement(elmntImmunisationTableData);
 
             blResult = true;
         } catch (Exception e) {
@@ -815,20 +818,20 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean ClickImmunisationsIconLocator(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strImmunisationsIconLocator
+            WebElement elmntImmunisationIconData = waitForElement(By.xpath(strImmunisationsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
 
-            waitForElementClickable(elmntReport1);
-            jsClick(elmntReport1);
+            waitForElementClickable(elmntImmunisationIconData);
+            jsClick(elmntImmunisationIconData);
 
             for (String str : lstDetails1) {
-//                System.out.println("Element is ::>>"+str);
+
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strImmunisationsDetails.replace("<<REPLACEMENT>>", str)));
                 if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Displayed::>>");
+                    System.out.println("Element is Verify::>>");
                 }
             }
             waitForElementClickable(elmntIcon);
@@ -844,14 +847,14 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean VerifyLabResultsTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strLabResultsIconLocator
+            WebElement elmntLabResultTableData = waitForElement(By.xpath(strLabResultsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
 
-            waitForElement(elmntReport1);
-            verifyElement(elmntReport1);
+            waitForElement(elmntLabResultTableData);
+            verifyElement(elmntLabResultTableData);
 
             blResult = true;
         } catch (Exception e) {
@@ -864,20 +867,20 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean ClickLabResultsIconLocator(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strLabResultsIconLocator
+            WebElement elmntLabResultIconData = waitForElement(By.xpath(strLabResultsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
 
-            waitForElementClickable(elmntReport1);
-            jsClick(elmntReport1);
+            waitForElementClickable(elmntLabResultIconData);
+            jsClick(elmntLabResultIconData);
 
             for (String str : lstDetails1) {
-//                System.out.println("Element is ::>>"+str);
+
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strLabResultsDetails.replace("<<REPLACEMENT>>", str)));
                 if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Displayed::>>");
+                    System.out.println("Element is Verify::>>");
                 }
             }
             waitForElementClickable(elmntlabIcon);
@@ -893,20 +896,20 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean ClickLabResultsIconLocatorVerifyTestResults(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strLabResultsIconLocator
+            WebElement elmntTestResults = waitForElement(By.xpath(strLabResultsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
 
-            waitForElementClickable(elmntReport1);
-            jsClick(elmntReport1);
+            waitForElementClickable(elmntTestResults);
+            jsClick(elmntTestResults);
 
             for (String str : lstDetails1) {
-//                System.out.println("Element is ::>>"+str);
+
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strTestResultsDetails.replace("<<REPLACEMENT>>", str)));
                 if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Displayed::>>");
+                    System.out.println("Element is Verify::>>");
                 }
             }
             waitForElementClickable(elmntlabIcon);
@@ -922,12 +925,13 @@ public class MyHealthRecordsPage extends BasePage {
 
     public void clickMyHealthRecordsOptionFromMenuRecalls() {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForSeconds(3);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
             jsScrollIntoView(elmntRecalls);
+            waitForSeconds(2);
             waitForElementClickable(elmntRecalls);
             jsClick(elmntRecalls);
-//            waitForSeconds(20);
 
         }
 
@@ -936,14 +940,14 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean VerifyRecallsTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strRecallsIconLocator
+            WebElement elmntRecallsTableData = waitForElement(By.xpath(strRecallsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
 
-            waitForElement(elmntReport1);
-            verifyElement(elmntReport1);
+            waitForElement(elmntRecallsTableData);
+            verifyElement(elmntRecallsTableData);
 
             blResult = true;
         } catch (Exception e) {
@@ -957,14 +961,14 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean ClickRecallsRemainderIconLocator(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strRecallsIconLocator
+            WebElement elmntRecallsRemainderIconData = waitForElement(By.xpath(strRecallsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
 
-            waitForElementClickable(elmntReport1);
-            jsClick(elmntReport1);
+            waitForElementClickable(elmntRecallsRemainderIconData);
+            jsClick(elmntRecallsRemainderIconData);
 
             for (String str : lstDetails1) {
                 System.out.println("Element is ::>>"+str);
@@ -988,20 +992,20 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean ClickRecallsIconLocator(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            WebElement elmntReport1 = waitForElement(By.xpath(strRecallsIconLocator
+            WebElement elmntRecallsIconData = waitForElement(By.xpath(strRecallsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
 
-            waitForElementClickable(elmntReport1);
-            jsClick(elmntReport1);
+            waitForElementClickable(elmntRecallsIconData);
+            jsClick(elmntRecallsIconData);
 
             for (String str : lstDetails1) {
-                System.out.println("Element is ::>>"+str);
+
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strRecallsDetails.replace("<<REPLACEMENT>>", str)));
                 if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Displayed::>>");
+                    System.out.println("Element is Verify::>>");
                 }
             }
             waitForElementClickable(elmntIcon);
@@ -1041,7 +1045,7 @@ public class MyHealthRecordsPage extends BasePage {
             for (String str : lstDetails1) {
                 WebElement elmntMyEntries = waitForElement(By.xpath(strMyEntriesInfoDetails.replace("<<DATA>>", str)));
                 if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
+                    System.out.println("Element is Verify::>>");
                 }
             }
             waitForElementClickable(elmntIcon);
@@ -1059,23 +1063,23 @@ public class MyHealthRecordsPage extends BasePage {
         System.out.println("Data Value1::>>" + TestDataUtil.getValue(PrescriptionsMyEntitiesNotesDetails.get(0)
                 + "  Data Value2::>>" + TestDataUtil.getValue(PrescriptionsMyEntitiesNotesDetails.get(1)
                 + "  Data Value3::>>" + TestDataUtil.getValue(PrescriptionsMyEntitiesNotesDetails.get(2)))));
-        WebElement elmntMyEntiresReport = waitForElement(By.xpath(strPrescriptionsMyEntitesIconLocator
+        WebElement elmntPrescriptionMyEntiresData = waitForElement(By.xpath(strPrescriptionsMyEntitesIconLocator
                 .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(PrescriptionsMyEntitiesNotesDetails.get(0)))
                 .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(PrescriptionsMyEntitiesNotesDetails.get(1)))
                 .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(PrescriptionsMyEntitiesNotesDetails.get(2)))));
-        waitForElement(elmntMyEntiresReport);
-        isVerifed = verifyElement(elmntMyEntiresReport);
+        waitForElement(elmntPrescriptionMyEntiresData);
+        isVerifed = verifyElement(elmntPrescriptionMyEntiresData);
         return isVerifed;
     }
     public boolean VerifyPrescriptionsMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            WebElement elmntMyEntiresReport = waitForElement(By.xpath(strPrescriptionsMyEntitesIconLocator
+            WebElement elmntPrescriptionMyEntiresIconData = waitForElement(By.xpath(strPrescriptionsMyEntitesIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))));
-            waitForElement(elmntMyEntiresReport);
-            jsClick(elmntMyEntiresReport);
+            waitForElement(elmntPrescriptionMyEntiresIconData);
+            jsClick(elmntPrescriptionMyEntiresIconData);
 
             for (String str : lstDetails1) {
                 WebElement elmntMyEntries = waitForElement(By.xpath(strPrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
@@ -1285,7 +1289,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntPrescriptiondrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntAddPrescriptionDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
-            //waitForElement(elmntBookAppointmentPanel);
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1305,7 +1309,7 @@ public class MyHealthRecordsPage extends BasePage {
             System.out.println(strSeverity);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntAddAllergicDrop.replace("<<REPLACEMENT>>", strSeverity)));
             jsClick(elmntEntriesFromHealthCentre);
-            //waitForElement(elmntBookAppointmentPanel);
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1322,7 +1326,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntclassificationdrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntAddclassiDrop.replace("<<REPLACEMENT>>", strSeverity)));
             jsClick(elmntEntriesFromHealthCentre);
-            //waitForElement(elmntBookAppointmentPanel);
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1756,7 +1760,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntclassificationdrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntAddclassiDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
-            //waitForElement(elmntBookAppointmentPanel);
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1773,7 +1777,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntCovidImmunisationsdrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntCovidImmunisationsDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
-            //waitForElement(elmntBookAppointmentPanel);
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1790,7 +1794,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntAllergicdrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntAddAllergicDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
-            //waitForElement(elmntBookAppointmentPanel);
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1807,7 +1811,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntPrescriptiondrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntAddPrescriptionDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
-            //waitForElement(elmntBookAppointmentPanel);
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1824,7 +1828,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntPrescriptiondrop1);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntAddPrescriptionDrop1.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
-            //waitForElement(elmntBookAppointmentPanel);
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1841,7 +1845,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntAllergicdrop1);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntAllergicDrop1.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
-            //waitForElement(elmntBookAppointmentPanel);
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1852,32 +1856,45 @@ public class MyHealthRecordsPage extends BasePage {
 
     public boolean verifyclassificationAddRecord(List<String> listCreatedRecord) {
 
-        WebElement elmntMyEntiresRecord = waitForElement(By.xpath(getStrClassificationsMyEntitesIconLocatorInfo
+        WebElement elmntClassificationMyEntiresRecord = waitForElement(By.xpath(getStrClassificationsMyEntitesIconLocatorInfo
                 .replace("<<REPLACEMENT>>", TestDataUtil.getValue(listCreatedRecord.get(0)))));
 
-        waitForElement(elmntMyEntiresRecord);
-        System.out.println("elmntMyEntiresRecord:::>>  " + elmntMyEntiresRecord.isDisplayed());
-        return verifyElement(elmntMyEntiresRecord);
+        waitForElement(elmntClassificationMyEntiresRecord);
+        System.out.println("elmntMyEntiresRecord:::>>  " + elmntClassificationMyEntiresRecord.isDisplayed());
+        return verifyElement(elmntClassificationMyEntiresRecord);
     }
 
 
     public boolean verifyAllergiesAddRecord(List<String> listCreatedRecord) {
 
-        WebElement elmntMyEntiresRecord = waitForElement(By.xpath(getStrAllergiesMyEntitesIconLocatorInfo
+        WebElement elmntAllergiesMyEntiresRecord = waitForElement(By.xpath(getStrAllergiesMyEntitesIconLocatorInfo
                 .replace("<<REPLACEMENT>>", TestDataUtil.getValue(listCreatedRecord.get(0)))));
 
-        waitForElement(elmntMyEntiresRecord);
-        System.out.println("elmntMyEntiresRecord:::>>  " + elmntMyEntiresRecord.isDisplayed());
-        return verifyElement(elmntMyEntiresRecord);
+        waitForElement(elmntAllergiesMyEntiresRecord);
+        System.out.println("elmntMyEntiresRecord:::>>  " + elmntAllergiesMyEntiresRecord.isDisplayed());
+        return verifyElement(elmntAllergiesMyEntiresRecord);
     }
     public boolean verifyImmunisationsAddRecord(List<String> listCreatedRecord) {
 
-        WebElement elmntMyEntiresRecord = waitForElement(By.xpath(getStrImmunisationsMyEntitesIconLocatorInfo
+        WebElement elmntImmunisationMyEntiresRecord = waitForElement(By.xpath(getStrImmunisationsMyEntitesIconLocatorInfo
                 .replace("<<REPLACEMENT>>", TestDataUtil.getValue(listCreatedRecord.get(0)))));
 
-        waitForElement(elmntMyEntiresRecord);
-        System.out.println("elmntMyEntiresRecord:::>>  " + elmntMyEntiresRecord.isDisplayed());
-        return verifyElement(elmntMyEntiresRecord);
+        waitForElement(elmntImmunisationMyEntiresRecord);
+        System.out.println("elmntMyEntiresRecord:::>>  " + elmntImmunisationMyEntiresRecord.isDisplayed());
+        return verifyElement(elmntImmunisationMyEntiresRecord);
+    }
+
+
+    public void clickSignoutButton(){
+        waitForSeconds(3);
+waitForElementClickable(elmntProfile);
+jsClick(elmntProfile);
+waitForSeconds(2);
+
+waitForElementClickable(elmntSignout);
+jsClick(elmntSignout);
+
+
     }
 }
 

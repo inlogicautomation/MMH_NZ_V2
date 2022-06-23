@@ -803,16 +803,10 @@ public class WebSteps {
     @When("I navigate to the Recalls page")
     public void iNavigateToTheRecallsPage() {
         demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuRecalls();
-//        demoPageContainer.myHealthRecordsPage.jsScrollDown();
+
     }
 
-//    @Then("I should see all the Entries From Health Centre future Grid View in Recalls page")
-//    public void iShouldSeeAllTheEntriesFromHealthCentreFutureGridViewInRecallsPage(List<String> RecallsDetails) {
-//        for (String String : RecallsDetails) {
-//            System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-//            demoPageContainer.myHealthRecordsPage.VerifyRecallsTableData(TestDataUtil.getListOfValue(String));
-//        }
-//
+
 
 
     @And("I should see all the Entries From Health Centre future Grid View in Recalls page")
@@ -1009,16 +1003,9 @@ public class WebSteps {
     }
 
 
-    @When("I navigate to the Summary")
-    public void iNavigateToTheSummary() {
-        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuSummary();
-    }
+    
 
-    @Then("I click Export button")
-    public void iClickExportButton() {
-        demoPageContainer.myHealthRecordsPage.clickExportButton();
 
-    }
 
     @When("I Create New Record in My Health Records")
     public void iCreateNewRecordInMyHealthRecords(List<String> listCreateData) {
@@ -1124,7 +1111,7 @@ public class WebSteps {
 
     @And("I Create New Record in My Entries in Prescription page")
     public void iCreateNewRecordInMyEntriesInPrescriptionPage(List<String> listCreateData) {
-        System.out.println("enterelement::::" + listCreateData);
+
         demoPageContainer.myHealthRecordsPage.clickAddRecord();
         demoPageContainer.myHealthRecordsPage.enterPrescriptionsMedicationName(TestDataUtil.getValue(listCreateData.get(0)));
         demoPageContainer.myHealthRecordsPage.clickDose();
@@ -1336,5 +1323,24 @@ public class WebSteps {
         for (String strCurrentRow : ImmunisationsMyEntries) {
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyImmunisationsMyEntries(TestDataUtil.getListOfValue(strCurrentRow)));
         }
+    }
+
+    @And("I navigate to the Health Summary")
+    public void iNavigateToTheHealthSummary() {
+        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuSummary();
+    }
+
+    @When("I click Export Health Summary")
+    public void iClickExportHealthSummary() {
+        demoPageContainer.myHealthRecordsPage.clickExportButton();
+        demoPageContainer.myHealthRecordsPage.DeleteFile();
+
+    }
+
+    @And("As I am on MMH login Page")
+    public void asIAmOnMMHLoginPage() {
+        demoPageContainer.myHealthRecordsPage.clickSignoutButton();
+
+
     }
 }
