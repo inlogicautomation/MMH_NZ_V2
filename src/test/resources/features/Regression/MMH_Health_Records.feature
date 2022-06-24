@@ -27,7 +27,7 @@ Feature: My Health Records Demo
       | &PRESCRIPTION_TABLE_DATA_2& | &PRESCRIPTION_ICON_DATA_2& |
     And I navigate to the Homepage
     Examples:
-      | Prescription     |
+      | Prescription    |
       | &FILTER_BY_DATA& |
 
   @WEB @S1 @Mobile @HEALTH_RECORDS
@@ -49,7 +49,7 @@ Feature: My Health Records Demo
       | &VISITED_DOSE_NAME&              |
       | &VISITED_PRESCRIPTION_DROPDOWN&  |
       | &VISITED_PRESCRIPTION_DROPDOWN1& |
-      | &ADDITIONAL_INFORMATION&         |
+      | &ADDITIONAL_INFORMATION&        |
 
     Examples:
       | Option     |
@@ -62,12 +62,11 @@ Feature: My Health Records Demo
     And I change "<FrequencyDrop>" in Prescription page
     When I am on "<Tab>" Prescriptions page
     And I delete Created "<Record>" in Prescriptions page
-    Then I should see Patient Record is deleted
+    Then I confirm deleted Patient Record
     And I navigate to the Homepage
     Examples:
       | Tab           | Record                | FrequencyDrop   |
       | Prescriptions | &VISITED_NAME_RANDOM& | 3 times per day |
-
 
   @WEB @S1 @Mobile @HEALTH_RECORDS
   Scenario Template: S3- Verify My Health Records can view all the My Entries Future in Allergies.
@@ -84,7 +83,7 @@ Feature: My Health Records Demo
       | &ALLERGIES_TABLE_DATA_2& | &ALLERGIES_ICON_DATA_2& |
     And I navigate to the Homepage
     Examples:
-      | Allergies        |
+      | Allergies       |
       | &FILTER_BY_DATA& |
 
   @WEB @S1 @Mobile @HEALTH_RECORDS
@@ -105,7 +104,7 @@ Feature: My Health Records Demo
       | &VISITED_NAME_RANDOM&         |
       | &VISITED_ALLERGIES_DROPDOWN&  |
       | &VISITED_ALLERGIES_DROPDOWN1& |
-      | &ADDITIONAL_INFORMATION&      |
+      | &ADDITIONAL_INFORMATION&     |
     Then I should see created Record in Allergies page
       | &VISITED_ALLERGIES_DROPDOWN& |
 
@@ -120,7 +119,7 @@ Feature: My Health Records Demo
     And I change "<SeverityDrop>" in Allergies page
     When I am on "<Tab>" Allergies page
     And I delete Created "<Record>" in Allergies page
-    Then I should see Patient Record is deleted
+    Then I confirm deleted Patient Record
     And I navigate to the Homepage
     Examples:
       | Tab       | Record                | SeverityDrop |
@@ -139,7 +138,7 @@ Feature: My Health Records Demo
       | &IMMUNISATIONS_TABLE_DATA_1& | &IMMUNISATIONS_ICON_DATA_1& |
     And I navigate to the Homepage
     Examples:
-      | Immunisations    |
+      | Immunisations   |
       | &FILTER_BY_DATA& |
 
   @WEB @S1 @Mobile @HEALTH_RECORDS
@@ -152,14 +151,17 @@ Feature: My Health Records Demo
       | &IMMUNISATIONS_TABLE_DATA_1& |
     When I select "<Option>" filter dropdown
     And I should see all My Entries Immunisations page
-      | &DATA_MY_ENTRIES_IMMUNISATIONS& |
+      | &DATA_MY_ENTRIES_IMMUNISATIONS&   |
+      | &DATA_MY_ENTRIES_IMMUNISATIONS_1& |
     And  I Click Info Icon in My Entries to see Immunisations page
-      | &DATA_MY_ENTRIES_IMMUNISATIONS& | &DATA_MY_ENTRIES_INSIDE_IMMUNISATIONS& |
+      | &DATA_MY_ENTRIES_IMMUNISATIONS&   | &DATA_MY_ENTRIES_INSIDE_IMMUNISATIONS&   |
+      | &DATA_MY_ENTRIES_IMMUNISATIONS_1& | &DATA_MY_ENTRIES_INSIDE_IMMUNISATIONS_1& |
     And I Create New Record in Immunisations page
-      | &VISITED_NAME_RANDOM&    |
+      | &VISITED_NAME_RANDOM&     |
       | &ADDITIONAL_INFORMATION& |
     Then I should see created Record in Immunisations page
       | &VISITED_NAME_RANDOM& |
+
     Examples:
       | Option     |
       | My Entries |
@@ -171,7 +173,7 @@ Feature: My Health Records Demo
     And I change "<AdditionalName>" in Immunisations page
     When I am on "<Tab>" Immunisation page
     And I delete Created "<Record>" in Immunisations page
-    Then I should see Patient Record is deleted
+    Then I confirm deleted Patient Record
 
     Examples:
       | Tab           | Record                | AdditionalName    |
@@ -183,10 +185,10 @@ Feature: My Health Records Demo
     And  I Click Info Icon in My Entries to see COVID Immunisation Details page
       | &DATA_MY_ENTRIES_COVID_IMMUNISATIONS& | &DATA_MY_ENTRIES_INSIDE_COVID_IMMUNISATIONS& |
     And I Create New Record in COVIDImmunisations page
-      | &VACCINE_NAME&           |
-      | &BATCH_NO&               |
+      | &VACCINE_NAME&            |
+      | &BATCH_NO&                |
       | &ADDITIONAL_INFORMATION& |
-      | &FILE_UPLOAD&            |
+      | &FILE_UPLOAD&             |
     When I edit Created "<Record>" in CovidImmunisations page
     And I change "<AdditionalName>" in CovidImmunisations page
     And I am on "<Tab>" CovidImmunisation page
@@ -212,8 +214,9 @@ Feature: My Health Records Demo
       | &CLASSIFICATIONS_TABLE_DATA_2& | &CLASSIFICATIONS_ICON_DATA_2& |
     And I navigate to the Homepage
     Examples:
-      | Classifications  |
+      | Classifications |
       | &FILTER_BY_DATA& |
+
 
   @WEB @S1 @Mobile @HEALTH_RECORDS
   Scenario Template: S8- Verify My Health Records can view all the My Entries Future in Classifications.
@@ -230,8 +233,8 @@ Feature: My Health Records Demo
     And  I Click Info Icon in My Entries to see Classifications page
       | &DATA_MY_ENTRIES_CLASSIFICATIONS& | &DATA_MY_ENTRIES_INSIDE_CLASSIFICATIONS& |
     And I Create New Record in My Entries in Classifications page
-      | &VISITED_NAME_RANDOM&    |
-      | &VISITED_DROPDOWN&       |
+      | &VISITED_NAME_RANDOM&     |
+      | &VISITED_DROPDOWN&        |
       | &ADDITIONAL_INFORMATION& |
     Then I should see created Record in Classifications page
       | &VISITED_NAME_RANDOM& |
@@ -247,11 +250,12 @@ Feature: My Health Records Demo
     And I change "<StatusDrop>" in Classifications page
     When I am on "<Tab>" Classifications page
     And I delete Created "<Record>" in Classifications page
-    Then I should see Patient Record is deleted
+    Then I confirm deleted Patient Record
     And I navigate to the Homepage
     Examples:
       | Tab             | Record                | StatusDrop |
       | Classifications | &VISITED_NAME_RANDOM& | Long Term  |
+
 
   @WEB @S1 @Mobile @HEALTH_RECORDS
   Scenario: S9- Verify My Health Records can view all the My Entries Future in Lab Results.
@@ -261,16 +265,14 @@ Feature: My Health Records Demo
     And I should see all the Entries From Health Centre future Grid View in Lab Results page
       | &LAB_RESULT_TABLE_DATA&   |
       | &LAB_RESULT_TABLE_DATA_1& |
-
     When  I Click Info Icon to see Lab Results page
       | &LAB_RESULT_TABLE_DATA&   | &LAB_RESULT_ICON_DATA&   |
       | &LAB_RESULT_TABLE_DATA_1& | &LAB_RESULT_ICON_DATA_1& |
-
     And I Click Info Icon to see Test Results in Lab Results page
       | &LAB_RESULT_TABLE_DATA&   | &TEST_RESULT_ICON_DATA&   |
       | &LAB_RESULT_TABLE_DATA_1& | &TEST_RESULT_ICON_DATA_1& |
-
     And I navigate to the Homepage
+
 
   @WEB @S1 @Mobile @HEALTH_RECORDS
   Scenario Template: S10- Verify My Health Records can view all the My Entries Future in Clinic Notes.
@@ -289,7 +291,7 @@ Feature: My Health Records Demo
       | &CLINIC_TABLE_DATA_3& | &CLINIC_ICON_DATA_3& |
     And I navigate to the Homepage
     Examples:
-      | ClinicNotes      |
+      | ClinicNotes     |
       | &FILTER_BY_DATA& |
 
   @WEB @S1 @Mobile @HEALTH_RECORDS
@@ -307,8 +309,8 @@ Feature: My Health Records Demo
     And  I Click Info Icon in My Entries to see my health records
       | &DATA_MY_ENTRIES_CLINIC_NOTES_1& | &DATA_MY_ENTRIES_INSIDE_CLINIC_NOTES_1& |
     And I Create New Record in My Health Records
-      | &VISITED_NAME_RANDOM&    |
-      | &VISITED_LOCATION&       |
+      | &VISITED_NAME_RANDOM&     |
+      | &VISITED_LOCATION&        |
       | &ADDITIONAL_INFORMATION& |
     Then I should see created Record in My Health Records
       | &VISITED_NAME_RANDOM& |
@@ -317,48 +319,46 @@ Feature: My Health Records Demo
       | Option     |
       | My Entries |
 
+
   @WEB @S1 @Mobile @HEALTH_RECORDS
   Scenario Template: S11- Patient Edit Created Record in Clinic Notes
     Given I am on "<Tab>" Clinic Notes page
     And I edit Created "<Record>" in My Health Records
     And I change "<Location>" in Clinic Notes
-    And I should see Edited "<Location>" record in Clinic Notes
+    When I should see Edited "<Location>" record in Clinic Notes
     And   I am on "<Tab>" Clinic Notes page
     And I delete Created "<Record>" in Clinic Notes
-    Then I should see Patient Record is deleted
+    Then I confirm deleted Patient Record
     And I navigate to the Homepage
     Examples:
       | Tab             | Record                | Location        |
       | Clinician Notes | &VISITED_NAME_RANDOM& | &EDIT_LOCATION& |
 
-  @WEB @S1 @Mobile @HEALTH_RECORDS
-  Scenario: S13- Verify My Health Records can view all the My Entries Future in Summary.
+
+  Scenario: S12- Verify My Health Records can view all the My Entries Future in Recalls.
 
     Given As a user I am on HomePage
-    And I navigate to the Health Summary
-    When I click Export Health Summary
-    Then I navigate to the Homepage
-
-  @WEB @S1 @Mobile @HEALTH_RECORDS
-  Scenario Outline: S12- Verify My Health Records can view all the My Entries Future in Recalls.
-
-    Given As a user I am on HomePage
-    And As I am on MMH login Page
-    And I enter "<Email Address>" and "<Password>"
-    And I click login button
     When I navigate to the Recalls page
     And I should see all the Entries From Health Centre future Grid View in Recalls page
+#      | &RECALLS_TABLE_DATA&     |
       | &RECALLS_TABLE_DATA_1& |
-    And I Click Info Icon to see Recalls page
+    And  I Click Info Icon to see Recalls page
+#      | &RECALLS_TABLE_DATA&   | &RECALLS_ICON_DATA&     |
       | &RECALLS_TABLE_DATA_1& | &RECALLS_ICON_DATA_1& |
-    Then I should see all the Entries From Health Centre Recall Remainder Details future Grid View in Recalls page
+
+    When I should see all the Entries From Health Centre Recall Remainder Details future Grid View in Recalls page
       | &RECALLS_REMAINDER_TABLE_DATA& |
     And  I Click Info Icon to see Recall Remainder Details in Recalls page
       | &RECALLS_REMAINDER_TABLE_DATA& | &RECALLS_REMAINDER_ICON_DATA& |
     And I navigate to the Homepage
 
-    Examples:
-      | Email Address | Password              |
-      | &EMAIL_MMH&   | &PASSWORD_FOR_HEALTH& |
+
+  @WEB @S1 @Mobile @HEALTH_RECORDS
+  Scenario: S13- Verify My Health Records can view all the My Entries Future in Summary.
+
+    Given As a user I am on HomePage
+    When I navigate to the Summary
+    Then I click Export button
+    And I navigate to the Homepage
 
 

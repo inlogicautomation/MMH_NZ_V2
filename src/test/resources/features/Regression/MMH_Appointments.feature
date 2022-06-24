@@ -1,6 +1,6 @@
 Feature: Appointments
 
-  @WEB @Mobile @APPOINTMENTS
+  @WEB @Mobile @APPOINTMENTS @MobileResponse
   Scenario Template: Prep- User Successfully logs in to the MMH v2 Portal.
 
     Given As a user I am on MMH login Page
@@ -12,7 +12,7 @@ Feature: Appointments
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @APP @APPOINTMENTS
+  @WEB @APP @APPOINTMENTS @MobileResponse
   Scenario Template: S1 Patient Booking Appointment - Visit Appointment
 
     Given As a user I am on HomePage

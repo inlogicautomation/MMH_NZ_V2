@@ -3,7 +3,11 @@ package cap.common;
 import cap.helpers.Constants;
 import cap.utilities.WaitTimeUtil;
 import com.google.gson.internal.bind.util.ISO8601Utils;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import lombok.Getter;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +24,7 @@ import MMH.DemoPageContainer;
 
 import java.awt.*;
 import java.io.File;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -614,6 +619,21 @@ public class BasePage {
             isVerify = true;
         }
         return isVerify;
+    }
+
+    public void swipeHorizontalMobileView(List<WebElement> lstElements) {
+        System.out.println("Total Elements " + lstElements.size());
+        WebElement toElement = lstElements.get(0);
+        WebElement fromElement = lstElements.get(1);
+        int centerY = fromElement.getLocation().y + (fromElement.getSize().height / 2);
+        int startX = fromElement.getLocation().x;
+        int endX = toElement.getLocation().x;
+        TouchAction act = new TouchAction((PerformsTouchActions) driver);
+        act.press(PointOption.point(startX, centerY))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
+                .moveTo(PointOption.point(endX, centerY))
+                .release()
+                .perform();
     }
 
 }

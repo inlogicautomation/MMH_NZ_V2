@@ -24,7 +24,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@id='Login']")
     protected WebElement btnLogin;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Login']")
+    @FindBy(how = How.XPATH, using = "//span[text()='LOGIN']")
     protected WebElement betaLoginBtn;
 
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]")
@@ -87,7 +87,6 @@ public class HomePage extends BasePage {
     protected WebElement SignInBtn;
 
 
-
     public void clickSignInButton() {
         waitForElement(SignInBtn);
         click(SignInBtn);
@@ -111,7 +110,6 @@ public class HomePage extends BasePage {
     }
 
 
-
     public boolean waitForMMHLoginPage() {
         System.out.println("\n >>> Get First Line :: ");
         waitForElement(elmntLogo);
@@ -126,6 +124,7 @@ public class HomePage extends BasePage {
         waitForElementClickable(txtBoxEmail);
         enterValue(txtBoxEmail, strEmail);
     }
+
     public void enterpassword(String strPassword) {
         waitForElementClickable(txtPassword);
         enterValue(txtPassword, strPassword);
@@ -135,6 +134,7 @@ public class HomePage extends BasePage {
         waitForElement(btnLogin);
         click(btnLogin);
     }
+
     public void clickBetaLoginButton() {
         waitForElement(betaLoginBtn);
         click(betaLoginBtn);
@@ -219,14 +219,26 @@ public class HomePage extends BasePage {
     }
 
     public boolean clickLogoutButton() {
-        takeScreenshot(driver);
-        waitForElement(elmntDashBoard);
-        click(elmntDashBoard);
-        waitForSeconds(3);
-        click(btnExitApp);
-        waitForSeconds(120);
-        waitForElement(txtEmail);
-        return verifyElement(txtEmail);
+        boolean isVerified = false;
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            takeScreenshot(driver);
+            waitForElement(elmntDashBoard);
+            click(elmntDashBoard);
+            waitForSeconds(3);
+            click(btnExitApp);
+            waitForSeconds(120);
+            waitForElement(txtEmail);
+            isVerified = verifyElement(txtEmail);
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElement(btnExitApp);
+            click(btnExitApp);
+            waitForSeconds(120);
+            waitForElement(txtEmail);
+            isVerified = verifyElement(txtEmail);
+        }
+        return isVerified;
     }
 
     public boolean clickMesagesExpandIcon() {
@@ -235,6 +247,14 @@ public class HomePage extends BasePage {
         waitForElement(btnMessagesExpand);
         jsClick(btnMessagesExpand);
         return verifyElement(elmntFutureAppointment);
+    }
+
+    public boolean clickHamburgerIcon() {
+        waitForSeconds(3);
+        waitForElement(btnHamburgerIcon);
+        click(btnHamburgerIcon);
+        waitForSeconds(2);
+        return verifyElement(elmntDashBoard);
     }
 }
 

@@ -1,5 +1,6 @@
 package MMH.stepDefinitions;
 
+import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -48,8 +49,13 @@ public class WebSteps {
 
     @Given("As a user I am on HomePage")
     public void asAUserIAmOnHomePage() {
-        Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
-        Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
+            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
+        }
 
     }
 
@@ -63,38 +69,47 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.homePage.verifyFutureAppoinmentsPage());
     }
 
-//    @And("I switch to card view to see future appointments in card view")
-//    public void iSwitchToCardViewToSeeFutureAppointmentsInCardView() {
-//        demoPageContainer.homePage.clickCardView();
-//        Assert.assertTrue(demoPageContainer.homePage.verifyAppointmentsInCardView());
-//    }
-
-//    @And("I switch to grid view to see future appointments in grid view")
-//    public void iSwitchToGridViewToSeeFutureAppointmentsInGridView() {
-//        demoPageContainer.homePage.clickGridView();
-//        Assert.assertTrue(demoPageContainer.homePage.verifyAppointmentsInGridView());
-//    }
-
     @And("I navigate to the {string} page")
     public void iNavigateToTheBookAAppointmentPage(String strAppointments) {
-        Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
-        Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToBookAppointmentPage(strAppointments));
-
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+            Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToBookAppointmentPage(strAppointments));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToBookAppointmentPage(strAppointments));
+        }
     }
 
     @And("I enter the visit appointment details {string}")
     public void iEnterTheVisitAppointmentDetails(String strHealthCenter) {
-        List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
-        Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
 //        Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
-        Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
-        Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
-        Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
-        Assert.assertTrue(demoPageContainer.appointmentsPage.selectReasonForBooking(TestDataUtil.getValue(lstAppointmentDetails.get(3))));
-        Assert.assertTrue(demoPageContainer.appointmentsPage.selectTypeOfAppointment(TestDataUtil.getValue(lstAppointmentDetails.get(4))));
-        Assert.assertTrue(demoPageContainer.appointmentsPage.selectProvider(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
-        Assert.assertTrue(demoPageContainer.appointmentsPage.selectFutureDateOnCalender(TestDataUtil.getValue(lstAppointmentDetails.get(7))));
-        Assert.assertTrue(demoPageContainer.appointmentsPage.selectAvialableSlotDateTime(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectReasonForBooking(TestDataUtil.getValue(lstAppointmentDetails.get(3))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectTypeOfAppointment(TestDataUtil.getValue(lstAppointmentDetails.get(4))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectProvider(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectFutureDateOnCalender(TestDataUtil.getValue(lstAppointmentDetails.get(7))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectAvialableSlotDateTime(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+//        Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectReasonForBooking(TestDataUtil.getValue(lstAppointmentDetails.get(3))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectTypeOfAppointment(TestDataUtil.getValue(lstAppointmentDetails.get(4))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectProviderForMobileView(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectFutureDateOnCalender(TestDataUtil.getValue(lstAppointmentDetails.get(7))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectAvialableSlotDateTime(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
+        }
     }
 
     @When("I click confirm button")
@@ -251,7 +266,6 @@ public class WebSteps {
 
     @And("I logout from tha application")
     public void iLogoutFromThaApplication() {
-
         Assert.assertTrue(demoPageContainer.homePage.clickLogoutButton());
     }
 

@@ -1,17 +1,17 @@
 package MMH.pages;
 
 import cap.common.BasePage;
+import cap.helpers.Constants;
 import cap.utilities.DateUtil;
 import cap.utilities.TestDataUtil;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.Select;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -95,11 +95,27 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='doctor-list']")
     protected WebElement elmntProviderList;
 
+    @FindBy(how = How.XPATH, using = "//div[@class='doctor mobile-view']")
+    protected WebElement elmntProviderListView;
+
+
+    @FindBy(how = How.XPATH, using = "(//div[@class='profile ng-star-inserted'])[1]")
+    protected WebElement elmntProviders;
+
+    @FindBy(how = How.XPATH, using = "(//div[@class='profile ng-star-inserted'])[1]")
+    protected WebElement elmntProvider2;
+
+//    @FindBy(how = How.XPATH, using = "//div[@class='profile ng-star-inserted']")
+//    List<WebElement> elmntProviders;
+
     protected String elmntBookingType = new StringBuilder().append("//div[@class='mat-tab-links']//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
     protected String elmntSelectProvider = new StringBuilder().append("//div[@class='profile']//child::p[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
+
+    protected String elmntSelectProviderMobileView = new StringBuilder().append("//div[@class='doctor mobile-view']/child::div//following-sibling::div/child::p[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]//ancestor::div/child::img").toString();
 
     @FindBy(how = How.XPATH, using = "//mat-calendar[@class='mat-calendar']")
     protected WebElement elmntAppointmentCalendar;
@@ -116,8 +132,17 @@ public class AppointmentsPage extends BasePage {
     protected String elmntSlots = new StringBuilder().append("//mat-chip[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Confirm']/parent::button")
-    protected WebElement btnConfirm;
+//    @FindAll({
+//            @FindBy(how = How.XPATH, using = "//div[contains(@class,'desktop-view')]//span[contains(text(),'Confirm')]/parent::button"), //Desktop View
+//            @FindBy(how = How.XPATH, using = "//div[contains(@class,'mobile-view')]//span[contains(text(),'Confirm')]/parent::button"),//Mobile View
+//    })
+//    protected WebElement btnConfirm;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'desktop-view')]//span[contains(text(),'Confirm')]/parent::button")
+    protected WebElement btnConfirmDesktop;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'mobile-view')]//span[contains(text(),'Confirm')]/parent::button")
+    protected WebElement btnConfirmMobile;
 
     @FindBy(how = How.XPATH, using = "//div[@class='payment-profile']")
     protected WebElement elmntPaymentProfile;
@@ -125,8 +150,8 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'checkbox')]/mat-checkbox")
     protected WebElement chkAcceptandTerms;
 
-//    @FindBy(how = How.XPATH, using = "//div[@id='desktop-view']//button[@ng-reflect-disabled='false']/span[text()='Confirm your booking now']")
-//    protected WebElement btnConfirmYourBookingEnabled;
+    @FindBy(how = How.XPATH, using = "//div[contains(@id,'mobile-view')]//span[contains(text(),'Confirm')]/parent::button")
+    protected WebElement btnConfirmYourBookingEnabledmobile;
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//div[@id='desktop-view']//button/span[text()='Confirm your booking now']"), // Without Fees
@@ -467,11 +492,25 @@ public class AppointmentsPage extends BasePage {
     public boolean clickConfirmButton() {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
-            waitForElement(btnConfirm);
-            click(btnConfirm);
-            waitForSeconds(10);
-            blResult = true;
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                waitForSeconds(2);
+                jsScrollDown();
+                jsScrollIntoView(btnConfirmDesktop);
+                waitForElement(btnConfirmDesktop);
+                click(btnConfirmDesktop);
+                waitForSeconds(5);
+                blResult = true;
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                waitForSeconds(2);
+                jsScrollDown();
+                jsScrollIntoView(btnConfirmMobile);
+                waitForElement(btnConfirmMobile);
+                click(btnConfirmMobile);
+                waitForSeconds(5);
+                blResult = true;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -544,13 +583,25 @@ public class AppointmentsPage extends BasePage {
     public boolean clickConfirmYourBookingButton() {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
-            waitForElement(elmntPaymentProfile);
-            verifyElement(btnConfirmYourBookingEnabled);
-            click(btnConfirmYourBookingEnabled);
-            waitForSeconds(4);
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+
+                waitForSeconds(2);
+                waitForElement(elmntPaymentProfile);
+                verifyElement(btnConfirmYourBookingEnabled);
+                click(btnConfirmYourBookingEnabled);
+                waitForSeconds(4);
+                blResult = true;
+            }
 //            blResult = verifyElement(elmntFutureAppointmentTab);
-            blResult = true;
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                waitForSeconds(2);
+                waitForElement(elmntPaymentProfile);
+                verifyElement(btnConfirmYourBookingEnabledmobile);
+                click(btnConfirmYourBookingEnabledmobile);
+                waitForSeconds(4);
+                blResult = true;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -561,11 +612,21 @@ public class AppointmentsPage extends BasePage {
     public boolean acceptTermsAndConditionsForAppointment() {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
-            waitForElement(elmntPaymentProfile);
-            waitForElementClickable(chkAcceptandTerms);
-            click(chkAcceptandTerms);
-            blResult = verifyElement(btnConfirmYourBookingEnabled);
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                waitForSeconds(2);
+                waitForElement(elmntPaymentProfile);
+                waitForElementClickable(chkAcceptandTerms);
+                click(chkAcceptandTerms);
+                blResult = verifyElement(btnConfirmYourBookingEnabled);
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                jsScrollDown();
+                jsScrollIntoView(chkAcceptandTerms);
+                waitForElement(elmntPaymentProfile);
+                waitForElementClickable(chkAcceptandTerms);
+                click(chkAcceptandTerms);
+                blResult = verifyElement(btnConfirmYourBookingEnabledmobile);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -667,6 +728,35 @@ public class AppointmentsPage extends BasePage {
             WebElement elmntProvider = waitForElement(By.xpath(elmntSelectProvider.replace("<<REPLACEMENT>>", strProvider)));
             waitForSeconds(2);
             jsClick(elmntProvider);
+            takeScreenshot(driver);
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectProviderForMobileView(String strProvider) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntProviderListView);
+            jsScrollIntoView(elmntProviderListView);
+            By elmntProvider = By.xpath(elmntSelectProviderMobileView.replace("<<REPLACEMENT>>", strProvider));
+            System.out.println("elmntPackName>>>>>> " + elmntProvider);
+            while (!(verifyElement(elmntProvider))) {
+//                System.out.println("Swipe>>>>> " + verifyElement(elmntProvider));
+//                swipeHorizontalMobileView(elmntProviders);
+                click(elmntProviders);
+                waitForSeconds(5);
+                Robot robot = new Robot();
+                robot.keyPress(KeyEvent.VK_RIGHT);
+                waitForSeconds(3);
+            }
+            WebElement elmntProvider1 = waitForElement(By.xpath(elmntSelectProviderMobileView.replace("<<REPLACEMENT>>", strProvider)));
+            waitForSeconds(3);
+            jsClick(elmntProvider1);
+            waitForSeconds(2);
             takeScreenshot(driver);
             blResult = true;
         } catch (Exception e) {
@@ -1190,7 +1280,8 @@ public class AppointmentsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", lstDetails.get(0))
                     .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
             System.out.println("TEST" + lstDetails.get(1));
-            verifyElement(elmntReservationDetails);;
+            verifyElement(elmntReservationDetails);
+            ;
             takeScreenshot(driver);
             waitForSeconds(3);
             blResult = true;
