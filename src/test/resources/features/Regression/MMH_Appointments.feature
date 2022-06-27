@@ -1,6 +1,6 @@
 Feature: Appointments
 
-  @WEB @Mobile @APPOINTMENTS @MobileResponse
+  @WEB @Mobile @APPOINTMENTS @MobileResponse @TestVideoJoin
   Scenario Template: Prep- User Successfully logs in to the MMH v2 Portal.
 
     Given As a user I am on MMH login Page
@@ -53,7 +53,7 @@ Feature: Appointments
       | Appointment         | Appointment_Cancel_Button        | Appointment_After_Cancel              |
       | Future Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
-  @WEB @APP @APPOINTMENTS
+  @WEB @APP @APPOINTMENTS @TestVideoJoin
   Scenario Template: S2 - Patient Booking Appointment - Video Appointment
 
     Given As a user I am on HomePage
@@ -63,10 +63,34 @@ Feature: Appointments
     Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
     And I accept the terms & conditions and confirm my booking
     And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
+    And I logout from tha application
 
     Examples:
       | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
       | Book Appointment | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
+
+  @WEB @Mobile @APPOINTMENTS @TestVideoJoin
+  Scenario Template: Prep- User Successfully logs in to the MMH v2 Portal.
+
+    Given As a user I am on MMH login Page
+    And I enter "<Email Address>" and "<Password>"
+    When I click login button
+    Then I should see user successfully logs in to the MMH portal
+
+    Examples:
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
+
+  @WEB @Mobile @APPOINTMENTS @TestVideoJoin
+  Scenario Template: S2 - Join Video Appointment
+
+    And I navigate to the "<Appointment>" page
+    And I join now button for video consultation "<Join_Consultation>"
+    Then I should see video consultation window with icons "<All_Icons>"
+
+    Examples:
+      | Appointment         | Join_Consultation                                 | All_Icons     |
+      | Future Appointments | &APPOINTMENT_DETAILS_FOR_JOIN_VIDEO_CONSULTATION& | &VIDEO_ICONS& |
 
   @WEB @APP @APPOINTMENTS
   Scenario Template: S3 - Patient Booking Appointment - Visit in video slot Appointment

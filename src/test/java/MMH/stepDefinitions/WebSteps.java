@@ -1350,11 +1350,25 @@ public class WebSteps {
     public void asIAmOnMMHLoginPage() {
         demoPageContainer.myHealthRecordsPage.clickSignoutButton();
 
-
     }
 
     @Then("I should see Patient Record is deleted")
     public void iShouldSeePatientRecordIsDeleted() {
         Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyDeletedRecord());
+    }
+
+    @And("I join now button for video consultation {string}")
+    public void iJoinNowButtonForVideoConsultation(String strAppointmentJoinVideo) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentJoinVideo);
+        Assert.assertTrue(demoPageContainer.appointmentsPage.clickJoinVideoConsultingForTheCreatedAppointment(lstDetails));
+    }
+
+    @Then("I should see video consultation window with icons {string}")
+    public void iShouldSeeVideoConsultationWindowWithIcons(String strAllIcons) {
+        System.out.println("All Icons Value:::>>" + strAllIcons);
+        List<String> lstIcons = TestDataUtil.getListOfValue(strAllIcons);
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAllIcons(lstIcons));
+        demoPageContainer.appointmentsPage.clickEndIcon();
+//        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
     }
 }

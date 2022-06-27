@@ -181,6 +181,15 @@ public class AppointmentsPage extends BasePage {
             .append("')]/ancestor::mat-card/child::mat-card-footer/button").toString();
 
 
+    protected String btnJoinVideoConsultingForCreatedAppointment = new StringBuilder().append("//mat-card//following-sibling::div//mat-card-title[contains(text(),'")
+            .append("<<REPLACEMENT1>>")
+            .append("')]/ancestor::mat-card//child::mat-card-actions//p[contains(text(),'")
+            .append("<<REPLACEMENT2>>")
+            .append("')]/ancestor::mat-card//child::div/p[contains(text(),'")
+            .append("<<REPLACEMENT3>>")
+            .append("')]/ancestor::mat-card/child::mat-card-content/child::div//button").toString();
+
+
     protected String elmntDetailsAfterCancelingAppointment = new StringBuilder().append("(//mat-card//following-sibling::div//mat-card-title[contains(text(),'")
             .append("<<REPLACEMENT1>>")
             .append("')]/ancestor::mat-card//child::mat-card-actions//p[contains(text(),'")
@@ -1335,4 +1344,77 @@ public class AppointmentsPage extends BasePage {
         }
         return blResult;
     }
+
+    public boolean clickJoinVideoConsultingForTheCreatedAppointment(List<String> lstDetails) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntFutureAppointmentTab);
+            String strDatePattern1 = "dd MMM yyyy";
+            String strDate = TestDataUtil.getValue(lstDetails.get(2));
+            String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+            System.out.println("DATE" + strDateValue);
+
+            String strDateMonth = strDateValue;
+            String strTime = strSlotDate;
+
+            System.out.println("CANCEL TIME" + strTime);
+
+            String strConvertedTime = strTime;
+
+            strConvertedTime = "0" + strConvertedTime;
+
+            String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
+
+            System.out.println(strFinalOutDateTime);
+
+            WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
+            verifyElement(elmntAppointmentDetails);
+            jsScrollIntoView(elmntAppointmentDetails);
+
+            System.out.println("TEST" + lstDetails.get(1));
+            WebElement elmntReservationDetails = waitForElement(By.xpath(btnJoinVideoConsultingForCreatedAppointment
+                    .replace("<<REPLACEMENT1>>", strFinalOutDateTime)
+                    .replace("<<REPLACEMENT2>>", lstDetails.get(0))
+                    .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
+            System.out.println("TEST" + lstDetails.get(1));
+            verifyElement(elmntReservationDetails);
+            click(elmntReservationDetails);
+            waitForSeconds(3);
+            blResult = true;
+
+        } catch (Exception e) {
+            try {
+                waitForSeconds(2);
+                waitForElement(elmntFutureAppointmentTab);
+                String strDatePattern1 = "dd MMM yyyy";
+                String strDate = TestDataUtil.getValue(lstDetails.get(2));
+                String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+                System.out.println("DATE" + strDateValue);
+                String strDateMonth = strDateValue;
+                String strTime = strSlotDate;
+                String strFinalOutDateTime = strDateMonth + " " + strTime;
+                System.out.println(strFinalOutDateTime);
+                WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
+                verifyElement(elmntAppointmentDetails);
+                jsScrollIntoView(elmntAppointmentDetails);
+
+                System.out.println("TEST" + lstDetails.get(1));
+                WebElement elmntReservationDetails = waitForElement(By.xpath(btnJoinVideoConsultingForCreatedAppointment
+                        .replace("<<REPLACEMENT1>>", strFinalOutDateTime)
+                        .replace("<<REPLACEMENT2>>", lstDetails.get(0))
+                        .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
+                System.out.println("TEST" + lstDetails.get(1));
+                verifyElement(elmntReservationDetails);
+                click(elmntReservationDetails);
+                waitForSeconds(3);
+                blResult = true;
+            } catch (Exception d) {
+                e.printStackTrace();
+            }
+
+        }
+        return blResult;
+    }
+
 }

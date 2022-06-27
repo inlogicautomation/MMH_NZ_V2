@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/New_Repo_Push.iml" filepath="$PROJECT_DIR$/.idea/New_Repo_Push.iml" />
+      <module fileurl="file://$PROJECT_DIR$/codoid-poc.iml" filepath="$PROJECT_DIR$/codoid-poc.iml" />
     </modules>
   </component>
 </project>
