@@ -317,7 +317,6 @@ Feature: My Health Records Demo
       | Option     |
       | My Entries |
 
-
   @WEB @S1 @Mobile @HEALTH_RECORDS
   Scenario Template: S11- Patient Edit Created Record in Clinic Notes
     Given I am on "<Tab>" Clinic Notes page
@@ -332,8 +331,6 @@ Feature: My Health Records Demo
       | Tab             | Record                | Location        |
       | Clinician Notes | &VISITED_NAME_RANDOM& | &EDIT_LOCATION& |
 
-
-
   @WEB @S1 @Mobile @HEALTH_RECORDS
   Scenario: S13- Verify My Health Records can view all the My Entries Future in Summary.
 
@@ -341,7 +338,6 @@ Feature: My Health Records Demo
     And I navigate to the Health Summary
     When I click Export Health Summary
     Then I navigate to the Homepage
-
 
   @WEB @S1 @Mobile @HEALTH_RECORDS
   Scenario Outline: S12- Verify My Health Records can view all the My Entries Future in Recalls.
