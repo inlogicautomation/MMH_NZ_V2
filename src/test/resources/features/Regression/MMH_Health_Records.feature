@@ -62,7 +62,7 @@ Feature: My Health Records Demo
     And I change "<FrequencyDrop>" in Prescription page
     When I am on "<Tab>" Prescriptions page
     And I delete Created "<Record>" in Prescriptions page
-    Then I confirm deleted Patient Record
+    Then I should see Patient Record is deleted
     And I navigate to the Homepage
     Examples:
       | Tab           | Record                | FrequencyDrop   |
@@ -119,7 +119,7 @@ Feature: My Health Records Demo
     And I change "<SeverityDrop>" in Allergies page
     When I am on "<Tab>" Allergies page
     And I delete Created "<Record>" in Allergies page
-    Then I confirm deleted Patient Record
+    Then I should see Patient Record is deleted
     And I navigate to the Homepage
     Examples:
       | Tab       | Record                | SeverityDrop |
@@ -152,10 +152,8 @@ Feature: My Health Records Demo
     When I select "<Option>" filter dropdown
     And I should see all My Entries Immunisations page
       | &DATA_MY_ENTRIES_IMMUNISATIONS&   |
-      | &DATA_MY_ENTRIES_IMMUNISATIONS_1& |
     And  I Click Info Icon in My Entries to see Immunisations page
       | &DATA_MY_ENTRIES_IMMUNISATIONS&   | &DATA_MY_ENTRIES_INSIDE_IMMUNISATIONS&   |
-      | &DATA_MY_ENTRIES_IMMUNISATIONS_1& | &DATA_MY_ENTRIES_INSIDE_IMMUNISATIONS_1& |
     And I Create New Record in Immunisations page
       | &VISITED_NAME_RANDOM&     |
       | &ADDITIONAL_INFORMATION& |
@@ -173,7 +171,7 @@ Feature: My Health Records Demo
     And I change "<AdditionalName>" in Immunisations page
     When I am on "<Tab>" Immunisation page
     And I delete Created "<Record>" in Immunisations page
-    Then I confirm deleted Patient Record
+    Then I should see Patient Record is deleted
 
     Examples:
       | Tab           | Record                | AdditionalName    |
@@ -250,7 +248,7 @@ Feature: My Health Records Demo
     And I change "<StatusDrop>" in Classifications page
     When I am on "<Tab>" Classifications page
     And I delete Created "<Record>" in Classifications page
-    Then I confirm deleted Patient Record
+    Then I should see Patient Record is deleted
     And I navigate to the Homepage
     Examples:
       | Tab             | Record                | StatusDrop |
@@ -328,37 +326,44 @@ Feature: My Health Records Demo
     When I should see Edited "<Location>" record in Clinic Notes
     And   I am on "<Tab>" Clinic Notes page
     And I delete Created "<Record>" in Clinic Notes
-    Then I confirm deleted Patient Record
+    Then I should see Patient Record is deleted
     And I navigate to the Homepage
     Examples:
       | Tab             | Record                | Location        |
       | Clinician Notes | &VISITED_NAME_RANDOM& | &EDIT_LOCATION& |
 
 
-  Scenario: S12- Verify My Health Records can view all the My Entries Future in Recalls.
-
-    Given As a user I am on HomePage
-    When I navigate to the Recalls page
-    And I should see all the Entries From Health Centre future Grid View in Recalls page
-#      | &RECALLS_TABLE_DATA&     |
-      | &RECALLS_TABLE_DATA_1& |
-    And  I Click Info Icon to see Recalls page
-#      | &RECALLS_TABLE_DATA&   | &RECALLS_ICON_DATA&     |
-      | &RECALLS_TABLE_DATA_1& | &RECALLS_ICON_DATA_1& |
-
-    When I should see all the Entries From Health Centre Recall Remainder Details future Grid View in Recalls page
-      | &RECALLS_REMAINDER_TABLE_DATA& |
-    And  I Click Info Icon to see Recall Remainder Details in Recalls page
-      | &RECALLS_REMAINDER_TABLE_DATA& | &RECALLS_REMAINDER_ICON_DATA& |
-    And I navigate to the Homepage
-
 
   @WEB @S1 @Mobile @HEALTH_RECORDS
   Scenario: S13- Verify My Health Records can view all the My Entries Future in Summary.
 
     Given As a user I am on HomePage
-    When I navigate to the Summary
-    Then I click Export button
+    And I navigate to the Health Summary
+    When I click Export Health Summary
+    Then I navigate to the Homepage
+
+
+  @WEB @S1 @Mobile @HEALTH_RECORDS
+  Scenario Outline: S12- Verify My Health Records can view all the My Entries Future in Recalls.
+
+    Given As a user I am on HomePage
+    And As I am on MMH login Page
+    And I enter "<Email Address>" and "<Password>"
+    And I click login button
+    When I navigate to the Recalls page
+    And I should see all the Entries From Health Centre future Grid View in Recalls page
+      | &RECALLS_TABLE_DATA_1& |
+    And I Click Info Icon to see Recalls page
+      | &RECALLS_TABLE_DATA_1& | &RECALLS_ICON_DATA_1& |
+    Then I should see all the Entries From Health Centre Recall Remainder Details future Grid View in Recalls page
+      | &RECALLS_REMAINDER_TABLE_DATA& |
+    And  I Click Info Icon to see Recall Remainder Details in Recalls page
+      | &RECALLS_REMAINDER_TABLE_DATA& | &RECALLS_REMAINDER_ICON_DATA& |
     And I navigate to the Homepage
+
+    Examples:
+      | Email Address | Password              |
+      | &EMAIL_MMH&   | &PASSWORD_FOR_HEALTH& |
+
 
 
