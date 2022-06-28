@@ -325,7 +325,7 @@ public class WebSteps {
     @When("I enter {string} and {string} For Beta")
     public void iEnterEmailAddressAndPasswordForBeta(String strEmail, String strPassword) {
         demoPageContainer.homePage.enterEmailForBeta(TestDataUtil.getValue(strEmail));
-        demoPageContainer.homePage.enterpasswordForBeta(TestDataUtil.getValue(strPassword));
+        demoPageContainer.homePage.enterPasswordForBeta(TestDataUtil.getValue(strPassword));
 
     }
 
@@ -1370,5 +1370,331 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAllIcons(lstIcons));
         demoPageContainer.appointmentsPage.clickEndIcon();
 //        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
+    }
+
+    @Given("As a user I am on HomePage and navigate to Messages Setting")
+    public void asAUserIAmOnHomePageAndNavigateToMessagesSetting() {
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
+
+    }
+
+    @And("I click the Session Setting and select the Customise Session {string}")
+    public void iClickTheSessionSettingAndSelectTheCustomiseSession(String strTimeOut) {
+
+        Assert.assertTrue(demoPageContainer.messagesPage.selectCustomiseSessionTimeOut(TestDataUtil.getValue(strTimeOut)));
+
+    }
+    @Then("I Should see the Out Of Office Based on {string} and Message get auto replied when sender send message within that period of time")
+    public void iShouldSeeTheOutOfOfficeBasedOnAndMessageGetAutoRepliedWhenSenderSendMessageWithinThatPeriodOfTime(String strMessage) {
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
+        Assert.assertTrue(demoPageContainer.messagesPage.selectOutOfOfficeSetting());
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredOutOfOfficeMessage(TestDataUtil.getValue(strMessage)));
+
+    }
+
+    @And("I click the Automatic Replies Settings and Enable Replies Settings option")
+    public void iClickTheAutomaticRepliesSettingsAndEnableRepliesSettingsOption() {
+        Assert.assertTrue(demoPageContainer.messagesPage.selectAutomaticRepliesSetting());
+        Assert.assertTrue(demoPageContainer.messagesPage.enableCheckBoxAutomaticReply());
+    }
+
+    @Given("As a user Launch the {string}")
+    public void asAUserLaunchTheAndLoginWith(String strURL) {
+        Assert.assertTrue(demoPageContainer.messagesPage.launchInNewTab(TestDataUtil.getValue(strURL)));
+
+    }
+
+    @Then("I Should see the Automatic Replies {string}")
+    public void iShouldSeeTheAutomaticReplies(String strMessage) {
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
+        Assert.assertTrue(demoPageContainer.messagesPage.selectAutomaticRepliesSetting());
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredAutomaticRepliesMessage(TestDataUtil.getValue(strMessage)));
+
+    }
+
+
+    @And("I Enter the Automatic Replies {string}")
+    public void iEnterTheAutomaticReplies(String strMessage) {
+        Assert.assertTrue(demoPageContainer.messagesPage.enterMessageForAutomaticReplies(TestDataUtil.getValue(strMessage)));
+
+    }
+
+    @And("I click the Out of Office Settings and Enable Out Of Office Reply option")
+    public void iClickTheOutOfOfficeSettingsAndEnableOutOfOfficeReplyOption() {
+        Assert.assertTrue(demoPageContainer.messagesPage.selectOutOfOfficeSetting());
+        Assert.assertTrue(demoPageContainer.messagesPage.enableOutOfOfficeChkBox());
+    }
+
+    @And("I select the Out of office {string} and {string} and Enter the{string}")
+    public void iSelectTheOutOfOfficeAndAndEnterThe(String strStartDate, String strEndDate, String strMessage) {
+//        Assert.assertTrue(demoPageContainer.messagesPage.selectStartDateForOutOfOffice(strStartDate));
+//        Assert.assertTrue(demoPageContainer.messagesPage.selectEndDateForOutOfOffice(strEndDate));
+        Assert.assertTrue(demoPageContainer.messagesPage.enterMessageForOutOfOffice(TestDataUtil.getValue(strMessage)));
+
+    }
+
+
+    @Then("I Should Verify the Out Of Office Reply {string}")
+    public void iShouldVerifyTheOutOfOfficeReplyMessage(String strMessage) {
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
+        Assert.assertTrue(demoPageContainer.messagesPage.selectOutOfOfficeSetting());
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredOutOfOfficeMessage(TestDataUtil.getValue(strMessage)));
+
+    }
+    @And("I click the Signature Setting and Enter the {string}")
+    public void iClickTheSignatureSettingAndEnterThe(String strMessage) {
+        Assert.assertTrue(demoPageContainer.messagesPage.enterTheSignatureMessage(TestDataUtil.getValue(strMessage)));
+    }
+    @Then("I Should see the Signature Based on {string} entered and signature must get auto populated in Compose mail")
+    public void iShouldSeeTheSignatureBasedOnEnteredAndSignatureMustGetAutoPopulatedInComposeMail(String strMessage) {
+
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessage());
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredSignatureMessage(TestDataUtil.getValue(strMessage)));
+    }
+
+    @When("I click the Save Button")
+    public void iClickTheSaveButton() {
+        Assert.assertTrue(demoPageContainer.messagesPage.clickSaveButton());
+
+    }
+
+    @And("I click the Alert Setting and select the {string}")
+    public void iClickTheAlertSettingAndSelectThe(String strAlertType) {
+        Assert.assertTrue(demoPageContainer.messagesPage.selectAlert(TestDataUtil.getValue(strAlertType)));
+    }
+
+    @Given("As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module")
+    public void asAUserIAmOnDoctorPortalHomepageAndNavigateToInbox() {
+//        Assert.assertTrue(demoPageContainer.messagesPage.navigateToInbox());
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessageForDoctor());
+
+    }
+
+    @And("As I enter the Compose {string}")
+    public void asIEnterTheCompose(String strMessageDetails) {
+
+        List <String> lstMessageDetails=TestDataUtil.getListOfValue(strMessageDetails);
+        System.out.println("List Message Details >>> :: " + lstMessageDetails);
+
+        Assert.assertTrue(demoPageContainer.messagesPage.selectHealthCenter(TestDataUtil.getValue(lstMessageDetails.get(0))));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectHealthCenterLocation(TestDataUtil.getValue(lstMessageDetails.get(1))));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectServiceName(TestDataUtil.getValue(lstMessageDetails.get(2))));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectRole(TestDataUtil.getValue(lstMessageDetails.get(3))));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectTo(TestDataUtil.getValue(lstMessageDetails.get(4))));
+        Assert.assertTrue(demoPageContainer.messagesPage.enterSubject(TestDataUtil.getValue(lstMessageDetails.get(5))));
+        Assert.assertTrue(demoPageContainer.messagesPage.enableTermAndConditions());
+        Assert.assertTrue(demoPageContainer.messagesPage.enterBodyMessage(TestDataUtil.getValue(lstMessageDetails.get(6))));
+
+
+    }
+
+
+    @And("I navigate to the {string} in Messages page")
+    public void iNavigateToTheInmessagespage(String strSubTab) {
+        demoPageContainer.messagesPage.clickMessagesExpandIcon();
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessagesPage(strSubTab));
+
+    }
+
+
+    @When("I enter the {string} to compose an email")
+    public void iEnterTheToComposeAnEmail(String listCreateData) {
+        List<String> list=TestDataUtil.getListOfValue(listCreateData);
+        System.out.println(list);
+        demoPageContainer.messagesPage.selectHealthCentre(list.get(0));
+        demoPageContainer.messagesPage.selectLocation(list.get(1));
+        demoPageContainer.messagesPage.selectServiceNamePatient(list.get(2));
+        demoPageContainer.messagesPage.selectRolePatient(list.get(3));
+        demoPageContainer.messagesPage.selectToPatient(list.get(4));
+//       demoPageContainer.messagespage.enterSubject(list.get(5));
+        demoPageContainer.messagesPage.clickCheckBox();
+        demoPageContainer.messagesPage.enterWriteMessage(list.get(6));
+        demoPageContainer.messagesPage.clickAddFile(list.get(7));
+
+
+
+    }
+
+    @And("I Click Send Message Button")
+    public void iClickSendMessageButton() {
+        demoPageContainer.messagesPage.clickReplySave();
+    }
+
+    @And("I Click Draft Message Button")
+    public void iClickDraftMessageButton() {
+        demoPageContainer.messagesPage.clickDraftSave();
+    }
+
+
+
+
+
+    @Then("I should see all the Messages future Grid View in Inbox page")
+    public void iShouldSeeAllTheMessagesFutureGridViewInInboxPage(List<String> locDetails) {
+        for (String String : locDetails) {
+
+            Assert.assertTrue(demoPageContainer.messagesPage.VerifyInboxData(TestDataUtil.getListOfValue(String)));
+        }
+    }
+
+    @And("I am on {string} Inbox page")
+    public void iAmOnInboxPage(String strTab) {
+        demoPageContainer.messagesPage.verifyInboxHeader(strTab);
+    }
+
+
+    @And("I am on {string} Draft page")
+    public void iAmOnDraftPage(String  strTab) {
+        demoPageContainer.messagesPage.verifyDraftHeader(strTab);
+
+    }
+
+    @Then("I should see all the Messages future Grid View in Draft page")
+    public void iShouldSeeAllTheMessagesFutureGridViewInDraftPage(List<String> locDetails) {
+        for (String String : locDetails) {
+            System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
+            Assert.assertTrue(demoPageContainer.messagesPage.VerifyDraftData(TestDataUtil.getListOfValue(String)));
+        }
+    }
+
+    @And("I Navigate to Home Page")
+    public void iNavigateToHomePage() {
+        demoPageContainer.messagesPage.clickMessageOptionMenu();
+        demoPageContainer.messagesPage.clickDashboardFromMenu();
+    }
+
+    @And("I Navigate to{string} Doctor Portal")
+    public void iNavigateToDoctorPortal(String listCreateData) {
+        List<String> list=TestDataUtil.getListOfValue(listCreateData);
+        demoPageContainer.messagesPage.clickInboxButton();
+        demoPageContainer.messagesPage.clickSubjectButton();
+        demoPageContainer.messagesPage.clickReplyButton();
+        demoPageContainer.messagesPage.clickAttachButton();
+        demoPageContainer.messagesPage.clickDevAddFile(list.get(3));
+        demoPageContainer.messagesPage.clickRadioButton();
+        demoPageContainer.messagesPage.clickSendMessageButton();
+
+
+
+    }
+
+    @And("I am on {string} Sent page")
+    public void iAmOnSentPage(String strTab) {
+        demoPageContainer.messagesPage.verifyInboxHeader(strTab);
+    }
+
+    @Then("I should see all the Messages future Grid View in Send page")
+    public void iShouldSeeAllTheMessagesFutureGridViewInSendPage(List<String> locDetails) {
+        for (String String : locDetails) {
+            System.out.println(String);
+
+            Assert.assertTrue(demoPageContainer.messagesPage.VerifySendData(TestDataUtil.getListOfValue(String)));
+        }
+    }
+
+    @Then("I click Attached Files")
+    public void iClickAttachedFiles() {
+        demoPageContainer.messagesPage.clickInboxAttachButton();
+        demoPageContainer.messagesPage.VerifyAttachdowloadSuccessfully();
+        demoPageContainer.messagesPage.DeleteFile();
+    }
+
+    @When("I am on {string} Inbox Header")
+    public void iAmOnInboxHeader(String strTab) {
+        demoPageContainer.messagesPage.verifyInboxesPage(strTab);
+    }
+
+    @Given("As a user I am on{string} Dev login Page")
+    public void asAUserIAmOnDevLoginPage(String listCreateData) {
+        List<String> list=TestDataUtil.getListOfValue(listCreateData);
+        demoPageContainer.messagesPage.launchingNewTab(list.get(0));
+    }
+
+    @And("I enter{string} Email Address and Password")
+    public void iEnterEmailAddressAndPassword(String listCreateData) {
+        List<String> list=TestDataUtil.getListOfValue(listCreateData);
+        demoPageContainer.homePage.enterEmail(list.get(1));
+        demoPageContainer.homePage.enterpassword(list.get(2));
+        demoPageContainer.homePage.clickLoginButton();
+    }
+
+    @Given("As a user I am on Inbox Header")
+    public void asAUserIAmOnInboxHeader() {
+        demoPageContainer.messagesPage.VerifyInboxHeader();
+    }
+
+    @And("I Click Reply Message Button")
+    public void iClickReplyMessageButton() {
+        demoPageContainer.messagesPage.ClickReplyMessage();
+    }
+
+    @When("I enter the {string} Message Body in Reply Message Page")
+    public void iEnterTheMessageBodyInReplymessagePage(String listCreateData) {
+        List<String> list=TestDataUtil.getListOfValue(listCreateData);
+        demoPageContainer.messagesPage.enterReplyMessage(list.get(6));
+    }
+
+    @When("I should see all the Messages future Grid View in GroupMessage page")
+    public void iShouldSeeAllTheMessagesFutureGridViewInGroupMessagePage(List<String> locDetails) {
+        for (String String : locDetails) {
+
+            Assert.assertTrue(demoPageContainer.messagesPage.VerifyGroupMessageData(TestDataUtil.getListOfValue(String)));
+        }
+    }
+
+    @And("I am on {string} GroupMessage")
+    public void iAmOnGroupMessage(String strTab) {
+        demoPageContainer.messagesPage.verifyGroupMessageHeader(strTab);
+    }
+
+    @Then("I should see message sent Successfully popup")
+    public void iShouldSeeMessageSentSuccessfullyPopup() {
+        demoPageContainer.messagesPage.verifySentSuccessfully();
+    }
+
+    @Then("I should see message Drop Successfully popup")
+    public void iShouldSeeMessageDropSuccessfullyPopup() {
+        demoPageContainer.messagesPage.verifyDraftSuccessfully();
+    }
+
+
+    @When("I Click the send message")
+    public void iClickTheSendMessage() {
+        Assert.assertTrue(demoPageContainer.messagesPage.selectSendMessage());
+
+    }
+
+    @Then("I Should verify the Patient {string} in the Inbox")
+    public void iShouldVerifyThePatientInTheInbox(String strMessageDetails) {
+        System.out.println("strMessageDetails Details >>> :: "+strMessageDetails);
+
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToInbox());
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyAutomaticReplyMessage(TestDataUtil.getListOfValue(strMessageDetails)));
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientLogin());
+
+
+
+    }
+
+
+    @Then("I Should Verify the Automatic Replies {string}")
+    public void iShouldVerifyTheAutomaticReplies(String strMessage) {
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
+        Assert.assertTrue(demoPageContainer.messagesPage.selectAutomaticRepliesSetting());
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredAutomaticRepliesMessage(TestDataUtil.getValue(strMessage)));
+
+    }
+
+
+    @When("I am on {string} Inbox Pages")
+    public void iAmOnInboxPages(String strTab) {
+        demoPageContainer.messagesPage.verifyInboxPage(strTab);
+
     }
 }

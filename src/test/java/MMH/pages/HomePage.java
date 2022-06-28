@@ -3,7 +3,6 @@ package MMH.pages;
 import cap.common.BasePage;
 import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,7 +17,7 @@ public class HomePage extends BasePage {
 
     //MMH_v2
 
-    @FindBy(how = How.XPATH, using = "//div[@class='col-1 logo']//img[@alt='ManageMyHealth']")
+    @FindBy(how = How.XPATH, using = "//div[@class='navbar-header']")
     protected WebElement elmntLogo;
 
     @FindBy(how = How.XPATH, using = "//button[@id='Login']")
@@ -27,8 +26,8 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='LOGIN']")
     protected WebElement betaLoginBtn;
 
-    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]")
-    protected WebElement elmntWelcomeMessage;
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health, today')]")
+    protected WebElement elmntVerifyHomePage;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashBoard;
@@ -99,7 +98,7 @@ public class HomePage extends BasePage {
 
     }
 
-    public void enterpasswordForBeta(String strPassword) {
+    public void enterPasswordForBeta(String strPassword) {
         waitForElementClickable(txtBoxPassword);
         enterValue(txtBoxPassword, strPassword);
     }
@@ -141,10 +140,37 @@ public class HomePage extends BasePage {
     }
 
     public boolean verifyHomePageOfMMHPortal() {
-        waitForElement(elmntWelcomeMessage);
+        waitForElement(elmntVerifyHomePage);
         takeScreenshot(driver);
-        return verifyElement(elmntWelcomeMessage);
+        return verifyElement(elmntVerifyHomePage);
     }
+    public boolean navigateToHomePage() {
+        boolean blResult = false;
+        try {
+            waitForElementClickable(elmntLogo);
+            click(elmntLogo);
+            refreshPage();
+            waitForSeconds(3);
+            String pageTitle = driver.getTitle();
+            System.out.println("pageTitle >>> : " + pageTitle);
+            try {
+                pageTitle.equalsIgnoreCase("PostRegistration");
+
+                System.out.println("User on the HomePage and Verified the HomePage >>>>");
+                blResult = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("User not in the HomePage >>>>");
+            }
+
+
+        } catch (Exception e) {
+            System.out.println("Failed to Navigate the HomePage >>>>");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
 
     public void clickAppointmentOptionFromMenu() {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
@@ -215,7 +241,7 @@ public class HomePage extends BasePage {
         click(elmntDashBoard);
         waitForSeconds(3);
         driver.navigate().refresh();
-        return verifyElement(elmntWelcomeMessage);
+        return verifyElement(elmntVerifyHomePage);
     }
 
     public boolean clickLogoutButton() {

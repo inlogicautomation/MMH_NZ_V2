@@ -1,8 +1,6 @@
 package MMH;
 
-import MMH.pages.AppointmentsPage;
-import MMH.pages.MyHealthRecordsPage;
-import MMH.pages.RepeatPrescription;
+import MMH.pages.*;
 import cap.utilities.SharedDriver;
 
 import io.cucumber.java.After;
@@ -11,7 +9,6 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import MMH.pages.HomePage;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -27,8 +24,9 @@ public class DemoPageContainer {
     public HomePage homePage;
     public AppointmentsPage appointmentsPage;
     public RepeatPrescription repeatPrescription;
-
     public MyHealthRecordsPage myHealthRecordsPage;
+    public MessagesPage messagesPage;
+
 
 
     public DemoPageContainer() {
@@ -41,6 +39,7 @@ public class DemoPageContainer {
         appointmentsPage = new AppointmentsPage(driver);
         repeatPrescription = new RepeatPrescription(driver);
         myHealthRecordsPage = new MyHealthRecordsPage(driver);
+        messagesPage = new MessagesPage(driver);
     }
 
     @After("@WEB")
