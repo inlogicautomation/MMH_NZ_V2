@@ -1,6 +1,6 @@
 Feature: Appointments
 
-  @WEB @Mobile @APPOINTMENTS @MobileResponse @TestVideoJoin
+  @WEB @Mobile @APPOINTMENTS @MobileResponse @HAPPY_PATH
   Scenario Template: Prep- User Successfully logs in to the MMH v2 Portal.
 
     Given As a user I am on MMH login Page
@@ -12,7 +12,7 @@ Feature: Appointments
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @APP @APPOINTMENTS @MobileResponse
+  @WEB @APP @APPOINTMENTS @MobileResponse @HAPPY_PATH
   Scenario Template: S1 Patient Booking Appointment - Visit Appointment
 
     Given As a user I am on HomePage
@@ -28,7 +28,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
       | Book Appointment | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &VISIT_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @Mobile @APPOINTMENTS
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH
   Scenario Template: Prep- User Successfully logs in to the MMH v2 Portal.
 
     Given As a user I am on MMH login Page
@@ -40,7 +40,7 @@ Feature: Appointments
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @Mobile @APPOINTMENTS
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH
   Scenario Template: S6 - Patient Cancel Appointment
 
     And I navigate to the "<Appointment>" page
@@ -53,7 +53,7 @@ Feature: Appointments
       | Appointment         | Appointment_Cancel_Button        | Appointment_After_Cancel              |
       | Future Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
-  @WEB @APP @APPOINTMENTS @TestVideoJoin
+  @WEB @APP @APPOINTMENTS @TestVideoJoin @HAPPY_PATH
   Scenario Template: S2 - Patient Booking Appointment - Video Appointment
 
     Given As a user I am on HomePage
@@ -69,7 +69,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
       | Book Appointment | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @Mobile @APPOINTMENTS @TestVideoJoin
+  @WEB @Mobile @APPOINTMENTS @TestVideoJoin @HAPPY_PATH
   Scenario Template: Prep- User Successfully logs in to the MMH v2 Portal.
 
     Given As a user I am on MMH login Page
@@ -81,7 +81,7 @@ Feature: Appointments
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @Mobile @APPOINTMENTS @TestVideoJoin
+  @WEB @Mobile @APPOINTMENTS @TestVideoJoin @HAPPY_PATH
   Scenario Template: S2 - Join Video Appointment
 
     And I navigate to the "<Appointment>" page
@@ -92,7 +92,7 @@ Feature: Appointments
       | Appointment         | Join_Consultation                                 | All_Icons     |
       | Future Appointments | &APPOINTMENT_DETAILS_FOR_JOIN_VIDEO_CONSULTATION& | &VIDEO_ICONS& |
 
-  @WEB @APP @APPOINTMENTS
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH
   Scenario Template: S3 - Patient Booking Appointment - Visit in video slot Appointment
 
     Given As a user I am on HomePage
@@ -107,7 +107,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details               | Details_For_Appointment              | Appointment_Summary                  | Future_Date   |
       | Book Appointment | &BOOK_VISIT_IN_VIDEO_APPOINTMENT& | &VISIT_IN_VIDEO_APPOINTMENT_DETAILS& | &VISIT_IN_VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @APP @APPOINTMENTS
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH
   Scenario Template: S4 - Patient Booking Appointment - Phone Appointment
 
     Given As a user I am on HomePage
@@ -122,7 +122,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
       | Book Appointment | &BOOK_PHONE_APPOINTMENT& | &PHONE_APPOINTMENT_DETAILS& | &PHONE_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @APP @APPOINTMENTS
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH
   Scenario Template: S5 - Patient Booking Appointment - Using Card Payment
 
     Given As a user I am on HomePage
@@ -135,7 +135,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details                         | Details_For_Appointment                        | Future_Date   |
       | Book Appointment | &BOOK_VISIT_APPOINTMENT_USING_CARD_PAYMENT& | &VISIT_APPOINTMENT_DETAILS_USING_CARD_PAYMENT& | &FUTURE_DATE& |
 
-  @WEB @APP @APPOINTMENTS
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH
   Scenario Template: S5 - Patient Booking Appointment - Using Card Payment
 
     And I select payment option "<Payment_Option>"
@@ -148,7 +148,7 @@ Feature: Appointments
       | Payment_Option   | Payment_Details |
       | &PAYMENT_OPTION& | &CARD_DETAILS&  |
 
-  @WEB @APP @APPOINTMENTS
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH
   Scenario Template: S7 - Patient can view all the future date booked appointments in card view
 
     Given As a user I am on HomePage
@@ -159,7 +159,7 @@ Feature: Appointments
       | Appointments        |
       | Future Appointments |
 
-  @WEB @APP @APPOINTMENTS
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH
   Scenario Template: S7 - Patient can view all the future date booked appointments in grid view
 
     Given I am on "<Tab>" page
@@ -169,7 +169,7 @@ Feature: Appointments
       | Tab                 |
       | Future Appointments |
 
-  @WEB @APP @APPOINTMENTS
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH
   Scenario Template: S8 - Patient can view all the past date booked appointments in card view
 
     Given As a user I am on HomePage
@@ -180,7 +180,7 @@ Feature: Appointments
       | Appointments      |
       | Past Appointments |
 
-  @WEB @APP @APPOINTMENTS
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH
   Scenario Template: S8 - Patient can view all the past date booked appointments in card view
 
     Given I am on "<Tab>" page
@@ -190,7 +190,7 @@ Feature: Appointments
       | Tab               |
       | Past Appointments |
 
-  @WEB @APP @APPOINTMENTS
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH
   Scenario Template: S9 - Patient can view all the video appointments invites sent from PMS/Provider in grid view
 
     Given As a user I am on HomePage

@@ -123,7 +123,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@aria-label='Next month']")
     protected WebElement elmntCalendarNavNext;
 
-    protected String elmntDatePicker = new StringBuilder().append("(//div[contains(text(),' ")
+    protected String elmntDatePicker = new StringBuilder().append("(//td[@class='mat-calendar-body-cell ng-star-inserted']/child::div[contains(text(),' ")
             .append("<<REPLACEMENT>>").append(" ')])[1]").toString();
 
     @FindBy(how = How.XPATH, using = "//div[@class='slot-start-time']")
@@ -456,6 +456,7 @@ public class AppointmentsPage extends BasePage {
             } catch (Exception e) {
                 verifyElement(elmntCalendarNavNext);
                 click(elmntCalendarNavNext);
+                waitForSeconds(3);
                 WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
                 verifyElement(elmntDate);
                 waitForElement(elmntDate);
@@ -675,6 +676,7 @@ public class AppointmentsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", lstDetails.get(0))
                     .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
             System.out.println("TEST" + lstDetails.get(1));
+            takeScreenshot(driver);
             blResult = verifyElement(elmntReservationDetails);
 
         } catch (Exception e) {
@@ -704,6 +706,7 @@ public class AppointmentsPage extends BasePage {
                         .replace("<<REPLACEMENT2>>", lstDetails.get(0))
                         .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
                 System.out.println("TEST" + lstDetails.get(1));
+                takeScreenshot(driver);
                 blResult = verifyElement(elmntReservationDetails);
             } catch (Exception d) {
                 e.printStackTrace();
@@ -955,6 +958,7 @@ public class AppointmentsPage extends BasePage {
         boolean isVerifed = false;
         for (String strCurrentIcon : strAllIcons) {
             System.out.println("Current Icon::" + strCurrentIcon);
+            takeScreenshot(driver);
             WebElement elmntCurrentIcon = waitForElement(By.xpath(strIcon.replace("<<REPLACEMENT>>", strCurrentIcon)));
             if (!verifyElement(elmntCurrentIcon)) {
                 isVerifed = false;
@@ -1133,6 +1137,7 @@ public class AppointmentsPage extends BasePage {
             waitForElement(btnNext);
             click(btnNext);
             waitForSeconds(2);
+            takeScreenshot(driver);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1190,6 +1195,7 @@ public class AppointmentsPage extends BasePage {
                     .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
             System.out.println("TEST" + lstDetails.get(1));
             verifyElement(elmntReservationDetails);
+            takeScreenshot(driver);
             click(elmntReservationDetails);
             waitForSeconds(3);
             blResult = true;
@@ -1217,6 +1223,7 @@ public class AppointmentsPage extends BasePage {
                         .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
                 System.out.println("TEST" + lstDetails.get(1));
                 verifyElement(elmntReservationDetails);
+                takeScreenshot(driver);
                 click(elmntReservationDetails);
                 waitForSeconds(3);
                 blResult = true;
@@ -1290,7 +1297,6 @@ public class AppointmentsPage extends BasePage {
                     .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
             System.out.println("TEST" + lstDetails.get(1));
             verifyElement(elmntReservationDetails);
-            ;
             takeScreenshot(driver);
             waitForSeconds(3);
             blResult = true;
@@ -1321,7 +1327,6 @@ public class AppointmentsPage extends BasePage {
                 verifyElement(elmntReservationDetails);
                 takeScreenshot(driver);
                 waitForSeconds(3);
-                blResult = true;
                 blResult = true;
             } catch (Exception d) {
                 e.printStackTrace();

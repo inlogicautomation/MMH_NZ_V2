@@ -177,6 +177,12 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='alert alert-success m-t-40']/b[text()='Success']")
     protected WebElement elmntOnlineCardSuccessPopUp;
 
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Payment Confirmation')]/i")
+    protected WebElement btnBackPaymentConfirmation;
+
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'View Previous Requests')]")
+    protected WebElement txtViewPreviousRequests;
+
     @FindBy(how = How.XPATH, using = "//span[text()=' Back to RRP ']")
     protected WebElement btnBackToRRP;
 
@@ -411,7 +417,7 @@ public class RepeatPrescription extends BasePage {
             mouseClick(elmntViewPreviousRequests);
 //            waitForInvisibilityOfElement(elmntLoadingSpinner);
 
-            blResult = verifyElement(txtViewHistory);
+            blResult = verifyElement(elmntViewPreviousRequests);
             System.out.println("Navigated To View Previous Scripts >>>>");
 
         } catch (Exception e) {
@@ -427,7 +433,7 @@ public class RepeatPrescription extends BasePage {
 
         try {
             waitForSeconds(2);
-            waitForElement(txtViewHistory);
+            waitForElement(elmntViewPreviousRequests);
             waitForElementClickable(elmntMoreInfo);
             click(elmntMoreInfo);
             waitForElement(txtRequestDetails);
@@ -724,8 +730,8 @@ public class RepeatPrescription extends BasePage {
 //            waitForElement(emlntSuccessPopUp);
 //            verifyElement(emlntSuccessPopUp);
 
-            waitForElement(txtViewHistory);
-            blResult = verifyElement(txtViewHistory);
+            waitForElement(elmntViewPreviousRequests);
+            blResult = verifyElement(elmntViewPreviousRequests);
             System.out.println("Repeat Prescription was success  and Successfully to navigate the View History Page>>>>>>");
 
         } catch (Exception e) {
@@ -784,8 +790,8 @@ public class RepeatPrescription extends BasePage {
 
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
-            waitForElement(txtViewHistory);
-            verifyElement(txtViewHistory);
+            waitForElement(elmntViewPreviousRequests);
+            verifyElement(elmntViewPreviousRequests);
             waitForSeconds(3);
             Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
 
@@ -795,6 +801,8 @@ public class RepeatPrescription extends BasePage {
             String currentDate = formatter.format(calendar.getTime());
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
+            waitForSeconds(2);
+            waitForElement(txtPrescriptionDate);
             String prescriptionDate = txtPrescriptionDate.getText();
             System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
             takeScreenshot(driver);
@@ -844,8 +852,8 @@ public class RepeatPrescription extends BasePage {
             List<String> strDetails = lstPrescriptionDetails.subList(2, 5);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
-            waitForElement(txtViewHistory);
-            verifyElement(txtViewHistory);
+            waitForElement(elmntViewPreviousRequests);
+            verifyElement(elmntViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
             Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
@@ -906,8 +914,8 @@ public class RepeatPrescription extends BasePage {
             List<String> strDetails = lstPrescriptionDetails.subList(2, 5);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
-            waitForElement(txtViewHistory);
-            verifyElement(txtViewHistory);
+            waitForElement(elmntViewPreviousRequests);
+            verifyElement(elmntViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
 
@@ -969,8 +977,8 @@ public class RepeatPrescription extends BasePage {
             List<String> strDetails = lstPrescriptionDetails.subList(2, 4);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
-            waitForElement(txtViewHistory);
-            verifyElement(txtViewHistory);
+            waitForElement(elmntViewPreviousRequests);
+            verifyElement(elmntViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
             Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
@@ -981,6 +989,8 @@ public class RepeatPrescription extends BasePage {
             String currentDate = formatter.format(calendar.getTime());
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
+            waitForSeconds(2);
+            waitForElement(txtPrescriptionDate);
             String prescriptionDate = txtPrescriptionDate.getText();
             System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
 
@@ -1032,8 +1042,8 @@ public class RepeatPrescription extends BasePage {
 //            pending;
 //            Next Day - Fee: NZ$12.00 (Incl. GST);
 //            Dr Tim
-            waitForElement(txtViewHistory);
-            verifyElement(txtViewHistory);
+            waitForElement(elmntViewPreviousRequests);
+            verifyElement(elmntViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
             Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
@@ -1044,6 +1054,8 @@ public class RepeatPrescription extends BasePage {
             String currentDate = formatter.format(calendar.getTime());
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
+            waitForSeconds(2);
+            waitForElement(txtPrescriptionDate);
             String prescriptionDate = txtPrescriptionDate.getText();
             System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
 
@@ -1091,8 +1103,8 @@ public class RepeatPrescription extends BasePage {
             List<String> strDetails = lstPrescriptionDetails.subList(2, 4);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
-            waitForElement(txtViewHistory);
-            verifyElement(txtViewHistory);
+            waitForElement(elmntViewPreviousRequests);
+            verifyElement(elmntViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
             Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
@@ -1520,20 +1532,17 @@ public class RepeatPrescription extends BasePage {
             verifyElement(elmntOnlineCardSuccessPopUp);
             waitForSeconds(2);
             takeScreenshot(driver);
-            waitForElementClickable(btnBackToRRP);
-            click(btnBackToRRP);
-
-            blResult = verifyElement(txtRequestNewScript);
+//            waitForElementClickable(btnBackToRRP);
+//            click(btnBackToRRP);
+            waitForElementClickable(btnBackPaymentConfirmation);
+            click(btnBackPaymentConfirmation);
+            blResult = verifyElement(txtViewPreviousRequests);
             System.out.println("verify The Prescription Details Online was Successful >>>>>");
-
         } catch (Exception e) {
             System.out.println("verify The Prescription Details Online was not Successful >>>>>");
             e.printStackTrace();
-
         }
         return blResult;
     }
-
-
 
 }

@@ -1,28 +1,28 @@
 Feature: Repeat Request Prescription
 
-#  @WEB @S1 @Mobile @DEV @RRP
-#  Scenario Template: S1- User Successfully logs in to the MMH v2 Portal.
-#
-#    Given As a user I am on MMH login Page
-#    And I enter "<Email Address>" and "<Password>"
-#    When I click login button
-#    Then I should see user successfully logs in to the MMH portal
-#    Examples:
-#      | Email Address   | Password           |
-#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+  @WEB @Mobile @RRP @HAPPY_PATH
+  Scenario Template: S1- User Successfully logs in to the MMH v2 Portal.
 
-  @WEB @S1 @Mobile @V2 @RRP @1
-  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
-
-    Given As a user I am on beta MMH login Page
-    And I enter "<Email Address>" and "<Password>" For Beta
-    When I click SignIn button
+    Given As a user I am on MMH login Page
+    And I enter "<Email Address>" and "<Password>"
+    When I click login button
     Then I should see user successfully logs in to the MMH portal
     Examples:
       | Email Address   | Password           |
       | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
-  @WEB @S2 @Mobile @V2 @DEV @RRP @1
+#  @WEB @S1 @Mobile @V2 @RRP @1 @HAPPY_PATH
+#  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
+#
+#    Given As a user I am on beta MMH login Page
+#    And I enter "<Email Address>" and "<Password>" For Beta
+#    When I click SignIn button
+#    Then I should see user successfully logs in to the MMH portal
+#    Examples:
+#      | Email Address   | Password           |
+#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+
+  @WEB @Mobile @RRP @HAPPY_PATH
   Scenario Outline: S2- Patient to collect the Prescription
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
@@ -35,7 +35,7 @@ Feature: Repeat Request Prescription
       | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &MORE INFO VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& |
 
 
-  @WEB @S3 @Mobile @V2 @DEV @RRP
+  @WEB @Mobile @RRP @HAPPY_PATH
   Scenario Outline: S3- Patient Collect the medication by Sent Script by Post
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
@@ -46,7 +46,7 @@ Feature: Repeat Request Prescription
       | Medication Details             | Verification Medication Details             | More info details                                     |
       | &DATA FOR SENT SCRIPT BY POST& | &VERIFICATION DATA FOR SENT SCRIPT BY POST& | &MORE INFO VERIFICATION DATA FOR SENT SCRIPT BY POST& |
 
-  @WEB @S4 @Mobile @V2 @DEV @RRP
+  @WEB @Mobile @RRP @HAPPY_PATH
   Scenario Outline: S4- Patient Collect the medication by Sent Script by Pharmacy
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
@@ -57,7 +57,7 @@ Feature: Repeat Request Prescription
       | Medication Details                                 | Verification Medication Details                 | More info details                                            |
       | &DATA FOR PRESCRIPTION BY SENT SCRIPT TO PHARMACY& | &VERIFICATION DATA FOR SENT SCRIPT TO PHARMACY& | &MORE INFO DATA FOR PRESCRIPTION BY SENT SCRIPT TO PHARMACY& |
 
-  @WEB @S5 @Mobile @V2 @DEV @RRP
+  @WEB @Mobile @RRP @HAPPY_PATH
   Scenario Outline: S5- Patient Collect the medication by Delivery Meds by Pharmacy
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
@@ -68,7 +68,7 @@ Feature: Repeat Request Prescription
       | Medication Details                   | Verification Medication Details                   | MM                                             |
       | &DATA FOR DELIVERY MEDS BY PHARMACY& | &VERIFICATION DATA FOR DELIVERY MEDS BY PHARMACY& | &MORE INFO DATA FOR DELIVERY MEDS BY PHARMACY& |
 
-  @WEB @S6 @Mobile @V2 @DEV @RRP
+  @WEB @Mobile @RRP @HAPPY_PATH
   Scenario Outline: S6- Request Repeat Prescription - Pay Online (Card)
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
@@ -81,7 +81,7 @@ Feature: Repeat Request Prescription
       | Medication Details                   | Payment Details       | Prescription Verification Details            |
       | &DATA MEDS PAY BY USING ONLINE CARD& | &CREDIT CARD DETAILS& | &VERIFICATION MEDS PAY BY USING ONLINE CARD& |
 
-  @WEB @S7 @Mobile @V2 @DEV @RRP
+  @WEB @Mobile @RRP @HAPPY_PATH
   Scenario Outline: S7- Request Repeat Prescription - Pay Online (A2A)
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
@@ -90,12 +90,11 @@ Feature: Repeat Request Prescription
     When I enter the Account details on the Payment Page "<Payment Details>"
     Then I should see the Prescription status for Request by card "<Prescription Verification Details>"
 
-
     Examples:
       | Medication Details                  | Payment Details      | Prescription Verification Details             |
       | &DATA MEDS PAY BY USING ONLINE A2A& | &ACCOUNT TO ACCOUNT& | &VERIFICATION DATA FOR MEDS PAY BY USING A2A& |
 
-  @WEB @S8 @Mobile @V2 @DEV @RRP
+  @WEB @Mobile @RRP @HAPPY_PATH
   Scenario Outline: S8- Request Repeat Prescription - View History
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
@@ -108,7 +107,7 @@ Feature: Repeat Request Prescription
       | Medication Details                            | Verification Medication Details                         | More info details                                                 |
       | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &MORE INFO VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& |
 
-  @WEB @S9 @Mobile @V2 @DEV @RRP
+  @WEB @Mobile @RRP @HAPPY_PATH
   Scenario Outline: S9- Request Repeat Prescription - Script Urgency
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
