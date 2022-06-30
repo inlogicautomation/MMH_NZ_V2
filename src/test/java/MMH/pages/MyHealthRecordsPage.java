@@ -1375,9 +1375,9 @@ public class MyHealthRecordsPage extends BasePage {
         waitForElement(elmntVisitedDate);
         click(elmntVisitedDate);
         String strDateFormat = "d";
-        String strDay = "DAYAFTERTOMORROW";
+        String strDay = "TODAY";
         String strDate = DateUtil.getDate(strDay, strDateFormat);
-        System.out.println("DayAfterTommorrow date is::>>" + strDate);
+        System.out.println("Current Day:: >>" + strDate);
         WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
         click(elmntDayAfterDate);
     }
@@ -1385,9 +1385,9 @@ public class MyHealthRecordsPage extends BasePage {
         waitForElement(elmntImmunisationDate);
         click(elmntImmunisationDate);
         String strDateFormat = "d";
-        String strDay = "DAYAFTERTOMORROW";
+        String strDay = "TODAY";
         String strDate = DateUtil.getDate(strDay, strDateFormat);
-        System.out.println("DayAfterTommorrow date is::>>" + strDate);
+        System.out.println("Current Day:: >>" + strDate);
         WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
         click(elmntDayAfterDate);
     }
@@ -1396,9 +1396,9 @@ public class MyHealthRecordsPage extends BasePage {
         waitForElement(elmntCovidImmunisationDate);
         click(elmntCovidImmunisationDate);
         String strDateFormat = "d";
-        String strDay = "DAYAFTERTOMORROW";
+        String strDay = "TODAY";
         String strDate = DateUtil.getDate(strDay, strDateFormat);
-        System.out.println("DayAfterTommorrow date is::>>" + strDate);
+        System.out.println("Current Day>>" + strDate);
         WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
         click(elmntDayAfterDate);
     }
@@ -1407,9 +1407,9 @@ public class MyHealthRecordsPage extends BasePage {
         waitForElement(elmntStartDate);
         click(elmntStartDate);
         String strDateFormat = "d";
-        String strDay = "DAYAFTERTOMORROW";
+        String strDay = "TODAY";
         String strDate = DateUtil.getDate(strDay, strDateFormat);
-        System.out.println("DayAfterTommorrow date is::>>" + strDate);
+        System.out.println("Current Day ::>>" + strDate);
         WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
         click(elmntDayAfterDate);
     }
@@ -1418,9 +1418,9 @@ public class MyHealthRecordsPage extends BasePage {
         waitForElement(elmntAllergiesStartDate);
         click(elmntAllergiesStartDate);
         String strDateFormat = "d";
-        String strDay = "DAYAFTERTOMORROW";
+        String strDay = "TODAY";
         String strDate = DateUtil.getDate(strDay, strDateFormat);
-        System.out.println("DayAfterTommorrow date is::>>" + strDate);
+        System.out.println("Current Day::>>" + strDate);
         WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
         click(elmntDayAfterDate);
     }
@@ -1429,9 +1429,9 @@ public class MyHealthRecordsPage extends BasePage {
         waitForElement(elmntPrescriptionDateToken);
         click(elmntPrescriptionDateToken);
         String strDateFormat = "d";
-        String strDay = "DAYAFTERTOMORROW";
+        String strDay = "TODAY";
         String strDate = DateUtil.getDate(strDay, strDateFormat);
-        System.out.println("DayAfterTommorrow date is::>>" + strDate);
+        System.out.println("Current Day ::>>" + strDate);
         WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
         click(elmntDayAfterDate);
     }
@@ -1440,9 +1440,9 @@ public class MyHealthRecordsPage extends BasePage {
         waitForElement(elmntAllergiesEndDate);
         click(elmntAllergiesEndDate);
         String strDateFormat = "d";
-        String strDay = "DAYAFTERTOMORROW";
+        String strDay = "TODAY";
         String strDate = DateUtil.getDate(strDay, strDateFormat);
-        System.out.println("DayAfterTommorrow date is::>>" + strDate);
+        System.out.println("Current Day::>>" + strDate);
         WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
         click(elmntDayAfterDate);
     }
@@ -1451,9 +1451,9 @@ public class MyHealthRecordsPage extends BasePage {
         waitForElement(elmntPrescriptionEndDate);
         click(elmntPrescriptionEndDate);
         String strDateFormat = "d";
-        String strDay = "DAYAFTERTOMORROW";
+        String strDay = "TODAY";
         String strDate = DateUtil.getDate(strDay, strDateFormat);
-        System.out.println("DayAfterTommorrow date is::>>" + strDate);
+        System.out.println("Current Day::>>" + strDate);
         WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
         click(elmntDayAfterDate);
     }
@@ -1463,9 +1463,9 @@ public class MyHealthRecordsPage extends BasePage {
         jsClick(elmntEndDate);
 
         String strDateFormat = "d";
-        String strDay = "DAYAFTERTOMORROW";
+        String strDay = "TODAY";
         String strDate = DateUtil.getDate(strDay, strDateFormat);
-        System.out.println("DayAfterTommorrow date is::>>" + strDate);
+        System.out.println("Current Day::>>" + strDate);
         WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
         click(elmntDayAfterDate);
     }
@@ -1609,7 +1609,7 @@ public class MyHealthRecordsPage extends BasePage {
 
     public boolean verifyHealthRecord(List<String> listCreatedRecord) {
         String strDateFormat = "dd MMM yyyy";
-        String strDay = "DAYAFTERTOMORROW";
+        String strDay = "TODAY";
         String strDate = DateUtil.getDate(strDay, strDateFormat);
         WebElement elmntMyEntiresRecord = waitForElement(By.xpath(strClinicalNotesMyEntitesIconLocator
                 .replace("<<REPLACEMENT1>>", strDate)

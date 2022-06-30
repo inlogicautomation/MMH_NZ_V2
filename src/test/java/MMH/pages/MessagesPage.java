@@ -115,7 +115,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[contains(@name,'Compose$chkAcceptTerm')]")
     protected WebElement chkBoxTermsAndCondition;
 
-    @FindBy(how = How.XPATH, using = "//iframe[@style='height: 307px; width: 766px;']")
+    @FindBy(how = How.XPATH, using = "//div/iframe[contains(@style,'height')]")
     protected WebElement frameComposeForDoctor;
 
     @FindBy(how = How.XPATH, using = "//body[contains(@style,'font-family')]")
@@ -1292,13 +1292,8 @@ public class MessagesPage extends BasePage {
     public boolean clickDevAddFile(String strUploadDocumentName) {
         boolean blResult = false;
         try {
-
-
             focusWindow(3);
-
             waitForSeconds(5);
-
-
             String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
             System.out.println(strFloorplanDocumentName);
             btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
@@ -1458,6 +1453,7 @@ public class MessagesPage extends BasePage {
             ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
             visit(URL);
+            waitForSeconds(3);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();

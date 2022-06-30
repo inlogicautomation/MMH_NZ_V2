@@ -92,6 +92,9 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='mat-tab-link-container']")
     protected WebElement elmntBookingTypeContainer;
 
+    @FindBy(how = How.XPATH, using = "//span[@title='Go to the next page']")
+    protected WebElement pagerNextButton;
+
     @FindBy(how = How.XPATH, using = "//div[@class='doctor-list']")
     protected WebElement elmntProviderList;
 
@@ -209,6 +212,9 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Future Appointments')]")
     protected WebElement elmntFutureAppointmentTab;
+
+    @FindBy(how = How.XPATH, using = "//div/p[contains(text(),'Thank you. Your payment has been processed successfully.')]")
+    protected WebElement elmntPaymentSuccess;
 
     protected String elmntVideoBookingType = new StringBuilder().append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]/preceding::input[@type='radio'][1]").toString();
@@ -812,6 +818,41 @@ public class AppointmentsPage extends BasePage {
         return isVerifed;
     }
 
+    public boolean verifyFutureAppointmentDatesInGrid() {
+        boolean isVerified = false;
+        waitForSeconds(3);    //wait until 'loader'  loading
+        List<WebElement> pagination = driver.findElements(By.xpath("//kendo-pager-numeric-buttons/ul/li"));
+        if (pagination.size() > 0) {
+            System.out.println("pagination exists and size=>" + pagination.size());
+            int page_no = pagination.size();
+            for (int i = 1; i <= pagination.size(); i++) {
+                System.out.println("TEST");
+                waitForSeconds(2);
+                driver.findElement(By.xpath("//kendo-pager-numeric-buttons/ul/li[" + i + "]")).click();
+                System.out.println("PAGE NUMBER" + i);
+                getAllAppointmentDatesInGrid();
+                for (String strDate : listAllAppoinmentDatesInGrid) {
+                    LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+                    DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+                    LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+                    boolean isDateCorrect = inputDate1.isAfter(localDate1);
+                    System.out.println("Card Date is Before Equal::" + isDateCorrect);
+                    isVerified = isDateCorrect;
+                    if (!isDateCorrect) {
+                        isVerified = false;
+                    }
+                    if (!isVerified) {
+                        break;
+                    }
+                }
+                if (!isVerified) {
+                    break;
+                }
+            }
+        }
+        return isVerified;
+    }
+
     public boolean verifyHeader(String strHeader) {
         WebElement elmntActiveHeader = waitForElement(By.xpath(strActiveHeader.replace("<<TAB>>", strHeader)));
         waitForElement(elmntActiveHeader);
@@ -895,26 +936,65 @@ public class AppointmentsPage extends BasePage {
         return isVerifed;
     }
 
+//    public boolean verifyAllAppointmentDatesInGridForPast() {
+//        boolean isVerifed = false;
+//        for (String strDate : listAllAppoinmentDatesInGrid) {
+//            LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+//            DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+//            LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+//            boolean isDateCorrect = inputDate1.isBefore(localDate1);
+//            if (!isDateCorrect) {
+//                isDateCorrect = inputDate1.isEqual(localDate1);
+//            }
+//            System.out.println("Grid Date is Equal::" + isDateCorrect);
+//            isVerifed = isDateCorrect;
+//            if (!isDateCorrect) {
+//                isVerifed = false;
+//            }
+//            if (!isVerifed) {
+//                break;
+//            }
+//        }
+//        return isVerifed;
+//    }
+
     public boolean verifyAllAppointmentDatesInGridForPast() {
-        boolean isVerifed = false;
-        for (String strDate : listAllAppoinmentDatesInGrid) {
-            LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
-            DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
-            LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
-            boolean isDateCorrect = inputDate1.isBefore(localDate1);
-            if (!isDateCorrect) {
-                isDateCorrect = inputDate1.isEqual(localDate1);
-            }
-            System.out.println("Grid Date is Equal::" + isDateCorrect);
-            isVerifed = isDateCorrect;
-            if (!isDateCorrect) {
-                isVerifed = false;
-            }
-            if (!isVerifed) {
-                break;
+        boolean isVerified = false;
+        waitForSeconds(5);    //wait until 'loader'  loading
+        List<WebElement> pagination = driver.findElements(By.xpath("//kendo-pager-numeric-buttons/ul/li"));
+        if (pagination.size() > 0) {
+            System.out.println("pagination exists and size=>" + pagination.size());
+            int page_no = pagination.size();
+            for (int i = 1; i <= pagination.size(); i++) {
+                System.out.println("TEST");
+                waitForSeconds(2);
+                driver.findElement(By.xpath("//kendo-pager-numeric-buttons/ul/li[" + i + "]")).click();
+                System.out.println("PAGE NUMBER" + i);
+                getAllAppointmentDatesInGrid();
+                for (String strDate : listAllAppoinmentDatesInGrid) {
+                    LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+                    DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+                    LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+                    boolean isDateCorrect = inputDate1.isBefore(localDate1);
+                    if (!isDateCorrect) {
+                        isDateCorrect = inputDate1.isEqual(localDate1);
+                    }
+                    System.out.println("Card Date is Before Equal::" + isDateCorrect);
+                    isVerified = isDateCorrect;
+                    if (!isDateCorrect) {
+                        isVerified = false;
+                    }
+                    if (!isVerified) {
+                        break;
+                    }
+                }
+                if (!isVerified) {
+                    break;
+                }
+
             }
         }
-        return isVerifed;
+        return isVerified;
     }
 
     public void clickMaxvalue() {
@@ -1422,4 +1502,15 @@ public class AppointmentsPage extends BasePage {
         return blResult;
     }
 
+    public boolean verifySucessMessage() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntPaymentSuccess);
+            blResult = verifyElement(elmntPaymentSuccess);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
 }

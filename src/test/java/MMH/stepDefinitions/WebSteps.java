@@ -190,7 +190,7 @@ public class WebSteps {
 
     @Then("I should see all the past date appointments in grid view")
     public void iShouldSeeAllThePastDateAppointmentsInGridView() {
-        demoPageContainer.appointmentsPage.getAllAppointmentDatesInGrid();
+//        demoPageContainer.appointmentsPage.getAllAppointmentDatesInGrid();
         Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAllAppointmentDatesInGridForPast());
     }
 
@@ -208,8 +208,7 @@ public class WebSteps {
 
     @Then("I should see all the future date appointments in grid view")
     public void iShouldSeeAllTheFutureDateAppointmentsInGridView() {
-        demoPageContainer.appointmentsPage.getAllAppointmentDatesInGrid();
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAllAppointmentDatesInGrid());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyFutureAppointmentDatesInGrid());
 
     }
 
@@ -1578,9 +1577,6 @@ public class WebSteps {
         demoPageContainer.messagesPage.clickDevAddFile(list.get(3));
         demoPageContainer.messagesPage.clickRadioButton();
         demoPageContainer.messagesPage.clickSendMessageButton();
-
-
-
     }
 
     @And("I am on {string} Sent page")
@@ -1600,8 +1596,7 @@ public class WebSteps {
     @Then("I click Attached Files")
     public void iClickAttachedFiles() {
         demoPageContainer.messagesPage.clickInboxAttachButton();
-        demoPageContainer.messagesPage.VerifyAttachdowloadSuccessfully();
-        demoPageContainer.messagesPage.DeleteFile();
+
     }
 
     @When("I am on {string} Inbox Header")
@@ -1696,5 +1691,16 @@ public class WebSteps {
     public void iAmOnInboxPages(String strTab) {
         demoPageContainer.messagesPage.verifyInboxPage(strTab);
 
+    }
+
+    @Then("I should see attached file successfully downloaded")
+    public void iShouldSeeAttachedFileSuccessfullyDownloaded() {
+        demoPageContainer.messagesPage.VerifyAttachdowloadSuccessfully();
+        demoPageContainer.messagesPage.DeleteFile();
+    }
+
+    @Then("I should see payment has been processed successfully with appointment details")
+    public void iShouldSeePaymentHasBeenProcessedSuccessfullyWithAppointmentDetails() {
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifySucessMessage());
     }
 }
