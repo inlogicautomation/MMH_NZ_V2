@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(features = {"src/test/resources/features/HappyPath"},
         monochrome = true,
-        tags = "@HAPPY_PATH",
+        tags = "@HEALTH_RECORDS",
         glue = {"MMH"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

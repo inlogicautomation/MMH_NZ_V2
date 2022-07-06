@@ -1052,7 +1052,8 @@ public class AppointmentsPage extends BasePage {
 
     public void clickEndIcon() {
         waitForElement(elmntEndCall);
-        click(elmntEndCall);
+        jsScrollIntoView(elmntEndCall);
+        jsClick(elmntEndCall);
         waitForSeconds(4);
         waitForElement(btnYes);
         click(btnYes);

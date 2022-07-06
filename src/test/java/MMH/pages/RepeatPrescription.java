@@ -269,6 +269,15 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Find a pharmacy')]/preceding::mat-select[contains(@id,'mat-select-0')]")
     protected WebElement drpDownSelectForSentScript;
 
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='City']")
+    protected WebElement drpDownSelectForCity;
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='Suburb']")
+    protected WebElement drpDownSelectForSubUrban;
+
+    @FindBy(how = How.XPATH, using = "(//mat-select[@formcontrolname='PharmacyName'])[1]")
+    protected WebElement drpDownSelectForPharmacyName;
+
     @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Find a pharmacy')]//ancestor::mat-select)[2]")
     protected WebElement drpDownSelectForDelivery;
 
@@ -309,6 +318,12 @@ public class RepeatPrescription extends BasePage {
 
     protected String ddlSelect = new StringBuilder()
             .append("//span[@class='mat-option-text' and contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+    //span[contains(text(),'Auckland')]
+    protected String ddlSelectFileds = new StringBuilder()
+            .append(" //span[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
@@ -926,6 +941,7 @@ public class RepeatPrescription extends BasePage {
             String currentDate = formatter.format(calendar.getTime());
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
+            waitForElement(txtPrescriptionDate);
             String prescriptionDate = txtPrescriptionDate.getText();
             System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
 
@@ -1193,7 +1209,7 @@ public class RepeatPrescription extends BasePage {
         return blResult;
     }
 
-    public boolean selectPharmacyBySavedListForSentScript(String strSelectType, String strSelectPharmacy) {
+    public boolean selectSearchPharmacyForSentScript(String strSelectType) {
         boolean blResult = false;
         try {
             waitForSeconds(2);
@@ -1206,21 +1222,98 @@ public class RepeatPrescription extends BasePage {
             waitForSeconds(2);
             WebElement selectType = waitForElement(By.xpath(ddlSelect.replace("<<REPLACEMENT>>", strSelectType)));
             System.out.println("selectType XPath >>>" + ddlSelect.replace("<<REPLACEMENT>>", strSelectType));
+            waitForElement(selectType);
+            waitForElementClickable(selectType);
             mouseClick(selectType);
             waitForSeconds(2);
-            waitForElementClickable(drpDownSelectPharmacyForSentScript);
-            click(drpDownSelectPharmacyForSentScript);
-            WebElement selectPharmacy = waitForElement(By.xpath(ddlSelectPharmacy.replace("<<REPLACEMENT>>", strSelectPharmacy)));
-            System.out.println("selectType XPath >>>" + ddlSelectPharmacy.replace("<<REPLACEMENT>>", strSelectPharmacy));
-            waitForSeconds(2);
-            mouseClick(selectPharmacy);
-            waitForSeconds(2);
-            waitForElementClickable(btnSelectForSentScript);
-            click(btnSelectForSentScript);
+
             blResult = true;
 
         } catch (Exception e) {
-            System.out.println(" Failed to select Pharmacy By Savedlist >>>>>");
+            System.out.println(" Failed to select Find Pharmacy >>>>>");
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+        return blResult;
+    }
+    public boolean selectCity(String strCity) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtSearchPharmacyForSentScript);
+            verifyElement(txtSearchPharmacyForSentScript);
+            System.out.println("Verified >>>> ::" +txtSearchPharmacyForSentScript.isDisplayed());
+            waitForSeconds(3);
+            waitForElementClickable(drpDownSelectForCity);
+            click(drpDownSelectForCity);
+            waitForSeconds(2);
+            WebElement selectCity = waitForElement(By.xpath(ddlSelectFileds.replace("<<REPLACEMENT>>", strCity)));
+            System.out.println("selectCity XPath >>>" + ddlSelectFileds.replace("<<REPLACEMENT>>", strCity));
+            waitForElement(selectCity);
+            waitForElementClickable(selectCity);
+            click(selectCity);
+            waitForSeconds(2);
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println(" Failed to select City >>>>>");
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+        return blResult;
+    }
+    public boolean selectSubUrban(String strSubUrban) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtSearchPharmacyForSentScript);
+            verifyElement(txtSearchPharmacyForSentScript);
+            System.out.println("Verified >>>> ::" +txtSearchPharmacyForSentScript.isDisplayed());
+            waitForSeconds(3);
+            waitForElementClickable(drpDownSelectForSubUrban);
+            click(drpDownSelectForSubUrban);
+            waitForSeconds(2);
+            WebElement selectSubUrban = waitForElement(By.xpath(ddlSelectFileds.replace("<<REPLACEMENT>>", strSubUrban)));
+            System.out.println("selectSubUrban XPath >>>" + ddlSelectFileds.replace("<<REPLACEMENT>>", strSubUrban));
+            waitForElement(selectSubUrban);
+            waitForElementClickable(selectSubUrban);
+            click(selectSubUrban);
+            waitForSeconds(2);
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println(" Failed to select Sub urban >>>>>");
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+        return blResult;
+    }
+    public boolean selectPharmacy(String strPharmacy) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtSearchPharmacyForSentScript);
+            verifyElement(txtSearchPharmacyForSentScript);
+            System.out.println("Verified >>>> ::" +txtSearchPharmacyForSentScript.isDisplayed());
+            waitForSeconds(3);
+            waitForElementClickable(drpDownSelectForPharmacyName);
+            click(drpDownSelectForPharmacyName);
+            waitForSeconds(2);
+            WebElement selectPharmacy = waitForElement(By.xpath(ddlSelectFileds.replace("<<REPLACEMENT>>", strPharmacy)));
+            System.out.println("selectPharmacy XPath >>>" + ddlSelectFileds.replace("<<REPLACEMENT>>", strPharmacy));
+            waitForElement(selectPharmacy);
+            waitForElementClickable(selectPharmacy);
+            click(selectPharmacy);
+            waitForSeconds(2);
+            waitForElement(btnSelectForSentScript);
+            waitForElementClickable(btnSelectForSentScript);
+            blResult = click(btnSelectForSentScript);;
+
+        } catch (Exception e) {
+            System.out.println(" Failed to select Pharmacy >>>>>");
             e.printStackTrace();
             System.out.println(e.getMessage());
 
@@ -1236,13 +1329,17 @@ public class RepeatPrescription extends BasePage {
             waitForElement(txtSearchPharmacyForDelivery);
             verifyElement(txtSearchPharmacyForDelivery);
             waitForSeconds(2);
+            waitForElement(drpDownSelectForDelivery);
             waitForElementClickable(drpDownSelectForDelivery);
             jsClick(drpDownSelectForDelivery);
             waitForSeconds(2);
             WebElement selectType = waitForElement(By.xpath(ddlSelect.replace("<<REPLACEMENT>>", strSelectType)));
             System.out.println("selectType XPath >>>" + selectType);
+            waitForElement(selectType);
+            waitForElementClickable(selectType);
             mouseClick(selectType);
             waitForSeconds(2);
+            waitForElement(drpDownSelectPharmacyForDelivery);
             waitForElementClickable(drpDownSelectPharmacyForDelivery);
             waitForSeconds(1);
             click(drpDownSelectPharmacyForDelivery);
@@ -1325,10 +1422,10 @@ public class RepeatPrescription extends BasePage {
             waitForSeconds(2);
             WebElement selectPaymentMethod = waitForElement(By.xpath(paymentMethod.replace("<<REPLACEMENT>>", strPaymentMethod)));
             System.out.println("selectPaymentMethod XPath >>>" + paymentMethod.replace("<<REPLACEMENT>>", strPaymentMethod));
+            waitForElement(selectPaymentMethod);
             waitForElementClickable(selectPaymentMethod);
             click(selectPaymentMethod);
             System.out.println("Successfully payment method was selected >>>>>");
-
 
             blResult = true;
 

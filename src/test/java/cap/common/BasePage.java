@@ -653,5 +653,4 @@ public class BasePage {
         return generatedString;
     }
 
-
 }

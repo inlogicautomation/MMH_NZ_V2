@@ -548,7 +548,7 @@ public class DriverUtil {
                 Collections.singletonList("enable-automation"));
         options.setExperimentalOption("prefs", chromePrefs);
         Map<String, String> mobileEmulation = new HashMap<>();
-        mobileEmulation.put("deviceName", "Pixel 2 XL");
+        mobileEmulation.put("deviceName", "Galaxy S5");
         options.setExperimentalOption("mobileEmulation", mobileEmulation);
         DesiredCapabilities cap = DesiredCapabilities.chrome();
         cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
