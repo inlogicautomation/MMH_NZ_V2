@@ -32,6 +32,9 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashBoard;
 
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
+    protected WebElement elmntSideBar;
+
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='exit_to_app']")
     protected WebElement btnExitApp;
 
@@ -54,7 +57,7 @@ public class HomePage extends BasePage {
     protected WebElement btnHamburgerIcon;
 
     @FindBy(how = How.XPATH, using = "//h3[text()=' Future Appointments']")
-    protected WebElement elmntFutureAppoinments;
+    protected WebElement elmntFutureAppointments;
 
     @FindBy(how = How.XPATH, using = "//i[contains(@class,'icon-list-view')]")
     protected WebElement btnCardView;
@@ -129,9 +132,10 @@ public class HomePage extends BasePage {
         enterValue(txtPassword, strPassword);
     }
 
-    public void clickLoginButton() {
+    public boolean clickLoginButton() {
         waitForElement(btnLogin);
-        click(btnLogin);
+        waitForElementClickable(btnLogin);
+        return click(btnLogin);
     }
 
     public void clickBetaLoginButton() {
@@ -189,9 +193,9 @@ public class HomePage extends BasePage {
     }
 
     public boolean verifyFutureAppoinmentsPage() {
-        waitForElement(elmntFutureAppoinments);
+        waitForElement(elmntFutureAppointments);
         takeScreenshot(driver);
-        return verifyElement(elmntFutureAppoinments);
+        return verifyElement(elmntFutureAppointments);
     }
 
     public void clickCardView() {
@@ -277,10 +281,13 @@ public class HomePage extends BasePage {
 
     public boolean clickHamburgerIcon() {
         waitForSeconds(3);
+        refreshPage();
         waitForElement(btnHamburgerIcon);
-        click(btnHamburgerIcon);
+        waitForElementClickable(btnHamburgerIcon);
+        waitAndClick(btnHamburgerIcon);
         waitForSeconds(2);
-        return verifyElement(elmntDashBoard);
+        waitForElement(elmntSideBar);
+        return verifyElement(elmntSideBar);
     }
 }
 
