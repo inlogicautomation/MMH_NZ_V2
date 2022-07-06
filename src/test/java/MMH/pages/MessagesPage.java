@@ -243,6 +243,10 @@ public class MessagesPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//a[contains(@class,'header')]/span[text()='Messages']//following-sibling::mat-icon")
     protected WebElement  btnMessagesExpand;
+
+    @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")
+    protected WebElement btnMobileMenu;
+
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
     protected WebElement elmntdashboard;
 
@@ -320,15 +324,30 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator btn-primary-pill mat-button mat-button-base'])[1]")
     protected WebElement btnReplysendMessage;
 
+    @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator btn-primary-pill mat-button mat-button-base'])[2]")
+    protected WebElement btnMobileReplysendMessage;
+
     @FindBy(how = How.XPATH, using = "(//span[contains(text(),' Save As Draft')]//parent::span[@class='mat-button-wrapper'])[1]")
     protected WebElement btnSaveDraft;
 
     @FindBy(how = How.XPATH, using = "//button[@type='button']//span[text()=' OK ']")
     protected WebElement btnokDraft;
 
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),' Save As Draft')]//parent::span[@class='mat-button-wrapper'])[2]")
+    protected WebElement btnMobileSaveDraft;
+
 
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'desktop-view')]//h1")
     protected WebElement btnInboxHeader;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'mobile-view')]//h1")
+    protected WebElement btnMobileInboxHeader;
+
+    protected String elmtMobileInboxesclick = new StringBuilder().append("(//mat-card-title[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[2]").toString();
+
+    protected String elmtMobilebInboxesclick = new StringBuilder().append("(//mat-card-title//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[2]").toString();
 
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'desktop-view')]//h1")
     protected WebElement btnGroupMessageHeader;
@@ -347,6 +366,9 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@mattooltip='Reply']//span[@class='mat-button-wrapper']")
     protected WebElement btnReply;
 
+    @FindBy(how = How.XPATH, using = "(//mat-icon[text()=' drive_file_rename_outline']//following::span[text()='Reply'])[2]")
+    protected WebElement btnMobileReply;
+
 
     @FindBy(how = How.XPATH, using = "//a[text()=' Sent']")
     protected WebElement btnClickSentHeader;
@@ -356,6 +378,9 @@ public class MessagesPage extends BasePage {
 
     protected String elmtGroupMessageclick = new StringBuilder().append("(//mat-card-title[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')])[1]").toString();
+
+    protected String elmtMobileGroupMessageclick = new StringBuilder().append("(//mat-card-title[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[2]").toString();
     protected String elmtInboxesclick = new StringBuilder().append("(//mat-card-title//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')])[1]").toString();
 
@@ -366,8 +391,14 @@ public class MessagesPage extends BasePage {
     protected String elmtSentclick = new StringBuilder().append("(//mat-card-title[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')])[1]").toString();
 
+    protected String elmtMobileSentclick = new StringBuilder().append("(//mat-card-title[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[2]").toString();
+
     protected String elmtDraftclick = new StringBuilder().append("//div[contains(@class,'desktop-view')]//mat-card-title[contains(text(),'")
             .append("<<REPLACEMENT>>").append(" ')]").toString();
+
+    protected String elmtMobileDraftclick = new StringBuilder().append("(//div[contains(@class,'mobile-view')]//mat-card-title[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[1]").toString();
 
     protected String strInboxData = new StringBuilder()
             .append("(//div[@class='tbl-td'][contains(text(),'")
@@ -375,6 +406,21 @@ public class MessagesPage extends BasePage {
             .append("<<REPLACEMENT2>>").append("')]//following::div[contains(text(),'")
             .append("<<REPLACEMENT3>>").append("')]//following::div[contains(text(),'")
             .append("<<REPLACEMENT4>>").append("')])[1]").toString();
+
+    protected String strMobileInboxData = new StringBuilder()
+            .append("(//div[@class='tbl-td'][contains(text(),'")
+            .append("<<REPLACEMENT1>>").append("')]//following::div[contains(text(),'")
+            .append("<<REPLACEMENT2>>").append("')]//following::div[contains(text(),'")
+            .append("<<REPLACEMENT3>>").append("')]//following::div[contains(text(),'")
+            .append("<<REPLACEMENT4>>").append("')])[2]").toString();
+
+    @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-close-cancel']")
+    protected WebElement btnMobileCancelButton;
+
+    protected String strMobileGroupMessageData = new StringBuilder()
+            .append("(//div[@class='tbl-td'][text()='")
+            .append("<<REPLACEMENT1>>").append("']//following::div[text()='")
+            .append("<<REPLACEMENT2>>").append("'])[3]").toString();
 
 
     protected String strGroupMessageData = new StringBuilder()
@@ -388,6 +434,13 @@ public class MessagesPage extends BasePage {
             .append("<<REPLACEMENT2>>").append("')]//following::span[contains(text(),'")
             .append("<<REPLACEMENT3>>").append("')]//following::span[contains(text(),'")
             .append("<<REPLACEMENT4>>").append("')])[1]").toString();
+
+    protected String strMobileDraftData = new StringBuilder()
+            .append("(//mat-select[@role='combobox']//following::span[contains(text(),'")
+            .append("<<REPLACEMENT1>>").append("')]//following::span[contains(text(),'")
+            .append("<<REPLACEMENT2>>").append("')]//following::span[contains(text(),'")
+            .append("<<REPLACEMENT3>>").append("')]//following::span[contains(text(),'")
+            .append("<<REPLACEMENT4>>").append("')])[2]").toString();
 
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Inbox')]")
@@ -416,6 +469,9 @@ public class MessagesPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//a[@class='download-file mail-download-file'])[1]")
     protected WebElement btnInboxAttachButton;
+
+    @FindBy(how = How.XPATH, using = "(//a[@class='download-file mail-download-file'])[2]")
+    protected WebElement btnMobileInboxAttachButton;
 
     public boolean navigateToMessageSetting() {
         boolean blResult = false;
@@ -1111,9 +1167,17 @@ public class MessagesPage extends BasePage {
 
 
     public void clickMessagesExpandIcon() {
-        waitForElement(btnMessagesExpand);
-        click(btnMessagesExpand);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForElement(btnMessagesExpand);
+            click(btnMessagesExpand);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElementClickable(btnMobileMenu);
+            jsClick(btnMobileMenu);
+            waitForElement(btnMessagesExpand);
+            click(btnMessagesExpand);
 
+        }
 
     }
 
@@ -1326,26 +1390,46 @@ public class MessagesPage extends BasePage {
     }
 
     public void clickReplySave() {
-        waitForSeconds(3);
-        jsScrollIntoView(btnReplysendMessage);
-        waitForElementClickable(btnReplysendMessage);
-        jsClick(btnReplysendMessage);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForSeconds(3);
+            jsScrollIntoView(btnReplysendMessage);
+            waitForElementClickable(btnReplysendMessage);
+            jsClick(btnReplysendMessage);
 
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(3);
+            jsScrollIntoView(btnMobileReplysendMessage);
+            waitForElementClickable(btnMobileReplysendMessage);
+            jsClick(btnMobileReplysendMessage);
+        }
     }
 
 
 
     public void clickDraftSave() {
-        waitForSeconds(3);
-        waitForElementClickable(btnSaveDraft);
-        jsClick(btnSaveDraft);
-        waitForElementClickable(btnokDraft);
-        jsClick(btnokDraft);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
 
+            waitForSeconds(3);
+            waitForElementClickable(btnSaveDraft);
+            jsClick(btnSaveDraft);
+            waitForElementClickable(btnokDraft);
+            jsClick(btnokDraft);
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileSaveDraft);
+            jsClick(btnMobileSaveDraft);
+            waitForElementClickable(btnokDraft);
+            jsClick(btnokDraft);
+        }
     }
 
 
     public boolean verifyInboxHeader(String strHeader) {
+        boolean blResult = false;
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
 
         waitForSeconds(3);
         verifyElement(btnInboxHeader);
@@ -1358,14 +1442,40 @@ public class MessagesPage extends BasePage {
 
         return verifyElement(elmntActiveHeader);
     }
-
-    public boolean verifyDraftHeader(String strHeader) {
-        verifyElement(btnDraftHeader);
+       if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+        waitForSeconds(3);
+        verifyElement(btnInboxHeader);
         waitForSeconds(2);
-        WebElement elmntActiveHeader = waitForElement(By.xpath(elmtDraftclick.replace("<<REPLACEMENT>>", strHeader)));
+        waitForElementClickable(btnClickSentHeader);
+        jsClick(btnClickSentHeader);
+        waitForSeconds(3);
+        WebElement elmntActiveHeader = waitForElement(By.xpath(elmtMobileSentclick.replace("<<REPLACEMENT>>", strHeader)));
         jsClick(elmntActiveHeader);
 
         return verifyElement(elmntActiveHeader);
+    }
+        return blResult;
+}
+
+    public boolean verifyDraftHeader(String strHeader) {
+        boolean blResult = false;
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            verifyElement(btnDraftHeader);
+            waitForSeconds(2);
+            WebElement elmntActiveHeader = waitForElement(By.xpath(elmtDraftclick.replace("<<REPLACEMENT>>", strHeader)));
+            jsClick(elmntActiveHeader);
+
+            return verifyElement(elmntActiveHeader);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            verifyElement(btnDraftHeader);
+            waitForSeconds(2);
+            WebElement elmntActiveHeader = waitForElement(By.xpath(elmtMobileDraftclick.replace("<<REPLACEMENT>>", strHeader)));
+            jsClick(elmntActiveHeader);
+
+            return verifyElement(elmntActiveHeader);
+        }
+        return blResult;
     }
 
 
@@ -1413,6 +1523,31 @@ public class MessagesPage extends BasePage {
         return blResult;
     }
 
+    public boolean VerifyMobileSendData(List<String> lstDetails) {
+        boolean blResult = false;
+        try {
+
+
+            WebElement elmntSentData = waitForElement(By.xpath(strMobileInboxData
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
+                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
+                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
+
+            waitForSeconds(2);
+            waitForElement(elmntSentData);
+            verifyElement(elmntSentData);
+            waitForElementClickable(btnMobileCancelButton);
+            click(btnMobileCancelButton);
+
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+
     public boolean VerifyDraftData(List<String> lstDetails) {
         boolean blResult = false;
         try {
@@ -1433,10 +1568,39 @@ public class MessagesPage extends BasePage {
         return blResult;
     }
 
-    public void clickMessageOptionMenu() {
+    public boolean VerifyMobileDraftData(List<String> lstDetails) {
+        boolean blResult = false;
+        try {
 
-        waitForElementClickable(btnMessagesExpand);
-        jsClick(btnMessagesExpand);
+
+            WebElement elmntReport = waitForElement(By.xpath(strMobileDraftData
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
+                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
+                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
+            waitForElement(elmntReport);
+            verifyElement(elmntReport);
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+
+    public void clickMessageOptionMenu() {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+
+            waitForElementClickable(btnMessagesExpand);
+            jsClick(btnMessagesExpand);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElementClickable(btnMobileMenu);
+            jsClick(btnMobileMenu);
+            waitForElementClickable(btnMessagesExpand);
+            jsClick(btnMessagesExpand);
+        }
+
     }
 
     public void clickDashboardFromMenu() {
@@ -1517,12 +1681,22 @@ public class MessagesPage extends BasePage {
     }
 
     public void clickInboxAttachButton() {
-        waitForSeconds(3);
-        waitForElementClickable(btnInboxAttachButton);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnInboxAttachButton);
 //        waitForElement(btnInboxAttachButton);
-        jsClick(btnInboxAttachButton);
+            jsClick(btnInboxAttachButton);
 
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileInboxAttachButton);
+//        waitForElement(btnInboxAttachButton);
+            jsClick(btnMobileInboxAttachButton);
+        }
     }
+
+
     public void DeleteFile() {
         File path = new File("config/Downloads");
         File[] files = path.listFiles();
@@ -1544,6 +1718,33 @@ public class MessagesPage extends BasePage {
 
         return verifyElement(btnInboxHeader);
     }
+    public boolean verifyMobileInboxPage(String strHeader) {
+        boolean blResult = false;
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForSeconds(2);
+            waitForElement(btnInboxHeader);
+            verifyElement(btnInboxHeader);
+            waitForSeconds(2);
+
+            WebElement elmntActiveHeader = waitForElement(By.xpath(elmtMobileInboxesclick.replace("<<REPLACEMENT>>", strHeader)));
+            jsClick(elmntActiveHeader);
+
+            return verifyElement(btnInboxHeader);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(2);
+            waitForElement(btnMobileInboxHeader);
+            verifyElement(btnMobileInboxHeader);
+            waitForSeconds(2);
+
+            WebElement elmntActiveHeader = waitForElement(By.xpath(elmtMobilebInboxesclick.replace("<<REPLACEMENT>>", strHeader)));
+            jsClick(elmntActiveHeader);
+
+            return verifyElement(btnInboxHeader);
+
+        }
+        return blResult;
+    }
 
     public boolean verifyInboxesPage(String strHeader) {
         focusWindow(1);
@@ -1563,11 +1764,20 @@ public class MessagesPage extends BasePage {
 
     }
     public void ClickReplyMessage() {
-        waitForSeconds(2);
-        waitForElement(btnReply);
-        click(btnReply);
-        waitForSeconds(10);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
 
+            waitForSeconds(2);
+            waitForElement(btnReply);
+            click(btnReply);
+            waitForSeconds(10);
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(2);
+            waitForElement(btnMobileReply);
+            click(btnMobileReply);
+            waitForSeconds(10);
+        }
     }
 
     public void enterReplyMessage(String strConditionName) {
@@ -1587,12 +1797,24 @@ public class MessagesPage extends BasePage {
     }
 
     public boolean verifyGroupMessageHeader(String strHeader) {
-        verifyElement(btnGroupMessageHeader);
-        waitForSeconds(2);
-        WebElement elmntActiveHeader = waitForElement(By.xpath(elmtGroupMessageclick.replace("<<REPLACEMENT>>", strHeader)));
-        jsClick(elmntActiveHeader);
+        boolean blResult = false;
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            verifyElement(btnGroupMessageHeader);
+            waitForSeconds(2);
+            WebElement elmntActiveHeader = waitForElement(By.xpath(elmtGroupMessageclick.replace("<<REPLACEMENT>>", strHeader)));
+            jsClick(elmntActiveHeader);
 
-        return verifyElement(btnGroupMessageHeader);
+            return verifyElement(btnGroupMessageHeader);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            verifyElement(btnGroupMessageHeader);
+            waitForSeconds(2);
+            WebElement elmntActiveHeader = waitForElement(By.xpath(elmtMobileGroupMessageclick.replace("<<REPLACEMENT>>", strHeader)));
+            jsClick(elmntActiveHeader);
+
+            return verifyElement(btnGroupMessageHeader);
+        }
+        return blResult;
     }
 
     public boolean verifySentSuccessfully() {
@@ -1622,6 +1844,28 @@ public class MessagesPage extends BasePage {
             waitForSeconds(2);
             waitForElement(elmntGroupMessageData);
             verifyElement(elmntGroupMessageData);
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+
+    public boolean VerifyMobileGroupMessageData(List<String> lstDetails) {
+        boolean blResult = false;
+        try {
+
+
+            WebElement elmntGroupMessageData = waitForElement(By.xpath(strMobileGroupMessageData
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))));
+
+            waitForSeconds(2);
+            waitForElement(elmntGroupMessageData);
+            verifyElement(elmntGroupMessageData);
+            waitForElementClickable(btnMobileCancelButton);
+            click(btnMobileCancelButton);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();

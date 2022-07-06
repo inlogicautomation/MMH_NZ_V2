@@ -3163,7 +3163,7 @@ public class MyHealthRecordsPage extends BasePage {
             String strMedicationName = strCreatedRecord.concat(strExecutionID);
 
             WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
-            click(btnEdit);
+            jsClick(btnEdit);
             waitForSeconds(2);
             jsScrollIntoView(btnMobilePrescriptionDelete);
             waitForElementClickable(btnMobilePrescriptionDelete);

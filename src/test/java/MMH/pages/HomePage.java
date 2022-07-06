@@ -32,6 +32,9 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashBoard;
 
+    @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")
+    protected WebElement btnMobileMenu;
+
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
     protected WebElement elmntSideBar;
 
@@ -241,6 +244,8 @@ public class HomePage extends BasePage {
 
     public boolean clickDashBoard() {
         takeScreenshot(driver);
+        waitForElementClickable(btnMobileMenu);
+        jsClick(btnMobileMenu);
         waitForElement(elmntDashBoard);
         click(elmntDashBoard);
         waitForSeconds(3);
