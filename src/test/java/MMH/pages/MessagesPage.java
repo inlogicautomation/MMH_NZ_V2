@@ -29,6 +29,9 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Messages')]")
     protected WebElement elmntMessages;
 
+    @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Compose Email')])[2]")
+    protected WebElement txtComposeMailForMobile;
+
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Setting')]")
     protected WebElement elmntMessagesSettings;
 
@@ -36,7 +39,7 @@ public class MessagesPage extends BasePage {
     protected WebElement txtSettings;
 
     @FindBy(how = How.XPATH, using = "//h1[@class='view-info']")
-    protected WebElement elmntViewInfo;
+    protected WebElement txtComposeMail;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Compose')]")
     protected WebElement elmntComposePatient;
@@ -318,6 +321,9 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Attach ']")
     protected WebElement btnAttachUpload;
 
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Attach Files')]")
+    protected WebElement btnAttachFile;
+
     @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Send message')]//parent::span[@class='mat-button-wrapper'])[1]")
     protected WebElement btnsendMessage;
 
@@ -476,16 +482,16 @@ public class MessagesPage extends BasePage {
     public boolean navigateToMessageSetting() {
         boolean blResult = false;
         try {
-            refreshPage();
             waitForSeconds(2);
+            waitForElement(elmntMessages);
             waitForElementClickable(elmntMessages);
             click(elmntMessages);
             waitForSeconds(1);
             waitForElementClickable(elmntMessagesSettings);
             click(elmntMessagesSettings);
             waitForSeconds(1);
-            waitForElement(txtSettings);
-            blResult = verifyElement(txtSettings);
+            waitForElement(btnSave);
+            blResult = verifyElement(btnSave);
             System.out.println("Successfully navigated to messages settings >>>>> :: " + blResult);
         } catch (Exception e) {
             System.out.println("Failed navigate to messages settings >>>>> :: " + blResult);
@@ -506,8 +512,8 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(elmntComposePatient);
             click(elmntComposePatient);
             waitForSeconds(1);
-            waitForElement(elmntViewInfo);
-            blResult = verifyElement(elmntViewInfo);
+            waitForElement(txtComposeMail);
+            blResult = verifyElement(txtComposeMail);
             System.out.println("Successfully navigated to Compose message >>>>> :: " + blResult);
         } catch (Exception e) {
             System.out.println("Failed navigate to Compose message >>>>> :: " + blResult);
@@ -521,7 +527,7 @@ public class MessagesPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(txtSettings);
+            waitForElement(btnSave);
             click(drpDownSessionSettings);
             waitForSeconds(1);
             waitForElement(txtKeepMeLogged);
@@ -542,7 +548,7 @@ public class MessagesPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(txtSettings);
+            waitForElement(btnSave);
             click(drpDownOutOfOfficeSettings);
             waitForSeconds(1);
             waitForElement(chkboxOutOfOfficeReply);
@@ -562,7 +568,7 @@ public class MessagesPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(txtSettings);
+            waitForElement(btnSave);
             click(drpDownAutomaticRepliesSetting);
             waitForSeconds(1);
             waitForElement(chkboxAutomaticReply);
@@ -724,7 +730,7 @@ public class MessagesPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(txtSettings);
+            waitForElement(btnSave);
             waitForElementClickable(drpDownAlertSettings);
             click(drpDownAlertSettings);
             waitForSeconds(1);
@@ -742,11 +748,32 @@ public class MessagesPage extends BasePage {
         return blResult;
     }
 
+    public boolean navigateToComposeMessageForMobile() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElementClickable(elmntMessages);
+            click(elmntMessages);
+            waitForSeconds(1);
+            waitForElementClickable(elmntComposePatient);
+            click(elmntComposePatient);
+            waitForSeconds(1);
+            waitForElement(txtComposeMailForMobile);
+            blResult = verifyElement(txtComposeMailForMobile);
+            System.out.println("Successfully navigated to Compose message >>>>> :: " + blResult);
+        } catch (Exception e) {
+            System.out.println("Failed navigate to Compose message >>>>> :: " + blResult);
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
     public boolean enterTheSignatureMessage(String strMessage) {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(txtSettings);
+            waitForElement(btnSave);
             waitForElementClickable(drpDownSignatureSettings);
             click(drpDownSignatureSettings);
             waitForSeconds(1);
@@ -781,7 +808,7 @@ public class MessagesPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(elmntViewInfo);
+            waitForElement(btnAttachFile);
             driver.switchTo().frame(frameCompose);
             WebElement txtSignature = waitForElement(By.xpath(messageText.replace("<<REPLACEMENT>>", strMessage)));
             waitForElement(txtSignature);
@@ -1485,6 +1512,27 @@ public class MessagesPage extends BasePage {
 
 
             WebElement elmntReport = waitForElement(By.xpath(strInboxData
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
+                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
+                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
+//            jsScrollIntoView(elmntReport);
+            waitForSeconds(2);
+            waitForElement(elmntReport);
+            verifyElement(elmntReport);
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+    public boolean VerifyMobileInboxData(List<String> lstDetails) {
+        boolean blResult = false;
+        try {
+
+
+            WebElement elmntReport = waitForElement(By.xpath(strMobileInboxData
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))

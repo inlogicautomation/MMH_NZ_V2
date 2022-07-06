@@ -53,7 +53,7 @@ Feature: Messages
       | Sub_tab | Details   | Tab    |
       | Compose | &MESSAGE& | Dr Tim |
 
-  @WEB @Mobile @MESSAGES @HAPPY_PATH
+  @WEB @MESSAGES @HAPPY_PATH
   Scenario Template: S3- Preparation for Received Message
     Given As a user I am on HomePage
     And I navigate to the "<Sub_tab>" in Messages page
@@ -63,7 +63,7 @@ Feature: Messages
       | Sub_tab | Details   |
       | Compose | &MESSAGE& |
 
-  @WEB @Mobile @MESSAGES @HAPPY_PATH
+  @WEB @MESSAGES @HAPPY_PATH
   Scenario Template:  S3- Patient Received Message.
     Given As a user I am on"<DevUrl>" Dev login Page
     And I enter"<DevUrl>" Email Address and Password
@@ -122,7 +122,6 @@ Feature: Messages
       | Sub_tab       | Tab          |
       | Group Message | VM03Location |
 
-
   @WEB @Mobile @MESSAGES @HAPPY_PATH
   Scenario Outline: S6- Patient Session Settings
 
@@ -165,7 +164,7 @@ Feature: Messages
       | Message                   |
       | &AUTOMATIC REPLY MESSAGE& |
 
-  @WEB @Mobile @MESSAGES @HAPPY_PATH
+  @WEB @MESSAGES @HAPPY_PATH
   Scenario Template: S10- Patient Automatic Reply Settings.
 
     Given As a user Launch the "<V1 Portal>"
@@ -176,7 +175,7 @@ Feature: Messages
       | V1 Portal | Email Address      | Password              |
       | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
-  @WEB @Mobile @MESSAGES @HAPPY_PATH
+  @WEB @MESSAGES @HAPPY_PATH
   Scenario Template: S10- Patient verifies the Automatic Reply Messages.
 
     Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module

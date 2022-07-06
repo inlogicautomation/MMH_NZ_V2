@@ -1932,6 +1932,9 @@ public class WebSteps {
     @Given("As a user I am on HomePage and navigate to Messages Setting")
     public void asAUserIAmOnHomePageAndNavigateToMessagesSetting() {
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+        }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
 
     }
@@ -1940,8 +1943,8 @@ public class WebSteps {
     public void iClickTheSessionSettingAndSelectTheCustomiseSession(String strTimeOut) {
 
         Assert.assertTrue(demoPageContainer.messagesPage.selectCustomiseSessionTimeOut(TestDataUtil.getValue(strTimeOut)));
-
     }
+
     @Then("I Should see the Out Of Office Based on {string} and Message get auto replied when sender send message within that period of time")
     public void iShouldSeeTheOutOfOfficeBasedOnAndMessageGetAutoRepliedWhenSenderSendMessageWithinThatPeriodOfTime(String strMessage) {
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
@@ -1997,6 +2000,9 @@ public class WebSteps {
     @Then("I Should Verify the Out Of Office Reply {string}")
     public void iShouldVerifyTheOutOfOfficeReplyMessage(String strMessage) {
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+        }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
         Assert.assertTrue(demoPageContainer.messagesPage.selectOutOfOfficeSetting());
         Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredOutOfOfficeMessage(TestDataUtil.getValue(strMessage)));
@@ -2006,11 +2012,18 @@ public class WebSteps {
     public void iClickTheSignatureSettingAndEnterThe(String strMessage) {
         Assert.assertTrue(demoPageContainer.messagesPage.enterTheSignatureMessage(TestDataUtil.getValue(strMessage)));
     }
+
     @Then("I Should see the Signature Based on {string} entered and signature must get auto populated in Compose mail")
     public void iShouldSeeTheSignatureBasedOnEnteredAndSignatureMustGetAutoPopulatedInComposeMail(String strMessage) {
 
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
-        Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+            Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessageForMobile());
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessage());
+        }
         Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredSignatureMessage(TestDataUtil.getValue(strMessage)));
     }
 
@@ -2093,15 +2106,15 @@ public class WebSteps {
 
     @Then("I should see all the Messages future Grid View in Inbox page")
     public void iShouldSeeAllTheMessagesFutureGridViewInInboxPage(List<String> locDetails) {
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {}
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
         for (String String : locDetails) {
 
             Assert.assertTrue(demoPageContainer.messagesPage.VerifyInboxData(TestDataUtil.getListOfValue(String)));
-        }
+        }}
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             for (String String : locDetails) {
 
-                Assert.assertTrue(demoPageContainer.messagesPage.VerifyInboxData(TestDataUtil.getListOfValue(String)));
+                Assert.assertTrue(demoPageContainer.messagesPage.VerifyMobileInboxData(TestDataUtil.getListOfValue(String)));
             }
         }
     }
@@ -2274,6 +2287,10 @@ public class WebSteps {
     @Then("I Should Verify the Automatic Replies {string}")
     public void iShouldVerifyTheAutomaticReplies(String strMessage) {
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+        }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
         Assert.assertTrue(demoPageContainer.messagesPage.selectAutomaticRepliesSetting());
         Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredAutomaticRepliesMessage(TestDataUtil.getValue(strMessage)));
