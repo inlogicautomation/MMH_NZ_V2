@@ -213,8 +213,14 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Future Appointments')]")
     protected WebElement elmntFutureAppointmentTab;
 
+    @FindBy(how = How.XPATH, using = "//span[text()=' OK ']/parent::button")
+    protected WebElement btnCancel;
+
     @FindBy(how = How.XPATH, using = "//div/p[contains(text(),'Thank you. Your payment has been processed successfully.')]")
     protected WebElement elmntPaymentSuccess;
+
+    @FindBy(how = How.XPATH, using = "//mat-dialog-container//div/div[contains(text(),'our appointment is not for today')]")
+    protected WebElement elmntAppointmentsisNotForTodayPopup;
 
     protected String elmntVideoBookingType = new StringBuilder().append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]/preceding::input[@type='radio'][1]").toString();
@@ -228,8 +234,14 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//td[@aria-colindex='1']")
     protected List<WebElement> elmntsAppointmentDatesInGrid;
 
+    @FindBy(how = How.XPATH, using = "//mat-expansion-panel-header[contains(@class,'mat-expansion-panel')]/span/mat-panel-title")
+    protected List<WebElement> elmntVideoInvitesGrid;
+
     @FindBy(how = How.XPATH, using = "//div[@class='mat-card-header-text']/mat-card-title")
     protected List<WebElement> elmntsAppointmentDatesInCard;
+
+    @FindBy(how = How.XPATH, using = "//p[@class='label-value lbl-remove']")
+    protected List<WebElement> elmntsAppointmentDatesInGridForMobileView;
 
     @FindBy(how = How.XPATH, using = "//span[@role='listbox']")
     protected WebElement elmntDownArrow;
@@ -237,15 +249,26 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'20')]")
     protected WebElement elmntMaxValue;
 
-
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Video Invitations')]")
     protected WebElement elmntVideoPage;
 
     @FindBy(how = How.XPATH, using = "//td/mat-icon[contains(text(),'videocam')]")
     protected List<WebElement> elmntsVideoIcons;
 
+    @FindBy(how = How.XPATH, using = "//mat-expansion-panel-header[contains(@class,'mat-expansion-panel')]")
+    protected List<WebElement> elmntsVideoTiles;
+
     @FindBy(how = How.XPATH, using = "(//td/mat-icon[contains(text(),'videocam')])[1]")
     protected WebElement elmntFirstVideoIcon;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'expansion-panel-primary-content')]//mat-icon[text()='videocam']")
+    protected WebElement elmntVideoIconMobileView;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'expansion-panel-primary-content')]")
+    protected WebElement elmntVideoInviteDetailsGrid;
+
+    @FindBy(how = How.XPATH, using = "(//mat-expansion-panel-header[contains(@class,'mat-expansion-panel')]/span/mat-panel-title)[1]")
+    protected WebElement elmntFirstVideoInvite;
 
     @FindBy(how = How.XPATH, using = "(//td/mat-icon[contains(text(),'videocam')])[1]")
     protected List<WebElement> elmntInsideAllIcons;
@@ -300,6 +323,9 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//textarea[@formcontrolname='reason']")
     protected WebElement txtReasonForCancelAppointment;
+
+    @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator btn mat-button mat-button-base']/span[text()='cancel'])[1]")
+    protected WebElement elmntCancelAppointments;
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Next')]")
     protected WebElement btnNext;
@@ -1029,6 +1055,20 @@ public class AppointmentsPage extends BasePage {
         return isVerifed;
     }
 
+    public boolean verifyAlltheVideoAppointmentsForMobileView() {
+        boolean isVerifed = false;
+        waitForSeconds(2);
+        waitForElements(elmntsVideoTiles);
+        int countVideoIcons = elmntsVideoTiles.size();
+        int countTotalRow = elmntVideoInvitesGrid.size();
+        System.out.println("Total Video Icons:::>> " + countVideoIcons + "  Total Row Count:::>> " + countTotalRow);
+        if (countVideoIcons == countTotalRow) {
+            isVerifed = true;
+        }
+        return isVerifed;
+    }
+
+
     public void clickFirstIcon() {
         waitForElement(elmntFirstVideoIcon);
         click(elmntFirstVideoIcon);
@@ -1215,8 +1255,10 @@ public class AppointmentsPage extends BasePage {
         try {
             waitForElement(elmntPaymentCheckOut);
             verifyElement(elmntSucessMessage);
+            waitForSeconds(1);
             waitForElement(btnNext);
-            click(btnNext);
+            jsScrollIntoView(btnNext);
+            jsClick(btnNext);
             waitForSeconds(2);
             takeScreenshot(driver);
             blResult = true;
@@ -1513,5 +1555,114 @@ public class AppointmentsPage extends BasePage {
             e.printStackTrace();
         }
         return blResult;
+    }
+    public void getAllAppointmentDatesInGridForMobileView() {
+        listAllAppoinmentDatesInCard = new LinkedList();
+        for (WebElement elmntCurrentAppoinmentDate : elmntsAppointmentDatesInGridForMobileView) {
+            String strCurrentAppoinmentDate = elmntCurrentAppoinmentDate.getText();
+            strCurrentAppoinmentDate = strCurrentAppoinmentDate.substring(0, 11);
+            strCurrentAppoinmentDate = strCurrentAppoinmentDate.replace(' ', '-');
+            System.out.println("Current Card Appoinments Dates is:::>>" + strCurrentAppoinmentDate);
+            listAllAppoinmentDatesInCard.add(strCurrentAppoinmentDate);
+        }
+    }
+
+    public boolean verifyFutureAppointmentDatesInGridForMobileResponse() {
+        boolean isVerifed = false;
+        for (String strDate : listAllAppoinmentDatesInCard) {
+            LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+            DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+            LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+            boolean isDateCorrect = inputDate1.isAfter(localDate1);
+            System.out.println("Card Date is Equal::" + isDateCorrect);
+            isVerifed = isDateCorrect;
+            if (!isDateCorrect) {
+                isVerifed = false;
+            }
+            if (!isVerifed) {
+                break;
+            }
+        }
+        return isVerifed;
+    }
+
+    public boolean verifyPastAppointmentDatesInGridForMobileResponse() {
+        boolean isVerifed = false;
+        for (String strDate : listAllAppoinmentDatesInCard) {
+            LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+            DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+            LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+            boolean isDateCorrect = inputDate1.isBefore(localDate1);
+            if (!isDateCorrect) {
+                isDateCorrect = inputDate1.isEqual(localDate1);
+            }
+            System.out.println("Card Date is Before Equal::" + isDateCorrect);
+            isVerifed = isDateCorrect;
+            if (!isDateCorrect) {
+                isVerifed = false;
+            }
+            if (!isVerifed) {
+                break;
+            }
+        }
+        return isVerifed;
+    }
+
+    public boolean verifyAppointmentIsNotForTodayPopup() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntAppointmentsisNotForTodayPopup);
+            verifyElement(elmntAppointmentsisNotForTodayPopup);
+            waitForElement(btnCancel);
+            jsClick(btnCancel);
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public void clickFirstVideoInvite() {
+        waitForElement(elmntFirstVideoInvite);
+        click(elmntFirstVideoInvite);
+        waitForElement(elmntVideoInviteDetailsGrid);
+        waitAndClick(elmntVideoInviteDetailsGrid);
+        waitForElement(elmntVideoIconMobileView);
+        click(elmntVideoIconMobileView);
+    }
+
+    public boolean cencelingAlltheAppointments() {
+        boolean isVerified = false;
+        try {
+            waitForSeconds(3);    //wait until 'loader'  loading
+            if (verifyElement(elmntCancelAppointments)){
+                List<WebElement> btnCancel = driver.findElements(By.xpath("//button[@class='mat-focus-indicator btn mat-button mat-button-base']/span[text()='cancel']"));
+                if (btnCancel.size() > 0) {
+                    System.out.println("btnCancel exists and size=>" + btnCancel.size());
+                    int page_no = btnCancel.size();
+                    for (int i = 1; i <= btnCancel.size(); i++) {
+                        System.out.println("TEST");
+                        waitForSeconds(2);
+                        driver.findElement(By.xpath("(//button[@class='mat-focus-indicator btn mat-button mat-button-base']/span[text()='cancel'])[1]")).click();
+                        System.out.println("Button No" + i);
+                        waitForElement(txtReasonForCancelAppointment);
+                        verifyElement(txtReasonForCancelAppointment);
+                        enterValue(txtReasonForCancelAppointment, "Cancelling My Appointment due to Unavailability");
+                        waitForSeconds(2);
+                        verifyElement(btnConfirmCancellAppointment);
+                        click(btnConfirmCancellAppointment);
+                        verifyElement(elmntAppoinmentCancelMessage);
+                        isVerified = true;
+                    }
+                }
+            }else {
+                System.out.println("Into Else");
+                isVerified = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isVerified;
     }
 }

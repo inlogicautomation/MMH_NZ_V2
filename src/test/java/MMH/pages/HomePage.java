@@ -242,10 +242,20 @@ public class HomePage extends BasePage {
         return verifyElement(elmntFutureAppointment);
     }
 
-    public boolean clickDashBoard() {
+    public boolean clickDashBoardForMobile() {
         takeScreenshot(driver);
+        waitForSeconds(2);
         waitForElementClickable(btnMobileMenu);
         jsClick(btnMobileMenu);
+        waitForElement(elmntDashBoard);
+        click(elmntDashBoard);
+        waitForSeconds(3);
+        driver.navigate().refresh();
+        return verifyElement(elmntVerifyHomePage);
+    }
+
+    public boolean clickDashBoard() {
+        waitForSeconds(2);
         waitForElement(elmntDashBoard);
         click(elmntDashBoard);
         waitForSeconds(3);
@@ -289,8 +299,9 @@ public class HomePage extends BasePage {
         refreshPage();
         waitForElement(btnHamburgerIcon);
         waitForElementClickable(btnHamburgerIcon);
-        waitAndClick(btnHamburgerIcon);
         waitForSeconds(2);
+        waitAndClick(btnHamburgerIcon);
+        waitForSeconds(1);
         waitForElement(elmntSideBar);
         return verifyElement(elmntSideBar);
     }

@@ -1,6 +1,6 @@
 Feature: My Health Records Demo
 
-  @WEB @S1 @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @S1 @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: Prep - User Successfully logs in to the MMH v2 Portal.
 
     Given As a user I am on MMH login Page
@@ -12,7 +12,7 @@ Feature: My Health Records Demo
       | Email Address      | Password              |
       | &EMAIL_FOR_HEALTH& | &PASSWORD_FOR_HEALTH& |
 
-  @WEB @S1 @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @S1 @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S1 - Verify My Health Records can view all the My Entries Future in Prescription page.
 
     Given As a user I am on HomePage
@@ -30,7 +30,7 @@ Feature: My Health Records Demo
       | Prescription     |
       | &FILTER_BY_DATA& |
 
-  @WEB @S1 @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @S1 @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S2 - Verify My Health Records can view all the My Entries Future in Prescriptions.
 
     Given As a user I am on HomePage
@@ -56,7 +56,7 @@ Feature: My Health Records Demo
       | Option     |
       | My Entries |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S2 - Patient Edit Created Record in Prescriptions
     Given I am on "<Tab>" Prescriptions page
     And I edit Created "<Record>" in Prescription page
@@ -69,7 +69,7 @@ Feature: My Health Records Demo
       | Tab           | Record                | FrequencyDrop  |
       | Prescriptions | &VISITED_NAME_RANDOM& | 3 time per day |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S3- Verify My Health Records can view all the My Entries Future in Allergies.
 
     Given As a user I am on HomePage
@@ -87,7 +87,7 @@ Feature: My Health Records Demo
       | Allergies        |
       | &FILTER_BY_DATA& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S4- Verify My Health Records can view all the My Entries Future in Allergies.
 
     Given As a user I am on HomePage
@@ -114,7 +114,7 @@ Feature: My Health Records Demo
       | Option     |
       | My Entries |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S4- Patient Edit Created Record in Allergies
     Given I am on "<Tab>" Allergies page
     And I edit Created "<Record>" in Allergies page
@@ -127,7 +127,7 @@ Feature: My Health Records Demo
       | Tab       | Record                | SeverityDrop |
       | Allergies | &VISITED_NAME_RANDOM& | Low          |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S5- Verify My Health Records can view all the My Entries Future in Immunisations.
 
     Given As a user I am on HomePage
@@ -143,7 +143,7 @@ Feature: My Health Records Demo
       | Immunisations    |
       | &FILTER_BY_DATA& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6- Verify My Health Records can view all the My Entries Future in Immunisations.
 
     Given As a user I am on HomePage
@@ -166,7 +166,7 @@ Feature: My Health Records Demo
       | Option     |
       | My Entries |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6- Patient Edit Created Record in  Immunisations
     Given I am on "<Tab>" Immunisation page
     And I edit Created "<Record>" in Immunisations page
@@ -179,7 +179,7 @@ Feature: My Health Records Demo
       | Tab           | Record                | AdditionalName    |
       | Immunisations | &VISITED_NAME_RANDOM& | &EDIT_ADDITIONAL& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6- Patient Edit Created Record in  COVIDImmunisations
     Given I am on "<Tab>" CovidImmunisation page
     And  I Click Info Icon in My Entries to see COVID Immunisation Details page
@@ -198,7 +198,7 @@ Feature: My Health Records Demo
       | Tab           | Record                                     | AdditionalName    |
       | Immunisations | Comirnaty, COVID-19 mRNA (Pfizer-BioNTech) | &EDIT_ADDITIONAL& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S7- Verify My Health Records can view all the My Entries Future in Classifications.
 
     Given As a user I am on HomePage
@@ -217,7 +217,7 @@ Feature: My Health Records Demo
       | Classifications  |
       | &FILTER_BY_DATA& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S8- Verify My Health Records can view all the My Entries Future in Classifications.
 
     Given As a user I am on HomePage
@@ -242,7 +242,7 @@ Feature: My Health Records Demo
       | Option     |
       | My Entries |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S8- Patient Edit Created Record in  Classifications
     Given I am on "<Tab>" Classifications page
     And I edit Created "<Record>" in Classifications page
@@ -256,7 +256,7 @@ Feature: My Health Records Demo
       | Classifications | &VISITED_NAME_RANDOM& | Long Term  |
 
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario: S9- Verify My Health Records can view all the My Entries Future in Lab Results.
 
     Given As a user I am on HomePage
@@ -272,7 +272,7 @@ Feature: My Health Records Demo
       | &LAB_RESULT_TABLE_DATA_1& | &TEST_RESULT_ICON_DATA_1& | &TEST_MOBILE_RESULT_ICON_DATA_1&|
     And I navigate to the Homepage
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S10- Verify My Health Records can view all the My Entries Future in Clinic Notes.
 
     Given As a user I am on HomePage
@@ -292,7 +292,7 @@ Feature: My Health Records Demo
       | ClinicNotes      |
       | &FILTER_BY_DATA& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S11- Patient Create New Record in Clinic Notes
     Given As a user I am on HomePage
     And I navigate to the Clinic Notes
@@ -317,7 +317,7 @@ Feature: My Health Records Demo
       | Option     |
       | My Entries |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S11- Patient Edit Created Record in Clinic Notes
     Given I am on "<Tab>" Clinic Notes page
     And I edit Created "<Record>" in My Health Records
@@ -330,7 +330,7 @@ Feature: My Health Records Demo
       | Tab             | Record                | Location        |
       | Clinician Notes | &VISITED_NAME_RANDOM& | &EDIT_LOCATION& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario: S13- Verify My Health Records can view all the My Entries Future in Summary.
 
     Given As a user I am on HomePage
@@ -338,7 +338,7 @@ Feature: My Health Records Demo
     When I click Export Health Summary
     Then I navigate to the Homepage
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S12- Verify My Health Records can view all the My Entries Future in Recalls.
 
     Given As a user I am on HomePage

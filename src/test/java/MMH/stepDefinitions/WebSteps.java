@@ -182,9 +182,15 @@ public class WebSteps {
 
     @When("I switch to grid view in future appointments page")
     public void iSwitchToGridViewInFutureAppointmentsPage() {
-        demoPageContainer.appointmentsPage.clickGrid();
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyGridView());
-        demoPageContainer.appointmentsPage.clickMaxvalue();
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            demoPageContainer.appointmentsPage.clickGrid();
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyGridView());
+            demoPageContainer.appointmentsPage.clickMaxvalue();
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            demoPageContainer.appointmentsPage.clickGrid();
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyGridView());
+        }
     }
 
     @When("I switch to card view in past appointments page")
@@ -201,15 +207,28 @@ public class WebSteps {
 
     @When("I switch to grid view in past appointments page")
     public void iSwitchToGridViewInPastAppointmentsPage() {
-        demoPageContainer.appointmentsPage.clickGrid();
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyGridView());
-        demoPageContainer.appointmentsPage.clickMaxvalue();
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            demoPageContainer.appointmentsPage.clickGrid();
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyGridView());
+            demoPageContainer.appointmentsPage.clickMaxvalue();
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            demoPageContainer.appointmentsPage.clickGrid();
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyGridView());
+        }
     }
 
     @Then("I should see all the past date appointments in grid view")
     public void iShouldSeeAllThePastDateAppointmentsInGridView() {
-//        demoPageContainer.appointmentsPage.getAllAppointmentDatesInGrid();
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAllAppointmentDatesInGridForPast());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAllAppointmentDatesInGridForPast());
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            demoPageContainer.appointmentsPage.getAllAppointmentDatesInGridForMobileView();
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyPastAppointmentDatesInGridForMobileResponse());
+        }
+
     }
 
     @And("I navigate to {string} page")
@@ -226,7 +245,15 @@ public class WebSteps {
 
     @Then("I should see all the future date appointments in grid view")
     public void iShouldSeeAllTheFutureDateAppointmentsInGridView() {
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyFutureAppointmentDatesInGrid());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyFutureAppointmentDatesInGrid());
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            demoPageContainer.appointmentsPage.getAllAppointmentDatesInGridForMobileView();
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyFutureAppointmentDatesInGridForMobileResponse());
+        }
+
 
     }
 
@@ -320,9 +347,16 @@ public class WebSteps {
 
     @Then("I should see all the all the video appointments invites sent from PMS Provider in grid view")
     public void iShouldSeeAllTheAllTheVideoAppointmentsInvitesSentFromPMSProviderInGridView() {
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
-        demoPageContainer.appointmentsPage.clickMaxvalue();
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAlltheVideoAppointments());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
+            demoPageContainer.appointmentsPage.clickMaxvalue();
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAlltheVideoAppointments());
+
+        } if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBIlEVIEW")) {
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAlltheVideoAppointmentsForMobileView());
+
+        }
     }
 
     @And("I join Video Consultation by clicking Join now Icon in Video invitations Gid {string}")
@@ -380,10 +414,11 @@ public class WebSteps {
     @Given("As a user I am on HomePage")
     public void asAUserIAmOnHomePage() {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
             Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoardForMobile());
             Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
         }
     }
@@ -529,7 +564,6 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
 
 
-
     }
 
     @And("I select the Medication details for Delivery Meds by Pharmacy and Pay Online with Card {string}")
@@ -646,8 +680,8 @@ public class WebSteps {
     @Then("I see the status for Patient to collect the Prescription{string}")
     public void iShouldSeeThePrescriptionStatusForPatientToCollectThePrescription(String strMedicationDetails) {
 
-        System.out.println("MedicationDetails >>> :" +strMedicationDetails);
-        List<String> lstMedicationDetails=TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
         System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
         System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
 
@@ -1110,9 +1144,7 @@ public class WebSteps {
                 demoPageContainer.myHealthRecordsPage.ClickRecallsRemainderIconLocator(list1, list2);
             }
         }
-        if(System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE,"").equalsIgnoreCase("MOBILEVIEW"))
-
-        {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             List<List<String>> tableData = dataTable.asLists(String.class);
             for (int i = 0; i < tableData.size(); i++) {
                 String strKey = tableData.get(i).get(0).trim();
@@ -1309,9 +1341,7 @@ public class WebSteps {
                 Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyImmunisationsMyEntriesDataIcon(list1, list2));
             }
         }
-        if(System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE,"").equalsIgnoreCase("MOBILEVIEW"))
-
-        {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             List<List<String>> tableData = dataTable.asLists(String.class);
             for (int i = 0; i < tableData.size(); i++) {
                 String strKey = tableData.get(i).get(0).trim();
@@ -1398,7 +1428,6 @@ public class WebSteps {
     }
 
 
-
     @When("I Create New Record in My Health Records")
     public void iCreateNewRecordInMyHealthRecords(List<String> listCreateData) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
@@ -1421,7 +1450,6 @@ public class WebSteps {
         }
 
 
-
     }
 
     @Then("I should see created Record in My Health Records")
@@ -1429,7 +1457,6 @@ public class WebSteps {
 //        demoPageContainer.myHealthRecordsPage.clickMaxvalue();
         Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyClinicalNotesAddRecord(listCreatedRecord));
     }
-
 
 
     @When("I edit Created {string} in My Health Records")
@@ -2008,6 +2035,7 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredOutOfOfficeMessage(TestDataUtil.getValue(strMessage)));
 
     }
+
     @And("I click the Signature Setting and Enter the {string}")
     public void iClickTheSignatureSettingAndEnterThe(String strMessage) {
         Assert.assertTrue(demoPageContainer.messagesPage.enterTheSignatureMessage(TestDataUtil.getValue(strMessage)));
@@ -2048,7 +2076,7 @@ public class WebSteps {
     @And("As I enter the Compose {string}")
     public void asIEnterTheCompose(String strMessageDetails) {
 
-        List <String> lstMessageDetails=TestDataUtil.getListOfValue(strMessageDetails);
+        List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
         System.out.println("List Message Details >>> :: " + lstMessageDetails);
 
         Assert.assertTrue(demoPageContainer.messagesPage.selectHealthCenter(TestDataUtil.getValue(lstMessageDetails.get(0))));
@@ -2074,7 +2102,7 @@ public class WebSteps {
 
     @When("I enter the {string} to compose an email")
     public void iEnterTheToComposeAnEmail(String listCreateData) {
-        List<String> list=TestDataUtil.getListOfValue(listCreateData);
+        List<String> list = TestDataUtil.getListOfValue(listCreateData);
         System.out.println(list);
         demoPageContainer.messagesPage.selectHealthCentre(list.get(0));
         demoPageContainer.messagesPage.selectLocation(list.get(1));
@@ -2085,7 +2113,6 @@ public class WebSteps {
         demoPageContainer.messagesPage.clickCheckBox();
         demoPageContainer.messagesPage.enterWriteMessage(list.get(6));
         demoPageContainer.messagesPage.clickAddFile(list.get(7));
-
 
 
     }
@@ -2101,16 +2128,14 @@ public class WebSteps {
     }
 
 
-
-
-
     @Then("I should see all the Messages future Grid View in Inbox page")
     public void iShouldSeeAllTheMessagesFutureGridViewInInboxPage(List<String> locDetails) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-        for (String String : locDetails) {
+            for (String String : locDetails) {
 
-            Assert.assertTrue(demoPageContainer.messagesPage.VerifyInboxData(TestDataUtil.getListOfValue(String)));
-        }}
+                Assert.assertTrue(demoPageContainer.messagesPage.VerifyInboxData(TestDataUtil.getListOfValue(String)));
+            }
+        }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             for (String String : locDetails) {
 
@@ -2126,7 +2151,7 @@ public class WebSteps {
 
 
     @And("I am on {string} Draft page")
-    public void iAmOnDraftPage(String  strTab) {
+    public void iAmOnDraftPage(String strTab) {
         demoPageContainer.messagesPage.verifyDraftHeader(strTab);
 
     }
@@ -2156,7 +2181,7 @@ public class WebSteps {
 
     @And("I Navigate to{string} Doctor Portal")
     public void iNavigateToDoctorPortal(String listCreateData) {
-        List<String> list=TestDataUtil.getListOfValue(listCreateData);
+        List<String> list = TestDataUtil.getListOfValue(listCreateData);
         demoPageContainer.messagesPage.clickInboxButton();
         demoPageContainer.messagesPage.clickSubjectButton();
         demoPageContainer.messagesPage.clickReplyButton();
@@ -2204,13 +2229,13 @@ public class WebSteps {
 
     @Given("As a user I am on{string} Dev login Page")
     public void asAUserIAmOnDevLoginPage(String listCreateData) {
-        List<String> list=TestDataUtil.getListOfValue(listCreateData);
+        List<String> list = TestDataUtil.getListOfValue(listCreateData);
         demoPageContainer.messagesPage.launchingNewTab(list.get(0));
     }
 
     @And("I enter{string} Email Address and Password")
     public void iEnterEmailAddressAndPassword(String listCreateData) {
-        List<String> list=TestDataUtil.getListOfValue(listCreateData);
+        List<String> list = TestDataUtil.getListOfValue(listCreateData);
         demoPageContainer.homePage.enterEmail(list.get(1));
         demoPageContainer.homePage.enterpassword(list.get(2));
         demoPageContainer.homePage.clickLoginButton();
@@ -2228,7 +2253,7 @@ public class WebSteps {
 
     @When("I enter the {string} Message Body in Reply Message Page")
     public void iEnterTheMessageBodyInReplymessagePage(String listCreateData) {
-        List<String> list=TestDataUtil.getListOfValue(listCreateData);
+        List<String> list = TestDataUtil.getListOfValue(listCreateData);
         demoPageContainer.messagesPage.enterReplyMessage(list.get(6));
     }
 
@@ -2273,12 +2298,11 @@ public class WebSteps {
 
     @Then("I Should verify the Patient {string} in the Inbox")
     public void iShouldVerifyThePatientInTheInbox(String strMessageDetails) {
-        System.out.println("strMessageDetails Details >>> :: "+strMessageDetails);
+        System.out.println("strMessageDetails Details >>> :: " + strMessageDetails);
 
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToInbox());
         Assert.assertTrue(demoPageContainer.messagesPage.verifyAutomaticReplyMessage(TestDataUtil.getListOfValue(strMessageDetails)));
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientLogin());
-
 
 
     }
@@ -2320,5 +2344,27 @@ public class WebSteps {
     @Then("I should see payment has been processed successfully with appointment details")
     public void iShouldSeePaymentHasBeenProcessedSuccessfullyWithAppointmentDetails() {
         Assert.assertTrue(demoPageContainer.appointmentsPage.verifySucessMessage());
+    }
+
+    @And("I should see Appointment is not for today popup")
+    public void iShouldSeeAppointmentIsNotForTodayPopup() {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            demoPageContainer.appointmentsPage.clickFirstIcon();
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAppointmentIsNotForTodayPopup());
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            demoPageContainer.appointmentsPage.clickFirstVideoInvite();
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAppointmentIsNotForTodayPopup());
+        }
+    }
+
+    @And("I canceling all the available appointments")
+    public void iCancelingAllTheAvailableAppointments() {
+        Assert.assertTrue(demoPageContainer.appointmentsPage.cencelingAlltheAppointments());
+    }
+
+    @Then("I should see Appointment is not for today popup in future appointments page")
+    public void iShouldSeeAppointmentIsNotForTodayPopupInFutureAppointmentsPage() {
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAppointmentIsNotForTodayPopup());
     }
 }
