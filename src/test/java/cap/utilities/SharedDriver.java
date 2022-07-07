@@ -28,6 +28,7 @@ public class SharedDriver {
 
 
     static {
+        randomID = TestDataUtil.getRandomID();
         strExecutionID = RandomGeneratorUtil.getRandomString();
         TestDataUtil.loadData(Constants.TESTDATA_PATH, System.getProperty(Constants.ENV_VARIABLE_APPLICATION));
         String strExecutionType = System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "");

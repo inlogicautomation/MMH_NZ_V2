@@ -271,7 +271,7 @@ public class HomePage extends BasePage {
             click(elmntDashBoard);
             waitForSeconds(3);
             click(btnExitApp);
-            waitForSeconds(120);
+            waitForSeconds(180);
             waitForElement(txtEmail);
             isVerified = verifyElement(txtEmail);
         }

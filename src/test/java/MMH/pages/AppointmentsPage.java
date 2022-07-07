@@ -1653,11 +1653,13 @@ public class AppointmentsPage extends BasePage {
                         verifyElement(btnConfirmCancellAppointment);
                         click(btnConfirmCancellAppointment);
                         verifyElement(elmntAppoinmentCancelMessage);
+                        waitForSeconds(5);
                         isVerified = true;
                     }
                 }
             }else {
                 System.out.println("Into Else");
+                waitForSeconds(3);
                 isVerified = true;
             }
         } catch (Exception e) {

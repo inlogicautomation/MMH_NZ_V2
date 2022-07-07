@@ -93,13 +93,13 @@ public class TestDataUtil {
                 else if (strValue.contains(strRandomPattern)) {
                     strValue = strValue.split(strRandomPattern)[0];
                     strValue = testDataMap.get(strValue).toString();
-                    strValue = strValue.concat(String.valueOf(SharedDriver.randomID));
+                    strValue = strValue.concat(String.valueOf(SharedDriver.strExecutionID));
                 } else {
                     strValue = testDataMap.get(strValue).toString();
                 }
             } else if (strKey.contains(strRandomPattern) && !(strValue.matches(strRegularExpressionPattern))) {
                 strValue = strValue.split(strRandomPattern)[0];
-                strValue = strValue.concat(String.valueOf(SharedDriver.randomID));
+                strValue = strValue.concat(String.valueOf(SharedDriver.strExecutionID));
 
             }
         } catch (Exception e) {
