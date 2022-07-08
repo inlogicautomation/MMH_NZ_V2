@@ -1,15 +1,15 @@
 package cap.common;
 
+import MMH_MobileApp.DemoScreenContainer;
 import cap.helpers.Constants;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.HidesKeyboard;
-import io.appium.java_client.PerformsTouchActions;
-import io.appium.java_client.TouchAction;
+import io.appium.java_client.*;
 import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.android.StartsActivity;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.touch.TouchActions;
@@ -17,12 +17,14 @@ import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import MMH.DemoScreenContainer;
 
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import static cap.common.BaseWindow.waitForSeconds;
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.PointOption.point;
 
 /**
@@ -31,6 +33,7 @@ import static io.appium.java_client.touch.offset.PointOption.point;
 public class BaseScreen {
 
     protected final WebDriver driver;
+    public AndroidDriver androidDriver;
     protected final WebDriverWait wait;
 
     public BaseScreen(WebDriver driver) {
@@ -70,16 +73,60 @@ public class BaseScreen {
         }
     }
 
+    public void scrollVerticalIntoView(String strTextToScroll) {
+        try {
+            driver.findElement(MobileBy.AndroidUIAutomator(
+                    "new UiScrollable(new UiSelector().scrollable(true)).setAsVerticalList().scrollIntoView(" +
+                            "new UiSelector().text(\"" + strTextToScroll + "\"))"));
+
+//            androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"" +strTextToScroll +"\"))");
+        } catch (Exception e) {
+            System.out.println("Scroll Vertical Exception: " + e.getMessage());
+        }
+
+    }
+
+
+
+
     public boolean verifyElement(WebElement element) {
 
         try {
-            element.isDisplayed();
-            // waitForElement(element).isDisplayed();
+//            element.isDisplayed();
+            waitForElement(element).isDisplayed();
             return true;
         } catch (Exception e) {
             System.out.println("\n Click Element:: " + e.getMessage());
             return false;
         }
+    }
+
+    public boolean verifyElement(By element) {
+        boolean isVerify = false;
+        try {
+            isVerify = driver.findElement(element).isDisplayed();
+        } catch (NoSuchElementException error) {
+            error.getMessage();
+            isVerify = false;
+        }
+        return isVerify;
+    }
+
+    public boolean verifyElementWithoutWait(WebElement element) {
+        boolean blResult = false;
+
+        try {
+            if (element.isDisplayed()) {
+                Thread.sleep(1000);
+                blResult = true;
+            } else {
+                blResult = false;
+            }
+        } catch (Exception e) {
+            System.out.println("\n Verify Element:: " + e.getMessage());
+        }
+
+        return blResult;
     }
 
     public void waitForSecond(int i) {
@@ -89,6 +136,36 @@ public class BaseScreen {
             System.out.println("\n waitForSecond:: " + e.getMessage());
         }
     }
+
+    public boolean focusFrame(WebElement element) {
+        boolean isFrameFocused;
+        waitForSeconds(1);
+        driver.switchTo().frame(element);
+        System.out.println("After Focused>>>>>>>>");
+        isFrameFocused = true;
+        return isFrameFocused;
+    }
+
+    public void reLaunchAppAndroid() {
+        ((AppiumDriver<WebElement>) driver).closeApp();
+        System.out.println("App Teriminated");
+        waitForSecond(3);
+        ((AppiumDriver<WebElement>) driver).activateApp("managemyhealth.co.nz");
+        System.out.println("App ReLaunched");
+    }
+
+    public void tapCooridinatesByElement(WebElement element) {
+        waitForSecond(3);
+        int Xcoordinate = element.getLocation().x;
+        int Ycoordinate = element.getLocation().y;
+        TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
+        touchAction.tap(PointOption.point(Xcoordinate, Ycoordinate)).perform();
+    }
+
+    public List<WebElement> waitForElements(List<WebElement> element) {
+        return wait.until(ExpectedConditions.visibilityOfAllElements(element));
+    }
+
 
     public boolean enterValue(WebElement element, String strVlaue) {
         try {
@@ -123,6 +200,52 @@ public class BaseScreen {
                     .release()
                     .perform();
         }
+    }
+
+    public void swipeUpShort() {
+        Dimension size = driver.manage().window().getSize();
+        System.out.println(size);
+
+        int startx = (int) (size.width * 0.2);
+        int starty = (int) (size.height * 0.6);
+
+        int endx = (int) (size.width * 0.2);
+        int endy = (int) (size.height * 0.2);
+
+        TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
+        touchAction.press(PointOption.point(startx, starty))
+                .waitAction(waitOptions(Duration.ofSeconds(1)))
+                .moveTo(PointOption.point(endx, endy)).release().perform();
+    }
+
+    public void swipeUp() {
+        Dimension size = driver.manage().window().getSize();
+        System.out.println(size);
+
+        int startx = (int) (size.width * 0.5);
+        int starty = (int) (size.height * 0.8);
+
+        int endx = (int) (size.width * 0.2);
+        int endy = (int) (size.height * 0.2);
+
+        TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
+        touchAction.press(PointOption.point(startx, starty))
+                .waitAction(waitOptions(Duration.ofSeconds(1)))
+                .moveTo(PointOption.point(endx, endy)).release().perform();
+    }
+
+
+
+    public void swipeDown() {
+        Dimension size = driver.manage().window().getSize();
+        int startx = (int) (size.width * 0.2);
+        int starty = (int) (size.height * 0.2);
+        int endx = (int) (size.width * 0.5);
+        int endy = (int) (size.height * 0.8);
+        TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
+        touchAction.press(PointOption.point(startx, starty))
+                .waitAction(waitOptions(Duration.ofSeconds(1)))
+                .moveTo(PointOption.point(endx, endy)).release().perform();
     }
 
     public void jsSwipeDown() {
@@ -235,5 +358,13 @@ public class BaseScreen {
         } catch (Exception e) {
             System.out.println("\n Exception enterValue By Coordinates" + e.getMessage());
         }
+    }
+
+    public boolean exitLoop(int milliSec, long startTime) {
+        return (System.currentTimeMillis() - startTime) < milliSec;
+    }
+
+    public WebElement waitForElementIgnoreStale(WebElement element) {
+        return wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
     }
 }

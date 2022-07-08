@@ -28,7 +28,6 @@ public class SharedDriver {
 
 
     static {
-        randomID = TestDataUtil.getRandomID();
         strExecutionID = RandomGeneratorUtil.getRandomString();
         TestDataUtil.loadData(Constants.TESTDATA_PATH, System.getProperty(Constants.ENV_VARIABLE_APPLICATION));
         String strExecutionType = System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "");
@@ -43,7 +42,7 @@ public class SharedDriver {
             System.out.println("<----------------------WeDriver is launched---------------------->");
         } else if (strExecutionType.equalsIgnoreCase("MOBILE")) {
             // Mobile Driver
-            driver = DriverUtil.getMobileDriver();
+            mobileDriver = DriverUtil.getMobileDriver();
             System.out.println("<----------------------Mobile Driver is launched---------------------->");
         } else if (strExecutionType.equalsIgnoreCase("WINDOWS")) {
             // Windows Driver

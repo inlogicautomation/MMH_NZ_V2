@@ -363,7 +363,6 @@ public class DriverUtil {
 
     public static WebDriver getAppiumDriver(DesiredCapabilities capability) {
         WebDriver driver = null;
-        System.out.println("\n Enter Get Appium Driver... method in...");
         try {
 
             String strRemoteIP = System.getProperty(Constants.ENV_VARIABLE_REMOTE_IP, "");
@@ -403,7 +402,6 @@ public class DriverUtil {
                         .toString();
             }
             if (capability.getPlatform().toString().equalsIgnoreCase(Constants.ANDROID.toUpperCase())) {
-                System.out.println("\n >>> Android Ifff....");
                 driver = new AndroidDriver(new URL(strURL), capability);
 
             } else if (capability.getPlatform().toString().equalsIgnoreCase(Constants.IOS.toUpperCase())) {
