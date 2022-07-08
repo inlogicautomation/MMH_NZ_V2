@@ -3,10 +3,12 @@ package MMH.stepDefinitions;
 import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.poi.ss.formula.functions.T;
 import org.testng.Assert;
 import MMH.DemoPageContainer;
 
@@ -352,7 +354,8 @@ public class WebSteps {
             demoPageContainer.appointmentsPage.clickMaxvalue();
             Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAlltheVideoAppointments());
 
-        } if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBIlEVIEW")) {
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBIlEVIEW")) {
             Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
             Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAlltheVideoAppointmentsForMobileView());
 
@@ -1482,12 +1485,6 @@ public class WebSteps {
     }
 
 
-    @And("I Create New Record in My Entries in Immunisations page")
-    public void iCreateNewRecordInMyEntriesInImmunisationsPage(List<String> listCreateData) {
-
-
-    }
-
     @And("I Create New Record in My Entries in Classifications page")
     public void iCreateNewRecordInMyEntriesInClassificationsPage(List<String> listCreateData) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
@@ -2005,7 +2002,9 @@ public class WebSteps {
 
     @And("I Enter the Automatic Replies {string}")
     public void iEnterTheAutomaticReplies(String strMessage) {
-        Assert.assertTrue(demoPageContainer.messagesPage.enterMessageForAutomaticReplies(TestDataUtil.getValue(strMessage)));
+        List<String>lstStrMessage= TestDataUtil.getListOfValue(strMessage);
+        System.out.println("lstStrMessage >>> :: "+ lstStrMessage);
+        Assert.assertTrue(demoPageContainer.messagesPage.enterMessageForAutomaticReplies(TestDataUtil.getValue(lstStrMessage.get(2))));
 
     }
 
@@ -2016,23 +2015,31 @@ public class WebSteps {
     }
 
     @And("I select the Out of office {string} and {string} and Enter the{string}")
-    public void iSelectTheOutOfOfficeAndAndEnterThe(String strStartDate, String strEndDate, String strMessage) {
+    public void iSelectTheOutOfOfficeAndAndEnterThe(String strStartDate,String strEndDate,String strMessage) {
+
+        List<String>lstStrMessage= TestDataUtil.getListOfValue(strMessage);
+        System.out.println("lstStrMessage >>> :: "+ lstStrMessage);
+
 //        Assert.assertTrue(demoPageContainer.messagesPage.selectStartDateForOutOfOffice(strStartDate));
 //        Assert.assertTrue(demoPageContainer.messagesPage.selectEndDateForOutOfOffice(strEndDate));
-        Assert.assertTrue(demoPageContainer.messagesPage.enterMessageForOutOfOffice(TestDataUtil.getValue(strMessage)));
+        Assert.assertTrue(demoPageContainer.messagesPage.enterMessageForOutOfOffice(TestDataUtil.getValue(lstStrMessage.get(0))));
 
     }
 
 
     @Then("I Should Verify the Out Of Office Reply {string}")
     public void iShouldVerifyTheOutOfOfficeReplyMessage(String strMessage) {
+
+        List<String>lstStrMessage= TestDataUtil.getListOfValue(strMessage);
+        System.out.println("lstStrMessage >>> :: "+ lstStrMessage);
+
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
         Assert.assertTrue(demoPageContainer.messagesPage.selectOutOfOfficeSetting());
-        Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredOutOfOfficeMessage(TestDataUtil.getValue(strMessage)));
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredOutOfOfficeMessage(TestDataUtil.getValue(lstStrMessage.get(0))));
 
     }
 
@@ -2064,13 +2071,6 @@ public class WebSteps {
     @And("I click the Alert Setting and select the {string}")
     public void iClickTheAlertSettingAndSelectThe(String strAlertType) {
         Assert.assertTrue(demoPageContainer.messagesPage.selectAlert(TestDataUtil.getValue(strAlertType)));
-    }
-
-    @Given("As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module")
-    public void asAUserIAmOnDoctorPortalHomepageAndNavigateToInbox() {
-//        Assert.assertTrue(demoPageContainer.messagesPage.navigateToInbox());
-        Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessageForDoctor());
-
     }
 
     @And("As I enter the Compose {string}")
@@ -2276,25 +2276,23 @@ public class WebSteps {
 
     @And("I am on {string} GroupMessage")
     public void iAmOnGroupMessage(String strTab) {
+
         demoPageContainer.messagesPage.verifyGroupMessageHeader(strTab);
+
     }
 
     @Then("I should see message sent Successfully popup")
     public void iShouldSeeMessageSentSuccessfullyPopup() {
+
         demoPageContainer.messagesPage.verifySentSuccessfully();
     }
 
     @Then("I should see message Drop Successfully popup")
     public void iShouldSeeMessageDropSuccessfullyPopup() {
+
         demoPageContainer.messagesPage.verifyDraftSuccessfully();
     }
 
-
-    @When("I Click the send message")
-    public void iClickTheSendMessage() {
-        Assert.assertTrue(demoPageContainer.messagesPage.selectSendMessage());
-
-    }
 
     @Then("I Should verify the Patient {string} in the Inbox")
     public void iShouldVerifyThePatientInTheInbox(String strMessageDetails) {
@@ -2302,7 +2300,6 @@ public class WebSteps {
 
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToInbox());
         Assert.assertTrue(demoPageContainer.messagesPage.verifyAutomaticReplyMessage(TestDataUtil.getListOfValue(strMessageDetails)));
-        Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientLogin());
 
 
     }
@@ -2310,6 +2307,9 @@ public class WebSteps {
 
     @Then("I Should Verify the Automatic Replies {string}")
     public void iShouldVerifyTheAutomaticReplies(String strMessage) {
+        List<String>lstStrMessage= TestDataUtil.getListOfValue(strMessage);
+        System.out.println("lstStrMessage >>> :: "+ lstStrMessage);
+
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -2317,7 +2317,7 @@ public class WebSteps {
         }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
         Assert.assertTrue(demoPageContainer.messagesPage.selectAutomaticRepliesSetting());
-        Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredAutomaticRepliesMessage(TestDataUtil.getValue(strMessage)));
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredAutomaticRepliesMessage(TestDataUtil.getValue(lstStrMessage.get(2))));
 
     }
 
@@ -2366,5 +2366,137 @@ public class WebSteps {
     @Then("I should see Appointment is not for today popup in future appointments page")
     public void iShouldSeeAppointmentIsNotForTodayPopupInFutureAppointmentsPage() {
         Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAppointmentIsNotForTodayPopup());
+    }
+
+    @When("I Click the send message and verify success pop up")
+    public void iClickTheSendMessageAndVerifySuccessPopUp() {
+        Assert.assertTrue(demoPageContainer.messagesPage.clickSendMessageAndNavigateToHomePage());
+    }
+
+    @Then("I navigate to Sent items and verify the Sent Message")
+    public void iNavigateToSentItemsAndVerifyTheSentMessage() {
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToSentItems());
+        Assert.assertTrue(demoPageContainer.messagesPage.verifySentMessages());
+    }
+
+    @And("I log out from Doctor Portal")
+    public void iLogOutFromDoctorPortal() {
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientLogin());
+    }
+
+    @Given("As a user I am on HomePage and navigate to Inbox")
+    public void asAUserIAmOnHomePageAndNavigateToInbox() {
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientInboxMessage());
+    }
+
+    @Then("I verify received Message in the Patient Inbox")
+    public void iVerifyReceivedMessageInThePatientInbox() {
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessage());
+    }
+
+    @Then("I download the attachment file and delete the downloaded attachment file")
+    public void iDownloadTheAttachmentFileAndDeleteTheDownloadedAttachmentFile() {
+        demoPageContainer.messagesPage.clickInboxAttachButton();
+        demoPageContainer.messagesPage.VerifyAttachdowloadSuccessfully();
+        demoPageContainer.messagesPage.DeleteFile();
+    }
+
+    @And("I click the Received message and I {string} to the received message")
+    public void iClickTheReceivedMessageAndIToTheReceivedMessage(String strReplyMessage) {
+        List<String> lstReplyMessage = TestDataUtil.getListOfValue(strReplyMessage);
+        System.out.println("lstReplyMessage >>> :: " + lstReplyMessage);
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessage());
+        demoPageContainer.messagesPage.clickInboxAttachButton();
+        demoPageContainer.messagesPage.VerifyAttachdowloadSuccessfully();
+        demoPageContainer.messagesPage.DeleteFile();
+        Assert.assertTrue(demoPageContainer.messagesPage.replyToPatientReceivedMessage(lstReplyMessage.get(0), lstReplyMessage.get(1)));
+
+    }
+
+    @Given("As a user I am on Doctor portal homepage and Navigate to Compose in GroupMessage module")
+    public void asAUserIAmOnDoctorPortalHomepageAndNavigateToComposeInGroupMessageModule() {
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToGroupMessageForDoctor());
+    }
+
+    @And("As I enter the Compose GroupMessage {string}")
+    public void asIEnterTheComposeGroupMessage(String listCreateData) {
+        List<String> list = TestDataUtil.getListOfValue(listCreateData);
+        System.out.println(list);
+
+        demoPageContainer.messagesPage.selectFrom(list.get(0));
+        demoPageContainer.messagesPage.selectProvider(list.get(1));
+        demoPageContainer.messagesPage.selectGenderPreference(list.get(2));
+        demoPageContainer.messagesPage.selecGroupTo(list.get(3));
+    }
+
+    @When("I Click the Reply send message")
+    public void iClickTheReplySendMessage() {
+        Assert.assertTrue(demoPageContainer.messagesPage.clickReplySendMessage());
+    }
+
+    @Then("I should verify the sent reply message in Sent items")
+    public void iShouldVerifyTheSentReplyMessageInSentItems() {
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientSentMessage());
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyReplySentMessage());
+    }
+
+
+    @When("I click Inbox refresh")
+    public void iClickInboxRefresh() {
+        Assert.assertTrue(demoPageContainer.messagesPage.clickInboxRefresh());
+    }
+
+    @Then("I should verify Patient Reply Message in the Provider Inbox")
+    public void iShouldVerifyPatientReplyMessageInTheProviderInbox() {
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReplyMessage());
+    }
+
+    @Given("As a user I am on Doctor portal homepage and Navigate to Inbox")
+    public void asAUserIAmOnDoctorPortalHomepageAndNavigateToInbox() {
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToInbox());
+    }
+
+
+    @Given("As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module")
+    public void asAUserIAmOnDoctorPortalHomepageAndNavigateToComposeInInboxModule() {
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessageForDoctor());
+
+    }
+
+    @Given("As a user I am on Doctor portal homepage and Navigate to GroupMessage")
+    public void asAUserIAmOnDoctorPortalHomepageAndNavigateToGroupMessage() {
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToGroupMessageForDoctor());
+    }
+
+    @And("I enter the Compose GroupMessage {string}")
+    public void IEnterTheComposeGroupMessage(String listCreateData) {
+        List<String> list=TestDataUtil.getListOfValue(listCreateData);
+        System.out.println(list);
+        demoPageContainer.messagesPage.selectFrom(list.get(0));
+        demoPageContainer.messagesPage.selectProvider(list.get(1));
+        demoPageContainer.messagesPage.selectGenderPreference(list.get(2));
+        demoPageContainer.messagesPage.selecGroupTo(list.get(3));
+        Assert.assertTrue(demoPageContainer.messagesPage.enterGroupSubject(TestDataUtil.getValue(list.get(4))));
+        Assert.assertTrue(demoPageContainer.messagesPage.enterGroupMessage(TestDataUtil.getValue(list.get(5))));
+        demoPageContainer.messagesPage.selecGroupTo(list.get(3));
+    }
+    @And("I send the group message to the patient users")
+    public void iSendTheGroupMessageToThePatientUsers() {
+        Assert.assertTrue(demoPageContainer.messagesPage.clickGroupMessageAndNavigateToHomePage());
+    }
+
+    @Given("As a user I am on HomePage and navigate to GroupMessage")
+    public void asAUserIAmOnHomePageAndNavigateToGroupMessage() {
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientGroupMessage());
+    }
+
+
+    @And("I verify the provider sent {string}")
+    public void iVerifyTheProviderSent(String strGroupMesssage) {
+        List<String> listGroupMessage=TestDataUtil.getListOfValue(strGroupMesssage);
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(4)),listGroupMessage.get(5)));
     }
 }

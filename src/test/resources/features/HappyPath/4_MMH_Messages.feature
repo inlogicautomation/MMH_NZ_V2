@@ -1,6 +1,6 @@
 Feature: Messages
 
-  @WEB @Mobile @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S1- User Successfully logs in to the MMH v2 Portal.
 
     Given As a user I am on MMH login Page
@@ -22,7 +22,7 @@ Feature: Messages
 #      | Email Address       | Password               |
 #      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
 
-  @WEB @Mobile @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S1- Patient Sending Message
     Given As a user I am on HomePage
     And I navigate to the "<Sub_tab>" in Messages page
@@ -37,7 +37,7 @@ Feature: Messages
       | Sub_tab | Details   | Tab    |
       | Compose | &MESSAGE& | Dr Tim |
 
-  @WEB @Mobile @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S2- Patient Save Message as Draft
     Given As a user I am on HomePage
     And I navigate to the "<Sub_tab>" in Messages page
@@ -53,76 +53,95 @@ Feature: Messages
       | Sub_tab | Details   | Tab    |
       | Compose | &MESSAGE& | Dr Tim |
 
-  @WEB @HAPPY_PATH
+  @WEB @MESSAGES @HAPPY_PATH
   Scenario Template: S3- Preparation for Received Message
-    Given As a user I am on HomePage
-    And I navigate to the "<Sub_tab>" in Messages page
-    When I enter the "<Details>" to compose an email
-    Then I Click Send Message Button
-    Examples:
-      | Sub_tab | Details   |
-      | Compose | &MESSAGE& |
 
-  @WEB @HAPPY_PATH
-  Scenario Template:  S3- Patient Received Message.
-    Given As a user I am on"<DevUrl>" Dev login Page
-    And I enter"<DevUrl>" Email Address and Password
-    And I Navigate to"<DevUrl>" Doctor Portal
-    And I am on "<Tab>" Inbox Header
-    And I should see all the Messages future Grid View in Inbox page
-      | &INBOX_DATA& |
-    When I click Attached Files
-    Then I should see attached file successfully downloaded
-    And I Navigate to Home Page
+    Given As a user Launch the "<V1 Portal>"
+    And I enter "<Email Address>" and "<Password>"
+    When I click login button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | V1 Portal | Email Address      | Password              |
+      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+
+  @WEB @MESSAGES @HAPPY_PATH
+  Scenario Template: S3- Preparation for Received Message
+
+    Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module
+    And As I enter the Compose "<Message Details>"
+    When I Click the send message and verify success pop up
+    Then I navigate to Sent items and verify the Sent Message
+    And I log out from Doctor Portal
 
     Examples:
-      | Tab                    | DevUrl    |
-      | Re:Lab results enquiry | &DEV_URL& |
+      | Message Details        |
+      | &SENT_MESSAGE_DETAILS& |
 
-  @WEB @Mobile @HAPPY_PATH
+  @WEB @MESSAGES @HAPPY_PATH
+  Scenario: S3- User verify the Received Message
+    Given As a user I am on HomePage and navigate to Inbox
+    When I verify received Message in the Patient Inbox
+    Then I download the attachment file and delete the downloaded attachment file
+
+
+  @WEB @MESSAGES @HAPPY_PATH
   Scenario Template: S4- Preparation for Patient Reply Message
-
-    Given As a user I am on HomePage
-    And I navigate to the "<Sub_tab>" in Messages page
-    And I am on "<Tab>" Inbox Pages
-    And I should see all the Messages future Grid View in Inbox page
-      | &INBOX_DATA& |
-    When I click Attached Files
-    Then I should see attached file successfully downloaded
-    Examples:
-      | Sub_tab | Tab                    |
-      | Inbox   | Re:Lab results enquiry |
-
-  @WEB @Mobile @HAPPY_PATH
-  Scenario Template: S4- Patient Reply Message
-
-    Given As a user I am on Inbox Header
-    And I Click Reply Message Button
-    When I enter the "<Details>" Message Body in Reply Message Page
-    And I Click Send Message Button
-    And I am on "<Tab>" Sent page
-    Then I should see all the Messages future Grid View in Send page
-      | &SEND_DATA& |
-    And I Navigate to Home Page
+    Given As a user I am on HomePage and navigate to Inbox
+    And I click the Received message and I "<Reply>" to the received message
+    When I Click the Reply send message
+    Then I should verify the sent reply message in Sent items
 
     Examples:
-      | Details   | Tab    |
-      | &MESSAGE& | Dr Tim |
+      | Reply           |
+      | &REPLY MESSAGE& |
 
-  @WEB @Mobile @HAPPY_PATH
+
+  @WEB @MESSAGES @HAPPY_PATH
+  Scenario Template: S5- User Successfully logs in to the MMH v2 Portal.
+
+    Given As a user I am on MMH login Page
+    And I enter "<Email Address>" and "<Password>"
+    When I click login button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address       | Password               |
+      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
+
+  @WEB @MESSAGES @HAPPY_PATH
   Scenario Template: S5- Patient Group Message
 
-    Given As a user I am on HomePage
-    And I navigate to the "<Sub_tab>" in Messages page
-    When I am on "<Tab>" GroupMessage
-    Then I should see all the Messages future Grid View in GroupMessage page
-      | &GROUP_MESSAGE_DATA& |
-    And I Navigate to Home Page
+    Given As a user Launch the "<V1 Portal>"
+    And I enter "<Email Address>" and "<Password>"
+    When I click login button
+    Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Sub_tab       | Tab          |
-      | Group Message | VM03Location |
+      | V1 Portal | Email Address      | Password              |
+      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
-  @WEB @Mobile @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+
+  @WEB @MESSAGES @HAPPY_PATH
+  Scenario Template: S5- Patient Group Message
+
+    Given As a user I am on Doctor portal homepage and Navigate to GroupMessage
+    When I enter the Compose GroupMessage "<Message Details>"
+    Then I send the group message to the patient users
+    And I log out from Doctor Portal
+
+    Examples:
+      | Message Details              |
+      | &SENT_GROUP_MESSAGE_DETAILS& |
+
+  @WEB @MESSAGES @HAPPY_PATH
+  Scenario Template: S5-  Patient Group Message
+    Given As a user I am on HomePage and navigate to GroupMessage
+    And I verify the provider sent "<Group Message Details>"
+
+    Examples:
+      | Group Message Details        |
+      | &SENT_GROUP_MESSAGE_DETAILS& |
+
+
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S6- Patient Session Settings
 
     Given As a user I am on HomePage and navigate to Messages Setting
@@ -133,7 +152,7 @@ Feature: Messages
       | Time Out Setting   |
       | &TIME_OUT_SETTING& |
 
-  @WEB @Mobile @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S7- Patient Alert Settings
     Given As a user I am on HomePage and navigate to Messages Setting
     And I click the Alert Setting and select the "<Alert Type>"
@@ -142,7 +161,7 @@ Feature: Messages
       | Alert Type   |
       | &ALERT TYPE& |
 
-  @WEB @Mobile @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S8- Patient Signature Settings
     Given As a user I am on HomePage and navigate to Messages Setting
     And I click the Signature Setting and Enter the "<Signature Message>"
@@ -152,7 +171,7 @@ Feature: Messages
       | Signature Message   |
       | &SIGNATURE MESSAGE& |
 
-  @WEB @Mobile @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S10- Patient Automatic Reply Settings
     Given As a user I am on HomePage and navigate to Messages Setting
     And I click the Automatic Replies Settings and Enable Replies Settings option
@@ -163,7 +182,7 @@ Feature: Messages
       | Message                   |
       | &AUTOMATIC REPLY MESSAGE& |
 
-  @WEB @HAPPY_PATH
+  @WEB @HAPPY_PATH @MESSAGES
   Scenario Template: S10- Patient Automatic Reply Settings.
 
     Given As a user Launch the "<V1 Portal>"
@@ -174,19 +193,21 @@ Feature: Messages
       | V1 Portal | Email Address      | Password              |
       | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
-  @WEB @HAPPY_PATH
+  @WEB @HAPPY_PATH @MESSAGES
   Scenario Template: S10- Patient verifies the Automatic Reply Messages.
 
     Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module
     And As I enter the Compose "<Message Details>"
-    When I Click the send message
+    When I Click the send message and verify success pop up
     Then I Should verify the Patient "<Automatic Reply Message>" in the Inbox
+    And I log out from Doctor Portal
+
 
     Examples:
       | Message Details             | Automatic Reply Message |
-      | &AUTOMATIC_MESSAGE_DETAILS& | &VERIFY_DATA_FOR_ARM&   |
+      | &AUTOMATIC_MESSAGE_DETAILS& | &AUTOMATIC REPLY MESSAGE&   |
 
-  @WEB @Mobile @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S9- Patient Out Of Office Settings
     Given As a user I am on HomePage and navigate to Messages Setting
     And I click the Out of Office Settings and Enable Out Of Office Reply option
