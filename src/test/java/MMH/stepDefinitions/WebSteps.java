@@ -2076,10 +2076,8 @@ public class WebSteps {
 
     @And("As I enter the Compose {string}")
     public void asIEnterTheCompose(String strMessageDetails) {
-
         List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
         System.out.println("List Message Details >>> :: " + lstMessageDetails);
-
         Assert.assertTrue(demoPageContainer.messagesPage.selectHealthCenter(TestDataUtil.getValue(lstMessageDetails.get(0))));
         Assert.assertTrue(demoPageContainer.messagesPage.selectHealthCenterLocation(TestDataUtil.getValue(lstMessageDetails.get(1))));
         Assert.assertTrue(demoPageContainer.messagesPage.selectServiceName(TestDataUtil.getValue(lstMessageDetails.get(2))));
@@ -2088,10 +2086,9 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.messagesPage.enterSubject(TestDataUtil.getValue(lstMessageDetails.get(5))));
         Assert.assertTrue(demoPageContainer.messagesPage.enableTermAndConditions());
         Assert.assertTrue(demoPageContainer.messagesPage.enterBodyMessage(TestDataUtil.getValue(lstMessageDetails.get(6))));
-
+        Assert.assertTrue(demoPageContainer.messagesPage.attachTheFile(TestDataUtil.getValue(lstMessageDetails.get(7))));
 
     }
-
 
     @And("I navigate to the {string} in Messages page")
     public void iNavigateToTheInmessagespage(String strSubTab) {
@@ -2099,7 +2096,6 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessagesPage(strSubTab));
 
     }
-
 
     @When("I enter the {string} to compose an email")
     public void iEnterTheToComposeAnEmail(String listCreateData) {
@@ -2499,5 +2495,19 @@ public class WebSteps {
     public void iVerifyTheProviderSent(String strGroupMesssage) {
         List<String> listGroupMessage=TestDataUtil.getListOfValue(strGroupMesssage);
         Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(4)),listGroupMessage.get(5)));
+    }
+
+    @And("I enter the Compose Mail{string}")
+    public void iEnterTheComposeMail(String strMessageDetails) {
+        List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
+        System.out.println("List Message Details >>> :: " + lstMessageDetails);
+        Assert.assertTrue(demoPageContainer.messagesPage.selectHealthCenter(TestDataUtil.getValue(lstMessageDetails.get(0))));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectHealthCenterLocation(TestDataUtil.getValue(lstMessageDetails.get(1))));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectServiceName(TestDataUtil.getValue(lstMessageDetails.get(2))));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectRole(TestDataUtil.getValue(lstMessageDetails.get(3))));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectTo(TestDataUtil.getValue(lstMessageDetails.get(4))));
+        Assert.assertTrue(demoPageContainer.messagesPage.enterSubject(TestDataUtil.getValue(lstMessageDetails.get(5))));
+        Assert.assertTrue(demoPageContainer.messagesPage.enableTermAndConditions());
+        Assert.assertTrue(demoPageContainer.messagesPage.enterBodyMessage(TestDataUtil.getValue(lstMessageDetails.get(6))));
     }
 }

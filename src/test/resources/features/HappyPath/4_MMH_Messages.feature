@@ -83,9 +83,8 @@ Feature: Messages
     When I verify received Message in the Patient Inbox
     Then I download the attachment file and delete the downloaded attachment file
 
-
   @WEB @MESSAGES @HAPPY_PATH
-  Scenario Template: S4- Preparation for Patient Reply Message
+  Scenario Template: S4- Patient Reply Message
     Given As a user I am on HomePage and navigate to Inbox
     And I click the Received message and I "<Reply>" to the received message
     When I Click the Reply send message
@@ -94,7 +93,6 @@ Feature: Messages
     Examples:
       | Reply           |
       | &REPLY MESSAGE& |
-
 
   @WEB @MESSAGES @HAPPY_PATH
   Scenario Template: S5- User Successfully logs in to the MMH v2 Portal.
@@ -139,7 +137,6 @@ Feature: Messages
     Examples:
       | Group Message Details        |
       | &SENT_GROUP_MESSAGE_DETAILS& |
-
 
   @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S6- Patient Session Settings
@@ -197,7 +194,7 @@ Feature: Messages
   Scenario Template: S10- Patient verifies the Automatic Reply Messages.
 
     Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module
-    And As I enter the Compose "<Message Details>"
+    And I enter the Compose Mail"<Message Details>"
     When I Click the send message and verify success pop up
     Then I Should verify the Patient "<Automatic Reply Message>" in the Inbox
     And I log out from Doctor Portal

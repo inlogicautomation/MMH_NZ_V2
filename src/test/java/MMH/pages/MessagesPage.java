@@ -406,11 +406,13 @@ public class MessagesPage extends BasePage {
     protected String strFloorplanFilePath = new StringBuilder().append(System.getProperty("user.dir")).append(File.separator).append(Constants.CONFIG_FOLDER).append(File.separator)
             .append(Constants.IMAGES_FOLDER).append(File.separator)
             .append("<<FILENAME>>").toString();
+
     @FindBy(how = How.XPATH, using = "//input[@type='file']")
     protected WebElement btnFloorplanUpload;
 
     @FindBy(how = How.XPATH, using = "//input[@value='Attach']")
     protected WebElement btndevUpload;
+
     @FindBy(how = How.XPATH, using = "//input[@id='AttachFile1_btnDone']")
     protected WebElement btndevDone;
 
@@ -676,7 +678,6 @@ public class MessagesPage extends BasePage {
     public boolean verifyPatientReceivedMessage() {
         boolean blResult = false;
         try {
-
             System.out.println("strRandomSubjectMessage >>> :: " + strRandomSubjectMessage);
             waitForElement(txtInboxPatient);
             System.out.println("X Path-inboxSubject >>> :: " + inboxMessageSubject.replace("<<REPLACEMENT>>", strRandomSubjectMessage));
@@ -1501,7 +1502,6 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(txtBoxSubject);
             txtBoxSubject.sendKeys(strRandomSubjectMessage);
             waitForSeconds(3);
-
             blResult = true;
             System.out.println("\nSuccessfully Entered The Subject Message >>> :: ");
         } catch (Exception e) {
@@ -2484,4 +2484,32 @@ public class MessagesPage extends BasePage {
         return blResult;
     }
 
+    public boolean attachTheFile(String strUploadDocumentName) {
+        boolean blResult = false;
+        try {
+            clickAttachButton();
+            waitForSeconds(3);
+            focusWindow(3);
+            System.out.println("Document Name" + strUploadDocumentName );
+            String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
+            System.out.println(strFloorplanDocumentName);
+            btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
+            waitForSeconds(5);
+            waitForElementClickable(btndevUpload);
+            jsClick(btndevUpload);
+            waitForSeconds(3);
+            waitForElement(btndevDone);
+            jsClick(btndevDone);
+            waitForSeconds(1);
+            driver.switchTo().alert().dismiss();
+            focusWindow(2);
+            waitForSeconds(5);
+
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
 }
