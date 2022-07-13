@@ -204,7 +204,7 @@ public class BaseScreen {
 
     public void swipeUpShort() {
         Dimension size = driver.manage().window().getSize();
-        System.out.println(size);
+        System.out.println("Swipe Up");
 
         int startx = (int) (size.width * 0.2);
         int starty = (int) (size.height * 0.6);
@@ -366,5 +366,13 @@ public class BaseScreen {
 
     public WebElement waitForElementIgnoreStale(WebElement element) {
         return wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
+    }
+
+    public void navigateToBack() {
+        try {
+            driver.navigate().back();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

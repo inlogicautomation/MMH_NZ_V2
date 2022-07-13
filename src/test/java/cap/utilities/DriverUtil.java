@@ -196,7 +196,7 @@ public class DriverUtil {
                         String value = config_prop.getProperty(key);
                         capability.setCapability(key, value);
                         System.setProperty(key, value);
-                        System.out.println(key + value);
+                        System.out.println(key +" : "+ value);
                     }
                     capability.setCapability("newCommandTimeout", 15000);
                 } catch (Exception e) {

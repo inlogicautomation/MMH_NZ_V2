@@ -38,7 +38,7 @@ public class MobileSteps {
 
     @Given("I am on MMH Home screen")
     public void iAmOnMMHHomeScreen() {
-        Assert.assertTrue(demoScreenContainer.homeScreen.verifyMMHHomeScreen());
+        Assert.assertTrue(demoScreenContainer.homeScreen.verifyMMHHomeScreen1());
     }
 
     @And("I tap on {string} option in home screen")
@@ -84,7 +84,7 @@ public class MobileSteps {
         Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyDetailsOfConfirmAppointment(lstDetails, TestDataUtil.getValue(strFutureDate)));
     }
 
-    @And("I send Appointment Request through pay at health centre")
+    @And("I Send Appointment Request through pay at health centre")
     public void iSendAppointmentRequestThroughPayAtHealthCentre() {
         demoScreenContainer.appointmentsScreen.tapSendAppointmentRequest();
         demoScreenContainer.appointmentsScreen.tapPayHealthCentre();
@@ -101,5 +101,57 @@ public class MobileSteps {
     @And("I enter the {string} in Confirm Appointment")
     public void iEnterTheInConfirmAppointment(String strContactNumber) {
         demoScreenContainer.appointmentsScreen.enterContactNumber(TestDataUtil.getValue(strContactNumber));
+    }
+
+    @Given("I am on Payment Options screen")
+    public void iAmOnPaymentOptionsScreen() {
+        Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyPaymentOptions());
+    }
+
+    @When("I Send Appointment Request")
+    public void iSendAppointmentRequest() {
+        demoScreenContainer.appointmentsScreen.tapSendAppointmentRequest();
+    }
+
+    @When("I tap Pay Now button and tap OK in payment info popup message")
+    public void iTapPayNowButtonAndTapOKInPaymentInfoPopupMessage() {
+        demoScreenContainer.appointmentsScreen.tapPayNow();
+        Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyPaymentInformation());
+        demoScreenContainer.appointmentsScreen.tapOK();
+    }
+
+    @When("I enter the {string} and submit")
+    public void iEnterTheAndSubmit(String strCardDetails) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strCardDetails);
+        demoScreenContainer.appointmentsScreen.enterCardNumber(lstDetails.get(0));
+        demoScreenContainer.appointmentsScreen.enterCardName(lstDetails.get(1));
+        demoScreenContainer.appointmentsScreen.selectExpiryDate(lstDetails.get(2), lstDetails.get(3));
+        demoScreenContainer.appointmentsScreen.enterCVCNumber(lstDetails.get(4));
+        demoScreenContainer.appointmentsScreen.tapSubmit();
+
+    }
+
+    @Then("I should see Transaction Approved message")
+    public void iShouldSeeTransactionApprovedMessage() {
+        Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyTransactionApproved());
+        Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyPaymentStatus());
+        demoScreenContainer.appointmentsScreen.tapContinue();
+    }
+
+    @And("I should see payment {string} displayed under Service Tab {string} {string}")
+    public void iShouldSeePaymentDisplayedUnderServiceTab(String strAppointment, String strAppointmentDetails, String strFutureDate) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentDetails);
+        Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyCreatedPaymentAppointmentInServiceTab(lstDetails, TestDataUtil.getValue(strFutureDate), TestDataUtil.getValue(strAppointment)));
+    }
+
+    @Given("I am on Confirm Appointment screen")
+    public void iAmOnConfirmAppointmentScreen() {
+        Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyConfirmAppointment());
+    }
+
+    @And("I verify Appointment Request Submitted Successfully popup message")
+    public void iVerifyAppointmentRequestSubmittedSuccessfullyPopupMessage() {
+        Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyAppointmentInformation());
+        demoScreenContainer.appointmentsScreen.tapOK();
     }
 }

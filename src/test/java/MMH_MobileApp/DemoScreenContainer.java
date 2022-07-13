@@ -52,6 +52,9 @@ public class DemoScreenContainer {
         scenario.attach(imageBytes, "image/png", "");
         System.out.println("\n Scenario outline: " + scenario.getName());
         System.out.println("\n Scenario Status: " + scenario.getStatus());
+        if (scenario.getSourceTagNames().contains("@RELAUNCH")) {
+            homeScreen.appRelaunch();
+        }
     }
 
     @Before("@MOBILE")
