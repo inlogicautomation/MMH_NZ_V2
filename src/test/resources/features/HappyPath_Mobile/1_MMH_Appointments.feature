@@ -77,7 +77,7 @@ Feature: Mobile_Appointments_Scenarios
 
 
   @MOBILE @Mobile_Appointment
-  Scenario Outline: S6 - Patient Booking Appointment - Visit Appointment Using Card Payment with $X amount [Mobile]
+  Scenario Outline: S5 - Patient Booking Appointment - Visit Appointment Using Card Payment with $X amount [Mobile]
 
     Given I am on Payment Options screen
     When I tap Pay Now button and tap OK in payment info popup message
@@ -91,7 +91,7 @@ Feature: Mobile_Appointments_Scenarios
 
 
   @MOBILE @Mobile_Appointment
-  Scenario Outline: S7 - Patient Send the Appointment Request [Mobile-Phone]
+  Scenario Outline: S6 - Patient Send the Appointment Request [Mobile-Phone]
 
     Given I am on MMH Home screen
     And I tap on "Book Appointment" option in home screen
@@ -107,7 +107,7 @@ Feature: Mobile_Appointments_Scenarios
 
 
   @MOBILE @Mobile_Appointment
-  Scenario Outline: S8 - Patient Booking Appointment - Phone Appointment Using Card Payment with $X amount [Mobile]
+  Scenario Outline: S6 - Patient Booking Appointment - Phone Appointment Using Card Payment with $X amount [Mobile]
 
     Given I am on Payment Options screen
     When I tap Pay Now button and tap OK in payment info popup message
@@ -121,7 +121,7 @@ Feature: Mobile_Appointments_Scenarios
 
 
   @MOBILE @Mobile_Appointment
-  Scenario Outline: S9 - Patient Send the Appointment Request [Mobile-Video]
+  Scenario Outline: S7 - Patient Send the Appointment Request [Mobile-Video]
 
     Given I am on MMH Home screen
     And I tap on "Book Appointment" option in home screen
@@ -136,7 +136,7 @@ Feature: Mobile_Appointments_Scenarios
 
 
   @MOBILE @Mobile_Appointment
-  Scenario Outline: S10 - Patient Booking Appointment - Video Appointment Using Card Payment with $X amount [Mobile]
+  Scenario Outline: S7 - Patient Booking Appointment - Video Appointment Using Card Payment with $X amount [Mobile]
 
     Given I am on Payment Options screen
     When I tap Pay Now button and tap OK in payment info popup message
@@ -150,7 +150,7 @@ Feature: Mobile_Appointments_Scenarios
 
 
   @MOBILE @Mobile_Appointment
-  Scenario Outline: S11 - Patient verify the Confirm Appointment details [Mobile-Visit]
+  Scenario Outline: S8 - Patient verify the Confirm Appointment details [Mobile-Visit]
 
     Given I am on MMH Home screen
     And I tap on "Book Appointment" option in home screen
@@ -165,7 +165,7 @@ Feature: Mobile_Appointments_Scenarios
 
 
   @MOBILE @Mobile_Appointment
-  Scenario Outline: S12 - Patient Booking Appointment - Visit Appointment & $0 Amount [Mobile-Visit]
+  Scenario Outline: S8 - Patient Booking Appointment - Visit Appointment & $0 Amount [Mobile-Visit]
 
     Given I am on Confirm Appointment screen
     And I Send Appointment Request
@@ -178,35 +178,7 @@ Feature: Mobile_Appointments_Scenarios
 
 
   @MOBILE @Mobile_Appointment
-  Scenario Outline: S13 - Patient verify the Confirm Appointment details [Mobile-Visit]
-
-    Given I am on MMH Home screen
-    And I tap on "Book Appointment" option in home screen
-    And I tap Book Appointment under Future tab
-    When I enter the "Visit" "<Appointment Details>"
-    Then I should see Confirm Appointment details "<Details_For_Appointment>" "<Future_Date>"
-
-
-    Examples:
-      | Appointment Details               | Details_For_Appointment              | Future_Date   |
-      | &BOOK_VISIT_APPOINTMENT_0_AMOUNT& | &VISIT_APPOINTMENT_DETAILS_0_AMOUNT& | &FUTURE_DATE& |
-
-
-  @MOBILE @Mobile_Appointment
-  Scenario Outline: S14 - Patient Booking Appointment - Visit Appointment & $0 Amount [Mobile-Visit]
-
-    Given I am on Confirm Appointment screen
-    And I Send Appointment Request
-    When I verify Appointment Request Submitted Successfully popup message
-    Then I should see booked "<Appointment>" displayed under Service Tab "<Appointment_Summary>" "<Future_Date>"
-
-    Examples:
-      | Appointment | Future_Date   | Appointment_Summary                  |
-      | VISIT       | &FUTURE_DATE& | &VISIT_APPOINTMENT_SUMMARY_0_AMOUNT& |
-
-
-  @MOBILE @Mobile_Appointment
-  Scenario Outline: S15 - Patient verify the Confirm Appointment details [Mobile-Phone]
+  Scenario Outline: S9 - Patient verify the Confirm Appointment details [Mobile-Phone]
 
     Given I am on MMH Home screen
     And I tap on "Book Appointment" option in home screen
@@ -222,7 +194,7 @@ Feature: Mobile_Appointments_Scenarios
 
 
   @MOBILE @Mobile_Appointment
-  Scenario Outline: S16 - Patient Booking Appointment - Phone Appointment & $0 Amount [Mobile-Phone]
+  Scenario Outline: S9 - Patient Booking Appointment - Phone Appointment & $0 Amount [Mobile-Phone]
 
     Given I am on Confirm Appointment screen
     And I Send Appointment Request
@@ -235,7 +207,7 @@ Feature: Mobile_Appointments_Scenarios
 
 
   @MOBILE @Mobile_Appointment
-  Scenario Outline: S17 - Patient verify the Confirm Appointment details [Mobile-Video]
+  Scenario Outline: S10 - Patient verify the Confirm Appointment details [Mobile-Video]
 
     Given I am on MMH Home screen
     And I tap on "Book Appointment" option in home screen
@@ -250,7 +222,7 @@ Feature: Mobile_Appointments_Scenarios
 
 
   @MOBILE @Mobile_Appointment
-  Scenario Outline: S18 - Patient Booking Appointment - Video Appointment & $0 Amount [Mobile-Video]
+  Scenario Outline: S10 - Patient Booking Appointment - Video Appointment & $0 Amount [Mobile-Video]
 
     Given I am on Confirm Appointment screen
     And I Send Appointment Request

@@ -25,43 +25,38 @@ public class HomeScreen extends BaseScreen {
     @AndroidFindBy(xpath = "//android.view.View[@text='home Home']")
     protected WebElement iconHome;
 
+    By byconfirmPopUp = By.xpath("//android.widget.TextView[@text='Confirm!']");
+
     String strOptionsInHomeScreenLocator = new StringBuilder()
             .append("//android.widget.TextView[@text='")
             .append("<<OPTION>>").append("']/preceding-sibling::android.widget.Image").toString();
 
-
     public boolean verifyMMHHomeScreen() {
-        if (!verifyElementWithoutWait(iconLogout)) {
-            waitForSecond(20);
+        try {
+            fluentWaitForElement(byconfirmPopUp);
             if (verifyElement(confirmPopUp)) {
                 tapByCoordinates(530, 730);
             }
-            waitForElement(iconLogout);
             return verifyElement(iconLogout);
+        } catch (Exception e) {
+            try {
+                return verifyElement(iconLogout);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+                return false;
+            }
         }
-        if (!verifyElementWithoutWait(iconNotification)) {
-            click(iconHome);
-            waitForElement(iconNotification);
-        }
-        waitForElement(iconLogout);
-        return verifyElement(iconLogout);
+
     }
 
-    public boolean verifyMMHHomeScreen1() {
-        if (!verifyElementWithoutWait(iconLogout)) {
-            waitForSecond(20);
-            if (verifyElement(confirmPopUp)) {
-                tapByCoordinates(530, 730);
-            }
-        }
-        waitForSecond(2);
-        int i =1;
-        while (!(verifyElementWithoutWait(iconHome) && i<=10)) {
+    public boolean gotoAndVerifyMMHHomeScreen() {
+        waitForSecond(1);
+        int i = 1;
+        while (!(verifyElementWithoutWait(iconHome) && i <= 10)) {
             navigateToBack();
             i++;
-            waitForSecond(2);
         }
-        waitForSecond(2);
+        waitForSecond(1);
         click(iconHome);
         waitForElement(iconNotification);
         waitForElement(iconLogout);

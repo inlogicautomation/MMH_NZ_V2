@@ -38,7 +38,7 @@ public class MobileSteps {
 
     @Given("I am on MMH Home screen")
     public void iAmOnMMHHomeScreen() {
-        Assert.assertTrue(demoScreenContainer.homeScreen.verifyMMHHomeScreen1());
+        Assert.assertTrue(demoScreenContainer.homeScreen.gotoAndVerifyMMHHomeScreen());
     }
 
     @And("I tap on {string} option in home screen")
@@ -153,5 +153,26 @@ public class MobileSteps {
     public void iVerifyAppointmentRequestSubmittedSuccessfullyPopupMessage() {
         Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyAppointmentInformation());
         demoScreenContainer.appointmentsScreen.tapOK();
+    }
+
+    @And("I tap on {string} in Health Records")
+    public void iTapOnInHealthRecords(String strHealthRecordOption) {
+        demoScreenContainer.healthRecordsScreen.tapHealthRecordOption(TestDataUtil.getValue(strHealthRecordOption));
+    }
+
+    @Then("I should see {string} and {string} in {string}")
+    public void iShouldSeeAnd(String strRecords, String strDetails, String strRecordOption) {
+        List<String> lstRecords = TestDataUtil.getListOfValue(strRecords);
+        List<String> lstDetails = TestDataUtil.getListOfValue(strDetails);
+        Assert.assertTrue(demoScreenContainer.healthRecordsScreen.verifyRecords(TestDataUtil.getValue(strRecordOption), lstRecords));
+        demoScreenContainer.healthRecordsScreen.tapRecordView(lstRecords);
+        Assert.assertTrue(demoScreenContainer.healthRecordsScreen.verifyRecordDetails(lstDetails));
+    }
+
+    @And("I should see Pathology Tests Explanation under Help")
+    public void iShouldSeePathologyTestsExplanationUnderHelp() {
+        demoScreenContainer.healthRecordsScreen.tapHelp();
+        Assert.assertTrue(demoScreenContainer.healthRecordsScreen.verifyPathologyTestsExplained());
+        demoScreenContainer.healthRecordsScreen.tapClose();
     }
 }

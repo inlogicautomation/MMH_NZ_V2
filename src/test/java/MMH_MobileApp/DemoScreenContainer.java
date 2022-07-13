@@ -24,6 +24,7 @@ public class DemoScreenContainer {
     public static LoginScreen loginScreen;
     public static HomeScreen homeScreen;
     public static AppointmentsScreen appointmentsScreen;
+    public static HealthRecordsScreen healthRecordsScreen;
 
     public static Scenario myScenario;
     public static LinkedHashMap<String, String> printTestDataMap = new LinkedHashMap<String, String>();
@@ -39,6 +40,7 @@ public class DemoScreenContainer {
         loginScreen = new LoginScreen(driver);
         homeScreen = new HomeScreen(driver);
         appointmentsScreen = new AppointmentsScreen(driver);
+        healthRecordsScreen = new HealthRecordsScreen(driver);
     }
 
     @After("@MOBILE")

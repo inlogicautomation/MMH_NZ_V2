@@ -16,12 +16,16 @@ import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import static cap.common.BaseWindow.waitForSeconds;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
@@ -85,9 +89,6 @@ public class BaseScreen {
         }
 
     }
-
-
-
 
     public boolean verifyElement(WebElement element) {
 
@@ -235,7 +236,6 @@ public class BaseScreen {
     }
 
 
-
     public void swipeDown() {
         Dimension size = driver.manage().window().getSize();
         int startx = (int) (size.width * 0.2);
@@ -374,5 +374,18 @@ public class BaseScreen {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public WebElement fluentWaitForElement(By element) {
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(80, TimeUnit.SECONDS)
+                .pollingEvery(2, TimeUnit.SECONDS)
+                .ignoring(NoSuchElementException.class);
+        WebElement elmnt = wait.until(new Function<WebDriver, WebElement>() {
+            public WebElement apply(WebDriver driver) {
+                return driver.findElement(element);
+            }
+        });
+        return elmnt;
     }
 }
