@@ -65,6 +65,7 @@ Feature: My Health Records Demo
     And I delete Created "<Record>" in Prescriptions page
     Then I should see Patient Record is deleted
     And I navigate to the Homepage
+
     Examples:
       | Tab           | Record                | FrequencyDrop |
       | Prescriptions | &VISITED_NAME_RANDOM& | 3 time        |
@@ -83,6 +84,7 @@ Feature: My Health Records Demo
       | &ALLERGIES_TABLE_DATA_1& | &ALLERGIES_ICON_DATA_1& | &ALLERGIES_MOBILE_ICON_DATA_1& |
       | &ALLERGIES_TABLE_DATA_2& | &ALLERGIES_ICON_DATA_2& | &ALLERGIES_MOBILE_ICON_DATA_2& |
     And I navigate to the Homepage
+
     Examples:
       | Allergies        |
       | &FILTER_BY_DATA& |
@@ -116,6 +118,7 @@ Feature: My Health Records Demo
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S4- Patient Edit Created Record in Allergies
+
     Given I am on "<Tab>" Allergies page
     And I edit Created "<Record>" in Allergies page
     And I change "<SeverityDrop>" in Allergies page
@@ -123,6 +126,7 @@ Feature: My Health Records Demo
     And I delete Created "<Record>" in Allergies page
     Then I should see Patient Record is deleted
     And I navigate to the Homepage
+
     Examples:
       | Tab       | Record                | SeverityDrop |
       | Allergies | &VISITED_NAME_RANDOM& | Low          |
@@ -168,6 +172,7 @@ Feature: My Health Records Demo
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6- Patient Edit Created Record in  Immunisations
+
     Given I am on "<Tab>" Immunisation page
     And I edit Created "<Record>" in Immunisations page
     And I change "<AdditionalName>" in Immunisations page
@@ -181,6 +186,7 @@ Feature: My Health Records Demo
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6- Patient Edit Created Record in  COVIDImmunisations
+
     Given I am on "<Tab>" CovidImmunisation page
     And  I Click Info Icon in My Entries to see COVID Immunisation Details page
       | &DATA_MY_ENTRIES_COVID_IMMUNISATIONS& | &DATA_MY_ENTRIES_INSIDE_COVID_IMMUNISATIONS& | &MOBILE_DATA_MY_ENTRIES_INSIDE_COVID_IMMUNISATIONS& |
@@ -194,6 +200,7 @@ Feature: My Health Records Demo
     And I am on "<Tab>" CovidImmunisation page
     Then I delete Created "<Record>" in CovidImmunisations page
     And I navigate to the Homepage
+
     Examples:
       | Tab           | Record                                     | AdditionalName    |
       | Immunisations | Comirnaty, COVID-19 mRNA (Pfizer-BioNTech) | &EDIT_ADDITIONAL& |
@@ -213,6 +220,7 @@ Feature: My Health Records Demo
       | &CLASSIFICATIONS_TABLE_DATA_1& | &CLASSIFICATIONS_ICON_DATA_1& | &CLASSIFICATIONS_MOBILE_ICON_DATA_1& |
       | &CLASSIFICATIONS_TABLE_DATA_2& | &CLASSIFICATIONS_ICON_DATA_2& | &CLASSIFICATIONS_MOBILE_ICON_DATA_2& |
     And I navigate to the Homepage
+
     Examples:
       | Classifications  |
       | &FILTER_BY_DATA& |
@@ -244,6 +252,7 @@ Feature: My Health Records Demo
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S8- Patient Edit Created Record in  Classifications
+
     Given I am on "<Tab>" Classifications page
     And I edit Created "<Record>" in Classifications page
     And I change "<StatusDrop>" in Classifications page
@@ -251,6 +260,7 @@ Feature: My Health Records Demo
     And I delete Created "<Record>" in Classifications page
     Then I should see Patient Record is deleted
     And I navigate to the Homepage
+
     Examples:
       | Tab             | Record                | StatusDrop |
       | Classifications | &VISITED_NAME_RANDOM& | Long Term  |
@@ -288,12 +298,14 @@ Feature: My Health Records Demo
       | &CLINIC_TABLE_DATA_2& | &CLINIC_ICON_DATA_2& | &CLINIC_MOBILE_ICON_DATA_2& |
       | &CLINIC_TABLE_DATA_3& | &CLINIC_ICON_DATA_3& | &CLINIC_MOBILE_ICON_DATA_3& |
     And I navigate to the Homepage
+
     Examples:
       | ClinicNotes      |
       | &FILTER_BY_DATA& |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S11- Patient Create New Record in Clinic Notes
+
     Given As a user I am on HomePage
     And I navigate to the Clinic Notes
     And I should see all the Entries From Health Centre future Grid View in Clinic Notes page
@@ -319,6 +331,7 @@ Feature: My Health Records Demo
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S11- Patient Edit Created Record in Clinic Notes
+
     Given I am on "<Tab>" Clinic Notes page
     And I edit Created "<Record>" in My Health Records
     And I change "<Location>" in Clinic Notes
@@ -326,6 +339,7 @@ Feature: My Health Records Demo
     And I delete Created "<Record>" in Clinic Notes
     Then I should see Patient Record is deleted
     And I navigate to the Homepage
+
     Examples:
       | Tab             | Record                | Location        |
       | Clinician Notes | &VISITED_NAME_RANDOM& | &EDIT_LOCATION& |

@@ -1989,6 +1989,7 @@ public class WebSteps {
     public void asAUserLaunchTheAndLoginWith(String strURL) {
         Assert.assertTrue(demoPageContainer.messagesPage.launchInNewTab(TestDataUtil.getValue(strURL)));
 
+
     }
 
     @Then("I Should see the Automatic Replies {string}")

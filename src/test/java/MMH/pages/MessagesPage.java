@@ -1168,11 +1168,11 @@ public class MessagesPage extends BasePage {
     public boolean launchInNewTab(String URL) {
         boolean blResult = false;
         try {
-            ((JavascriptExecutor) driver).executeScript("window.open()");
-            waitForWindow(2);
-            System.out.println("Before focussed another window");
-            ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-            driver.switchTo().window(tabs.get(1));
+//            ((JavascriptExecutor) driver).executeScript("window.open()");
+//            waitForWindow(2);
+//            System.out.println("Before focussed another window");
+//            ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+//            driver.switchTo().window(tabs.get(1));
             visit(URL);
             waitForSeconds(3);
             System.out.println("focussed another window");

@@ -54,7 +54,9 @@ public class AppointmentsPage extends BasePage {
     protected WebElement elmntWarningPopup;
 
     @FindBy(how = How.XPATH, using = "//mat-progress-spinner[@role='progressbar']")
-    protected WebElement elmntSpinner;
+    protected WebElement elmntSpinnerr;
+
+    protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
     protected String elmntHealthCenter = new StringBuilder().append("//h6[text()='")
             .append("<<REPLACEMENT>>").append("']").toString();
@@ -381,6 +383,7 @@ public class AppointmentsPage extends BasePage {
             waitAndClick(elmntLocationCenter);
             WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>", strLocation)));
             waitAndClick(elmntSelectLocation);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(elmntCovidPreScreeningPopup);
         } catch (Exception e) {
             e.printStackTrace();
@@ -391,18 +394,19 @@ public class AppointmentsPage extends BasePage {
     public boolean declineCovidPreScreeningPopup() {
         boolean blResult = false;
         try {
-            waitForSeconds(4);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntCovidPreScreeningPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitAndClick(elmntDeclineCovidPreScreening);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
-//            waitForElement(elmntAppointmentPreScreening);
-//            waitAndClick(elmntCloseAppointmentPreScreening);
             blResult = verifyElement(elmntAppointmentPanel);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return blResult;
     }
+
 
     public boolean selectAppointmentIsFor(String strFamilyMember) {
         boolean blResult = false;
@@ -459,7 +463,7 @@ public class AppointmentsPage extends BasePage {
             waitForElement(elmntBookingTypeContainer);
             WebElement elmntTypeOfAppointment = waitForElement(By.xpath(elmntBookingType.replace("<<REPLACEMENT>>", strBookingType)));
             click(elmntTypeOfAppointment);
-            waitForElement(elmntSpinner);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -772,6 +776,7 @@ public class AppointmentsPage extends BasePage {
             WebElement elmntProvider = waitForElement(By.xpath(elmntSelectProvider.replace("<<REPLACEMENT>>", strProvider)));
             waitForSeconds(2);
             jsClick(elmntProvider);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             takeScreenshot(driver);
             blResult = true;
         } catch (Exception e) {
@@ -1556,6 +1561,7 @@ public class AppointmentsPage extends BasePage {
         }
         return blResult;
     }
+
     public void getAllAppointmentDatesInGridForMobileView() {
         listAllAppoinmentDatesInCard = new LinkedList();
         for (WebElement elmntCurrentAppoinmentDate : elmntsAppointmentDatesInGridForMobileView) {
@@ -1636,7 +1642,7 @@ public class AppointmentsPage extends BasePage {
         boolean isVerified = false;
         try {
             waitForSeconds(3);    //wait until 'loader'  loading
-            if (verifyElement(elmntCancelAppointments)){
+            if (verifyElement(elmntCancelAppointments)) {
                 List<WebElement> btnCancel = driver.findElements(By.xpath("//button[@class='mat-focus-indicator btn mat-button mat-button-base']/span[text()='cancel']"));
                 if (btnCancel.size() > 0) {
                     System.out.println("btnCancel exists and size=>" + btnCancel.size());
@@ -1657,7 +1663,7 @@ public class AppointmentsPage extends BasePage {
                         isVerified = true;
                     }
                 }
-            }else {
+            } else {
                 System.out.println("Into Else");
                 waitForSeconds(3);
                 isVerified = true;

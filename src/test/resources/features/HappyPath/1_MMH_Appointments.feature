@@ -167,6 +167,7 @@ Feature: Appointments
     And I navigate to the "<Appointments>" page
     When I switch to card view in future appointments page
     Then I should see all the future date appointments in card view
+
     Examples:
       | Appointments        |
       | Future Appointments |
@@ -188,6 +189,7 @@ Feature: Appointments
     And I navigate to the "<Appointments>" page
     When I switch to card view in past appointments page
     Then I should see all the past date appointments in card view
+
     Examples:
       | Appointments      |
       | Past Appointments |
@@ -198,6 +200,7 @@ Feature: Appointments
     Given I am on "<Tab>" page
     When I switch to grid view in past appointments page
     Then I should see all the past date appointments in grid view
+
     Examples:
       | Tab               |
       | Past Appointments |
