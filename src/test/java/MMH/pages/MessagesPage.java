@@ -1077,6 +1077,7 @@ public class MessagesPage extends BasePage {
             waitForElement(btnAttachFile);
             driver.switchTo().frame(frameCompose);
             WebElement txtSignature = waitForElement(By.xpath(messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
+            jsScrollIntoView(txtSignature);
             waitForElement(txtSignature);
             verifyElement(txtSignature);
             String signature = txtSignature.getText();
@@ -1103,6 +1104,7 @@ public class MessagesPage extends BasePage {
             driver.switchTo().frame(frameOutOfOffice);
             System.out.println("Xpath for Text Out Of Office >>>> :: " + messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
             WebElement txtOutOfMessage = waitForElement(By.xpath(messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
+            jsScrollIntoView(txtOutOfMessage);
             waitForElement(txtOutOfMessage);
             verifyElement(txtOutOfMessage);
             String outOfMessageText = txtOutOfMessage.getText();
@@ -1129,6 +1131,7 @@ public class MessagesPage extends BasePage {
             driver.switchTo().frame(frameAutomaticReplies);
             System.out.println("Xpath for Text Out Of Office >>>> :: " + messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
             WebElement txtAutomaticRepliesMessage = waitForElement(By.xpath(messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
+            jsScrollIntoView(txtAutomaticRepliesMessage);
             waitForElement(txtAutomaticRepliesMessage);
             verifyElement(txtAutomaticRepliesMessage);
             String automaticRepliesMessageText = txtAutomaticRepliesMessage.getText();
