@@ -3,12 +3,10 @@ package MMH.stepDefinitions;
 import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.poi.ss.formula.functions.T;
 import org.testng.Assert;
 import MMH.DemoPageContainer;
 
@@ -29,8 +27,7 @@ public class WebSteps {
     @Given("As a user I am on MMH login Page")
     public void asAUserIAmOnMMHLoginPage() {
         demoPageContainer.homePage.visit();
-//        Assert.assertTrue(demoPageContainer.homePage.waitForMMHLoginPage());
-
+        Assert.assertTrue(demoPageContainer.homePage.clickBetaLoginButton());
     }
 
     @When("I enter {string} and {string}")
@@ -315,11 +312,11 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.appointmentsPage.clickPaymentCheckOut());
     }
 
-    @Then("I should see payment has been processed successfully with appointment details {string}")
-    public void iShouldSeePaymentHasBeenProcessedSuccessfullyWithAppointmentDetails(String strPaymentMessage) {
-        List<String> lstDetails = TestDataUtil.getListOfValue(strPaymentMessage);
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyPaymentSucessfullMessage(lstDetails));
-    }
+//    @Then("I should see payment has been processed successfully with appointment details {string}")
+//    public void iShouldSeePaymentHasBeenProcessedSuccessfullyWithAppointmentDetails(String strPaymentMessage) {
+//        List<String> lstDetails = TestDataUtil.getListOfValue(strPaymentMessage);
+//        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyPaymentSucessfullMessage(lstDetails));
+//    }
 
     @And("I click cancel button for the created appointment {string}")
     public void iClickCancelButtonForTheCreatedAppointment(String strAppointmentCancel) {
@@ -1929,10 +1926,9 @@ public class WebSteps {
 
     }
 
-    @And("As I am on MMH login Page")
-    public void asIAmOnMMHLoginPage() {
+    @And("I logout from the MMH site")
+    public void ILogoutFromTheMMHSite() {
         demoPageContainer.myHealthRecordsPage.clickSignoutButton();
-
     }
 
     @Then("I should see Patient Record is deleted")
@@ -2098,6 +2094,42 @@ public class WebSteps {
 
     }
 
+    @Given("As a Existing user I am on HomePage and navigate to Compose Message")
+    public void asAExistingUserIAmOnHomePageAndNavigateToComposeMessage() {
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+        }
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessage());
+    }
+    @And("I navigate to Patient Draft items and verify the Draft {string}")
+    public void iNavigateToPatientDraftItemsAndVerifyTheDraft(String strMessageDetails) {
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
+
+
+            System.out.println("List Message Details >>> :: " + lstMessageDetails);
+
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+            Assert.assertTrue(demoPageContainer.messagesPage.navigateToDraftMessage());
+            Assert.assertTrue(demoPageContainer.messagesPage.VerifyDraftMessage(TestDataUtil.getListOfValue(strMessageDetails)));
+            Assert.assertTrue(demoPageContainer.messagesPage.VerifyBodyMessage(lstMessageDetails.get(6)));
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
+            System.out.println("List Message Details >>> :: " + lstMessageDetails);
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+            Assert.assertTrue(demoPageContainer.messagesPage.navigateToDraftMessage());
+            Assert.assertTrue(demoPageContainer.messagesPage.VerifyMobileDraftMessage(TestDataUtil.getListOfValue(strMessageDetails)));
+//            Assert.assertTrue(demoPageContainer.messagesPage.VerifyBodyMessageForMobile(lstMessageDetails.get(6)));
+            Assert.assertTrue(demoPageContainer.messagesPage.clickBackButton());
+        }
+    }
+
+
     @When("I enter the {string} to compose an email")
     public void iEnterTheToComposeAnEmail(String listCreateData) {
         List<String> list = TestDataUtil.getListOfValue(listCreateData);
@@ -2107,11 +2139,34 @@ public class WebSteps {
         demoPageContainer.messagesPage.selectServiceNamePatient(list.get(2));
         demoPageContainer.messagesPage.selectRolePatient(list.get(3));
         demoPageContainer.messagesPage.selectToPatient(list.get(4));
-//       demoPageContainer.messagespage.enterSubject(list.get(5));
+       demoPageContainer.messagesPage.enterSubject(list.get(5));
         demoPageContainer.messagesPage.clickCheckBox();
         demoPageContainer.messagesPage.enterWriteMessage(list.get(6));
         demoPageContainer.messagesPage.clickAddFile(list.get(7));
 
+
+    }
+
+    @And("I navigate to Patient Sent items and verify the Sent {string}")
+    public void iNavigateToPatientSentItemsAndVerifyTheSent(String strMessageDetails) {
+
+        List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
+        System.out.println("List Message Details >>> :: " + lstMessageDetails);
+
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+            Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientSentMessage());
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientSentMessageForMobile(TestDataUtil.getValue(lstMessageDetails.get(5))));
+            Assert.assertTrue(demoPageContainer.messagesPage.VerifyBodyMessageForMobile(lstMessageDetails.get(6)));
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientSentMessage());
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientSentMessage(TestDataUtil.getValue(lstMessageDetails.get(5))));
+            Assert.assertTrue(demoPageContainer.messagesPage.VerifyBodyMessage(lstMessageDetails.get(6)));
+
+        }
 
     }
 
@@ -2159,13 +2214,13 @@ public class WebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             for (String String : locDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                Assert.assertTrue(demoPageContainer.messagesPage.VerifyDraftData(TestDataUtil.getListOfValue(String)));
+                Assert.assertTrue(demoPageContainer.messagesPage.VerifyDraftMessage(TestDataUtil.getListOfValue(String)));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             for (String String : locDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                Assert.assertTrue(demoPageContainer.messagesPage.VerifyMobileDraftData(TestDataUtil.getListOfValue(String)));
+                Assert.assertTrue(demoPageContainer.messagesPage.VerifyMobileDraftMessage(TestDataUtil.getListOfValue(String)));
             }
 
         }
@@ -2339,9 +2394,11 @@ public class WebSteps {
         demoPageContainer.messagesPage.DeleteFile();
     }
 
-    @Then("I should see payment has been processed successfully with appointment details")
-    public void iShouldSeePaymentHasBeenProcessedSuccessfullyWithAppointmentDetails() {
+    @Then("I should see payment has been processed successfully with appointment details {string} {string}")
+    public void iShouldSeePaymentHasBeenProcessedSuccessfullyWithAppointmentDetails(String strAppointment, String strFutureDate) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strAppointment);
         Assert.assertTrue(demoPageContainer.appointmentsPage.verifySucessMessage());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyCardPayAppointmentDetails(lstDetails,TestDataUtil.getValue(strFutureDate)));
     }
 
     @And("I should see Appointment is not for today popup")

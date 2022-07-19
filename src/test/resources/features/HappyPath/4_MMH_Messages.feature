@@ -1,60 +1,42 @@
 Feature: Messages
 
   @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
-  Scenario Template: S1- User Successfully logs in to the MMH v2 Portal.
+  Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
-    And I enter "<Email Address>" and "<Password>"
-    When I click login button
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
+
     Examples:
       | Email Address       | Password               |
       | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
 
-#  @WEB @S1 @Mobile @BETA
-#  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
-#
-#    Given As a user I am on beta MMH login Page
-#    And I enter "<Email Address>" and "<Password>" For Beta
-#    When I click SignIn button
-#    Then I should see user successfully logs in to the MMH portal
-#    Examples:
-#      | Email Address       | Password               |
-#      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
-
   @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S1- Patient Sending Message
 
-    Given As a user I am on HomePage
-    And I navigate to the "<Sub_tab>" in Messages page
-    And I enter the "<Details>" to compose an email
+    Given As a Existing user I am on HomePage and navigate to Compose Message
+    And I enter the "<Compose Details>" to compose an email
     When I Click Send Message Button
     Then I should see message sent Successfully popup
-    And  I am on "<Tab>" Inbox page
-    And I should see all the Messages future Grid View in Send page
-      | &SEND_DATA& |
-    And I Navigate to Home Page
+    And I navigate to Patient Sent items and verify the Sent "<Compose Details>"
 
     Examples:
-      | Sub_tab | Details   | Tab    |
-      | Compose | &MESSAGE& | Dr Tim |
+      | Compose Details   |
+      | &COMPOSE_MESSAGE& |
 
   @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S2- Patient Save Message as Draft
 
-    Given As a user I am on HomePage
-    And I navigate to the "<Sub_tab>" in Messages page
-    When I enter the "<Details>" to compose an email
-    And I Click Draft Message Button
+    Given As a Existing user I am on HomePage and navigate to Compose Message
+    And I enter the "<Details>" to compose an email
+    When I Click Draft Message Button
     Then I should see message Drop Successfully popup
-    And  I am on "<Tab>" Draft page
-    And I should see all the Messages future Grid View in Draft page
-      | &DRAFT_DATA& |
-    And I Navigate to Home Page
+    And I navigate to Patient Draft items and verify the Draft "<Details>"
 
     Examples:
-      | Sub_tab | Details   | Tab    |
-      | Compose | &MESSAGE& | Dr Tim |
+      | Details         |
+      | &DRAFT_MESSAGE& |
 
   @WEB @MESSAGES @HAPPY_PATH
   Scenario Template: S3- Preparation for Received Message, Login as a Provider user
@@ -85,14 +67,13 @@ Feature: Messages
   Scenario Template: User Successfully logs in to the MMH v2 Portal as patient user.
 
     Given As a user I am on MMH login Page
-    And I enter "<Email Address>" and "<Password>"
-    When I click login button
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
       | Email Address       | Password               |
       | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
-
 
   @WEB @MESSAGES @HAPPY_PATH
   Scenario: S3- User verifies the Received Email from the provider
@@ -125,7 +106,6 @@ Feature: Messages
       | V1 Portal | Email Address      | Password              |
       | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
-
   @WEB @MESSAGES @HAPPY_PATH
   Scenario Template: S5- Preparation for Group Message, Sending a Group of E-Mail's to the Patient from provider login
 
@@ -142,8 +122,8 @@ Feature: Messages
   Scenario Template: User Successfully logs in to the MMH v2 Portal as Patient.
 
     Given As a user I am on MMH login Page
-    And I enter "<Email Address>" and "<Password>"
-    When I click login button
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
@@ -234,8 +214,8 @@ Feature: Messages
   Scenario Template: User Successfully logs in to the MMH v2 Portal as Patient.
 
     Given As a user I am on MMH login Page
-    And I enter "<Email Address>" and "<Password>"
-    When I click login button
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
 
     Examples:

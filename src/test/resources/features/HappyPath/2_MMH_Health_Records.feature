@@ -1,11 +1,11 @@
 Feature: My Health Records Demo
 
   @WEB @S1 @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
-  Scenario Template: Prep - User Successfully logs in to the MMH v2 Portal.
+  Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
-    And I enter "<Email Address>" and "<Password>"
-    When I click login button
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
@@ -356,9 +356,10 @@ Feature: My Health Records Demo
   Scenario Outline: S12- Verify My Health Records can view all the My Entries Future in Recalls.
 
     Given As a user I am on HomePage
-    And As I am on MMH login Page
-    And I enter "<Email Address>" and "<Password>"
-    And I click login button
+    And I logout from the MMH site
+    And As a user I am on MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
     When I navigate to the Recalls page
     And I should see all the Entries From Health Centre future Grid View in Recalls page
       | &RECALLS_TABLE_DATA_1& |
@@ -369,6 +370,7 @@ Feature: My Health Records Demo
     And  I Click Info Icon to see Recall Remainder Details in Recalls page
       | &RECALLS_REMAINDER_TABLE_DATA& | &RECALLS_REMAINDER_ICON_DATA& | &MOBILE_RECALLS_REMAINDER_ICON_DATA& |
     And I navigate to the Homepage
+    And I logout from the MMH site
 
     Examples:
       | Email Address | Password              |

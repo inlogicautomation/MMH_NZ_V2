@@ -221,6 +221,10 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div/p[contains(text(),'Thank you. Your payment has been processed successfully.')]")
     protected WebElement elmntPaymentSuccess;
 
+    protected String eleAppointmentSummaryDetails = new StringBuilder().append("//div/p[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
     @FindBy(how = How.XPATH, using = "//mat-dialog-container//div/div[contains(text(),'our appointment is not for today')]")
     protected WebElement elmntAppointmentsisNotForTodayPopup;
 
@@ -232,6 +236,9 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//i[@class='icon-grid-view']")
     protected WebElement elmntCard;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Drag a column header and drop it here to group by that column')]")
+    protected WebElement elmntTableNote;
 
     @FindBy(how = How.XPATH, using = "//td[@aria-colindex='1']")
     protected List<WebElement> elmntsAppointmentDatesInGrid;
@@ -384,6 +391,7 @@ public class AppointmentsPage extends BasePage {
             WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>", strLocation)));
             waitAndClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntCovidPreScreeningPopup);
             blResult = verifyElement(elmntCovidPreScreeningPopup);
         } catch (Exception e) {
             e.printStackTrace();
@@ -394,12 +402,13 @@ public class AppointmentsPage extends BasePage {
     public boolean declineCovidPreScreeningPopup() {
         boolean blResult = false;
         try {
+            waitForSeconds(3);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntCovidPreScreeningPopup);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitAndClick(elmntDeclineCovidPreScreening);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(2);
+            waitForSeconds(4);
             blResult = verifyElement(elmntAppointmentPanel);
         } catch (Exception e) {
             e.printStackTrace();
@@ -411,7 +420,8 @@ public class AppointmentsPage extends BasePage {
     public boolean selectAppointmentIsFor(String strFamilyMember) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            waitForSeconds(4);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntFamilyMemberCenter);
             waitForSeconds(2);
             waitAndClick(elmntFamilyMemberCenter);
@@ -858,7 +868,7 @@ public class AppointmentsPage extends BasePage {
             int page_no = pagination.size();
             for (int i = 1; i <= pagination.size(); i++) {
                 System.out.println("TEST");
-                waitForSeconds(2);
+                waitForSeconds(4);
                 driver.findElement(By.xpath("//kendo-pager-numeric-buttons/ul/li[" + i + "]")).click();
                 System.out.println("PAGE NUMBER" + i);
                 getAllAppointmentDatesInGrid();
@@ -930,6 +940,7 @@ public class AppointmentsPage extends BasePage {
 
     public boolean verifyCardView() {
         boolean isVerifed = false;
+        waitForSeconds(5);
         if (elmntsAppointmentDatesInCard.size() != 0) {
             isVerifed = true;
         }
@@ -938,6 +949,8 @@ public class AppointmentsPage extends BasePage {
 
     public boolean verifyGridView() {
         boolean isVerifed = false;
+        waitForSeconds(5);
+        waitForElement(elmntTableNote);
         if (elmntsAppointmentDatesInGrid.size() != 0) {
             isVerifed = true;
         }
@@ -998,7 +1011,7 @@ public class AppointmentsPage extends BasePage {
             int page_no = pagination.size();
             for (int i = 1; i <= pagination.size(); i++) {
                 System.out.println("TEST");
-                waitForSeconds(2);
+                waitForSeconds(4);
                 driver.findElement(By.xpath("//kendo-pager-numeric-buttons/ul/li[" + i + "]")).click();
                 System.out.println("PAGE NUMBER" + i);
                 getAllAppointmentDatesInGrid();
@@ -1672,5 +1685,23 @@ public class AppointmentsPage extends BasePage {
             e.printStackTrace();
         }
         return isVerified;
+    }
+
+    public boolean verifyCardPayAppointmentDetails(List<String> lstDetails, String strFutureDate) {
+        boolean blResult = false;
+        waitForSeconds(2);
+        waitForElement(elmntPaymentSuccess);
+        String strDatePattern1 = "EEEE, MMMM dd, yyyy";
+        String strDate = TestDataUtil.getValue(strFutureDate);
+        String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+        System.out.println("DATE" + strDateValue);
+        String strDateMonth = strDateValue;
+        for (String strDetails : lstDetails) {
+            WebElement elmntReservationDetails = waitForElement(By.xpath(eleAppointmentSummaryDetails.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetails))));
+            blResult = verifyElement(elmntReservationDetails);
+        }
+        WebElement elmntReservationDetails = waitForElement(By.xpath(eleAppointmentSummaryDetails.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDateMonth))));
+        verifyElement(elmntReservationDetails);
+        return blResult;
     }
 }
