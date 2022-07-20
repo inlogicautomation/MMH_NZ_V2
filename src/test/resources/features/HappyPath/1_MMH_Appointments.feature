@@ -178,6 +178,7 @@ Feature: Appointments
     Given I am on "<Tab>" page
     When I switch to grid view in future appointments page
     Then I should see all the future date appointments in grid view
+
     Examples:
       | Tab                 |
       | Future Appointments |
@@ -213,7 +214,6 @@ Feature: Appointments
     Then I should see all the all the video appointments invites sent from PMS Provider in grid view
 #   And I join Video Consultation by clicking Join now Icon in Video invitations Gid "<All_Icons>"
     And I should see Appointment is not for today popup
-    And I logout from the MMH site
 
     Examples:
       | Appointments      | All_Icons     |

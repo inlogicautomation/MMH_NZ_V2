@@ -103,7 +103,6 @@ Feature: Repeat Request Prescription
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
     When I select the "<Medication Details>"
     Then I should verify the Script "<Urgency Details>"
-    And I logout from the MMH site
 
     Examples:
       | Medication Details               | Urgency Details |

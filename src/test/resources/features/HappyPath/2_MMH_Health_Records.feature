@@ -370,7 +370,6 @@ Feature: My Health Records Demo
     And  I Click Info Icon to see Recall Remainder Details in Recalls page
       | &RECALLS_REMAINDER_TABLE_DATA& | &RECALLS_REMAINDER_ICON_DATA& | &MOBILE_RECALLS_REMAINDER_ICON_DATA& |
     And I navigate to the Homepage
-    And I logout from the MMH site
 
     Examples:
       | Email Address | Password              |
