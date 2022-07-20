@@ -4,6 +4,7 @@ import cap.common.BasePage;
 import cap.helpers.Constants;
 import cap.utilities.DateUtil;
 import cap.utilities.TestDataUtil;
+import io.cucumber.java.an.E;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -34,6 +35,12 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]")
     protected WebElement elmntWelcomeMessage;
+
+    @FindBy(how = How.XPATH, using = "//span[@title='Go to the next page' and contains(@class,'k-pager')]")
+    protected WebElement elmntNextPage;
+
+    @FindBy(how = How.XPATH, using = "//span[@title='Go to the next page' and contains(@class,'disabled')]")
+    protected WebElement elmntNextPageDisabled;
 
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'page-content')]")
     protected WebElement elmntAppointmentPanel;
@@ -221,6 +228,10 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div/p[contains(text(),'Thank you. Your payment has been processed successfully.')]")
     protected WebElement elmntPaymentSuccess;
 
+    protected String eleAppointmentSummaryDetails = new StringBuilder().append("//div/p[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
     @FindBy(how = How.XPATH, using = "//mat-dialog-container//div/div[contains(text(),'our appointment is not for today')]")
     protected WebElement elmntAppointmentsisNotForTodayPopup;
 
@@ -232,6 +243,9 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//i[@class='icon-grid-view']")
     protected WebElement elmntCard;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Drag a column header and drop it here to group by that column')]")
+    protected WebElement elmntTableNote;
 
     @FindBy(how = How.XPATH, using = "//td[@aria-colindex='1']")
     protected List<WebElement> elmntsAppointmentDatesInGrid;
@@ -384,6 +398,7 @@ public class AppointmentsPage extends BasePage {
             WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>", strLocation)));
             waitAndClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntCovidPreScreeningPopup);
             blResult = verifyElement(elmntCovidPreScreeningPopup);
         } catch (Exception e) {
             e.printStackTrace();
@@ -394,12 +409,13 @@ public class AppointmentsPage extends BasePage {
     public boolean declineCovidPreScreeningPopup() {
         boolean blResult = false;
         try {
+            waitForSeconds(3);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntCovidPreScreeningPopup);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitAndClick(elmntDeclineCovidPreScreening);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(2);
+            waitForSeconds(4);
             blResult = verifyElement(elmntAppointmentPanel);
         } catch (Exception e) {
             e.printStackTrace();
@@ -411,7 +427,8 @@ public class AppointmentsPage extends BasePage {
     public boolean selectAppointmentIsFor(String strFamilyMember) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            waitForSeconds(4);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntFamilyMemberCenter);
             waitForSeconds(2);
             waitAndClick(elmntFamilyMemberCenter);
@@ -849,6 +866,51 @@ public class AppointmentsPage extends BasePage {
         return isVerifed;
     }
 
+    public boolean verifyFutureAppointmentDatesInGridNewMethod() {
+        boolean isVerified = false;
+        do {
+            waitForSeconds(1);
+            getAllAppointmentDatesInGrid();
+            for (String strDate : listAllAppoinmentDatesInGrid) {
+                LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+                DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+                LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+                boolean isDateCorrect = inputDate1.isAfter(localDate1);
+                System.out.println("GRID Date is Before Equal::" + isDateCorrect);
+                isVerified = isDateCorrect;
+                if (!isDateCorrect) {
+                    isVerified = false;
+                }
+                if (!isVerified) {
+                    break;
+                }
+            }
+            if (!isVerified) {
+                break;
+            }
+            waitForSeconds(3);
+            waitForElement(elmntNextPage);
+            click(elmntNextPage);
+        } while (!verifyElement(elmntNextPageDisabled));
+        waitForSeconds(3);
+        getAllAppointmentDatesInGrid();
+        for (String strDate : listAllAppoinmentDatesInGrid) {
+            LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+            DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+            LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+            boolean isDateCorrect = inputDate1.isAfter(localDate1);
+            System.out.println("GRID Date is Before Equal::" + isDateCorrect);
+            isVerified = isDateCorrect;
+            if (!isDateCorrect) {
+                isVerified = false;
+            }
+            if (!isVerified) {
+                break;
+            }
+        }
+        return isVerified;
+    }
+
     public boolean verifyFutureAppointmentDatesInGrid() {
         boolean isVerified = false;
         waitForSeconds(3);    //wait until 'loader'  loading
@@ -858,7 +920,7 @@ public class AppointmentsPage extends BasePage {
             int page_no = pagination.size();
             for (int i = 1; i <= pagination.size(); i++) {
                 System.out.println("TEST");
-                waitForSeconds(2);
+                waitForSeconds(4);
                 driver.findElement(By.xpath("//kendo-pager-numeric-buttons/ul/li[" + i + "]")).click();
                 System.out.println("PAGE NUMBER" + i);
                 getAllAppointmentDatesInGrid();
@@ -880,6 +942,59 @@ public class AppointmentsPage extends BasePage {
                     break;
                 }
             }
+        }
+        return isVerified;
+    }
+
+    public boolean verifyFutureAppointmentDatesInGridNewMethodd() {
+        boolean isVerified = false;
+        try {
+            waitForSeconds(1);
+            while (!verifyElement(elmntNextPageDisabled)) {
+                getAllAppointmentDatesInGrid();
+                int i = 1;
+                for (String strDate : listAllAppoinmentDatesInGrid) {
+                    LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+                    DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+                    LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+                    boolean isDateCorrect = inputDate1.isAfter(localDate1);
+                    System.out.println("GRID Date is Before Equal::" + isDateCorrect);
+                    isVerified = isDateCorrect;
+                    if (!isDateCorrect) {
+                        isVerified = false;
+                    }
+                    if (!isVerified) {
+                        break;
+                    }
+                }
+                System.out.println("PAGE NUMBER" + i);
+                if (!isVerified) {
+                    break;
+                }
+                waitForSeconds(3);
+                waitForElement(elmntNextPage);
+                click(elmntNextPage);
+            }
+            getAllAppointmentDatesInGrid();
+            int i = 1;
+            for (String strDate : listAllAppoinmentDatesInGrid) {
+                LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+                DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+                LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+                boolean isDateCorrect = inputDate1.isAfter(localDate1);
+                System.out.println("GRID Date is Before Equal::" + isDateCorrect);
+                isVerified = isDateCorrect;
+                if (!isDateCorrect) {
+                    isVerified = false;
+                }
+                if (!isVerified) {
+                    break;
+                }
+            }
+            System.out.println("PAGE NUMBER" + i);
+
+        } catch (Exception e) {
+            System.out.println("Verifying Future Appointments in Grid View is Failure");
         }
         return isVerified;
     }
@@ -930,6 +1045,7 @@ public class AppointmentsPage extends BasePage {
 
     public boolean verifyCardView() {
         boolean isVerifed = false;
+        waitForSeconds(5);
         if (elmntsAppointmentDatesInCard.size() != 0) {
             isVerifed = true;
         }
@@ -938,6 +1054,8 @@ public class AppointmentsPage extends BasePage {
 
     public boolean verifyGridView() {
         boolean isVerifed = false;
+        waitForSeconds(5);
+        waitForElement(elmntTableNote);
         if (elmntsAppointmentDatesInGrid.size() != 0) {
             isVerifed = true;
         }
@@ -989,6 +1107,57 @@ public class AppointmentsPage extends BasePage {
 //        return isVerifed;
 //    }
 
+    public boolean verifyPastAppointmentDatesInGridNewMethod() {
+        boolean isVerified = false;
+        do {
+            waitForSeconds(1);
+            getAllAppointmentDatesInGrid();
+            for (String strDate : listAllAppoinmentDatesInGrid) {
+                LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+                DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+                LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+                boolean isDateCorrect = inputDate1.isBefore(localDate1);
+                if (!isDateCorrect) {
+                    isDateCorrect = inputDate1.isEqual(localDate1);
+                }
+                System.out.println("Card Date is Before Equal::" + isDateCorrect);
+                isVerified = isDateCorrect;
+                if (!isDateCorrect) {
+                    isVerified = false;
+                }
+                if (!isVerified) {
+                    break;
+                }
+            }
+            if (!isVerified) {
+                break;
+            }
+            waitForSeconds(3);
+            waitForElement(elmntNextPage);
+            click(elmntNextPage);
+        } while (!verifyElement(elmntNextPageDisabled));
+        waitForSeconds(3);
+        getAllAppointmentDatesInGrid();
+        for (String strDate : listAllAppoinmentDatesInGrid) {
+            LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+            DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+            LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+            boolean isDateCorrect = inputDate1.isBefore(localDate1);
+            if (!isDateCorrect) {
+                isDateCorrect = inputDate1.isEqual(localDate1);
+            }
+            System.out.println("Card Date is Before Equal::" + isDateCorrect);
+            isVerified = isDateCorrect;
+            if (!isDateCorrect) {
+                isVerified = false;
+            }
+            if (!isVerified) {
+                break;
+            }
+        }
+        return isVerified;
+    }
+
     public boolean verifyAllAppointmentDatesInGridForPast() {
         boolean isVerified = false;
         waitForSeconds(5);    //wait until 'loader'  loading
@@ -998,7 +1167,7 @@ public class AppointmentsPage extends BasePage {
             int page_no = pagination.size();
             for (int i = 1; i <= pagination.size(); i++) {
                 System.out.println("TEST");
-                waitForSeconds(2);
+                waitForSeconds(4);
                 driver.findElement(By.xpath("//kendo-pager-numeric-buttons/ul/li[" + i + "]")).click();
                 System.out.println("PAGE NUMBER" + i);
                 getAllAppointmentDatesInGrid();
@@ -1027,6 +1196,8 @@ public class AppointmentsPage extends BasePage {
         }
         return isVerified;
     }
+
+
 
     public void clickMaxvalue() {
         waitForSeconds(3);
@@ -1673,4 +1844,23 @@ public class AppointmentsPage extends BasePage {
         }
         return isVerified;
     }
+
+    public boolean verifyCardPayAppointmentDetails(List<String> lstDetails, String strFutureDate) {
+        boolean blResult = false;
+        waitForSeconds(2);
+        waitForElement(elmntPaymentSuccess);
+        String strDatePattern1 = "EEEE, MMMM dd, yyyy";
+        String strDate = TestDataUtil.getValue(strFutureDate);
+        String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+        System.out.println("DATE" + strDateValue);
+        String strDateMonth = strDateValue;
+        for (String strDetails : lstDetails) {
+            WebElement elmntReservationDetails = waitForElement(By.xpath(eleAppointmentSummaryDetails.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetails))));
+            blResult = verifyElement(elmntReservationDetails);
+        }
+        WebElement elmntReservationDetails = waitForElement(By.xpath(eleAppointmentSummaryDetails.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDateMonth))));
+        verifyElement(elmntReservationDetails);
+        return blResult;
+    }
+
 }

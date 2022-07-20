@@ -1,11 +1,11 @@
 Feature: Appointments
 
   @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
-  Scenario Template: Prep- User Successfully logs in to the MMH v2 Portal.
+  Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
-    And I enter "<Email Address>" and "<Password>"
-    When I click login button
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
@@ -40,11 +40,11 @@ Feature: Appointments
       | Book Appointment | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &VISIT_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
   @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
-  Scenario Template: Prep- User Successfully logs in to the MMH v2 Portal.
+  Scenario Template: S1- User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
-    And I enter "<Email Address>" and "<Password>"
-    When I click login button
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
@@ -81,11 +81,11 @@ Feature: Appointments
       | Book Appointment | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
   @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
-  Scenario Template: Prep- User Successfully logs in to the MMH v2 Portal.
+  Scenario Template: S2- User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
-    And I enter "<Email Address>" and "<Password>"
-    When I click login button
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
@@ -98,7 +98,7 @@ Feature: Appointments
     And I navigate to the "<Appointment>" page
     And I join now button for video consultation "<Join_Consultation>"
     Then I should see Appointment is not for today popup in future appointments page
-#    Then I should see video consultation window with icons "<All_Icons>"
+#   Then I should see video consultation window with icons "<All_Icons>"
 
     Examples:
       | Appointment         | Join_Consultation                                 | All_Icons     |
@@ -154,11 +154,11 @@ Feature: Appointments
     And I accept the terms & conditions and confirm my booking
     And I see page navigated to the payment option
     When I enter the card details and confirm payment "<Payment_Details>"
-    Then I should see payment has been processed successfully with appointment details
+    Then I should see payment has been processed successfully with appointment details "<Appointment_Details>" "<Future_Date>"
 
     Examples:
-      | Payment_Option   | Payment_Details |
-      | &PAYMENT_OPTION& | &CARD_DETAILS&  |
+      | Payment_Option   | Payment_Details | Appointment_Details        | Future_Date   |
+      | &PAYMENT_OPTION& | &CARD_DETAILS&  | &CARD_APPOINTMENT_DETAILS& | &FUTURE_DATE& |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S7 - Patient can view all the future date booked appointments in card view
@@ -178,6 +178,7 @@ Feature: Appointments
     Given I am on "<Tab>" page
     When I switch to grid view in future appointments page
     Then I should see all the future date appointments in grid view
+
     Examples:
       | Tab                 |
       | Future Appointments |
@@ -211,7 +212,7 @@ Feature: Appointments
     Given As a user I am on HomePage
     When I navigate to the "<Appointments>" page
     Then I should see all the all the video appointments invites sent from PMS Provider in grid view
-#    And I join Video Consultation by clicking Join now Icon in Video invitations Gid "<All_Icons>"
+#   And I join Video Consultation by clicking Join now Icon in Video invitations Gid "<All_Icons>"
     And I should see Appointment is not for today popup
 
     Examples:

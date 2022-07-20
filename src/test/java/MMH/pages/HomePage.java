@@ -23,8 +23,15 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@id='Login']")
     protected WebElement btnLogin;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='LOGIN']")
+    @FindBy(how = How.XPATH, using = "//span[text()='Login']")
     protected WebElement betaLoginBtn;
+
+    @FindBy(how = How.XPATH, using = "//img[@class='profile-pic img-fluid']")
+    protected WebElement elmntProfile;
+
+    @FindBy(how = How.XPATH, using = "//button[contains(text(),' Sign Out ')]")
+    protected WebElement elmntSignout;
+
 
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health, today')]")
     protected WebElement elmntVerifyHomePage;
@@ -141,9 +148,30 @@ public class HomePage extends BasePage {
         return click(btnLogin);
     }
 
-    public void clickBetaLoginButton() {
-        waitForElement(betaLoginBtn);
-        click(betaLoginBtn);
+    public boolean clickBetaLoginButton() {
+        boolean blResult = false;
+        try {
+            waitForElement(betaLoginBtn);
+            click(betaLoginBtn);
+            blResult = true;
+            System.out.println("Try Block 1 executed");
+        } catch (Exception e) {
+            try {
+                waitForElementClickable(elmntProfile);
+                jsClick(elmntProfile);
+                waitForSeconds(2);
+                waitForElementClickable(elmntSignout);
+                jsClick(elmntSignout);
+                visit();
+                waitForElement(betaLoginBtn);
+                click(betaLoginBtn);
+                blResult = true;
+                System.out.println("Catch Block 1 executed");
+            } catch (Exception d) {
+                d.printStackTrace();
+            }
+        }
+        return blResult;
     }
 
     public boolean verifyHomePageOfMMHPortal() {

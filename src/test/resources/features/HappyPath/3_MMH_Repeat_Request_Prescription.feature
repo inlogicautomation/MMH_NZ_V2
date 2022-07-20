@@ -1,26 +1,16 @@
 Feature: Repeat Request Prescription
 
   @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
-  Scenario Template: S1- User Successfully logs in to the MMH v2 Portal.
+  Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
-    And I enter "<Email Address>" and "<Password>"
-    When I click login button
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
+
     Examples:
       | Email Address   | Password           |
       | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
-
-#  @WEB @S1 @Mobile @V2 @RRP @1 @HAPPY_PATH
-#  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
-#
-#    Given As a user I am on beta MMH login Page
-#    And I enter "<Email Address>" and "<Password>" For Beta
-#    When I click SignIn button
-#    Then I should see user successfully logs in to the MMH portal
-#    Examples:
-#      | Email Address   | Password           |
-#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
   @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S2- Patient to collect the Prescription
