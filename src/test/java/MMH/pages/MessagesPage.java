@@ -1513,6 +1513,7 @@ public class MessagesPage extends BasePage {
             waitForElement(elmntLogOut);
             waitForElementClickable(elmntLogOut);
             click(elmntLogOut);
+            waitForSeconds(3);
             waitForElement(btnLogOutOk);
             waitForElementClickable(btnLogOutOk);
             click(btnLogOutOk);
@@ -1979,6 +1980,7 @@ public class MessagesPage extends BasePage {
             jsClick(btnTo);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntTo.replace("<<REPLACEMENT>>", strFamilyMember)));
             waitForSeconds(1);
+            jsScrollIntoView(elmntEntriesFromHealthCentre);
             waitForElementClickable(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
             blResult = true;

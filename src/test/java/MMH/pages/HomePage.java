@@ -108,7 +108,7 @@ public class HomePage extends BasePage {
     public void visit() {
         visit(TestDataUtil.getValue("&URL&"));
         takeScreenshot(driver);
-
+        waitForSeconds(5);
     }
 
     public void enterPasswordForBeta(String strPassword) {
@@ -179,6 +179,7 @@ public class HomePage extends BasePage {
         takeScreenshot(driver);
         return verifyElement(elmntVerifyHomePage);
     }
+
     public boolean navigateToHomePage() {
         boolean blResult = false;
         try {

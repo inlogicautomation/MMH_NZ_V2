@@ -1,6 +1,6 @@
 Feature: Messages
 
-  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -12,7 +12,7 @@ Feature: Messages
       | Email Address       | Password               |
       | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
 
-  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: S1- Patient Sending Message
 
     Given As a Existing user I am on HomePage and navigate to Compose Message
@@ -25,7 +25,7 @@ Feature: Messages
       | Compose Details   |
       | &COMPOSE_MESSAGE& |
 
-  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: S2- Patient Save Message as Draft
 
     Given As a Existing user I am on HomePage and navigate to Compose Message
@@ -143,7 +143,7 @@ Feature: Messages
       | Group Message Details        |
       | &SENT_GROUP_MESSAGE_DETAILS& |
 
-  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Outline: S6- Patient Session Settings
 
     Given As a user I am on HomePage and navigate to Messages Setting
@@ -155,7 +155,7 @@ Feature: Messages
       | Time Out Setting   |
       | &TIME_OUT_SETTING& |
 
-  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Outline: S7- Patient Alert Settings
     Given As a user I am on HomePage and navigate to Messages Setting
     And I click the Alert Setting and select the "<Alert Type>"
@@ -165,7 +165,7 @@ Feature: Messages
       | Alert Type   |
       | &ALERT TYPE& |
 
-  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Outline: S8- Patient Signature Settings
     Given As a user I am on HomePage and navigate to Messages Setting
     And I click the Signature Setting and Enter the "<Signature Message>"
@@ -176,7 +176,7 @@ Feature: Messages
       | Signature Message   |
       | &SIGNATURE MESSAGE& |
 
-  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Outline: S10- Patient Automatic Reply Settings
 
     Given As a user I am on HomePage and navigate to Messages Setting
@@ -214,7 +214,7 @@ Feature: Messages
       | Message Details             | Automatic Reply Message   |
       | &AUTOMATIC_MESSAGE_DETAILS& | &AUTOMATIC REPLY MESSAGE& |
 
-  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: User Successfully logs in to the MMH v2 Portal as Patient.
 
     Given As a user I am on MMH login Page
@@ -226,7 +226,7 @@ Feature: Messages
       | Email Address       | Password               |
       | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
 
-  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Outline: S9- Patient Out Of Office Settings
 
     Given As a user I am on HomePage and navigate to Messages Setting

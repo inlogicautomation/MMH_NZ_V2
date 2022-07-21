@@ -4,7 +4,7 @@ package MMH.cukes;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-@CucumberOptions(features = {"src/test/resources/features/HappyPath"},
+@CucumberOptions(features = {"src/test/resources/features/HappyPath_Web_&_MobileResponse"},
         monochrome = true,
         tags = "@HAPPY_PATH",
         glue = {"MMH"},
