@@ -731,16 +731,16 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgencyPrice(lstUrgencyDetails));
     }
 
-    @Then("I should see all the Entries From Health Centre future Grid View in Prescription page")
-    public void iShouldSeeAllTheEntriesFromHealthCentreFutureGridViewInPrescriptionPage(List<String> locDetails) {
+    @Then("I should see all the Prescription Entries From Health center Medicine Details in a grid view")
+    public void iShouldSeeAllThePrescriptionEntriesFromHealthCenterMedicineDetailsInAGridView(List<String> PrescriptionDetails) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
-            for (String String : locDetails) {
+            for (String String : PrescriptionDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
                 Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyPrescriptionsTableData(TestDataUtil.getListOfValue(String)));
             }
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-                for (String String : locDetails) {
+                for (String String : PrescriptionDetails) {
                     System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
                     Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobilePrescriptionsTableData(TestDataUtil.getListOfValue(String)));
                 }
@@ -748,22 +748,21 @@ public class WebSteps {
         }
     }
 
-    @And("I Click Info Icon to see Prescription page")
-    public void iClickInfoIconToSeePrescriptionPage(DataTable dataTable) {
+    @And("I click on the more info icon on the grid & view the details of the prescription added")
+    public void iClickOnTheMoreInfoIconOnTheGridViewTheDetailsOfThePrescriptionAdded(DataTable PrescriptiondTabledata) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
-            List<List<String>> tableData = dataTable.asLists(String.class);
+            List<List<String>> tableData = PrescriptiondTabledata.asLists(String.class);
             for (int i = 0; i < tableData.size(); i++) {
                 String strKey = tableData.get(i).get(0).trim();
                 String strKey2 = tableData.get(i).get(1).trim();
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-//            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickPrescriptionsIcon(list1, list2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickPrescriptionsIcon(list1, list2));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            List<List<String>> tableData = dataTable.asLists(String.class);
+            List<List<String>> tableData = PrescriptiondTabledata.asLists(String.class);
             for (int i = 0; i < tableData.size(); i++) {
                 String strKey = tableData.get(i).get(0).trim();
                 String strKey2 = tableData.get(i).get(1).trim();
@@ -771,9 +770,7 @@ public class WebSteps {
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 List<String> list3 = TestDataUtil.getListOfValue(strKey3);
-//            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickMobilePrescriptionsIcon(list1, list3);
-
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickMobilePrescriptionsIcon(list1, list3));
             }
         }
     }
@@ -810,8 +807,8 @@ public class WebSteps {
 
     }
 
-    @Then("I should see all the Entries From Health Centre future Grid View in Classifications page")
-    public void iShouldSeeAllTheEntriesFromHealthCentreFutureGridViewInClassificationsPage(List<String> ClassificationsDetails) {
+    @Then("I should see all the Classifications Entries From Health center Medicine Details in a grid view")
+    public void iShouldSeeAllTheClassificationsEntriesFromHealthCenterMedicineDetailsInAGridView(List<String> ClassificationsDetails) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             for (String String : ClassificationsDetails) {
@@ -824,13 +821,11 @@ public class WebSteps {
                     demoPageContainer.myHealthRecordsPage.VerifyMobileClassificationTableData(TestDataUtil.getListOfValue(String));
                 }
             }
-
-
         }
     }
 
-    @And("I Click Info Icon to see Classifications page")
-    public void iClickInfoIconToSeeClassificationsPage(DataTable dataTable) {
+    @And("I click on the more info icon on the grid & view the details of the Classifications added")
+    public void iClickOnTheMoreInfoIconOnTheGridViewTheDetailsOfTheClassificationsAdded(DataTable dataTable) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             List<List<String>> tableData = dataTable.asLists(String.class);
@@ -868,8 +863,8 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
     }
 
-    @Then("I should see all the Entries From Health Centre future Grid View in Clinic Notes page")
-    public void iShouldSeeAllTheEntriesFromHealthCentreFutureGridViewInClinicNotesPage(List<String> ClinicNotesDetails) {
+    @Then("I should see all the Clinic Notes Entries From Health center Medicine Details in a grid view")
+    public void iShouldSeeAllTheClinicNotesEntriesFromHealthCenterMedicineDetailsInAGridView(List<String> ClinicNotesDetails) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             for (String String : ClinicNotesDetails) {
@@ -885,8 +880,8 @@ public class WebSteps {
         }
     }
 
-    @And("I Click Info Icon to see Clinic Notes page")
-    public void iClickInfoIconToSeeClinicNotesPage(DataTable dataTable) {
+    @And("I click on the more info icon on the grid & view the details of the Clinic Notes added")
+    public void iClickOnTheMoreInfoIconOnTheGridViewTheDetailsOfTheClinicNotesAdded(DataTable dataTable) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             List<List<String>> tableData = dataTable.asLists(String.class);
@@ -937,10 +932,9 @@ public class WebSteps {
 
     }
 
-    @Then("I should see all the Entries From Health Centre future Grid View in Allergies page")
-    public void iShouldSeeAllTheEntriesFromHealthCentreFutureGridViewInAllergiesPage(List<String> AllergiesDetails) {
+    @Then("I should see all the Allergies Entries From Health center Medicine Details in a grid view")
+    public void iShouldSeeAllTheAllergiesEntriesFromHealthCenterMedicineDetailsInAGridView(List<String> AllergiesDetails) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             for (String String : AllergiesDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
@@ -956,8 +950,8 @@ public class WebSteps {
         }
     }
 
-    @And("I Click Info Icon to see Allergies page")
-    public void iClickInfoIconToSeeAllergiesPage(DataTable dataTable) {
+    @And("I click on the more info icon on the grid & view the details of the Allergies added")
+    public void iClickOnTheMoreInfoIconOnTheGridViewTheDetailsOfTheAllergiesAdded(DataTable dataTable) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             List<List<String>> tableData = dataTable.asLists(String.class);
@@ -1001,8 +995,8 @@ public class WebSteps {
         demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuLabResults();
     }
 
-    @Then("I should see all the Entries From Health Centre future Grid View in Immunisations page")
-    public void iShouldSeeAllTheEntriesFromHealthCentreFutureGridViewInImmunisationsPage(List<String> ImmunisationsDetails) {
+    @Then("I should see all the Immunisations Entries From Health center Medicine Details in a grid view")
+    public void iShouldSeeAllTheImmunisationsEntriesFromHealthCenterMedicineDetailsInAGridView(List<String> ImmunisationsDetails) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             for (String String : ImmunisationsDetails) {
@@ -1019,8 +1013,8 @@ public class WebSteps {
 
     }
 
-    @And("I Click Info Icon to see Immunisations page")
-    public void iClickInfoIconToSeeImmunisationsPage(DataTable dataTable) {
+    @And("I click on the more info icon on the grid & view the details of the Immunisations added")
+    public void iClickOnTheMoreInfoIconOnTheGridViewTheDetailsOfTheImmunisationsAdded(DataTable dataTable) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             List<List<String>> tableData = dataTable.asLists(String.class);
@@ -1048,8 +1042,8 @@ public class WebSteps {
         }
     }
 
-    @Then("I should see all the Entries From Health Centre future Grid View in Lab Results page")
-    public void iShouldSeeAllTheEntriesFromHealthCentreFutureGridViewInLabResultsPage(List<String> LabResultsDetails) {
+    @And("I should see all the Lab Results Entries From Health center Medicine Details in a grid view")
+    public void iShouldSeeAllTheLabResultsEntriesFromHealthCenterMedicineDetailsInAGridView(List<String> LabResultsDetails) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             for (String String : LabResultsDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
@@ -1065,8 +1059,8 @@ public class WebSteps {
 
     }
 
-    @And("I Click Info Icon to see Lab Results page")
-    public void iClickInfoIconToSeeLabResultsPage(DataTable dataTable) {
+    @When("I click on the more info icon on the grid & view the details of the Lab Results added")
+    public void iClickOnTheMoreInfoIconOnTheGridViewTheDetailsOfTheLabResultsAdded(DataTable dataTable) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             List<List<String>> tableData = dataTable.asLists(String.class);
@@ -1101,9 +1095,8 @@ public class WebSteps {
 
     }
 
-
-    @And("I should see all the Entries From Health Centre future Grid View in Recalls page")
-    public void iShouldSeeAllTheEntriesFromHealthCentreFutureGridViewInRecallsPage(List<String> RecallsDetails) {
+    @And("I should see all the Recalls Entries From Health center Medicine Details in a grid view")
+    public void iShouldSeeAllTheRecallsEntriesFromHealthCenterMedicineDetailsInAGridView(List<String> RecallsDetails) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             for (String String : RecallsDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
@@ -1118,8 +1111,8 @@ public class WebSteps {
         }
     }
 
-    @When("I should see all the Entries From Health Centre Recall Remainder Details future Grid View in Recalls page")
-    public void iShouldSeeAllTheEntriesFromHealthCentreRecallRemainderDetailsFutureGridViewInRecallsPage(List<String> RecallsRemainderDetails) {
+    @Then("I should see all the Recalls Remainder Entries From Health center Medicine Details in a grid view")
+    public void iShouldSeeAllTheRecallsRemainderEntriesFromHealthCenterMedicineDetailsInAGridView(List<String> RecallsRemainderDetails) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             for (String String : RecallsRemainderDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
@@ -1134,8 +1127,9 @@ public class WebSteps {
         }
     }
 
-    @And("I Click Info Icon to see Recall Remainder Details in Recalls page")
-    public void iClickInfoIconToSeeRecallRemainderDetailsInRecallsPage(DataTable dataTable) {
+
+    @And("I click on the more info icon on the grid & view the details of the Recalls regarding the clinical added")
+    public void iClickOnTheMoreInfoIconOnTheGridViewTheDetailsOfTheRecallsRegardingTheClinicalMedicalAdded(DataTable dataTable) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             List<List<String>> tableData = dataTable.asLists(String.class);
@@ -1164,8 +1158,9 @@ public class WebSteps {
 
     }
 
-    @And("I Click Info Icon to see Recalls page")
-    public void iClickInfoIconToSeeRecallsPage(DataTable dataTable) {
+
+    @And("I click on the more info icon on the grid & view the details of the Recalls added")
+    public void iClickOnTheMoreInfoIconOnTheGridViewTheDetailsOfTheRecallsAdded(DataTable dataTable) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue1();
             List<List<String>> tableData = dataTable.asLists(String.class);
@@ -1213,33 +1208,6 @@ public class WebSteps {
         }
     }
 
-    @And("I Click Info Icon in My Entries to see my health records")
-    public void iClickInfoIconInMyEntriesToSeeMyHealthRecords(DataTable dataTable) {
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            List<List<String>> tableData = dataTable.asLists(String.class);
-            for (int i = 0; i < tableData.size(); i++) {
-                String strKey = tableData.get(i).get(0).trim();
-                String strKey2 = tableData.get(i).get(1).trim();
-                List<String> list1 = TestDataUtil.getListOfValue(strKey);
-                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickAndVerifycMyEntriesDataIcon(list1, list2));
-            }
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-
-            List<List<String>> tableData = dataTable.asLists(String.class);
-            for (int i = 0; i < tableData.size(); i++) {
-                String strKey = tableData.get(i).get(0).trim();
-                String strKey2 = tableData.get(i).get(1).trim();
-                String strKey3 = tableData.get(i).get(2).trim();
-                List<String> list1 = TestDataUtil.getListOfValue(strKey);
-                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                List<String> list3 = TestDataUtil.getListOfValue(strKey3);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickAndVerifyMobileMyEntriesDataIcon(list1, list3));
-            }
-        }
-    }
-
     @And("I navigate to the Prescriptions")
     public void iNavigateToThePrescriptions() {
         demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu();
@@ -1253,32 +1221,6 @@ public class WebSteps {
         }
     }
 
-    @And("I Click Info Icon in My Entries to see Prescription page")
-    public void iClickInfoIconInMyEntriesToSeePrescriptionPage(DataTable dataTable) {
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            List<List<String>> tableData = dataTable.asLists(String.class);
-            for (int i = 0; i < tableData.size(); i++) {
-                String strKey = tableData.get(i).get(0).trim();
-                String strKey2 = tableData.get(i).get(1).trim();
-                List<String> list1 = TestDataUtil.getListOfValue(strKey);
-                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyPrescriptionsMyEntriesDataIcon(list1, list2));
-            }
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            List<List<String>> tableData = dataTable.asLists(String.class);
-            for (int i = 0; i < tableData.size(); i++) {
-                String strKey = tableData.get(i).get(0).trim();
-                String strKey2 = tableData.get(i).get(1).trim();
-                String strKey3 = tableData.get(i).get(2).trim();
-                List<String> list1 = TestDataUtil.getListOfValue(strKey);
-                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                List<String> list3 = TestDataUtil.getListOfValue(strKey2);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobilePrescriptionsMyEntriesDataIcon(list1, list3));
-            }
-        }
-    }
-
     @And("I navigate to the Allergies")
     public void iNavigateToTheAllergies() {
         demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies();
@@ -1289,33 +1231,6 @@ public class WebSteps {
         demoPageContainer.myHealthRecordsPage.clickMaxvalue();
         for (String strCurrentRow : AllergiesMyEntries) {
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyAllergiesMyEntries(TestDataUtil.getListOfValue(strCurrentRow)));
-        }
-    }
-
-    @And("I Click Info Icon in My Entries to see Allergies page")
-    public void iClickInfoIconInMyEntriesToSeeAllergiesPage(DataTable dataTable) {
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            List<List<String>> tableData = dataTable.asLists(String.class);
-            for (int i = 0; i < tableData.size(); i++) {
-                String strKey = tableData.get(i).get(0).trim();
-                String strKey2 = tableData.get(i).get(1).trim();
-                List<String> list1 = TestDataUtil.getListOfValue(strKey);
-                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyAllergiesMyEntriesDataIcon(list1, list2));
-            }
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            List<List<String>> tableData = dataTable.asLists(String.class);
-            for (int i = 0; i < tableData.size(); i++) {
-                String strKey = tableData.get(i).get(0).trim();
-                String strKey2 = tableData.get(i).get(1).trim();
-                String strKey3 = tableData.get(i).get(2).trim();
-                List<String> list1 = TestDataUtil.getListOfValue(strKey);
-                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                List<String> list3 = TestDataUtil.getListOfValue(strKey3);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileAllergiesMyEntriesDataIcon(list1, list3));
-
-            }
         }
     }
 
@@ -1333,33 +1248,6 @@ public class WebSteps {
         }
     }
 
-    @And("I Click Info Icon in My Entries to see Immunisations page")
-    public void iClickInfoIconInMyEntriesToSeeImmunisationsPage(DataTable dataTable) {
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            List<List<String>> tableData = dataTable.asLists(String.class);
-            for (int i = 0; i < tableData.size(); i++) {
-                String strKey = tableData.get(i).get(0).trim();
-                String strKey2 = tableData.get(i).get(1).trim();
-                List<String> list1 = TestDataUtil.getListOfValue(strKey);
-                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyImmunisationsMyEntriesDataIcon(list1, list2));
-            }
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            List<List<String>> tableData = dataTable.asLists(String.class);
-            for (int i = 0; i < tableData.size(); i++) {
-                String strKey = tableData.get(i).get(0).trim();
-                String strKey2 = tableData.get(i).get(1).trim();
-                String strKey3 = tableData.get(i).get(2).trim();
-                List<String> list1 = TestDataUtil.getListOfValue(strKey);
-                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                List<String> list3 = TestDataUtil.getListOfValue(strKey3);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileImmunisationsMyEntriesDataIcon(list1, list3));
-            }
-        }
-
-    }
-
     @And("I navigate to the Classifications")
     public void iNavigateToTheClassifications() {
         demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications();
@@ -1373,37 +1261,8 @@ public class WebSteps {
         }
     }
 
-    @And("I Click Info Icon in My Entries to see Classifications page")
-    public void iClickInfoIconInMyEntriesToSeeClassificationsPage(DataTable dataTable) {
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            List<List<String>> tableData = dataTable.asLists(String.class);
-            for (int i = 0; i < tableData.size(); i++) {
-                String strKey = tableData.get(i).get(0).trim();
-                String strKey2 = tableData.get(i).get(1).trim();
-                List<String> list1 = TestDataUtil.getListOfValue(strKey);
-                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyClassificationsMyEntriesDataIcon(list1, list2));
-            }
-
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            List<List<String>> tableData = dataTable.asLists(String.class);
-            for (int i = 0; i < tableData.size(); i++) {
-                String strKey = tableData.get(i).get(0).trim();
-                String strKey2 = tableData.get(i).get(1).trim();
-                String strKey3 = tableData.get(i).get(2).trim();
-                List<String> list1 = TestDataUtil.getListOfValue(strKey);
-                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                List<String> list3 = TestDataUtil.getListOfValue(strKey3);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileClassificationMyEntriesDataIcon(list1, list3));
-
-            }
-        }
-    }
-
-
-    @And("I Click Info Icon to see Test Results in Lab Results page")
-    public void iClickInfoIconToSeeTestResultsInLabResultsPage(DataTable dataTable) {
+    @And("I click on the more info icon on the grid & view the details of the Test Results added")
+    public void iClickOnTheMoreInfoIconOnTheGridViewTheDetailsOfTheTestResultsAdded(DataTable dataTable) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             List<List<String>> tableData = dataTable.asLists(String.class);
@@ -1579,7 +1438,6 @@ public class WebSteps {
     @And("I Create New Record in My Entries in Prescription page")
     public void iCreateNewRecordInMyEntriesInPrescriptionPage(List<String> listCreateData) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-
             demoPageContainer.myHealthRecordsPage.clickAddRecord();
             demoPageContainer.myHealthRecordsPage.enterPrescriptionsMedicationName(TestDataUtil.getValue(listCreateData.get(0)));
             demoPageContainer.myHealthRecordsPage.clickDose();
@@ -1727,31 +1585,7 @@ public class WebSteps {
         demoPageContainer.myHealthRecordsPage.clickDelete(TestDataUtil.getValue(strCreatedRecord));
     }
 
-    @And("I Click Info Icon in My Entries to see COVID Immunisation Details page")
-    public void iClickInfoIconInMyEntriesToSeeCOVIDImmunisationDetailsPage(DataTable dataTable) {
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            List<List<String>> tableData = dataTable.asLists(String.class);
-            for (int i = 0; i < tableData.size(); i++) {
-                String strKey = tableData.get(i).get(0).trim();
-                String strKey2 = tableData.get(i).get(1).trim();
-                List<String> list1 = TestDataUtil.getListOfValue(strKey);
-                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyCOVIDImmunisationsMyEntriesDataIcon(list1, list2));
-            }
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            List<List<String>> tableData = dataTable.asLists(String.class);
-            for (int i = 0; i < tableData.size(); i++) {
-                String strKey = tableData.get(i).get(0).trim();
-                String strKey2 = tableData.get(i).get(1).trim();
-                String strKey3 = tableData.get(i).get(2).trim();
-                List<String> list1 = TestDataUtil.getListOfValue(strKey);
-                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                List<String> list3 = TestDataUtil.getListOfValue(strKey3);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileCOVIDImmunisationsMyEntriesDataIcon(list1, list3));
-            }
-        }
-    }
+
 
     @And("I Create New Record in COVIDImmunisations page")
     public void iCreateNewRecordInCOVIDImmunisationsPage(List<String> listCreateData) {
@@ -1832,90 +1666,11 @@ public class WebSteps {
         }
     }
 
-
-    @And("I should see all My Entries in Prescription page")
-    public void iShouldSeeAllMyEntriesInPrescriptionPage(List<String> PrescriptionsMyEntries) {
-
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            demoPageContainer.myHealthRecordsPage.clickMaxvalue();
-            for (String strCurrentRow : PrescriptionsMyEntries) {
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyPrescriptionsMyEntries(TestDataUtil.getListOfValue(strCurrentRow)));
-            }
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            for (String strCurrentRow : PrescriptionsMyEntries) {
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyMobilePrescriptionsMyEntries(TestDataUtil.getListOfValue(strCurrentRow)));
-
-            }
-
-        }
-    }
-
-    @And("I should see all My Entries Allergies page")
-    public void iShouldSeeAllMyEntriesAllergiesPage(List<String> AllergiesMyEntries) {
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            demoPageContainer.myHealthRecordsPage.clickMaxvalue();
-            for (String strCurrentRow : AllergiesMyEntries) {
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyAllergiesMyEntries(TestDataUtil.getListOfValue(strCurrentRow)));
-            }
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            for (String strCurrentRow : AllergiesMyEntries) {
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyMobileAllergiesMyEntries(TestDataUtil.getListOfValue(strCurrentRow)));
-            }
-        }
-    }
-
-    @And("I should see all My Entries Classifications page")
-    public void iShouldSeeAllMyEntriesClassificationsPage(List<String> ClassificationsMyEntries) {
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            demoPageContainer.myHealthRecordsPage.clickMaxvalue();
-            for (String strCurrentRow : ClassificationsMyEntries) {
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyClassificationsMyEntitiesNotesDetails(TestDataUtil.getListOfValue(strCurrentRow)));
-            }
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            for (String strCurrentRow : ClassificationsMyEntries) {
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyMobileClassificationsMyEntries(TestDataUtil.getListOfValue(strCurrentRow)));
-            }
-        }
-    }
-
-    @And("I should see all My Entries in my health records")
-    public void iShouldSeeAllMyEntriesInMyHealthRecords(List<String> ClinicMyEntriesClinicNotes) {
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            demoPageContainer.myHealthRecordsPage.clickMaxvalue();
-            for (String strCurrentRow : ClinicMyEntriesClinicNotes) {
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyMyEntries(TestDataUtil.getListOfValue(strCurrentRow)));
-            }
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            for (String String : ClinicMyEntriesClinicNotes) {
-                System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.verifyMobileMyEntries(TestDataUtil.getListOfValue(String));
-            }
-        }
-    }
-
     @When("I should see Edited {string} record in Clinic Notes")
     public void iShouldSeeEditedRecordInClinicNotes(String strEditedLocation) {
         Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyEditedLocation(TestDataUtil.getValue(strEditedLocation)));
     }
 
-    @And("I should see all My Entries Immunisations page")
-    public void iShouldSeeAllMyEntriesImmunisationsPage(List<String> ImmunisationsMyEntries) {
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            demoPageContainer.myHealthRecordsPage.clickMaxvalue();
-            for (String strCurrentRow : ImmunisationsMyEntries) {
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyImmunisationsMyEntries(TestDataUtil.getListOfValue(strCurrentRow)));
-            }
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            for (String strCurrentRow : ImmunisationsMyEntries) {
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyMobileImmunisationsMyEntries(TestDataUtil.getListOfValue(strCurrentRow)));
-            }
-        }
-    }
 
     @And("I navigate to the Health Summary")
     public void iNavigateToTheHealthSummary() {
@@ -1928,12 +1683,6 @@ public class WebSteps {
         demoPageContainer.myHealthRecordsPage.DeleteFile();
 
     }
-
-    @And("I logout from the MMH site")
-    public void ILogoutFromTheMMHSite() {
-        demoPageContainer.myHealthRecordsPage.clickSignoutButton();
-    }
-
     @Then("I should see Patient Record is deleted")
     public void iShouldSeePatientRecordIsDeleted() {
         Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyDeletedRecord());
@@ -2003,8 +1752,8 @@ public class WebSteps {
 
     @And("I Enter the Automatic Replies {string}")
     public void iEnterTheAutomaticReplies(String strMessage) {
-        List<String>lstStrMessage= TestDataUtil.getListOfValue(strMessage);
-        System.out.println("lstStrMessage >>> :: "+ lstStrMessage);
+        List<String> lstStrMessage = TestDataUtil.getListOfValue(strMessage);
+        System.out.println("lstStrMessage >>> :: " + lstStrMessage);
         Assert.assertTrue(demoPageContainer.messagesPage.enterMessageForAutomaticReplies(TestDataUtil.getValue(lstStrMessage.get(2))));
 
     }
@@ -2016,10 +1765,10 @@ public class WebSteps {
     }
 
     @And("I select the Out of office {string} and {string} and Enter the{string}")
-    public void iSelectTheOutOfOfficeAndAndEnterThe(String strStartDate,String strEndDate,String strMessage) {
+    public void iSelectTheOutOfOfficeAndAndEnterThe(String strStartDate, String strEndDate, String strMessage) {
 
-        List<String>lstStrMessage= TestDataUtil.getListOfValue(strMessage);
-        System.out.println("lstStrMessage >>> :: "+ lstStrMessage);
+        List<String> lstStrMessage = TestDataUtil.getListOfValue(strMessage);
+        System.out.println("lstStrMessage >>> :: " + lstStrMessage);
 
 //        Assert.assertTrue(demoPageContainer.messagesPage.selectStartDateForOutOfOffice(strStartDate));
 //        Assert.assertTrue(demoPageContainer.messagesPage.selectEndDateForOutOfOffice(strEndDate));
@@ -2031,8 +1780,8 @@ public class WebSteps {
     @Then("I Should Verify the Out Of Office Reply {string}")
     public void iShouldVerifyTheOutOfOfficeReplyMessage(String strMessage) {
 
-        List<String>lstStrMessage= TestDataUtil.getListOfValue(strMessage);
-        System.out.println("lstStrMessage >>> :: "+ lstStrMessage);
+        List<String> lstStrMessage = TestDataUtil.getListOfValue(strMessage);
+        System.out.println("lstStrMessage >>> :: " + lstStrMessage);
 
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -2105,6 +1854,7 @@ public class WebSteps {
         }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessage());
     }
+
     @And("I navigate to Patient Draft items and verify the Draft {string}")
     public void iNavigateToPatientDraftItemsAndVerifyTheDraft(String strMessageDetails) {
 
@@ -2360,8 +2110,8 @@ public class WebSteps {
 
     @Then("I Should Verify the Automatic Replies {string}")
     public void iShouldVerifyTheAutomaticReplies(String strMessage) {
-        List<String>lstStrMessage= TestDataUtil.getListOfValue(strMessage);
-        System.out.println("lstStrMessage >>> :: "+ lstStrMessage);
+        List<String> lstStrMessage = TestDataUtil.getListOfValue(strMessage);
+        System.out.println("lstStrMessage >>> :: " + lstStrMessage);
 
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
 
@@ -2398,7 +2148,7 @@ public class WebSteps {
     public void iShouldSeePaymentHasBeenProcessedSuccessfullyWithAppointmentDetails(String strAppointment, String strFutureDate) {
         List<String> lstDetails = TestDataUtil.getListOfValue(strAppointment);
         Assert.assertTrue(demoPageContainer.appointmentsPage.verifySucessMessage());
-        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyCardPayAppointmentDetails(lstDetails,TestDataUtil.getValue(strFutureDate)));
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyCardPayAppointmentDetails(lstDetails, TestDataUtil.getValue(strFutureDate)));
     }
 
     @And("I should see Appointment is not for today popup")
@@ -2534,7 +2284,7 @@ public class WebSteps {
 
     @And("I enter the Compose GroupMessage {string}")
     public void IEnterTheComposeGroupMessage(String listCreateData) {
-        List<String> list=TestDataUtil.getListOfValue(listCreateData);
+        List<String> list = TestDataUtil.getListOfValue(listCreateData);
         System.out.println(list);
         demoPageContainer.messagesPage.selectFrom(list.get(0));
         demoPageContainer.messagesPage.selectProvider(list.get(1));
@@ -2544,6 +2294,7 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.messagesPage.enterGroupMessage(TestDataUtil.getValue(list.get(5))));
         demoPageContainer.messagesPage.selecGroupTo(list.get(3));
     }
+
     @And("I send the group message to the patient users")
     public void iSendTheGroupMessageToThePatientUsers() {
         Assert.assertTrue(demoPageContainer.messagesPage.clickGroupMessageAndNavigateToHomePage());
@@ -2558,8 +2309,8 @@ public class WebSteps {
 
     @And("I verify the provider sent {string}")
     public void iVerifyTheProviderSent(String strGroupMesssage) {
-        List<String> listGroupMessage=TestDataUtil.getListOfValue(strGroupMesssage);
-        Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(4)),listGroupMessage.get(5)));
+        List<String> listGroupMessage = TestDataUtil.getListOfValue(strGroupMesssage);
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(4)), listGroupMessage.get(5)));
     }
 
     @And("I enter the Compose Mail{string}")
@@ -2575,4 +2326,199 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.messagesPage.enableTermAndConditions());
         Assert.assertTrue(demoPageContainer.messagesPage.enterBodyMessage(TestDataUtil.getValue(lstMessageDetails.get(6))));
     }
+
+    @Then("I should see all the Prescription My Entries Medicine details in more info")
+    public void iShouldSeeAllThePrescriptionMyEntriesMedicineDetailsInMoreInfo(DataTable dataTable) {
+
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.clickMaxvalue());
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>"+strKey);
+                List<String> list1 = TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+list1);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesPrescriptionsData(list1, list2));
+            }
+        }
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                String strKey3 = tableData.get(i).get(2).trim();
+                List<String> list1 = cap.utilities.TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                List<String> list3 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobilePrescriptionsMyEntriesDataIcon(list1, list3));
+            }
+        }
+    }
+    @Then("I should see all the Allergies My Entries Medicine details in more info")
+    public void iShouldSeeAllTheAllergiesMyEntriesMedicineDetailsInMoreInfo(DataTable dataTable) {
+
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.clickMaxvalue());
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                System.out.println(strKey);
+                List<String> list1 = TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
+                System.out.println(list1);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesPrescriptionsData(list1, list2));
+            }
+        }
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                String strKey3 = tableData.get(i).get(2).trim();
+                List<String> list1 = cap.utilities.TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                List<String> list3 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobilePrescriptionsMyEntriesDataIcon(list1, list3));
+            }
+        }
+    }
+
+    @Then("I should see all the Immunisations My Entries Medicine details in more info")
+    public void iShouldSeeAllTheImmunisationsMyEntriesMedicineDetailsInMoreInfo(DataTable dataTable) {
+
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.clickMaxvalue());
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                System.out.println(strKey);
+                List<String> list1 = TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
+                System.out.println(list1);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesImmunisationData(list1, list2));
+            }
+        }
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                String strKey3 = tableData.get(i).get(2).trim();
+                List<String> list1 = cap.utilities.TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                List<String> list3 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobilePrescriptionsMyEntriesDataIcon(list1, list3));
+            }
+        }
+    }
+
+    @When("I should see all the COVIDImmunisations My Entries Medicine details in more info")
+    public void iShouldSeeAllTheCOVIDImmunisationsMyEntriesMedicineDetailsInMoreInfo(DataTable dataTable) {
+
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.clickMaxvalue1());
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                System.out.println(strKey);
+                List<String> list1 = TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
+                System.out.println(list1);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesCOVIDImmunisationData(list1, list2));
+            }
+        }
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                String strKey3 = tableData.get(i).get(2).trim();
+                List<String> list1 = cap.utilities.TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                List<String> list3 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileCovidImmusationMyEntriesDataIcon(list1, list3));
+            }
+        }
+    }
+
+    @Then("I should see all the Classifications My Entries Medicine details in more info")
+    public void iShouldSeeAllTheClassificationsMyEntriesMedicineDetailsInMoreInfo(DataTable dataTable) {
+
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.clickMaxvalue());
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                System.out.println(strKey);
+                List<String> list1 = TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
+                System.out.println(list1);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesClassificationData(list1, list2));
+            }
+        }
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                String strKey3 = tableData.get(i).get(2).trim();
+                List<String> list1 = cap.utilities.TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                List<String> list3 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobilePrescriptionsMyEntriesDataIcon(list1, list3));
+            }
+        }
+    }
+
+    @Then("I should see all the Clinic Notes My Entries Medicine details in more info")
+    public void iShouldSeeAllTheClinicNotesMyEntriesMedicineDetailsInMoreInfo(DataTable dataTable) {
+
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.clickMaxvalue());
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                System.out.println(strKey);
+                List<String> list1 = TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
+                System.out.println(list1);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesClassificationData(list1, list2));
+            }
+        }
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                String strKey3 = tableData.get(i).get(2).trim();
+                List<String> list1 = cap.utilities.TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                List<String> list3 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobilePrescriptionsMyEntriesDataIcon(list1, list3));
+            }
+        }
+    }
 }
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+

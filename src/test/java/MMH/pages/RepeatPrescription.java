@@ -1090,10 +1090,8 @@ public class RepeatPrescription extends BasePage {
             waitForSeconds(2);
             takeScreenshot(driver);
             Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
-
             DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
             formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
-
             String currentDate = formatter.format(calendar.getTime());
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
