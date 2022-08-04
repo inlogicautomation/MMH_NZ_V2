@@ -374,7 +374,7 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(3);
-            waitForElementClickable(elmntWarningPopup);
+//          waitForElementClickable(elmntWarningPopup);
             waitForElement(elmntHealtCenter);
             waitAndClick(elmntHealtCenter);
             WebElement elmntSelectHealthCenter = waitForElementFewSeconds(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", strHealthCenter)));
