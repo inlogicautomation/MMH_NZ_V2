@@ -1381,7 +1381,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterImmunisationVaccineName(TestDataUtil.getValue(listCreateData.get(0)));
             demoPageContainer.myHealthRecordsPage.enterImmunisationDateGiven();
             demoPageContainer.myHealthRecordsPage.enterAdditionalInformation(TestDataUtil.getValue(listCreateData.get(1)));
-            demoPageContainer.myHealthRecordsPage.clickImmuCheckBox();
+           demoPageContainer.myHealthRecordsPage.clickImmuCheckBox();
             demoPageContainer.myHealthRecordsPage.clickImmunisationSave();
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -1409,7 +1409,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterAllergiesStartDate();
             demoPageContainer.myHealthRecordsPage.enterAllergiesEndDate();
             demoPageContainer.myHealthRecordsPage.enterAllergiesAdditionalInformation(TestDataUtil.getValue(listCreateData.get(3)));
-            demoPageContainer.myHealthRecordsPage.clickAllergiesCheckBox();
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.clickAllergiesCheckBox());
             demoPageContainer.myHealthRecordsPage.clickAllergiesSave();
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -1447,7 +1447,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterPrescriptionDateTaken();
             demoPageContainer.myHealthRecordsPage.enterPrescriptionEndDate();
             demoPageContainer.myHealthRecordsPage.enterPrescriptionAdditionalInformation(TestDataUtil.getValue(listCreateData.get(4)));
-            demoPageContainer.myHealthRecordsPage.clickPrescriptionCheckBox();
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.clickPrescriptionCheckBox());
             demoPageContainer.myHealthRecordsPage.clickPrescriptionSave();
         }
 
@@ -2369,7 +2369,7 @@ public class WebSteps {
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 System.out.println(list1);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesPrescriptionsData(list1, list2));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesAllergiesData(list1, list2));
             }
         }
         if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -2489,7 +2489,7 @@ public class WebSteps {
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 System.out.println(list1);
-                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesClassificationData(list1, list2));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesClinicanNotesData(list1, list2));
             }
         }
         if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {

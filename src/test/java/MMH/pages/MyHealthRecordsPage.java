@@ -9,12 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.TimeZone;
 
 import static cap.utilities.DateUtil.getCurrentDate;
 import static cap.utilities.SharedDriver.strExecutionID;
@@ -301,6 +296,11 @@ public class MyHealthRecordsPage extends BasePage {
             .append("//td[contains(text(),'")
             .append("<<REPLACEMENT1>>").append("')]/following-sibling::td/button[contains(@class,'moreinfo')]").toString();
 
+    protected String StrDoctorImmunisationsIconLocator = new StringBuilder()
+            .append("//td[contains(text(),'")
+            .append("<<REPLACEMENT1>>").append("')]/following-sibling::td[text()='")
+            .append("<<REPLACEMENT2>>").append("')]/following-sibling::td/button[contains(@class,'moreinfo')]").toString();
+
     protected String strTestingPrescriptionsMyEntitesIconLocator = new StringBuilder()
             .append("//td[contains(text(),'")
             .append("<<REPLACEMENT1>>").append("')]/following-sibling::td[contains(text(),'")
@@ -471,21 +471,20 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@class='mat-focus-indicator btn-increment mat-stroked-button mat-button-base']")
     protected WebElement btnDose;
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='false'][@id='mat-checkbox-9-input']")
+    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-9-input']")
     protected WebElement elmntCheckBox;
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='false'][@id='mat-checkbox-10-input']")
+    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-10-input']")
     protected WebElement elmntClassiCheckBox;
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='false'][@id='mat-checkbox-6-input']")
+    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-6-input']")
     protected WebElement elmntAllergiesCheckBox;
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='false'][@id='mat-checkbox-5-input']")
+    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-5-input']")
     protected WebElement elmntPrescriptionCheckBox;
 
-    @FindBy(how = How.XPATH, using = "//div[@class='footer-checkbox']//following::mat-checkbox[@class='mat-checkbox mat-accent ng-valid ng-dirty ng-touched']")
+    @FindBy(how = How.XPATH, using = "(//div[@class='footer-checkbox']//following::mat-checkbox[@class='mat-checkbox mat-accent ng-valid ng-dirty ng-touched mat-checkbox-checked'])[2]")
     protected WebElement elmtImmunisationsiCheckBox;
-
 
     @FindBy(how = How.XPATH, using = "//mat-checkbox[not(contains(@class,'mat-checkbox-checked'))][@formcontrolname='isconf']")
     protected WebElement elmtCovidImmunisationsiCheckBox;
@@ -1750,6 +1749,33 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean VerifyMyEntriesClassificationData(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
+            String currentDate = getCurrentDate("dd MMM yyyy");
+            waitForSeconds(5);
+            WebElement elmntPrescriptionMyEntiresIconData = waitForElement(By.xpath(StrDoctorImmunisationsIconLocator
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(0).concat(strExecutionID)))));
+            System.out.println(elmntPrescriptionMyEntiresIconData);
+            waitForSeconds(5);
+            waitForElementClickable(elmntPrescriptionMyEntiresIconData);
+            click(elmntPrescriptionMyEntiresIconData);
+            for (String str : lstDetails1) {
+                waitForSeconds(3);
+                WebElement elmntMyEntries = waitForElement(By.xpath(strPrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
+                verifyElement(elmntMyEntries);
+                }
+            waitForElementClickable(elmntIcon);
+            jsClick(elmntIcon);
+            waitForSeconds(3);
+            blResult = verifyElement(headerClassifications);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+    public boolean VerifyMyEntriesClinicanNotesData(List<String> lstDetails, List<String> lstDetails1) {
+        boolean blResult = false;
+        try {
             waitForSeconds(5);
             WebElement elmntPrescriptionMyEntiresIconData = waitForElement(By.xpath(StrShareDoctorImmunisationsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0).concat(strExecutionID)))));
@@ -1761,7 +1787,7 @@ public class MyHealthRecordsPage extends BasePage {
                 waitForSeconds(3);
                 WebElement elmntMyEntries = waitForElement(By.xpath(strPrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
                 verifyElement(elmntMyEntries);
-                }
+            }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
             waitForSeconds(3);
@@ -1791,6 +1817,37 @@ public class MyHealthRecordsPage extends BasePage {
                 WebElement elmntMyEntries = waitForElement(By.xpath(strPrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
                 verifyElement(elmntMyEntries);
                 }
+            waitForElementClickable(elmntIcon);
+            jsClick(elmntIcon);
+            waitForSeconds(3);
+            blResult = verifyElement(headerPrescriptions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+
+    public boolean VerifyMyEntriesAllergiesData(List<String> lstDetails, List<String> lstDetails1) {
+
+        boolean blResult = false;
+        try {
+            String currentDate = getCurrentDate("dd MMM yyyy");
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>"+lstDetails);
+            waitForSeconds(5);
+            WebElement elmntPrescriptionMyEntiresIconData = waitForElement(By.xpath(strAllergiesMyEntitesIconLocator
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(0).concat(strExecutionID)))
+                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(1)))));
+            System.out.println(elmntPrescriptionMyEntiresIconData);
+            waitForSeconds(5);
+            waitForElement(elmntPrescriptionMyEntiresIconData);
+            jsClick(elmntPrescriptionMyEntiresIconData);
+            for (String str : lstDetails1) {
+                waitForSeconds(3);
+                WebElement elmntMyEntries = waitForElement(By.xpath(strPrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
+                verifyElement(elmntMyEntries);
+            }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
             waitForSeconds(3);
@@ -2500,56 +2557,31 @@ public class MyHealthRecordsPage extends BasePage {
 
     public void clickCheckBox() {
         waitForSeconds(3);
-        if (verifyElement(elmntCheckBox)) {
-            click(elmntCheckBox);
-        } else {
-            System.out.println("CheckBox are checked::>>");
-        }
+        verifyElement(elmntCheckBox);
     }
 
     public void clickClassiCheckBox() {
         waitForSeconds(3);
-        if (verifyElement(elmntClassiCheckBox)) {
-            click(elmntClassiCheckBox);
-        } else {
-            System.out.println("CheckBox are checked::>>");
-        }
+        verifyElement(elmntClassiCheckBox);
     }
 
-    public void clickAllergiesCheckBox() {
+    public boolean clickAllergiesCheckBox() {
         waitForSeconds(3);
-        if (verifyElement(elmntAllergiesCheckBox)) {
-            click(elmntAllergiesCheckBox);
-        } else {
-            System.out.println("CheckBox are checked::>>");
-        }
+        return verifyElement(elmntAllergiesCheckBox);
     }
-
-    public void clickPrescriptionCheckBox() {
+    public boolean clickPrescriptionCheckBox() {
         waitForSeconds(3);
-        if (verifyElement(elmntPrescriptionCheckBox)) {
-            click(elmntPrescriptionCheckBox);
-        } else {
-            System.out.println("CheckBox are checked::>>");
-        }
+        return verifyElement(elmntPrescriptionCheckBox);
     }
 
     public void clickImmuCheckBox() {
         waitForSeconds(3);
-        if (verifyElement(elmtImmunisationsiCheckBox)) {
-            click(elmtImmunisationsiCheckBox);
-        } else {
-            System.out.println("CheckBox are checked::>>");
-        }
+         verifyElement(elmtImmunisationsiCheckBox);
     }
 
     public void clickCovidCheckBox() {
         waitForSeconds(3);
-        if (verifyElement(elmtCovidImmunisationsiCheckBox)) {
-            click(elmtCovidImmunisationsiCheckBox);
-        } else {
-            System.out.println("CheckBox are checked::>>");
-        }
+        verifyElement(elmtCovidImmunisationsiCheckBox);
     }
 
 
