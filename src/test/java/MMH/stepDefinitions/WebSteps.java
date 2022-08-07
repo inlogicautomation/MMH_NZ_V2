@@ -813,12 +813,12 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             for (String String : ClassificationsDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyClassificationsTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyClassificationsTableData(TestDataUtil.getListOfValue(String)));
             }
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
                 for (String String : ClassificationsDetails) {
                     System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                    demoPageContainer.myHealthRecordsPage.VerifyMobileClassificationTableData(TestDataUtil.getListOfValue(String));
+                    Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileClassificationTableData(TestDataUtil.getListOfValue(String)));
                 }
             }
         }
@@ -835,7 +835,7 @@ public class WebSteps {
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
 //            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickClassificationsIconLocator(list1, list2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickClassificationsIconLocator(list1, list2));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -848,7 +848,7 @@ public class WebSteps {
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 List<String> list3 = TestDataUtil.getListOfValue(strKey3);
 //            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickMobileClassificationIcon(list1, list3);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickMobileClassificationIcon(list1, list3));
             }
 
         }
@@ -869,13 +869,13 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             for (String String : ClinicNotesDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyClinicNotesTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyClinicNotesTableData(TestDataUtil.getListOfValue(String)));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             for (String String : ClinicNotesDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyMobileClinicNotesTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileClinicNotesTableData(TestDataUtil.getListOfValue(String)));
             }
         }
     }
@@ -891,7 +891,7 @@ public class WebSteps {
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
 //            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickClinicNotesIconLocator(list1, list2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickClinicNotesIconLocator(list1, list2));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -905,7 +905,7 @@ public class WebSteps {
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 List<String> list3 = TestDataUtil.getListOfValue(strKey3);
 //            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickMobileClinicNotesIcon(list1, list3);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickMobileClinicNotesIcon(list1, list3));
             }
 
         }
@@ -938,13 +938,13 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             for (String String : AllergiesDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyAllergiesTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyAllergiesTableData(TestDataUtil.getListOfValue(String)));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             for (String String : AllergiesDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyMobileAllergiesTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileAllergiesTableData(TestDataUtil.getListOfValue(String)));
             }
 
         }
@@ -961,7 +961,7 @@ public class WebSteps {
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
 //            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickAllergiesIconLocator(list1, list2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickAllergiesIconLocator(list1, list2));
             }
 
         }
@@ -975,7 +975,7 @@ public class WebSteps {
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 List<String> list3 = TestDataUtil.getListOfValue(strKey3);
 //            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickMobileAllergiesIcon(list1, list3);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickMobileAllergiesIcon(list1, list3));
             }
         }
 
@@ -1001,13 +1001,13 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             for (String String : ImmunisationsDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyImmunisationsTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyImmunisationsTableData(TestDataUtil.getListOfValue(String)));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             for (String String : ImmunisationsDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyMobileImmunisationTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileImmunisationTableData(TestDataUtil.getListOfValue(String)));
             }
         }
 
@@ -1024,7 +1024,7 @@ public class WebSteps {
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
 //            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickImmunisationsIconLocator(list1, list2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickImmunisationsIconLocator(list1, list2));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -1037,7 +1037,7 @@ public class WebSteps {
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 List<String> list3 = TestDataUtil.getListOfValue(strKey3);
 //            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickMobileImmunisationIcon(list1, list3);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickMobileImmunisationIcon(list1, list3));
             }
         }
     }
@@ -1047,13 +1047,13 @@ public class WebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             for (String String : LabResultsDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyLabResultsTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyLabResultsTableData(TestDataUtil.getListOfValue(String)));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             for (String String : LabResultsDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyMobileLabResultsTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileLabResultsTableData(TestDataUtil.getListOfValue(String)));
             }
         }
 
@@ -1070,7 +1070,7 @@ public class WebSteps {
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
 //            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickLabResultsIconLocator(list1, list2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickLabResultsIconLocator(list1, list2));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -1083,7 +1083,7 @@ public class WebSteps {
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 List<String> list3 = TestDataUtil.getListOfValue(strKey3);
 //            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickMobileLabResultsIcon(list1, list3);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickMobileLabResultsIcon(list1, list3));
             }
         }
 
@@ -1100,13 +1100,13 @@ public class WebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             for (String String : RecallsDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyRecallsTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyRecallsTableData(TestDataUtil.getListOfValue(String)));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             for (String String : RecallsDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyMobileRecallsTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileRecallsTableData(TestDataUtil.getListOfValue(String)));
             }
         }
     }
@@ -1116,13 +1116,13 @@ public class WebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             for (String String : RecallsRemainderDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyRecallsTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyRecallsTableData(TestDataUtil.getListOfValue(String)));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             for (String String : RecallsRemainderDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                demoPageContainer.myHealthRecordsPage.VerifyMobileRecallsTableData(TestDataUtil.getListOfValue(String));
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileRecallsTableData(TestDataUtil.getListOfValue(String)));
             }
         }
     }
@@ -1139,7 +1139,7 @@ public class WebSteps {
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 System.out.println(">> TestDataUtil list2 : " + list2);
-                demoPageContainer.myHealthRecordsPage.ClickRecallsRemainderIconLocator(list1, list2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickRecallsRemainderIconLocatorVerifyRecallsRemainderData(list1, list2));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -1152,7 +1152,7 @@ public class WebSteps {
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 List<String> list3 = TestDataUtil.getListOfValue(strKey3);
                 System.out.println(">> TestDataUtil list2 : " + list2);
-                demoPageContainer.myHealthRecordsPage.ClickMobileRecallsRemainderIconLocator(list1, list3);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickMobileRecallsRemainderIconLocatorVerifyRecallsRemainderData(list1, list3));
             }
         }
 
@@ -1170,7 +1170,7 @@ public class WebSteps {
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 System.out.println(">> TestDataUtil list2 : " + list2);
-                demoPageContainer.myHealthRecordsPage.ClickRecallsIconLocator(list1, list2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickIconLocatorVerifyRecallsIconData(list1, list2));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -1183,7 +1183,7 @@ public class WebSteps {
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 List<String> list3 = TestDataUtil.getListOfValue(strKey3);
                 System.out.println(">> TestDataUtil list2 : " + list3);
-                demoPageContainer.myHealthRecordsPage.ClickMobileRecallsIconLocator(list1, list3);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickMobileIconLocatorVerifyRecallData(list1, list3));
             }
         }
     }
@@ -1272,7 +1272,7 @@ public class WebSteps {
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
 //            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickLabResultsIconLocatorVerifyTestResults(list1, list2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickLabResultsIconLocatorVerifyTestResults(list1, list2));
             }
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -1285,7 +1285,7 @@ public class WebSteps {
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 List<String> list3 = TestDataUtil.getListOfValue(strKey3);
 //            System.out.println(">> TestDataUtil list2 : "+list2);
-                demoPageContainer.myHealthRecordsPage.ClickMobileLabResultsIconLocatorVerifyTestResults(list1, list3);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.ClickMobileLabResultsIconLocatorVerifyTestResults(list1, list3));
             }
         }
     }

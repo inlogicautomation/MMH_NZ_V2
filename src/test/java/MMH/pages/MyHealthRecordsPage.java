@@ -25,7 +25,7 @@ public class MyHealthRecordsPage extends BasePage {
     }
 
     public String strVisitedName = "";
-    public String PrescriptionsMedicationName = "";
+    public static String PrescriptionsMedicationName = "";
 
     @FindBy(how = How.XPATH, using = "//a[@class='menu-header ng-star-inserted']/following::span[text()='My Health Records']/following-sibling::mat-icon")
     protected WebElement btnMyHealthRecordsExpand;
@@ -34,6 +34,22 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement btnMobileMenu;
     @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-prescription-extra-medicine']//following::span[1]")
     protected WebElement elmntPrescriptions;
+
+    @FindBy(how = How.XPATH, using = "(//h3[text()='Prescriptions'])[1]")
+    protected WebElement headerPrescriptions;
+    @FindBy(how = How.XPATH, using = "(//h3[text()='Allergies'])[1]")
+    protected WebElement headerAllergies;
+    @FindBy(how = How.XPATH, using = "(//h3[text()='Immunisations'])[1]")
+    protected WebElement headerImmunisatoin;
+    @FindBy(how = How.XPATH, using = "(//h3[text()='Classifications'])[1]")
+    protected WebElement headerClassifications;
+    @FindBy(how = How.XPATH, using = "(//h3[text()='Lab Results '])[1]")
+    protected WebElement headerLabResults;
+    @FindBy(how = How.XPATH, using = "(//h3[text()='Clinician Notes'])[1]")
+    protected WebElement headerClinicanNotes;
+
+    @FindBy(how = How.XPATH, using = "(//h3[text()='Recalls'])[1]")
+    protected WebElement headerRecalls;
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'All Sources')]/ancestor::mat-form-field//span[text()]")
     protected WebElement elmntFilterdropPrescriptions;
     protected String elmntFilterbyDrop = new StringBuilder().append("//mat-option//child::span[normalize-space(text())='")
@@ -67,6 +83,9 @@ public class MyHealthRecordsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//mat-expansion-panel-header[@aria-expanded='true']")
     protected WebElement elmntMobileIcon;
+
+    @FindBy(how = How.XPATH, using = "(//img[@alt='Manage My Health'])[2]")
+    protected WebElement elmntMobileMMHlogo;
 
     @FindBy(how = How.XPATH, using = "//button[contains(text(),'Close')]")
     protected WebElement elmntIcon;
@@ -151,6 +170,16 @@ public class MyHealthRecordsPage extends BasePage {
             .append("(//h2[contains(text(),'")
             .append("<<REPLACEMENT1>>").append("')]//following::p[contains(text(),'")
             .append("<<REPLACEMENT2>>").append("')])[1]").toString();
+
+    protected String getStrMobileRecallsIconContentLocator = new StringBuilder()
+            .append("(//h2[contains(text(),'")
+            .append("<<REPLACEMENT1>>").append("')]//following::p[contains(text(),'")
+            .append("<<REPLACEMENT2>>").append("')])[3]").toString();
+
+    protected String getStrMobileRecallsReminderIconContentLocator = new StringBuilder()
+            .append("(//h2[contains(text(),'")
+            .append("<<REPLACEMENT1>>").append("')]//following::p[contains(text(),'")
+            .append("<<REPLACEMENT2>>").append("')])[2]").toString();
 
     protected String strMobileLabTestResultDetails = new StringBuilder()
             .append(" //mat-expansion-panel-header[@aria-expanded='true']//following::div[contains(@style,'visibility: visible')]//span[contains(text(),'")
@@ -240,9 +269,7 @@ public class MyHealthRecordsPage extends BasePage {
             .append("//h2[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
-    protected String strMyEntriesInfoDetails = new StringBuilder()
-            .append("//div[@class='tbl-row']//div[contains(@class,'tbl-td')][contains(text(),'")
-            .append("<<DATA>>").append("')]").toString();
+
 
     protected String strPrescriptionsMyEntitesIconLocator = new StringBuilder()
             .append("//td[contains(text(),'")
@@ -255,9 +282,7 @@ public class MyHealthRecordsPage extends BasePage {
             .append("<<REPLACEMENT1>>").append("')]//following::p[contains(text(),'")
             .append("<<REPLACEMENT2>>").append("')])[1]").toString();
 
-    protected String strMobileAllergiesMyEntriesInfoDetails = new StringBuilder()
-            .append("//mat-expansion-panel-header[@aria-expanded='true']//following::div[contains(@style,'visibility: visible')]//p[normalize-space(text())='")
-            .append("<<REPLACEMENT>>").append("']").toString();
+
 
     protected String strMobilePrescriptionsMyEntriesInfoDetails = new StringBuilder()
             .append("//mat-expansion-panel-header[@aria-expanded='true']//following::div[contains(@style,'visibility: visible')]//p[normalize-space(text())='")
@@ -286,37 +311,14 @@ public class MyHealthRecordsPage extends BasePage {
             .append("<<REPLACEMENT1>>").append("')]/following-sibling::td[contains(text(),'")
             .append("<<REPLACEMENT2>>").append("')]/following-sibling::td[contains(text(),'")
             .append("<<REPLACEMENT3>>").append("')]/following-sibling::td/button[contains(@class,'moreinfo')]").toString();
-
-    protected String strAllergiesMyEntriesInfoDetails = new StringBuilder()
-            .append("//div[@class='tbl-row']//div[contains(@class,'tbl-td')][contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')]").toString();
-
     protected String strImmunisationsMyEntitesIconLocator = new StringBuilder()
             .append("//td[contains(text(),'")
             .append("<<REPLACEMENT1>>").append("')]/following-sibling::td[contains(text(),'")
             .append("<<REPLACEMENT2>>").append("')]/following-sibling::td/button[contains(@class,'moreinfo')]").toString();
-
-    protected String strCOVIDImmunisationsMyEntitesIconLocator = new StringBuilder()
-            .append("//td[contains(text(),'")
-            .append("<<REPLACEMENT1>>").append("')]/following-sibling::td[text()='")
-            .append("<<REPLACEMENT2>>").append("']/following-sibling::td/button//mat-icon[text()=' info_outline']").toString();
-    protected String strImmunisationsMyEntriesInfoDetails = new StringBuilder()
-            .append("//div[@class='tbl-row']//div[contains(@class,'tbl-td')][contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')]").toString();
-
-    protected String strCOVIDImmunisationsMyEntriesInfoDetails = new StringBuilder()
-            .append("//div[@class='tbl-row']//div[contains(@class,'tbl-td')][contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')]").toString();
-
     protected String strClassificationsMyEntitesIconLocator = new StringBuilder()
             .append("//td[contains(text(),'")
             .append("<<REPLACEMENT1>>").append("')]/following-sibling::td[contains(text(),'")
             .append("<<REPLACEMENT2>>").append("')]/following-sibling::td/button[contains(@class,'moreinfo')]").toString();
-
-    protected String strClassificationsMyEntriesInfoDetails = new StringBuilder()
-            .append("//div[@class='tbl-row']//div[contains(@class,'tbl-td')][contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')]").toString();
-
 
     @FindBy(how = How.XPATH, using = "//p[text()='Write the name who visited']//following::div[11]//input")
     protected WebElement elmntVisitedName;
@@ -715,7 +717,8 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))));
             waitForElement(elmntPrescriptionTableData);
             verifyElement(elmntPrescriptionTableData);
-            blResult = true;
+            waitForSeconds(3);
+            blResult =verifyElement(headerPrescriptions);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -731,7 +734,7 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(5)))));
             waitForElement(elmntMobilePrescriptionTableData);
             verifyElement(elmntMobilePrescriptionTableData);
-            blResult = true;
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -767,19 +770,16 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
                     .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))));
-
             waitForElementClickable(elmntPrescriptionIconData);
             jsClick(elmntPrescriptionIconData);
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strPrescriptionsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
-                }
+                verifyElement(elmntPaitientDetails);
             }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerPrescriptions);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -797,16 +797,13 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElementClickable(elmntMobilePrescriptionIconData);
             jsClick(elmntMobilePrescriptionIconData);
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strMobilePrescriptionsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
-                }
+                verifyElement(elmntPaitientDetails);
             }
-
             waitForElementClickable(elmntMobileIcon);
             jsClick(elmntMobileIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -860,11 +857,10 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
                     .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))));
-
             waitForElement(elmntClassificationTableData);
             verifyElement(elmntClassificationTableData);
-
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerClassifications);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -880,7 +876,8 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(5)))));
             waitForElement(elmntMobileAllergiesTableData);
             verifyElement(elmntMobileAllergiesTableData);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -897,20 +894,16 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
                     .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))));
-
             waitForElementClickable(elmntClassificationIconData);
             jsClick(elmntClassificationIconData);
-
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strClassificationsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerClassifications);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -928,16 +921,13 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElementClickable(elmntMobileAllergiesIconData);
             jsClick(elmntMobileAllergiesIconData);
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strMobilePrescriptionsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
-
             waitForElementClickable(elmntMobileIcon);
             jsClick(elmntMobileIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -988,10 +978,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntSummary);
         }
     }
-
-
     public void clickExportButton() {
-
         click(elmntExport);
     }
 
@@ -1013,7 +1000,8 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(4)))));
             waitForElement(elmntMobileAllergiesTableData);
             verifyElement(elmntMobileAllergiesTableData);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1029,28 +1017,15 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
-
             waitForElement(elmntClinicNotesTableData);
             verifyElement(elmntClinicNotesTableData);
-
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerClinicanNotes);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return blResult;
-    }
-
-    public boolean verifyMobileMyEntries(List<String> ImmunisationsMyEntitiesNotesDetails) {
-        boolean isVerifed = false;
-        System.out.println("Data Value1::>>" + TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(1)
-                + "  Data Value2::>>" + TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(0))));
-        WebElement elmntMobileAllergiesMyEntiresData = waitForElement(By.xpath(strMobilePrescriptionsMyEntitesIconLocator
-                .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(1)))
-                .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(0)))));
-        waitForElement(elmntMobileAllergiesMyEntiresData);
-        isVerifed = verifyElement(elmntMobileAllergiesMyEntiresData);
-        return isVerifed;
     }
 
     public boolean ClickClinicNotesIconLocator(List<String> lstDetails, List<String> lstDetails1) {
@@ -1061,20 +1036,16 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
-
             waitForElementClickable(elmntClinicNotesIconData);
             jsClick(elmntClinicNotesIconData);
-
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strClinicalNotesDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerClinicanNotes);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1093,13 +1064,12 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntMobileAllergiesIconData);
             for (String str : lstDetails1) {
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strMobilePrescriptionsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
             waitForElementClickable(elmntMobileIcon);
             jsClick(elmntMobileIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1172,11 +1142,10 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
-
             waitForElement(elmntAllergiesTableData);
             verifyElement(elmntAllergiesTableData);
-
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerAllergies);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1192,7 +1161,8 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(4)))));
             waitForElement(elmntMobileAllergiesTableData);
             verifyElement(elmntMobileAllergiesTableData);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1208,20 +1178,16 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
-
             waitForElementClickable(elmntAllergiesIconData);
             jsClick(elmntAllergiesIconData);
-
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strAllergiesNotesDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
-                }
+                 verifyElement(elmntPaitientDetails);
             }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerAllergies);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1239,16 +1205,13 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElementClickable(elmntMobileAllergiesIconData);
             jsClick(elmntMobileAllergiesIconData);
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strMobilePrescriptionsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
-
             waitForElementClickable(elmntMobileIcon);
             jsClick(elmntMobileIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1265,11 +1228,10 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
-
             waitForElement(elmntImmunisationTableData);
             verifyElement(elmntImmunisationTableData);
-
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerImmunisatoin);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1285,7 +1247,8 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(4)))));
             waitForElement(elmntMobileAllergiesTableData);
             verifyElement(elmntMobileAllergiesTableData);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1301,20 +1264,16 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
-
             waitForElementClickable(elmntImmunisationIconData);
             jsClick(elmntImmunisationIconData);
-
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strImmunisationsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerImmunisatoin);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1332,16 +1291,13 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElementClickable(elmntMobileAllergiesIconData);
             jsClick(elmntMobileAllergiesIconData);
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strMobilePrescriptionsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
-
             waitForElementClickable(elmntMobileIcon);
             jsClick(elmntMobileIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1357,11 +1313,10 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
-
             waitForElement(elmntLabResultTableData);
             verifyElement(elmntLabResultTableData);
-
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerLabResults);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1377,7 +1332,8 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(4)))));
             waitForElement(elmntMobileAllergiesTableData);
             verifyElement(elmntMobileAllergiesTableData);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1393,20 +1349,16 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
-
             waitForElementClickable(elmntLabResultIconData);
             jsClick(elmntLabResultIconData);
-
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strLabResultsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
             waitForElementClickable(elmntlabIcon);
             jsClick(elmntlabIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerLabResults);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1424,16 +1376,13 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElementClickable(elmntMobileAllergiesIconData);
             jsClick(elmntMobileAllergiesIconData);
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strMobilePrescriptionsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
-
             waitForElementClickable(elmntMobileIcon);
             jsClick(elmntMobileIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1449,20 +1398,16 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
-
             waitForElementClickable(elmntTestResults);
             jsClick(elmntTestResults);
-
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strTestResultsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
             waitForElementClickable(elmntlabIcon);
             jsClick(elmntlabIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerLabResults);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1480,16 +1425,12 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElementClickable(elmntMobileAllergiesIconData);
             jsClick(elmntMobileAllergiesIconData);
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strMobileLabTestResultDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
-
             waitForElementClickable(elmntMobileIcon);
             jsClick(elmntMobileIcon);
-            blResult = true;
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1531,11 +1472,10 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
-
             waitForElement(elmntRecallsTableData);
             verifyElement(elmntRecallsTableData);
-
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerRecalls);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -1547,12 +1487,13 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean VerifyMobileRecallsTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
-            WebElement elmntMobileAllergiesTableData = waitForElement(By.xpath(strMobileLabResultIconContentLocator
+            WebElement elmntMobileAllergiesTableData = waitForElement(By.xpath(getStrMobileRecallsReminderIconContentLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(4)))));
             waitForElement(elmntMobileAllergiesTableData);
             verifyElement(elmntMobileAllergiesTableData);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1561,7 +1502,7 @@ public class MyHealthRecordsPage extends BasePage {
     }
 
 
-    public boolean ClickRecallsRemainderIconLocator(List<String> lstDetails, List<String> lstDetails1) {
+    public boolean ClickRecallsRemainderIconLocatorVerifyRecallsRemainderData(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
             WebElement elmntRecallsRemainderIconData = waitForElement(By.xpath(strRecallsIconLocator
@@ -1569,22 +1510,16 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
-
             waitForElementClickable(elmntRecallsRemainderIconData);
             jsClick(elmntRecallsRemainderIconData);
-
             for (String str : lstDetails1) {
-                System.out.println("Element is ::>>" + str);
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strRecallsRemainderDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Displayed::>>");
-                } else {
-                    System.out.println("Element is Not Displayed::>>");
-                }
+                verifyElement(elmntPaitientDetails);
             }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerRecalls);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1592,10 +1527,10 @@ public class MyHealthRecordsPage extends BasePage {
         return blResult;
     }
 
-    public boolean ClickMobileRecallsRemainderIconLocator(List<String> lstDetails, List<String> lstDetails1) {
+    public boolean ClickMobileRecallsRemainderIconLocatorVerifyRecallsRemainderData(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            WebElement elmntMobileAllergiesIconData = waitForElement(By.xpath(strMobileRecallsIconContentLocator
+            WebElement elmntMobileAllergiesIconData = waitForElement(By.xpath(getStrMobileRecallsReminderIconContentLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(4)))));
             jsScrollIntoView(elmntMobileAllergiesIconData);
@@ -1603,13 +1538,12 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntMobileAllergiesIconData);
             for (String str : lstDetails1) {
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strMobilePrescriptionsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
             waitForElementClickable(elmntMobileIcon);
             jsClick(elmntMobileIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1617,7 +1551,7 @@ public class MyHealthRecordsPage extends BasePage {
         return blResult;
     }
 
-    public boolean ClickRecallsIconLocator(List<String> lstDetails, List<String> lstDetails1) {
+    public boolean ClickIconLocatorVerifyRecallsIconData(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
             WebElement elmntRecallsIconData = waitForElement(By.xpath(strRecallsIconLocator
@@ -1625,20 +1559,16 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
-
             waitForElementClickable(elmntRecallsIconData);
             jsClick(elmntRecallsIconData);
-
             for (String str : lstDetails1) {
-
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strRecallsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerRecalls);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1646,10 +1576,10 @@ public class MyHealthRecordsPage extends BasePage {
         return blResult;
     }
 
-    public boolean ClickMobileRecallsIconLocator(List<String> lstDetails, List<String> lstDetails1) {
+    public boolean ClickMobileIconLocatorVerifyRecallData(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            WebElement elmntMobileAllergiesIconData = waitForElement(By.xpath(strMobileRecallsReminderIconContentLocator
+            WebElement elmntMobileAllergiesIconData = waitForElement(By.xpath(getStrMobileRecallsIconContentLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(4)))));
             jsScrollIntoView(elmntMobileAllergiesIconData);
@@ -1657,13 +1587,12 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntMobileAllergiesIconData);
             for (String str : lstDetails1) {
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strMobilePrescriptionsDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntPaitientDetails)) {
-                    System.out.println("Element is Verify::>>");
+                verifyElement(elmntPaitientDetails);
                 }
-            }
             waitForElementClickable(elmntMobileIcon);
             jsClick(elmntMobileIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1683,57 +1612,6 @@ public class MyHealthRecordsPage extends BasePage {
         waitForElement(elmntMyEntiresReport);
         isVerifed = verifyElement(elmntMyEntiresReport);
         return isVerifed;
-    }
-
-    public boolean ClickAndVerifycMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
-        boolean blResult = false;
-        try {
-            WebElement elmntMyEntiresReport = waitForElement(By.xpath(strClinicalNotesMyEntitesIconLocator
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
-                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))));
-            waitForElement(elmntMyEntiresReport);
-            jsClick(elmntMyEntiresReport);
-
-            for (String str : lstDetails1) {
-                WebElement elmntMyEntries = waitForElement(By.xpath(strMyEntriesInfoDetails.replace("<<DATA>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Verify::>>");
-                }
-            }
-            waitForElementClickable(elmntIcon);
-            jsClick(elmntIcon);
-            blResult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
-    }
-
-    public boolean ClickAndVerifyMobileMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
-        boolean blResult = false;
-        try {
-            WebElement elmntMobilePrescriptionMyEntiresData = waitForElement(By.xpath(strMobilePrescriptionsMyEntitesIconLocator
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(1)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(0)))));
-            waitForElement(elmntMobilePrescriptionMyEntiresData);
-            jsClick(elmntMobilePrescriptionMyEntiresData);
-
-            for (String str : lstDetails1) {
-                WebElement elmntMyEntries = waitForElement(By.xpath(strMobileAllergiesMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
-                }
-            }
-            waitForElementClickable(elmntMobileIcon);
-            jsClick(elmntMobileIcon);
-            blResult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
     }
 
     public boolean verifyPrescriptionsMyEntries(List<String> PrescriptionsMyEntitiesNotesDetails) {
@@ -1762,31 +1640,6 @@ public class MyHealthRecordsPage extends BasePage {
         return isVerifed;
     }
 
-    public boolean VerifyPrescriptionsMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
-        boolean blResult = false;
-        try {
-            WebElement elmntPrescriptionMyEntiresIconData = waitForElement(By.xpath(strPrescriptionsMyEntitesIconLocator
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
-                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))));
-            waitForElement(elmntPrescriptionMyEntiresIconData);
-            jsClick(elmntPrescriptionMyEntiresIconData);
-
-            for (String str : lstDetails1) {
-                WebElement elmntMyEntries = waitForElement(By.xpath(strPrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
-                }
-            }
-            waitForElementClickable(elmntIcon);
-            jsClick(elmntIcon);
-            blResult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
-    }
     public boolean VerifyMyEntriesImmunisationData(List<String> lstDetails, List<String> lstDetails1) {
 
         boolean blResult = false;
@@ -1798,17 +1651,15 @@ public class MyHealthRecordsPage extends BasePage {
             waitForSeconds(5);
             waitForElement(elmntPrescriptionMyEntiresIconData);
             jsClick(elmntPrescriptionMyEntiresIconData);
-
             for (String str : lstDetails1) {
                 waitForSeconds(3);
                 WebElement elmntMyEntries = waitForElement(By.xpath(strPrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
+                verifyElement(elmntMyEntries);
                 }
-            }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerImmunisatoin);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1824,20 +1675,18 @@ public class MyHealthRecordsPage extends BasePage {
             WebElement elmntPrescriptionMyEntiresIconData = waitForElement(By.xpath(StrShareDoctorCOVIDImmunisationsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(0)))));
-            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>"+elmntPrescriptionMyEntiresIconData);
             waitForElementClickable(elmntPrescriptionMyEntiresIconData);
             waitForElement(elmntPrescriptionMyEntiresIconData);
             mouseClick(elmntPrescriptionMyEntiresIconData);
             for (String str : lstDetails1) {
                 waitForSeconds(3);
                 WebElement elmntMyEntries = waitForElement(By.xpath(strPrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
+                verifyElement(elmntMyEntries);
                 }
-            }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerImmunisatoin);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1848,11 +1697,14 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean VerifyMobilePrescriptionsMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
-            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
-            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
-            String currentDate = formatter.format(calendar.getTime());
-            System.out.println(currentDate);
+//            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+//            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+//            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+//            String currentDate = formatter.format(calendar.getTime());
+//            System.out.println(currentDate);
+            String strdatePattern="dd MMM yyyy";
+            String strdate=TestDataUtil.getValue("TODAY");
+            String currentDate=DateUtil.getDate(strdate,strdatePattern);
             WebElement elmntMobilePrescriptionMyEntiresData = waitForElement(By.xpath(strMobilePrescriptionsMyEntitesIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0).concat(strExecutionID)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(currentDate))));
@@ -1861,13 +1713,12 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntMobilePrescriptionMyEntiresData);
             for (String str : lstDetails1) {
                 WebElement elmntMyEntries = waitForElement(By.xpath(strMobilePrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
+                verifyElement(elmntMyEntries);
                 }
-            }
             waitForElementClickable(elmntMobileIcon);
             jsClick(elmntMobileIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1883,16 +1734,13 @@ public class MyHealthRecordsPage extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(currentDate))));
             waitForElement(elmntMobilePrescriptionMyEntiresData);
             jsClick(elmntMobilePrescriptionMyEntiresData);
-
             for (String str : lstDetails1) {
                 WebElement elmntMyEntries = waitForElement(By.xpath(strMobilePrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
+                verifyElement(elmntMyEntries);
                 }
-            }
             waitForElementClickable(elmntMobileIcon);
             jsClick(elmntMobileIcon);
-            blResult = true;
+            blResult = verifyElement(elmntMobileMMHlogo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1905,22 +1753,19 @@ public class MyHealthRecordsPage extends BasePage {
             waitForSeconds(5);
             WebElement elmntPrescriptionMyEntiresIconData = waitForElement(By.xpath(StrShareDoctorImmunisationsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0).concat(strExecutionID)))));
-
             System.out.println(elmntPrescriptionMyEntiresIconData);
             waitForSeconds(5);
             waitForElementClickable(elmntPrescriptionMyEntiresIconData);
             click(elmntPrescriptionMyEntiresIconData);
-
             for (String str : lstDetails1) {
                 waitForSeconds(3);
                 WebElement elmntMyEntries = waitForElement(By.xpath(strPrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
+                verifyElement(elmntMyEntries);
                 }
-            }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerClinicanNotes);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1944,13 +1789,12 @@ public class MyHealthRecordsPage extends BasePage {
             for (String str : lstDetails1) {
                 waitForSeconds(3);
                 WebElement elmntMyEntries = waitForElement(By.xpath(strPrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
+                verifyElement(elmntMyEntries);
                 }
-            }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = true;
+            waitForSeconds(3);
+            blResult = verifyElement(headerAllergies);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1971,71 +1815,6 @@ public class MyHealthRecordsPage extends BasePage {
         isVerifed = verifyElement(elmntMyEntiresReport);
         return isVerifed;
     }
-
-    public boolean verifyMobileAllergiesMyEntries(List<String> PrescriptionsMyEntitiesNotesDetails) {
-        boolean isVerifed = false;
-        System.out.println("Data Value1::>>" + TestDataUtil.getValue(PrescriptionsMyEntitiesNotesDetails.get(1)
-                + "  Data Value2::>>" + TestDataUtil.getValue(PrescriptionsMyEntitiesNotesDetails.get(0))));
-        WebElement elmntMobileAllergiesMyEntiresData = waitForElement(By.xpath(strMobilePrescriptionsMyEntitesIconLocator
-                .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(PrescriptionsMyEntitiesNotesDetails.get(1)))
-                .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(PrescriptionsMyEntitiesNotesDetails.get(0)))));
-        waitForElement(elmntMobileAllergiesMyEntiresData);
-        isVerifed = verifyElement(elmntMobileAllergiesMyEntiresData);
-        return isVerifed;
-    }
-
-    public boolean VerifyAllergiesMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
-        boolean blResult = false;
-        try {
-            WebElement elmntMyEntiresReport = waitForElement(By.xpath(strAllergiesMyEntitesIconLocator
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
-                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))));
-            waitForElement(elmntMyEntiresReport);
-            jsClick(elmntMyEntiresReport);
-
-            for (String str : lstDetails1) {
-                WebElement elmntMyEntries = waitForElement(By.xpath(strAllergiesMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
-                }
-            }
-            waitForElementClickable(elmntIcon);
-            jsClick(elmntIcon);
-            blResult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
-    }
-
-    public boolean VerifyMobileAllergiesMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
-        boolean blResult = false;
-        try {
-            WebElement elmntMobilePrescriptionMyEntiresData = waitForElement(By.xpath(strMobilePrescriptionsMyEntitesIconLocator
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(1)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(0)))));
-            waitForElement(elmntMobilePrescriptionMyEntiresData);
-            jsClick(elmntMobilePrescriptionMyEntiresData);
-
-            for (String str : lstDetails1) {
-                WebElement elmntMyEntries = waitForElement(By.xpath(strMobileAllergiesMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
-                }
-            }
-            waitForElementClickable(elmntMobileIcon);
-            jsClick(elmntMobileIcon);
-            blResult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
-    }
-
-
     public boolean verifyImmunisationsMyEntries(List<String> ImmunisationsMyEntitiesNotesDetails) {
         boolean isVerifed = false;
         System.out.println("Data Value1::>>" + TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(0)
@@ -2047,120 +1826,6 @@ public class MyHealthRecordsPage extends BasePage {
         isVerifed = verifyElement(elmntMyEntiresReport);
         return isVerifed;
     }
-
-    public boolean verifyMobileImmunisationsMyEntries(List<String> ImmunisationsMyEntitiesNotesDetails) {
-        boolean isVerifed = false;
-        System.out.println("Data Value1::>>" + TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(1)
-                + "  Data Value2::>>" + TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(2))));
-        WebElement elmntMobileAllergiesMyEntiresData = waitForElement(By.xpath(strMobilePrescriptionsMyEntitesIconLocator
-                .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(1)))
-                .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(2)))));
-        waitForElement(elmntMobileAllergiesMyEntiresData);
-        isVerifed = verifyElement(elmntMobileAllergiesMyEntiresData);
-        return isVerifed;
-    }
-
-    public boolean VerifyImmunisationsMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
-        boolean blResult = false;
-        try {
-            WebElement elmntMyEntiresReport = waitForElement(By.xpath(strImmunisationsMyEntitesIconLocator
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))));
-            waitForElement(elmntMyEntiresReport);
-            jsClick(elmntMyEntiresReport);
-
-            for (String str : lstDetails1) {
-                WebElement elmntMyEntries = waitForElement(By.xpath(strImmunisationsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
-                }
-            }
-            waitForElementClickable(elmntIcon);
-            jsClick(elmntIcon);
-            blResult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
-    }
-
-    public boolean VerifyMobileImmunisationsMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
-        boolean blResult = false;
-        try {
-            WebElement elmntMobilePrescriptionMyEntiresData = waitForElement(By.xpath(strMobilePrescriptionsMyEntitesIconLocator
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(1)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(2)))));
-            waitForElement(elmntMobilePrescriptionMyEntiresData);
-            jsClick(elmntMobilePrescriptionMyEntiresData);
-
-            for (String str : lstDetails1) {
-                WebElement elmntMyEntries = waitForElement(By.xpath(strMobileAllergiesMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
-                }
-            }
-            waitForElementClickable(elmntMobileIcon);
-            jsClick(elmntMobileIcon);
-            blResult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
-    }
-
-    public boolean VerifyCOVIDImmunisationsMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
-        boolean blResult = false;
-        try {
-            WebElement elmntMyEntiresReport = waitForElement(By.xpath(strCOVIDImmunisationsMyEntitesIconLocator
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))));
-            waitForElement(elmntMyEntiresReport);
-            jsClick(elmntMyEntiresReport);
-
-            for (String str : lstDetails1) {
-                WebElement elmntMyEntries = waitForElement(By.xpath(strCOVIDImmunisationsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
-                }
-            }
-            waitForElementClickable(elmntIcon);
-            jsClick(elmntIcon);
-            blResult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
-    }
-
-    public boolean VerifyMobileCOVIDImmunisationsMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
-        boolean blResult = false;
-        try {
-            WebElement elmntMobilePrescriptionMyEntiresData = waitForElement(By.xpath(strMobilePrescriptionsMyEntitesIconLocator
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(1)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(0)))));
-            waitForElement(elmntMobilePrescriptionMyEntiresData);
-            jsClick(elmntMobilePrescriptionMyEntiresData);
-
-            for (String str : lstDetails1) {
-                WebElement elmntMyEntries = waitForElement(By.xpath(strMobileAllergiesMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
-                }
-            }
-            waitForElementClickable(elmntMobileIcon);
-            jsClick(elmntMobileIcon);
-            blResult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
-    }
-
-
     public boolean verifyClassificationsMyEntitiesNotesDetails(List<String> ClassificationsMyEntitiesNotesDetails) {
         boolean isVerifed = false;
         System.out.println("Data Value1::>>" + TestDataUtil.getValue(ClassificationsMyEntitiesNotesDetails.get(0)
@@ -2172,70 +1837,6 @@ public class MyHealthRecordsPage extends BasePage {
         isVerifed = verifyElement(elmntMyEntiresReport);
         return isVerifed;
     }
-
-    public boolean verifyMobileClassificationsMyEntries(List<String> ImmunisationsMyEntitiesNotesDetails) {
-        boolean isVerifed = false;
-        System.out.println("Data Value1::>>" + TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(1)
-                + "  Data Value2::>>" + TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(0))));
-        WebElement elmntMobileAllergiesMyEntiresData = waitForElement(By.xpath(strMobilePrescriptionsMyEntitesIconLocator
-                .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(1)))
-                .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(ImmunisationsMyEntitiesNotesDetails.get(0)))));
-        waitForElement(elmntMobileAllergiesMyEntiresData);
-        isVerifed = verifyElement(elmntMobileAllergiesMyEntiresData);
-        return isVerifed;
-    }
-
-    public boolean VerifyClassificationsMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
-        boolean blResult = false;
-        try {
-            WebElement elmntMyEntiresReport = waitForElement(By.xpath(strClassificationsMyEntitesIconLocator
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))));
-            waitForElement(elmntMyEntiresReport);
-            jsClick(elmntMyEntiresReport);
-
-            for (String str : lstDetails1) {
-                WebElement elmntMyEntries = waitForElement(By.xpath(strClassificationsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
-                }
-            }
-            waitForElementClickable(elmntIcon);
-            jsClick(elmntIcon);
-            blResult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
-    }
-
-    public boolean VerifyMobileClassificationMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
-        boolean blResult = false;
-        try {
-            WebElement elmntMobilePrescriptionMyEntiresData = waitForElement(By.xpath(strMobilePrescriptionsMyEntitesIconLocator
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(1)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(0)))));
-            waitForElement(elmntMobilePrescriptionMyEntiresData);
-            jsClick(elmntMobilePrescriptionMyEntiresData);
-
-            for (String str : lstDetails1) {
-                WebElement elmntMyEntries = waitForElement(By.xpath(strMobileAllergiesMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
-                if (verifyElement(elmntMyEntries)) {
-                    System.out.println("Element is Displayed::>>");
-                }
-            }
-            waitForElementClickable(elmntMobileIcon);
-            jsClick(elmntMobileIcon);
-            blResult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
-    }
-
-
     public void enterVistedName(String strVisitedName) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             PrescriptionsMedicationName = strVisitedName.concat(strExecutionID);
