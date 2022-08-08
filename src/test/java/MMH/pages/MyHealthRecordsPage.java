@@ -299,7 +299,7 @@ public class MyHealthRecordsPage extends BasePage {
     protected String StrDoctorImmunisationsIconLocator = new StringBuilder()
             .append("//td[contains(text(),'")
             .append("<<REPLACEMENT1>>").append("')]/following-sibling::td[text()='")
-            .append("<<REPLACEMENT2>>").append("')]/following-sibling::td/button[contains(@class,'moreinfo')]").toString();
+            .append("<<REPLACEMENT2>>").append("']/following-sibling::td/button[contains(@class,'moreinfo')]").toString();
 
     protected String strTestingPrescriptionsMyEntitesIconLocator = new StringBuilder()
             .append("//td[contains(text(),'")
