@@ -497,7 +497,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='uploadDocument']")
     protected WebElement btnFloorplanUpload;
 
-    @FindBy(how = How.XPATH, using = "//p[text()='Do you know the visited date?']//following::div[40]//button")
+    @FindBy(how = How.XPATH, using = "//textarea[@formcontrolname='clinicalNotesInformation']//following::div[12]//button")
     protected WebElement elmntSave;
 
     @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='clinicianCheckbox'])[2]//following::button[1]")
@@ -601,16 +601,16 @@ public class MyHealthRecordsPage extends BasePage {
     protected String elmntVerifyDelete = new StringBuilder().append("//td[text()='")
             .append("<<REPLACEMENT>>").append("']").toString();
 
-    @FindBy(how = How.XPATH, using = "//p[text()='What is the status?']//following::div[11]")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='status']")
     protected WebElement elmntclassificationdrop;
 
-    @FindBy(how = How.XPATH, using = "//p[text()=' Name of Vaccine']//following::div[12]//mat-select")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='Vaccine']")
     protected WebElement elmntCovidImmunisationsdrop;
 
-    @FindBy(how = How.XPATH, using = "//p[text()='Severity']//following::div[12]")
+    @FindBy(how = How.XPATH, using = "(//mat-select[@formcontrolname='severityType'])[1]")
     protected WebElement elmntAllergicdrop;
 
-    @FindBy(how = How.XPATH, using = "//p[text()='Status']//following::div[12]")
+    @FindBy(how = How.XPATH, using = "(//mat-select[@formcontrolname='statusType'])[1]")
     protected WebElement elmntAllergicdrop1;
 
     @FindBy(how = How.XPATH, using = "(//mat-select[@formcontrolname='howOften'])[1]")

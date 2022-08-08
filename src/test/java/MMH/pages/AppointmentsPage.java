@@ -1472,17 +1472,11 @@ public class AppointmentsPage extends BasePage {
 
             String strDateMonth = strDateValue;
             String strTime = strSlotDate;
-
             System.out.println("CANCEL TIME" + strTime);
-
             String strConvertedTime = strTime;
-
             strConvertedTime = "0" + strConvertedTime;
-
             String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
-
             System.out.println(strFinalOutDateTime);
-
             WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
             verifyElement(elmntAppointmentDetails);
             jsScrollIntoView(elmntAppointmentDetails);

@@ -222,7 +222,6 @@ Feature: My Health Records Demo
       | &ADDITIONAL_INFORMATION& |
     Then I should see all the Classifications My Entries Medicine details in more info
       | &DATA_MY_ENTRIES_CLASSIFICATIONS& | &CLASSIFICATIONS_INFO_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLASSIFICATION& |
-
     Examples:
       | Option     |
       | My Entries |
