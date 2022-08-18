@@ -614,7 +614,7 @@ public class MessagesPage extends BasePage {
     protected String strMobileDraftData = new StringBuilder()
         .append("(//span[contains(text(),'")
         .append("<<REPLACEMENT>>")
-        .append("')])[2]").toString();
+        .append("')])[4]").toString();
 
 //
 //    protected String strMobileDraftData = new StringBuilder()

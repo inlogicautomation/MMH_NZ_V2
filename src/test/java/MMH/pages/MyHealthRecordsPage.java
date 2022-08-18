@@ -2781,14 +2781,15 @@ public class MyHealthRecordsPage extends BasePage {
     public void clickEditButton(String strCreatedRecord) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             String strMedicationName = strCreatedRecord.concat(strExecutionID);
-//        strVisitedName = strCreatedRecord;
+//          strVisitedName = strCreatedRecord;
             WebElement btnEdit = waitForElement(By.xpath(elmntEdit.replace("<<REPLACEMENT>>", strMedicationName)));
             click(btnEdit);
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            strVisitedName = strCreatedRecord;
-            WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strCreatedRecord)));
+//          strVisitedName = strCreatedRecord;
+            String strMedicationName = strCreatedRecord.concat(strExecutionID);
+            WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
             click(btnEdit);
             waitForSeconds(3);
             jsScrollIntoView(btnMobilePrescriptionsEdit);
