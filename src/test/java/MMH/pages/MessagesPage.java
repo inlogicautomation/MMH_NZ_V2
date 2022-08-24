@@ -2425,6 +2425,8 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(btnInboxAttachButton);
 //        waitForElement(btnInboxAttachButton);
             jsClick(btnInboxAttachButton);
+            waitForSeconds(1);
+            takeScreenshot(driver);
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -2432,6 +2434,8 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(btnMobileInboxAttachButton);
 //        waitForElement(btnInboxAttachButton);
             jsClick(btnMobileInboxAttachButton);
+            waitForSeconds(1);
+            takeScreenshot(driver);
         }
     }
 
