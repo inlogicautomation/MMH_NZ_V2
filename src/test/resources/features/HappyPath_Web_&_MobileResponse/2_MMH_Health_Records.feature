@@ -1,4 +1,13 @@
-Feature: My Health Records Demo
+Feature: My Health Records
+
+  @WEB @S1 @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  Scenario Template: Changing machines timezone
+
+    Given I change Windows "<TimeZone>"
+
+    Examples:
+      | TimeZone                  |
+      | New Zealand Standard Time |
 
   @WEB @S1 @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: User Successfully logs in to the MMH Portal.

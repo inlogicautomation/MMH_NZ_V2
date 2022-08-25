@@ -19,6 +19,17 @@ public class WindowsProcessUtil {
         return process;
     }
 
+    public static Process startTimeZoneProcess(String strTimeZone) {
+        Process pb = null;
+        try {
+            ProcessBuilder process = new ProcessBuilder("C:\\Windows\\System32\\tzutil.exe", "/s", strTimeZone);
+            pb = process.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pb;
+    }
+
     public static void stopProcess(Process pb) {
         try {
             pb.destroy();

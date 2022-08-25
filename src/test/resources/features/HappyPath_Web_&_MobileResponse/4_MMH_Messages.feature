@@ -1,6 +1,15 @@
 Feature: Messages
 
   @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  Scenario Template: Changing machines timezone
+
+    Given I change Windows "<TimeZone>"
+
+    Examples:
+      | TimeZone                  |
+      | New Zealand Standard Time |
+
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -238,6 +247,15 @@ Feature: Messages
     Examples:
       | Start Date   | End Date   | Message          |
       | &START DATE& | &END DATE& | &OUT OF MESSAGE& |
+
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  Scenario Template: Changing machines timezone
+
+    Given I change Windows "<TimeZone>"
+
+    Examples:
+      | TimeZone            |
+      | India Standard Time |
 
 #  @MESSAGES @LAST
 #  Scenario Template: S9- Patient Out Of Office Settings

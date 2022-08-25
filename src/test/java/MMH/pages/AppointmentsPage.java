@@ -373,10 +373,12 @@ public class AppointmentsPage extends BasePage {
     public boolean selectHealthCenter(String strHealthCenter) {
         boolean blResult = false;
         try {
-            waitForSeconds(6);
+//          waitForSeconds(6);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //          waitForElementClickable(elmntWarningPopup);
             waitForElement(elmntHealtCenter);
             waitAndClick(elmntHealtCenter);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectHealthCenter = waitForElementFewSeconds(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", strHealthCenter)));
             waitForSeconds(2);
             waitAndClick(elmntSelectHealthCenter);
@@ -392,6 +394,7 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(4);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntLocationCenter);
             waitForSeconds(2);
             waitAndClick(elmntLocationCenter);

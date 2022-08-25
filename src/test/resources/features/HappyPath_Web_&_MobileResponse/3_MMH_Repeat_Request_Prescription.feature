@@ -1,6 +1,15 @@
 Feature: Repeat Request Prescription
 
-  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @TEST123
+  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  Scenario Template: Changing machines timezone
+
+    Given I change Windows "<TimeZone>"
+
+    Examples:
+      | TimeZone                  |
+      | New Zealand Standard Time |
+
+  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page

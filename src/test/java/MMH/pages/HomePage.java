@@ -3,6 +3,7 @@ package MMH.pages;
 import cap.common.BasePage;
 import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
+import cap.utilities.WindowsProcessUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +15,8 @@ public class HomePage extends BasePage {
     public HomePage(WebDriver driver) {
         super(driver);
     }
+
+    static Process pb = null;
 
     //MMH_v2
 
@@ -333,6 +336,20 @@ public class HomePage extends BasePage {
         waitForSeconds(1);
         waitForElement(elmntSideBar);
         return verifyElement(elmntSideBar);
+    }
+
+    public boolean changeTimeZone(String strTimeZone) {
+        boolean blResult = false;
+        try {
+            pb = WindowsProcessUtil.startTimeZoneProcess(strTimeZone);
+            waitForSeconds(5);
+            WindowsProcessUtil.stopProcess(pb);
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+
     }
 }
 

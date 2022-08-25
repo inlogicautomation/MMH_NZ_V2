@@ -2505,6 +2505,11 @@ public class WebSteps {
             }
         }
     }
+
+    @Given("I change Windows {string}")
+    public void iChangeWindowsTimeZone(String strTimeZone) {
+        Assert.assertTrue(demoPageContainer.homePage.changeTimeZone(strTimeZone));
+    }
 }
 
   

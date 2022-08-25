@@ -541,7 +541,7 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
         try {
             refreshPage();
-            waitForSeconds(5);
+            waitForSeconds(10);
             waitForElementClickable(drpdownLocation);
             waitForSeconds(2);
             click(drpdownLocation);
