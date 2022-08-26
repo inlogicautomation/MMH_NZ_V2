@@ -2957,26 +2957,25 @@ public class MyHealthRecordsPage extends BasePage {
     public void clickDelete(String strCreatedRecord) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             String strMedicationName = strCreatedRecord.concat(strExecutionID);
-//        strVisitedName = strCreatedRecord;
+//          strVisitedName = strCreatedRecord;
             waitForSeconds(2);
             WebElement btnDelete = waitForElement(By.xpath(elmntDelete.replace("<<REPLACEMENT>>", strMedicationName)));
-            click(btnDelete);
-            waitForSeconds(2);
-            waitForElement(btnYes);
-            click(btnYes);
+            waitAndClick(btnDelete);
+            waitForSeconds(5);
+            waitForElementClickable(btnYes);
+            waitAndClick(btnYes);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             String strMedicationName = strCreatedRecord.concat(strExecutionID);
-
             WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
             jsClick(btnEdit);
-            waitForSeconds(2);
+            waitForSeconds(4);
             jsScrollIntoView(btnMobilePrescriptionDelete);
             waitForElementClickable(btnMobilePrescriptionDelete);
             jsClick(btnMobilePrescriptionDelete);
-            waitForSeconds(2);
+            waitForSeconds(4);
             waitForElement(btnYes);
-            click(btnYes);
+            waitAndClick(btnYes);
         }
     }
 

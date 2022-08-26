@@ -54,6 +54,8 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='Location']")
     protected WebElement drpdownLocation;
 
+    protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
+
     protected String selectLocation = new StringBuilder()
             .append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
@@ -541,21 +543,19 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
         try {
             refreshPage();
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(10);
             waitForElementClickable(drpdownLocation);
-            waitForSeconds(2);
+            waitForSeconds(4);
             click(drpdownLocation);
-            waitForSeconds(2);
+            waitForSeconds(4);
             System.out.println(" select Location Locator :: " + selectLocation.replace("<<REPLACEMENT>>", strLocation) + "\n");
             WebElement ddlLocation = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
             waitForElementClickable(ddlLocation);
             waitForSeconds(2);
             System.out.println("Location was selected in the Request Medication >>> ::");
             mouseClick(ddlLocation);
-
             blResult = true;
-
-
         } catch (Exception e) {
             System.out.println("Location not selected in the Request Medication");
             e.printStackTrace();
@@ -569,7 +569,7 @@ public class RepeatPrescription extends BasePage {
         try {
             waitForSeconds(5);
 
-            waitForElement(drpdownDoctor);
+            waitForElementClickable(drpdownDoctor);
             click(drpdownDoctor);
             waitForSeconds(2);
 
@@ -1416,14 +1416,12 @@ public class RepeatPrescription extends BasePage {
     public boolean selectMedicationsToRepeatForMobile(String strMedication) {
         boolean blResult = false;
         try {
-
             System.out.println("selectMedication XPath >>>>" + chkMedicationForMobile.replace("<<REPLACEMENT>>", strMedication));
             WebElement selectMedication = waitForElement(By.xpath(chkMedicationForMobile.replace("<<REPLACEMENT>>", strMedication)));
             waitForElementClickable(selectMedication);
             jsClick(selectMedication);
             waitForSeconds(2);
             blResult = true;
-
         } catch (Exception e) {
             System.out.println("Failed to Select Medications To Repeat >>>");
             e.printStackTrace();

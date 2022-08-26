@@ -373,15 +373,19 @@ public class AppointmentsPage extends BasePage {
     public boolean selectHealthCenter(String strHealthCenter) {
         boolean blResult = false;
         try {
-//          waitForSeconds(6);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-//          waitForElementClickable(elmntWarningPopup);
-            waitForElement(elmntHealtCenter);
+            waitForSeconds(10);
+            waitForElementClickable(elmntHealtCenter);
+            jsScrollIntoView(elmntSlotTimes);
+            waitForSeconds(5);
+            jsScrollIntoView(elmntHealtCenter);
             waitAndClick(elmntHealtCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(2);
             WebElement elmntSelectHealthCenter = waitForElementFewSeconds(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", strHealthCenter)));
             waitForSeconds(2);
             waitAndClick(elmntSelectHealthCenter);
+            waitForSeconds(2);
             blResult = verifyElement(elmntLocationCenter);
         } catch (Exception e) {
             e.printStackTrace();
@@ -432,12 +436,12 @@ public class AppointmentsPage extends BasePage {
         try {
             waitForSeconds(4);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(elmntFamilyMemberCenter);
+            waitForElementClickable(elmntFamilyMemberCenter);
             waitForSeconds(2);
             waitAndClick(elmntFamilyMemberCenter);
             WebElement elmntSelectFamilyMember = waitForElementFewSeconds(By.xpath(elmntFamilyMember.replace("<<REPLACEMENT>>", strFamilyMember)));
             waitAndClick(elmntSelectFamilyMember);
-            waitForElement(elmntAppointmentPanel);
+            waitForElementClickable(elmntAppointmentPanel);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -449,7 +453,7 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(elmntReason);
+            waitForElementClickable(elmntReason);
             waitAndClick(elmntReason);
 
             if (strReason.contains(",")) {
@@ -480,7 +484,7 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(elmntBookingTypeContainer);
+            waitForElementClickable(elmntBookingTypeContainer);
             WebElement elmntTypeOfAppointment = waitForElement(By.xpath(elmntBookingType.replace("<<REPLACEMENT>>", strBookingType)));
             click(elmntTypeOfAppointment);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -506,7 +510,7 @@ public class AppointmentsPage extends BasePage {
             try {
                 WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
                 verifyElement(elmntDate);
-                waitForElement(elmntDate);
+                waitForElementClickable(elmntDate);
                 waitForSeconds(3);
                 waitAndClick(elmntDate);
             } catch (Exception e) {
@@ -515,7 +519,7 @@ public class AppointmentsPage extends BasePage {
                 waitForSeconds(3);
                 WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
                 verifyElement(elmntDate);
-                waitForElement(elmntDate);
+                waitForElementClickable(elmntDate);
                 waitForSeconds(3);
                 waitAndClick(elmntDate);
             }
@@ -792,7 +796,7 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(elmntProviderList);
+            waitForElementClickable(elmntProviderList);
             WebElement elmntProvider = waitForElement(By.xpath(elmntSelectProvider.replace("<<REPLACEMENT>>", strProvider)));
             waitForSeconds(2);
             jsClick(elmntProvider);
@@ -1199,7 +1203,6 @@ public class AppointmentsPage extends BasePage {
         }
         return isVerified;
     }
-
 
 
     public void clickMaxvalue() {

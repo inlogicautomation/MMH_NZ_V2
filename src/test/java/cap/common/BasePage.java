@@ -570,7 +570,7 @@ public class BasePage {
     }
 
     protected WebElement waitForElementFewSeconds(By by) {
-        WebDriverWait tempWait = new WebDriverWait(this.driver, 5);
+        WebDriverWait tempWait = new WebDriverWait(this.driver, 30);
         return tempWait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 

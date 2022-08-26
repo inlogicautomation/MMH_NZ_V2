@@ -327,8 +327,8 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.appointmentsPage.clickCancelButtonForTheCreatedAppointment(lstDetails));
     }
 
-    @And("I logout from tha application")
-    public void iLogoutFromThaApplication() {
+    @And("I logout from the application")
+    public void iLogoutFromTheApplication() {
         Assert.assertTrue(demoPageContainer.homePage.clickLogoutButton());
     }
 
