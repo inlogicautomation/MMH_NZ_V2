@@ -609,7 +609,7 @@ public class AppointmentsPage extends BasePage {
             try {
                 waitForSeconds(2);
                 waitForElement(elmntPaymentProfile);
-                String strDatePattern1 = "dd/MM/yyyy";
+                String strDatePattern1 = "dd MMM yyyy";
                 String strDate = TestDataUtil.getValue(strFutureDate);
                 String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
                 System.out.println("DATE" + strDateValue);
