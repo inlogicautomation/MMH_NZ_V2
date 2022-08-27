@@ -73,7 +73,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Keep me Logged In for')]")
     protected WebElement txtKeepMeLogged;
 
-    @FindBy(how = How.XPATH, using = "//figure[contains(text(),'When I receive new messages send alerts')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'When I receive new messages send alerts')]")
     protected WebElement txtSendAlert;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Save')]")
@@ -364,6 +364,8 @@ public class MessagesPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
     protected WebElement btnHealthCentre;
+
+    protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
     @FindBy(how = How.XPATH, using = "(//select[contains(@id,'GroupMessage1')])[1]")
     protected WebElement btnfrom;
@@ -1820,14 +1822,17 @@ public class MessagesPage extends BasePage {
             System.out.println("Member " + strFamilyMember);
 
             waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(btnHealthCentre);
             jsClick(btnHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntHealthCentre.replace("<<REPLACEMENT>>", strFamilyMember)));
 
             waitForSeconds(1);
             waitForElementClickable(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1917,13 +1922,13 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(btnLocation);
             waitForSeconds(2);
             jsClick(btnLocation);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>", strFamilyMember)));
             waitForSeconds(1);
             waitForElementClickable(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
             blResult = true;
         } catch (Exception e) {
@@ -1940,10 +1945,12 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(btnServiceName);
             waitForSeconds(2);
             jsClick(btnServiceName);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntServiceName.replace("<<REPLACEMENT>>", strFamilyMember)));
             waitForSeconds(1);
             waitForElementClickable(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1959,10 +1966,12 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(btnRole);
             waitForSeconds(2);
             jsClick(btnRole);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntRole.replace("<<REPLACEMENT>>", strFamilyMember)));
             waitForSeconds(1);
             waitForElementClickable(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1978,11 +1987,13 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(btnTo);
             waitForSeconds(2);
             jsClick(btnTo);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntTo.replace("<<REPLACEMENT>>", strFamilyMember)));
             waitForSeconds(1);
             jsScrollIntoView(elmntEntriesFromHealthCentre);
             waitForElementClickable(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();

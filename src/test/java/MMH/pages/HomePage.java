@@ -4,6 +4,7 @@ import cap.common.BasePage;
 import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
 import cap.utilities.WindowsProcessUtil;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -101,10 +102,12 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Sign in']")
     protected WebElement SignInBtn;
 
+    protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
     public void clickSignInButton() {
         waitForElement(SignInBtn);
         click(SignInBtn);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
     }
 
 
@@ -275,23 +278,30 @@ public class HomePage extends BasePage {
     }
 
     public boolean clickDashBoardForMobile() {
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         takeScreenshot(driver);
         waitForSeconds(2);
         waitForElementClickable(btnMobileMenu);
         jsClick(btnMobileMenu);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElement(elmntDashBoard);
         click(elmntDashBoard);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         driver.navigate().refresh();
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         return verifyElement(elmntVerifyHomePage);
     }
 
     public boolean clickDashBoard() {
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(2);
         waitForElement(elmntDashBoard);
         click(elmntDashBoard);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         driver.navigate().refresh();
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         return verifyElement(elmntVerifyHomePage);
     }
 

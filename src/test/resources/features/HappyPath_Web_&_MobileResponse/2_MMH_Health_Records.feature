@@ -95,7 +95,7 @@ Feature: My Health Records
       | Allergies        |
       | &FILTER_BY_DATA& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @CHECK
   Scenario Template: S4-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Allergies Details
 
     Given As a user I am on HomePage
@@ -116,7 +116,7 @@ Feature: My Health Records
       | Option     |
       | My Entries |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @CHECK
   Scenario Template: S4-Patient validate edit and delete in My entries Allergies Details
 
     Given I am on "<Tab>" Allergies page
@@ -215,7 +215,7 @@ Feature: My Health Records
       | Classifications  |
       | &FILTER_BY_DATA& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @CHECK
   Scenario Template: S8-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Classifications Details
 
     Given As a user I am on HomePage
@@ -235,7 +235,7 @@ Feature: My Health Records
       | Option     |
       | My Entries |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @CHECK
   Scenario Template: S8-Patient validate edit and delete in My entries Classifications Details
 
     Given I am on "<Tab>" Classifications page

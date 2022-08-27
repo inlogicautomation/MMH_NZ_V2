@@ -9,7 +9,7 @@ Feature: Appointments
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @PAY
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -30,6 +30,32 @@ Feature: Appointments
     Examples:
       | Appointment         |
       | Future Appointments |
+
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  Scenario Template: S5 - Patient Booking Appointment - Using Card Payment
+
+    Given As a user I am on HomePage
+    And I navigate to the "<Appointment>" page
+    And I enter the visit appointment details "<Appointment_Details>"
+    When I click confirm button
+    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
+
+    Examples:
+      | Appointment      | Appointment_Details                         | Details_For_Appointment                        | Future_Date   |
+      | Book Appointment | &BOOK_VISIT_APPOINTMENT_USING_CARD_PAYMENT& | &VISIT_APPOINTMENT_DETAILS_USING_CARD_PAYMENT& | &FUTURE_DATE& |
+
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  Scenario Template: S5 - Patient Booking Appointment - Using Card Payment
+
+    And I select payment option "<Payment_Option>"
+    And I accept the terms & conditions and confirm my booking
+    And I see page navigated to the payment option
+    When I enter the card details and confirm payment "<Payment_Details>"
+    Then I should see payment has been processed successfully with appointment details "<Appointment_Details>" "<Future_Date>"
+
+    Examples:
+      | Payment_Option   | Payment_Details | Appointment_Details        | Future_Date   |
+      | &PAYMENT_OPTION& | &CARD_DETAILS&  | &CARD_APPOINTMENT_DETAILS& | &FUTURE_DATE& |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S1 Patient Booking Appointment - Visit Appointment
@@ -142,31 +168,6 @@ Feature: Appointments
       | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
       | Book Appointment | &BOOK_PHONE_APPOINTMENT& | &PHONE_APPOINTMENT_DETAILS& | &PHONE_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
-  Scenario Template: S5 - Patient Booking Appointment - Using Card Payment
-
-    Given As a user I am on HomePage
-    And I navigate to the "<Appointment>" page
-    And I enter the visit appointment details "<Appointment_Details>"
-    When I click confirm button
-    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
-
-    Examples:
-      | Appointment      | Appointment_Details                         | Details_For_Appointment                        | Future_Date   |
-      | Book Appointment | &BOOK_VISIT_APPOINTMENT_USING_CARD_PAYMENT& | &VISIT_APPOINTMENT_DETAILS_USING_CARD_PAYMENT& | &FUTURE_DATE& |
-
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
-  Scenario Template: S5 - Patient Booking Appointment - Using Card Payment
-
-    And I select payment option "<Payment_Option>"
-    And I accept the terms & conditions and confirm my booking
-    And I see page navigated to the payment option
-    When I enter the card details and confirm payment "<Payment_Details>"
-    Then I should see payment has been processed successfully with appointment details "<Appointment_Details>" "<Future_Date>"
-
-    Examples:
-      | Payment_Option   | Payment_Details | Appointment_Details        | Future_Date   |
-      | &PAYMENT_OPTION& | &CARD_DETAILS&  | &CARD_APPOINTMENT_DETAILS& | &FUTURE_DATE& |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S7 - Patient can view all the future date booked appointments in card view

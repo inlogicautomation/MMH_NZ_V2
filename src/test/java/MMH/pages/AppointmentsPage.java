@@ -301,6 +301,8 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='alert-header-content']/h3[contains(text(),'Payment')]")
     protected WebElement elmntPaymentPopup;
 
+    protected String elmntPaymentPopup1 = "//div[@class='alert-header-content']/h3[contains(text(),'Payment')]";
+
     @FindBy(how = How.XPATH, using = "//img[@id='DpsCustomerLogo']")
     protected WebElement elmntPaymentPage;
 
@@ -375,13 +377,16 @@ public class AppointmentsPage extends BasePage {
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(10);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntHealtCenter);
             jsScrollIntoView(elmntSlotTimes);
             waitForSeconds(5);
-            jsScrollIntoView(elmntHealtCenter);
+            jsScrollIntoView(elmntAppointmentPanel);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitAndClick(elmntHealtCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectHealthCenter = waitForElementFewSeconds(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", strHealthCenter)));
             waitForSeconds(2);
             waitAndClick(elmntSelectHealthCenter);
@@ -402,6 +407,7 @@ public class AppointmentsPage extends BasePage {
             waitForElementClickable(elmntLocationCenter);
             waitForSeconds(2);
             waitAndClick(elmntLocationCenter);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>", strLocation)));
             waitAndClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -498,6 +504,8 @@ public class AppointmentsPage extends BasePage {
     public boolean selectFutureDateOnCalender(String strFutureDate) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(5);
             String strDatePattern1 = "d";
             String strDate = strFutureDate;
 
@@ -512,16 +520,23 @@ public class AppointmentsPage extends BasePage {
                 verifyElement(elmntDate);
                 waitForElementClickable(elmntDate);
                 waitForSeconds(3);
-                waitAndClick(elmntDate);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                jsClick(elmntDate);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(2);
             } catch (Exception e) {
                 verifyElement(elmntCalendarNavNext);
                 click(elmntCalendarNavNext);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(3);
                 WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
                 verifyElement(elmntDate);
                 waitForElementClickable(elmntDate);
                 waitForSeconds(3);
-                waitAndClick(elmntDate);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                jsClick(elmntDate);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(2);
             }
 
             blResult = verifyElement(elmntAppointmentCalendar);
@@ -547,6 +562,7 @@ public class AppointmentsPage extends BasePage {
             strSlotDate = lstAvailableSlots.get(1).getText();
             System.out.println("Slot Date" + strSlotDate);
             waitAndClick(lstAvailableSlots.get(1));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
 //            for (int i = 1; i <= lstAvailableSlots.size(); i++) {
 //                lstAvailableSlots.get(i).click();
@@ -563,20 +579,24 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(2);
-                jsScrollDown();
-                jsScrollIntoView(btnConfirmDesktop);
+//              jsScrollDown();
+              jsScrollIntoView(btnConfirmDesktop);
                 waitForElement(btnConfirmDesktop);
                 click(btnConfirmDesktop);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(5);
                 blResult = true;
             }
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(2);
-                jsScrollDown();
+//                jsScrollDown();
                 jsScrollIntoView(btnConfirmMobile);
                 waitForElement(btnConfirmMobile);
                 click(btnConfirmMobile);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(5);
                 blResult = true;
             }
@@ -591,6 +611,7 @@ public class AppointmentsPage extends BasePage {
     public boolean verifyDetailsOfCreatedAppointment(List<String> lstDetails, String strFutureDate) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElement(elmntPaymentProfile);
             String strDatePattern1 = "dd MMM yyyy";
@@ -654,11 +675,11 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-
                 waitForSeconds(2);
                 waitForElement(elmntPaymentProfile);
                 verifyElement(btnConfirmYourBookingEnabled);
                 click(btnConfirmYourBookingEnabled);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(4);
                 blResult = true;
             }
@@ -668,6 +689,7 @@ public class AppointmentsPage extends BasePage {
                 waitForElement(elmntPaymentProfile);
                 verifyElement(btnConfirmYourBookingEnabledmobile);
                 click(btnConfirmYourBookingEnabledmobile);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(4);
                 blResult = true;
             }
@@ -687,6 +709,7 @@ public class AppointmentsPage extends BasePage {
                 waitForElement(elmntPaymentProfile);
                 waitForElementClickable(chkAcceptandTerms);
                 click(chkAcceptandTerms);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 blResult = verifyElement(btnConfirmYourBookingEnabled);
             }
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -695,6 +718,7 @@ public class AppointmentsPage extends BasePage {
                 waitForElement(elmntPaymentProfile);
                 waitForElementClickable(chkAcceptandTerms);
                 click(chkAcceptandTerms);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 blResult = verifyElement(btnConfirmYourBookingEnabledmobile);
             }
 
@@ -829,6 +853,7 @@ public class AppointmentsPage extends BasePage {
             WebElement elmntProvider1 = waitForElement(By.xpath(elmntSelectProviderMobileView.replace("<<REPLACEMENT>>", strProvider)));
             waitForSeconds(3);
             jsClick(elmntProvider1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             takeScreenshot(driver);
             blResult = true;
@@ -883,6 +908,9 @@ public class AppointmentsPage extends BasePage {
                 DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
                 LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
                 boolean isDateCorrect = inputDate1.isAfter(localDate1);
+                if (!isDateCorrect) {
+                    isDateCorrect = inputDate1.isEqual(localDate1);
+                }
                 System.out.println("GRID Date is Before Equal::" + isDateCorrect);
                 isVerified = isDateCorrect;
                 if (!isDateCorrect) {
@@ -1037,6 +1065,9 @@ public class AppointmentsPage extends BasePage {
             DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
             LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
             boolean isDateCorrect = inputDate1.isAfter(localDate1);
+            if (!isDateCorrect) {
+                isDateCorrect = inputDate1.isEqual(localDate1);
+            }
             System.out.println("Card Date is Equal::" + isDateCorrect);
             isVerifed = isDateCorrect;
             if (!isDateCorrect) {
@@ -1061,8 +1092,9 @@ public class AppointmentsPage extends BasePage {
 
     public boolean verifyGridView() {
         boolean isVerifed = false;
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(5);
-        waitForElement(elmntTableNote);
+//        waitForElement(elmntTableNote);
         if (elmntsAppointmentDatesInGrid.size() != 0) {
             isVerifed = true;
         }
@@ -1327,11 +1359,14 @@ public class AppointmentsPage extends BasePage {
     public boolean acceptThePaymentPopup() {
         boolean blResult = false;
         try {
+            waitForElementToAppear(driver , By.xpath(elmntPaymentPopup1));
             waitForSeconds(4);
             waitForElement(elmntPaymentPopup);
             verifyElement(btnPaymentPopupOK);
             click(btnPaymentPopupOK);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1342,7 +1377,8 @@ public class AppointmentsPage extends BasePage {
     public boolean verifyPageNavigatedToPaymentWindow() {
         boolean blResult = false;
         try {
-            waitForSeconds(4);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(6);
             compareCurrentUrlTill("https://uat.paymentexpress.com/pxmi3https://uat.paymentexpress.com/pxmi3", "i3");
             blResult = verifyElement(elmntPaymentPage);
             ;
@@ -1751,6 +1787,9 @@ public class AppointmentsPage extends BasePage {
             DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
             LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
             boolean isDateCorrect = inputDate1.isAfter(localDate1);
+            if (!isDateCorrect) {
+                isDateCorrect = inputDate1.isEqual(localDate1);
+            }
             System.out.println("Card Date is Equal::" + isDateCorrect);
             isVerifed = isDateCorrect;
             if (!isDateCorrect) {
@@ -1829,7 +1868,9 @@ public class AppointmentsPage extends BasePage {
                         waitForSeconds(2);
                         verifyElement(btnConfirmCancellAppointment);
                         click(btnConfirmCancellAppointment);
+                        waitForElementDisappear(driver, By.xpath(elmntSpinner));
                         verifyElement(elmntAppoinmentCancelMessage);
+                        waitForElementDisappear(driver, By.xpath(elmntSpinner));
                         waitForSeconds(5);
                         isVerified = true;
                     }

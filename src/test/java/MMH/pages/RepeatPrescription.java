@@ -256,11 +256,15 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'Your request has been sent successfully. Once the request has been processed, you will get an email ')]")
     protected WebElement emlntSuccessPopUp;
 
+    protected String emlntSuccessPopUp1 = "//p[contains(text(),'Your request has been sent successfully. Once the request has been processed, you will get an email ')]";
+
     @FindBy(how = How.XPATH, using = "(//div[@class='repeat-card-block yellow ng-star-inserted'])[1]")
     protected WebElement emlntPrescriptionStatus;
 
     @FindBy(how = How.XPATH, using = "(//mat-card-title[@class='mat-card-title'])[1]")
     protected WebElement txtPrescriptionDate;
+
+    protected String txtPrescriptionDate1 = "(//mat-card-title[@class='mat-card-title'])[1]";
 
     @FindBy(how = How.XPATH, using = "//mat-select[@name='ddlSelectOrSearchFax' or @placeholder='Select or search for a pharmacy']")
     protected WebElement drpDownPharmacy;
@@ -555,6 +559,7 @@ public class RepeatPrescription extends BasePage {
             waitForSeconds(2);
             System.out.println("Location was selected in the Request Medication >>> ::");
             mouseClick(ddlLocation);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
             System.out.println("Location not selected in the Request Medication");
@@ -567,18 +572,19 @@ public class RepeatPrescription extends BasePage {
     public boolean selectDoctor(String strDoctor) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(5);
-
             waitForElementClickable(drpdownDoctor);
             click(drpdownDoctor);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
-
             System.out.println("Doctor xpath >>> : " + selectDoctor.replace("<<REPLACEMENT>>", strDoctor));
             WebElement ddlDoctor = waitForElement(By.xpath(selectDoctor.replace("<<REPLACEMENT>>", strDoctor)));
             selectDoctor.replace("<<REPLACEMENT>>", strDoctor);
             waitForElementClickable(ddlDoctor);
             waitForSeconds(2);
-            mouseClick(ddlDoctor);
+            waitAndClick(ddlDoctor);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             takeScreenshot(driver);
             blResult = true;
 
@@ -593,6 +599,7 @@ public class RepeatPrescription extends BasePage {
     public boolean selectInstructions(String strInstruction) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(drpdownInstructions);
             jsClick(drpdownInstructions);
             waitForSeconds(2);
@@ -600,7 +607,8 @@ public class RepeatPrescription extends BasePage {
             WebElement ddlInstructions = waitForElement(By.xpath(selectInstructions.replace("<<REPLACEMENT>>", strInstruction)));
             waitForElementClickable(ddlInstructions);
             waitForSeconds(2);
-            mouseClick(ddlInstructions);
+            waitAndClick(ddlInstructions);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            waitForInvisibilityOfElement(elmntLoadingSpinner);
             blResult = true;
 
@@ -724,6 +732,7 @@ public class RepeatPrescription extends BasePage {
         try {
             waitForElementClickable(chkTermsAndCondion);
             click(chkTermsAndCondion);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             takeScreenshot(driver);
             System.out.println("Terms and Condition was selected in the Request Medication");
             blResult = true;
@@ -739,9 +748,13 @@ public class RepeatPrescription extends BasePage {
     public boolean clickPayAtHealthCentre() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(btnPayAtHealthCentre);
+            waitForSeconds(4);
             click(btnPayAtHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println(" Successfully Selected Pay at Health centre Button >>>");
+            waitForElementToAppear(driver, By.xpath(emlntSuccessPopUp1));
             waitForElement(emlntSuccessPopUp);
             blResult = verifyElement(emlntSuccessPopUp);
 
@@ -756,9 +769,12 @@ public class RepeatPrescription extends BasePage {
     public boolean clickPayNow() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(btnPayNow);
+            waitForSeconds(4);
             click(btnPayNow);
-            waitForSeconds(2);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(6);
             takeScreenshot(driver);
             System.out.println("Successfully clicked Pay now button >>>");
             blResult = verifyElement(txtPayment);
@@ -774,6 +790,9 @@ public class RepeatPrescription extends BasePage {
     public boolean verifyTheSuccessAndNavigateToViewHistory() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(3);
+            waitForElement(txtRRPSuccessPopUp);
             verifyElement(txtRRPSuccessPopUp);
             waitForSeconds(5);
             waitForElement(txtViewPreviousRequests);
@@ -795,12 +814,12 @@ public class RepeatPrescription extends BasePage {
             verifyElement(txtPayment);
             waitForElementClickable(btnPaymentOk);
             click(btnPaymentOk);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
-//            waitForInvisibilityOfElement(elmntLoadingSpinner);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtPaymentCheckOut);
             blResult = verifyElement(txtPaymentCheckOut);
             System.out.println("Repeat Prescription was success  and Successfully to navigate the View History Page>>>>>>");
-
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Repeat Prescription was not success and so failed to navigate to View History Page >>>");
@@ -836,6 +855,7 @@ public class RepeatPrescription extends BasePage {
 
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtViewPreviousRequests);
             verifyElement(txtViewPreviousRequests);
             waitForSeconds(3);
@@ -848,6 +868,8 @@ public class RepeatPrescription extends BasePage {
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
             waitForSeconds(2);
+            waitForElementToAppear(driver, By.xpath(txtPrescriptionDate1));
+            waitForSeconds(3);
             waitForElement(txtPrescriptionDate);
             String prescriptionDate = txtPrescriptionDate.getText();
             System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
@@ -891,6 +913,7 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
 
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             ArrayList<String> lstPrescriptionDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strPrescriptionDetails);
 
@@ -910,6 +933,8 @@ public class RepeatPrescription extends BasePage {
             String currentDate = formatter.format(calendar.getTime());
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
+            waitForElementToAppear(driver, By.xpath(txtPrescriptionDate1));
+            waitForSeconds(3);
             String prescriptionDate = txtPrescriptionDate.getText();
             System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
 
@@ -952,6 +977,7 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
 
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             ArrayList<String> lstPrescriptionDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strPrescriptionDetails);
 
             System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
@@ -972,6 +998,8 @@ public class RepeatPrescription extends BasePage {
             String currentDate = formatter.format(calendar.getTime());
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
+            waitForElementToAppear(driver, By.xpath(txtPrescriptionDate1));
+            waitForSeconds(3);
             waitForElement(txtPrescriptionDate);
             String prescriptionDate = txtPrescriptionDate.getText();
             System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
@@ -1017,6 +1045,7 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
 
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             ArrayList<String> lstPrescriptionDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strPrescriptionDetails);
 
             System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
@@ -1037,6 +1066,8 @@ public class RepeatPrescription extends BasePage {
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
             waitForSeconds(2);
+            waitForElementToAppear(driver, By.xpath(txtPrescriptionDate1));
+            waitForSeconds(3);
             waitForElement(txtPrescriptionDate);
             String prescriptionDate = txtPrescriptionDate.getText();
             System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
@@ -1077,6 +1108,7 @@ public class RepeatPrescription extends BasePage {
     public boolean verifyThePrescriptionDetailsForPatientToCollectTheScriptInCardView(String strPrescriptionDetails) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             ArrayList<String> lstPrescriptionDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strPrescriptionDetails);
 
             System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
@@ -1096,6 +1128,8 @@ public class RepeatPrescription extends BasePage {
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
             waitForSeconds(2);
+            waitForElementToAppear(driver, By.xpath(txtPrescriptionDate1));
+            waitForSeconds(3);
             waitForElement(txtPrescriptionDate);
             String prescriptionDate = txtPrescriptionDate.getText();
             System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
@@ -1155,6 +1189,8 @@ public class RepeatPrescription extends BasePage {
 
             String currentDate = formatter.format(calendar.getTime());
             System.out.println(currentDate);
+            waitForElementToAppear(driver, By.xpath(txtPrescriptionDate1));
+            waitForSeconds(3);
             System.out.println("currentDate >>>: " + currentDate);
             String prescriptionDate = txtPrescriptionDate.getText();
             System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
