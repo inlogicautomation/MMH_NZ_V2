@@ -3034,18 +3034,23 @@ public class MyHealthRecordsPage extends BasePage {
 
     public void clickCovidDelete(String strCreatedRecord) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             strVisitedName = strCreatedRecord;
             WebElement btnDelete = waitForElement(By.xpath(elmntDelete.replace("<<REPLACEMENT>>", strCreatedRecord)));
             click(btnDelete);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(3);
             waitForElement(btnYes);
             click(btnYes);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(4);
             strVisitedName = strCreatedRecord;
             WebElement btnDelete = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strCreatedRecord)));
             click(btnDelete);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             jsScrollIntoView(btnMobilePrescriptionDelete);
             waitForElementClickable(btnMobilePrescriptionDelete);

@@ -279,8 +279,8 @@ public class HomePage extends BasePage {
 
     public boolean clickDashBoardForMobile() {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        takeScreenshot(driver);
         waitForSeconds(2);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElementClickable(btnMobileMenu);
         jsClick(btnMobileMenu);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));

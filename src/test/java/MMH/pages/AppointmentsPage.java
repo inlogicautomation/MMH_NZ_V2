@@ -376,11 +376,11 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(10);
+            waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntHealtCenter);
             jsScrollIntoView(elmntSlotTimes);
-            waitForSeconds(5);
+            waitForSeconds(2);
             jsScrollIntoView(elmntAppointmentPanel);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitAndClick(elmntHealtCenter);
@@ -440,13 +440,14 @@ public class AppointmentsPage extends BasePage {
     public boolean selectAppointmentIsFor(String strFamilyMember) {
         boolean blResult = false;
         try {
-            waitForSeconds(4);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(4);
             waitForElementClickable(elmntFamilyMemberCenter);
             waitForSeconds(2);
             waitAndClick(elmntFamilyMemberCenter);
             WebElement elmntSelectFamilyMember = waitForElementFewSeconds(By.xpath(elmntFamilyMember.replace("<<REPLACEMENT>>", strFamilyMember)));
             waitAndClick(elmntSelectFamilyMember);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntAppointmentPanel);
             blResult = true;
         } catch (Exception e) {
@@ -458,6 +459,7 @@ public class AppointmentsPage extends BasePage {
     public boolean selectReasonForBooking(String strReason) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElementClickable(elmntReason);
             waitAndClick(elmntReason);
@@ -489,6 +491,7 @@ public class AppointmentsPage extends BasePage {
     public boolean selectTypeOfAppointment(String strBookingType) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElementClickable(elmntBookingTypeContainer);
             WebElement elmntTypeOfAppointment = waitForElement(By.xpath(elmntBookingType.replace("<<REPLACEMENT>>", strBookingType)));
@@ -845,6 +848,7 @@ public class AppointmentsPage extends BasePage {
 //                System.out.println("Swipe>>>>> " + verifyElement(elmntProvider));
 //                swipeHorizontalMobileView(elmntProviders);
                 click(elmntProviders);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(5);
                 Robot robot = new Robot();
                 robot.keyPress(KeyEvent.VK_RIGHT);
@@ -934,6 +938,9 @@ public class AppointmentsPage extends BasePage {
             DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
             LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
             boolean isDateCorrect = inputDate1.isAfter(localDate1);
+            if (!isDateCorrect) {
+                isDateCorrect = inputDate1.isEqual(localDate1);
+            }
             System.out.println("GRID Date is Before Equal::" + isDateCorrect);
             isVerified = isDateCorrect;
             if (!isDateCorrect) {
@@ -1890,7 +1897,7 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         waitForSeconds(2);
         waitForElement(elmntPaymentSuccess);
-        String strDatePattern1 = "EEEE, MMMM dd, yyyy";
+        String strDatePattern1 = "EEEE, MMMM d, yyyy";
         String strDate = TestDataUtil.getValue(strFutureDate);
         String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
         System.out.println("DATE" + strDateValue);

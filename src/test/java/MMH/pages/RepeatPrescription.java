@@ -582,8 +582,8 @@ public class RepeatPrescription extends BasePage {
             WebElement ddlDoctor = waitForElement(By.xpath(selectDoctor.replace("<<REPLACEMENT>>", strDoctor)));
             selectDoctor.replace("<<REPLACEMENT>>", strDoctor);
             waitForElementClickable(ddlDoctor);
-            waitForSeconds(2);
-            waitAndClick(ddlDoctor);
+            waitForSeconds(4);
+            mouseClick(ddlDoctor);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             takeScreenshot(driver);
             blResult = true;
