@@ -529,7 +529,7 @@ public class AppointmentsPage extends BasePage {
                 waitForSeconds(2);
             } catch (Exception e) {
                 verifyElement(elmntCalendarNavNext);
-                click(elmntCalendarNavNext);
+                jsClick(elmntCalendarNavNext);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(3);
                 WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
