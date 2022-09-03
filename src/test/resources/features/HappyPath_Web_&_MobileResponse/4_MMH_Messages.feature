@@ -280,3 +280,51 @@ Feature: Messages
 #      | Message Details                 | Out of Office Reply Message |
 #      | &OUT_OF_OFFICE_MESSAGE_DETAILS& | &&                          |
 
+
+  #============================================================================
+
+  @WEB @MESSAGES @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  Scenario Template: User Successfully logs in to the MMH Portal.
+
+    Given As a user I am on MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+
+    Examples:
+      | Email Address       | Password               |
+      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
+
+
+  @WEB @MESSAGES @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  Scenario Outline: S3- User verify the Received Message
+
+    Given As a user I am on HomePage and navigate to Inbox
+    When I verify received "<Message>" in the Patient Inbox
+    Then I download the attachment file and delete the downloaded attachment file
+
+    Examples:
+      | Message                            |
+      | &MOBILE_RESPONSE_RECEIVED_MESSAGE& |
+
+  @WEB @MESSAGES @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  Scenario Template: S4- User Verifies the Patient Reply Message
+
+    Given As a user I am on HomePage and navigate to Inbox
+    And I click the Received message and I "<Reply>" to the received message
+    When I Click the Reply send message
+    Then I should verify the sent reply message in Sent items
+
+    Examples:
+      | Reply                           |
+      | &MOBILE_RESPONSE_REPLY_MESSAGE& |
+
+  @WEB @MESSAGES @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  Scenario Template: S5-  User verifies the Patient Group Message
+
+    Given As a user I am on HomePage and navigate to GroupMessage
+    And I verify the provider sent "<Group Message Details>"
+
+    Examples:
+      | Group Message Details        |
+      | &MOBILE_RESPONSE_GROUP_MESSAGE_DETAILS& |

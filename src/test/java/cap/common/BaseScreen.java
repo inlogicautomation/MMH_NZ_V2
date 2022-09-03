@@ -20,6 +20,8 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
@@ -69,6 +71,17 @@ public class BaseScreen {
         WebElement ele;
         try {
             ele = waitForElement(element);
+            ele.click();
+            return true;
+        } catch (Exception e) {
+            System.out.println("\n Click Element:: " + e.getMessage());
+            return false;
+        }
+    }
+    public boolean click(By by) {
+        WebElement ele;
+        try {
+            ele = waitForElement(by);
             ele.click();
             return true;
         } catch (Exception e) {
@@ -388,4 +401,15 @@ public class BaseScreen {
         });
         return elmnt;
     }
+
+    public static String strImageDirectory = System.getProperty("user.dir") + "\\config\\Images\\";
+
+    public void pushFileToDevice(String strImageName) {
+        try {
+            ((AndroidDriver<WebElement>) driver).pushFile("/sdcard/Download/" + strImageName + "", new File(strImageDirectory + strImageName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

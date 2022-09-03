@@ -6,8 +6,8 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(features = {"src/test/resources/features/HappyPath_Mobile_App"},
         monochrome = true,
-        tags = "@Mobile_Appointment",
-        glue = {"MMH_MobileApp"},
+        tags = "@HAPPY_PATH_MOBILE",
+        glue = {"MMH_MobileApp","MMH"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         })

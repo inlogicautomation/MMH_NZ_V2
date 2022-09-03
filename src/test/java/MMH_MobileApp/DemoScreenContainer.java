@@ -25,6 +25,8 @@ public class DemoScreenContainer {
     public static HomeScreen homeScreen;
     public static AppointmentsScreen appointmentsScreen;
     public static HealthRecordsScreen healthRecordsScreen;
+    public static RepeatRequestPrescriptionScreen repeatRequestPrescriptionScreen;
+    public static MessageScreen messageScreen;
 
     public static Scenario myScenario;
     public static LinkedHashMap<String, String> printTestDataMap = new LinkedHashMap<String, String>();
@@ -41,6 +43,8 @@ public class DemoScreenContainer {
         homeScreen = new HomeScreen(driver);
         appointmentsScreen = new AppointmentsScreen(driver);
         healthRecordsScreen = new HealthRecordsScreen(driver);
+        repeatRequestPrescriptionScreen = new RepeatRequestPrescriptionScreen(driver);
+        messageScreen = new MessageScreen(driver);
     }
 
     @After("@MOBILE")
@@ -55,6 +59,9 @@ public class DemoScreenContainer {
         System.out.println("\n Scenario outline: " + scenario.getName());
         System.out.println("\n Scenario Status: " + scenario.getStatus());
         if (scenario.getSourceTagNames().contains("@RELAUNCH")) {
+            homeScreen.appRelaunch();
+        }
+        if (scenario.isFailed()) {
             homeScreen.appRelaunch();
         }
     }

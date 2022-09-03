@@ -34,8 +34,8 @@ public class SharedDriver {
         System.out.println("\n >> Execution String: " + strExecutionID);
 
         if (strExecutionType.equalsIgnoreCase("BROWSER")
-                    || strExecutionType.equalsIgnoreCase("MOBILEVIEW")
-                    || strExecutionType.equalsIgnoreCase("TABLETVIEW")) {
+                || strExecutionType.equalsIgnoreCase("MOBILEVIEW")
+                || strExecutionType.equalsIgnoreCase("TABLETVIEW")) {
 
             //Launch WebDriver
             driver = DriverUtil.getDriver();

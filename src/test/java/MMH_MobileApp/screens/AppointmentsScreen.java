@@ -114,6 +114,7 @@ public class AppointmentsScreen extends BaseScreen {
     @AndroidFindBy(xpath = "//android.view.View[@text='Card Number:*']/following-sibling::android.view.View//android.widget.EditText")
     protected WebElement txtCardNumber;
 
+
     @AndroidFindBy(xpath = "//android.view.View[@text='Name On Card:*']/following-sibling::android.view.View//android.widget.EditText")
     protected WebElement txtCardName;
 
@@ -140,6 +141,21 @@ public class AppointmentsScreen extends BaseScreen {
 
     @AndroidFindBy(xpath = "//android.widget.Button[@text='CONTINUE']")
     protected WebElement btnContinueInPayment;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Reason for cancellation*']/following::android.widget.EditText")
+    protected WebElement txtReasonForCancellation;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='CANCEL APPOINTMENT']")
+    protected WebElement btnCancelAppointment;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Confirmation']")
+    protected WebElement popUpConfirmation;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='YES']")
+    protected WebElement btnYes;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Appointment has been cancelled successfully.']")
+    protected WebElement popUpCancelledSuccessfully;
 
     String strButtonTextLocator = new StringBuilder()
             .append("//android.widget.Button[@text='")
@@ -212,11 +228,12 @@ public class AppointmentsScreen extends BaseScreen {
         waitForElement(elmntFuture);
         click(elmntFuture);
         waitForElementIgnoreStale(btnBookAppointment);
-        waitForElement(btnBookAppointment);
+        waitForSecond(5);
         click(btnBookAppointment);
     }
 
-    public void tapLocation(String strLocation) {
+    public void selectLocation(String strLocation) {
+        waitForSecond(10);
         System.out.println("Location: " + strLocation);
         attachStepLog("Location", strLocation);
         waitForElement(elmntSelectLocation);
@@ -225,6 +242,7 @@ public class AppointmentsScreen extends BaseScreen {
     }
 
     public void tapNoInAppointmentPreScreening() {
+        waitForSecond(5);
         waitForElement(elmntAppointmentPreScreening);
         waitForElement(btnNO);
         click(btnNO);
@@ -242,6 +260,7 @@ public class AppointmentsScreen extends BaseScreen {
         waitForElement(By.xpath(strButtonTextLocator.replace("<<TEXT>>", strProvider)));
         String strDatePattern1 = "MMMM E d";
         String strDate = strFutureDate;
+        waitForElement(elmntVisit);
 
         String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
         System.out.println("DATE: " + strDateValue);
@@ -253,7 +272,8 @@ public class AppointmentsScreen extends BaseScreen {
         System.out.println("Appointment: " + strAppointment);
         attachStepLog("Appointment", strAppointment);
         waitForElement(elmntVisit);
-        waitForSecond(8);
+        waitForElements(lstAvailableTimeSlot);
+        waitForSecond(2);
         WebElement elmntAppointment = waitForElement(By.xpath(strButtonTextLocator.replace("<<TEXT>>", strAppointment)));
         click(elmntAppointment);
     }
@@ -287,7 +307,7 @@ public class AppointmentsScreen extends BaseScreen {
     public boolean verifyDetailsOfConfirmAppointment(List<String> lstDetails, String strFutureDate) {
         boolean blResult = false;
         waitForElementIgnoreStale(elmntConfirmAppointment);
-        waitForElement(elmntConfirmAppointment);
+//        waitForElement(elmntConfirmAppointment);
 
         String strDatePattern1 = "EEEE";
         String strDatePattern2 = "dd MMMM yyyy";
@@ -297,8 +317,8 @@ public class AppointmentsScreen extends BaseScreen {
         String strDateValue2 = DateUtil.getDate(strDate, strDatePattern2);
 
         if (!(strTimeSlot.contains("10:") || strTimeSlot.contains("11:") || strTimeSlot.contains("12:"))) {
-            System.out.println("Append 0: " + strTimeSlot);
             strTimeSlot = "0" + strTimeSlot.trim();
+            System.out.println("Append 0: " + strTimeSlot);
         }
         strDateValue = strDateValue + " " + strTimeSlot;
         System.out.println("Appointment Time: " + strDateValue);
@@ -309,6 +329,7 @@ public class AppointmentsScreen extends BaseScreen {
         lstDetails.add(strDateValue2);
 
 
+        waitForSecond(5);
         for (String strDetails : lstDetails) {
             WebElement elmntAppointmentDetails = waitForElement(By.xpath(strTextViewLocator.replace("<<TEXT>>", TestDataUtil.getValue(strDetails))));
             blResult = verifyElement(elmntAppointmentDetails);
@@ -323,6 +344,7 @@ public class AppointmentsScreen extends BaseScreen {
     }
 
     public void tapSendAppointmentRequest() {
+        waitForSecond(3);
         waitForElement(btnSendAppointmentRequest);
         click(btnSendAppointmentRequest);
     }
@@ -343,10 +365,12 @@ public class AppointmentsScreen extends BaseScreen {
     }
 
     public void tapOK() {
+        waitForSecond(3);
         waitForElement(popUpOk);
         click(popUpOk);
     }
 
+    public static By elmntAppointmentDetails = null;
 
     public boolean verifyCreatedAppointmentInServiceTab(List<String> lstDetails, String strFutureDate, String strAppointment) {
         waitForElement(elmntServicesHeader);
@@ -360,7 +384,7 @@ public class AppointmentsScreen extends BaseScreen {
         attachStepLog("Appointment Time", strDateValue);
         lstDetails.add(strDateValue);
 
-        waitForSecond(80);
+        waitForSecond(120);
 
         reLaunchAppAndroid();
         waitForElement(elmntServicesIcon);
@@ -372,8 +396,6 @@ public class AppointmentsScreen extends BaseScreen {
         waitForSecond(2);
         swipeDown();
         waitForSecond(2);
-
-        By elmntAppointmentDetails = null;
 
 
         if (strAppointment.equals("VISIT")) {
@@ -423,7 +445,7 @@ public class AppointmentsScreen extends BaseScreen {
                 System.out.println("Loop Break 1");
                 break;
             }
-            if (!exitLoop(600000, startTime)) {
+            if (!exitLoop(6000000, startTime)) {
                 System.out.println("Loop Break 2");
                 break;
             }
@@ -435,7 +457,7 @@ public class AppointmentsScreen extends BaseScreen {
 
     public void enterContactNumber(String strContactNumber) {
         waitForElementIgnoreStale(elmntConfirmAppointment);
-        waitForElement(elmntConfirmAppointment);
+        waitForSecond(2);
         waitForElement(txtContactNumber);
         enterValue(txtContactNumber, strContactNumber);
     }
@@ -461,6 +483,7 @@ public class AppointmentsScreen extends BaseScreen {
     }
 
     public boolean verifyPaymentInformation() {
+        waitForSecond(4);
         waitForElement(popUpPaymentInfo);
         System.out.println("Payment Information: " + popUpPaymentInfo.getText());
         attachStepLog("Payment Information", popUpPaymentInfo.getText());
@@ -472,6 +495,7 @@ public class AppointmentsScreen extends BaseScreen {
         waitForElement(elmntAmount);
         attachStepLog("Amount", elmntAmount.getText());
         System.out.println("Amount: " + elmntAmount.getText());
+        waitForSecond(2);
         waitForElement(txtCardNumber);
         enterValue(txtCardNumber, strCardNumber);
     }
@@ -538,7 +562,7 @@ public class AppointmentsScreen extends BaseScreen {
         lstDetails.add(strAmount);
         lstDetails.add(strDateValue);
 
-        waitForSecond(80);
+        waitForSecond(180);
 
         reLaunchAppAndroid();
         waitForElement(elmntServicesIcon);
@@ -551,7 +575,7 @@ public class AppointmentsScreen extends BaseScreen {
         swipeDown();
         waitForSecond(2);
 
-        By elmntAppointmentDetails = null;
+//        By elmntAppointmentDetails = null;
 
         if (strAppointment.equals("VISIT")) {
             System.out.println("Enter " + strAppointment);
@@ -599,7 +623,7 @@ public class AppointmentsScreen extends BaseScreen {
                 System.out.println("Loop Break 1");
                 break;
             }
-            if (!exitLoop(600000, startTime)) {
+            if (!exitLoop(6000000, startTime)) {
                 System.out.println("Loop Break 2");
                 break;
             }
@@ -613,5 +637,33 @@ public class AppointmentsScreen extends BaseScreen {
         waitForElementIgnoreStale(elmntConfirmAppointment);
         waitForElement(elmntConfirmAppointment);
         return verifyElement(elmntConfirmAppointment);
+    }
+
+    public boolean verifyServiceScreen() {
+        waitForElement(elmntServicesHeader);
+        return verifyElement(elmntServicesHeader);
+    }
+
+    public void tapCancelAppointment() {
+        waitForElement(elmntServicesHeader);
+        System.out.println("Cancel: " + elmntAppointmentDetails);
+        waitForElement(elmntAppointmentDetails);
+        click(elmntAppointmentDetails);
+        waitForElement(txtReasonForCancellation);
+        takeScreenshot(driver);
+        enterValue(txtReasonForCancellation, "Test Cancel");
+        swipeUp();
+        waitForElement(btnCancelAppointment);
+        tapCooridinatesByElement(btnCancelAppointment);
+    }
+
+    public boolean verifyCancelMessage() {
+        waitForElement(popUpConfirmation);
+        takeScreenshot(driver);
+        waitForElement(btnYes);
+        click(btnYes);
+        waitForElement(popUpCancelledSuccessfully);
+        takeScreenshot(driver);
+        return verifyElement(popUpCancelledSuccessfully);
     }
 }

@@ -42,8 +42,9 @@ public class DriverUtil {
 //        String strEnvironment = "";
 //        if (strExecutionType.equalsIgnoreCase("BROWSER")) {
         String strBrowser = System.getProperty(Constants.ENV_VARIABLE_BROWSER_NAME, "");
+        String strExecutionType = System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "");
 
-        if (strConfig.isEmpty()) {
+        if (strConfig.isEmpty() || strExecutionType.equalsIgnoreCase("WEBMOBILE")) {
             driver = getLocalDriver(strBrowser);
             driver.manage().window().maximize();
         } else if (strConfig.equalsIgnoreCase("remote")) {

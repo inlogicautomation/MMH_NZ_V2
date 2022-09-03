@@ -46,6 +46,10 @@ public class HealthRecordsScreen extends BaseScreen {
             .append("(//android.widget.TextView[contains(@text,'")
             .append("<<TEXT>>").append("')]/following::android.widget.TextView[@text='View'])[1]").toString();
 
+    String strRecordsViewLocator1 = new StringBuilder()
+            .append("(//android.widget.TextView[contains(@text,'")
+            .append("<<TEXT1>>").append("')]/following::android.widget.TextView[@text='")
+            .append("<<TEXT2>>").append("']/following::android.widget.TextView[@text='View'])[1]").toString();
 
     public void tapHealthRecordOption(String strHealthRecordOption) {
         waitForElements(lstHealthRecordNo);
@@ -74,13 +78,17 @@ public class HealthRecordsScreen extends BaseScreen {
     }
 
     public void tapRecordView(List<String> lstRecords) {
-        WebElement elmntRecord = waitForElement(By.xpath(strRecordsViewLocator.replace("<<TEXT>>", lstRecords.get(0))));
+//      WebElement elmntRecord = waitForElement(By.xpath(strRecordsViewLocator.replace("<<TEXT>>", lstRecords.get(0))));
+        WebElement elmntRecord = waitForElement(By.xpath(strRecordsViewLocator1
+                .replace("<<TEXT1>>", lstRecords.get(0))
+                .replace(("<<TEXT2>>"), lstRecords.get(1))));
         click(elmntRecord);
     }
 
     public boolean verifyRecordDetails(List<String> lstRecordDetails) {
         boolean blResult = false;
-
+        waitForSecond(3);
+        swipeUpShort();
         for (String strRecordDetail : lstRecordDetails) {
             WebElement elmntDetail = waitForElement(By.xpath(strContainsTextViewLocator.replace("<<TEXT>>", strRecordDetail)));
             blResult = verifyElement(elmntDetail);

@@ -2195,6 +2195,9 @@ public class WebSteps {
     @Given("As a user I am on HomePage and navigate to Inbox")
     public void asAUserIAmOnHomePageAndNavigateToInbox() {
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+        }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientInboxMessage());
     }
 
@@ -2202,7 +2205,13 @@ public class WebSteps {
     public void iVerifyReceivedInThePatientInbox(String strMessageDetails) {
         List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
         System.out.println("List Message Details >>> :: " + lstMessageDetails);
-        Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessage(TestDataUtil.getValue(lstMessageDetails.get(5))));
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessageForMobile(TestDataUtil.getValue(lstMessageDetails.get(4))));
+        }else {
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessage(TestDataUtil.getValue(lstMessageDetails.get(5))));
+
+        }
+
 
     }
 
@@ -2218,7 +2227,12 @@ public class WebSteps {
     public void iClickTheReceivedMessageAndIToTheReceivedMessage(String strReplyMessage) {
         List<String> lstReplyMessage = TestDataUtil.getListOfValue(strReplyMessage);
         System.out.println("lstReplyMessage >>> :: " + lstReplyMessage);
-        Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessage(TestDataUtil.getValue(lstReplyMessage.get(5))));
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessageForMobile(TestDataUtil.getValue(lstReplyMessage.get(5))));
+        }else {
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessage(TestDataUtil.getValue(lstReplyMessage.get(5))));
+        }
         demoPageContainer.messagesPage.clickInboxAttachButton();
         demoPageContainer.messagesPage.VerifyAttachdowloadSuccessfully();
         demoPageContainer.messagesPage.DeleteFile();
@@ -2303,14 +2317,23 @@ public class WebSteps {
     @Given("As a user I am on HomePage and navigate to GroupMessage")
     public void asAUserIAmOnHomePageAndNavigateToGroupMessage() {
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+        }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientGroupMessage());
     }
 
 
     @And("I verify the provider sent {string}")
-    public void iVerifyTheProviderSent(String strGroupMesssage) {
-        List<String> listGroupMessage = TestDataUtil.getListOfValue(strGroupMesssage);
-        Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(4)), listGroupMessage.get(5)));
+    public void iVerifyTheProviderSent(String strGroupMessage) {
+        List<String> listGroupMessage = TestDataUtil.getListOfValue(strGroupMessage);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessageForMobile((listGroupMessage.get(0)), listGroupMessage.get(1)));
+        }else {
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(4)), listGroupMessage.get(5)));
+
+        }
+
     }
 
     @And("I enter the Compose Mail{string}")

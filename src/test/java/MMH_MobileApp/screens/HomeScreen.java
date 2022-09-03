@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 public class HomeScreen extends BaseScreen {
 
     public HomeScreen(WebDriver driver) {
+
         super(driver);
     }
 
@@ -26,6 +27,9 @@ public class HomeScreen extends BaseScreen {
     protected WebElement iconHome;
 
     By byconfirmPopUp = By.xpath("//android.widget.TextView[@text='Confirm!']");
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='YES']")
+    protected WebElement btnYes;
 
     String strOptionsInHomeScreenLocator = new StringBuilder()
             .append("//android.widget.TextView[@text='")
@@ -56,7 +60,7 @@ public class HomeScreen extends BaseScreen {
             navigateToBack();
             i++;
         }
-        waitForSecond(1);
+        waitForSecond(2);
         click(iconHome);
         waitForElement(iconNotification);
         waitForElement(iconLogout);
@@ -71,5 +75,12 @@ public class HomeScreen extends BaseScreen {
 
     public void appRelaunch() {
         reLaunchAppAndroid();
+    }
+
+    public void tapLogout() {
+        waitForElement(iconLogout);
+        click(iconLogout);
+        waitForElement(btnYes);
+        click(btnYes);
     }
 }
