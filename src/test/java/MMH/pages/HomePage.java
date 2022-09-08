@@ -5,10 +5,15 @@ import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
 import cap.utilities.WindowsProcessUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 
 public class HomePage extends BasePage {
@@ -18,6 +23,11 @@ public class HomePage extends BasePage {
     }
 
     static Process pb = null;
+
+    public static String strAppVersion;
+    public static String strBrowserName;
+    public static String strBrowserVersion;
+    public static String strSystemName;
 
     //MMH_v2
 
@@ -36,6 +46,8 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[contains(text(),' Sign Out ')]")
     protected WebElement elmntSignout;
 
+    @FindBy(how = How.XPATH, using = "//div[@class='appVersion']/small")
+    protected WebElement txtAppVersion;
 
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health, today')]")
     protected WebElement elmntVerifyHomePage;
@@ -182,6 +194,15 @@ public class HomePage extends BasePage {
 
     public boolean verifyHomePageOfMMHPortal() {
         waitForElement(elmntVerifyHomePage);
+        strAppVersion = txtAppVersion.getText();
+        Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+        strBrowserName = cap.getBrowserName();
+        strBrowserVersion = cap.getVersion();
+        try {
+            strSystemName= InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         takeScreenshot(driver);
         return verifyElement(elmntVerifyHomePage);
     }

@@ -379,8 +379,9 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntHealtCenter);
-            jsScrollIntoView(elmntSlotTimes);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
+//          jsScrollIntoView(elmntSlotTimes);
             jsScrollIntoView(elmntAppointmentPanel);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitAndClick(elmntHealtCenter);
@@ -1355,7 +1356,9 @@ public class AppointmentsPage extends BasePage {
         try {
             waitForSeconds(4);
             WebElement elmntPaymentOption = waitForElement(By.xpath(elmntSelectPaymentOption.replace("<<REPLACEMENT>>", strPaymentOption)));
-            click(elmntPaymentOption);
+            jsScrollDown();
+            jsScrollIntoView(elmntPaymentOption);
+            jsClick(elmntPaymentOption);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
