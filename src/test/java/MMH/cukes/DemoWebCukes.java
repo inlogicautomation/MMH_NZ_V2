@@ -25,13 +25,15 @@ public class DemoWebCukes extends AbstractTestNGCucumberTests {
 
     @AfterClass
     public void teardown() {
-        ExtentService.getInstance().setSystemInfo("SYSTEM NAME", strSystemName);
-        ExtentService.getInstance().setSystemInfo("SYSTEM USER NAME", System.getProperty("user.name"));
-        ExtentService.getInstance().setSystemInfo("OS", System.getProperty("os.name"));
-        ExtentService.getInstance().setSystemInfo("BROWSER DETAILS", strBrowserName);
-        ExtentService.getInstance().setSystemInfo("BROWSER VERSION", strBrowserVersion);
-        ExtentService.getInstance().setSystemInfo("BUILD NUMBER", strAppVersion);
-        ExtentService.getInstance().setSystemInfo("APP URL", TestDataUtil.getValue("&URL&"));
+        ExtentService.getInstance().setSystemInfo("Application Name", "V2 Feature Development");
+        ExtentService.getInstance().setSystemInfo("Application URL", TestDataUtil.getValue("&URL&"));
+        ExtentService.getInstance().setSystemInfo("Execution Build", strAppVersion);
+        ExtentService.getInstance().setSystemInfo("Operating System", System.getProperty("os.name"));
+        ExtentService.getInstance().setSystemInfo("Execution Browser", strBrowserName);
+        ExtentService.getInstance().setSystemInfo("Browser Version", strBrowserVersion);
+        ExtentService.getInstance().setSystemInfo("Execution Machine", strSystemName);
+        ExtentService.getInstance().setSystemInfo("Automation QA", System.getProperty("user.name"));
+
 
     }
 }
