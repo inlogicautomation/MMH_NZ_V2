@@ -26,6 +26,7 @@ import static MMH.pages.HomePage.strAppVersion;
 public class DemoMobileViewCukes extends AbstractTestNGCucumberTests {
         @AfterClass
         public void teardown() {
+                ExtentService.getInstance().setSystemInfo("Application Name", "V2 Feature Development");
                 ExtentService.getInstance().setSystemInfo("Application URL", TestDataUtil.getValue("&URL&"));
                 ExtentService.getInstance().setSystemInfo("Execution Build", strAppVersion);
                 ExtentService.getInstance().setSystemInfo("Operating System", System.getProperty("os.name"));
