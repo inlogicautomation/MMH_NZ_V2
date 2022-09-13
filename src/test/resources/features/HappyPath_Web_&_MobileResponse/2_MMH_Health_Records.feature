@@ -267,7 +267,7 @@ Feature: My Health Records
       | &LAB_RESULT_TABLE_DATA_1& | &TEST_RESULT_ICON_DATA_1& | &TEST_MOBILE_RESULT_ICON_DATA_1& |
     And I navigate to the Homepage
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S10-Patient to View Health Records & Verify the Clinic Notes Entries from Health Centre Medicine Details
 
     Given As a user I am on HomePage
@@ -288,7 +288,7 @@ Feature: My Health Records
       | ClinicNotes      |
       | &FILTER_BY_DATA& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S11-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Clinic Notes Details
 
     Given As a user I am on HomePage

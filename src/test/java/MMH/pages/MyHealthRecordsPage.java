@@ -49,6 +49,9 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement headerRecalls;
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'All Sources')]/ancestor::mat-form-field//span[text()]")
     protected WebElement elmntFilterdropPrescriptions;
+
+    @FindBy(how = How.XPATH, using = "//mat-option//child::span[normalize-space(text())='My Entries']")
+    protected WebElement elmntFilterdropMyEntries;
     protected String elmntFilterbyDrop = new StringBuilder().append("//mat-option//child::span[normalize-space(text())='")
             .append("<<REPLACEMENT>>").append("']").toString();
 
@@ -2643,13 +2646,39 @@ public class MyHealthRecordsPage extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(elmntSave);
             click(elmntSave);
+
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForElement(elmntMobileSave);
             click(elmntMobileSave);
+
         }
     }
 
+    public void RefreshPage() {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForSeconds(3);
+            driver.navigate().refresh();
+            waitForSeconds(3);
+            waitForElementClickable(elmntFilterdropPrescriptions);
+            jsClick(elmntFilterdropPrescriptions);
+            waitForSeconds(2);
+            waitForElement(elmntFilterdropMyEntries);
+            jsClick(elmntFilterdropMyEntries);
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+
+            waitForSeconds(3);
+            driver.navigate().refresh();
+            waitForSeconds(3);
+            waitForElementClickable(elmntFilterdropPrescriptions);
+            jsClick(elmntFilterdropPrescriptions);
+            waitForSeconds(2);
+            waitForElement(elmntFilterdropMyEntries);
+            jsClick(elmntFilterdropMyEntries);
+        }
+    }
     public boolean verifyClinicalNotesAddRecord(List<String> listCreatedRecord) {
         boolean blResult = false;
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {

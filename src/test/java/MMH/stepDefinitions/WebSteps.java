@@ -1301,6 +1301,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterClinicianNotesAdditionalInformation(TestDataUtil.getValue(listCreateData.get(2)));
             demoPageContainer.myHealthRecordsPage.clickCheckBox();
             demoPageContainer.myHealthRecordsPage.clickSave();
+            demoPageContainer.myHealthRecordsPage.RefreshPage();
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             demoPageContainer.myHealthRecordsPage.clickAddRecord();
@@ -1310,6 +1311,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterClinicianNotesAdditionalInformation(TestDataUtil.getValue(listCreateData.get(2)));
             demoPageContainer.myHealthRecordsPage.clickCheckBox();
             demoPageContainer.myHealthRecordsPage.clickSave();
+            demoPageContainer.myHealthRecordsPage.RefreshPage();
         }
 
 
