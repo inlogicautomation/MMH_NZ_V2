@@ -392,6 +392,16 @@ Feature: Health_Records
       | My Entries | Edit Icon      | Records   |
       | My Entries | &VISITED_NAME& | Long Term |
 
+  @WEB  @SANITY_PATH  @HEALTH_RECORDS
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address   | Password           |
+      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+
 
         #Note:{#122:Click on Lab Results
   #123:Health centre entries displays all the Lab Results given by provider/updated from pms

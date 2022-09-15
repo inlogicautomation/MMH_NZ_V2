@@ -972,6 +972,7 @@ public class SanityWebSteps {
     @And("I click on Immunisations Confirm & Save Button")
     public void iClickOnImmunisationsConfirmSaveButton() {
         Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickImmunisationSave());
+        sanityPageContainer.myHealthRecordsPage.RefreshPage();
     }
 
     @When("I click on {string}edit icon & I Edit Immunisations of My Entries records {string}")
@@ -1711,7 +1712,7 @@ public class SanityWebSteps {
     @Then("I should see all the BMI My Entries Medicine details in the grid view")
     public void iShouldSeeAllTheBMIMyEntriesMedicineDetailsInTheGridView(String details) {
 
-        Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyBloodPressureMyEntriesTableData(TestDataUtil.getListOfValue(details)));
+        Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyBMIMyEntriesTableData(TestDataUtil.getListOfValue(details)));
     }
 
     @And("I click on {string} edit icon & I Edit BMI of My Entries records {string}")
@@ -1739,7 +1740,7 @@ public class SanityWebSteps {
             Assert.assertTrue(sanityPageContainer.myHealthIndicators.clickMaxvalue());
             for (String String : locDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyBloodPressureTableData(TestDataUtil.getListOfValue(String)));
+                Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyHBA1CTableData(TestDataUtil.getListOfValue(String)));
             }
 
         }
@@ -1816,7 +1817,7 @@ public class SanityWebSteps {
             Assert.assertTrue(sanityPageContainer.myHealthIndicators.clickMaxvalue());
             for (String String : locDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyBloodPressureTableData(TestDataUtil.getListOfValue(String)));
+                Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyLDLPressureTableData(TestDataUtil.getListOfValue(String)));
             }
 
         }
@@ -3522,6 +3523,16 @@ public class SanityWebSteps {
 
     }
 
+    @And("click on Beating the Blues & click on View Session")
+    public void clickOnBeatingTheBluesClickOnViewSession() {
+        Assert.assertTrue(sanityPageContainer.beatingTheBlues.clickViewsummary());
+        sanityPageContainer.beatingTheBlues.clickViewsession();
+    }
+
+    @Then("click view all the steps of session in Beating the Blues")
+    public void clickViewAllTheStepsOfSessionInBeatingTheBlues() {
+        Assert.assertTrue(sanityPageContainer.beatingTheBlues.clickContinuesession1());
+    }
 }
 
 

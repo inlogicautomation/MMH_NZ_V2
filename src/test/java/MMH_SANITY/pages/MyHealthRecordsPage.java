@@ -43,6 +43,9 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'All Sources')]/ancestor::mat-form-field//span[text()]")
     protected WebElement elmntFilterdropPrescriptions;
 
+    @FindBy(how = How.XPATH, using = "//mat-option//child::span[normalize-space(text())='My Entries']")
+    protected WebElement elmntFilterdropMyEntries;
+
     @FindBy(how = How.XPATH, using = "(//h3[text()='Prescriptions'])[1]")
     protected WebElement headerPrescriptions;
 
@@ -2070,6 +2073,20 @@ public class MyHealthRecordsPage extends BasePage {
             isVerified = verifyElement(elmntMobileImmunisationSave);
         }
         return isVerified;
+    }
+
+    public void RefreshPage() {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForSeconds(3);
+            driver.navigate().refresh();
+            waitForSeconds(3);
+            waitForElementClickable(elmntFilterdropPrescriptions);
+            jsClick(elmntFilterdropPrescriptions);
+            waitForSeconds(2);
+            waitForElement(elmntFilterdropMyEntries);
+            jsClick(elmntFilterdropMyEntries);
+
+        }
     }
 
 

@@ -21,7 +21,7 @@ public class SanityPageContainer {
     public static LinkedHashMap<String, String> printTestDataMap = new LinkedHashMap<String, String>();
 
     public HomePage homePage;
-    public AppointmentsPage appointmentsPage;
+    public BeatingTheBlues beatingTheBlues;
     public RepeatPrescription repeatPrescription;
     public MyHealthRecordsPage myHealthRecordsPage;
     public MessagesPage messagesPage;
@@ -46,7 +46,7 @@ public class SanityPageContainer {
 
     private void initPages() {
         homePage = new HomePage(driver);
-        appointmentsPage = new AppointmentsPage(driver);
+        beatingTheBlues = new BeatingTheBlues(driver);
         repeatPrescription = new RepeatPrescription(driver);
         myHealthRecordsPage = new MyHealthRecordsPage(driver);
         messagesPage = new MessagesPage(driver);

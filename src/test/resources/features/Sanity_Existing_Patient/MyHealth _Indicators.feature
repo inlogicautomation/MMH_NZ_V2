@@ -1,6 +1,6 @@
 Feature:MyHealth_Indicators
 
-  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS1
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature:MyHealth_Indicators
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS1
   Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
     Given As a user I am on beta MMH login Page
     And I enter "<Email Address>" and "<Password>" For Beta
@@ -64,6 +64,16 @@ Feature:MyHealth_Indicators
     Examples:
       | Edit Icon                      | Records                |
       | &EDIT_ALCOHOL_MY_ENTRIES_DATA& | &EDIT_ALCOHOL_DETAILS& |
+
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address   | Password           |
+      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
   @WEB @MY_HEALTH_INDICATORS @SANITY_PATH
   Scenario Template: Changing machines timezone
@@ -120,6 +130,16 @@ Feature:MyHealth_Indicators
     And I Navigate to My Health indicators from the Blood Pressure
     Then I should see all the Blood Pressure Entries From Health center Medicine Details in a grid view
       | &BLOOD_PRESSURE_TABLE_DATA& |
+
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address   | Password           |
+      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
   @WEB @MY_HEALTH_INDICATORS @SANITY_PATH
   Scenario Template: Changing machines timezone
@@ -203,6 +223,16 @@ Feature:MyHealth_Indicators
     Examples:
       | Edit Icon                          | Records                    |
       | &EDIT_BLOOD_SUGAR_MY_ENTRIES_DATA& | &EDIT_BLOOD_SUGAR_DETAILS& |
+
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address   | Password           |
+      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
   @WEB @MY_HEALTH_INDICATORS @SANITY_PATH
   Scenario Template: Changing machines timezone
@@ -314,6 +344,16 @@ Feature:MyHealth_Indicators
     And I Navigate to My Health indicators from the HBAC
     Then I should see all the HBAC Entries From Health center Medicine Details in a grid view
       | &HBA1C_TABLE_DATA& |
+
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address   | Password           |
+      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
   @WEB  @MY_HEALTH_INDICATORS @SANITY_PATH
   Scenario Template: Changing machines timezone
@@ -440,6 +480,16 @@ Feature:MyHealth_Indicators
       | Edit Icon                  | Records            |
       | &EDIT_LDL_MY_ENTRIES_DATA& | &EDIT_LDL_DETAILS& |
 
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address   | Password           |
+      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+
   @WEB  @MY_HEALTH_INDICATORS @SANITY_PATH
   Scenario Template: Changing machines timezone
 
@@ -523,6 +573,16 @@ Feature:MyHealth_Indicators
       | Edit Icon                      | Records                |
       | &EDIT_SMOKING_MY_ENTRIES_DATA& | &EDIT_SMOKING_DETAILS& |
 
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address   | Password           |
+      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+
   @WEB  @MY_HEALTH_INDICATORS @SANITY_PATH
   Scenario Template: Changing machines timezone
 
@@ -600,6 +660,16 @@ Feature:MyHealth_Indicators
       | Edit Icon                            | Records                      |
       | &EDIT_TRIGLYCERIDES_MY_ENTRIES_DATA& | &EDIT_TRIGLYCERIDES_DETAILS& |
 
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address   | Password           |
+      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+
   @WEB  @MY_HEALTH_INDICATORS @SANITY_PATH
   Scenario Template: Changing machines timezone
 
@@ -653,7 +723,7 @@ Feature:MyHealth_Indicators
            # These tests Case Covered The Scenario NO: S20
       #}
 
-  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS1
   Scenario Template: S20-Existing Patient Verify Medicine details and validate Add, edit, delete, change status, set reminder,privacy settings in My entries BMI Details
 
     Given As a Existing user I am on HomePage and I click the My Health Indicators
@@ -675,6 +745,16 @@ Feature:MyHealth_Indicators
       | Edit Icon                  | Records                   |
       | &EDIT_BMI_MY_ENTRIES_DATA& | &EDIT_BMI_HEIGHT_DETAILS& |
 
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address   | Password           |
+      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+
   @WEB @MY_HEALTH_INDICATORS @SANITY_PATH
   Scenario Template: Changing machines timezone
 
@@ -695,7 +775,7 @@ Feature:MyHealth_Indicators
            # These tests Case Covered The Scenario NO: S21
       #}
 
-  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS1
   Scenario Template: S21-Existing Patient Verify Medicine details and validate Add, edit, delete, change status, set reminder,privacy settings in My entries Height card Details
 
     Given As a Existing user I am on HomePage and I click the My Health Indicators
@@ -726,7 +806,7 @@ Feature:MyHealth_Indicators
            # These tests Case Covered The Scenario NO: S22
       #}
 
-  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS1
   Scenario Template: S22-Existing Patient Verify Medicine details and validate Add, edit, delete, change status, set reminder,privacy settings in My entries Weight card Details
 
     Given As a Existing user I am on HomePage and I click the My Health Indicators
