@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 
 public class DateUtil {
@@ -123,5 +125,28 @@ public class DateUtil {
         String strDate = formatter.format(date);
         System.out.println("DateUtil. strDate: " + strDate);
         return strDate;
+    }
+
+    public static String getCurrentDateByTimeZone(String strDateFormat, String strTimeZone) {
+
+        Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+        DateFormat formatter = new SimpleDateFormat(strDateFormat);
+        formatter.setTimeZone(TimeZone.getTimeZone(strTimeZone));
+        String currentDate = formatter.format(calendar.getTime());
+        System.out.println("currentDate >>> :: " + currentDate);
+        return currentDate;
+    }
+
+    public static String getDayAfterTommorrowDate(String strFormat) {
+        DateFormat dateFormat = new SimpleDateFormat(strFormat);
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        //Current Date should be go on Next Month and Year
+        calendar.add(Calendar.DATE, +2);
+        String strNextMonthAndYear = Integer.toString(calendar.get(Calendar.DATE)); //To Convert Integer to String (Next Month and Year)
+        Date NextMonthAndYear = calendar.getTime();
+        strNextMonthAndYear = dateFormat.format(NextMonthAndYear);
+        return strNextMonthAndYear;
     }
 }

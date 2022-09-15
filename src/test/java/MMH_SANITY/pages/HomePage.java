@@ -1,4 +1,4 @@
-package MMH.pages;
+package MMH_SANITY.pages;
 
 import cap.common.BasePage;
 import cap.helpers.Constants;
@@ -9,6 +9,7 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -19,20 +20,22 @@ import java.net.UnknownHostException;
 public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
+
         super(driver);
     }
 
+    //MMH_v2
     static Process pb = null;
 
     public static String strAppVersion;
     public static String strBrowserName;
     public static String strBrowserVersion;
     public static String strSystemName;
-
-    //MMH_v2
-
     @FindBy(how = How.XPATH, using = "//div[@class='navbar-header']")
     protected WebElement elmntLogo;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='appVersion']/small")
+    protected WebElement txtAppVersion;
 
     @FindBy(how = How.XPATH, using = "//button[@id='Login']")
     protected WebElement btnLogin;
@@ -40,17 +43,21 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Login']")
     protected WebElement betaLoginBtn;
 
-    @FindBy(how = How.XPATH, using = "//img[@class='profile-pic img-fluid']")
-    protected WebElement elmntProfile;
-
-    @FindBy(how = How.XPATH, using = "//button[contains(text(),' Sign Out ')]")
-    protected WebElement elmntSignout;
-
-    @FindBy(how = How.XPATH, using = "//div[@class='appVersion']/small")
-    protected WebElement txtAppVersion;
-
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health, today')]")
     protected WebElement elmntVerifyHomePage;
+
+    protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
+
+    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Connect a health centre')]")
+    protected WebElement txtConnectAHealthCentre;
+
+
+    @FindAll({
+            @FindBy(how = How.XPATH, using = "//mat-icon[contains(text(),'exit_to_app')]"),
+            @FindBy(how = How.XPATH, using = "//a[contains(text(),'Log out')]")
+    })
+    protected WebElement elmntLogOut;
+
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashBoard;
@@ -58,7 +65,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")
     protected WebElement btnMobileMenu;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
+    @FindBy(how = How.XPATH, using = "//mat-nav-list[@role='navigation']/parent::app-vertical-sidebar")
     protected WebElement elmntSideBar;
 
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='exit_to_app']")
@@ -114,19 +121,26 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Sign in']")
     protected WebElement SignInBtn;
 
-    protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
     public void clickSignInButton() {
         waitForElement(SignInBtn);
         click(SignInBtn);
-        waitForElementDisappear(driver, By.xpath(elmntSpinner));
     }
 
 
     public void visit() {
         visit(TestDataUtil.getValue("&URL&"));
-        takeScreenshot(driver);
+        takeScreenshotSanity(driver);
         waitForSeconds(5);
+        if (verifyElement(elmntLogOut)){
+            patientLogOut();
+            visit(TestDataUtil.getValue("&URL&"));
+        }
+    }
+    public void visitDevURL(String strURL) {
+        visit(TestDataUtil.getValue(strURL));
+        takeScreenshotSanity(driver);
+
     }
 
     public void enterPasswordForBeta(String strPassword) {
@@ -143,7 +157,7 @@ public class HomePage extends BasePage {
     public boolean waitForMMHLoginPage() {
         System.out.println("\n >>> Get First Line :: ");
         waitForElement(elmntLogo);
-        takeScreenshot(driver);
+        takeScreenshotSanity(driver);
         waitForElement(btnLogin);
         System.out.println("----> BLN elmntMainHeader : " + verifyElement(btnLogin));
         return verifyElement(btnLogin);
@@ -166,50 +180,42 @@ public class HomePage extends BasePage {
         return click(btnLogin);
     }
 
-    public boolean clickBetaLoginButton() {
-        boolean blResult = false;
-        try {
-            waitForElement(betaLoginBtn);
-            click(betaLoginBtn);
-            blResult = true;
-            System.out.println("Try Block 1 executed");
-        } catch (Exception e) {
-            try {
-                waitForElementClickable(elmntProfile);
-                jsClick(elmntProfile);
-                waitForSeconds(2);
-                waitForElementClickable(elmntSignout);
-                jsClick(elmntSignout);
-                visit();
-                waitForElement(betaLoginBtn);
-                click(betaLoginBtn);
-                blResult = true;
-                System.out.println("Catch Block 1 executed");
-            } catch (Exception d) {
-                d.printStackTrace();
-            }
-        }
-        return blResult;
+    public void clickBetaLoginButton() {
+        waitForSeconds(2);
+        waitForElement(betaLoginBtn);
+        waitForElementClickable(betaLoginBtn);
+        waitAndClick(betaLoginBtn);
     }
 
-    public boolean verifyHomePageOfMMHPortal() {
-        waitForElement(elmntVerifyHomePage);
-        strAppVersion = txtAppVersion.getText();
-        Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
-        strBrowserName = cap.getBrowserName();
-        strBrowserVersion = cap.getVersion();
+//    public boolean verifyHomePageOfMMHPortal() {
+//        waitForElement(elmntVerifyHomePage);
+//        takeScreenshotSanity(driver);
+//        return verifyElement(elmntVerifyHomePage);
+//    }
+    public boolean patientLogOut() {
+        boolean blResult = false;
         try {
-            strSystemName= InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e) {
+            waitForSeconds(2);
+            waitForElement(elmntLogOut);
+            waitForElementClickable(elmntLogOut);
+            click(elmntLogOut);
+            waitForElement(btnLogin);
+
+            blResult = verifyElement(btnLogin);
+            waitForSeconds(5);
+            System.out.println("Patient Log out Successfully");
+        } catch (Exception e) {
+            System.out.println("Patient Failed to Log out");
             e.printStackTrace();
         }
-        takeScreenshot(driver);
-        return verifyElement(elmntVerifyHomePage);
+        return blResult;
     }
 
     public boolean navigateToHomePage() {
         boolean blResult = false;
         try {
+            waitForSeconds(3);
+            waitForElement(elmntLogo);
             waitForElementClickable(elmntLogo);
             click(elmntLogo);
             refreshPage();
@@ -220,12 +226,13 @@ public class HomePage extends BasePage {
                 pageTitle.equalsIgnoreCase("PostRegistration");
 
                 System.out.println("User on the HomePage and Verified the HomePage >>>>");
-                blResult = true;
+                waitForSeconds(3);
+                waitForElement(txtConnectAHealthCentre);
+                blResult = verifyElement(txtConnectAHealthCentre);
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("User not in the HomePage >>>>");
             }
-
 
         } catch (Exception e) {
             System.out.println("Failed to Navigate the HomePage >>>>");
@@ -253,7 +260,7 @@ public class HomePage extends BasePage {
 
     public boolean verifyFutureAppoinmentsPage() {
         waitForElement(elmntFutureAppointments);
-        takeScreenshot(driver);
+        takeScreenshotSanity(driver);
         return verifyElement(elmntFutureAppointments);
     }
 
@@ -266,14 +273,14 @@ public class HomePage extends BasePage {
         boolean isVerified = false;
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(elmntGroupingHeader);
-            takeScreenshot(driver);
+            takeScreenshotSanity(driver);
             isVerified = verifyElement(elmntTableView);
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             System.out.println("INTO MOBILE VIEW");
             waitForElement(elmntMobileView);
-            takeScreenshot(driver);
+            takeScreenshotSanity(driver);
             isVerified = verifyElement(elmntMobileView);
         }
         return isVerified;
@@ -286,7 +293,7 @@ public class HomePage extends BasePage {
 
     public boolean verifyAppointmentsInGridView() {
         waitForElement(elmntGridView);
-        takeScreenshot(driver);
+        takeScreenshotSanity(driver);
         return verifyElement(elmntGridView);
     }
 
@@ -299,37 +306,36 @@ public class HomePage extends BasePage {
     }
 
     public boolean clickDashBoardForMobile() {
-        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        takeScreenshotSanity(driver);
         waitForSeconds(2);
-        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElementClickable(btnMobileMenu);
         jsClick(btnMobileMenu);
-        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElement(elmntDashBoard);
         click(elmntDashBoard);
-        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         driver.navigate().refresh();
-        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         return verifyElement(elmntVerifyHomePage);
     }
 
     public boolean clickDashBoard() {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(2);
-        waitForElement(elmntDashBoard);
-        click(elmntDashBoard);
+        jsScrollIntoView(elmntDashBoard);
+        waitForElementClickable(elmntDashBoard);
+        mouseClick(elmntDashBoard);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        waitForSeconds(3);
         driver.navigate().refresh();
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(3);
+        waitForElement(elmntVerifyHomePage);
+        waitForSeconds(5);
         return verifyElement(elmntVerifyHomePage);
     }
 
     public boolean clickLogoutButton() {
         boolean isVerified = false;
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            takeScreenshot(driver);
+            takeScreenshotSanity(driver);
             waitForElement(elmntDashBoard);
             click(elmntDashBoard);
             waitForSeconds(3);
@@ -368,7 +374,6 @@ public class HomePage extends BasePage {
         waitForElement(elmntSideBar);
         return verifyElement(elmntSideBar);
     }
-
     public boolean changeTimeZone(String strTimeZone) {
         boolean blResult = false;
         try {
@@ -383,13 +388,20 @@ public class HomePage extends BasePage {
 
     }
 
-    public void visitDevURL(String strURL) {
-        visit(TestDataUtil.getValue(strURL));
-        takeScreenshotSanity(driver);
-
+    public boolean verifyHomePageOfMMHPortal() {
+        waitForElement(elmntVerifyHomePage);
+        strAppVersion = txtAppVersion.getText();
+        Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+        strBrowserName = cap.getBrowserName();
+        strBrowserVersion = cap.getVersion();
+        try {
+            strSystemName= InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        takeScreenshot(driver);
+        return verifyElement(elmntVerifyHomePage);
     }
-
-
 }
 
 

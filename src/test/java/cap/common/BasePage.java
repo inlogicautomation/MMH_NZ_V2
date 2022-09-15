@@ -1,5 +1,6 @@
 package cap.common;
 
+import MMH_SANITY.SanityPageContainer;
 import cap.helpers.Constants;
 import cap.utilities.WaitTimeUtil;
 import com.google.gson.internal.bind.util.ISO8601Utils;
@@ -668,6 +669,14 @@ public class BasePage {
         }
         String generatedString = buffer.toString();
         return generatedString;
+    }
+
+    public void takeScreenshotSanity(WebDriver driver) {
+        try {
+            SanityPageContainer.myScenario.attach(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES), "image/png", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

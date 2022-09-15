@@ -1383,7 +1383,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterImmunisationVaccineName(TestDataUtil.getValue(listCreateData.get(0)));
             demoPageContainer.myHealthRecordsPage.enterImmunisationDateGiven();
             demoPageContainer.myHealthRecordsPage.enterAdditionalInformation(TestDataUtil.getValue(listCreateData.get(1)));
-           demoPageContainer.myHealthRecordsPage.clickImmuCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickImmuCheckBox();
             demoPageContainer.myHealthRecordsPage.clickImmunisationSave();
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -1588,7 +1588,6 @@ public class WebSteps {
     }
 
 
-
     @And("I Create New Record in COVIDImmunisations page")
     public void iCreateNewRecordInCOVIDImmunisationsPage(List<String> listCreateData) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
@@ -1685,6 +1684,7 @@ public class WebSteps {
         demoPageContainer.myHealthRecordsPage.DeleteFile();
 
     }
+
     @Then("I should see Patient Record is deleted")
     public void iShouldSeePatientRecordIsDeleted() {
         Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyDeletedRecord());
@@ -1901,28 +1901,6 @@ public class WebSteps {
 
     }
 
-    @And("I navigate to Patient Sent items and verify the Sent {string}")
-    public void iNavigateToPatientSentItemsAndVerifyTheSent(String strMessageDetails) {
-
-        List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
-        System.out.println("List Message Details >>> :: " + lstMessageDetails);
-
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
-            Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientSentMessage());
-            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientSentMessageForMobile(TestDataUtil.getValue(lstMessageDetails.get(5))));
-            Assert.assertTrue(demoPageContainer.messagesPage.VerifyBodyMessageForMobile(lstMessageDetails.get(6)));
-
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientSentMessage());
-            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientSentMessage(TestDataUtil.getValue(lstMessageDetails.get(5))));
-            Assert.assertTrue(demoPageContainer.messagesPage.VerifyBodyMessage(lstMessageDetails.get(6)));
-
-        }
-
-    }
 
     @And("I Click Send Message Button")
     public void iClickSendMessageButton() {
@@ -1951,10 +1929,10 @@ public class WebSteps {
         }
     }
 
-    @And("I am on {string} Inbox page")
-    public void iAmOnInboxPage(String strTab) {
-        demoPageContainer.messagesPage.verifyInboxHeader(strTab);
-    }
+//    @And("I am on {string} Inbox page")
+//    public void iAmOnInboxPage(String strTab) {
+//        demoPageContainer.messagesPage.verifyInboxHeader(strTab);
+//    }
 
 
     @And("I am on {string} Draft page")
@@ -2209,7 +2187,7 @@ public class WebSteps {
         System.out.println("List Message Details >>> :: " + lstMessageDetails);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessageForMobile(TestDataUtil.getValue(lstMessageDetails.get(4))));
-        }else {
+        } else {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessage(TestDataUtil.getValue(lstMessageDetails.get(5))));
 
         }
@@ -2232,7 +2210,7 @@ public class WebSteps {
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessageForMobile(TestDataUtil.getValue(lstReplyMessage.get(5))));
-        }else {
+        } else {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessage(TestDataUtil.getValue(lstReplyMessage.get(5))));
         }
         demoPageContainer.messagesPage.clickInboxAttachButton();
@@ -2331,7 +2309,7 @@ public class WebSteps {
         List<String> listGroupMessage = TestDataUtil.getListOfValue(strGroupMessage);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessageForMobile((listGroupMessage.get(0)), listGroupMessage.get(1)));
-        }else {
+        } else {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(4)), listGroupMessage.get(5)));
 
         }
@@ -2361,10 +2339,10 @@ public class WebSteps {
             for (int i = 0; i < tableData.size(); i++) {
                 String strKey = tableData.get(i).get(0).trim();
                 String strKey2 = tableData.get(i).get(1).trim();
-                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>"+strKey);
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>" + strKey);
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+list1);
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>" + list1);
                 Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesPrescriptionsData(list1, list2));
             }
         }
@@ -2381,6 +2359,7 @@ public class WebSteps {
             }
         }
     }
+
     @Then("I should see all the Allergies My Entries Medicine details in more info")
     public void iShouldSeeAllTheAllergiesMyEntriesMedicineDetailsInMoreInfo(DataTable dataTable) {
 
@@ -2535,9 +2514,71 @@ public class WebSteps {
     public void iChangeWindowsTimeZone(String strTimeZone) {
         Assert.assertTrue(demoPageContainer.homePage.changeTimeZone(strTimeZone));
     }
+
+    @Given("As a Existing user I am on HomePage and I click the Repeat Prescription")
+    public void asAExistingUserIAmOnHomePageAndIClickTheRepeatPrescription() {
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+        }
+        Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToRequestNewScript());
+
+    }
+
+    @And("I navigate to Patient Sent items and verify the Sent {string}")
+    public void iNavigateToPatientSentItemsAndVerifyTheSent(String strMessageDetails) {
+
+        List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
+        System.out.println("List Message Details >>> :: " + lstMessageDetails);
+
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+            Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientSentMessage());
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientSentMessageForMobile(TestDataUtil.getValue(lstMessageDetails.get(5))));
+            Assert.assertTrue(demoPageContainer.messagesPage.VerifyBodyMessageForMobile(lstMessageDetails.get(6)));
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientSentMessage());
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientSentMessage(TestDataUtil.getValue(lstMessageDetails.get(5))));
+            Assert.assertTrue(demoPageContainer.messagesPage.VerifyBodyMessage(TestDataUtil.getValue(lstMessageDetails.get(6))));
+
+        }
+
+
+    }
+    @Given("As a user I am on MMH login Page {string}")
+    public void asAUserIAmOnMMHLoginPage(String strURL) {
+
+        System.out.println("Dev strURL >>> :: " + strURL);
+        demoPageContainer.homePage.visitDevURL(strURL);
+        Assert.assertTrue(demoPageContainer.homePage.waitForMMHLoginPage());
+
+
+    }
+
+    @Given("As a Existing Patient Login with valid {string} and {string}")
+    public void asAExistingPatientLoginWithValidAnd(String strEmail, String strPassword) {
+        demoPageContainer.homePage.visit();
+        demoPageContainer.homePage.clickBetaLoginButton();
+        demoPageContainer.homePage.enterEmailForBeta(TestDataUtil.getValue(strEmail));
+        demoPageContainer.homePage.enterPasswordForBeta(TestDataUtil.getValue(strPassword));
+    }
+
+    @And("I logout from tha application")
+    public void iLogoutFromThaApplication() {
+        Assert.assertTrue(demoPageContainer.homePage.clickLogoutButton());
+    }
+
+//    @Given("I change Windows {string}")
+//    public void iChangeWindows(String strTimeZone) {
+//        Assert.assertTrue(demoPageContainer.homePage.changeTimeZone(strTimeZone));
+//    }
+
 }
 
-  
+
 
 
 
