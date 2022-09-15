@@ -29,7 +29,7 @@ Feature: Patient Profile
       | Current Password       | Password                   |
       | &PASSWORD_FOR_PROFILE& | &NEW_PASSWORD_FOR_PROFILE& |
 
-  @WEB @Mobile @PROFILE12
+  @WEB  @PROFILE12 @SANITY_PATH
   Scenario Template: S1- Existing Patient Login with new password.
 
     Given As a user I am on beta MMH login Page

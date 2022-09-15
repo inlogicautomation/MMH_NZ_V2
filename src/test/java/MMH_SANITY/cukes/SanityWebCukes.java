@@ -37,5 +37,5 @@ public class SanityWebCukes extends AbstractTestNGCucumberTests {
         }
 }
 
-// clean test -Dapp=MMH_SANITY -Dexecution_type=browser -Drunner=SanityWebCukes -Dbrowser_name=chrome -Denv=PROD "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/WebApp-QAResults.html -Dsysteminfo.AppName=Demo-QA"
+//clean test -Dapp=MMH_SANITY -Dexecution_type=browser -Drunner=SanityWebCukes -Dbrowser_name=chrome -Denv=PROD "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/WebApp-QAResults.html -Dsysteminfo.AppName=Demo-QA"
 

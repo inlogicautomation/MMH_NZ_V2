@@ -1,6 +1,6 @@
 Feature:MyHealth_Indicators
 
-  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS1
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature:MyHealth_Indicators
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS1
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
   Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
     Given As a user I am on beta MMH login Page
     And I enter "<Email Address>" and "<Password>" For Beta
@@ -365,7 +365,7 @@ Feature:MyHealth_Indicators
            # These tests Case Covered The Scenario NO: S12
       #}
 
-  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS1
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
   Scenario Template: S12-Existing Patient Verify Medicine details and validate Add, edit, delete, change status, set reminder,privacy settings in My entries HDL Details
 
     Given As a Existing user I am on HomePage and I click the My Health Indicators
@@ -544,7 +544,7 @@ Feature:MyHealth_Indicators
       #}
 
 
-  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS1
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
   Scenario Template: S17-Existing Patient Verify Medicine details and validate Add, edit, delete, change status, set reminder,privacy settings in My entries Total Cholesterol Details
 
     Given As a Existing user I am on HomePage and I click the My Health Indicators
@@ -578,7 +578,7 @@ Feature:MyHealth_Indicators
       #}
 
 
-  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS1
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
   Scenario Template: S18-Existing Patient Verify Medicine details and validate Add, edit, delete, change status, set reminder,privacy settings in My entries Triglycerides Details
 
     Given As a Existing user I am on HomePage and I click the My Health Indicators
@@ -620,7 +620,7 @@ Feature:MyHealth_Indicators
            # These tests Case Covered The Scenario NO: S19
       #}
 
-  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS1
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
   Scenario Template: S19-Existing Patient Verify Medicine details and validate Add, edit, delete, change status, set reminder,privacy settings in My entries Waist Size Details
 
     Given As a Existing user I am on HomePage and I click the My Health Indicators

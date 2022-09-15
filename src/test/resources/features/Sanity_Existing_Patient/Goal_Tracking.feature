@@ -1,6 +1,6 @@
 Feature: Goal_Tracking
 
-  @WEB  @Mobile @SANITY_PATH @GOAL_TRACKING
+  @WEB  @SANITY_PATH @GOAL_TRACKING
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature: Goal_Tracking
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB  @GOAL_TRACKING1 @SANITY_PATH
+  @WEB  @GOAL_TRACKING @SANITY_PATH
   Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
     Given As a user I am on beta MMH login Page
     And I enter "<Email Address>" and "<Password>" For Beta
@@ -83,7 +83,7 @@ Feature: Goal_Tracking
       | Edit Icon                                   | Records                      |
       | &SHARED_EDIT_GOAL_TRACKING_MY_ENTRIES_DATA& | &EDIT_GOAL_TRACKING_DETAILS& |
 
-  @WEB  @Mobile @HEALTH_RECORDS @SANITY_PATH
+  @WEB @SANITY_PATH @GOAL_TRACKING
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -141,7 +141,7 @@ Feature: Goal_Tracking
     Examples:
       | Edit Icon                                            | Records                      |
       | &SHARED_EDIT_PREVIOUS_GOAL_TRACKING_MY_ENTRIES_DATA& | &EDIT_GOAL_TRACKING_DETAILS& |
-  @WEB  @Mobile  @SANITY_PATH  @GOAL_TRACKING
+  @WEB  @SANITY_PATH  @GOAL_TRACKING
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"

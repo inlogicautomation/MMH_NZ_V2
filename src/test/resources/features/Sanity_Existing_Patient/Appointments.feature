@@ -1,6 +1,6 @@
 Feature: Appointments
 
-  @WEB  @Mobile  @SANITY_PATH  @APPOINTMENTS
+  @WEB @SANITY_PATH  @APPOINTMENTS
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature: Appointments
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @APPOINTMENTS @SANITY_PATH @TESTING
+  @WEB  @APPOINTMENTS @SANITY_PATH @TESTING
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -21,7 +21,7 @@ Feature: Appointments
       | &EMAIL&       | &PASSWORD& |
 
 
-  @WEB @Mobile @APPOINTMENTS @SANITY_PATH
+  @WEB  @APPOINTMENTS @SANITY_PATH
   Scenario Template: Prep- Canceling all the appointments
 
     Given As a user I am on HomePage
@@ -47,7 +47,7 @@ Feature: Appointments
 #    36:Click on confirm & get Appointment Confirmed details
 #    These test Case Covered The Scenario NO: S1
 #  }
-  @WEB @APP @APPOINTMENTS @SANITY_PATH
+  @WEB  @APPOINTMENTS @SANITY_PATH
   Scenario Template: S1 Patient Booking Appointment - Visit Appointment
 
     Given As a user I am on HomePage
@@ -63,7 +63,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
       | Book Appointment | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &VISIT_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @Mobile @APPOINTMENTS @SANITY_PATH
+  @WEB  @APPOINTMENTS @SANITY_PATH
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -74,7 +74,7 @@ Feature: Appointments
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @Mobile @APPOINTMENTS @SANITY_PATH
+  @WEB  @APPOINTMENTS @SANITY_PATH
   Scenario Template: S1 - Patient Cancel Appointment
 
     And I navigate to the "<Appointment>" page
@@ -91,7 +91,7 @@ Feature: Appointments
 #    37:Click on future appointments & view card details of future date appointments
 #    These test Case Covered The Scenario NO: S2
 #  }
-  @WEB @APP @APPOINTMENTS @SANITY_PATH
+  @WEB @APPOINTMENTS @SANITY_PATH
   Scenario Template: S2 - Patient can view all the future date booked appointments in card view
 
     Given As a user I am on HomePage
@@ -107,7 +107,7 @@ Feature: Appointments
 #    37:Click on future appointments & view card details of future date appointments
 #    These test Case Covered The Scenario NO: S2
 #  }
-  @WEB @APP @APPOINTMENTS @SANITY_PATH
+  @WEB @APPOINTMENTS @SANITY_PATH
   Scenario Template: S2 - Patient can view all the future date booked appointments in grid view
 
     Given I am on "<Tab>" page
@@ -120,7 +120,7 @@ Feature: Appointments
 #    40:Click on video invitations & view grid details of Video invite appointments
 #    These test Case Covered The Scenario NO: S3
 #  }
-  @WEB @APP @APPOINTMENTS @SANITY_PATH
+  @WEB  @APPOINTMENTS @SANITY_PATH
   Scenario Template: S3 - Patient Booking Appointment - Video Appointment
 
     Given As a user I am on HomePage
@@ -136,7 +136,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
       | Book Appointment | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @Mobile @APPOINTMENTS @SANITY_PATH
+  @WEB @APPOINTMENTS @SANITY_PATH
   Scenario Template: S3- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -151,7 +151,7 @@ Feature: Appointments
 #    40:Click on video invitations & view grid details of Video invite appointments
 #    These test Case Covered The Scenario NO: S3
 #  }
-  @WEB @Mobile @APPOINTMENTS @SANITY_PATH
+  @WEB  @APPOINTMENTS @SANITY_PATH
   Scenario Template: S3 - Join Video Appointment
 
     And I navigate to the "<Appointment>" page
@@ -168,7 +168,7 @@ Feature: Appointments
 #    39:Click on past appointments & view card details of past date appointments
 #    These test Case Covered The Scenario NO: S4
 #  }
-  @WEB @APP @APPOINTMENTS @SANITY_PATH
+  @WEB  @APPOINTMENTS @SANITY_PATH
   Scenario Template: S4 - Patient can view all the past date booked appointments in card view
 
     Given As a user I am on HomePage
@@ -183,7 +183,7 @@ Feature: Appointments
 #    39:Click on past appointments & view grid details of past date appointments
 #    These test Case Covered The Scenario NO: S4
 #  }
-  @WEB @APP @APPOINTMENTS @SANITY_PATH
+  @WEB  @APPOINTMENTS @SANITY_PATH
   Scenario Template: S4 - Patient can view all the past date booked appointments in grid view
 
     Given I am on "<Tab>" page
@@ -193,7 +193,7 @@ Feature: Appointments
       | Tab               |
       | Past Appointments |
 
-  @WEB @APP @APPOINTMENTS
+  @WEB  @APPOINTMENTS
   Scenario Template: S5 - Patient can view all the video appointments invites sent from PMS/Provider in grid view
 
     Given As a user I am on HomePage
