@@ -3511,6 +3511,17 @@ public class SanityWebSteps {
         Assert.assertTrue(sanityPageContainer.myHealthIndicators.clickWeightCard());
         Assert.assertTrue(sanityPageContainer.myHealthIndicators.verifyDeleteIconWeightMyEntriesTableData(TestDataUtil.getListOfValue(details.get(0))));
     }
+    @And("View latest three patient Appointments in upcoming appointments card")
+    public void viewLatestThreePatientAppointmentsInUpcomingAppointmentsCard(List<String> strDetails) {
+        for (String strData : strDetails) {
+
+            System.out.println("strData >>> :: " + strData);
+            Assert.assertTrue(sanityPageContainer.dashboardPage.verifyAppointmentsInDashboard(strData));
+
+        }
+
+    }
+
 }
 
 

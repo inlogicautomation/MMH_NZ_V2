@@ -165,3 +165,39 @@ Feature: Patient Profile
 # 393:  Navigate to profile & click on My Payment - Enter Health centre, location, from date, to date, or text to search & click on search - All payments details must be displayed in grid
 # 395: Click on update profile under view profile tab & update personal details, contact details, additional details & click on save
 # 401: click on who accessed my records & grid is displayed
+
+
+  @WEB @RRP @SANITY_PATH
+  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
+
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address   | Password           |
+      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+
+
+
+  @WEB @MESSAGES @SANITY_PATH
+  Scenario Template: S3- User Successfully logs in to the DEV Portal.
+    Given As a user I am on MMH login Page "<V1 Portal>"
+    And I enter "<Email Address>" and "<Password>"
+    When I click login button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | V1 Portal | Email Address      | Password              |
+      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+
+  @WEB @MESSAGES @SANITY_PATH
+  Scenario Template: S3- Preparation for Received Message
+
+    Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module
+    And As I enter the Compose "<Message Details>"
+    When I Click the send message and verify success pop up
+    Then I navigate to Sent items and verify the Sent "<Message Details>"
+    And I log out from Doctor Portal
+    Examples:
+      | Message Details        |
+      | &SENT_MESSAGE_DETAILS& |

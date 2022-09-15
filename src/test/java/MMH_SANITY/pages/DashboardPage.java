@@ -1,6 +1,7 @@
 package MMH_SANITY.pages;
 
 import cap.common.BasePage;
+import cap.utilities.DateUtil;
 import cap.utilities.TestDataUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.How;
 
 import java.util.List;
 
+import static MMH.pages.AppointmentsPage.strSlotDate;
 import static cap.utilities.DateUtil.getCurrentDateByTimeZone;
 
 public class DashboardPage extends BasePage {
@@ -54,7 +56,7 @@ public class DashboardPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//mat-card-title[contains(text(),'New Messages')])[2]")
     protected WebElement elmntNewMessages;
 
-    @FindBy(how = How.XPATH, using = "(//mat-card-title[contains(text(),'My Health centres')])[2]")
+    @FindBy(how = How.XPATH, using = "(//mat-card-title[contains(text(),'My Health Centres')])[2]")
     protected WebElement elmntMyHealthCentres;
 
     @FindBy(how = How.XPATH, using = "(//mat-card-title[contains(text(),'My Repeat Prescriptions')])[2]")
@@ -128,6 +130,16 @@ public class DashboardPage extends BasePage {
     protected String verifyMyHealthCentre = new StringBuilder()
             .append("(//mat-card-title[contains(text(),'My Health centres')])[2]/ancestor::mat-card-header/parent::mat-card//h5[contains(text(),'")
             .append("<<REPLACEMENT>>")
+            .append("')]")
+            .toString();
+
+//  (//app-dashboard-appointments)[3]//h5[contains(text(),'18 Sep 2022 | 8:15 AM')]/following-sibling::p[contains(text(),'Dr Tim')]
+
+    protected String verifyAppointments = new StringBuilder()
+            .append("(//app-dashboard-appointments)[3]//h5[contains(text(),'")
+            .append("<<DATE>>")
+            .append("')]/following-sibling::p[contains(text(),'")
+            .append("<<NAME>>")
             .append("')]")
             .toString();
 
@@ -466,6 +478,41 @@ public class DashboardPage extends BasePage {
 
     }
 
+    public boolean verifyAppointmentsInDashboard(String strDetails) {
+        boolean isVerified = false;
+        List<String> lstDetails = TestDataUtil.getListOfValue(strDetails);
+        System.out.println("lstDetails >>> :: " + lstDetails);
+        try {
+
+            waitForElement(elmntUpcomingAppointments);
+//            15 Sep 2022 | 8:00 AM
+
+            String strDate = TestDataUtil.getValue(lstDetails.get(0));
+
+            String futureDate = DateUtil.getDate(strDate, "d MMM YYYY");
+            System.out.println("DATE" + futureDate);
+
+            String dateAndTime = futureDate.concat(" | ").concat(strSlotDate.trim());
+            System.out.println("Xpath for RRP >>> :: " + verifyAppointments
+                    .replace("<<DATE>>", dateAndTime)
+                    .replace("<<NAME>>", TestDataUtil.getValue(lstDetails.get(1))));
+
+            WebElement data = waitForElement(By.xpath(verifyAppointments
+                    .replace("<<DATE>>", dateAndTime)
+                    .replace("<<NAME>>", TestDataUtil.getValue(lstDetails.get(1)))));
+
+            waitForElement(data);
+
+            isVerified = verifyElement(data);
+
+            takeScreenshotSanity(driver);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isVerified;
+
+    }
+
     public boolean selectRRP(List<String> lstDetails) {
         boolean isVerified = false;
         System.out.println("lstDetails >>> :: " + lstDetails);
@@ -528,24 +575,6 @@ public class DashboardPage extends BasePage {
         return isVerified;
 
     }
-
-    public static void main(String[] args) {
-        String str = "VM04Practice";
-        String str1 = "Pending";
-        String strCurrentDate = getCurrentDateByTimeZone("dd MMM YYY", "GMT+12");
-        System.out.println(verifyDashboardRRP.replace("<<LOCATION>>", str)
-                .replace("<<DATE>>", strCurrentDate)
-                .replace("<<STATUS>>", str1));
-//        List<WebElement> data = driver.findElements(By.xpath(verifyDashboardRRP
-//                .replace("<<LOCATION>>",str )
-//                .replace("<<DATE>>", strCurrentDate)
-//                .replace("<<STATUS>>", str1)));
-
-//        System.out.println("Data >>> :: " + data);
-//
-//        System.out.println("Size of RRP >>> :: " + data.size());
-    }
-
 
     public void verifyUnreadMessageCount() {
 

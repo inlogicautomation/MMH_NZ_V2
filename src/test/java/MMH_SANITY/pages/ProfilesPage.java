@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -292,6 +293,25 @@ public class ProfilesPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//mat-checkbox[@formcontrolname='categoryShow']")
     protected WebElement chkBoxShow;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='leftside']")
+    protected WebElement elmntsMenu;
+
+    @FindBy(how = How.XPATH, using = "//select[contains(@id,'Search_cmbPractice')]")
+    protected WebElement drpDownHealthCentre;
+
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Search  Patients')]")
+    protected WebElement elmntSearchPatients;
+
+    @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome')])[1]")
+    protected WebElement txtMyHomePage;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Search Patients')]/ancestor::div[contains(@class,'breadcrumbs')]")
+    protected WebElement txtBCSearchPatient;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Search Patients')]")
+    protected WebElement txtSearchPatients;
 
 //    @FindBy(how = How.XPATH, using = "//mat-checkbox[@formcontrolname='categoryShow']//input")
 //    protected WebElement chkBoxShow;
@@ -1495,6 +1515,44 @@ public class ProfilesPage extends BasePage {
 
         } catch (Exception e) {
             System.out.println("Failed to verify Calendar categories data >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean navigateToSearchPatient() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(3);
+            waitForElement(txtMyHomePage);
+            waitForElement(elmntsMenu);
+            waitForElement(elmntSearchPatients);
+            waitForElementClickable(elmntSearchPatients);
+            click(elmntSearchPatients);
+            waitForSeconds(1);
+            waitForElement(txtBCSearchPatient);
+            blResult = verifyElement(txtBCSearchPatient);
+            System.out.println("Successfully navigated to the Search Patient");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to navigate the Search Patient");
+        }
+        return blResult;
+    }
+    public boolean selectHealthCenter(String strHealthCenter) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtSearchPatients);
+            waitForElementClickable(drpDownHealthCentre);
+            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'ddlPractice')]")));
+            healthCentre.selectByVisibleText(strHealthCenter);
+            waitForSeconds(1);
+
+            blResult = true;
+            System.out.println("\nSuccessfully selected the health centre >>> :: ");
+        } catch (Exception e) {
+            System.out.println("\nFailed to select the health centre >>> :: ");
             e.printStackTrace();
         }
         return blResult;
