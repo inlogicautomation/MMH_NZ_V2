@@ -713,48 +713,6 @@ public class MyHealthIndicators extends BasePage {
         return blResult;
     }
 
-    public boolean VerifyLDLPressureTableData(List<String> lstDetails) {
-        boolean blResult = false;
-        try {
-            waitForSeconds(5);
-            WebElement elmntPrescriptionTableData = waitForElement(By.xpath(strBloodPressure
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
-                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
-                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
-                    .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))));
-            jsScrollIntoView(elmntPrescriptionTableData);
-            waitForElement(elmntPrescriptionTableData);
-            verifyElement(elmntPrescriptionTableData);
-            blResult = verifyElement(elmntLDL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
-    }
-
-    public boolean VerifyHBA1CTableData(List<String> lstDetails) {
-        boolean blResult = false;
-        try {
-            waitForSeconds(5);
-            WebElement elmntPrescriptionTableData = waitForElement(By.xpath(strBloodPressure
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
-                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
-                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
-                    .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))));
-            jsScrollIntoView(elmntPrescriptionTableData);
-            waitForElement(elmntPrescriptionTableData);
-            verifyElement(elmntPrescriptionTableData);
-            blResult = verifyElement(elmntHBA1C);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return blResult;
-    }
-
     public boolean VerifyLDLTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
@@ -2426,8 +2384,8 @@ public class MyHealthIndicators extends BasePage {
         jsClick(btnBloodPressureyes);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
-        waitForElement(elmntHDL);
-        return verifyElement(elmntHDL);
+        waitForElement(elmntHBA1C);
+        return verifyElement(elmntHBA1C);
     }
 
     public boolean clickLDLYesButton() {

@@ -1,6 +1,7 @@
 package MMH_SANITY.pages;
 
 import cap.common.BasePage;
+import cap.utilities.DateUtil;
 import cap.utilities.TestDataUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static cap.utilities.DateUtil.getCurrentDateByTimeZone;
 
 public class ProfilesPage extends BasePage {
 
@@ -300,6 +303,14 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//select[contains(@id,'Search_cmbPractice')]")
     protected WebElement drpDownHealthCentre;
 
+    @FindBy(how = How.XPATH, using = "//div[@class='rounded']//a[contains(text(),'Search')]")
+    protected WebElement btnSearchForPatient;
+
+    @FindBy(how = How.XPATH, using = "//td/div/input")
+    protected WebElement txtBoxPatientName;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Date Recorded')]")
+    protected WebElement elmntDateRecorded;
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Search  Patients')]")
     protected WebElement elmntSearchPatients;
@@ -313,6 +324,15 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Search Patients')]")
     protected WebElement txtSearchPatients;
 
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'View Goals')]")
+    protected WebElement elmntViewGoals;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Goal Tracking')]")
+    protected WebElement txtGoalTracking;
+
+    @FindBy(how = How.XPATH, using = "//b[contains(text(),'Search Results:')]")
+    protected WebElement txtSearchResults;
+
 //    @FindBy(how = How.XPATH, using = "//mat-checkbox[@formcontrolname='categoryShow']//input")
 //    protected WebElement chkBoxShow;
 
@@ -321,6 +341,12 @@ public class ProfilesPage extends BasePage {
             .append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
+
+    //label[contains(text(),'Last Name First Name')]/preceding-sibling::input
+    protected String searchOrder = new StringBuilder()
+            .append("//label[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]/preceding-sibling::input").toString();
 
     //div[contains(text(),'test-wqewrytyet')]
     protected String elmntCalendarEvent = new StringBuilder()
@@ -332,6 +358,16 @@ public class ProfilesPage extends BasePage {
             .append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
+
+    //tr[./td[contains(text(),'15 Sep 2022')]][./td[contains(text(),'Goals')]][./td[contains(text(),'Dr Paul Anderson')]]
+    protected String verifyAccessRecords = new StringBuilder()
+            .append("//tr[./td[contains(text(),'")
+            .append("<<DATE>>")
+            .append("')]][./td[contains(text(),'")
+            .append("<<NAME>>")
+            .append("')]][./td[contains(text(),'")
+            .append("<<DOCTOR>>")
+            .append("')]]").toString();
 
     //mat-option//span[contains(text(),'Week')]
     protected String ddlGeneralSetting = new StringBuilder()
@@ -348,6 +384,12 @@ public class ProfilesPage extends BasePage {
             .append("//mat-option//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
+
+    protected String selectPatientName = new StringBuilder()
+            .append("//strong[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]/parent::li")
+            .toString();
 
 
     //li[contains(text(),'catedgory-qwerty')]
@@ -954,7 +996,7 @@ public class ProfilesPage extends BasePage {
                     .replace("<<REPLACEMENT>>", TestDataUtil.getValue(lstDetails.get(0))));
 
             waitForElementClickable(name);
-            doubleClick(driver,name);
+            doubleClick(driver, name);
 
 
             String strWhat = TestDataUtil.getValue(lstDetails.get(0));
@@ -1519,6 +1561,7 @@ public class ProfilesPage extends BasePage {
         }
         return blResult;
     }
+
     public boolean navigateToSearchPatient() {
         boolean blResult = false;
         try {
@@ -1539,15 +1582,18 @@ public class ProfilesPage extends BasePage {
         }
         return blResult;
     }
+
     public boolean selectHealthCenter(String strHealthCenter) {
         boolean blResult = false;
         try {
             waitForSeconds(2);
             waitForElement(txtSearchPatients);
+            waitForElement(drpDownHealthCentre);
             waitForElementClickable(drpDownHealthCentre);
-            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'ddlPractice')]")));
+            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'Search_cmbPractice')]")));
+            System.out.println("strHealthCenter >>> :: "+strHealthCenter);
             healthCentre.selectByVisibleText(strHealthCenter);
-            waitForSeconds(1);
+            waitForSeconds(2);
 
             blResult = true;
             System.out.println("\nSuccessfully selected the health centre >>> :: ");
@@ -1557,6 +1603,123 @@ public class ProfilesPage extends BasePage {
         }
         return blResult;
     }
+
+    public void SearchOrder(String strOrder) {
+        waitForElement(txtSearchPatients);
+        System.out.println("X-path for rdoBtn >>> :: "+searchOrder.replace("<<REPLACEMENT>>",strOrder));
+        WebElement rdoBtn = waitForElement(By.xpath(searchOrder.replace("<<REPLACEMENT>>",strOrder)));
+        waitForElementClickable(rdoBtn);
+        waitAndClick(rdoBtn);
+
+    }
+
+    public void enterPatientName(String strName) {
+        try {
+            waitForElement(txtSearchPatients);
+            waitForSeconds(3);
+            txtBoxPatientName.sendKeys(strName);
+            waitForSeconds(2);
+            System.out.println("Xpath for Patient >>> :: " + selectPatientName.replace("<<REPLACEMENT>>", strName));
+            WebElement patient = waitForElement(By.xpath(selectPatientName.replace("<<REPLACEMENT>>", strName)));
+            waitForElementClickable(patient);
+            waitAndClick(patient);
+            waitForSeconds(1);
+
+            System.out.println("\nSuccessfully Entered To>>> :: ");
+        } catch (Exception e) {
+            System.out.println("\nFailed to select the  >>> :: ");
+            e.printStackTrace();
+        }
+
+    }
+
+    public boolean clickSearchButton() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtSearchPatients);
+            waitForElement(btnSearchForPatient);
+            waitForElementClickable(btnSearchForPatient);
+            waitAndClick(btnSearchForPatient);
+            waitForSeconds(2);
+            waitForElement(txtSearchResults);
+            blResult = verifyElement(txtSearchResults);
+            System.out.println("\nSuccessfully Clicked the Search Button >>> :: ");
+        } catch (Exception e) {
+            System.out.println("\nFailed to click the Search Button >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean selectViewGoals() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(3);
+            waitForElement(txtSearchResults);
+
+            waitForElement(elmntViewGoals);
+            waitForElementClickable(elmntViewGoals);
+            waitAndClick(elmntViewGoals);
+            waitForSeconds(2);
+            waitForElement(txtGoalTracking);
+            blResult = verifyElement(txtGoalTracking);
+
+            System.out.println("\nSuccessfully Clicked the view Goal Button >>> :: ");
+        } catch (Exception e) {
+            System.out.println("\nFailed to click the view Goal Button >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean verifyWhoAccessedMyRecords(String strDetail) {
+        boolean blResult = false;
+        try {
+            List<String> lstDetail = TestDataUtil.getListOfValue(strDetail);
+            System.out.println("lstDetail >>> :: "+lstDetail);
+            waitForSeconds(3);
+            waitForElement(txtAccessInformation);
+
+            waitForElement(rdoBtnAccessed);
+            waitForElementClickable(rdoBtnAccessed);
+            waitAndClick(rdoBtnAccessed);
+
+            waitForElement(elmntDateRecorded);
+            waitForElementClickable(elmntDateRecorded);
+            waitAndClick(elmntDateRecorded);
+            waitForSeconds(3);
+            waitForElement(elmntDateRecorded);
+            waitForElementClickable(elmntDateRecorded);
+            waitAndClick(elmntDateRecorded);
+
+            String strCurrentDate = getCurrentDateByTimeZone("dd MMM YYYY", "GMT+12");
+
+            System.out.println("Xpath for Patient >>> :: " + verifyAccessRecords
+                    .replace("<<DATE>>", strCurrentDate)
+                    .replace("<<NAME>>",lstDetail.get(0))
+                    .replace("<<DOCTOR>>",lstDetail.get(1)));
+
+            WebElement record = waitForElement(By.xpath(verifyAccessRecords
+                    .replace("<<DATE>>", strCurrentDate)
+                    .replace("<<NAME>>",lstDetail.get(0))
+                    .replace("<<DOCTOR>>",lstDetail.get(1))));
+
+            waitForSeconds(2);
+            waitForElement(record);
+            blResult = verifyElement(record);
+
+            System.out.println("\nSuccessfully verified  >>> :: ");
+        } catch (Exception e) {
+            System.out.println("\nFailed to verify >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public static void main(String[] args) {
+        String strCurrentDate = getCurrentDateByTimeZone("dd MMM YYYY", "GMT+12");
+        System.out.println(strCurrentDate);
+    }
+
 
 
 }

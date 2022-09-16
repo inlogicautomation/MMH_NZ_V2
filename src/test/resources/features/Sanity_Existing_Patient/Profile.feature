@@ -167,7 +167,45 @@ Feature: Patient Profile
 # 401: click on who accessed my records & grid is displayed
 
 
-  @WEB @RRP @SANITY_PATH
+
+
+#  @WEB @MESSAGES @SANITY_PATH @PROFILE1
+#  Scenario Template: S3- User Successfully logs in to the DEV Portal.
+#    Given As a user I am on MMH login Page "<V1 Portal>"
+#    And I enter "<Email Address>" and "<Password>"
+#    When I click login button
+#    Then I should see user successfully logs in to the MMH portal
+#    Examples:
+#      | V1 Portal | Email Address      | Password              |
+#      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+#
+
+  @WEB @PROFILE @SANITY_PATH
+  Scenario Template: S10- Preparation for Patient Automatic Reply Settings, Login as a Provider user
+
+    Given As a user Launch the "<V1 Portal>"
+    And I enter "<Email Address>" and "<Password>"
+    When I click login button
+    Then I should see user successfully logs in to the MMH portal
+
+    Examples:
+      | V1 Portal | Email Address      | Password              |
+      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+
+  @WEB @PROFILE @SANITY_PATH
+  Scenario Template: S3- Preparation for Profile Access
+
+    Given As a user I am on Doctor portal homepage and Navigate to Search Patient
+    And As I enter the Search Patient "<Details>"
+    When I Click the Search button and verify result
+    Then I navigate to view goals
+    And I log out from Doctor Portal
+    Examples:
+      | Details                      |
+      | &PROFILE_ACCESS_INFORMATION& |
+
+
+  @WEB @PROFILE @SANITY_PATH
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -179,25 +217,37 @@ Feature: Patient Profile
       | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
 
+  @WEB @PROFILE @SANITY_PATH
+  Scenario Template: S3- Existing Patient change the Phone Number.
 
-  @WEB @MESSAGES @SANITY_PATH
-  Scenario Template: S3- User Successfully logs in to the DEV Portal.
-    Given As a user I am on MMH login Page "<V1 Portal>"
-    And I enter "<Email Address>" and "<Password>"
-    When I click login button
-    Then I should see user successfully logs in to the MMH portal
+    Given I navigate to View Profile and I see Access Information
+    And I verify the provider Access Information of patient "<Details>"
     Examples:
-      | V1 Portal | Email Address      | Password              |
-      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+      | Details                     |
+      | &VERIFY_ACCESS_INFORMATION& |
 
-  @WEB @MESSAGES @SANITY_PATH
-  Scenario Template: S3- Preparation for Received Message
 
-    Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module
-    And As I enter the Compose "<Message Details>"
-    When I Click the send message and verify success pop up
-    Then I navigate to Sent items and verify the Sent "<Message Details>"
-    And I log out from Doctor Portal
-    Examples:
-      | Message Details        |
-      | &SENT_MESSAGE_DETAILS& |
+#
+#  @WEB @HAPPY_PATH @MESSAGES123
+#  Scenario Template: S10- Preparation for Patient Automatic Reply Settings, Login as a Provider user
+#
+#    Given As a user Launch the "<V1 Portal>"
+#    And I enter "<Email Address>" and "<Password>"
+#    When I click login button
+#    Then I should see user successfully logs in to the MMH portal
+#
+#    Examples:
+#      | V1 Portal | Email Address      | Password              |
+#      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+#
+#
+#  @WEB @RRP @SANITY_PATH @MESSAGES123
+#  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
+#
+#    Given As a user I am on beta MMH login Page
+#    And I enter "<Email Address>" and "<Password>" For Beta
+#    When I click SignIn button
+#    Then I should see user successfully logs in to the MMH portal
+#    Examples:
+#      | Email Address   | Password           |
+#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |

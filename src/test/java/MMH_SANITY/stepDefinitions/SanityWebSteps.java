@@ -972,7 +972,6 @@ public class SanityWebSteps {
     @And("I click on Immunisations Confirm & Save Button")
     public void iClickOnImmunisationsConfirmSaveButton() {
         Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickImmunisationSave());
-        sanityPageContainer.myHealthRecordsPage.RefreshPage();
     }
 
     @When("I click on {string}edit icon & I Edit Immunisations of My Entries records {string}")
@@ -1712,7 +1711,7 @@ public class SanityWebSteps {
     @Then("I should see all the BMI My Entries Medicine details in the grid view")
     public void iShouldSeeAllTheBMIMyEntriesMedicineDetailsInTheGridView(String details) {
 
-        Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyBMIMyEntriesTableData(TestDataUtil.getListOfValue(details)));
+        Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyBloodPressureMyEntriesTableData(TestDataUtil.getListOfValue(details)));
     }
 
     @And("I click on {string} edit icon & I Edit BMI of My Entries records {string}")
@@ -1740,7 +1739,7 @@ public class SanityWebSteps {
             Assert.assertTrue(sanityPageContainer.myHealthIndicators.clickMaxvalue());
             for (String String : locDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyHBA1CTableData(TestDataUtil.getListOfValue(String)));
+                Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyBloodPressureTableData(TestDataUtil.getListOfValue(String)));
             }
 
         }
@@ -1817,7 +1816,7 @@ public class SanityWebSteps {
             Assert.assertTrue(sanityPageContainer.myHealthIndicators.clickMaxvalue());
             for (String String : locDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyLDLPressureTableData(TestDataUtil.getListOfValue(String)));
+                Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyBloodPressureTableData(TestDataUtil.getListOfValue(String)));
             }
 
         }
@@ -3520,18 +3519,42 @@ public class SanityWebSteps {
             Assert.assertTrue(sanityPageContainer.dashboardPage.verifyAppointmentsInDashboard(strData));
 
         }
+    }
+
+    @Given("As a user I am on Doctor portal homepage and Navigate to Search Patient")
+    public void asAUserIAmOnDoctorPortalHomepageAndNavigateToSearchPatient() {
+        Assert.assertTrue(sanityPageContainer.profilesPage.navigateToSearchPatient());
 
     }
 
-    @And("click on Beating the Blues & click on View Session")
-    public void clickOnBeatingTheBluesClickOnViewSession() {
-        Assert.assertTrue(sanityPageContainer.beatingTheBlues.clickViewsummary());
-        sanityPageContainer.beatingTheBlues.clickViewsession();
+    @And("As I enter the Search Patient {string}")
+    public void asIEnterTheSearchPatient(String strDetail) {
+        List<String> lstMessageDetails = TestDataUtil.getListOfValue(strDetail);
+        System.out.println("List Details >>> :: " + lstMessageDetails);
+        Assert.assertTrue(sanityPageContainer.profilesPage.selectHealthCenter(TestDataUtil.getValue(lstMessageDetails.get(0))));
+        sanityPageContainer.profilesPage.SearchOrder(TestDataUtil.getValue(lstMessageDetails.get(1)));
+        sanityPageContainer.profilesPage.enterPatientName(TestDataUtil.getValue(lstMessageDetails.get(2)));
     }
 
-    @Then("click view all the steps of session in Beating the Blues")
-    public void clickViewAllTheStepsOfSessionInBeatingTheBlues() {
-        Assert.assertTrue(sanityPageContainer.beatingTheBlues.clickContinuesession1());
+    @When("I Click the Search button and verify result")
+    public void iClickTheSearchButtonAndVerifyResult() {
+        Assert.assertTrue(sanityPageContainer.profilesPage.clickSearchButton());
+    }
+
+    @Then("I navigate to view goals")
+    public void iNavigateToViewGoals() {
+
+        Assert.assertTrue(sanityPageContainer.profilesPage.selectViewGoals());
+    }
+
+
+    @And("I verify the provider Access Information of patient {string}")
+    public void iVerifyTheProviderAccessInformationOfPatient(String strDetail) {
+
+        List<String> lstMessageDetails = TestDataUtil.getListOfValue(strDetail);
+        System.out.println("List Details >>> :: " + lstMessageDetails);
+        Assert.assertTrue(sanityPageContainer.profilesPage.verifyWhoAccessedMyRecords(strDetail));
+
     }
 }
 
