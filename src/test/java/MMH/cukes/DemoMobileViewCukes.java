@@ -11,7 +11,7 @@ import static MMH.pages.HomePage.strAppVersion;
 
 @CucumberOptions(features = {"src/test/resources/features/HappyPath_Web_&_MobileResponse"},
         monochrome = true,
-        tags = "@HAPPY_PATH_MOBILE_RESPONSE",
+        tags = "@HEALTH_RECORDS1",
         glue = {"MMH"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

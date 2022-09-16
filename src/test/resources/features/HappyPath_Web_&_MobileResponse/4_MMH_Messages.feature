@@ -9,7 +9,7 @@ Feature: Messages
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE @TEST
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -47,7 +47,7 @@ Feature: Messages
       | Details         |
       | &DRAFT_MESSAGE& |
 
-  @WEB @MESSAGES @HAPPY_PATH
+  @WEB @MESSAGES @HAPPY_PATH @TEST
   Scenario Template: S3- Preparation for Received Message, Login as a Provider user
 
     Given As a user Launch the "<V1 Portal>"

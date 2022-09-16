@@ -31,6 +31,7 @@ public class DemoPageContainer {
 
     public DemoPageContainer() {
         driver = SharedDriver.getDriver();
+//        driver = SharedDriver.getMobileDriver();
         initPages();
     }
 

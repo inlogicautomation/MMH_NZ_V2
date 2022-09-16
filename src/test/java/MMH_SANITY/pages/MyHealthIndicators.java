@@ -4898,6 +4898,7 @@ public class MyHealthIndicators extends BasePage {
 //            System.out.println(">>>>>>>>>>>>>>>>>>>PrivateSettinglstDetails"+lstDetails);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollUp();
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData =driver.findElement(By.xpath(strMyEntriesShowthisentrytomycareproviders
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))

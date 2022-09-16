@@ -1,6 +1,6 @@
 Feature: My Health Records
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature: My Health Records
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -20,7 +20,7 @@ Feature: My Health Records
       | Email Address      | Password              |
       | &EMAIL_FOR_HEALTH& | &PASSWORD_FOR_HEALTH& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template:S1-Patient to View Health Records & Verify the Prescription Entries from Health Centre Medicine Details
 
     Given As a user I am on HomePage
@@ -267,7 +267,7 @@ Feature: My Health Records
       | &LAB_RESULT_TABLE_DATA_1& | &TEST_RESULT_ICON_DATA_1& | &TEST_MOBILE_RESULT_ICON_DATA_1& |
     And I navigate to the Homepage
 
-  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S10-Patient to View Health Records & Verify the Clinic Notes Entries from Health Centre Medicine Details
 
     Given As a user I am on HomePage
