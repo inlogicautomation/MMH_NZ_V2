@@ -88,8 +88,9 @@ public class WebSteps {
     public void iEnterTheVisitAppointmentDetails(String strHealthCenter) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
-//        Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -101,8 +102,9 @@ public class WebSteps {
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
-//        Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -141,8 +143,9 @@ public class WebSteps {
     public void iEnterTheVideoAppointmentDetails(String strVideoAppointmentDetails) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strVideoAppointmentDetails);
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
-//        Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -155,8 +158,9 @@ public class WebSteps {
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strVideoAppointmentDetails);
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
-//        Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -264,7 +268,9 @@ public class WebSteps {
     public void iEnterThePhoneAppointmentDetails(String strHealthCenter) {
         List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -278,7 +284,9 @@ public class WebSteps {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -1383,7 +1391,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterImmunisationVaccineName(TestDataUtil.getValue(listCreateData.get(0)));
             demoPageContainer.myHealthRecordsPage.enterImmunisationDateGiven();
             demoPageContainer.myHealthRecordsPage.enterAdditionalInformation(TestDataUtil.getValue(listCreateData.get(1)));
-           demoPageContainer.myHealthRecordsPage.clickImmuCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickImmuCheckBox();
             demoPageContainer.myHealthRecordsPage.clickImmunisationSave();
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -1588,7 +1596,6 @@ public class WebSteps {
     }
 
 
-
     @And("I Create New Record in COVIDImmunisations page")
     public void iCreateNewRecordInCOVIDImmunisationsPage(List<String> listCreateData) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
@@ -1685,6 +1692,7 @@ public class WebSteps {
         demoPageContainer.myHealthRecordsPage.DeleteFile();
 
     }
+
     @Then("I should see Patient Record is deleted")
     public void iShouldSeePatientRecordIsDeleted() {
         Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyDeletedRecord());
@@ -2209,7 +2217,7 @@ public class WebSteps {
         System.out.println("List Message Details >>> :: " + lstMessageDetails);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessageForMobile(TestDataUtil.getValue(lstMessageDetails.get(4))));
-        }else {
+        } else {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessage(TestDataUtil.getValue(lstMessageDetails.get(5))));
 
         }
@@ -2232,7 +2240,7 @@ public class WebSteps {
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessageForMobile(TestDataUtil.getValue(lstReplyMessage.get(5))));
-        }else {
+        } else {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessage(TestDataUtil.getValue(lstReplyMessage.get(5))));
         }
         demoPageContainer.messagesPage.clickInboxAttachButton();
@@ -2331,7 +2339,7 @@ public class WebSteps {
         List<String> listGroupMessage = TestDataUtil.getListOfValue(strGroupMessage);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessageForMobile((listGroupMessage.get(0)), listGroupMessage.get(1)));
-        }else {
+        } else {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(4)), listGroupMessage.get(5)));
 
         }
@@ -2361,10 +2369,10 @@ public class WebSteps {
             for (int i = 0; i < tableData.size(); i++) {
                 String strKey = tableData.get(i).get(0).trim();
                 String strKey2 = tableData.get(i).get(1).trim();
-                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>"+strKey);
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>" + strKey);
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+list1);
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>" + list1);
                 Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesPrescriptionsData(list1, list2));
             }
         }
@@ -2381,6 +2389,7 @@ public class WebSteps {
             }
         }
     }
+
     @Then("I should see all the Allergies My Entries Medicine details in more info")
     public void iShouldSeeAllTheAllergiesMyEntriesMedicineDetailsInMoreInfo(DataTable dataTable) {
 

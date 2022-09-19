@@ -194,7 +194,9 @@ public class HomePage extends BasePage {
 
     public boolean verifyHomePageOfMMHPortal() {
         waitForElement(elmntVerifyHomePage);
-        strAppVersion = txtAppVersion.getText();
+        if (verifyElement(txtAppVersion)) {
+            strAppVersion = txtAppVersion.getText();
+        }
         Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
         strBrowserName = cap.getBrowserName();
         strBrowserVersion = cap.getVersion();
