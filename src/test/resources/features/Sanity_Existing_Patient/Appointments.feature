@@ -187,15 +187,15 @@ Feature: Appointments
 #    39:Click on past appointments & view grid details of past date appointments
 #    These test Case Covered The Scenario NO: S4
 #  }
-  @WEB @SANITY_PATH @SANITY_PATH_APPOINTMENTS
-  Scenario Template: S4 - Patient can view all the past date booked appointments in grid view
-
-    Given I am on "<Tab>" page
-    When I switch to grid view in past appointments page
-    Then I should see all the past date appointments in grid view
-    Examples:
-      | Tab               |
-      | Past Appointments |
+#  @WEB @SANITY_PATH @SANITY_PATH_APPOINTMENTS
+#  Scenario Template: S4 - Patient can view all the past date booked appointments in grid view
+#
+#    Given I am on "<Tab>" page
+#    When I switch to grid view in past appointments page
+#    Then I should see all the past date appointments in grid view
+#    Examples:
+#      | Tab               |
+#      | Past Appointments |
 
   @WEB @SANITY_PATH @SANITY_PATH_APPOINTMENTS
   Scenario Template: S5 - Patient can view all the video appointments invites sent from PMS/Provider in grid view

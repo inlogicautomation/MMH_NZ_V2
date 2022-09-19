@@ -29,16 +29,16 @@ Feature: Patient Profile
       | Current Password       | Password                   |
       | &PASSWORD_FOR_PROFILE& | &NEW_PASSWORD_FOR_PROFILE& |
 
-  @WEB  @PROFILE12 @SANITY_PATH
-  Scenario Template: S1- Existing Patient Login with new password.
-
-    Given As a user I am on beta MMH login Page
-    And I enter "<Email Address>" and "<Password>" For Beta
-    When I click SignIn button
-    Then I should see user successfully logs in to the MMH portal
-    Examples:
-      | Email Address       | Password               |
-      | &EMAIL_FOR_PROFILE& | &PASSWORD_FOR_PROFILE& |
+#  @WEB  @PROFILE12 @SANITY_PATH12
+#  Scenario Template: S1- Existing Patient Login with new password.
+#
+#    Given As a user I am on beta MMH login Page
+#    And I enter "<Email Address>" and "<Password>" For Beta
+#    When I click SignIn button
+#    Then I should see user successfully logs in to the MMH portal
+#    Examples:
+#      | Email Address       | Password               |
+#      | &EMAIL_FOR_PROFILE& | &PASSWORD_FOR_PROFILE& |
 
 
 #    Note: {
@@ -169,18 +169,18 @@ Feature: Patient Profile
 
 
 
-#  @WEB @MESSAGES @SANITY_PATH @PROFILE1
-#  Scenario Template: S3- User Successfully logs in to the DEV Portal.
-#    Given As a user I am on MMH login Page "<V1 Portal>"
-#    And I enter "<Email Address>" and "<Password>"
-#    When I click login button
-#    Then I should see user successfully logs in to the MMH portal
-#    Examples:
-#      | V1 Portal | Email Address      | Password              |
-#      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+  @WEB @MESSAGES @SANITY_PATH @PROFILE1
+  Scenario Template: S3- User Successfully logs in to the DEV Portal.
+    Given As a user I am on MMH login Page "<V1 Portal>"
+    And I enter "<Email Address>" and "<Password>"
+    When I click login button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | V1 Portal | Email Address      | Password              |
+      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 #
 
-  @WEB @PROFILE @SANITY_PATH
+  @WEB @PROFILE @SANITY_PATH @PROFILE1
   Scenario Template: S10- Preparation for Patient Automatic Reply Settings, Login as a Provider user
 
     Given As a user Launch the "<V1 Portal>"
@@ -192,7 +192,7 @@ Feature: Patient Profile
       | V1 Portal | Email Address      | Password              |
       | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
-  @WEB @PROFILE @SANITY_PATH
+  @WEB @PROFILE @SANITY_PATH @PROFILE1
   Scenario Template: S3- Preparation for Profile Access
 
     Given As a user I am on Doctor portal homepage and Navigate to Search Patient
@@ -205,7 +205,7 @@ Feature: Patient Profile
       | &PROFILE_ACCESS_INFORMATION& |
 
 
-  @WEB @PROFILE @SANITY_PATH
+  @WEB @PROFILE @SANITY_PATH @PROFILE1
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -217,7 +217,7 @@ Feature: Patient Profile
       | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
 
-  @WEB @PROFILE @SANITY_PATH
+  @WEB @PROFILE @SANITY_PATH @PROFILE1
   Scenario Template: S3- Existing Patient change the Phone Number.
 
     Given I navigate to View Profile and I see Access Information
@@ -227,27 +227,8 @@ Feature: Patient Profile
       | &VERIFY_ACCESS_INFORMATION& |
 
 
+#  Navigate to profile & click on My Payment - Enter Health centre, location, from date, to date, or text to search
+#  & click on search - All payments details must be displayed in grid
 #
-#  @WEB @HAPPY_PATH @MESSAGES123
-#  Scenario Template: S10- Preparation for Patient Automatic Reply Settings, Login as a Provider user
-#
-#    Given As a user Launch the "<V1 Portal>"
-#    And I enter "<Email Address>" and "<Password>"
-#    When I click login button
-#    Then I should see user successfully logs in to the MMH portal
-#
-#    Examples:
-#      | V1 Portal | Email Address      | Password              |
-#      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
-#
-#
-#  @WEB @RRP @SANITY_PATH @MESSAGES123
-#  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
-#
-#    Given As a user I am on beta MMH login Page
-#    And I enter "<Email Address>" and "<Password>" For Beta
-#    When I click SignIn button
-#    Then I should see user successfully logs in to the MMH portal
-#    Examples:
-#      | Email Address   | Password           |
-#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+#  Click on update profile under view profile tab & update personal details, contact details, additional details
+#  & click on save

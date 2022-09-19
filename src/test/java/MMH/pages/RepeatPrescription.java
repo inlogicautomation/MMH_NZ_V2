@@ -182,6 +182,12 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[text()='Next']")
     protected WebElement btnNextCrdCard;
 
+    @FindBy(how = How.XPATH, using = "//span[@name='CardName']")
+    protected WebElement elmntCardType;
+
+    @FindBy(how = How.ID, using = "Amount")
+    protected WebElement elmntAmount;
+
     @FindBy(how = How.XPATH, using = "//div[@class='alert alert-success m-t-40']/b[text()='Success']")
     protected WebElement elmntOnlineCardSuccessPopUp;
 

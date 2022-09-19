@@ -55,14 +55,17 @@ Feature: Messages
 #    These test Case Covered The Scenario NO: S3
 #  }
   @WEB @MESSAGES @SANITY_PATH
-  Scenario Template: S3- User Successfully logs in to the DEV Portal.
-    Given As a user I am on MMH login Page "<V1 Portal>"
+  Scenario Template: S3- User successfully login into Doctor Portal
+
+    Given As a user Launch the "<V1 Portal>"
     And I enter "<Email Address>" and "<Password>"
     When I click login button
     Then I should see user successfully logs in to the MMH portal
+
     Examples:
       | V1 Portal | Email Address      | Password              |
       | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+
 
   @WEB @MESSAGES @SANITY_PATH
   Scenario Template: S3- Preparation for Received Message
@@ -164,14 +167,16 @@ Feature: Messages
 #    These test Case Covered The Scenario NO: S8
 #  }
   @WEB @MESSAGES @SANITY_PATH
-  Scenario Template: S8- User Successfully logs in to the DEV Portal.
-    Given As a user I am on MMH login Page "<V1 Portal>"
+  Scenario Template: S8- User successfully login into Doctor Portal
+
+    Given As a user Launch the "<V1 Portal>"
     And I enter "<Email Address>" and "<Password>"
     When I click login button
     Then I should see user successfully logs in to the MMH portal
     Examples:
       | V1 Portal | Email Address      | Password              |
       | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+
 
 
   @WEB @MESSAGES @SANITY_PATH
@@ -243,14 +248,17 @@ Feature: Messages
       | &AUTOMATIC REPLY MESSAGE& |
 
   @WEB  @MESSAGES @SANITY_PATH
-  Scenario Template: S10- User Successfully logs in to the DEV Portal.
-    Given As a user I am on MMH login Page "<V1 Portal>"
+  Scenario Template: S10- User successfully login into Doctor Portal
+
+    Given As a user Launch the "<V1 Portal>"
     And I enter "<Email Address>" and "<Password>"
     When I click login button
     Then I should see user successfully logs in to the MMH portal
+
     Examples:
       | V1 Portal | Email Address      | Password              |
       | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+
 
 #    Note: {
 #    68:Click on Automatic replies & Enable automatic replies & enter details that need to be sent to sender automatically#    These test Case Covered The Scenario NO: S10

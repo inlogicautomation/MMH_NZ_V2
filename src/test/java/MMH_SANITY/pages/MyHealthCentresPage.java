@@ -1,11 +1,16 @@
 package MMH_SANITY.pages;
 
 import cap.common.BasePage;
+import cap.utilities.DateUtil;
+import cap.utilities.TestDataUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class MyHealthCentresPage extends BasePage {
 
@@ -22,7 +27,7 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Connect a health centre')]")
     protected WebElement btnConnectAHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'My Health centres')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'My Health Centres')]")
     protected WebElement elmntMyHealthCentres;
 
     @FindBy(how = How.XPATH, using = "//h5[contains(text(),'Notice Board')]")
@@ -33,6 +38,18 @@ public class MyHealthCentresPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Connect a health centre')]")
     protected WebElement txtConnectAHealthCentre;
+
+    @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome')])[1]")
+    protected WebElement txtMyHomePage;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='leftside']")
+    protected WebElement elmntsMenu;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Search Patients')]/ancestor::div[contains(@class,'breadcrumbs')]")
+    protected WebElement txtBCSearchPatient;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Post to Notice Board')]")
+    protected WebElement elmntPostNoticeBoard;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'GP')]//preceding-sibling::div/div[@class='mat-radio-inner-circle']")
     protected WebElement rdoBtnGP;
@@ -46,14 +63,17 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Next')]")
     protected WebElement btnNext;
 
+    @FindBy(how = How.XPATH, using = "//a[contains(@id,'btnSubmitEditor')]")
+    protected WebElement btnSave;
+
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'CONNECT')]")
     protected WebElement btnConnect;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Post to Notice Board')]")
-    protected WebElement elmntPostToNotice;
-
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'New Post')]")
     protected WebElement elmntNewPost;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Content Header')]")
+    protected WebElement txtContentHeader;
 
     @FindBy(how = How.XPATH, using = "//iframe[@class='inner_iframe']")
     protected WebElement elmntIframe;
@@ -67,11 +87,30 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'Deleted successfully')]/preceding::h4[contains(text(),'Success!')]")
     protected WebElement txtDeletedSuccessPopUp;
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
+    @FindBy(how = How.XPATH, using = "//select[contains(@id,'ddlPracticeList')]")
     protected WebElement drpDownHealthCentre;
+
+    @FindBy(how = How.XPATH, using = "//select[contains(@id,'ddlSelectType')]")
+    protected WebElement drpDownContentType;
+
+    @FindBy(how = How.XPATH, using = "//select[contains(@id,'ddlSelectHeader')]")
+    protected WebElement drpDownContentHeader;
+
+    @FindBy(how = How.XPATH, using = "//input[contains(@id,'txtEndDate')]")
+    protected WebElement elmntEndDate;
+
+    @FindBy(how = How.XPATH, using = "//input[contains(@id,'txtStartDate')]")
+    protected WebElement elmntStartDate;
 
     protected String practiceName = new StringBuilder()
             .append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+
+    //mat-card-title[contains(text(),'Post Header')]
+    protected String verifyHeader = new StringBuilder()
+            .append("//mat-card-title[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
@@ -89,6 +128,12 @@ public class MyHealthCentresPage extends BasePage {
 
     protected String address = new StringBuilder()
             .append("//p[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+    //div[contains(text(),'123456qwert')]
+    protected String verifyContent = new StringBuilder()
+            .append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
@@ -228,6 +273,190 @@ public class MyHealthCentresPage extends BasePage {
         waitForElement(rdoBtnGP);
         waitForElementClickable(rdoBtnGP);
         waitAndClick(rdoBtnGP);
+    }
+    public boolean navigateToPostNoticeBoard() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(3);
+            waitForElement(txtMyHomePage);
+            waitForElement(elmntsMenu);
+            waitForElement(elmntPostNoticeBoard);
+            waitForElementClickable(elmntPostNoticeBoard);
+            click(elmntPostNoticeBoard);
+            waitForSeconds(1);
+            waitForElement(elmntNewPost);
+            blResult = verifyElement(elmntNewPost);
+            System.out.println("Successfully navigated to Post notice board >>> :: ");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to navigate Post notice board >>> :: ");
+        }
+        return blResult;
+    }
+
+    public boolean selectHealthCenter(String strHealthCenter) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntNewPost);
+            waitForElement(drpDownHealthCentre);
+            waitForElementClickable(drpDownHealthCentre);
+            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'ddlPracticeList')]")));
+            System.out.println("strHealthCenter >>> :: "+strHealthCenter);
+            healthCentre.selectByVisibleText(strHealthCenter);
+            waitForSeconds(2);
+
+            blResult = true;
+            System.out.println("\nSuccessfully selected the health centre >>> :: ");
+        } catch (Exception e) {
+            System.out.println("\nFailed to select the health centre >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean selectContentHeader(String strHeader) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntNewPost);
+            jsScrollIntoView(txtContentHeader);
+            waitForElement(drpDownContentHeader);
+            waitForElementClickable(drpDownContentHeader);
+            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'ddlSelectHeader')]")));
+            System.out.println("strHealthCenter >>> :: "+strHeader);
+            healthCentre.selectByVisibleText(strHeader);
+            waitForSeconds(5);
+            waitForElement(txtContentHeader);
+            blResult = verifyElement(txtContentHeader);
+            System.out.println("\nSuccessfully selected the health centre >>> :: ");
+        } catch (Exception e) {
+            System.out.println("\nFailed to select the health centre >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean selectContentType(String strType) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntNewPost);
+            jsScrollIntoView(txtContentHeader);
+            waitForElement(drpDownContentType);
+            waitForElementClickable(drpDownContentType);
+            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'ddlSelectType')]")));
+            System.out.println("strHealthCenter >>> :: "+strType);
+            healthCentre.selectByVisibleText(strType);
+
+            waitForSeconds(5);
+            waitForElement(txtContentHeader);
+            blResult = verifyElement(txtContentHeader);
+
+            System.out.println("\nSuccessfully selected the health centre >>> :: ");
+        } catch (Exception e) {
+            System.out.println("\nFailed to select the health centre >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean selectDate() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntStartDate);
+            String strStartDate = DateUtil.getDate("YESTERDAY","dd/MM/YYYY");
+            System.out.println("strStartDate >>> :: "+strStartDate);
+            enterValue(elmntStartDate,strStartDate);
+
+            waitForElement(elmntEndDate);
+            String strEndDate=DateUtil.getDate("TOMORROW","dd/MM/YYYY");
+            System.out.println("strEndDate >>> :: "+strEndDate);
+            enterValue(elmntEndDate,strEndDate);
+
+            blResult = true;
+            System.out.println("\nSuccessfully selected the health centre >>> :: ");
+        } catch (Exception e) {
+            System.out.println("\nFailed to select the health centre >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean enterBodyMessage(String strBodyMessage) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(btnSave);
+            driver.switchTo().frame(elmntIframe);
+            waitForSeconds(2);
+            waitForElementClickable(elmntEditorBody);
+
+            elmntEditorBody.sendKeys(strBodyMessage);
+            takeScreenshot(driver);
+            waitForSeconds(3);
+            driver.switchTo().parentFrame();
+
+            waitForElement(btnSave);
+            blResult = verifyElement(btnSave);
+            System.out.println("\nSuccessfully Entered The Subject Body Message >>> :: ");
+        } catch (Exception e) {
+            System.out.println("\nFailed to Enter the Subject Message >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean verifyNoticeBoardMessage(String strDetail) {
+        boolean blResult = false;
+        try {
+            List<String> lstDetail = TestDataUtil.getListOfValue(strDetail);
+            System.out.println("lstDetail >>> :: "+lstDetail);
+            waitForSeconds(2);
+            waitForElement(txtNoticeBoard);
+
+            jsScroll();
+
+            System.out.println("X-Path for Header >>> :: "+verifyHeader.replace("<<REPLACEMENT>>", TestDataUtil.getValue(lstDetail.get(0))));
+            WebElement header = waitForElement(By.xpath(verifyHeader.replace("<<REPLACEMENT>>", TestDataUtil.getValue(lstDetail.get(0)))));
+            waitForElement(header);
+
+             System.out.println("X-Path for content >>> :: "+verifyContent.replace("<<REPLACEMENT>>", TestDataUtil.getValue(lstDetail.get(1))));
+            WebElement content = waitForElement(By.xpath(verifyContent.replace("<<REPLACEMENT>>", TestDataUtil.getValue(lstDetail.get(1)))));
+            waitForElement(header);
+
+            takeScreenshot(driver);
+
+            blResult = verifyElement(header);
+            System.out.println("\nSuccessfully Entered The Subject Body Message >>> :: ");
+        } catch (Exception e) {
+            System.out.println("\nFailed to Enter the Subject Message >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean clickNewPost(){
+        waitForSeconds(2);
+        waitForElement(elmntNewPost);
+        waitForElementClickable(elmntNewPost);
+        waitAndClick(elmntNewPost);
+        waitForSeconds(2);
+        jsScrollIntoView(btnSave);
+        waitForElement(btnSave);
+        return verifyElement(btnSave);
+    }
+
+    public void clickSave(){
+        waitForSeconds(2);
+        waitForElement(btnSave);
+        waitForElementClickable(btnSave);
+        waitAndClick(btnSave);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(DateUtil.getDate("TODAY","dd/MM/YYYY"));
+        System.out.println(DateUtil.getDate("TOMORROW","dd/MM/YYYY"));
+
+        StringBuilder str = new StringBuilder("Naveen");
+        str.reverse();
+        System.out.println(str);
     }
 
 }

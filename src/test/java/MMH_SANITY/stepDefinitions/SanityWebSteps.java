@@ -23,8 +23,6 @@ public class SanityWebSteps {
     }
 
 
-
-
     @When("I click pay now Button")
     public void iClickPayNowButton() {
         Assert.assertTrue(sanityPageContainer.repeatPrescription.clickPayNow());
@@ -135,10 +133,6 @@ public class SanityWebSteps {
 //        Assert.assertTrue(sanityPageContainer.messagesPage.launchInNewTab(TestDataUtil.getValue(strURL)));
 //
 //    }
-
-
-
-
 
 
     @And("I enter the Compose Message Details and I Click the send message and verify success pop up")
@@ -305,9 +299,6 @@ public class SanityWebSteps {
 //    }
 
 
-
-
-
     @And("I verify the provider sent Group{string}")
     public void iVerifyTheProviderSentGroup(String strGroupMesssage) {
         List<String> listGroupMessage = TestDataUtil.getListOfValue(strGroupMesssage);
@@ -324,26 +315,6 @@ public class SanityWebSteps {
         Assert.assertTrue(sanityPageContainer.messagesPage.moveReceivedMessageIntoArchive(TestDataUtil.getValue(lstMessageDetails.get(5))));
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @And("I log out from Patient Portal")
@@ -367,35 +338,11 @@ public class SanityWebSteps {
 //    }
 
 
-
-
-
     @And("I log out from Patient Portal and Verify the Login page")
     public void iLogOutFromPatientPortalAndVerifyTheLoginPage() {
         Assert.assertTrue(sanityPageContainer.messagesPage.patientLogOut());
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Given("As a Existing user I am on HomePage and I navigate to change password in the My Profile")
@@ -684,10 +631,6 @@ public class SanityWebSteps {
     }
 
 
-
-
-
-
     @Given("As a Existing user I am on HomePage and I click the Health Records")
     public void asAExistingUserIAmOnHomePageAndIClickTheHealthRecords() {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
@@ -701,7 +644,8 @@ public class SanityWebSteps {
 
         }
     }
-////
+
+    ////
 ////
     @When("I click on {string} Prescription Page")
     public void iClickOnPrescriptionPage(String strHealthCenter) {
@@ -799,7 +743,7 @@ public class SanityWebSteps {
 
     }
 
-//
+    //
     @And("I click on the more info icon to see all the Allergies Entries From the Health center Medicine details")
     public void iClickOnTheMoreInfoIconToSeeAllTheAllergiesEntriesFromTheHealthCenterMedicineDetails(DataTable dataTable) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
@@ -1046,7 +990,6 @@ public class SanityWebSteps {
     }
 
 
-
     @And("I click on Delete Icon & I verify the COVIDImmunisations My Entries Record is deleted")
     public void iClickOnDeleteIconIVerifyTheCOVIDImmunisationsMyEntriesRecordIsDeleted() {
         Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickCovidDelete());
@@ -1075,7 +1018,6 @@ public class SanityWebSteps {
         Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(lsClassificationsDetails)));
 
     }
-
 
 
     @And("I click on the more info icon to see all the Classifications Entries From the Health center Medicine details")
@@ -1324,7 +1266,6 @@ public class SanityWebSteps {
     }
 
 
-
     @And("I click on the more info icon to see all the Recalls Entries From the Health center Medicine details")
     public void iClickOnTheMoreInfoIconToSeeAllTheRecallsEntriesFromTheHealthCenterMedicineDetails(DataTable dataTable) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
@@ -1370,9 +1311,6 @@ public class SanityWebSteps {
 
 
     }
-
-
-
 
 
 //    @And("I navigate to the Homepage")
@@ -2157,7 +2095,7 @@ public class SanityWebSteps {
 
     @And("Navigate to View Specific health Record Details in Dashboard")
     public void navigateToViewSpecificHealthRecordDetailsInDashboard(String strValue) {
-        System.out.println("strValue >>> :: "+TestDataUtil.getValue(strValue));
+        System.out.println("strValue >>> :: " + TestDataUtil.getValue(strValue));
         List<String> lstDetails = TestDataUtil.getListOfValue(strValue);
         System.out.println("lstDetails >>> :: " + lstDetails);
         Assert.assertTrue(sanityPageContainer.dashboardPage.selectHealthRecords(lstDetails));
@@ -2170,7 +2108,8 @@ public class SanityWebSteps {
         Assert.assertTrue(sanityPageContainer.viewJournal.clickMyHealthToolsOptionFromMenu());
 //        Assert.assertTrue(sanityPageContainer.goalTracking.clickGoalTracking());
     }
-//
+
+    //
     @And("View latest three patient Health Records in Health records card")
     public void viewLatestThreePatientHealthRecordsInHealthRecordsCard(List<String> strDetails) {
 
@@ -2182,6 +2121,7 @@ public class SanityWebSteps {
         }
 
     }
+
     @When("I click on view Journal & Add Journal Details kept private are not shared with the provider")
     public void iClickOnViewJournalAddJournalDetailsKeptPrivateAreNotSharedWithTheProvider(String viewJournal) {
         List<String> strviewjournalData = TestDataUtil.getListOfValue(viewJournal);
@@ -2259,7 +2199,6 @@ public class SanityWebSteps {
     }
 
 
-
     @When("I click on Goal Tracking & Add Goal Tracking Details kept private are not shared with the provider")
     public void iClickOnGoalTrackingAddGoalTrackingDetailsKeptPrivateAreNotSharedWithTheProvider(String viewJournal) {
         List<String> strviewjournalData = TestDataUtil.getListOfValue(viewJournal);
@@ -2331,7 +2270,8 @@ public class SanityWebSteps {
         Assert.assertTrue(sanityPageContainer.goalTracking.clickYesButton());
         Assert.assertTrue(sanityPageContainer.goalTracking.verifyDeletedRecord());
     }
-//
+
+    //
     @And("I click on Goal Tracking & Add Goal Tracking Details kept private are shared with the provider")
     public void iClickOnGoalTrackingAddGoalTrackingDetailsKeptPrivateAreSharedWithTheProvider(String GoalTracking) {
         List<String> strGoalTrackingData = TestDataUtil.getListOfValue(GoalTracking);
@@ -3205,8 +3145,8 @@ public class SanityWebSteps {
                 String strKey2 = tableData.get(i).get(1).trim();
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-                System.out.println(">>>>>>>>>>>>>>>>>>>>list1"+list1);
-                System.out.println(">>>>>>>>>>>>>>>>>>>>list2"+list2);
+                System.out.println(">>>>>>>>>>>>>>>>>>>>list1" + list1);
+                System.out.println(">>>>>>>>>>>>>>>>>>>>list2" + list2);
                 Assert.assertTrue(sanityPageContainer.goalTracking.ClickFutureTaskMoreInfoIcon(list1, list2));
             }
         }
@@ -3214,8 +3154,8 @@ public class SanityWebSteps {
 
     @And("I click on {string} edit icon & I Edit future task records {string}")
     public void iClickOnEditIconIEditFutureTaskRecords(String details, String listCreateData) {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>details"+details);
-        System.out.println(">>>>>>>>>>>>>>>>>>>>listCreateData"+listCreateData);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>details" + details);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>listCreateData" + listCreateData);
         Assert.assertTrue(sanityPageContainer.goalTracking.ClickEditFutureTaskTableData(TestDataUtil.getListOfValue(details)));
         Assert.assertTrue(sanityPageContainer.goalTracking.EditFutureTaskDescription(TestDataUtil.getValue(listCreateData)));
         Assert.assertTrue(sanityPageContainer.goalTracking.clickEditSaveButton());
@@ -3271,8 +3211,8 @@ public class SanityWebSteps {
             String strKey2 = tableData.get(i).get(1).trim();
             List<String> list1 = TestDataUtil.getListOfValue(strKey);
             List<String> list2 = TestDataUtil.getListOfValue(strKey2);
-            System.out.println(">>>>>>>>>>>>>>>>>>>>list1"+list1);
-            System.out.println(">>>>>>>>>>>>>>>>>>>>list2"+list2);
+            System.out.println(">>>>>>>>>>>>>>>>>>>>list1" + list1);
+            System.out.println(">>>>>>>>>>>>>>>>>>>>list2" + list2);
             Assert.assertTrue(sanityPageContainer.goalTracking.ClickPreviousTaskMoreInfoIcon(list1, list2));
         }
     }
@@ -3511,6 +3451,7 @@ public class SanityWebSteps {
         Assert.assertTrue(sanityPageContainer.myHealthIndicators.clickWeightCard());
         Assert.assertTrue(sanityPageContainer.myHealthIndicators.verifyDeleteIconWeightMyEntriesTableData(TestDataUtil.getListOfValue(details.get(0))));
     }
+
     @And("View latest three patient Appointments in upcoming appointments card")
     public void viewLatestThreePatientAppointmentsInUpcomingAppointmentsCard(List<String> strDetails) {
         for (String strData : strDetails) {
@@ -3554,6 +3495,33 @@ public class SanityWebSteps {
         List<String> lstMessageDetails = TestDataUtil.getListOfValue(strDetail);
         System.out.println("List Details >>> :: " + lstMessageDetails);
         Assert.assertTrue(sanityPageContainer.profilesPage.verifyWhoAccessedMyRecords(strDetail));
+
+    }
+
+    @Given("As a user I am on Doctor portal homepage and Navigate to Post notice board")
+    public void asAUserIAmOnDoctorPortalHomepageAndNavigateToPostNoticeBoard() {
+        Assert.assertTrue(sanityPageContainer.myHealthCentresPage.navigateToPostNoticeBoard());
+
+    }
+
+    @And("I Enter the notice board message {string}")
+    public void iEnterTheNoticeBoardMessage(String strDetail) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strDetail);
+        System.out.println("List Details >>> :: " + lstDetails);
+        Assert.assertTrue(sanityPageContainer.myHealthCentresPage.selectHealthCenter(TestDataUtil.getValue(lstDetails.get(0))));
+        Assert.assertTrue(sanityPageContainer.myHealthCentresPage.clickNewPost());
+        Assert.assertTrue(sanityPageContainer.myHealthCentresPage.selectContentType(TestDataUtil.getValue(lstDetails.get(1))));
+        Assert.assertTrue(sanityPageContainer.myHealthCentresPage.selectContentHeader(TestDataUtil.getValue(lstDetails.get(2))));
+        Assert.assertTrue(sanityPageContainer.myHealthCentresPage.selectDate());
+        Assert.assertTrue(sanityPageContainer.myHealthCentresPage.enterBodyMessage(TestDataUtil.getValue(lstDetails.get(3))));
+        sanityPageContainer.myHealthCentresPage.clickSave();
+    }
+
+    @And("I verify the notice board message {string}")
+    public void iVerifyTheNoticeBoardMessage(String strDetail) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strDetail);
+        System.out.println("List Details >>> :: " + lstDetails);
+        Assert.assertTrue(sanityPageContainer.myHealthCentresPage.verifyNoticeBoardMessage(strDetail));
 
     }
 }

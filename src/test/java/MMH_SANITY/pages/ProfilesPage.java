@@ -1718,6 +1718,16 @@ public class ProfilesPage extends BasePage {
     public static void main(String[] args) {
         String strCurrentDate = getCurrentDateByTimeZone("dd MMM YYYY", "GMT+12");
         System.out.println(strCurrentDate);
+        String st123 ="2209-1816-4257-0088";
+        StringBuffer st = new StringBuffer("2209-1816-4257-0088");
+        st123.replace("-","");
+        System.out.println(st123.replace("-",""));
+
+        String input_string = "$ 12.00(NS USD)";
+        String string_output=input_string.replaceAll("[A-Za-z]", "");
+//        int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+        System.out.println("string_output = "+string_output);
+//        System.out.println("number_output = "+number_output);
     }
 
 
