@@ -27,8 +27,8 @@ public class SanityPageContainer {
     public MessagesPage messagesPage;
     public ProfilesPage profilesPage;
     public MyHealthCentresPage myHealthCentresPage;
-//    public BeatingTheBlues beatingTheBlues;
 
+    public BeatingTheBlues beatingTheBlues;
     public MyHealthIndicators myHealthIndicators;
     public ResourcesPage resourcesPage;
     public MyHealthDocumentsPage myHealthDocumentsPage;
@@ -47,7 +47,7 @@ public class SanityPageContainer {
 
     private void initPages() {
         homePage = new HomePage(driver);
-//        beatingTheBlues = new BeatingTheBlues(driver);
+        beatingTheBlues = new BeatingTheBlues(driver);
 //        appointmentsPage = new AppointmentsPage(driver);
         repeatPrescription = new RepeatPrescription(driver);
         myHealthRecordsPage = new MyHealthRecordsPage(driver);

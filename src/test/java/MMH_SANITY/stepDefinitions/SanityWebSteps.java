@@ -978,6 +978,7 @@ public class SanityWebSteps {
     @And("I click on COVIDImmunisations Confirm & Save Button")
     public void iClickOnCOVIDImmunisationsConfirmSaveButton() {
         sanityPageContainer.myHealthRecordsPage.clickCovidSave();
+        sanityPageContainer.myHealthRecordsPage.RefreshPage();
     }
 
     @When("I click on edit icon & I Edit COVIDImmunisations of My Entries records {string}")
@@ -3523,6 +3524,18 @@ public class SanityWebSteps {
         System.out.println("List Details >>> :: " + lstDetails);
         Assert.assertTrue(sanityPageContainer.myHealthCentresPage.verifyNoticeBoardMessage(strDetail));
 
+    }
+
+    @And("click on Beating the Blues & click on View Session")
+    public void clickOnBeatingTheBluesClickOnViewSession() {
+        Assert.assertTrue(sanityPageContainer.beatingTheBlues.clickViewsummary());
+        sanityPageContainer.beatingTheBlues.clickViewsession();
+    }
+
+    @Then("click view all the steps of session in Beating the Blues")
+    public void clickViewAllTheStepsOfSessionInBeatingTheBlues() {
+        Assert.assertTrue(sanityPageContainer.beatingTheBlues.clickContinuesession1());
+        Assert.assertTrue(sanityPageContainer.viewJournal.clickDashBoard());
     }
 }
 
