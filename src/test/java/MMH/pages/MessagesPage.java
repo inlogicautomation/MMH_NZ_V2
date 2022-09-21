@@ -38,11 +38,15 @@ public class MessagesPage extends BasePage {
     protected WebElement elmntGroupMessagePatient;
 
 
-    @FindAll({
-            @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Group Messages')])[2]"),
-            @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Group Messages')])[1]")
+//    @FindAll({
+//            @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Group Messages')])[2]"),
+//            @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Group Messages')])[1]")
+//
+//    })
+//    protected WebElement txtGroupMessagePatient;
 
-    })
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Group Messages')]")
     protected WebElement txtGroupMessagePatient;
 
     @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Compose Email')])[2]")
@@ -78,17 +82,21 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Keep me Logged In for')]")
     protected WebElement txtKeepMeLogged;
 
-    @FindBy(how = How.XPATH, using = "//figure[contains(text(),'When I receive new messages send alerts')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'When I receive new messages send alerts')]")
     protected WebElement txtSendAlert;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Save')]")
     protected WebElement btnSave;
 
-    @FindAll({
-            @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Inbox')])[2]"),
-            @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Inbox')])[1]")
-    })
+//    @FindAll({
+//            @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Inbox')])[2]"),
+//            @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Inbox')])[1]")
+//    })
+//    protected WebElement txtInboxPatient;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Inbox')]")
     protected WebElement txtInboxPatient;
+
 
 //    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Group Messages')]")
 //    protected WebElement txtGroupMessagesPatient;

@@ -283,7 +283,7 @@ Feature: Messages
 
   #============================================================================
 
-  @WEB @MESSAGES @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  @WEB @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -296,7 +296,7 @@ Feature: Messages
       | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
 
 
-  @WEB @MESSAGES @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  @WEB @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Outline: S3- User verify the Received Message
 
     Given As a user I am on HomePage and navigate to Inbox
@@ -307,7 +307,7 @@ Feature: Messages
       | Message                            |
       | &MOBILE_RESPONSE_RECEIVED_MESSAGE& |
 
-  @WEB @MESSAGES @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  @WEB @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: S4- User Verifies the Patient Reply Message
 
     Given As a user I am on HomePage and navigate to Inbox
@@ -319,7 +319,7 @@ Feature: Messages
       | Reply                           |
       | &MOBILE_RESPONSE_REPLY_MESSAGE& |
 
-  @WEB @MESSAGES @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  @WEB @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: S5-  User verifies the Patient Group Message
 
     Given As a user I am on HomePage and navigate to GroupMessage

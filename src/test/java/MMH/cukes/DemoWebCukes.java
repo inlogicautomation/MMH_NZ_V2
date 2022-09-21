@@ -37,3 +37,4 @@ public class DemoWebCukes extends AbstractTestNGCucumberTests {
 
     }
 }
+//    clean test -Dapp=MMH -Dexecution_type=browser -Drunner=DemoWebCukes -Dbrowser_name=chrome -Denv=PROD "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/Web-QAResults.html -Dsysteminfo.AppName=Demo-QA"

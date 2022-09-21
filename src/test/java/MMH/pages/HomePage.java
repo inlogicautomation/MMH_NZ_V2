@@ -4,7 +4,6 @@ import cap.common.BasePage;
 import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
 import cap.utilities.WindowsProcessUtil;
-import io.cucumber.java.an.E;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
@@ -195,22 +194,16 @@ public class HomePage extends BasePage {
 
     public boolean verifyHomePageOfMMHPortal() {
         waitForElement(elmntVerifyHomePage);
-
-        try {
-
+        if (verifyElement(txtAppVersion)) {
             strAppVersion = txtAppVersion.getText();
-            Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
-            strBrowserName = cap.getBrowserName();
-            strBrowserVersion = cap.getVersion();
-            try {
-                strSystemName = InetAddress.getLocalHost().getHostName();
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
-            }
-        }catch (Exception e){
-            waitForElement(elmntVerifyHomePage);
-            takeScreenshot(driver);
-            return verifyElement(elmntVerifyHomePage);
+        }
+        Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+        strBrowserName = cap.getBrowserName();
+        strBrowserVersion = cap.getVersion();
+        try {
+            strSystemName= InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
         }
         takeScreenshot(driver);
         return verifyElement(elmntVerifyHomePage);
@@ -391,14 +384,6 @@ public class HomePage extends BasePage {
         return blResult;
 
     }
-
-    public void visitDevURL(String strURL) {
-        visit(TestDataUtil.getValue(strURL));
-        takeScreenshotSanity(driver);
-
-    }
-
-
 }
 
 

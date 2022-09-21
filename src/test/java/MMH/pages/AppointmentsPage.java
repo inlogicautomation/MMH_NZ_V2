@@ -309,7 +309,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div//span[contains(text(),'Ok')]")
     protected WebElement btnPaymentPopupOK;
 
-    @FindBy(how = How.XPATH, using = "//input[@data-placeholder='contact number']")
+    @FindBy(how = How.XPATH, using = "//input[@data-placeholder='Contact Number']")
     protected WebElement txtPhoneNumber;
 
     protected String elmntPhoneID = new StringBuilder().append("//div[@role='listbox']//span[contains(text(),'")
@@ -342,7 +342,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//textarea[@formcontrolname='reason']")
     protected WebElement txtReasonForCancelAppointment;
 
-    @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator btn mat-button mat-button-base']/span[text()='cancel'])[1]")
+    @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator btn mat-button mat-button-base']/span[text()='Cancel Appointment'])[1]")
     protected WebElement elmntCancelAppointments;
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Next')]")
@@ -1863,14 +1863,14 @@ public class AppointmentsPage extends BasePage {
         try {
             waitForSeconds(3);    //wait until 'loader'  loading
             if (verifyElement(elmntCancelAppointments)) {
-                List<WebElement> btnCancel = driver.findElements(By.xpath("//button[@class='mat-focus-indicator btn mat-button mat-button-base']/span[text()='cancel']"));
+                List<WebElement> btnCancel = driver.findElements(By.xpath("//button[@class='mat-focus-indicator btn mat-button mat-button-base']/span[text()='Cancel Appointment']"));
                 if (btnCancel.size() > 0) {
                     System.out.println("btnCancel exists and size=>" + btnCancel.size());
                     int page_no = btnCancel.size();
                     for (int i = 1; i <= btnCancel.size(); i++) {
                         System.out.println("TEST");
                         waitForSeconds(2);
-                        driver.findElement(By.xpath("(//button[@class='mat-focus-indicator btn mat-button mat-button-base']/span[text()='cancel'])[1]")).click();
+                        driver.findElement(By.xpath("(//button[@class='mat-focus-indicator btn mat-button mat-button-base']/span[text()='Cancel Appointment'])[1]")).click();
                         System.out.println("Button No" + i);
                         waitForElement(txtReasonForCancelAppointment);
                         verifyElement(txtReasonForCancelAppointment);
