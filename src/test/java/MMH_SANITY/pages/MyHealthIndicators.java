@@ -2202,7 +2202,7 @@ public class MyHealthIndicators extends BasePage {
     public boolean ClickHDLData(List<String> lstDetails) {
         boolean blResult = false;
         try {
-            String currentDate = getCurrentDate("dd MMM yyyy");
+
             WebElement elmntActiveCardData = waitForElement(By.xpath(ActiveCardElemnts
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))));
             waitForSeconds(3);
@@ -2384,8 +2384,8 @@ public class MyHealthIndicators extends BasePage {
         jsClick(btnBloodPressureyes);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
-        waitForElement(elmntHBA1C);
-        return verifyElement(elmntHBA1C);
+        waitForElement(elmtHDL);
+        return verifyElement(elmtHDL);
     }
 
     public boolean clickLDLYesButton() {
@@ -4418,6 +4418,27 @@ public class MyHealthIndicators extends BasePage {
         return blResult;
     }
 
+    public boolean VerifyWeightMyEntriesTableData(List<String> lstDetails) {
+        boolean blResult = false;
+        try {
+            String currentDate = getCurrentDate("dd MMM yyyy");
+            waitForSeconds(5);
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+lstDetails);
+            WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(0)))
+                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(TestDataUtil.getValue(lstDetails.get(1).concat(strExecutionID))))));
+            jsScrollIntoView(elmntBloodPressureTableData);
+            waitForElement(elmntBloodPressureTableData);
+            verifyElement(elmntBloodPressureTableData);
+            blResult = verifyElement(elmntsWeightCard);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+
     public boolean VerifyPeakFlowMyEntriesTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
@@ -4689,6 +4710,7 @@ public class MyHealthIndicators extends BasePage {
         try {
 //            System.out.println(">>>>>>>>>>>>>>>>>>>PrivateSettinglstDetails"+lstDetails);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            jsScrollUp();
             String currentDate = getCurrentDate("dd MMM yyyy");
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData =driver.findElement(By.xpath(strMyEntriesShowthisentrytomycareproviders
@@ -4764,7 +4786,7 @@ public class MyHealthIndicators extends BasePage {
 
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             String currentDate = getCurrentDate("dd MMM yyyy");
-            jsScrollDown();
+            jsScrollUp();
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = driver.findElement(By.xpath(strDeleteMyEntriesAnxietySeverity
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4878,6 +4900,7 @@ public class MyHealthIndicators extends BasePage {
 //            System.out.println(">>>>>>>>>>>>>>>>>>>PrivateSettinglstDetails"+lstDetails);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollUp();
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData =driver.findElement(By.xpath(strMyEntriesShowthisentrytomycareproviders
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))

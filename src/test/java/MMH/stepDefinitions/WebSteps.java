@@ -2331,6 +2331,9 @@ public class WebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+        }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientGroupMessage());
     }
 
@@ -2545,6 +2548,24 @@ public class WebSteps {
     public void iChangeWindowsTimeZone(String strTimeZone) {
         Assert.assertTrue(demoPageContainer.homePage.changeTimeZone(strTimeZone));
     }
+    @Given("As a Existing Patient Login with valid {string} and {string}")
+    public void asAExistingPatientLoginWithValidAnd(String strEmail, String strPassword) {
+        demoPageContainer.homePage.visit();
+        demoPageContainer.homePage.clickBetaLoginButton();
+        demoPageContainer.homePage.enterEmailForBeta(TestDataUtil.getValue(strEmail));
+        demoPageContainer.homePage.enterPasswordForBeta(TestDataUtil.getValue(strPassword));
+    }
+    @Given("As a Existing user I am on HomePage and I click the Repeat Prescription")
+    public void asAExistingUserIAmOnHomePageAndIClickTheRepeatPrescription() {
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+        }
+        Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToRequestNewScript());
+
+    }
+
+
 }
 
   

@@ -104,10 +104,10 @@ public class SanityWebSteps {
     }
 
 
-    @And("I am on {string} Inbox page")
-    public void iAmOnInboxPage(String strTab) {
-        sanityPageContainer.messagesPage.verifyPatientSentMessage(strTab);
-    }
+//    @And("I am on {string} Inbox page")
+//    public void iAmOnInboxPage(String strTab) {
+//        sanityPageContainer.messagesPage.verifyPatientSentMessage(strTab);
+//    }
 
 //    @Then("I should see all the Messages future Grid View in Send page")
 //    public void iShouldSeeAllTheMessagesFutureGridViewInSendPage(List<String> locDetails) {
@@ -916,6 +916,7 @@ public class SanityWebSteps {
     @And("I click on Immunisations Confirm & Save Button")
     public void iClickOnImmunisationsConfirmSaveButton() {
         Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickImmunisationSave());
+        sanityPageContainer.myHealthRecordsPage.RefreshPage();
     }
 
     @When("I click on {string}edit icon & I Edit Immunisations of My Entries records {string}")
@@ -972,6 +973,8 @@ public class SanityWebSteps {
             Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.enterCovidClinicalSite(TestDataUtil.getValue(listCreateData.get(2))));
             sanityPageContainer.myHealthRecordsPage.clickCovidCheckBox();
             Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickCovidAddFile(TestDataUtil.getValue(listCreateData.get(3))));
+
+
         }
     }
 
@@ -1008,6 +1011,7 @@ public class SanityWebSteps {
             Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.enterCovidClinicalSite(TestDataUtil.getValue(listCreateData.get(2))));
             sanityPageContainer.myHealthRecordsPage.clickCovidUnCheckBox();
             Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickCovidAddFile(TestDataUtil.getValue(listCreateData.get(3))));
+
         }
 
     }
@@ -1650,7 +1654,7 @@ public class SanityWebSteps {
     @Then("I should see all the BMI My Entries Medicine details in the grid view")
     public void iShouldSeeAllTheBMIMyEntriesMedicineDetailsInTheGridView(String details) {
 
-        Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyBloodPressureMyEntriesTableData(TestDataUtil.getListOfValue(details)));
+        Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyBMIMyEntriesTableData(TestDataUtil.getListOfValue(details)));
     }
 
     @And("I click on {string} edit icon & I Edit BMI of My Entries records {string}")
@@ -1678,7 +1682,7 @@ public class SanityWebSteps {
             Assert.assertTrue(sanityPageContainer.myHealthIndicators.clickMaxvalue());
             for (String String : locDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyBloodPressureTableData(TestDataUtil.getListOfValue(String)));
+                Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyHBACTableData(TestDataUtil.getListOfValue(String)));
             }
 
         }
@@ -1755,7 +1759,7 @@ public class SanityWebSteps {
             Assert.assertTrue(sanityPageContainer.myHealthIndicators.clickMaxvalue());
             for (String String : locDetails) {
                 System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getListOfValue(String));
-                Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyBloodPressureTableData(TestDataUtil.getListOfValue(String)));
+                Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyLDLTableData(TestDataUtil.getListOfValue(String)));
             }
 
         }
@@ -3031,7 +3035,7 @@ public class SanityWebSteps {
     @Then("I should see all the Weight card My Entries Medicine details in the grid view")
     public void iShouldSeeAllTheWeightCardMyEntriesMedicineDetailsInTheGridView(String details) {
 
-        Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyHeightMyEntriesTableData(TestDataUtil.getListOfValue(details)));
+        Assert.assertTrue(sanityPageContainer.myHealthIndicators.VerifyWeightMyEntriesTableData(TestDataUtil.getListOfValue(details)));
     }
 
     @And("I click on {string} edit icon & I Edit Weight card of My Entries records {string}")
@@ -3537,6 +3541,7 @@ public class SanityWebSteps {
         Assert.assertTrue(sanityPageContainer.beatingTheBlues.clickContinuesession1());
         Assert.assertTrue(sanityPageContainer.viewJournal.clickDashBoard());
     }
+
 }
 
 

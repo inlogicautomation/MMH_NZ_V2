@@ -1520,11 +1520,11 @@ public class AppointmentsPage extends BasePage {
             String strDatePattern1 = "dd MMM yyyy";
             String strDate = TestDataUtil.getValue(lstDetails.get(2));
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
-            System.out.println("DATE" + strDateValue);
+            System.out.println("DATE : " + strDateValue);
 
             String strDateMonth = strDateValue;
             String strTime = strSlotDate;
-            System.out.println("CANCEL TIME" + strTime);
+            System.out.println("CANCEL TIME : " + strTime);
             String strConvertedTime = strTime;
             strConvertedTime = "0" + strConvertedTime;
             String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;

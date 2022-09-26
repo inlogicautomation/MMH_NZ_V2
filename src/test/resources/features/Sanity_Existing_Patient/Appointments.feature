@@ -57,7 +57,7 @@ Feature: Appointments
     Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
     And I accept the terms & conditions and confirm my booking
     And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
-    And I logout from tha application
+    And I logout from the application
 
     Examples:
       | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
@@ -133,7 +133,7 @@ Feature: Appointments
     Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
     And I accept the terms & conditions and confirm my booking
     And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
-    And I logout from tha application
+    And I logout from the application
 
     Examples:
       | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |

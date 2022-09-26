@@ -1900,6 +1900,28 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntFilterdropMyEntries);
 
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(3);
+            driver.navigate().refresh();
+            waitForSeconds(3);
+            waitForElementClickable(elmntFilterdropPrescriptions);
+            jsClick(elmntFilterdropPrescriptions);
+            waitForSeconds(2);
+            waitForElement(elmntFilterdropMyEntries);
+            jsClick(elmntFilterdropMyEntries);
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForSeconds(3);
+            driver.navigate().refresh();
+            waitForSeconds(3);
+            waitForElementClickable(elmntFilterdropPrescriptions);
+            jsClick(elmntFilterdropPrescriptions);
+            waitForSeconds(2);
+            waitForElement(elmntFilterdropMyEntries);
+            jsClick(elmntFilterdropMyEntries);
+
+        }
     }
 
     public boolean clickCovidDose() {

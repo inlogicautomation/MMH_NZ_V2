@@ -46,8 +46,8 @@ Feature: Messages
     And I log out from Patient Portal
 
     Examples:
-      | Compose Details   |  | Message           |
-      | &COMPOSE_MESSAGE& |  | &COMPOSE_MESSAGE& |
+      | Compose Details   |   Message           |
+      | &COMPOSE_MESSAGE& |   &COMPOSE_MESSAGE& |
 
 
 #    Note: {
