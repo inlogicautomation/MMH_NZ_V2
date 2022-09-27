@@ -267,7 +267,7 @@ Feature: My Health Records
       | &LAB_RESULT_TABLE_DATA_1& | &TEST_RESULT_ICON_DATA_1& | &TEST_MOBILE_RESULT_ICON_DATA_1& |
     And I navigate to the Homepage
 
-  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S10-Patient to View Health Records & Verify the Clinic Notes Entries from Health Centre Medicine Details
 
     Given As a user I am on HomePage
@@ -288,7 +288,7 @@ Feature: My Health Records
       | ClinicNotes      |
       | &FILTER_BY_DATA& |
 
-  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S11-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Clinic Notes Details
 
     Given As a user I am on HomePage
@@ -323,6 +323,17 @@ Feature: My Health Records
     Examples:
       | Tab             | Record         | Location        |
       | Clinician Notes | &VISITED_NAME& | &EDIT_LOCATION& |
+
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  Scenario Template: User Successfully logs in to the MMH Portal.
+
+    Given As a user I am on MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address      | Password              |
+      | &EMAIL_FOR_HEALTH& | &PASSWORD_FOR_HEALTH& |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario: S12-Patient to View Health Records & Verify the Recalls Entries from Health Centre Medicine Details

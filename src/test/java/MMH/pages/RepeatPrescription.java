@@ -641,8 +641,8 @@ public class RepeatPrescription extends BasePage {
             waitForElementClickable(btnNextRRP);
             waitForSeconds(3);
             jsClick(btnNextRRP);
-            waitForElement(txtTotalToPay);
-            blResult= verifyElement(txtTotalToPay);
+            waitForElement(btnPayNow);
+            blResult= verifyElement(btnPayNow);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -3,8 +3,10 @@ package cap.common;
 import cap.helpers.Constants;
 import cap.utilities.WaitTimeUtil;
 import com.google.gson.internal.bind.util.ISO8601Utils;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
@@ -13,6 +15,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -24,12 +27,15 @@ import MMH.DemoPageContainer;
 
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
 
 /**
  * Created by codoid-pc on 6/20/2018.
@@ -668,6 +674,58 @@ public class BasePage {
         }
         String generatedString = buffer.toString();
         return generatedString;
+    }
+
+    public static String strImageDirectory = System.getProperty("user.dir") + "\\config\\Images\\";
+
+    public void pushFileToDevice(String strImageName) {
+        try {
+            ((AndroidDriver<WebElement>) driver).pushFile("/sdcard/Download/" + strImageName + "", new File(strImageDirectory + strImageName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void enterValueRealDevice(WebElement elmnt, String strValue) {
+        elmnt.click();
+        elmnt.clear();
+        waitForSeconds(1);
+        AppiumDriver appiumDriver = (AppiumDriver) driver;
+        appiumDriver.getKeyboard().sendKeys(strValue);
+        appiumDriver.getKeyboard().pressKey(Keys.ENTER);
+
+
+    }
+    public void swipeUp() {
+        Dimension size = driver.manage().window().getSize();
+        System.out.println(size);
+
+        int startx = (int) (size.width * 0.5);
+        int starty = (int) (size.height * 0.8);
+
+        int endx = (int) (size.width * 0.2);
+        int endy = (int) (size.height * 0.2);
+
+        TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
+        touchAction.press(PointOption.point(startx, starty))
+                .waitAction(waitOptions(Duration.ofSeconds(1)))
+                .moveTo(PointOption.point(endx, endy)).release().perform();
+    }
+
+    public void swipeUpOutOfSetting() {
+        Dimension size = driver.manage().window().getSize();
+        System.out.println(size);
+
+        int startx = (int) (size.width * 0.3);
+        int starty = (int) (size.height * 0.5);
+
+        int endx = (int) (size.width * 0.2);
+        int endy = (int) (size.height * 0.2);
+
+        TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
+        touchAction.press(PointOption.point(startx, starty))
+                .waitAction(waitOptions(Duration.ofSeconds(1)))
+                .moveTo(PointOption.point(endx, endy)).release().perform();
     }
 
 }

@@ -3,8 +3,11 @@ package MMH.pages;
 import cap.common.BasePage;
 import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -17,6 +20,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MessagesPage extends BasePage {
 
@@ -263,10 +267,16 @@ public class MessagesPage extends BasePage {
             .append("')])[2]")
             .toString();
 
+//    protected String groupMessageSubjectForMobile = new StringBuilder()
+//            .append("(//div[contains(text(),'")
+//            .append("<<REPLACEMENT>>")
+//            .append("')])[4]")
+//            .toString();
+
     protected String groupMessageSubjectForMobile = new StringBuilder()
-            .append("(//div[contains(text(),'")
+            .append("(//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
-            .append("')])[4]")
+            .append("')])[8]")
             .toString();
 
 
@@ -468,6 +478,12 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']")
     protected WebElement btnWriteMessage;
 
+    @AndroidFindBy(xpath = "(//android.widget.TextView[@text='Write your message']/following::android.widget.EditText)[1]")
+    protected WebElement txtMessage;
+
+    @AndroidFindBy(xpath = "(//android.widget.Button[@text='Signature Settings - Click here to update the signature on your outgoing E-mails']/following::android.widget.EditText)[1]")
+    protected WebElement txtSignatureSettingMessage;
+
     @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror']//p)[2]")
     protected WebElement btnReplyWriteMessage;
     @FindBy(how = How.XPATH, using = "//div[@class='k-editor-content ng-star-inserted']/descendant::iframe")
@@ -484,7 +500,7 @@ public class MessagesPage extends BasePage {
             .append(Constants.IMAGES_FOLDER).append(File.separator)
             .append("<<FILENAME>>").toString();
 
-    @FindBy(how = How.XPATH, using = "//input[@type='file']")
+    @FindBy(how = How.XPATH, using = "(//mat-icon[contains(text(),'attachment')])[2]")
     protected WebElement btnFloorplanUpload;
 
     @FindBy(how = How.XPATH, using = "//input[@value='Attach']")
@@ -499,6 +515,16 @@ public class MessagesPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//span[text()='Attach ']")
     protected WebElement btnAttachUpload;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='WHILE USING THE APP']")
+    protected WebElement WhileUsingTheApp;
+
+    @FindBy(xpath = "//android.widget.TextView[@text='Files']")
+    protected WebElement FileIcon;
+
+    String strTextViewLocator = new StringBuilder()
+            .append("//android.widget.TextView[@text='")
+            .append("<<TEXT>>").append("']").toString();
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Attach Files')]")
     protected WebElement btnAttachFile;
@@ -814,9 +840,11 @@ public class MessagesPage extends BasePage {
             waitForSeconds(2);
             waitForElementClickable(elmntMessages);
             click(elmntMessages);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(1);
             waitForElementClickable(elmntComposePatient);
             click(elmntComposePatient);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(1);
             String PageUrl = driver.getCurrentUrl();
             System.out.println("PageUrl >>> :: " + PageUrl);
@@ -871,6 +899,7 @@ public class MessagesPage extends BasePage {
             takeScreenshot(driver);
             waitForElementClickable(inboxSubject);
             waitAndClick(inboxSubject);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("X Path-inboxSubject 2 >>> :: " + receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
             WebElement inboxReceivedSubject = waitForElement(By.xpath(receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             waitForElement(inboxReceivedSubject);
@@ -886,6 +915,7 @@ public class MessagesPage extends BasePage {
     public boolean verifyPatientReceivedMessageForMobile(String strMessage) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("strMessage >>> :: " + TestDataUtil.getValue(strMessage));
             waitForElement(txtInboxPatient);
             System.out.println("X Path-inboxSubject 1 >>> :: " + inboxMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
@@ -893,7 +923,8 @@ public class MessagesPage extends BasePage {
             waitForElement(inboxSubject);
             takeScreenshot(driver);
             waitForElementClickable(inboxSubject);
-            waitAndClick(inboxSubject);
+            click(inboxSubject);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("X Path-inboxSubject 2 >>> :: " + receivedMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
             WebElement inboxReceivedSubject = waitForElement(By.xpath(receivedMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             waitForElement(inboxReceivedSubject);
@@ -941,7 +972,7 @@ public class MessagesPage extends BasePage {
             WebElement inboxSubject = waitForElement(By.xpath(inboxMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage))));
             waitForElement(inboxSubject);
             takeScreenshot(driver);
-            waitForElementClickable(inboxSubject);
+//            waitForElementClickable(inboxSubject);
             click(inboxSubject);
             System.out.println("X Path-inboxMessageSubject >>> :: " + groupMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage)));
             WebElement inboxReceivedSubject = waitForElement(By.xpath(groupMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage))));
@@ -1050,6 +1081,7 @@ public class MessagesPage extends BasePage {
             jsScrollIntoView(btnReplySendMessage);
             waitForElementClickable(btnReplySendMessage);
             click(btnReplySendMessage);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(btnSentSuccessfullyPopup);
             blResult = verifyElement(btnSentSuccessfullyPopup);
 
@@ -1156,31 +1188,89 @@ public class MessagesPage extends BasePage {
     public boolean enterMessageForOutOfOffice(String strMessage) {
         boolean blResult = false;
         try {
-            System.out.println("SignatureMessage >>> :: " + TestDataUtil.getValue(strMessage));
-            waitForSeconds(2);
-            waitForElement(chkboxOutOfOfficeReply);
-            waitForSeconds(1);
-            waitForElement(frameOutOfOffice);
-            driver.switchTo().frame(frameOutOfOffice);
-            System.out.println("Switched into frame");
-            waitForSeconds(5);
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                waitForSeconds(2);
+                waitForElement(chkboxOutOfOfficeReply);
+                waitForSeconds(1);
+//                jsScrollIntoView(txtBoxMessages);
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("autoGrantPermissions", "true");
+                AppiumDriver appiumDriver = (AppiumDriver) driver;
+                Set<String> contextNames = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames) {
+                    if (strContextName.contains("NATIVE_APP")) {
+                        appiumDriver.context("NATIVE_APP");
+                        break;
+                    }
+                }
+                System.out.println("Success Switch Native App");
+                capabilities.setCapability("autoGrantPermissions", "true");
+                swipeUpOutOfSetting();
+                waitForElement(txtSignatureSettingMessage);
+                waitForSeconds(2);
+                enterValueRealDevice(txtSignatureSettingMessage, strMessage);
+                Set<String> contextNames1 = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames1) {
+                    if (strContextName.contains("CHROMIUM")) {
+                        appiumDriver.context("CHROMIUM");
+                        break;
+                    }
+                }
+                blResult = true;
 
-            txtBoxMessages.sendKeys(Keys.CONTROL + "a");
-            waitForSeconds(2);
-            txtBoxMessages.sendKeys(Keys.BACK_SPACE);
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            StringSelection stringSelection = new StringSelection(TestDataUtil.getValue(strMessage));
-            clipboard.setContents(stringSelection, stringSelection);
-            robotKey(txtBoxMessages, KeyEvent.VK_CONTROL);
-            robotKey(txtBoxMessages, KeyEvent.VK_V);
-            robotKeyRelease(KeyEvent.VK_V);
-            robotKeyRelease(KeyEvent.VK_CONTROL);
-            takeScreenshot(driver);
-            waitForSeconds(2);
-            System.out.println("Out Of Office Message was Entered successfully >>> ::");
-            blResult = true;
-            driver.switchTo().defaultContent();
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                System.out.println("SignatureMessage >>> :: " + TestDataUtil.getValue(strMessage));
+                waitForSeconds(2);
+                waitForElement(chkboxOutOfOfficeReply);
+                waitForSeconds(1);
+                waitForElement(frameOutOfOffice);
+                driver.switchTo().frame(frameOutOfOffice);
+                System.out.println("Switched into frame");
+                waitForSeconds(5);
 
+                txtBoxMessages.sendKeys(Keys.CONTROL + "a");
+                waitForSeconds(2);
+                txtBoxMessages.sendKeys(Keys.BACK_SPACE);
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                StringSelection stringSelection = new StringSelection(TestDataUtil.getValue(strMessage));
+                clipboard.setContents(stringSelection, stringSelection);
+                robotKey(txtBoxMessages, KeyEvent.VK_CONTROL);
+                robotKey(txtBoxMessages, KeyEvent.VK_V);
+                robotKeyRelease(KeyEvent.VK_V);
+                robotKeyRelease(KeyEvent.VK_CONTROL);
+                takeScreenshot(driver);
+                waitForSeconds(2);
+                System.out.println("Out Of Office Message was Entered successfully >>> ::");
+                blResult = true;
+                driver.switchTo().defaultContent();
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                System.out.println("SignatureMessage >>> :: " + TestDataUtil.getValue(strMessage));
+                waitForSeconds(2);
+                waitForElement(chkboxOutOfOfficeReply);
+                waitForSeconds(1);
+                waitForElement(frameOutOfOffice);
+                driver.switchTo().frame(frameOutOfOffice);
+                System.out.println("Switched into frame");
+                waitForSeconds(5);
+
+                txtBoxMessages.sendKeys(Keys.CONTROL + "a");
+                waitForSeconds(2);
+                txtBoxMessages.sendKeys(Keys.BACK_SPACE);
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                StringSelection stringSelection = new StringSelection(TestDataUtil.getValue(strMessage));
+                clipboard.setContents(stringSelection, stringSelection);
+                robotKey(txtBoxMessages, KeyEvent.VK_CONTROL);
+                robotKey(txtBoxMessages, KeyEvent.VK_V);
+                robotKeyRelease(KeyEvent.VK_V);
+                robotKeyRelease(KeyEvent.VK_CONTROL);
+                takeScreenshot(driver);
+                waitForSeconds(2);
+                System.out.println("Out Of Office Message was Entered successfully >>> ::");
+                blResult = true;
+                driver.switchTo().defaultContent();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to enter Out Of Office Message >>> ::");
@@ -1191,30 +1281,88 @@ public class MessagesPage extends BasePage {
     public boolean enterMessageForAutomaticReplies(String strMessage) {
         boolean blResult = false;
         try {
-            System.out.println("strMessage >>> :: " + TestDataUtil.getValue(strMessage));
-            waitForSeconds(2);
-            waitForElement(chkboxAutomaticReply);
-            waitForSeconds(1);
-            waitForElement(frameAutomaticReplies);
-            driver.switchTo().frame(frameAutomaticReplies);
-            System.out.println("Switched into frame");
-            waitForSeconds(3);
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                waitForSeconds(2);
+                waitForElement(chkboxAutomaticReply);
+                waitForSeconds(1);
+//                jsScrollIntoView(txtBoxMessages);
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("autoGrantPermissions", "true");
+                AppiumDriver appiumDriver = (AppiumDriver) driver;
+                Set<String> contextNames = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames) {
+                    if (strContextName.contains("NATIVE_APP")) {
+                        appiumDriver.context("NATIVE_APP");
+                        break;
+                    }
+                }
+                System.out.println("Success Switch Native App");
+                capabilities.setCapability("autoGrantPermissions", "true");
+                swipeUp();
+                waitForElement(txtSignatureSettingMessage);
+                waitForSeconds(2);
+                enterValueRealDevice(txtSignatureSettingMessage, strMessage);
+                Set<String> contextNames1 = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames1) {
+                    if (strContextName.contains("CHROMIUM")) {
+                        appiumDriver.context("CHROMIUM");
+                        break;
+                    }
+                }
+                blResult = true;
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                System.out.println("strMessage >>> :: " + TestDataUtil.getValue(strMessage));
+                waitForSeconds(2);
+                waitForElement(chkboxAutomaticReply);
+                waitForSeconds(1);
+                waitForElement(frameAutomaticReplies);
+                driver.switchTo().frame(frameAutomaticReplies);
+                System.out.println("Switched into frame");
+                waitForSeconds(3);
 
-            txtBoxMessages.sendKeys(Keys.CONTROL + "a");
-            waitForSeconds(2);
-            txtBoxMessages.sendKeys(Keys.BACK_SPACE);
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            StringSelection stringSelection = new StringSelection(TestDataUtil.getValue(strMessage));
-            clipboard.setContents(stringSelection, stringSelection);
-            robotKey(txtBoxMessages, KeyEvent.VK_CONTROL);
-            robotKey(txtBoxMessages, KeyEvent.VK_V);
-            robotKeyRelease(KeyEvent.VK_V);
-            robotKeyRelease(KeyEvent.VK_CONTROL);
-            takeScreenshot(driver);
-            waitForSeconds(2);
-            System.out.println("Automatic reply Message was Entered successfully >>> ::");
-            blResult = true;
-            driver.switchTo().parentFrame();
+                txtBoxMessages.sendKeys(Keys.CONTROL + "a");
+                waitForSeconds(2);
+                txtBoxMessages.sendKeys(Keys.BACK_SPACE);
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                StringSelection stringSelection = new StringSelection(TestDataUtil.getValue(strMessage));
+                clipboard.setContents(stringSelection, stringSelection);
+                robotKey(txtBoxMessages, KeyEvent.VK_CONTROL);
+                robotKey(txtBoxMessages, KeyEvent.VK_V);
+                robotKeyRelease(KeyEvent.VK_V);
+                robotKeyRelease(KeyEvent.VK_CONTROL);
+                takeScreenshot(driver);
+                waitForSeconds(2);
+                System.out.println("Automatic reply Message was Entered successfully >>> ::");
+                blResult = true;
+                driver.switchTo().parentFrame();
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                System.out.println("strMessage >>> :: " + TestDataUtil.getValue(strMessage));
+                waitForSeconds(2);
+                waitForElement(chkboxAutomaticReply);
+                waitForSeconds(1);
+                waitForElement(frameAutomaticReplies);
+                driver.switchTo().frame(frameAutomaticReplies);
+                System.out.println("Switched into frame");
+                waitForSeconds(3);
+
+                txtBoxMessages.sendKeys(Keys.CONTROL + "a");
+                waitForSeconds(2);
+                txtBoxMessages.sendKeys(Keys.BACK_SPACE);
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                StringSelection stringSelection = new StringSelection(TestDataUtil.getValue(strMessage));
+                clipboard.setContents(stringSelection, stringSelection);
+                robotKey(txtBoxMessages, KeyEvent.VK_CONTROL);
+                robotKey(txtBoxMessages, KeyEvent.VK_V);
+                robotKeyRelease(KeyEvent.VK_V);
+                robotKeyRelease(KeyEvent.VK_CONTROL);
+                takeScreenshot(driver);
+                waitForSeconds(2);
+                System.out.println("Automatic reply Message was Entered successfully >>> ::");
+                blResult = true;
+                driver.switchTo().parentFrame();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1270,34 +1418,93 @@ public class MessagesPage extends BasePage {
     public boolean enterTheSignatureMessage(String strMessage) {
         boolean blResult = false;
         try {
-            System.out.println("SignatureMessage >>> :: " + TestDataUtil.getValue(strMessage));
-            waitForSeconds(2);
-            waitForElement(btnSave);
-            waitForElementClickable(drpDownSignatureSettings);
-            click(drpDownSignatureSettings);
-            waitForSeconds(1);
-            waitForElement(frameSignature);
-            driver.switchTo().frame(frameSignature);
-            System.out.println("Switched into frame");
-            waitForSeconds(5);
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                waitForElement(btnSave);
+                waitForElementClickable(drpDownSignatureSettings);
+                click(drpDownSignatureSettings);
+//                jsScrollIntoView(txtBoxMessages);
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("autoGrantPermissions", "true");
+                AppiumDriver appiumDriver = (AppiumDriver) driver;
+                Set<String> contextNames = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames) {
+                    if (strContextName.contains("NATIVE_APP")) {
+                        appiumDriver.context("NATIVE_APP");
+                        break;
+                    }
+                }
+                System.out.println("Success Switch Native App");
+                capabilities.setCapability("autoGrantPermissions", "true");
+                swipeUp();
+                waitForElement(txtSignatureSettingMessage);
+                waitForSeconds(2);
+                enterValueRealDevice(txtSignatureSettingMessage, strMessage);
+                Set<String> contextNames1 = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames1) {
+                    if (strContextName.contains("CHROMIUM")) {
+                        appiumDriver.context("CHROMIUM");
+                        break;
+                    }
+                }
+                blResult = true;
 
-            txtBoxMessages.sendKeys(Keys.CONTROL + "a");
-            waitForSeconds(2);
-            txtBoxMessages.sendKeys(Keys.BACK_SPACE);
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            StringSelection stringSelection = new StringSelection(TestDataUtil.getValue(strMessage));
-            clipboard.setContents(stringSelection, stringSelection);
-            robotKey(txtBoxMessages, KeyEvent.VK_CONTROL);
-            robotKey(txtBoxMessages, KeyEvent.VK_V);
-            robotKeyRelease(KeyEvent.VK_V);
-            robotKeyRelease(KeyEvent.VK_CONTROL);
-            takeScreenshot(driver);
-            waitForSeconds(2);
-            System.out.println("Signature Message was Entered successfully >>> ::");
-            blResult = true;
-            driver.switchTo().defaultContent();
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                System.out.println("SignatureMessage >>> :: " + TestDataUtil.getValue(strMessage));
+                waitForSeconds(2);
+                waitForElement(btnSave);
+                waitForElementClickable(drpDownSignatureSettings);
+                click(drpDownSignatureSettings);
+                waitForSeconds(1);
+                waitForElement(frameSignature);
+                driver.switchTo().frame(frameSignature);
+                System.out.println("Switched into frame");
+                waitForSeconds(5);
+                txtBoxMessages.sendKeys(Keys.CONTROL + "a");
+                waitForSeconds(2);
+                txtBoxMessages.sendKeys(Keys.BACK_SPACE);
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                StringSelection stringSelection = new StringSelection(TestDataUtil.getValue(strMessage));
+                clipboard.setContents(stringSelection, stringSelection);
+                robotKey(txtBoxMessages, KeyEvent.VK_CONTROL);
+                robotKey(txtBoxMessages, KeyEvent.VK_V);
+                robotKeyRelease(KeyEvent.VK_V);
+                robotKeyRelease(KeyEvent.VK_CONTROL);
+                takeScreenshot(driver);
+                waitForSeconds(2);
+                System.out.println("Signature Message was Entered successfully >>> ::");
+                blResult = true;
+                driver.switchTo().defaultContent();
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                System.out.println("SignatureMessage >>> :: " + TestDataUtil.getValue(strMessage));
+                waitForSeconds(2);
+                waitForElement(btnSave);
+                waitForElementClickable(drpDownSignatureSettings);
+                click(drpDownSignatureSettings);
+                waitForSeconds(1);
+                waitForElement(frameSignature);
+                driver.switchTo().frame(frameSignature);
+                System.out.println("Switched into frame");
+                waitForSeconds(5);
+                txtBoxMessages.sendKeys(Keys.CONTROL + "a");
+                waitForSeconds(2);
+                txtBoxMessages.sendKeys(Keys.BACK_SPACE);
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                StringSelection stringSelection = new StringSelection(TestDataUtil.getValue(strMessage));
+                clipboard.setContents(stringSelection, stringSelection);
+                robotKey(txtBoxMessages, KeyEvent.VK_CONTROL);
+                robotKey(txtBoxMessages, KeyEvent.VK_V);
+                robotKeyRelease(KeyEvent.VK_V);
+                robotKeyRelease(KeyEvent.VK_CONTROL);
+                takeScreenshot(driver);
+                waitForSeconds(2);
+                System.out.println("Signature Message was Entered successfully >>> ::");
+                blResult = true;
+                driver.switchTo().defaultContent();
+            }
 
-        } catch (Exception e) {
+        } catch(Exception e){
             e.printStackTrace();
         }
         return blResult;
@@ -1889,6 +2096,13 @@ public class MessagesPage extends BasePage {
             click(btnMessagesExpand);
 
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElementClickable(btnMobileMenu);
+            jsClick(btnMobileMenu);
+            waitForElement(btnMessagesExpand);
+            click(btnMessagesExpand);
+
+        }
 
     }
 
@@ -2108,39 +2322,151 @@ public class MessagesPage extends BasePage {
     }
 
     public void enterWriteMessage(String strConditionName) {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
 
-        driver.switchTo().frame(btnFocusFrame);
-        waitForSeconds(2);
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
-        robotKey(btnWriteMessage, KeyEvent.VK_A);
-        StringSelection stringSelection = new StringSelection(TestDataUtil.getValue(strConditionName));
-        clipboard.setContents(stringSelection, stringSelection);
-        robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
-        robotKey(btnWriteMessage, KeyEvent.VK_V);
-        robotKeyRelease(KeyEvent.VK_V);
-        robotKeyRelease(KeyEvent.VK_CONTROL);
-        takeScreenshot(driver);
-        driver.switchTo().defaultContent();
+//            jsScrollIntoView(btnWriteMessage);
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("autoGrantPermissions", "true");
+            AppiumDriver appiumDriver = (AppiumDriver) driver;
+            Set<String> contextNames = appiumDriver.getContextHandles();
+            for (String strContextName : contextNames) {
+                if (strContextName.contains("NATIVE_APP")) {
+                    appiumDriver.context("NATIVE_APP");
+                    break;
+                }
+            }
+            System.out.println("Success Switch Native App");
+            capabilities.setCapability("autoGrantPermissions", "true");
+            swipeUp();
+            waitForSeconds(2);
+            waitForElement(txtMessage);
+            waitForSeconds(2);
+            enterValueRealDevice(txtMessage, strConditionName);
+            Set<String> contextNames1 = appiumDriver.getContextHandles();
+            for (String strContextName : contextNames1) {
+                if (strContextName.contains("CHROMIUM")) {
+                    appiumDriver.context("CHROMIUM");
+                    break;
+                }
+            }
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+
+            driver.switchTo().frame(btnFocusFrame);
+            waitForSeconds(2);
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
+            robotKey(btnWriteMessage, KeyEvent.VK_A);
+            StringSelection stringSelection = new StringSelection(TestDataUtil.getValue(strConditionName));
+            clipboard.setContents(stringSelection, stringSelection);
+            robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
+            robotKey(btnWriteMessage, KeyEvent.VK_V);
+            robotKeyRelease(KeyEvent.VK_V);
+            robotKeyRelease(KeyEvent.VK_CONTROL);
+            takeScreenshot(driver);
+            driver.switchTo().defaultContent();
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+
+            driver.switchTo().frame(btnFocusFrame);
+            waitForSeconds(2);
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
+            robotKey(btnWriteMessage, KeyEvent.VK_A);
+            StringSelection stringSelection = new StringSelection(TestDataUtil.getValue(strConditionName));
+            clipboard.setContents(stringSelection, stringSelection);
+            robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
+            robotKey(btnWriteMessage, KeyEvent.VK_V);
+            robotKeyRelease(KeyEvent.VK_V);
+            robotKeyRelease(KeyEvent.VK_CONTROL);
+            takeScreenshot(driver);
+            driver.switchTo().defaultContent();
+        }
     }
 
     public boolean clickAddFile(String strUploadDocumentName) {
         boolean blResult = false;
         try {
-            System.out.println("Member " + strUploadDocumentName);
-            System.out.println(strUploadDocumentName);
-            waitForSeconds(2);
-            waitForElement(btnAttachClick);
-            click(btnAttachClick);
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
 
-            String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
-            System.out.println(strFloorplanDocumentName);
-            btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
-            waitForSeconds(3);
-            waitForElement(btnAttachUpload);
-            click(btnAttachUpload);
+                waitForSeconds(3);
+                jsScrollUp();
+                jsClick(btnAttachClick);
+                waitForSeconds(2);
+                mouseClick(btnFloorplanUpload);
+                waitForSeconds(4);
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("autoGrantPermissions", "true");
+                pushFileToDevice("MMHtest.jpg");
+                AppiumDriver appiumDriver = (AppiumDriver) driver;
+                Set<String> contextNames = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames) {
+                    if (strContextName.contains("NATIVE_APP")) {
+                        appiumDriver.context("NATIVE_APP");
+                        break;
+                    }
+                }
+                capabilities.setCapability("autoGrantPermissions", "true");
+                String mobiledevicename=System.getProperty("deviceName");
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>"+mobiledevicename);
+                if (System.getProperty("deviceName").equalsIgnoreCase("Poco M2")){
+                    waitForSeconds(3);
+                    click(WhileUsingTheApp);
+                    waitForSeconds(3);
+                    click(WhileUsingTheApp);
+                }
+                if (System.getProperty("deviceName").equalsIgnoreCase("Samsung Galaxy S21")) {
+                    waitForSeconds(3);
+                    click(WhileUsingTheApp);
 
+                }
+                waitForSeconds(3);
+                click(FileIcon);
+                WebElement elmntImage = waitForElement(By.xpath(strTextViewLocator.replace("<<TEXT>>", "MMHtest.jpg")));
+                click(elmntImage);
+                waitForSeconds(3);
+                Set<String> contextNames1 = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames1) {
+                    if (strContextName.contains("CHROMIUM")) {
+                        appiumDriver.context("CHROMIUM");
+                        break;
+                    }
+                }
+                waitForElement(btnAttachUpload);
+                click(btnAttachUpload);
+            }
 
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                System.out.println("Member " + strUploadDocumentName);
+                System.out.println(strUploadDocumentName);
+                waitForSeconds(2);
+                waitForElement(btnAttachClick);
+                click(btnAttachClick);
+
+                String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
+                System.out.println(strFloorplanDocumentName);
+                btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
+                waitForSeconds(3);
+                waitForElement(btnAttachUpload);
+                click(btnAttachUpload);
+
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                System.out.println("Member " + strUploadDocumentName);
+                System.out.println(strUploadDocumentName);
+                waitForSeconds(2);
+                waitForElement(btnAttachClick);
+                click(btnAttachClick);
+
+                String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
+                System.out.println(strFloorplanDocumentName);
+                btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
+                waitForSeconds(3);
+                waitForElement(btnAttachUpload);
+                click(btnAttachUpload);
+
+            }
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -2198,6 +2524,12 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(btnMobileReplysendMessage);
             jsClick(btnMobileReplysendMessage);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForSeconds(3);
+            jsScrollIntoView(btnMobileReplysendMessage);
+            waitForElementClickable(btnMobileReplysendMessage);
+            jsClick(btnMobileReplysendMessage);
+        }
     }
 
 
@@ -2212,6 +2544,13 @@ public class MessagesPage extends BasePage {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileSaveDraft);
+            jsClick(btnMobileSaveDraft);
+            waitForElementClickable(btnokDraft);
+            jsClick(btnokDraft);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(3);
             waitForElementClickable(btnMobileSaveDraft);
             jsClick(btnMobileSaveDraft);
@@ -2248,6 +2587,18 @@ public class MessagesPage extends BasePage {
 
             return verifyElement(elmntActiveHeader);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForSeconds(3);
+            verifyElement(btnInboxHeader);
+            waitForSeconds(2);
+            waitForElementClickable(btnClickSentHeader);
+            jsClick(btnClickSentHeader);
+            waitForSeconds(3);
+            WebElement elmntActiveHeader = waitForElement(By.xpath(elmtMobileSentclick.replace("<<REPLACEMENT>>", strHeader)));
+            jsClick(elmntActiveHeader);
+
+            return verifyElement(elmntActiveHeader);
+        }
         return blResult;
     }
 
@@ -2262,6 +2613,14 @@ public class MessagesPage extends BasePage {
             return verifyElement(elmntActiveHeader);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            verifyElement(btnDraftHeader);
+            waitForSeconds(2);
+            WebElement elmntActiveHeader = waitForElement(By.xpath(elmtMobileDraftclick.replace("<<REPLACEMENT>>", strHeader)));
+            jsClick(elmntActiveHeader);
+
+            return verifyElement(elmntActiveHeader);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             verifyElement(btnDraftHeader);
             waitForSeconds(2);
             WebElement elmntActiveHeader = waitForElement(By.xpath(elmtMobileDraftclick.replace("<<REPLACEMENT>>", strHeader)));
@@ -2440,6 +2799,12 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(btnMessagesExpand);
             jsClick(btnMessagesExpand);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElementClickable(btnMobileMenu);
+            jsClick(btnMobileMenu);
+            waitForElementClickable(btnMessagesExpand);
+            jsClick(btnMessagesExpand);
+        }
 
     }
 
@@ -2538,6 +2903,14 @@ public class MessagesPage extends BasePage {
             waitForSeconds(1);
             takeScreenshot(driver);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileInboxAttachButton);
+//        waitForElement(btnInboxAttachButton);
+            jsClick(btnMobileInboxAttachButton);
+            waitForSeconds(1);
+            takeScreenshot(driver);
+        }
     }
 
 
@@ -2588,6 +2961,18 @@ public class MessagesPage extends BasePage {
             return verifyElement(btnInboxHeader);
 
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForSeconds(2);
+            waitForElement(btnMobileInboxHeader);
+            verifyElement(btnMobileInboxHeader);
+            waitForSeconds(2);
+
+            WebElement elmntActiveHeader = waitForElement(By.xpath(elmtMobilebInboxesclick.replace("<<REPLACEMENT>>", strHeader)));
+            jsClick(elmntActiveHeader);
+
+            return verifyElement(btnInboxHeader);
+
+        }
         return blResult;
     }
 
@@ -2620,6 +3005,12 @@ public class MessagesPage extends BasePage {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(2);
+            waitForElement(btnMobileReply);
+            click(btnMobileReply);
+            waitForSeconds(10);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(2);
             waitForElement(btnMobileReply);
             click(btnMobileReply);
@@ -2661,6 +3052,14 @@ public class MessagesPage extends BasePage {
 
             return verifyElement(btnGroupMessageHeader);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            verifyElement(btnGroupMessageHeader);
+            waitForSeconds(2);
+            WebElement elmntActiveHeader = waitForElement(By.xpath(elmtMobileGroupMessageclick.replace("<<REPLACEMENT>>", strHeader)));
+            jsClick(elmntActiveHeader);
+
+            return verifyElement(btnGroupMessageHeader);
+        }
         return blResult;
     }
 
@@ -2675,6 +3074,7 @@ public class MessagesPage extends BasePage {
     }
 
     public boolean VerifyAttachdowloadSuccessfully() {
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElement(btnAttachdowloadSuccessfullyPopup);
         return verifyElement(btnAttachdowloadSuccessfullyPopup);
     }
