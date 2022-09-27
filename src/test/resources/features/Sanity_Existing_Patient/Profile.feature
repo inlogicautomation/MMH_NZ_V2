@@ -16,18 +16,18 @@ Feature: Patient Profile
 #    389:Navigate to profile & click on Change password - Enter current password, new password & confirm new password & click on change
 #    These test Case Covered The Scenario NO: S1
 #  }
-  @WEB @PROFILE @SANITY_PATH
-  Scenario Template: S1- Existing Patient change the password.
-
-    Given As a Existing user I am on HomePage and I navigate to change password in the My Profile
-    And I enter the "<Current Password>" and New "<Password>"
-    When I click Update Button
-    Then I should see the Password changed Success Popup
-#    And I log out from Patient Portal
-
-    Examples:
-      | Current Password       | Password                   |
-      | &PASSWORD_FOR_PROFILE& | &NEW_PASSWORD_FOR_PROFILE& |
+#  @WEB @PROFILE @SANITY_PATH
+#  Scenario Template: S1- Existing Patient change the password.
+#
+#    Given As a Existing user I am on HomePage and I navigate to change password in the My Profile
+#    And I enter the "<Current Password>" and New "<Password>"
+#    When I click Update Button
+#    Then I should see the Password changed Success Popup
+##    And I log out from Patient Portal
+#
+#    Examples:
+#      | Current Password       | Password                   |
+#      | &PASSWORD_FOR_PROFILE& | &NEW_PASSWORD_FOR_PROFILE& |
 
 #  @WEB  @PROFILE12 @SANITY_PATH12
 #  Scenario Template: S1- Existing Patient Login with new password.
@@ -169,18 +169,8 @@ Feature: Patient Profile
 
 
 
-  @WEB @MESSAGES @SANITY_PATH @PROFILE1
-  Scenario Template: S3- User Successfully logs in to the DEV Portal.
-    Given As a user I am on MMH login Page "<V1 Portal>"
-    And I enter "<Email Address>" and "<Password>"
-    When I click login button
-    Then I should see user successfully logs in to the MMH portal
-    Examples:
-      | V1 Portal | Email Address      | Password              |
-      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
-#
 
-  @WEB @PROFILE @SANITY_PATH @PROFILE1
+  @WEB @PROFILE @SANITY_PATH
   Scenario Template: S10- Preparation for Patient Automatic Reply Settings, Login as a Provider user
 
     Given As a user Launch the "<V1 Portal>"
@@ -192,7 +182,7 @@ Feature: Patient Profile
       | V1 Portal | Email Address      | Password              |
       | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
-  @WEB @PROFILE @SANITY_PATH @PROFILE1
+  @WEB @PROFILE @SANITY_PATH
   Scenario Template: S3- Preparation for Profile Access
 
     Given As a user I am on Doctor portal homepage and Navigate to Search Patient
@@ -205,7 +195,7 @@ Feature: Patient Profile
       | &PROFILE_ACCESS_INFORMATION& |
 
 
-  @WEB @PROFILE @SANITY_PATH @PROFILE1
+  @WEB @PROFILE @SANITY_PATH
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page

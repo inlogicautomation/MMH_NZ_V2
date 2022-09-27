@@ -706,7 +706,7 @@ public class MessagesPage extends BasePage {
     protected WebElement btnSendMessageButton;
 
     @FindAll({
-            @FindBy(how = How.XPATH, using = "//mat-icon[contains(text(),'exit_to_app')]"),
+            @FindBy(how = How.XPATH, using = "//span[contains(text(),'SIGN OUT')]"),
             @FindBy(how = How.XPATH, using = "//a[contains(text(),'Log out')]")
     })
     protected WebElement elmntLogOut;

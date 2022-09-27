@@ -24,7 +24,7 @@ Feature: Repeat Request Prescription
   @WEB @SANITY_PATH_RRP @SANITY_PATH
   Scenario Outline: S2- Existing Patient to Request the Repeat Prescription
 
-    Given As a Existing user I am on HomePage and I click the Repeat Prescription
+    Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
     And I select the Medication details "<Medication Details>"
     When I click pay now Button
     Then I enter the Card details on the Payment Page "<Payment Details>"

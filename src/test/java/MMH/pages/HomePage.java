@@ -49,7 +49,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='appVersion']/small")
     protected WebElement txtAppVersion;
 
-    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health, today')]")
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'My Home page') or contains(text(),'Welcome,') or contains(text(),'Start managing your health, today')]")
     protected WebElement elmntVerifyHomePage;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
@@ -103,7 +103,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//kendo-grid-group-panel[contains(@class,'grouping-header')]")
     protected WebElement elmntGroupingHeader;
 
-    @FindBy(how = How.XPATH, using = "//input[@data-placeholder='Email address']")
+    @FindBy(how = How.XPATH, using = "//input[@data-placeholder='Email Address' or @data-placeholder='Email address']")
     protected WebElement txtBoxEmail;
 
 
@@ -130,6 +130,7 @@ public class HomePage extends BasePage {
     }
 
     public void enterPasswordForBeta(String strPassword) {
+//        waitForElement(txtBoxPassword);
         waitForElementClickable(txtBoxPassword);
         enterValue(txtBoxPassword, strPassword);
     }
@@ -151,6 +152,7 @@ public class HomePage extends BasePage {
 
 
     public void enterEmailForBeta(String strEmail) {
+        waitForElement(txtBoxEmail);
         waitForElementClickable(txtBoxEmail);
         enterValue(txtBoxEmail, strEmail);
     }
@@ -221,16 +223,16 @@ public class HomePage extends BasePage {
             try {
                 pageTitle.equalsIgnoreCase("PostRegistration");
 
-                System.out.println("User on the HomePage and Verified the HomePage >>>>");
+                System.out.println("User on the ProviderHomePage and Verified the ProviderHomePage >>>>");
                 blResult = true;
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("User not in the HomePage >>>>");
+                System.out.println("User not in the ProviderHomePage >>>>");
             }
 
 
         } catch (Exception e) {
-            System.out.println("Failed to Navigate the HomePage >>>>");
+            System.out.println("Failed to Navigate the ProviderHomePage >>>>");
             e.printStackTrace();
         }
         return blResult;

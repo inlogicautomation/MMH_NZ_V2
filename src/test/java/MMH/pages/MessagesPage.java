@@ -1605,6 +1605,7 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(btnLogOutOk);
             click(btnLogOutOk);
             blResult = true;
+            takeScreenshotSanity(driver);
             System.out.println("Doctor Log out Successfully");
         } catch (Exception e) {
             System.out.println("Doctor Failed to Log out");

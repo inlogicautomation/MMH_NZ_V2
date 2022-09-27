@@ -198,7 +198,7 @@ Feature: Dashboard
 #    These test Case Covered The Scenario NO: S3
 #  }
 
-  @WEB @DASHBOARD12 @SANITY_PATH12
+  @WEB @DASHBOARD @SANITY_PATH12
   Scenario: S2-Existing Patient Verify Medicine details and validate Add, edit, delete, change status, set reminder in My entries Alcohol Details
 
     Given As a Existing user I am on HomePage and I click the My Health Indicators

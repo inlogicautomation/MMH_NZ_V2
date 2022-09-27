@@ -420,16 +420,16 @@ public class RepeatPrescription extends BasePage {
             try {
                 pageTitle.equalsIgnoreCase("PostRegistration");
 
-                System.out.println("User on the HomePage and Verified the HomePage >>>>");
+                System.out.println("User on the ProviderHomePage and Verified the ProviderHomePage >>>>");
                 blResult = true;
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("User not in the HomePage >>>>");
+                System.out.println("User not in the ProviderHomePage >>>>");
             }
 
 
         } catch (Exception e) {
-            System.out.println("Failed to Navigate the HomePage >>>>");
+            System.out.println("Failed to Navigate the ProviderHomePage >>>>");
             e.printStackTrace();
         }
         return blResult;
@@ -1398,6 +1398,7 @@ public class RepeatPrescription extends BasePage {
         try {
 
             waitForSeconds(3);
+            waitForElement(drpDownSelectForPharmacyName);
             waitForElementClickable(drpDownSelectForPharmacyName);
             click(drpDownSelectForPharmacyName);
             waitForSeconds(2);

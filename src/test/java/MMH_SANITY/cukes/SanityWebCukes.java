@@ -8,11 +8,9 @@ import org.testng.annotations.AfterClass;
 import static MMH_SANITY.pages.HomePage.*;
 
 
-
-
 @CucumberOptions(features = {"src/test/resources/features/Sanity_Existing_Patient"},
         monochrome = true,
-        tags = "@MY_HEALTH_INDICATORS1",
+        tags = "@TEST",
         glue = {"MMH_SANITY","MMH"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

@@ -64,6 +64,11 @@ public class TestDataUtil {
                     .concat("='").concat(strDataValue).concat("' where ")
                     .concat(Constants.TESTDATA_FIELDS).concat("='").concat(strDataName).concat("'"));
 
+            connection.executeUpdate("Update ".concat(strSheetName)
+                    .concat(" Set ").concat("PROD")
+                    .concat("='").concat(strDataValue).concat("' where ")
+                    .concat(Constants.TESTDATA_FIELDS).concat("='").concat(strDataName).concat("'"));
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

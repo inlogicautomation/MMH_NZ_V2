@@ -30,6 +30,13 @@ public class DashboardPage extends BasePage {
     })
     protected WebElement elmntLogOut;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(@id,'cdk-overlay')]")
+    protected WebElement elmntCovidPreScreeningPopup;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'NO')]//parent::button")
+    protected WebElement elmntDeclineCovidPreScreening;
+
+
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
@@ -128,7 +135,7 @@ public class DashboardPage extends BasePage {
 
     //(//mat-card-title[contains(text(),'My Health centres')])[2]/ancestor::mat-card-header/parent::mat-card//h5[contains(text(),'')]
     protected String verifyMyHealthCentre = new StringBuilder()
-            .append("(//mat-card-title[contains(text(),'My Health centres')])[2]/ancestor::mat-card-header/parent::mat-card//h5[contains(text(),'")
+            .append("(//mat-card-title[contains(text(),'My Health Centres')])[2]/ancestor::mat-card-header/parent::mat-card//h5[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]")
             .toString();
@@ -186,6 +193,7 @@ public class DashboardPage extends BasePage {
             waitForElement(txtRequestNewScript);
             blResult = verifyElement(txtRequestNewScript);
             takeScreenshotSanity(driver);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("Navigated To Request Medication >>>>");
 
         } catch (Exception e) {
@@ -206,10 +214,12 @@ public class DashboardPage extends BasePage {
             jsScrollIntoView(elmntNewRepeatPrescription);
             waitForElement(elmntNewRepeatPrescription);
             waitForElementClickable(elmntNewRepeatPrescription);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             click(elmntNewRepeatPrescription);
             waitForElement(txtRequestNewScript);
             blResult = verifyElement(txtRequestNewScript);
             takeScreenshotSanity(driver);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("Navigated To Request Medication >>>>");
 
 
@@ -229,16 +239,38 @@ public class DashboardPage extends BasePage {
             waitForElement(elmntWelcomeMessage);
 
             jsScrollIntoView(elmntBookAppointment);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntBookAppointment);
             waitForElementClickable(elmntBookAppointment);
             click(elmntBookAppointment);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntAppointmentPanel);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(elmntAppointmentPanel);
             takeScreenshotSanity(driver);
 
         } catch (Exception e) {
             System.out.println("Failed to navigate To Book Appointment Page >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+
+    public boolean declineCovidPreScreeningPopup() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntCovidPreScreeningPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntDeclineCovidPreScreening);
+            waitForElementClickable(elmntDeclineCovidPreScreening);
+            waitAndClick(elmntDeclineCovidPreScreening);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(4);
+            blResult = verifyElement(elmntAppointmentPanel);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return blResult;
@@ -275,6 +307,7 @@ public class DashboardPage extends BasePage {
             waitForElement(elmntWelcomeMessage);
 
             jsScrollIntoView(elmntConnectHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntConnectHealthCentre);
             waitForElementClickable(elmntConnectHealthCentre);
             click(elmntConnectHealthCentre);
@@ -282,6 +315,7 @@ public class DashboardPage extends BasePage {
             waitForElement(txtConnectAHealthCentre);
             blResult = verifyElement(txtConnectAHealthCentre);
             takeScreenshotSanity(driver);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         } catch (Exception e) {
             System.out.println("Failed to navigate To Connect health centre Page >>> :: ");
@@ -300,10 +334,12 @@ public class DashboardPage extends BasePage {
             jsScrollIntoView(elmntViewAllIndicators);
             waitForElement(elmntViewAllIndicators);
             waitForElementClickable(elmntViewAllIndicators);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             click(elmntViewAllIndicators);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtMyHealthIndicator);
             blResult = verifyElement(txtMyHealthIndicator);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             takeScreenshotSanity(driver);
         } catch (Exception e) {
             System.out.println("Failed to navigate To My Health Indicators Page >>> :: ");
@@ -327,6 +363,7 @@ public class DashboardPage extends BasePage {
             waitForElement(txtMyHealthRecords);
             blResult = verifyElement(txtMyHealthRecords);
             takeScreenshotSanity(driver);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         } catch (Exception e) {
             System.out.println("Failed to navigate To My Health Records Page >>> :: ");
@@ -349,6 +386,7 @@ public class DashboardPage extends BasePage {
             waitForElement(elmntWelcomeMessage);
             blResult = verifyElement(elmntWelcomeMessage);
             takeScreenshotSanity(driver);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         } catch (Exception e) {
             System.out.println("Failed to navigate To Dashboard Page >>> :: ");
@@ -362,6 +400,7 @@ public class DashboardPage extends BasePage {
         System.out.println(lstValue);
         boolean isVerified = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(elmntMyHealthIndicators);
             waitForElement(elmntMyHealthIndicators);
             System.out.println(verifyMyHealthIndicator.replace("<<REPLACEMENT>>", lstValue.get(0)).replace("<<REPLACEMENT1>>", lstValue.get(1)));
@@ -370,6 +409,7 @@ public class DashboardPage extends BasePage {
             waitForElement(data);
 
             isVerified = verifyElement(data);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         } catch (Exception e) {
             System.out.println("Failed to verify My Health Indicators data >>> :: ");
@@ -384,6 +424,7 @@ public class DashboardPage extends BasePage {
         System.out.println(strValue);
         boolean isVerified = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(elmntMyHealthCentres);
             waitForElement(elmntMyHealthCentres);
             System.out.println(verifyMyHealthCentre.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strValue)));
@@ -392,6 +433,7 @@ public class DashboardPage extends BasePage {
             waitForElement(data);
 
             isVerified = verifyElement(data);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         } catch (Exception e) {
             System.out.println("Failed to verify My Health centre data >>> :: ");
@@ -406,6 +448,7 @@ public class DashboardPage extends BasePage {
         List<String> lstDetails = TestDataUtil.getListOfValue(strDetails);
         System.out.println("lstDetails >>> :: " + lstDetails);
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntNewMessages);
             String strCurrentDate = getCurrentDateByTimeZone("dd MMM YYY", "GMT+12");
             System.out.println("Xpath for Dashboard message >>> :: " + verifyDashboardMessages.replace("<<DATE>>", strCurrentDate).replace("<<DOCTOR_NAME>>", TestDataUtil.getValue(lstDetails.get(0))).replace("<<MESSAGE>>", TestDataUtil.getValue(lstDetails.get(1))));
@@ -413,6 +456,7 @@ public class DashboardPage extends BasePage {
             waitForElement(data);
             isVerified = verifyElement(data);
             takeScreenshotSanity(driver);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -517,6 +561,7 @@ public class DashboardPage extends BasePage {
         boolean isVerified = false;
         System.out.println("lstDetails >>> :: " + lstDetails);
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             String strCurrentDate = getCurrentDateByTimeZone("dd MMM YYY", "GMT+12");
             System.out.println("Xpath for RRP 1 >>> :: " + verifyDashboardRRP.replace("<<LOCATION>>", TestDataUtil.getValue(lstDetails.get(0))).replace("<<DATE>>", strCurrentDate).replace("<<STATUS>>", TestDataUtil.getValue(lstDetails.get(1))));
             WebElement data = waitForElement(By.xpath(verifyDashboardRRP.replace("<<LOCATION>>", TestDataUtil.getValue(lstDetails.get(0))).replace("<<DATE>>", strCurrentDate).replace("<<STATUS>>", TestDataUtil.getValue(lstDetails.get(1)))));
@@ -524,6 +569,7 @@ public class DashboardPage extends BasePage {
             waitForElementClickable(data);
             waitAndClick(data);
             waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(btnMoreInfoClose);
             waitForElementClickable(btnMoreInfoClose);
             waitAndClick(btnMoreInfoClose);
@@ -577,7 +623,7 @@ public class DashboardPage extends BasePage {
     }
 
     public void verifyUnreadMessageCount() {
-
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElement(elmntNewMessages);
         waitForElement(elmntUnreadMessage);
         verifyElement(elmntUnreadMessage);

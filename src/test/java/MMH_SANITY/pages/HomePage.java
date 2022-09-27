@@ -20,7 +20,6 @@ import java.net.UnknownHostException;
 public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
-
         super(driver);
     }
 
@@ -225,17 +224,17 @@ public class HomePage extends BasePage {
             try {
                 pageTitle.equalsIgnoreCase("PostRegistration");
 
-                System.out.println("User on the HomePage and Verified the HomePage >>>>");
                 waitForSeconds(3);
                 waitForElement(txtConnectAHealthCentre);
                 blResult = verifyElement(txtConnectAHealthCentre);
+                System.out.println("User on the ProviderHomePage and Verified the ProviderHomePage >>>>");
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("User not in the HomePage >>>>");
+                System.out.println("User not in the ProviderHomePage >>>>");
             }
 
         } catch (Exception e) {
-            System.out.println("Failed to Navigate the HomePage >>>>");
+            System.out.println("Failed to Navigate the ProviderHomePage >>>>");
             e.printStackTrace();
         }
         return blResult;

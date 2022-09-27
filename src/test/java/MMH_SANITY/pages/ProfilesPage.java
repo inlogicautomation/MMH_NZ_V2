@@ -1,7 +1,6 @@
 package MMH_SANITY.pages;
 
 import cap.common.BasePage;
-import cap.utilities.DateUtil;
 import cap.utilities.TestDataUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -58,6 +57,9 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Categories')]")
     protected WebElement elmntCategories;
 
+    @FindBy(how = How.XPATH, using = "//button[@aria-label='Delete']")
+    protected List<WebElement> btnDeleteIcon;
+
     @FindBy(how = How.XPATH, using = "//button[contains(text(),'Change Address')]")
     protected WebElement elmntChangeAddress;
 
@@ -92,6 +94,8 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Calendar')]")
     protected WebElement txtCalendar;
 
+    protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
+
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Event')]")
     protected WebElement txtEvent;
 
@@ -125,6 +129,7 @@ public class ProfilesPage extends BasePage {
             @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'Emergency Contact updated successfully')]"),
             @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'New Event Saved')]"),
             @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'Event Deleted')]"),
+            @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'Category deleted successfully')]"),
             @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'Emergency Contact added successfully')]"),
             @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'Category succesfully added')]"), //Desktop View
             @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'Event Updated.')]"), //Desktop View
@@ -528,6 +533,7 @@ public class ProfilesPage extends BasePage {
         waitForElement(btnAddContact);
         waitForElementClickable(btnAddContact);
         waitAndClick(btnAddContact);
+        waitForSeconds(1);
         waitForElement(successPopup);
         return verifyElement(successPopup);
     }
@@ -566,8 +572,62 @@ public class ProfilesPage extends BasePage {
         waitForElement(elmntCategories);
         waitForElementClickable(elmntCategories);
         waitAndClick(elmntCategories);
+        waitForSeconds(2);
         waitForElement(headerName);
         return headerName.isDisplayed();
+    }
+    public boolean deleteAllCategories() {
+        waitForElement(elmntAddCategory);
+        try {
+            waitForElements(btnDeleteIcon);
+            for (WebElement delete: btnDeleteIcon) {
+                waitForSeconds(2);
+                waitForElement(delete);
+                waitForElementClickable(delete);
+                waitAndClick(delete);
+                waitForSeconds(1);
+                waitForElement(btnYes);
+                waitForSeconds(1);
+                waitForElementClickable(btnYes);
+                waitForSeconds(1);
+                waitAndClick(btnYes);
+
+                waitForElement(successPopup);
+                waitForSeconds(3);
+
+            }
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return true;
+    }
+    public boolean deleteAllEmergencyContact() {
+        waitForElement(txtEmergencyContacts);
+        try {
+            waitForElements(btnDeleteIcon);
+            for (WebElement delete: btnDeleteIcon) {
+                waitForSeconds(2);
+                waitForElement(delete);
+                waitForElementClickable(delete);
+                waitAndClick(delete);
+                waitForSeconds(1);
+                waitForElement(btnYes);
+                waitForSeconds(1);
+                waitForElementClickable(btnYes);
+                waitForSeconds(1);
+                waitAndClick(btnYes);
+
+                waitForElement(successPopup);
+                waitForSeconds(3);
+            }
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return true;
     }
 
     public boolean clickAddCategoryButton() {
@@ -1372,6 +1432,7 @@ public class ProfilesPage extends BasePage {
         boolean blResult = false;
         try {
             refreshPage();
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElement(txtCalendar);
             waitForElement(btnCalendarSettings);
@@ -1644,6 +1705,7 @@ public class ProfilesPage extends BasePage {
             waitForSeconds(2);
             waitForElement(txtSearchResults);
             blResult = verifyElement(txtSearchResults);
+            takeScreenshotSanity(driver);
             System.out.println("\nSuccessfully Clicked the Search Button >>> :: ");
         } catch (Exception e) {
             System.out.println("\nFailed to click the Search Button >>> :: ");
@@ -1663,6 +1725,7 @@ public class ProfilesPage extends BasePage {
             waitForSeconds(2);
             waitForElement(txtGoalTracking);
             blResult = verifyElement(txtGoalTracking);
+            takeScreenshotSanity(driver);
 
             System.out.println("\nSuccessfully Clicked the view Goal Button >>> :: ");
         } catch (Exception e) {

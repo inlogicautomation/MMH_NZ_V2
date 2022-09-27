@@ -143,7 +143,7 @@ public class SanityWebSteps {
             System.out.println("SENT_MESSAGE_DETAILS_FOR_DASHBOARD >>> :: " + strMessageDetails);
             List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
             System.out.println("List Message Details >>> :: " + lstMessageDetails);
-            Assert.assertTrue(sanityPageContainer.messagesPage.selectHealthCenter(TestDataUtil.getValue(lstMessageDetails.get(0))));
+//            Assert.assertTrue(sanityPageContainer.messagesPage.selectHealthCenter(TestDataUtil.getValue(lstMessageDetails.get(0))));
             Assert.assertTrue(sanityPageContainer.messagesPage.selectHealthCenterLocation(TestDataUtil.getValue(lstMessageDetails.get(1))));
             Assert.assertTrue(sanityPageContainer.messagesPage.selectServiceName(TestDataUtil.getValue(lstMessageDetails.get(2))));
             Assert.assertTrue(sanityPageContainer.messagesPage.selectRole(TestDataUtil.getValue(lstMessageDetails.get(3))));
@@ -463,6 +463,7 @@ public class SanityWebSteps {
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToMyProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.mouseOverProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToEmergencyContacts());
+        Assert.assertTrue(sanityPageContainer.profilesPage.deleteAllEmergencyContact());
     }
 
     @And("I enter the New Emergency Contact{string}")
@@ -554,6 +555,7 @@ public class SanityWebSteps {
         System.out.println("lstDetails >>> :: " + lstDetails);
 
         Assert.assertTrue(sanityPageContainer.profilesPage.clickCategories());
+        Assert.assertTrue(sanityPageContainer.profilesPage.deleteAllCategories());
         Assert.assertTrue(sanityPageContainer.profilesPage.clickAddCategoryButton());
         Assert.assertTrue(sanityPageContainer.profilesPage.addCategory(strDetails));
 
@@ -2044,6 +2046,8 @@ public class SanityWebSteps {
         Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToDashboard());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToBookAppointmentPage());
+        Assert.assertTrue(sanityPageContainer.dashboardPage.declineCovidPreScreeningPopup());
+
 
     }
 
