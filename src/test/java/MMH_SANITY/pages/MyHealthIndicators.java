@@ -229,6 +229,13 @@ public class MyHealthIndicators extends BasePage {
             .append("<<REPLACEMENT1>>").append("')]//following::td//following::td[contains(text(),'")
             .append("<<REPLACEMENT2>>").append("')]//following::span//following::button)[1]").toString();
 
+    protected String strDeleteMyEntriesWeight = new StringBuilder()
+            .append("(//td[contains(text(),'")
+            .append("<<REPLACEMENT1>>").append("')]//following::td[contains(text(),'")
+            .append("<<REPLACEMENT2>>").append("')]//following::span//following::button)[1]").toString();
+
+//    (//td[contains(text(),'28 Sep 2022')]//following::td[contains(text(),'55')]//following::span//following::button)[1]
+
     protected String strDeleteMyEntriesDepression = new StringBuilder()
             .append("(//td[contains(text(),'")
             .append("<<REPLACEMENT1>>").append("')]//following::td[contains(text(),'")
@@ -539,6 +546,9 @@ public class MyHealthIndicators extends BasePage {
             .append("//td[contains(text(),'")
             .append("<<REPLACEMENT1>>").append("')]//following::td[contains(text(),'")
             .append("<<REPLACEMENT2>>").append("')]").toString();
+
+    @FindBy(how = How.XPATH, using = "//span[text()='ALL']")
+    protected WebElement veriflyAllTabElement;
 
 
     public boolean clickMyHealthIndicatorsOptionFromMenu() {
@@ -1089,7 +1099,10 @@ public class MyHealthIndicators extends BasePage {
     public boolean VerifyBloodPressureMyEntriesTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
+            waitForSeconds(3);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -1112,6 +1125,8 @@ public class MyHealthIndicators extends BasePage {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>" + lstDetails);
 //            List<String>details=TestDataUtil.getListOfValue(lstDetails);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -1341,7 +1356,7 @@ public class MyHealthIndicators extends BasePage {
             String currentDate = getCurrentDate("dd MMM yyyy");
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodSugar
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.concat(strExecutionID)))));
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails))));
             waitForElementClickable(elmntBloodPressureTableData);
             waitForSeconds(3);
             jsClick(elmntBloodPressureTableData);
@@ -1676,9 +1691,9 @@ public class MyHealthIndicators extends BasePage {
         try {
             String currentDate = getCurrentDate("dd MMM yyyy");
             waitForSeconds(5);
-            WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
+            WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesWeight
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.concat(strExecutionID)))));
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails))));
             waitForElementClickable(elmntBloodPressureTableData);
             waitForSeconds(3);
             jsClick(elmntBloodPressureTableData);
@@ -1834,7 +1849,7 @@ public class MyHealthIndicators extends BasePage {
             jsClick(getElmntBMIHealthIndicator);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntHealthIndicatorDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -2333,6 +2348,8 @@ public class MyHealthIndicators extends BasePage {
         boolean blResult = false;
         try {
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4302,6 +4319,8 @@ public class MyHealthIndicators extends BasePage {
             System.out.println(">>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4321,6 +4340,8 @@ public class MyHealthIndicators extends BasePage {
     public boolean VerifyAnxietyMyEntriesTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             String currentDate = getCurrentDate("dd MMM yyyy");
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesAnxiety
@@ -4342,6 +4363,8 @@ public class MyHealthIndicators extends BasePage {
         try {
             System.out.println(">>>>>>>>>>>>>>>>>>>>"+lstDetails);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesAnxiety
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4361,6 +4384,8 @@ public class MyHealthIndicators extends BasePage {
         boolean blResult = false;
         try {
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesAnxiety
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4380,6 +4405,8 @@ public class MyHealthIndicators extends BasePage {
         boolean blResult = false;
         try {
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+lstDetails);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
@@ -4401,6 +4428,8 @@ public class MyHealthIndicators extends BasePage {
         boolean blResult = false;
         try {
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+lstDetails);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
@@ -4422,6 +4451,8 @@ public class MyHealthIndicators extends BasePage {
         boolean blResult = false;
         try {
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+lstDetails);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
@@ -4443,6 +4474,8 @@ public class MyHealthIndicators extends BasePage {
         boolean blResult = false;
         try {
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+lstDetails);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
@@ -4463,6 +4496,8 @@ public class MyHealthIndicators extends BasePage {
         boolean blResult = false;
         try {
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+lstDetails);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
@@ -4485,6 +4520,8 @@ public class MyHealthIndicators extends BasePage {
         boolean blResult = false;
         try {
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+lstDetails);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
@@ -4506,6 +4543,8 @@ public class MyHealthIndicators extends BasePage {
         boolean blResult = false;
         try {
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+lstDetails);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
@@ -4527,6 +4566,8 @@ public class MyHealthIndicators extends BasePage {
         boolean blResult = false;
         try {
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+lstDetails);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strMyEntriesBloodPressure
@@ -4687,7 +4728,7 @@ public class MyHealthIndicators extends BasePage {
             jsClick(elmntActiveCardData);
             waitForSeconds(3);
             waitForElement(elmtPrivacySetting);
-            click(elmtPrivacySetting);
+            jsClick(elmtPrivacySetting);
             waitForSeconds(2);
             verifyElement(elmtPrivacySettingHeader);
             waitForSeconds(2);
@@ -4710,7 +4751,9 @@ public class MyHealthIndicators extends BasePage {
         try {
 //            System.out.println(">>>>>>>>>>>>>>>>>>>PrivateSettinglstDetails"+lstDetails);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            jsScrollUp();
+//            jsScrollUp();
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             String currentDate = getCurrentDate("dd MMM yyyy");
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData =driver.findElement(By.xpath(strMyEntriesShowthisentrytomycareproviders
@@ -4763,6 +4806,8 @@ public class MyHealthIndicators extends BasePage {
             String details = lstDetails.get(1).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4786,7 +4831,9 @@ public class MyHealthIndicators extends BasePage {
 
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             String currentDate = getCurrentDate("dd MMM yyyy");
-            jsScrollUp();
+//            jsScrollUp();
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = driver.findElement(By.xpath(strDeleteMyEntriesAnxietySeverity
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4810,6 +4857,8 @@ public class MyHealthIndicators extends BasePage {
             String details = lstDetails.get(1);
 //            System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesAnxietySeverity
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4832,6 +4881,8 @@ public class MyHealthIndicators extends BasePage {
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4855,6 +4906,8 @@ public class MyHealthIndicators extends BasePage {
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4878,6 +4931,8 @@ public class MyHealthIndicators extends BasePage {
             String details = lstDetails.get(1);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesDepression
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4900,7 +4955,9 @@ public class MyHealthIndicators extends BasePage {
 //            System.out.println(">>>>>>>>>>>>>>>>>>>PrivateSettinglstDetails"+lstDetails);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             String currentDate = getCurrentDate("dd MMM yyyy");
-            jsScrollUp();
+//            jsScrollUp();
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData =driver.findElement(By.xpath(strMyEntriesShowthisentrytomycareproviders
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4921,7 +4978,9 @@ public class MyHealthIndicators extends BasePage {
 //            System.out.println(">>>>>>>>>>>>>>>>>>>PrivateSettinglstDetails"+lstDetails);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             String currentDate = getCurrentDate("dd MMM yyyy");
-            jsScrollUp();
+//            jsScrollUp();
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData =driver.findElement(By.xpath(strMyEntriesShowthisentrytomycareproviders
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4944,6 +5003,8 @@ public class MyHealthIndicators extends BasePage {
             String details = lstDetails.get(1);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesAnxietySeverity
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4967,6 +5028,8 @@ public class MyHealthIndicators extends BasePage {
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -4990,6 +5053,8 @@ public class MyHealthIndicators extends BasePage {
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -5014,6 +5079,8 @@ public class MyHealthIndicators extends BasePage {
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -5037,6 +5104,8 @@ public class MyHealthIndicators extends BasePage {
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String currentDate = getCurrentDate("dd MMM yyyy");
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(currentDate))
@@ -5059,6 +5128,8 @@ public class MyHealthIndicators extends BasePage {
             System.out.println(">>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             String currentDate = getCurrentDate("dd MMM yyyy");
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
@@ -5081,6 +5152,8 @@ public class MyHealthIndicators extends BasePage {
             System.out.println(">>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             String currentDate = getCurrentDate("dd MMM yyyy");
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
@@ -5104,6 +5177,8 @@ public class MyHealthIndicators extends BasePage {
             System.out.println(">>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             String currentDate = getCurrentDate("dd MMM yyyy");
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
@@ -5127,6 +5202,8 @@ public class MyHealthIndicators extends BasePage {
             System.out.println(">>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             String currentDate = getCurrentDate("dd MMM yyyy");
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
@@ -5151,6 +5228,8 @@ public class MyHealthIndicators extends BasePage {
             System.out.println(">>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             String currentDate = getCurrentDate("dd MMM yyyy");
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
@@ -5174,6 +5253,8 @@ public class MyHealthIndicators extends BasePage {
             System.out.println(">>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             String currentDate = getCurrentDate("dd MMM yyyy");
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure
@@ -5197,6 +5278,8 @@ public class MyHealthIndicators extends BasePage {
             System.out.println(">>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             String details = lstDetails.get(2).concat(strExecutionID);
             System.out.println(">>>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
+            jsScrollIntoView(veriflyAllTabElement);
+            takeScreenshot(driver);
             String currentDate = getCurrentDate("dd MMM yyyy");
             waitForSeconds(5);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(strDeleteMyEntriesBloodPressure

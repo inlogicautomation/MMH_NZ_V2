@@ -59,7 +59,7 @@ public class ResourcesPage extends BasePage {
 
             waitForSeconds(2);
 
-            waitForElement(elmntHealthTools);
+//            waitForElement(elmntHealthTools);
             jsScrollIntoView(elmntHealthTools);
             waitForElementClickable(elmntHealthTools);
             jsClick(elmntHealthTools);
