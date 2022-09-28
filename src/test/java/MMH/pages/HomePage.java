@@ -195,6 +195,7 @@ public class HomePage extends BasePage {
     }
 
     public boolean verifyHomePageOfMMHPortal() {
+        waitForSeconds(5);
         waitForElement(elmntVerifyHomePage);
         if (verifyElement(txtAppVersion)) {
             strAppVersion = txtAppVersion.getText();

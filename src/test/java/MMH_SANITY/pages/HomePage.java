@@ -30,6 +30,7 @@ public class HomePage extends BasePage {
     public static String strBrowserName;
     public static String strBrowserVersion;
     public static String strSystemName;
+
     @FindBy(how = How.XPATH, using = "//div[@class='navbar-header']")
     protected WebElement elmntLogo;
 
@@ -213,28 +214,30 @@ public class HomePage extends BasePage {
     public boolean navigateToHomePage() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
             waitForElement(elmntLogo);
             waitForElementClickable(elmntLogo);
             click(elmntLogo);
-            refreshPage();
+//            refreshPage();
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
             String pageTitle = driver.getTitle();
             System.out.println("pageTitle >>> : " + pageTitle);
             try {
                 pageTitle.equalsIgnoreCase("PostRegistration");
-
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(3);
                 waitForElement(txtConnectAHealthCentre);
                 blResult = verifyElement(txtConnectAHealthCentre);
-                System.out.println("User on the ProviderHomePage and Verified the ProviderHomePage >>>>");
+                System.out.println("User on the HomePage and Verified the HomePage >>>>");
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("User not in the ProviderHomePage >>>>");
+                System.out.println("User not in the HomePage >>>>");
             }
 
         } catch (Exception e) {
-            System.out.println("Failed to Navigate the ProviderHomePage >>>>");
+            System.out.println("Failed to Navigate the HomePage >>>>");
             e.printStackTrace();
         }
         return blResult;
