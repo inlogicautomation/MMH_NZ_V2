@@ -14,10 +14,6 @@ public class ProviderWebSteps {
     }
 
 
-    @Given("As a user I am on Provider Portal login Page")
-    public void asAUserIAmOnProviderPortalLoginPage() {
-
-    }
 
 
     @Given("As a Provider I am on HomePage and navigate to RRP Script Instructions in {string}")

@@ -2,6 +2,7 @@ package PROVIDER_HAPPY_PATH;
 
 import MMH_SANITY.pages.*;
 import PROVIDER_HAPPY_PATH.pages.ProviderHomePage;
+import PROVIDER_HAPPY_PATH.pages.RRPScriptFeeSettingsPage;
 import PROVIDER_HAPPY_PATH.pages.RepeatScriptSettingPage;
 import cap.utilities.SharedDriver;
 import io.cucumber.java.After;
@@ -21,6 +22,8 @@ public class ProviderPageContainer {
     public ProviderHomePage providerHomePage;
     public RepeatScriptSettingPage repeatScriptSettingPage;
 
+    public RRPScriptFeeSettingsPage rrpScriptFeeSettingsPage;
+
 
 
 
@@ -33,6 +36,7 @@ public class ProviderPageContainer {
     private void initPages() {
         providerHomePage = new ProviderHomePage(driver);
         repeatScriptSettingPage = new RepeatScriptSettingPage(driver);
+        rrpScriptFeeSettingsPage = new RRPScriptFeeSettingsPage(driver);
     }
 
     @After("@WEB")

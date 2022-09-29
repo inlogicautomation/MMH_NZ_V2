@@ -389,12 +389,51 @@ public class GoalTracking extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(elmntEndDate);
             click(elmntEndDate);
-            String strDateFormat = "d";
-            String strDay = "DAYAFTERTOMORROW";
-            String strDate = DateUtil.getDate(strDay, strDateFormat);
-            System.out.println("Current Day ::>>" + strDate);
-            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
-            click(elmntDayAfterDate);
+            waitForSeconds(3);
+            waitForElement(elmntMonthAndYear);
+            waitForElementClickable(elmntMonthAndYear);
+            waitAndClick(elmntMonthAndYear);
+
+
+            String date = getDayAfterTommorrowDate("d");
+            String month = getDayAfterTommorrowDate("MMM").toUpperCase();
+            String year = getDayAfterTommorrowDate("YYYY");
+
+            System.out.println("getDayAfterTomorrowDate >>> :: " + date);
+            System.out.println("getDayAfterTomorrowDate >>> :: " + month);
+            System.out.println("getDayAfterTomorrowDate >>> :: " + year);
+
+
+            System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", year));
+            WebElement selectYear = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", year)));
+
+            waitForSeconds(3);
+            waitForElement(selectYear);
+            waitForElementClickable(selectYear);
+            waitAndClick(selectYear);
+
+            System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", month));
+            WebElement selectMonth = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", month)));
+
+            waitForSeconds(3);
+            waitForElement(selectMonth);
+            waitForElementClickable(selectMonth);
+            waitAndClick(selectMonth);
+
+            System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", date));
+            WebElement selectDate = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", date)));
+
+            waitForSeconds(3);
+            waitForElement(selectDate);
+            waitForElementClickable(selectDate);
+            waitAndClick(selectDate);
+
+            System.out.println("Value >>> :: " + elmntCalendar.getAttribute("value"));
+            waitForElement(elmntCalendar);
+            String strEnteredDate = elmntCalendar.getAttribute("value");
+            System.out.println("strEnteredDate >>>> :: "+strEnteredDate);
+            waitForSeconds(2);
+            takeScreenshot(driver);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
 
@@ -818,12 +857,52 @@ public class GoalTracking extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(elmntEndDate);
             click(elmntEndDate);
-            String strDateFormat = "d";
-            String strDay = "DAYAFTERTOMORROW";
-            String strDate = DateUtil.getDate(strDay, strDateFormat);
-            System.out.println("Current Day ::>>" + strDate);
-            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
-            click(elmntDayAfterDate);
+            waitForSeconds(3);
+            waitForElement(elmntMonthAndYear);
+            waitForElementClickable(elmntMonthAndYear);
+            waitAndClick(elmntMonthAndYear);
+
+
+            String date = getDayAfterTommorrowDate("d");
+            String month = getDayAfterTommorrowDate("MMM").toUpperCase();
+            String year = getDayAfterTommorrowDate("YYYY");
+
+            System.out.println("getDayAfterTomorrowDate >>> :: " + date);
+            System.out.println("getDayAfterTomorrowDate >>> :: " + month);
+            System.out.println("getDayAfterTomorrowDate >>> :: " + year);
+
+
+            System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", year));
+            WebElement selectYear = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", year)));
+
+            waitForSeconds(3);
+            waitForElement(selectYear);
+            waitForElementClickable(selectYear);
+            waitAndClick(selectYear);
+
+            System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", month));
+            WebElement selectMonth = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", month)));
+
+            waitForSeconds(3);
+            waitForElement(selectMonth);
+            waitForElementClickable(selectMonth);
+            waitAndClick(selectMonth);
+
+            System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", date));
+            WebElement selectDate = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", date)));
+
+            waitForSeconds(3);
+            waitForElement(selectDate);
+            waitForElementClickable(selectDate);
+            waitAndClick(selectDate);
+
+            System.out.println("Value >>> :: " + elmntCalendar.getAttribute("value"));
+            waitForElement(elmntCalendar);
+            String strEnteredDate = elmntCalendar.getAttribute("value");
+            System.out.println("strEnteredDate >>>> :: "+strEnteredDate);
+            waitForSeconds(2);
+            takeScreenshot(driver);
+//            documentValidityDate = getDayAfterTommorrowDate("d MMM YYYY");
         }
 
     }

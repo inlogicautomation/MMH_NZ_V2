@@ -710,6 +710,14 @@ public class WebSteps {
 
     }
 
+    @Given("As a user I am on Provider Portal login Page")
+    public void asAUserIAmOnProviderPortalLoginPage() {
+        demoPageContainer.homePage.visit();
+        demoPageContainer.homePage.clickBetaLoginButton();
+
+    }
+
+
 
     @Then("I should see the Prescription status for Request by card {string}")
     public void iShouldSeeThePrescriptionStatusForRequestByCard(String strMedicationDetails) {

@@ -61,7 +61,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
     protected WebElement elmntSideBar;
 
-    @FindBy(how = How.XPATH, using = "//mat-icon[text()='exit_to_app']")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'SIGN OUT')]")
     protected WebElement btnExitApp;
 
     @FindBy(how = How.XPATH, using = "//input[@id='UserName']")
