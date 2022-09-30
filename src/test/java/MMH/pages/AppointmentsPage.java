@@ -110,6 +110,8 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='doctor mobile-view']")
     protected WebElement elmntProviderListView;
 
+    @FindBy(how = How.XPATH, using = "//a[@aria-label='next']")
+    protected WebElement btnNextArrow;
 
     @FindBy(how = How.XPATH, using = "(//div[@class='profile ng-star-inserted'])[1]")
     protected WebElement elmntProviders;
@@ -505,6 +507,32 @@ public class AppointmentsPage extends BasePage {
         return blResult;
     }
 
+    public boolean selectProviderForRealMobileView(String strProvider) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntProviderListView);
+            jsScrollIntoView(elmntProviderListView);
+            By elmntProvider = By.xpath(elmntSelectProviderMobileView.replace("<<REPLACEMENT>>", strProvider));
+            System.out.println("elmntPackName>>>>>> " + elmntProvider);
+            waitForSeconds(3);
+            while (!(verifyElement(elmntProvider))){
+                click(btnNextArrow);
+            }
+            WebElement elmntProvider1 = waitForElement(By.xpath(elmntSelectProviderMobileView.replace("<<REPLACEMENT>>", strProvider)));
+            waitForSeconds(3);
+            jsClick(elmntProvider1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(2);
+            takeScreenshot(driver);
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+
+    }
+
     public boolean selectFutureDateOnCalender(String strFutureDate) {
         boolean blResult = false;
         try {
@@ -594,6 +622,17 @@ public class AppointmentsPage extends BasePage {
                 blResult = true;
             }
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(2);
+//                jsScrollDown();
+                jsScrollIntoView(btnConfirmMobile);
+                waitForElement(btnConfirmMobile);
+                click(btnConfirmMobile);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(5);
+                blResult = true;
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(2);
 //                jsScrollDown();
@@ -698,6 +737,16 @@ public class AppointmentsPage extends BasePage {
                 blResult = true;
             }
 
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                waitForSeconds(2);
+                waitForElement(elmntPaymentProfile);
+                verifyElement(btnConfirmYourBookingEnabledmobile);
+                click(btnConfirmYourBookingEnabledmobile);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(4);
+                blResult = true;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -717,6 +766,15 @@ public class AppointmentsPage extends BasePage {
                 blResult = verifyElement(btnConfirmYourBookingEnabled);
             }
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                jsScrollDown();
+                jsScrollIntoView(chkAcceptandTerms);
+                waitForElement(elmntPaymentProfile);
+                waitForElementClickable(chkAcceptandTerms);
+                click(chkAcceptandTerms);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                blResult = verifyElement(btnConfirmYourBookingEnabledmobile);
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
                 jsScrollDown();
                 jsScrollIntoView(chkAcceptandTerms);
                 waitForElement(elmntPaymentProfile);

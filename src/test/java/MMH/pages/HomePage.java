@@ -348,8 +348,18 @@ public class HomePage extends BasePage {
             waitForElement(txtEmail);
             isVerified = verifyElement(txtEmail);
         }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElement(btnExitApp);
+            click(btnExitApp);
+            waitForSeconds(120);
+            waitForElement(txtEmail);
+            isVerified = verifyElement(txtEmail);
+        }
         return isVerified;
     }
+
+
 
     public boolean clickMesagesExpandIcon() {
         waitForSeconds(3);
