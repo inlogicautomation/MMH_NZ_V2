@@ -943,10 +943,12 @@ public class GoalTracking extends BasePage {
     }
 
     public boolean ClickAddValueSaveButton() {
+        jsScrollIntoView(getElmtAddValuesavebutton);
         waitForSeconds(3);
-        click(getElmtAddValuesavebutton);
+        jsClick(getElmtAddValuesavebutton);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         return verifyElement(elmtsgoaltracking);
     }
 

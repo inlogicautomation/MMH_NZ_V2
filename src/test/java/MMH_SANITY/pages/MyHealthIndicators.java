@@ -4718,7 +4718,7 @@ public class MyHealthIndicators extends BasePage {
             System.out.println(">>>>>>>>>>>>>>>>>>>PrivateSettinglstDetails"+lstDetails);
             waitForSeconds(3);
             waitForElementClickable(elmtInactiveAlltab);
-            click(elmtInactiveAlltab);
+            jsClick(elmtInactiveAlltab);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
             WebElement elmntActiveCardData = waitForElement(By.xpath(ActiveCardElemnts

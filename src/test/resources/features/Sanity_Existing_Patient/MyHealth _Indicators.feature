@@ -807,7 +807,7 @@ Feature:MyHealth_Indicators
     Then I should see all the Weight card My Entries Medicine details in the grid view
       | &WEIGHT_CARD_SURVEY_MY_ENTRIES_DATA& |
     And I click on "<Edit Icon>" edit icon & I Edit Weight card of My Entries records "<Records>"
-    And I click on Delete Icon "<Edit Icon>"& I verify the Weight card My Entries Record is deleted
+    And I click on Delete Icon "<Records>"& I verify the Weight card My Entries Record is deleted
     Examples:
       | Edit Icon                          | Records                    |
       | &EDIT_WEIGHT_CARD_MY_ENTRIES_DATA& | &EDIT_WEIGHT_CARD_DETAILS& |
