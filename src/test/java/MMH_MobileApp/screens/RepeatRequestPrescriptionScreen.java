@@ -349,7 +349,7 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
         click(elmntSyncView);
         waitForElement(elmntRepeatPrescriptionStatus);
 
-        waitForSecond(3);
+        waitForSecond(6);
 
         WebElement elmntPickUpMethod = waitForElement(By.xpath(strViewPickUpMethodTextLocator.replace("<<TEXT>>", lstRPDetails.get(0))));
         click(elmntPickUpMethod);
@@ -375,6 +375,7 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
     }
 
     public void selectPharmacy(List<String> lstPharmacy) {
+        waitForSecond(5);
         waitForElementIgnoreStale(elmntSelectPharmacyHearder);
         click(elmntFindAPharmacy);
 
