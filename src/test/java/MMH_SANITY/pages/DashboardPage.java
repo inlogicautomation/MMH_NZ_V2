@@ -214,12 +214,13 @@ public class DashboardPage extends BasePage {
             jsScrollIntoView(elmntNewRepeatPrescription);
             waitForElement(elmntNewRepeatPrescription);
             waitForElementClickable(elmntNewRepeatPrescription);
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             click(elmntNewRepeatPrescription);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtRequestNewScript);
             blResult = verifyElement(txtRequestNewScript);
             takeScreenshotSanity(driver);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(2);
             System.out.println("Navigated To Request Medication >>>>");
 
 

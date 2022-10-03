@@ -215,6 +215,9 @@ public class HomePage extends BasePage {
     public boolean navigateToHomePage() {
         boolean blResult = false;
         try {
+            refreshPage();
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntLogo);
             waitForElementClickable(elmntLogo);
             click(elmntLogo);
             refreshPage();

@@ -411,9 +411,12 @@ public class RepeatPrescription extends BasePage {
     public boolean navigateToHomePage() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForPresenceOfElement(elmntLogo);
             waitForElementClickable(elmntLogo);
             click(elmntLogo);
             refreshPage();
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
             String pageTitle = driver.getTitle();
             System.out.println("pageTitle >>> : " + pageTitle);
@@ -814,8 +817,8 @@ public class RepeatPrescription extends BasePage {
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
-            waitForElement(txtRRPSuccessPopUp);
-            verifyElement(txtRRPSuccessPopUp);
+//            waitForElement(txtRRPSuccessPopUp);
+//            verifyElement(txtRRPSuccessPopUp);
             waitForSeconds(5);
             waitForElement(txtViewPreviousRequests);
             blResult = verifyElement(txtViewPreviousRequests);

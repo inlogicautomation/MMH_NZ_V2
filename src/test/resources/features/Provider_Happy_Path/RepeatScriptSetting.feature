@@ -16,11 +16,11 @@ Feature: Repeat Script Setting
     Given As a Provider I am on HomePage and navigate to RRP Script Instructions in "<System_Menu>"
     And I navigate to RRP Script Instructions Settings and click edit button
     When I disable the RRP Script Instructions Settings "<Details>"
-    Then I should verify disabled RRP Script Instructions Settings "<Details>"
+#    Then I should verify disabled RRP Script Instructions Settings "<Details>"
 
     Examples:
-      | System_Menu       | Details   |
-      | Repeat Script Fee | &PASSWORD& |
+      | System_Menu       | Details                            |
+      | Repeat Script Fee | &RRP_SCRIPT_INSTRUCTIONS_SETTINGS& |
 
 
 

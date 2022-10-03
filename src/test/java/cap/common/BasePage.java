@@ -347,6 +347,10 @@ public class BasePage {
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
+    public void waitForPresenceOfElement(WebElement element) {
+        wait.until(ExpectedConditions.presenceOfElementLocated((By.ByXPath) element));
+    }
+
     public boolean verifyElement(WebElement element) {
         boolean isVerify = false;
         try {

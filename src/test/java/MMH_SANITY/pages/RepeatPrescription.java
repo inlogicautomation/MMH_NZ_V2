@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.Select;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -104,7 +103,7 @@ public class RepeatPrescription extends BasePage {
             .append("')]").toString();
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='ScriptUrgency']")
-    protected WebElement drpdownUrgrency;
+    protected WebElement drpdownUrgency;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Select Script Urgency')]/parent::mat-option")
     protected WebElement elmntSelectScriptUrgency;
@@ -356,15 +355,16 @@ public class RepeatPrescription extends BasePage {
     public boolean selectHealthCentreLocation(String strLocation) {
         boolean blResult = false;
         try {
-            refreshPage();
+            waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(10);
+            waitForElement(drpdownLocation);
             waitForElementClickable(drpdownLocation);
-            waitForSeconds(4);
             click(drpdownLocation);
             waitForSeconds(4);
             System.out.println(" select Location Locator :: " + selectLocation.replace("<<REPLACEMENT>>", strLocation) + "\n");
             WebElement ddlLocation = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(ddlLocation);
             waitForElementClickable(ddlLocation);
             waitForSeconds(2);
             System.out.println("Location was selected in the Request Medication >>> ::");
@@ -383,14 +383,14 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(5);
+            waitForElement(drpdownDoctor);
             waitForElementClickable(drpdownDoctor);
             click(drpdownDoctor);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             System.out.println("Doctor xpath >>> : " + selectDoctor.replace("<<REPLACEMENT>>", strDoctor));
             WebElement ddlDoctor = waitForElement(By.xpath(selectDoctor.replace("<<REPLACEMENT>>", strDoctor)));
-            selectDoctor.replace("<<REPLACEMENT>>", strDoctor);
+            waitForElement(ddlDoctor);
             waitForElementClickable(ddlDoctor);
             waitForSeconds(4);
             mouseClick(ddlDoctor);
@@ -410,11 +410,14 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(drpdownInstructions);
             waitForElementClickable(drpdownInstructions);
             jsClick(drpdownInstructions);
             waitForSeconds(2);
             System.out.println(" SelectInstructions xpath >>> : " + selectInstructions.replace("<<REPLACEMENT>>", strInstruction));
             WebElement ddlInstructions = waitForElement(By.xpath(selectInstructions.replace("<<REPLACEMENT>>", strInstruction)));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(ddlInstructions);
             waitForElementClickable(ddlInstructions);
             waitForSeconds(2);
             waitAndClick(ddlInstructions);
@@ -432,11 +435,13 @@ public class RepeatPrescription extends BasePage {
     public boolean clickNextButton(){
         boolean blResult=false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(btnNextRRP);
             jsScrollIntoView(btnNextRRP);
             waitForElementClickable(btnNextRRP);
             waitForSeconds(3);
             jsClick(btnNextRRP);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtTotalToPay);
             blResult= verifyElement(txtTotalToPay);
         } catch (Exception e) {
@@ -450,13 +455,15 @@ public class RepeatPrescription extends BasePage {
     public boolean selectUrgency(String strUrgency) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
-            waitForElementClickable(drpdownUrgrency);
-            jsClick(drpdownUrgrency);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(drpdownUrgency);
+            waitForElementClickable(drpdownUrgency);
+            jsClick(drpdownUrgency);
             waitForSeconds(2);
             System.out.println("Xpath for selectUrgrency Type >>> : " + selectUrgrency.replace("<<REPLACEMENT>>", strUrgency));
             WebElement ddlUrgrencyType = waitForElement(By.xpath(selectUrgrency.replace("<<REPLACEMENT>>", strUrgency)));
-            waitForSeconds(2);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(ddlUrgrencyType);
             waitForElementClickable(ddlUrgrencyType);
             mouseClick(ddlUrgrencyType);
             blResult = true;
@@ -472,11 +479,12 @@ public class RepeatPrescription extends BasePage {
     public boolean selectMedicationsToRepeat(String strMedication) {
         boolean blResult = false;
         try {
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("selectMedication XPath >>>>" + chkMedication.replace("<<REPLACEMENT>>", strMedication));
             WebElement selectMedication = waitForElement(By.xpath(chkMedication.replace("<<REPLACEMENT>>", strMedication)));
             waitForElementClickable(selectMedication);
             jsClick(selectMedication);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             blResult = true;
 
@@ -508,6 +516,8 @@ public class RepeatPrescription extends BasePage {
     public boolean selectTermsAndCondition() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(chkTermsAndCondion);
             waitForElementClickable(chkTermsAndCondion);
             click(chkTermsAndCondion);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -548,6 +558,7 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(btnPayNow);
             waitForElementClickable(btnPayNow);
             waitForSeconds(4);
             click(btnPayNow);

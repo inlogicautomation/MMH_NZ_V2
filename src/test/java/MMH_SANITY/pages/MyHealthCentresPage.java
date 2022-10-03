@@ -51,7 +51,7 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Post to Notice Board')]")
     protected WebElement elmntPostNoticeBoard;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'GP')]//preceding-sibling::div/div[@class='mat-radio-inner-circle']")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'GP')]//preceding-sibling::div/div[@class='mat-radio-outer-circle']")
     protected WebElement rdoBtnGP;
 
     @FindBy(how = How.XPATH, using = "//input[@placeholder='Search for Health Centre']")
@@ -164,9 +164,11 @@ public class MyHealthCentresPage extends BasePage {
     public boolean clickNoticeBoard() {
         boolean blResult = false;
         try {
+            waitForSeconds(3);
+            if (!elmntNoticeBoard.isDisplayed()){
             waitForElement(elmntMyHealthCentres);
             waitForElementClickable(elmntMyHealthCentres);
-            waitAndClick(elmntMyHealthCentres);
+            waitAndClick(elmntMyHealthCentres);}
 
             waitForElement(elmntNoticeBoard);
             waitForElementClickable(elmntNoticeBoard);
@@ -183,9 +185,11 @@ public class MyHealthCentresPage extends BasePage {
     public boolean clickConnectToHealthCentre() {
         boolean blResult = false;
         try {
+            waitForSeconds(3);
+            if (!elmntConnectToHealthCentre.isDisplayed()){
             waitForElement(elmntMyHealthCentres);
             waitForElementClickable(elmntMyHealthCentres);
-            waitAndClick(elmntMyHealthCentres);
+            waitAndClick(elmntMyHealthCentres);}
 
             waitForElement(elmntConnectToHealthCentre);
             waitForElementClickable(elmntConnectToHealthCentre);
@@ -219,6 +223,7 @@ public class MyHealthCentresPage extends BasePage {
     public boolean searchHealthCentre(String strHealthCentre) {
         boolean blResult = false;
         try {
+            waitForSeconds(3);
             clickGP();
             System.out.println("strHealthCentre >>> "+strHealthCentre);
             waitForElement(txtBoxSearchForHealthCentre);
@@ -268,11 +273,16 @@ public class MyHealthCentresPage extends BasePage {
     }
 
     public void clickGP() {
+        System.out.println("111111111111");
         waitForElement(txtBoxSearchForHealthCentre);
         waitForSeconds(2);
         waitForElement(rdoBtnGP);
         waitForElementClickable(rdoBtnGP);
+        System.out.println("2222222222222222222");
+
         waitAndClick(rdoBtnGP);
+        System.out.println("333333333333333333");
+
     }
     public boolean navigateToPostNoticeBoard() {
         boolean blResult = false;

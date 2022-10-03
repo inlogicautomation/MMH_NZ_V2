@@ -444,12 +444,15 @@ public class ProfilesPage extends BasePage {
     public boolean navigateToMyProfile() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElement(elmntMyProfile);
             waitForElementClickable(elmntMyProfile);
             waitAndClick(elmntMyProfile);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntProfile);
             blResult = verifyElement(elmntProfile);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         } catch (Exception e) {
             System.out.println("Failed to Navigate My Profile >>> :: ");
             e.printStackTrace();
@@ -742,11 +745,17 @@ public class ProfilesPage extends BasePage {
                 waitForElement(contactDetails);
                 if (!verifyElement(contactDetails)) {
                     System.out.println("Failed to verify >>> :: ");
+                    waitForElement(btnClose);
+                    waitForElementClickable(btnClose);
+                    waitAndClick(btnClose);
                     return isVerified;
                 }
 
             }
             takeScreenshotSanity(driver);
+            waitForElement(btnClose);
+            waitForElementClickable(btnClose);
+            waitAndClick(btnClose);
             isVerified = true;
             System.out.println("\nFailed to verify Added More Info Contact Details >>> ::");
         } catch (Exception e) {

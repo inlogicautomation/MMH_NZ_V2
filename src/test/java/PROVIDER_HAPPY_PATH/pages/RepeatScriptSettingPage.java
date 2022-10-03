@@ -25,16 +25,38 @@ public class RepeatScriptSettingPage extends BasePage {
     @FindBy(xpath = "//h3[contains(text(),'RRP Script Instructions Fee Setup')]")
     protected WebElement txtRRPScriptInstructionsFeeSetup;
 
+    @FindBy(xpath = "//span[contains(text(),'Edit')]")
+    protected WebElement btnEdit;
+
+    @FindBy(xpath = "//span[contains(text(),'Save')]")
+    protected WebElement btnSave;
+
+    @FindBy(xpath = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'Changes Saved Successfully')]")
+    protected WebElement successPopUp;
+
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='Location']")
-    protected WebElement drpdownLocation;
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='HealthCenter']")
+    protected WebElement drpDownLocation;
 
     protected String selectLocation = new StringBuilder()
             .append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]/parent::mat-option").toString();
+
+    //span[contains(text(),'VM04Practice')]
+    protected String selectedDrpDownOption = new StringBuilder()
+            .append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
+
+    //div[contains(text(),'No')]/preceding-sibling::div/div[@class='mat-radio-inner-circle']
+    protected String rdoBtn = new StringBuilder()
+            .append("//div[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]/preceding-sibling::div/div[@class='mat-radio-inner-circle']").toString();
+
 
 
 
@@ -47,6 +69,26 @@ public class RepeatScriptSettingPage extends BasePage {
         waitForElement(txtRRPScriptInstructionsSettings);
         isVerified =verifyElement(txtRRPScriptInstructionsSettings);
         return isVerified;
+    }
+
+    public boolean clickRRPScriptInstructionSettingEditButton(){
+        boolean isVerified = false;
+        waitForSeconds(2);
+        waitForElement(btnEdit);
+        waitForElementClickable(btnEdit);
+        waitAndClick(btnEdit);
+        waitForElement(btnSave);
+        return isVerified =verifyElement(btnSave);
+    }
+    public boolean clickRRPScriptInstructionSettingSaveButton(){
+        boolean isVerified = false;
+        waitForSeconds(2);
+        waitForElement(btnSave);
+        waitForElementClickable(btnSave);
+        waitAndClick(btnSave);
+        waitForElement(btnEdit);
+        waitForElement(successPopUp);
+        return isVerified =verifyElement(btnEdit);
     }
 
     public boolean clickRRPScriptInstructionFeeSetup(){
@@ -65,9 +107,9 @@ public class RepeatScriptSettingPage extends BasePage {
         try {
             refreshPage();
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(drpdownLocation);
-            waitForElementClickable(drpdownLocation);
-            click(drpdownLocation);
+            waitForElement(drpDownLocation);
+            waitForElementClickable(drpDownLocation);
+            click(drpDownLocation);
 
             System.out.println(" select Location Locator :: " + selectLocation.replace("<<REPLACEMENT>>", strLocation) + "\n");
             WebElement ddlLocation = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
@@ -76,7 +118,12 @@ public class RepeatScriptSettingPage extends BasePage {
             System.out.println("Location was selected in the Request Medication >>> ::");
             mouseClick(ddlLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = true;
+
+            System.out.println(" selected DrpDownOption Locator >>> :: " + selectedDrpDownOption.replace("<<REPLACEMENT>>", strLocation) + "\n");
+            WebElement selectedOption = waitForElement(By.xpath(selectedDrpDownOption.replace("<<REPLACEMENT>>", strLocation)));
+            waitForElement(selectedOption);
+
+            blResult = verifyElement(selectedOption);
         } catch (Exception e) {
             System.out.println("Location not selected in the Request Medication");
             e.printStackTrace();

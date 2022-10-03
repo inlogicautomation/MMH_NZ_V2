@@ -55,18 +55,18 @@ Feature: Repeat Request Prescription
       | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &MORE INFO VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& |
 
 
-    ##    Note: {
-##    These test Case Covered The Scenario NO: S10
-##  }
-#  @WEB @RRP12 @SANITY_PATH
-#  Scenario Outline: S2- Existing Patient to view History of Request the Repeat Prescription
-#
-#    Given As a Existing user I am on HomePage and I click the Repeat Prescription
-#    And I select the Medication details "<Medication Details>"
-#    When I click pay at health centre Button
-#    Then I should see the successful message and I navigate to view history of the Prescription
-#    And I should see the status of the Prescription and Verify the Medication"<Details>"
-#
-#    Examples:
-#      | Medication Details   | Details                     |
-#      | &MEDICATION DETAILS& | &VERIFY MEDICATION DETAILS& |
+    #    Note: {
+#    These test Case Covered The Scenario NO: S10
+#  }
+  @WEB @SANITY_PATH_RRP @SANITY_PATH
+  Scenario Outline: S2- Existing Patient to view History of Request the Repeat Prescription
+
+    Given As a Existing user I am on HomePage and I click the Repeat Prescription
+    And I select the Medication details "<Medication Details>"
+    When I click pay at health centre Button
+    Then I should see the successful message and I navigate to view history of the Prescription
+    And I should see the status of the Prescription and Verify the Medication"<Details>"
+
+    Examples:
+      | Medication Details   | Details                     |
+      | &MEDICATION DETAILS& | &VERIFY MEDICATION DETAILS& |

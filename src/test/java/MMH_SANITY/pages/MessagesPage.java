@@ -89,10 +89,7 @@ public class MessagesPage extends BasePage {
     protected WebElement txtDraftPatient;
 
 
-    @FindAll({
-            @FindBy(how = How.XPATH, using = "//span[contains(text(),'DELETE ALL')]"),
-            @FindBy(how = How.XPATH, using = "//span[contains(text(),'Delete All')]")
-    })
+    @FindBy(how = How.XPATH, using = "//img[@mattooltip='Message settings']/parent::span/preceding-sibling::button")
     protected WebElement btnDeleteAllInDraft;
 
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Group Messages')]")
@@ -711,6 +708,8 @@ public class MessagesPage extends BasePage {
     })
     protected WebElement elmntLogOut;
 
+    protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
+
     @FindBy(how = How.XPATH, using = "//button[@id='Login']")
     protected WebElement btnLogin;
 
@@ -952,8 +951,10 @@ public class MessagesPage extends BasePage {
         try {
             waitForSeconds(2);
             waitForElement(btnSave);
+            if (!verifyElement(chkboxOutOfOfficeReply)){
             waitForElementClickable(drpDownOutOfOfficeSettings);
             click(drpDownOutOfOfficeSettings);
+            }
             waitForSeconds(1);
             waitForElement(chkboxOutOfOfficeReply);
 
@@ -1239,6 +1240,8 @@ public class MessagesPage extends BasePage {
     public boolean patientLogOut() {
         boolean blResult = false;
         try {
+            refreshPage();
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElement(elmntLogOut);
             waitForElementClickable(elmntLogOut);
@@ -1374,6 +1377,7 @@ public class MessagesPage extends BasePage {
             waitForElement(btnDeleteAllInDraft);
             waitForElementClickable(btnDeleteAllInDraft);
             waitAndClick(btnDeleteAllInDraft);
+            waitForSeconds(2);
             waitForElement(btnYesForDeleteDraftMessage);
             waitForElementClickable(btnYesForDeleteDraftMessage);
             waitAndClick(btnYesForDeleteDraftMessage);
