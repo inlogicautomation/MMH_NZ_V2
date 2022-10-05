@@ -10,7 +10,7 @@ import static MMH_SANITY.pages.HomePage.*;
 
 @CucumberOptions(features = {"src/test/resources/features/Sanity_Existing_Patient"},
         monochrome = true,
-        tags = "@SANITY_PATH",
+        tags = "@MESSAGES",
         glue = {"MMH_SANITY","MMH"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

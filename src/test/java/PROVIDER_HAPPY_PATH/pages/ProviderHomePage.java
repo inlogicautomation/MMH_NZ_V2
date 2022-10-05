@@ -48,10 +48,13 @@ public class ProviderHomePage extends BasePage {
         boolean blResult = false;
         try {
             waitForElement(elmtEServices);
-            WebElement element = waitForElement(By.xpath(elmntModule.replace("<<NAME>>",strName)));
+            WebElement element = driver.findElement(By.xpath(elmntModule.replace("<<NAME>>",strName)));
+            jsScrollIntoView(element);
+            waitForElement(element);
             waitForElementClickable(element);
             waitAndClick(element);
             waitForElement(txtRRPScriptInstructionsSettings);
+            takeScreenshot(driver);
             blResult =verifyElement(txtRRPScriptInstructionsSettings);
 
         } catch (Exception e) {
