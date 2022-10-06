@@ -54,4 +54,24 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifyRRPScriptInstructionsChanges(lstDetails.get(0),lstDetails.get(1)));
 
     }
+
+
+
+
+    @When("I navigate to RRP Script Instructions Fee Setup Page and Select Health centre {string}")
+    public void iNavigateToRRPScriptInstructionsFeeSetupPageAndSelectHealthCentre(String strHealthCentre) {
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickRRPScriptInstructionsFeeSetup());
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.selectHealthCentre(strHealthCentre));
+    }
+
+    @And("I Click Edit on a location record in Grid & Selected Location must be auto-populated")
+    public void iClickEditOnALocationRecordInGridSelectedLocationMustBeAutoPopulated(String Locationdata) {
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.ClickRRPScriptInstructionFeeSetupEditAction(TestDataUtil.getListOfValue(Locationdata)));
+
+
+    }
+    @And("I navigate to RRP Script Instructions Settings and i click edit button")
+    public void iNavigateToRRPScriptInstructionsSettingsAndIClickEditButton() {
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickEditButton());
+    }
 }

@@ -325,7 +325,7 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement elmntVisitedLocation;
     @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='visitedLocation'])[2]")
     protected WebElement elmntMobileVisitedLocation;
-    @FindBy(how = How.XPATH, using = "//p[text()='Do you know the period of condition?']//following::div[44]//textarea")
+    @FindBy(how = How.XPATH, using = "(//textarea[@formcontrolname='classificationAdditionalInformation'])[1]")
     protected WebElement elmntClassiAdditionalInformation;
     @FindBy(how = How.XPATH, using = "(//textarea[@formcontrolname='classificationAdditionalInformation'])[2]")
     protected WebElement elmntMobileClassiAdditionalInformation;
