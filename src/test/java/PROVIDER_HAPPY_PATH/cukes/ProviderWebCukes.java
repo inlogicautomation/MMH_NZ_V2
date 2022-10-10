@@ -11,7 +11,7 @@ import static MMH.pages.HomePage.strSystemName;
 
 @CucumberOptions(features = {"src/test/resources/features/Provider_Happy_Path"},
         monochrome = true,
-        tags = "@PROVIDER_RRP_SCRIPT_FEE_SETTING",
+        tags = "@PROVIDER_RRP",
         glue = {"PROVIDER_HAPPY_PATH","MMH"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
