@@ -1,6 +1,7 @@
 package MMH;
 
 import MMH.pages.*;
+import cap.helpers.Constants;
 import cap.utilities.SharedDriver;
 
 import io.cucumber.java.After;
@@ -28,11 +29,30 @@ public class DemoPageContainer {
     public MessagesPage messagesPage;
 
 
-
     public DemoPageContainer() {
-        driver = SharedDriver.getDriver();
-//        driver = SharedDriver.getMobileDriver();
-        initPages();
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            driver = SharedDriver.getDriver();
+            initPages();
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            driver = SharedDriver.getDriver();
+            driver = SharedDriver.getMobileDriver();
+            initPages();
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            driver = SharedDriver.getDriver();
+            initPages();
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("WEBMOBILE")) {
+            driver = SharedDriver.getDriver();
+            initPages();
+        }
+
+
     }
 
     private void initPages() {

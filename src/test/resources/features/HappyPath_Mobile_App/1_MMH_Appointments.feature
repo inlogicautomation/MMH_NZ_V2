@@ -1,4 +1,4 @@
-Feature: Mobile_Appointments_Scenarios
+    Feature: Mobile_Appointments_Scenarios
 
   @MOBILE @RELAUNCH @Mobile_Appointment @HAPPY_PATH_MOBILE
   Scenario Outline: S1 - User login with valid credential and verifies MMH Home screen

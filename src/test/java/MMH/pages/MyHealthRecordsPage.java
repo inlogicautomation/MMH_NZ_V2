@@ -4,12 +4,16 @@ import cap.common.BasePage;
 import cap.helpers.Constants;
 import cap.utilities.DateUtil;
 import cap.utilities.TestDataUtil;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 import static cap.utilities.DateUtil.getCurrentDate;
 import static cap.utilities.SharedDriver.strExecutionID;
@@ -557,7 +561,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//span[text()='Update'])[3]")
     protected WebElement btnCovidImmunisationsUpdate;
 
-    @FindBy(how = How.XPATH, using = "(//span[text()='Update']//parent::button)[3]")
+    @FindBy(how = How.XPATH, using = "//button[@class='mat-focus-indicator btn-primary-rect mat-button mat-button-base ng-star-inserted']")
     protected WebElement btnMobileCovidImmunisationsUpdate;
 
 
@@ -663,6 +667,23 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Yes')]")
     protected WebElement btnYes;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'ADD Files')]")
+    protected WebElement btnFloorplanUploadMobile;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='WHILE USING THE APP']")
+    protected WebElement WhileUsingTheApp;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Files']")
+    protected WebElement FileIcon;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='While using the app']")
+    protected WebElement WhileUsingTheAppForA13;
+
+
+    String strTextViewLocator = new StringBuilder()
+            .append("//android.widget.TextView[@text='")
+            .append("<<TEXT>>").append("']").toString();
+
     public void visit() {
         visit(TestDataUtil.getValue("&URL&"));
         takeScreenshot(driver);
@@ -679,6 +700,15 @@ public class MyHealthRecordsPage extends BasePage {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileMenu);
+            jsClick(btnMobileMenu);
+            waitForElementClickable(btnMyHealthRecordsExpand);
+            jsClick(btnMyHealthRecordsExpand);
+            waitForElementClickable(elmntPrescriptions);
+            jsClick(elmntPrescriptions);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(3);
             waitForElementClickable(btnMobileMenu);
             jsClick(btnMobileMenu);
@@ -862,6 +892,16 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntClassifications);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileMenu);
+            jsClick(btnMobileMenu);
+            waitForElement(btnMyHealthRecordsExpand);
+            click(btnMyHealthRecordsExpand);
+            waitForElementClickable(elmntClassifications);
+            jsClick(elmntClassifications);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        }
 
     }
 
@@ -974,6 +1014,17 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntClinicalNotes);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileMenu);
+            jsClick(btnMobileMenu);
+            waitForElement(btnMyHealthRecordsExpand);
+            click(btnMyHealthRecordsExpand);
+            jsScrollIntoView(elmntClinicalNotes);
+            waitForElementClickable(elmntClinicalNotes);
+            jsClick(elmntClinicalNotes);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        }
     }
 
 
@@ -987,6 +1038,17 @@ public class MyHealthRecordsPage extends BasePage {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileMenu);
+            jsClick(btnMobileMenu);
+            waitForElement(btnMyHealthRecordsExpand);
+            click(btnMyHealthRecordsExpand);
+            jsScrollIntoView(elmntSummary);
+            waitForElementClickable(elmntSummary);
+            jsClick(elmntSummary);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(3);
             waitForElementClickable(btnMobileMenu);
             jsClick(btnMobileMenu);
@@ -1114,6 +1176,15 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElementClickable(elmntAllergies);
             jsClick(elmntAllergies);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileMenu);
+            jsClick(btnMobileMenu);
+            waitForElement(btnMyHealthRecordsExpand);
+            click(btnMyHealthRecordsExpand);
+            waitForElementClickable(elmntAllergies);
+            jsClick(elmntAllergies);
+        }
     }
 
     public void clickMyHealthRecordsOptionFromMenuImmunisations() {
@@ -1124,6 +1195,16 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntImmunisations);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileMenu);
+            jsClick(btnMobileMenu);
+            waitForElement(btnMyHealthRecordsExpand);
+            click(btnMyHealthRecordsExpand);
+            waitForElementClickable(elmntImmunisations);
+            jsClick(elmntImmunisations);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(3);
             waitForElementClickable(btnMobileMenu);
             jsClick(btnMobileMenu);
@@ -1146,6 +1227,16 @@ public class MyHealthRecordsPage extends BasePage {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileMenu);
+            jsClick(btnMobileMenu);
+            waitForElement(btnMyHealthRecordsExpand);
+            click(btnMyHealthRecordsExpand);
+            waitForElementClickable(elmntLabResults);
+            jsClick(elmntLabResults);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(3);
             waitForElementClickable(btnMobileMenu);
             jsClick(btnMobileMenu);
@@ -1476,6 +1567,17 @@ public class MyHealthRecordsPage extends BasePage {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileMenu);
+            jsClick(btnMobileMenu);
+            waitForElement(btnMyHealthRecordsExpand);
+            click(btnMyHealthRecordsExpand);
+            jsScrollIntoView(elmntRecalls);
+            waitForElementClickable(elmntRecalls);
+            jsClick(elmntRecalls);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(3);
             waitForElementClickable(btnMobileMenu);
             jsClick(btnMobileMenu);
@@ -1935,6 +2037,11 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(elmntMobileVisitedName);
             enterValue(elmntMobileVisitedName, PrescriptionsMedicationName);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            PrescriptionsMedicationName = strVisitedName.concat(strExecutionID);
+            waitForElement(elmntMobileVisitedName);
+            enterValue(elmntMobileVisitedName, PrescriptionsMedicationName);
+        }
     }
 
     public void enterImmunisationVaccineName(String strVisitedName) {
@@ -1944,6 +2051,11 @@ public class MyHealthRecordsPage extends BasePage {
             enterValue(elmntImmunisationVaccineName, PrescriptionsMedicationName);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            PrescriptionsMedicationName = strVisitedName.concat(strExecutionID);
+            waitForElement(elmntMobileImmunisationVaccineName);
+            enterValue(elmntMobileImmunisationVaccineName, PrescriptionsMedicationName);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             PrescriptionsMedicationName = strVisitedName.concat(strExecutionID);
             waitForElement(elmntMobileImmunisationVaccineName);
             enterValue(elmntMobileImmunisationVaccineName, PrescriptionsMedicationName);
@@ -1963,6 +2075,12 @@ public class MyHealthRecordsPage extends BasePage {
             enterValue(elmntConditionName, PrescriptionsMedicationName);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            PrescriptionsMedicationName = strConditionName.concat(strExecutionID);
+            waitForSeconds(2);
+            waitForElementClickable(elmntMobileConditionName);
+            enterValue(elmntMobileConditionName, PrescriptionsMedicationName);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             PrescriptionsMedicationName = strConditionName.concat(strExecutionID);
             waitForSeconds(2);
             waitForElementClickable(elmntMobileConditionName);
@@ -2000,6 +2118,12 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElementClickable(elmntMobileAllergicName);
             enterValue(elmntMobileAllergicName, PrescriptionsMedicationName);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            PrescriptionsMedicationName = strConditionName.concat(strExecutionID);
+            waitForSeconds(2);
+            waitForElementClickable(elmntMobileAllergicName);
+            enterValue(elmntMobileAllergicName, PrescriptionsMedicationName);
+        }
     }
 
     public boolean selectMobileAllergicdropdown(String strFamilyMember) {
@@ -2032,6 +2156,13 @@ public class MyHealthRecordsPage extends BasePage {
             enterValue(elmntMobilePrescriptionsMedicationName, PrescriptionsMedicationName);
 
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            PrescriptionsMedicationName = strConditionName.concat(strExecutionID);
+            waitForSeconds(2);
+            waitForElementClickable(elmntMobilePrescriptionsMedicationName);
+            enterValue(elmntMobilePrescriptionsMedicationName, PrescriptionsMedicationName);
+
+        }
     }
 
     public void enterPrescriptionsDose(String strDoseName) {
@@ -2046,6 +2177,11 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(elmntMobilePrescriptionsDose);
             enterValue(elmntMobilePrescriptionsDose, strDoseName);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForSeconds(2);
+            waitForElement(elmntMobilePrescriptionsDose);
+            enterValue(elmntMobilePrescriptionsDose, strDoseName);
+        }
     }
 
     public void enterVisitedLocation(String strVisitedLocation) {
@@ -2056,6 +2192,12 @@ public class MyHealthRecordsPage extends BasePage {
             enterValue(elmntVisitedLocation, strVisitedLocation);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            System.out.println("enterelement::::" + strVisitedLocation);
+            waitForSeconds(5);
+            waitForElement(elmntMobileVisitedLocation);
+            enterValue(elmntMobileVisitedLocation, strVisitedLocation);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             System.out.println("enterelement::::" + strVisitedLocation);
             waitForSeconds(5);
             waitForElement(elmntMobileVisitedLocation);
@@ -2184,6 +2326,12 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(elmntMobileImmuAdditionalInformation);
             enterValue(elmntMobileImmuAdditionalInformation, strAdditionalInformation);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(2);
+            waitForElement(elmntMobileImmuAdditionalInformation);
+            enterValue(elmntMobileImmuAdditionalInformation, strAdditionalInformation);
+        }
     }
 
     public void enterCovidClinicalSite(String strAdditionalInformation) {
@@ -2206,6 +2354,11 @@ public class MyHealthRecordsPage extends BasePage {
             enterValue(elmntMobileClinicianNotesAdditionalInformation, strAdditionalInformation);
 
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElement(elmntMobileClinicianNotesAdditionalInformation);
+            enterValue(elmntMobileClinicianNotesAdditionalInformation, strAdditionalInformation);
+
+        }
     }
 
 
@@ -2217,6 +2370,12 @@ public class MyHealthRecordsPage extends BasePage {
             enterValue(elmntClassiAdditionalInformation, strAdditionalInformation);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            System.out.println(strAdditionalInformation);
+            jsScrollIntoView(elmntMobileClassiAdditionalInformation);
+            waitForElement(elmntMobileClassiAdditionalInformation);
+            enterValue(elmntMobileClassiAdditionalInformation, strAdditionalInformation);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             System.out.println(strAdditionalInformation);
             jsScrollIntoView(elmntMobileClassiAdditionalInformation);
             waitForElement(elmntMobileClassiAdditionalInformation);
@@ -2235,6 +2394,11 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(elmntMobileAllergiesAdditionalInformation);
             enterValue(elmntMobileAllergiesAdditionalInformation, strAdditionalInformation);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            jsScrollIntoView(elmntMobileAllergiesAdditionalInformation);
+            waitForElement(elmntMobileAllergiesAdditionalInformation);
+            enterValue(elmntMobileAllergiesAdditionalInformation, strAdditionalInformation);
+        }
     }
 
     public void enterPrescriptionAdditionalInformation(String strAdditionalInformation) {
@@ -2244,6 +2408,11 @@ public class MyHealthRecordsPage extends BasePage {
             enterValue(elmntPrescriptionAdditionalInformation, strAdditionalInformation);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            jsScrollIntoView(elmntMobilePrescriptionAdditionalInformation);
+            waitForElement(elmntMobilePrescriptionAdditionalInformation);
+            enterValue(elmntMobilePrescriptionAdditionalInformation, strAdditionalInformation);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             jsScrollIntoView(elmntMobilePrescriptionAdditionalInformation);
             waitForElement(elmntMobilePrescriptionAdditionalInformation);
             enterValue(elmntMobilePrescriptionAdditionalInformation, strAdditionalInformation);
@@ -2272,6 +2441,17 @@ public class MyHealthRecordsPage extends BasePage {
             click(elmntDayAfterDate);
 
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElement(elmntMobileVisitedDate);
+            click(elmntMobileVisitedDate);
+            String strDateFormat = "d";
+            String strDay = "TODAY";
+            String strDate = DateUtil.getDate(strDay, strDateFormat);
+            System.out.println("TOADY date is::>>" + strDate);
+            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
+            click(elmntDayAfterDate);
+
+        }
 
     }
 
@@ -2287,6 +2467,16 @@ public class MyHealthRecordsPage extends BasePage {
             click(elmntDayAfterDate);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElement(elmntMobileImmunisationDate);
+            click(elmntMobileImmunisationDate);
+            String strDateFormat = "d";
+            String strDay = "TOADY";
+            String strDate = DateUtil.getDate(strDay, strDateFormat);
+            System.out.println("TOADY date is::>>" + strDate);
+            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
+            click(elmntDayAfterDate);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(elmntMobileImmunisationDate);
             click(elmntMobileImmunisationDate);
             String strDateFormat = "d";
@@ -2332,6 +2522,16 @@ public class MyHealthRecordsPage extends BasePage {
             WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
             click(elmntDayAfterDate);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElement(elmntMobileStartDate);
+            click(elmntMobileStartDate);
+            String strDateFormat = "d";
+            String strDay = "TOADY";
+            String strDate = DateUtil.getDate(strDay, strDateFormat);
+            System.out.println("TOADY date is::>>" + strDate);
+            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
+            click(elmntDayAfterDate);
+        }
 
     }
 
@@ -2357,6 +2557,17 @@ public class MyHealthRecordsPage extends BasePage {
             WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
             click(elmntDayAfterDate);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+
+            waitForElement(elmntMobileAllergiesStartDate);
+            click(elmntMobileAllergiesStartDate);
+            String strDateFormat = "d";
+            String strDay = "TODAY";
+            String strDate = DateUtil.getDate(strDay, strDateFormat);
+            System.out.println("TOADY date is::>>" + strDate);
+            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
+            click(elmntDayAfterDate);
+        }
     }
 
     public void enterPrescriptionDateTaken() {
@@ -2371,6 +2582,17 @@ public class MyHealthRecordsPage extends BasePage {
             click(elmntDayAfterDate);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElement(elmntMobilePrescriptionDateToken);
+            click(elmntMobilePrescriptionDateToken);
+            String strDateFormat = "d";
+            String strDay = "TODAY";
+            String strDate = DateUtil.getDate(strDay, strDateFormat);
+            System.out.println("TOADY date is::>>" + strDate);
+            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
+            click(elmntDayAfterDate);
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(elmntMobilePrescriptionDateToken);
             click(elmntMobilePrescriptionDateToken);
             String strDateFormat = "d";
@@ -2422,6 +2644,17 @@ public class MyHealthRecordsPage extends BasePage {
             click(elmntDayAfterDate);
 
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElement(elmntMobileAllergiesEndDate);
+            click(elmntMobileAllergiesEndDate);
+            String strDateFormat = "d";
+            String strDay = "TOADY";
+            String strDate = DateUtil.getDate(strDay, strDateFormat);
+            System.out.println("TOADY date is::>>" + strDate);
+            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
+            click(elmntDayAfterDate);
+
+        }
     }
 
     public boolean selectMobileAllergicdropdown1(String strFamilyMember) {
@@ -2454,6 +2687,16 @@ public class MyHealthRecordsPage extends BasePage {
             click(elmntDayAfterDate);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElement(elmntMobilePrescriptionEndDate);
+            click(elmntMobilePrescriptionEndDate);
+            String strDateFormat = "d";
+            String strDay = "TOADY";
+            String strDate = DateUtil.getDate(strDay, strDateFormat);
+            System.out.println("TOADY date is::>>" + strDate);
+            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
+            click(elmntDayAfterDate);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(elmntMobilePrescriptionEndDate);
             click(elmntMobilePrescriptionEndDate);
             String strDateFormat = "d";
@@ -2522,6 +2765,16 @@ public class MyHealthRecordsPage extends BasePage {
             WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
             click(elmntDayAfterDate);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElementClickable(elmntMobileEndDate);
+            jsClick(elmntMobileEndDate);
+            String strDateFormat = "d";
+            String strDay = "TOADY";
+            String strDate = DateUtil.getDate(strDay, strDateFormat);
+            System.out.println("TOADY date is::>>" + strDate);
+            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
+            click(elmntDayAfterDate);
+        }
 
     }
 
@@ -2538,6 +2791,11 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElementClickable(btnMobileAddRecord);
             jsClick(btnMobileAddRecord);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(btnMobileAddRecord);
+            jsClick(btnMobileAddRecord);
+        }
     }
 
     public void clickCovidAddRecord() {
@@ -2548,6 +2806,12 @@ public class MyHealthRecordsPage extends BasePage {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileCovidAddRecord);
+            jsClick(btnMobileCovidAddRecord);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
 
             waitForSeconds(3);
             waitForElementClickable(btnMobileCovidAddRecord);
@@ -2626,14 +2890,60 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean clickCovidAddFile(String strUploadDocumentName) {
         boolean blResult = false;
         try {
-            System.out.println(strUploadDocumentName);
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                waitForSeconds(3);
+                click(btnFloorplanUploadMobile);
+                waitForSeconds(4);
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("autoGrantPermissions", "true");
+                pushFileToDevice("MMHtest.jpg");
+                AppiumDriver appiumDriver = (AppiumDriver) driver;
+                Set<String> contextNames = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames) {
+                    if (strContextName.contains("NATIVE_APP")) {
+                        appiumDriver.context("NATIVE_APP");
+                        break;
+                    }
+                }
+                capabilities.setCapability("autoGrantPermissions", "true");
 
-            String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
-            System.out.println(strFloorplanDocumentName);
-            btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
+                if (System.getProperty("deviceName").equalsIgnoreCase("Poco M2")){
+                    waitForSeconds(3);
+                    click(WhileUsingTheApp);
+                    waitForSeconds(3);
+                    click(WhileUsingTheApp);
+                }
+                if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy A13")){
+                    waitForSeconds(3);
+                    click(WhileUsingTheAppForA13);
+                }
+                waitForSeconds(3);
+                click(FileIcon);
+                WebElement elmntImage = waitForElement(By.xpath(strTextViewLocator.replace("<<TEXT>>", "MMHtest.jpg")));
+                click(elmntImage);
+                waitForSeconds(3);
+                Set<String> contextNames1 = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames1) {
+                    if (strContextName.contains("CHROMIUM")) {
+                        appiumDriver.context("CHROMIUM");
+                        break;
+                    }
+                }
 
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                System.out.println(strUploadDocumentName);
+                String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
+                System.out.println(strFloorplanDocumentName);
+                btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                System.out.println(strUploadDocumentName);
+                String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
+                System.out.println(strFloorplanDocumentName);
+                btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
+            }
 
-            blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -2653,6 +2963,11 @@ public class MyHealthRecordsPage extends BasePage {
             click(elmntMobileSave);
 
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElement(elmntMobileSave);
+            click(elmntMobileSave);
+
+        }
     }
 
     public void RefreshPage() {
@@ -2668,6 +2983,17 @@ public class MyHealthRecordsPage extends BasePage {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+
+            waitForSeconds(3);
+            driver.navigate().refresh();
+            waitForSeconds(3);
+            waitForElementClickable(elmntFilterdropPrescriptions);
+            jsClick(elmntFilterdropPrescriptions);
+            waitForSeconds(2);
+            waitForElement(elmntFilterdropMyEntries);
+            jsClick(elmntFilterdropMyEntries);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
 
             waitForSeconds(3);
             driver.navigate().refresh();
@@ -2698,6 +3024,14 @@ public class MyHealthRecordsPage extends BasePage {
             System.out.println("elmntMyEntiresRecord:::>>  " + elmntClassificationMyEntiresRecord.isDisplayed());
             return verifyElement(elmntClassificationMyEntiresRecord);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            WebElement elmntClassificationMyEntiresRecord = waitForElement(By.xpath(getStrMobileClassificationsMyEntitesIconLocatorInfo
+                    .replace("<<REPLACEMENT>>", TestDataUtil.getValue(listCreatedRecord.get(0)))));
+
+            waitForElement(elmntClassificationMyEntiresRecord);
+            System.out.println("elmntMyEntiresRecord:::>>  " + elmntClassificationMyEntiresRecord.isDisplayed());
+            return verifyElement(elmntClassificationMyEntiresRecord);
+        }
         return blResult;
     }
 
@@ -2710,6 +3044,10 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(elmntMobileAllergiesSave);
             click(elmntMobileAllergiesSave);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElement(elmntMobileAllergiesSave);
+            click(elmntMobileAllergiesSave);
+        }
     }
 
     public void clickImmunisationSave() {
@@ -2718,6 +3056,10 @@ public class MyHealthRecordsPage extends BasePage {
             click(elmntImmuSave);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElement(elmntMobileImmunisationSave);
+            click(elmntMobileImmunisationSave);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(elmntMobileImmunisationSave);
             click(elmntMobileImmunisationSave);
         }
@@ -2733,6 +3075,11 @@ public class MyHealthRecordsPage extends BasePage {
             click(elmntMobilePrescriptionSave);
 
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElement(elmntMobilePrescriptionSave);
+            click(elmntMobilePrescriptionSave);
+
+        }
     }
 
     public void clickClassificationsSave() {
@@ -2741,6 +3088,10 @@ public class MyHealthRecordsPage extends BasePage {
             click(elmntClassificationsSave);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElement(elmntMobileClassificationsSave);
+            click(elmntMobileClassificationsSave);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(elmntMobileClassificationsSave);
             click(elmntMobileClassificationsSave);
         }
@@ -2769,6 +3120,14 @@ public class MyHealthRecordsPage extends BasePage {
             System.out.println("elmntMyEntiresRecord:::>>  " + elmntClassificationMyEntiresRecord.isDisplayed());
             return verifyElement(elmntClassificationMyEntiresRecord);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            WebElement elmntClassificationMyEntiresRecord = waitForElement(By.xpath(getStrMobileClassificationsMyEntitesIconLocatorInfo
+                    .replace("<<REPLACEMENT>>", TestDataUtil.getValue(listCreatedRecord.get(0)))));
+
+            waitForElement(elmntClassificationMyEntiresRecord);
+            System.out.println("elmntMyEntiresRecord:::>>  " + elmntClassificationMyEntiresRecord.isDisplayed());
+            return verifyElement(elmntClassificationMyEntiresRecord);
+        }
         return blResult;
     }
 
@@ -2790,6 +3149,14 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(elmntActiveHeader);
             return verifyElement(elmntActiveHeader);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(6);
+            WebElement elmntActiveHeader = waitForElement(By.xpath(strMobileActiveHeader.replace("<<REPLACEMENT>>", strHeader)));
+            jsScrollIntoView(elmntActiveHeader);
+            waitForElement(elmntActiveHeader);
+            return verifyElement(elmntActiveHeader);
+        }
         return blResult;
 
     }
@@ -2804,7 +3171,7 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(elmntActiveHeader);
             return verifyElement(elmntActiveHeader);
         }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             WebElement elmntActiveHeader = waitForElement(By.xpath(strMobileActiveHeader.replace("<<REPLACEMENT>>", strHeader)));
@@ -2833,6 +3200,14 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(elmntActiveHeader);
             return verifyElement(elmntActiveHeader);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(2);
+            WebElement elmntActiveHeader = waitForElement(By.xpath(strMobileActiveHeader.replace("<<REPLACEMENT>>", strHeader)));
+            jsScrollIntoView(elmntActiveHeader);
+            waitForElement(elmntActiveHeader);
+            return verifyElement(elmntActiveHeader);
+        }
         return blResult;
     }
 
@@ -2845,6 +3220,12 @@ public class MyHealthRecordsPage extends BasePage {
             return verifyElement(elmntActiveHeader);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            WebElement elmntActiveHeader = waitForElement(By.xpath(strMobileActiveHeader.replace("<<REPLACEMENT>>", strHeader)));
+            jsScrollIntoView(elmntActiveHeader);
+            waitForElement(elmntActiveHeader);
+            return verifyElement(elmntActiveHeader);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             WebElement elmntActiveHeader = waitForElement(By.xpath(strMobileActiveHeader.replace("<<REPLACEMENT>>", strHeader)));
             jsScrollIntoView(elmntActiveHeader);
             waitForElement(elmntActiveHeader);
@@ -2870,6 +3251,15 @@ public class MyHealthRecordsPage extends BasePage {
             jsScrollIntoView(btnMobilePrescriptionsEdit);
             jsClick(btnMobilePrescriptionsEdit);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+//          strVisitedName = strCreatedRecord;
+            String strMedicationName = strCreatedRecord.concat(strExecutionID);
+            WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
+            click(btnEdit);
+            waitForSeconds(3);
+            jsScrollIntoView(btnMobilePrescriptionsEdit);
+            jsClick(btnMobilePrescriptionsEdit);
+        }
 
     }
 
@@ -2882,6 +3272,15 @@ public class MyHealthRecordsPage extends BasePage {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(3);
+            strVisitedName = strCreatedRecord;
+            WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strCreatedRecord)));
+            click(btnEdit);
+            waitForSeconds(3);
+            jsScrollIntoView(btnMobilePrescriptionsEdit);
+            click(btnMobilePrescriptionsEdit);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(3);
             strVisitedName = strCreatedRecord;
             WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strCreatedRecord)));
@@ -2914,6 +3313,17 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobilePrescriptionsEdit);
 
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            String strMedicationName = strCreatedRecord.concat(strExecutionID);
+            WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
+            click(btnEdit);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(3);
+            jsScrollIntoView(btnMobilePrescriptionsEdit);
+            waitForElementClickable(btnMobilePrescriptionsEdit);
+            jsClick(btnMobilePrescriptionsEdit);
+
+        }
     }
 
     public void clickAllergiesEditButton(String strCreatedRecord) {
@@ -2924,6 +3334,14 @@ public class MyHealthRecordsPage extends BasePage {
             click(btnEdit);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            String strMedicationName = strCreatedRecord.concat(strExecutionID);
+            WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
+            click(btnEdit);
+            waitForSeconds(3);
+            jsClick(btnMobilePrescriptionsEdit);
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             String strMedicationName = strCreatedRecord.concat(strExecutionID);
             WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
             click(btnEdit);
@@ -2942,6 +3360,14 @@ public class MyHealthRecordsPage extends BasePage {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            String strMedicationName = strCreatedRecord.concat(strExecutionID);
+            WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
+            click(btnEdit);
+            waitForSeconds(3);
+            jsScrollIntoView(btnMobilePrescriptionsEdit);
+            click(btnMobilePrescriptionsEdit);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             String strMedicationName = strCreatedRecord.concat(strExecutionID);
             WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
             click(btnEdit);
@@ -2969,6 +3395,11 @@ public class MyHealthRecordsPage extends BasePage {
             click(btnMobilePrescriptionsSave);
 
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElement(btnMobilePrescriptionsSave);
+            click(btnMobilePrescriptionsSave);
+
+        }
     }
 
     public void clickAllergiesSaveButton() {
@@ -2978,6 +3409,10 @@ public class MyHealthRecordsPage extends BasePage {
         }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElement(btnMobilePrescriptionsSave);
+            click(btnMobilePrescriptionsSave);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(btnMobilePrescriptionsSave);
             click(btnMobilePrescriptionsSave);
         }
@@ -2992,6 +3427,12 @@ public class MyHealthRecordsPage extends BasePage {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElement(btnMobileClassificationsSave);
+            click(btnMobileClassificationsSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(btnMobileClassificationsSave);
             click(btnMobileClassificationsSave);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -3016,6 +3457,10 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(btnMobileImmunisationsSave);
             click(btnMobileImmunisationsSave);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElement(btnMobileImmunisationsSave);
+            click(btnMobileImmunisationsSave);
+        }
     }
 
     public void clickCovidImmunisationsUpdateButton() {
@@ -3027,9 +3472,18 @@ public class MyHealthRecordsPage extends BasePage {
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForSeconds(3);
-            jsScrollIntoView(btnMobileCovidImmunisationsUpdate);
+//            jsScrollIntoView(btnMobileCovidImmunisationsUpdate);
             waitForElementClickable(btnMobileCovidImmunisationsUpdate);
-            jsClick(btnMobileCovidImmunisationsUpdate);
+            click(btnMobileCovidImmunisationsUpdate);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            System.out.println(">>>>>>>>>>>>>>>>>Success");
+            waitForSeconds(2);
+//            jsScrollIntoView(btnMobileCovidImmunisationsUpdate);
+//            waitForElementClickable(btnMobileCovidImmunisationsUpdate);
+            waitForElement(btnMobileCovidImmunisationsUpdate);
+            click(btnMobileCovidImmunisationsUpdate);
+
         }
 
     }
@@ -3059,6 +3513,19 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(btnYes);
             waitAndClick(btnYes);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            String strMedicationName = strCreatedRecord.concat(strExecutionID);
+            WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
+            jsClick(btnEdit);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(4);
+            jsScrollIntoView(btnMobilePrescriptionDelete);
+            waitForElementClickable(btnMobilePrescriptionDelete);
+            jsClick(btnMobilePrescriptionDelete);
+            waitForSeconds(4);
+            waitForElement(btnYes);
+            waitAndClick(btnYes);
+        }
     }
 
     public void clickCovidDelete(String strCreatedRecord) {
@@ -3074,6 +3541,21 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(4);
+            strVisitedName = strCreatedRecord;
+            WebElement btnDelete = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strCreatedRecord)));
+            click(btnDelete);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(2);
+            jsScrollIntoView(btnMobilePrescriptionDelete);
+            waitForElementClickable(btnMobilePrescriptionDelete);
+            click(btnMobilePrescriptionDelete);
+            waitForElement(btnYes);
+            click(btnYes);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(4);
             strVisitedName = strCreatedRecord;
@@ -3224,6 +3706,14 @@ public class MyHealthRecordsPage extends BasePage {
             System.out.println("elmntMyEntiresRecord:::>>  " + elmntClassificationMyEntiresRecord.isDisplayed());
             return verifyElement(elmntClassificationMyEntiresRecord);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            WebElement elmntClassificationMyEntiresRecord = waitForElement(By.xpath(getStrMobileClassificationsMyEntitesIconLocatorInfo
+                    .replace("<<REPLACEMENT>>", TestDataUtil.getValue(listCreatedRecord.get(0)))));
+
+            waitForElement(elmntClassificationMyEntiresRecord);
+            System.out.println("elmntMyEntiresRecord:::>>  " + elmntClassificationMyEntiresRecord.isDisplayed());
+            return verifyElement(elmntClassificationMyEntiresRecord);
+        }
         return blResult;
     }
 
@@ -3247,6 +3737,14 @@ public class MyHealthRecordsPage extends BasePage {
             System.out.println("elmntMyEntiresRecord:::>>  " + elmntAllergiesMyEntiresRecord.isDisplayed());
             return verifyElement(elmntAllergiesMyEntiresRecord);
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            WebElement elmntAllergiesMyEntiresRecord = waitForElement(By.xpath(getStrMobileAllergiesMyEntitesIconLocatorInfo
+                    .replace("<<REPLACEMENT>>", TestDataUtil.getValue(listCreatedRecord.get(1)))));
+
+            waitForElement(elmntAllergiesMyEntiresRecord);
+            System.out.println("elmntMyEntiresRecord:::>>  " + elmntAllergiesMyEntiresRecord.isDisplayed());
+            return verifyElement(elmntAllergiesMyEntiresRecord);
+        }
         return blResult;
     }
 
@@ -3262,6 +3760,14 @@ public class MyHealthRecordsPage extends BasePage {
             return verifyElement(elmntImmunisationMyEntiresRecord);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            WebElement elmntImmunisationMyEntiresRecord = waitForElement(By.xpath(getStrMobileImmunisationsMyEntitesIconLocatorInfo
+                    .replace("<<REPLACEMENT>>", TestDataUtil.getValue(listCreatedRecord.get(0)))));
+
+            waitForElement(elmntImmunisationMyEntiresRecord);
+            System.out.println("elmntMyEntiresRecord:::>>  " + elmntImmunisationMyEntiresRecord.isDisplayed());
+            return verifyElement(elmntImmunisationMyEntiresRecord);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             WebElement elmntImmunisationMyEntiresRecord = waitForElement(By.xpath(getStrMobileImmunisationsMyEntitesIconLocatorInfo
                     .replace("<<REPLACEMENT>>", TestDataUtil.getValue(listCreatedRecord.get(0)))));
 
