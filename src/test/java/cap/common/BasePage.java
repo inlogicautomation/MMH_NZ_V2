@@ -1,5 +1,6 @@
 package cap.common;
 
+import MMH_SANITY.SanityPageContainer;
 import cap.helpers.Constants;
 import cap.utilities.WaitTimeUtil;
 import com.google.gson.internal.bind.util.ISO8601Utils;
@@ -350,6 +351,10 @@ public class BasePage {
 
     public void waitForPresenceOfElement(By by) {
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    public void waitForPresenceOfElement(WebElement element) {
+        wait.until(ExpectedConditions.presenceOfElementLocated((By.ByXPath) element));
     }
 
     public boolean verifyElement(WebElement element) {
@@ -726,6 +731,14 @@ public class BasePage {
         touchAction.press(PointOption.point(startx, starty))
                 .waitAction(waitOptions(Duration.ofSeconds(1)))
                 .moveTo(PointOption.point(endx, endy)).release().perform();
+    }
+
+    public void takeScreenshotSanity(WebDriver driver) {
+        try {
+            SanityPageContainer.myScenario.attach(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES), "image/png", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
