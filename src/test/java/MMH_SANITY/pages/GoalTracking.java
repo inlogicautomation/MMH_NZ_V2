@@ -1125,8 +1125,10 @@ public class GoalTracking extends BasePage {
     //h1[contains(text(),'Goal Analysis')]//
 
     public boolean clickAddTaskIcon() {
-//        driver.navigate().refresh();
-        waitForSeconds(10);
+        driver.navigate().refresh();
+        waitForSeconds(5);
+        waitForElementDisappear(driver,btnAddTaskButton);
+        waitForSeconds(3);
         jsScrollIntoView(btnAddTaskButton);
         waitForElementClickable(btnAddTaskButton);
         jsClick(btnAddTaskButton);

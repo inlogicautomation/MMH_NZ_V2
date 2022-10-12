@@ -49,8 +49,8 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h3[text()='Prescriptions'])[1]")
     protected WebElement headerPrescriptions;
 
-    @FindBy(how = How.XPATH, using = "(//h3[text()='Classifications'])[1]")
-    protected WebElement headerClassifications;
+    @FindBy(how = How.XPATH, using = "(//h3[text()='Conditions'])[1]")
+    protected WebElement headerConditions;
 
     @FindBy(how = How.XPATH, using = "(//h3[text()='Allergies'])[1]")
     protected WebElement headerAllergies;
@@ -68,8 +68,8 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement headerRecalls;
     protected String elmntFilterbyDrop = new StringBuilder().append("//mat-option//child::span[normalize-space(text())='")
             .append("<<REPLACEMENT>>").append("']").toString();
-    @FindBy(how = How.XPATH, using = "//span[text()='Classifications']")
-    protected WebElement elmntClassifications;
+    @FindBy(how = How.XPATH, using = "//span[text()='Conditions']")
+    protected WebElement elmntConditions;
     protected String strPrescriptionsIconContentLocator = new StringBuilder()
             .append("//td[text()='")
             .append("<<REPLACEMENT1>>").append("']/following-sibling::td[text()='")
@@ -496,8 +496,8 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-drawer[contains(@class,'drawer-opened')]//form[not(contains(@class,'invalid'))]//div[@class='slide-tray-container']//button[@type='submit']")
     protected WebElement btnClassificationsSave;
 
-    @FindBy(how = How.XPATH, using = "(//h3[text()='Classifications'])[1]")
-    protected WebElement HeaderClassifications;
+//    @FindBy(how = How.XPATH, using = "(//h3[text()='Conditions'])[1]")
+//    protected WebElement headerConditions;
 
     @FindBy(how = How.XPATH, using = "//mat-drawer[contains(@class,'drawer-opened')]//form[not(contains(@class,'invalid'))]//div[@class='slide-tray-container']//button[@type='submit']//span[text()='Save']")
     protected WebElement btnMobileClassificationsSave;
@@ -805,10 +805,10 @@ public class MyHealthRecordsPage extends BasePage {
             click(btnMyHealthRecordsExpand);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
-            waitForElementClickable(elmntClassifications);
-            jsClick(elmntClassifications);
+            waitForElementClickable(elmntConditions);
+            jsClick(elmntConditions);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            isVerified = verifyElement(elmntClassifications);
+            isVerified = verifyElement(elmntConditions);
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -817,9 +817,9 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntClassifications);
-            jsClick(elmntClassifications);
-            isVerified = verifyElement(elmntClassifications);
+            waitForElementClickable(elmntConditions);
+            jsClick(elmntConditions);
+            isVerified = verifyElement(elmntConditions);
         }
         return isVerified;
     }
@@ -842,7 +842,7 @@ public class MyHealthRecordsPage extends BasePage {
             }
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = verifyElement(headerClassifications);
+            blResult = verifyElement(headerConditions);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1255,7 +1255,7 @@ public class MyHealthRecordsPage extends BasePage {
 
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            blResult = verifyElement(headerClassifications);
+            blResult = verifyElement(headerConditions);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -2139,7 +2139,7 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(elmntClassificationsSave);
             click(elmntClassificationsSave);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            isVerified = verifyElement(HeaderClassifications);
+            isVerified = verifyElement(headerConditions);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForElement(elmntMobileClassificationsSave);
@@ -2327,7 +2327,7 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(btnClassificationsSave);
             click(btnClassificationsSave);
             waitForSeconds(3);
-            isVerified = verifyElement(HeaderClassifications);
+            isVerified = verifyElement(headerConditions);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForElement(btnMobileClassificationsSave);

@@ -329,7 +329,7 @@ Feature: Health_Records
 
     Given As a Existing user I am on HomePage and I click the Health Records
     When I click on "<Classifications>" Classifications Page
-    Then I should see all the Classifications Entries From Health center Medicine Details in a grid view
+    Then I should see all the Conditions Entries From Health center Medicine Details in a grid view
       | &CLASSIFICATIONS_TABLE_DATA& |
     And I click on the more info icon to see all the Classifications Entries From the Health center Medicine details
       | &CLASSIFICATIONS_TABLE_DATA& | &CLASSIFICATIONS_ICON_DATA& | &CLASSIFICATIONS_MOBILE_ICON_DATA& |

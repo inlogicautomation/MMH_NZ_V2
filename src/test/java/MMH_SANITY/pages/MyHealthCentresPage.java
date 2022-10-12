@@ -51,7 +51,7 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Post to Notice Board')]")
     protected WebElement elmntPostNoticeBoard;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'GP')]//preceding-sibling::div/div[@class='mat-radio-outer-circle']")
+    @FindBy(how = How.XPATH, using = "(//div[contains(text(),'GP')]//preceding-sibling::div/div[@class='mat-radio-outer-circle'])[1]")
     protected WebElement rdoBtnGP;
 
     @FindBy(how = How.XPATH, using = "//input[@placeholder='Search for Health Centre']")
@@ -224,7 +224,8 @@ public class MyHealthCentresPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(3);
-            clickGP();
+//            clickGP();
+            jsClick(rdoBtnGP);
             System.out.println("strHealthCentre >>> "+strHealthCentre);
             waitForElement(txtBoxSearchForHealthCentre);
             waitForElementClickable(txtBoxSearchForHealthCentre);
