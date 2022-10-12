@@ -607,13 +607,13 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(7)));
 //        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForSentScriptToPharmacy());
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyTypeForSentScript(lstMedicationDetails.get(3)));
 //        Assert.assertTrue(demoPageContainer.repeatPrescription.selectSearchPharmacyForSentScript(lstMedicationDetails.get(3)));
 //        Assert.assertTrue(demoPageContainer.repeatPrescription.selectCity(lstMedicationDetails.get(4)));
 //        Assert.assertTrue(demoPageContainer.repeatPrescription.selectSubUrban(lstMedicationDetails.get(5)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacy(lstMedicationDetails.get(6)));
-        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(7)));
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.repeatPrescription.clickNextButton());
             Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeatForMobile(lstMedicationDetails.get(8)));
@@ -642,11 +642,12 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(6)));
+
 //        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForDeliveryMedsByPharmacy());
 //        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedListForDelivery(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacy(lstMedicationDetails.get(4)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectAddress(lstMedicationDetails.get(5)));
-        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(6)));
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.repeatPrescription.clickNextButton());
             Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeatForMobile(lstMedicationDetails.get(7)));
@@ -674,11 +675,11 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(6)));
 //        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForDeliveryMedsByPharmacy());
 //        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedListForDelivery(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacy(lstMedicationDetails.get(4)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectAddress(lstMedicationDetails.get(5)));
-        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(6)));
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.repeatPrescription.clickNextButton());
             Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeatForMobile(lstMedicationDetails.get(7)));
@@ -917,8 +918,8 @@ public class WebSteps {
     }
 
 
-    @When("I navigate to the {string} Classifications page Dropdown")
-    public void iNavigateToTheClassificationsPageDropdown(String strHealthCenter) {
+    @When("I navigate to the {string} Conditions page Dropdown")
+    public void iNavigateToTheConditionsPageDropdown(String strHealthCenter) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
@@ -941,8 +942,8 @@ public class WebSteps {
 
     }
 
-    @Then("I should see all the Classifications Entries From Health center Medicine Details in a grid view")
-    public void iShouldSeeAllTheClassificationsEntriesFromHealthCenterMedicineDetailsInAGridView(List<String> ClassificationsDetails) {
+    @Then("I should see all the Conditions Entries From Health center Medicine Details in a grid view")
+    public void iShouldSeeAllTheConditionsEntriesFromHealthCenterMedicineDetailsInAGridView(List<String> ClassificationsDetails) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             for (String String : ClassificationsDetails) {
@@ -965,8 +966,8 @@ public class WebSteps {
     }
 
 
-    @And("I click on the more info icon on the grid & view the details of the Classifications added")
-    public void iClickOnTheMoreInfoIconOnTheGridViewTheDetailsOfTheClassificationsAdded(DataTable dataTable) {
+    @And("I click on the more info icon on the grid & view the details of the Conditions added")
+    public void iClickOnTheMoreInfoIconOnTheGridViewTheDetailsOfTheConditionsAdded(DataTable dataTable) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickMaxvalue();
             List<List<String>> tableData = dataTable.asLists(String.class);
@@ -1524,8 +1525,8 @@ public class WebSteps {
         }
     }
 
-    @And("I navigate to the Classifications")
-    public void iNavigateToTheClassifications() {
+    @And("I navigate to the Conditions")
+    public void iNavigateToTheConditions() {
         demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications();
     }
 
@@ -1646,8 +1647,8 @@ public class WebSteps {
     }
 
 
-    @And("I Create New Record in My Entries in Classifications page")
-    public void iCreateNewRecordInMyEntriesInClassificationsPage(List<String> listCreateData) {
+    @And("I Create New Record in My Entries in Conditions page")
+    public void iCreateNewRecordInMyEntriesInConditionsPage(List<String> listCreateData) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickAddRecord();
             demoPageContainer.myHealthRecordsPage.enterConditionName(TestDataUtil.getValue(listCreateData.get(0)));
@@ -1657,6 +1658,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterClassiAdditionalInformation(TestDataUtil.getValue(listCreateData.get(2)));
             demoPageContainer.myHealthRecordsPage.clickClassiCheckBox();
             demoPageContainer.myHealthRecordsPage.clickClassificationsSave();
+            demoPageContainer.myHealthRecordsPage.RefreshPage();
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             demoPageContainer.myHealthRecordsPage.clickAddRecord();
@@ -1667,6 +1669,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterClassiAdditionalInformation(TestDataUtil.getValue(listCreateData.get(2)));
             demoPageContainer.myHealthRecordsPage.clickClassiCheckBox();
             demoPageContainer.myHealthRecordsPage.clickClassificationsSave();
+            demoPageContainer.myHealthRecordsPage.RefreshPage();
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             demoPageContainer.myHealthRecordsPage.clickAddRecord();
@@ -1677,6 +1680,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterClassiAdditionalInformation(TestDataUtil.getValue(listCreateData.get(2)));
             demoPageContainer.myHealthRecordsPage.clickClassiCheckBox();
             demoPageContainer.myHealthRecordsPage.clickClassificationsSave();
+            demoPageContainer.myHealthRecordsPage.RefreshPage();
         }
     }
 
@@ -1779,6 +1783,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterPrescriptionAdditionalInformation(TestDataUtil.getValue(listCreateData.get(4)));
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.clickPrescriptionCheckBox());
             demoPageContainer.myHealthRecordsPage.clickPrescriptionSave();
+            demoPageContainer.myHealthRecordsPage.RefreshPage();
         }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -1793,6 +1798,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterPrescriptionAdditionalInformation(TestDataUtil.getValue(listCreateData.get(4)));
             demoPageContainer.myHealthRecordsPage.clickPrescriptionCheckBox();
             demoPageContainer.myHealthRecordsPage.clickPrescriptionSave();
+            demoPageContainer.myHealthRecordsPage.RefreshPage();
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
@@ -1807,6 +1813,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterPrescriptionAdditionalInformation(TestDataUtil.getValue(listCreateData.get(4)));
             demoPageContainer.myHealthRecordsPage.clickPrescriptionCheckBox();
             demoPageContainer.myHealthRecordsPage.clickPrescriptionSave();
+            demoPageContainer.myHealthRecordsPage.RefreshPage();
 
         }
     }
@@ -1902,18 +1909,18 @@ public class WebSteps {
         demoPageContainer.myHealthRecordsPage.clickDelete(TestDataUtil.getValue(strCreatedRecord));
     }
 
-    @Given("I am on {string} Classifications page")
-    public void iAmOnClassificationsPage(String strTab) {
+    @Given("I am on {string} Conditions page")
+    public void iAmOnConditionsPage(String strTab) {
         Assert.assertTrue(demoPageContainer.myHealthRecordsPage.verifyClassificationsHeader(strTab));
     }
 
-    @And("I edit Created {string} in Classifications page")
-    public void iEditCreatedInClassificationsPage(String strCreatedRecord) {
+    @And("I edit Created {string} in Conditions page")
+    public void iEditCreatedInConditionsPage(String strCreatedRecord) {
         demoPageContainer.myHealthRecordsPage.clickClassificationsEditButton(TestDataUtil.getValue(strCreatedRecord));
     }
 
-    @And("I change {string} in Classifications page")
-    public void iChangeInClassificationsPage(String strStatusLocation) {
+    @And("I change {string} in Conditions page")
+    public void iChangeInConditionsPage(String strStatusLocation) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.selectStatus(TestDataUtil.getValue(strStatusLocation));
             demoPageContainer.myHealthRecordsPage.clickClassificationsSaveButton();
@@ -1930,8 +1937,8 @@ public class WebSteps {
         }
     }
 
-    @And("I delete Created {string} in Classifications page")
-    public void iDeleteCreatedInClassificationsPage(String strCreatedRecord) {
+    @And("I delete Created {string} in Conditions page")
+    public void iDeleteCreatedInConditionsPage(String strCreatedRecord) {
         demoPageContainer.myHealthRecordsPage.clickDelete(TestDataUtil.getValue(strCreatedRecord));
     }
 
@@ -2967,8 +2974,8 @@ public class WebSteps {
         }
     }
 
-    @Then("I should see all the Classifications My Entries Medicine details in more info")
-    public void iShouldSeeAllTheClassificationsMyEntriesMedicineDetailsInMoreInfo(DataTable dataTable) {
+    @Then("I should see all the Conditions My Entries Medicine details in more info")
+    public void iShouldSeeAllTheConditionsMyEntriesMedicineDetailsInMoreInfo(DataTable dataTable) {
 
         if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.clickMaxvalue());

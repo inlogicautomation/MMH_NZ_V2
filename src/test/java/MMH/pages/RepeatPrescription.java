@@ -15,10 +15,9 @@ import java.util.*;
 
 public class RepeatPrescription extends BasePage {
 
-    public RepeatPrescription(WebDriver driver){
+    public RepeatPrescription(WebDriver driver) {
         super(driver);
     }
-
 
 
     @FindBy(how = How.XPATH, using = "//div[@class='navbar-header']")
@@ -79,7 +78,6 @@ public class RepeatPrescription extends BasePage {
             .append("//div[@class='repeat-content-wrapper']//p[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
-
 
 
     protected String elmntDoctorAndMedicine = new StringBuilder()
@@ -324,6 +322,9 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Change')]")
     protected WebElement btnChange;
 
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Change')])[2]")
+    protected WebElement btnChangeForMobile;
+
     @FindBy(how = How.XPATH, using = "(//button//span[text()='Select'])[2]")
     protected WebElement btnSelectForDelivery;
 
@@ -368,11 +369,11 @@ public class RepeatPrescription extends BasePage {
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
-    //div[contains(text(),'Find a pharmacy')]/preceding-sibling::div/div[@class='mat-radio-inner-circle']
+    //div[contains(text(),'Select from my saved list')]/preceding-sibling::div/input
     protected String rdoBtnType = new StringBuilder()
             .append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>")
-            .append("')]/preceding-sibling::div/div[@class='mat-radio-inner-circle']").toString();
+            .append("')]/preceding-sibling::div/div[@class='mat-radio-outer-circle']").toString();
 
     protected String elmntMedicationFields = new StringBuilder()
             .append("(//mat-card-content[@class='mat-card-content']/following::div[contains(text(),'")
@@ -437,7 +438,6 @@ public class RepeatPrescription extends BasePage {
         }
         return blResult;
     }
-
 
 
     public boolean navigateToRequestNewScript() {
@@ -608,7 +608,7 @@ public class RepeatPrescription extends BasePage {
             selectDoctor.replace("<<REPLACEMENT>>", strDoctor);
             waitForElementClickable(ddlDoctor);
             waitForSeconds(4);
-            mouseClick(ddlDoctor);
+            jsClick(ddlDoctor);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             takeScreenshot(driver);
             blResult = true;
@@ -644,16 +644,19 @@ public class RepeatPrescription extends BasePage {
         }
         return blResult;
     }
-    public boolean clickNextButton(){
-        boolean blResult=false;
+
+    public boolean clickNextButton() {
+        boolean blResult = false;
         try {
             waitForElement(btnNextRRP);
             jsScrollIntoView(btnNextRRP);
             waitForElementClickable(btnNextRRP);
             waitForSeconds(3);
             jsClick(btnNextRRP);
+            waitForSeconds(3);
+//            jsScrollIntoView(btnPayNow);
             waitForElement(btnPayNow);
-            blResult= verifyElement(btnPayNow);
+            blResult = verifyElement(btnPayNow);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -698,6 +701,8 @@ public class RepeatPrescription extends BasePage {
 
                 System.out.println("Xpath for Element day Price >>>> : " + elmntScriptUrgency.replace("<<REPLACEMENT>>", urgencyPrice));
                 WebElement dayPrice = waitForElement(By.xpath(elmntScriptUrgency.replace("<<REPLACEMENT>>", urgencyPrice)));
+                waitForSeconds(3);
+                waitForElement(dayPrice);
                 blResult = verifyElement(dayPrice);
 
                 if (!blResult) {
@@ -1299,11 +1304,12 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            WebElement selectType = waitForElement(By.xpath(rdoBtnType.replace("<<REPLACEMENT>>", strSelectType)));
+            jsScrollDown();
             System.out.println("selectType XPath >>>" + rdoBtnType.replace("<<REPLACEMENT>>", strSelectType));
+            WebElement selectType = waitForElement(By.xpath(rdoBtnType.replace("<<REPLACEMENT>>", strSelectType)));
             waitForElement(selectType);
             waitForElementClickable(selectType);
-            mouseClick(selectType);
+            jsClick(selectType);
             waitForSeconds(2);
 
             blResult = true;
@@ -1316,7 +1322,8 @@ public class RepeatPrescription extends BasePage {
         }
         return blResult;
     }
-//    public boolean selectSearchPharmacyForSentScript(String strSelectType) {
+
+    //    public boolean selectSearchPharmacyForSentScript(String strSelectType) {
 //        boolean blResult = false;
 //        try {
 //            waitForSeconds(2);
@@ -1350,7 +1357,7 @@ public class RepeatPrescription extends BasePage {
             waitForSeconds(2);
             waitForElement(txtSearchPharmacyForSentScript);
             verifyElement(txtSearchPharmacyForSentScript);
-            System.out.println("Verified >>>> ::" +txtSearchPharmacyForSentScript.isDisplayed());
+            System.out.println("Verified >>>> ::" + txtSearchPharmacyForSentScript.isDisplayed());
             waitForSeconds(3);
             waitForElementClickable(drpDownSelectForCity);
             click(drpDownSelectForCity);
@@ -1371,13 +1378,14 @@ public class RepeatPrescription extends BasePage {
         }
         return blResult;
     }
+
     public boolean selectSubUrban(String strSubUrban) {
         boolean blResult = false;
         try {
             waitForSeconds(2);
             waitForElement(txtSearchPharmacyForSentScript);
             verifyElement(txtSearchPharmacyForSentScript);
-            System.out.println("Verified >>>> ::" +txtSearchPharmacyForSentScript.isDisplayed());
+            System.out.println("Verified >>>> ::" + txtSearchPharmacyForSentScript.isDisplayed());
             waitForSeconds(3);
             waitForElementClickable(drpDownSelectForSubUrban);
             click(drpDownSelectForSubUrban);
@@ -1398,6 +1406,7 @@ public class RepeatPrescription extends BasePage {
         }
         return blResult;
     }
+
     public boolean selectPharmacy(String strPharmacy) {
         boolean blResult = false;
         try {
@@ -1413,8 +1422,16 @@ public class RepeatPrescription extends BasePage {
             waitForElementClickable(selectPharmacy);
             click(selectPharmacy);
             waitForSeconds(2);
-            waitForElement(btnChange);
-            blResult = verifyElement(btnChange);
+            try {
+                jsScrollIntoView(btnChange);
+                waitForElement(btnChange);
+                blResult = verifyElement(btnChange);
+            }catch (Exception e){
+                jsScrollIntoView(btnChangeForMobile);
+                waitForElement(btnChangeForMobile);
+                blResult = verifyElement(btnChangeForMobile);
+            }
+
 
         } catch (Exception e) {
             System.out.println(" Failed to select Pharmacy >>>>>");

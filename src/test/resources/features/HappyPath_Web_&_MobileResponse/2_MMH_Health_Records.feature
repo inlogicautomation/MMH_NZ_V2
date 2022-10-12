@@ -197,39 +197,38 @@ Feature: My Health Records
       | Immunisations | Comirnaty, COVID-19 mRNA (Pfizer-BioNTech) | &EDIT_ADDITIONAL& |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
-  Scenario Template: S7-Patient to View Health Records & Verify the Classifications Entries from Health Centre Medicine Details
+  Scenario Template: S7-Patient to View Health Records & Verify the Conditions Entries from Health Centre Medicine Details
 
     Given As a user I am on HomePage
-    When I navigate to the "<Classifications>" Classifications page Dropdown
-    Then I should see all the Classifications Entries From Health center Medicine Details in a grid view
+    When I navigate to the "<Conditions>" Conditions page Dropdown
+    Then I should see all the Conditions Entries From Health center Medicine Details in a grid view
       | &CLASSIFICATIONS_TABLE_DATA&   |
       | &CLASSIFICATIONS_TABLE_DATA_1& |
       | &CLASSIFICATIONS_TABLE_DATA_2& |
-    And I click on the more info icon on the grid & view the details of the Classifications added
+    And I click on the more info icon on the grid & view the details of the Conditions added
       | &CLASSIFICATIONS_TABLE_DATA&   | &CLASSIFICATIONS_ICON_DATA&   | &CLASSIFICATIONS_MOBILE_ICON_DATA&   |
       | &CLASSIFICATIONS_TABLE_DATA_1& | &CLASSIFICATIONS_ICON_DATA_1& | &CLASSIFICATIONS_MOBILE_ICON_DATA_1& |
       | &CLASSIFICATIONS_TABLE_DATA_2& | &CLASSIFICATIONS_ICON_DATA_2& | &CLASSIFICATIONS_MOBILE_ICON_DATA_2& |
     And I navigate to the Homepage
-
     Examples:
-      | Classifications  |
+      | Conditions       |
       | &FILTER_BY_DATA& |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S8-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Classifications Details
 
     Given As a user I am on HomePage
-    And I navigate to the Classifications
-    And I should see all the Classifications Entries From Health center Medicine Details in a grid view
+    And I navigate to the Conditions
+    And I should see all the Conditions Entries From Health center Medicine Details in a grid view
       | &CLASSIFICATIONS_TABLE_DATA&   |
       | &CLASSIFICATIONS_TABLE_DATA_1& |
       | &CLASSIFICATIONS_TABLE_DATA_2& |
     When I select "<Option>" filter dropdown
-    And I Create New Record in My Entries in Classifications page
+    And I Create New Record in My Entries in Conditions page
       | &VISITED_NAME&           |
       | &VISITED_DROPDOWN&       |
       | &ADDITIONAL_INFORMATION& |
-    Then I should see all the Classifications My Entries Medicine details in more info
+    Then I should see all the Conditions My Entries Medicine details in more info
       | &DATA_MY_ENTRIES_CLASSIFICATIONS& | &CLASSIFICATIONS_INFO_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLASSIFICATION& |
     Examples:
       | Option     |
@@ -238,17 +237,17 @@ Feature: My Health Records
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S8-Patient validate edit and delete in My entries Classifications Details
 
-    Given I am on "<Tab>" Classifications page
-    And I edit Created "<Record>" in Classifications page
-    And I change "<StatusDrop>" in Classifications page
-    When I am on "<Tab>" Classifications page
-    And I delete Created "<Record>" in Classifications page
+    Given I am on "<Tab>" Conditions page
+    And I edit Created "<Record>" in Conditions page
+    And I change "<StatusDrop>" in Conditions page
+    When I am on "<Tab>" Conditions page
+    And I delete Created "<Record>" in Conditions page
     Then I should see Patient Record is deleted
     And I navigate to the Homepage
 
     Examples:
-      | Tab             | Record         | StatusDrop |
-      | Classifications | &VISITED_NAME& | Long Term  |
+      | Tab        | Record         | StatusDrop |
+      | Conditions | &VISITED_NAME& | Long Term  |
 
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
