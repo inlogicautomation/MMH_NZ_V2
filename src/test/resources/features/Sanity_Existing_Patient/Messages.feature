@@ -33,21 +33,21 @@ Feature: Messages
 
 #    These test Case Covered The Scenario NO: S2
 #  }
-  @WEB @MESSAGES @SANITY_PATH
-  Scenario Template: S2- Patient Sending Message
-
-    Given As a Existing user I am on HomePage and navigate to Compose Message
-    And I enter the "<Compose Details>" to compose an email
-    When I Click Send Message Button
-    Then I should see message sent Successfully popup
-    And I navigate to Patient Sent items and verify the Sent "<Compose Details>"
-    And I move the Sent Message into Archive and verify the Archive "<Message>"
-    And I move Archive Message into sent Items and Verify the Sent "<Message>"
-    And I log out from Patient Portal
-
-    Examples:
-      | Compose Details   |   Message           |
-      | &COMPOSE_MESSAGE& |   &COMPOSE_MESSAGE& |
+#  @WEB @MESSAGES @SANITY_PATH
+#  Scenario Template: S2- Patient Sending Message
+#
+#    Given As a Existing user I am on HomePage and navigate to Compose Message
+#    And I enter the "<Compose Details>" to compose an email
+#    When I Click Send Message Button
+#    Then I should see message sent Successfully popup
+#    And I navigate to Patient Sent items and verify the Sent "<Compose Details>"
+#    And I move the Sent Message into Archive and verify the Archive "<Message>"
+#    And I move Archive Message into sent Items and Verify the Sent "<Message>"
+#    And I log out from Patient Portal
+#
+#    Examples:
+#      | Compose Details   |   Message           |
+#      | &COMPOSE_MESSAGE& |   &COMPOSE_MESSAGE& |
 
 
 #    Note: {
