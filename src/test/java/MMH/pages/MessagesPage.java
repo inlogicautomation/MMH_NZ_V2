@@ -500,7 +500,7 @@ public class MessagesPage extends BasePage {
             .append(Constants.IMAGES_FOLDER).append(File.separator)
             .append("<<FILENAME>>").toString();
 
-    @FindBy(how = How.XPATH, using = "(//mat-icon[contains(text(),'attachment')])[2]")
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='Attachment']")
     protected WebElement btnFloorplanUpload;
 
     @FindBy(how = How.XPATH, using = "//input[@value='Attach']")
@@ -2439,7 +2439,9 @@ public class MessagesPage extends BasePage {
                 waitForSeconds(2);
                 waitForElement(btnAttachClick);
                 click(btnAttachClick);
-
+                waitForSeconds(3);
+//                click(btnFloorplanUpload);
+//                waitForSeconds(2);
                 String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
                 System.out.println(strFloorplanDocumentName);
                 btnFloorplanUpload.sendKeys(strFloorplanDocumentName);

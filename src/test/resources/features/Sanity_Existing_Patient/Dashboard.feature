@@ -225,143 +225,143 @@ Feature: Dashboard
 #  21	Dashboard	View latest 3 updated Health records in Health records card
 #  23	Dashboard	View Specific health Record details
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
-  Scenario Template: Changing machines timezone
-
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
-  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
-
-    Given As a user I am on beta MMH login Page
-    And I enter "<Email Address>" and "<Password>" For Beta
-    When I click SignIn button
-    Then I should see user successfully logs in to the MMH portal
-    Examples:
-      | Email Address | Password   |
-      | &EMAIL&       | &PASSWORD& |
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
-  Scenario Template: Prep- Canceling all the appointments
-
-    Given As a user I am on HomePage
-    And I navigate to the "<Appointment>" page
-    And I canceling all the available appointments
-
-    Examples:
-      | Appointment         |
-      | Future Appointments |
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
-  Scenario Template: S1 Patient Booking Appointment - Visit Appointment
-
-    Given As a user I am on HomePage
-    And I navigate to the "<Appointment>" page
-    And I enter the visit appointment details "<Appointment_Details>"
-    When I click confirm button
-    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
-    And I accept the terms & conditions and confirm my booking
-    And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
-    And I logout from the application
-
-    Examples:
-      | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
-      | Book Appointment | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &VISIT_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
-
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
-  Scenario Template: Changing machines timezone
-
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
-  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
-
-    Given As a user I am on beta MMH login Page
-    And I enter "<Email Address>" and "<Password>" For Beta
-    When I click SignIn button
-    Then I should see user successfully logs in to the MMH portal
-    Examples:
-      | Email Address | Password   |
-      | &EMAIL&       | &PASSWORD& |
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
-  Scenario Template: S6 - Patient Cancel Appointment
-
-    And I navigate to the "<Appointment>" page
-    And I click cancel button for the created appointment "<Appointment_Cancel_Button>"
-    And I enter reason to cancel appointment
-    When I click cancel your appointment button
-    Then I should see Appointment cancelled message "<Appointment_After_Cancel>"
-
-    Examples:
-      | Appointment         | Appointment_Cancel_Button        | Appointment_After_Cancel              |
-      | Future Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
-  Scenario Template: S2 - Patient Booking Appointment - Video Appointment
-
-    Given As a user I am on HomePage
-    And I navigate to the "<Appointment>" page
-    And I enter the video appointment details "<Appointment_Details>"
-    When I click confirm button
-    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
-    And I accept the terms & conditions and confirm my booking
-    And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
-    And I logout from the application
-
-    Examples:
-      | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
-      | Book Appointment | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
-
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
-  Scenario Template: Changing machines timezone
-    Given I change Windows "<TimeZone>"
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
-  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
-    Given As a user I am on beta MMH login Page
-    And I enter "<Email Address>" and "<Password>" For Beta
-    When I click SignIn button
-    Then I should see user successfully logs in to the MMH portal
-    Examples:
-      | Email Address | Password   |
-      | &EMAIL&       | &PASSWORD& |
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
-  Scenario Template: S3 - Patient Booking Appointment - Visit in video slot Appointment
-
-    Given As a user I am on HomePage
-    And I navigate to the "<Appointment>" page
-    And I enter the video appointment details "<Appointment_Details>"
-    When I click confirm button
-    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
-    And I accept the terms & conditions and confirm my booking
-    And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
-
-    Examples:
-      | Appointment      | Appointment_Details               | Details_For_Appointment              | Appointment_Summary                  | Future_Date   |
-      | Book Appointment | &BOOK_VISIT_IN_VIDEO_APPOINTMENT& | &VISIT_IN_VIDEO_APPOINTMENT_DETAILS& | &VISIT_IN_VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
-
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
-  Scenario: View patient Appointments Records
-
-    Given As a Existing user I am on HomePage and I click Dashboard
-    And View latest three patient Appointments in upcoming appointments card
-      | &VERIFY_DASHBOARD_APPOINTMENTS_1& |
-      | &VERIFY_DASHBOARD_APPOINTMENTS_2& |
-      | &VERIFY_DASHBOARD_APPOINTMENTS_3& |
-    And Navigate to book appointment page in Upcoming appointments card from dashboard
+#  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
+#
+#  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
+#  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
+#
+#    Given As a user I am on beta MMH login Page
+#    And I enter "<Email Address>" and "<Password>" For Beta
+#    When I click SignIn button
+#    Then I should see user successfully logs in to the MMH portal
+#    Examples:
+#      | Email Address | Password   |
+#      | &EMAIL&       | &PASSWORD& |
+#
+#  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
+#  Scenario Template: Prep- Canceling all the appointments
+#
+#    Given As a user I am on HomePage
+#    And I navigate to the "<Appointment>" page
+#    And I canceling all the available appointments
+#
+#    Examples:
+#      | Appointment         |
+#      | Future Appointments |
+#
+#  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
+#  Scenario Template: S1 Patient Booking Appointment - Visit Appointment
+#
+#    Given As a user I am on HomePage
+#    And I navigate to the "<Appointment>" page
+#    And I enter the visit appointment details "<Appointment_Details>"
+#    When I click confirm button
+#    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
+#    And I accept the terms & conditions and confirm my booking
+#    And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
+#    And I logout from the application
+#
+#    Examples:
+#      | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
+#      | Book Appointment | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &VISIT_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
+#
+#
+#  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
+#
+#  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
+#  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
+#
+#    Given As a user I am on beta MMH login Page
+#    And I enter "<Email Address>" and "<Password>" For Beta
+#    When I click SignIn button
+#    Then I should see user successfully logs in to the MMH portal
+#    Examples:
+#      | Email Address | Password   |
+#      | &EMAIL&       | &PASSWORD& |
+#
+#  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
+#  Scenario Template: S6 - Patient Cancel Appointment
+#
+#    And I navigate to the "<Appointment>" page
+#    And I click cancel button for the created appointment "<Appointment_Cancel_Button>"
+#    And I enter reason to cancel appointment
+#    When I click cancel your appointment button
+#    Then I should see Appointment cancelled message "<Appointment_After_Cancel>"
+#
+#    Examples:
+#      | Appointment         | Appointment_Cancel_Button        | Appointment_After_Cancel              |
+#      | Future Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+#
+#  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
+#  Scenario Template: S2 - Patient Booking Appointment - Video Appointment
+#
+#    Given As a user I am on HomePage
+#    And I navigate to the "<Appointment>" page
+#    And I enter the video appointment details "<Appointment_Details>"
+#    When I click confirm button
+#    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
+#    And I accept the terms & conditions and confirm my booking
+#    And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
+#    And I logout from the application
+#
+#    Examples:
+#      | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
+#      | Book Appointment | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
+#
+#
+#  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
+#  Scenario Template: Changing machines timezone
+#    Given I change Windows "<TimeZone>"
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
+#
+#  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
+#  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
+#    Given As a user I am on beta MMH login Page
+#    And I enter "<Email Address>" and "<Password>" For Beta
+#    When I click SignIn button
+#    Then I should see user successfully logs in to the MMH portal
+#    Examples:
+#      | Email Address | Password   |
+#      | &EMAIL&       | &PASSWORD& |
+#
+#  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
+#  Scenario Template: S3 - Patient Booking Appointment - Visit in video slot Appointment
+#
+#    Given As a user I am on HomePage
+#    And I navigate to the "<Appointment>" page
+#    And I enter the video appointment details "<Appointment_Details>"
+#    When I click confirm button
+#    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
+#    And I accept the terms & conditions and confirm my booking
+#    And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
+#
+#    Examples:
+#      | Appointment      | Appointment_Details               | Details_For_Appointment              | Appointment_Summary                  | Future_Date   |
+#      | Book Appointment | &BOOK_VISIT_IN_VIDEO_APPOINTMENT& | &VISIT_IN_VIDEO_APPOINTMENT_DETAILS& | &VISIT_IN_VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
+#
+#
+#  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS
+#  Scenario: View patient Appointments Records
+#
+#    Given As a Existing user I am on HomePage and I click Dashboard
+#    And View latest three patient Appointments in upcoming appointments card
+#      | &VERIFY_DASHBOARD_APPOINTMENTS_1& |
+#      | &VERIFY_DASHBOARD_APPOINTMENTS_2& |
+#      | &VERIFY_DASHBOARD_APPOINTMENTS_3& |
+#    And Navigate to book appointment page in Upcoming appointments card from dashboard

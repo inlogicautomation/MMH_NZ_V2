@@ -124,7 +124,7 @@ public class MyHealthIndicators extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Add New')]")
     protected WebElement btnAddnew;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'NEW HEALTH INDICATOR')]")
+    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'New Health Indicator')]")
     protected WebElement elmtVerifyAddnewHeader;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Blood Pressure')]")
