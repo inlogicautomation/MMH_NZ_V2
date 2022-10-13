@@ -533,7 +533,7 @@ public class MyHealthIndicators extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//p[text()='I would like to add an indicator for']//following::mat-radio-group[@role='radiogroup']//div[@class='mat-radio-container']//following-sibling::input)[45]")
     protected WebElement getHasarelativefriendordoctor;
-    @FindBy(how = How.XPATH, using = "//h3[text()='NEW HEALTH INDICATOR']")
+    @FindBy(how = How.XPATH, using = "//h3[text()='New Health Indicator']")
     protected WebElement getElmntNewHealthIndicator;
     @FindBy(how = How.XPATH, using = "//h3[text()='My Health Indicators']")
     protected WebElement getNewHealthIndicator;
@@ -4987,6 +4987,8 @@ public class MyHealthIndicators extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2).concat(strExecutionID)))));
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>"+elmntBloodPressureTableData);
+            waitForSeconds(3);
+            waitForElement(elmntBloodPressureTableData);
 //            jsScrollDown();
             blResult = verifyElement(elmntBloodPressureTableData);
         } catch (Exception e) {

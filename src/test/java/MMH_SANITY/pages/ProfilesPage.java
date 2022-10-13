@@ -634,10 +634,12 @@ public class ProfilesPage extends BasePage {
     }
 
     public boolean clickAddCategoryButton() {
+        waitForSeconds(3);
         waitForElement(txtCalendarSettings);
+        waitForSeconds(2);
         waitForElement(elmntAddCategory);
         waitForElementClickable(elmntAddCategory);
-        waitAndClick(elmntAddCategory);
+        jsClick(elmntAddCategory);
         waitForElement(txtAddCategory);
         return txtAddCategory.isDisplayed();
     }

@@ -383,9 +383,10 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(3);
             waitForElement(drpdownDoctor);
             waitForElementClickable(drpdownDoctor);
-            click(drpdownDoctor);
+            jsClick(drpdownDoctor);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             System.out.println("Doctor xpath >>> : " + selectDoctor.replace("<<REPLACEMENT>>", strDoctor));

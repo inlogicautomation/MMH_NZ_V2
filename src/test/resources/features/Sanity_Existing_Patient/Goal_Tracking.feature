@@ -250,6 +250,26 @@ Feature: Goal_Tracking
   #}
       #}
 
+  @WEB   @GOAL_TRACKING @SANITY_PATH
+  Scenario Template: Changing machines timezone
+
+    Given I change Windows "<TimeZone>"
+
+    Examples:
+      | TimeZone                  |
+      | New Zealand Standard Time |
+
+
+  @WEB  @GOAL_TRACKING @SANITY_PATH
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address   | Password           |
+      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+
   @WEB @GOAL_TRACKING @SANITY_PATH
   Scenario Template:S8-Existing Patient Verify Goal Tracking Details and validate Add New Task,Future Task Details in Goal Tracking Details
 
@@ -270,14 +290,7 @@ Feature: Goal_Tracking
     Examples:
       | Edit Icon                               | Records                    |
       | &ADD_FUTURE_TASK_REMINDER_SETTING_DATA& | &EDIT_FUTURE_TASK_DETAILS& |
-  @WEB   @GOAL_TRACKING @SANITY_PATH
-  Scenario Template: Changing machines timezone
 
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
 
 
        #Note:{342:Login as Existing patient & view/click on Health Tools
