@@ -338,7 +338,7 @@ public class MessagesPage extends BasePage {
             .toString();
 
     protected String messageText = new StringBuilder()
-            .append("//div/p[contains(text(),'")
+            .append("//p[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]")
             .toString();
@@ -500,9 +500,13 @@ public class MessagesPage extends BasePage {
             .append(Constants.IMAGES_FOLDER).append(File.separator)
             .append("<<FILENAME>>").toString();
 
-    @FindBy(how = How.XPATH, using = "//input[@type='file']")
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='Attachment']")
     protected WebElement btnFloorplanUpload;
 
+    @FindBy(how = How.XPATH, using = "//input[@type='file']")
+    protected WebElement btnDoctorUploadfile;
+
+    //input[@type='file']
     @FindBy(how = How.XPATH, using = "//input[@value='Attach']")
     protected WebElement btndevUpload;
 
@@ -782,11 +786,11 @@ public class MessagesPage extends BasePage {
             waitForSeconds(2);
             waitForElement(elmntMessages);
             waitForElementClickable(elmntMessages);
-            click(elmntMessages);
+            jsClick(elmntMessages);
             waitForSeconds(1);
             waitForElement(elmntSentPatient);
             waitForElementClickable(elmntSentPatient);
-            click(elmntSentPatient);
+            jsClick(elmntSentPatient);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(1);
             String PageUrl = driver.getCurrentUrl();
@@ -1612,6 +1616,11 @@ public class MessagesPage extends BasePage {
     public boolean launchInNewTab(String URL) {
         boolean blResult = false;
         try {
+//            ((JavascriptExecutor) driver).executeScript("window.open()");
+//            waitForWindow(2);
+//            System.out.println("Before focussed another window");
+//            ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+//            driver.switchTo().window(tabs.get(1));
             visit(URL);
             waitForSeconds(3);
             System.out.println("focussed another window");
@@ -1812,7 +1821,6 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(btnLogOutOk);
             click(btnLogOutOk);
             blResult = true;
-            takeScreenshotSanity(driver);
             System.out.println("Doctor Log out Successfully");
         } catch (Exception e) {
             System.out.println("Doctor Failed to Log out");
@@ -2439,9 +2447,7 @@ public class MessagesPage extends BasePage {
                 waitForSeconds(2);
                 waitForElement(btnAttachClick);
                 click(btnAttachClick);
-                waitForSeconds(3);
-//                click(btnFloorplanUpload);
-//                waitForSeconds(2);
+
                 String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
                 System.out.println(strFloorplanDocumentName);
                 btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
@@ -3216,7 +3222,7 @@ public class MessagesPage extends BasePage {
             System.out.println("Document Name" + strUploadDocumentName);
             String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
             System.out.println(strFloorplanDocumentName);
-            btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
+            btnDoctorUploadfile.sendKeys(strFloorplanDocumentName);
             waitForSeconds(5);
             waitForElementClickable(btndevUpload);
             jsClick(btndevUpload);
