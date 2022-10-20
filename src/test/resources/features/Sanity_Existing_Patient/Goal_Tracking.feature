@@ -83,14 +83,14 @@ Feature: Goal_Tracking
       | Edit Icon                                   | Records                      |
       | &SHARED_EDIT_GOAL_TRACKING_MY_ENTRIES_DATA& | &EDIT_GOAL_TRACKING_DETAILS& |
 
-  @WEB @SANITY_PATH @GOAL_TRACKING
-  Scenario Template: Changing machines timezone
-
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
+#  @WEB @SANITY_PATH @GOAL_TRACKING
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 
       #Note:{342:Login as Existing patient & view/click on Health Tools
     #343:Click on Goal Tracking - Add New Goal enter goal name, type, description, start date, end date, unit of measurement, initial value, final value, privacy settings & click save
@@ -141,14 +141,15 @@ Feature: Goal_Tracking
     Examples:
       | Edit Icon                                            | Records                      |
       | &SHARED_EDIT_PREVIOUS_GOAL_TRACKING_MY_ENTRIES_DATA& | &EDIT_GOAL_TRACKING_DETAILS& |
-  @WEB  @SANITY_PATH  @GOAL_TRACKING
-  Scenario Template: Changing machines timezone
 
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
+#  @WEB  @SANITY_PATH  @GOAL_TRACKING
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 
 
         #Note:{342:Login as Existing patient & view/click on Health Tools
@@ -200,14 +201,15 @@ Feature: Goal_Tracking
     Examples:
       | Edit Icon                   |
       | &SET_REMINDER_PREVIEW_DATA& |
-  @WEB   @SANITY_PATH @GOAL_TRACKING
-  Scenario Template: Changing machines timezone
 
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
+#  @WEB   @SANITY_PATH @GOAL_TRACKING
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 
 
         #Note:{342:Login as Existing patient & view/click on Health Tools
@@ -250,25 +252,25 @@ Feature: Goal_Tracking
   #}
       #}
 
-  @WEB   @GOAL_TRACKING @SANITY_PATH
-  Scenario Template: Changing machines timezone
+#  @WEB   @GOAL_TRACKING @SANITY_PATH
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 
-    Given I change Windows "<TimeZone>"
 
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
-
-
-  @WEB  @GOAL_TRACKING @SANITY_PATH
-  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
-    Given As a user I am on beta MMH login Page
-    And I enter "<Email Address>" and "<Password>" For Beta
-    When I click SignIn button
-    Then I should see user successfully logs in to the MMH portal
-    Examples:
-      | Email Address   | Password           |
-      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+#  @WEB  @GOAL_TRACKING @SANITY_PATH
+#  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+#    Given As a user I am on beta MMH login Page
+#    And I enter "<Email Address>" and "<Password>" For Beta
+#    When I click SignIn button
+#    Then I should see user successfully logs in to the MMH portal
+#    Examples:
+#      | Email Address   | Password           |
+#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
   @WEB @GOAL_TRACKING @SANITY_PATH
   Scenario Template:S8-Existing Patient Verify Goal Tracking Details and validate Add New Task,Future Task Details in Goal Tracking Details
@@ -285,11 +287,12 @@ Feature: Goal_Tracking
     Then I should see all the Added future task grid Details must be displayed in more info
       | &ADD_FUTURE_TASK_REMINDER_SETTING_DATA& | &ADD_FUTURE_TASK_INFO_DATA& |
     And I click on "<Edit Icon>" edit icon & I Edit future task records "<Records>"
-    And I click on Delete Icon "<Edit Icon>" in the goal tracking grid for a specific goal will delete the goal from the grid
+    And I click on "<Delete Icon>" Add Task delete icon
+    And I click on Delete Icon "<GoalTrackingDeleteIcon>" in the goal tracking grid for a specific goal will delete the goal from the grid
 
     Examples:
-      | Edit Icon                               | Records                    |
-      | &ADD_FUTURE_TASK_REMINDER_SETTING_DATA& | &EDIT_FUTURE_TASK_DETAILS& |
+      | Edit Icon                               | Records                    | Delete Icon                  | GoalTrackingDeleteIcon                     |
+      | &ADD_FUTURE_TASK_REMINDER_SETTING_DATA& | &EDIT_FUTURE_TASK_DETAILS& | &DELETE_FUTURE_TASK_DETAILS& | &GOAL_TRACKING_FUTURE_TASK_ADD_VALUE_DATA& |
 
 
 
@@ -311,21 +314,22 @@ Feature: Goal_Tracking
 
     Given As a Existing user I am on HomePage and I click the Health Tools
     And I click on Goal Tracking & Add Goal Tracking Details kept private are not shared with the provider
-      | &GOAL_TRACKING_FUTURE_TASK_ENTRIES_DATA& |
+      | &GOAL_TRACKING_PREVIOUS_TASK_ENTRIES_DATA& |
     And click on Add Value icon & Add measured value, date, comments & click on save
-      | &GOAL_TRACKING_FUTURE_TASK_ADD_VALUE_DATA& |
+      | &GOAL_TRACKING_PREVIOUS_TASK_ADD_VALUE_DATA& |
     When click on Add task icon & Add enter Previous task details and click on save
-      | &ADD_FUTURE_TASK_ENTRIES_DATA& |
+      | &ADD_PREVIOUS_TASK_ENTRIES_DATA& |
     And click on Reminder setting icon & Add enter Previous task details and click on save
-      | &ADD_FUTURE_TASK_REMINDER_SETTING_DATA& |
+      | &ADD_PREVIOUS_TASK_REMINDER_SETTING_DATA& |
     Then I should see all the Added Previous task grid Details must be displayed in more info
-      | &ADD_FUTURE_TASK_REMINDER_SETTING_DATA& | &ADD_FUTURE_TASK_INFO_DATA& |
+      | &ADD_PREVIOUS_TASK_REMINDER_SETTING_DATA& | &ADD_FUTURE_TASK_INFO_DATA& |
     And I click on "<Edit Icon>" edit icon & I Edit Previous task records "<Records>"
-    And  I click on Delete Icon "<Edit Icon>" in the Previous Task goal tracking grid for a specific goal will delete the goal from the grid
+    And I click on "<Delete Icon>" Add Task delete icon
+    And  I click on Delete Icon "<GoalTrackingDeleteIcon>" in the Previous Task goal tracking grid for a specific goal will delete the goal from the grid
 
     Examples:
-      | Edit Icon                               | Records                    |
-      | &ADD_FUTURE_TASK_REMINDER_SETTING_DATA& | &EDIT_FUTURE_TASK_DETAILS& |
+      | Edit Icon                                 | Records                    | Delete Icon                    | GoalTrackingDeleteIcon                       |
+      | &ADD_PREVIOUS_TASK_REMINDER_SETTING_DATA& | &EDIT_FUTURE_TASK_DETAILS& | &DELETE_PREVIOUS_TASK_DETAILS& | &GOAL_TRACKING_PREVIOUS_TASK_ADD_VALUE_DATA& |
 
 
        #Note:{342:Login as Existing patient & view/click on Health Tools
@@ -347,18 +351,19 @@ Feature: Goal_Tracking
 
     Given As a Existing user I am on HomePage and I click the Health Tools
     And I click on Goal Tracking & Add Goal Tracking Details kept private are not shared with the provider
-      | &GOAL_TRACKING_FUTURE_TASK_ENTRIES_DATA& |
+      | &GOAL_TRACKING_FUTURE_ENTRIES_DATA& |
     And click on Add Value icon & Add measured value, date, comments & click on save
-      | &GOAL_TRACKING_FUTURE_TASK_ADD_VALUE_DATA& |
+      | &GOAL_TRACKING_FUTURE_ADD_VALUE_DATA& |
     When click on Add task icon & Add enter Previous task details and click on Add another task
-      | &ADD_FUTURE_TASK_ENTRIES_DATA& |
+      | &ADD_FUTURE_ENTRIES_DATA& |
     And click on Reminder setting icon & Add enter Previous task details and click on save
-      | &ADD_FUTURE_TASK_REMINDER_SETTING_DATA& |
+      | &ADD_FUTURE_REMINDER_SETTING_DATA& |
     Then I should see all the Added Previous task grid Details must be displayed in more info
-      | &ADD_FUTURE_TASK_REMINDER_SETTING_DATA& | &ADD_FUTURE_TASK_INFO_DATA& |
+      | &ADD_FUTURE_REMINDER_SETTING_DATA& | &ADD_FUTURE_TASK_INFO_DATA& |
     And I click on "<Edit Icon>" edit icon & I Edit Previous task records "<Records>"
-    And I click on Delete Icon "<Edit Icon>" in the Previous Task goal tracking grid for a specific goal will delete the goal from the grid
+    And I click on "<Delete Icon>" Add Task delete icon
+    And I click on Delete Icon "<GoalTrackingDeleteIcon>" in the Previous Task goal tracking grid for a specific goal will delete the goal from the grid
 
     Examples:
-      | Edit Icon                               | Records                    |
-      | &ADD_FUTURE_TASK_REMINDER_SETTING_DATA& | &EDIT_FUTURE_TASK_DETAILS& |
+      | Edit Icon                          | Records                    | Delete Icon             | GoalTrackingDeleteIcon                |
+      | &ADD_FUTURE_REMINDER_SETTING_DATA& | &EDIT_FUTURE_TASK_DETAILS& | &DELETE_FUTURE_DETAILS& | &GOAL_TRACKING_FUTURE_ADD_VALUE_DATA& |

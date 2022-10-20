@@ -462,13 +462,16 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Add Record')]//parent::button")
     protected WebElement btnAddRecord;
 
-    @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-add-plus-add icon-white']")
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'mb-flo-wrp icon-immunisation-add mobile-view')]//span//child::img")
+    protected WebElement btnMobileImmunisationAddRecord;
+
+    @FindBy(how = How.XPATH, using = "//i[contains(@class,'icon-cent-add-plus-add icon-white')]")
     protected WebElement btnMobileAddRecord;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),' Add COVID Immunisation ')]//parent::button")
     protected WebElement btnCovidAddRecord;
 
-    @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-calendar-plus-date icon-white']")
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'mb-flo-wrp settings-btn-float icon-immunisation-covid mobile-view')]//span//child::img")
     protected WebElement btnMobileCovidAddRecord;
 
     @FindBy(how = How.XPATH, using = "//mat-dialog-actions//span[text()='Save']")
@@ -675,6 +678,12 @@ public class MyHealthRecordsPage extends BasePage {
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Files']")
     protected WebElement FileIcon;
+
+    @AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc='Show roots']")
+    protected WebElement iconHamburger;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Downloads' and @resource-id='android:id/title']")
+    protected WebElement optDownloads;
 
     @AndroidFindBy(xpath = "//android.widget.Button[@text='While using the app']")
     protected WebElement WhileUsingTheAppForA13;
@@ -2798,6 +2807,26 @@ public class MyHealthRecordsPage extends BasePage {
         }
     }
 
+    public void clickImmunisationAddRecord() {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(3);
+            waitForElementClickable(btnAddRecord);
+            jsClick(btnAddRecord);
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(btnMobileImmunisationAddRecord);
+            jsClick(btnMobileImmunisationAddRecord);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(btnMobileImmunisationAddRecord);
+            jsClick(btnMobileImmunisationAddRecord);
+        }
+    }
+
     public void clickCovidAddRecord() {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForSeconds(3);
@@ -2912,13 +2941,26 @@ public class MyHealthRecordsPage extends BasePage {
                     click(WhileUsingTheApp);
                     waitForSeconds(3);
                     click(WhileUsingTheApp);
+                    waitForSeconds(3);
+                    click(FileIcon);
+                    waitForSeconds(3);
+                    click(iconHamburger);
+                    waitForSeconds(3);
+                    click(optDownloads);
                 }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy A13")){
                     waitForSeconds(3);
                     click(WhileUsingTheAppForA13);
+                    waitForSeconds(2);
+                    click(FileIcon);
+                }
+                if (System.getProperty("deviceName").equalsIgnoreCase("Motorola One Fusion+")){
+                    waitForSeconds(3);
+                    click(WhileUsingTheAppForA13);
+                    waitForSeconds(2);
+                    click(FileIcon);
                 }
                 waitForSeconds(3);
-                click(FileIcon);
                 WebElement elmntImage = waitForElement(By.xpath(strTextViewLocator.replace("<<TEXT>>", "MMHtest.jpg")));
                 click(elmntImage);
                 waitForSeconds(3);

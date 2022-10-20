@@ -4782,7 +4782,7 @@ public class MyHealthIndicators extends BasePage {
             jsClick(elmntActiveCardData);
             waitForSeconds(3);
             waitForElement(elmtPrivacySetting);
-            click(elmtPrivacySetting);
+            jsClick(elmtPrivacySetting);
             waitForSeconds(2);
             verifyElement(elmtPrivacySettingHeader);
             waitForSeconds(2);
@@ -4988,7 +4988,7 @@ public class MyHealthIndicators extends BasePage {
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2).concat(strExecutionID)))));
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>"+elmntBloodPressureTableData);
             waitForSeconds(3);
-            waitForElement(elmntBloodPressureTableData);
+//            waitForElement(elmntBloodPressureTableData);
 //            jsScrollDown();
             blResult = verifyElement(elmntBloodPressureTableData);
         } catch (Exception e) {

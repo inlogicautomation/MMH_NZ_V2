@@ -68,14 +68,14 @@ Feature: Health_Records
       | My Entries | Edit Icon      | Records |
       | My Entries | &VISITED_NAME& | 3 time  |
 
-  @WEB  @HEALTH_RECORDS @SANITY_PATH
-  Scenario Template: Changing machines timezone
-
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
+#  @WEB  @HEALTH_RECORDS @SANITY_PATH
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 
 
 
@@ -122,14 +122,14 @@ Feature: Health_Records
       | Allergies        |
       | &FILTER_BY_DATA& |
 
-  @WEB   @HEALTH_RECORDS @SANITY_PATH
-  Scenario Template: Changing machines timezone
-
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
+#  @WEB   @HEALTH_RECORDS @SANITY_PATH
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 #Note:{#95:Click on add record & enter the allergies name, severity, status, start date & end date, additional info & share with doctor in allergies tab
   #96:Click on confirm & save button, Record is submitted & added in My entries grid in allergies tab
   #98:Click on edit icon for specific record in My entries grid to edit added data in allergies tab
@@ -156,14 +156,14 @@ Feature: Health_Records
       | My Entries | Edit Icon      | Records |
       | My Entries | &VISITED_NAME& | Low     |
 
-  @WEB  @HEALTH_RECORDS @SANITY_PATH
-  Scenario Template: Changing machines timezone
-
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
+#  @WEB  @HEALTH_RECORDS @SANITY_PATH
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 #Note:{#97:If share with doctor is uncheck then the records is not shared to health centre/provider & kept private in allergies tab
    #These tests Case Covered The Scenario NO: S6
   #}
@@ -205,14 +205,14 @@ Feature: Health_Records
       | Immunisations    |
       | &FILTER_BY_DATA& |
 
-  @WEB  @HEALTH_RECORDS @SANITY_PATH
-  Scenario Template: Changing machines timezone
-
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
+#  @WEB  @HEALTH_RECORDS @SANITY_PATH
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 #Note:{#105:Click on add record & enter the vaccine name, date given, additional info & share with doctor in immunisation tab
   #106:Click on confirm & save button, Record is submitted & added in My entries grid in immunisation tab
   #109:Click on edit icon for specific record in My entries grid to edit added data in immunisation tab
@@ -256,15 +256,15 @@ Feature: Health_Records
     Examples:
       | My Entries | Edit Icon      | AdditionalName    |
       | My Entries | &VISITED_NAME& | &EDIT_ADDITIONAL& |
-
-  @WEB  @HEALTH_RECORDS @SANITY_PATH
-  Scenario Template: Changing machines timezone
-
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
+#
+#  @WEB  @HEALTH_RECORDS @SANITY_PATH
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 #Note:{#107:Add Covid Immunisation -  Dose 1/Dose2
    #These tests Case Covered The Scenario NO: S10
   #}
@@ -306,14 +306,14 @@ Feature: Health_Records
       | My Entries | AdditionalName    |
       | My Entries | &EDIT_ADDITIONAL& |
 
-  @WEB   @HEALTH_RECORDS @SANITY_PATH
-  Scenario Template: Changing machines timezone
-
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
+#  @WEB   @HEALTH_RECORDS @SANITY_PATH
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 
 
 
@@ -363,14 +363,14 @@ Feature: Health_Records
       | My Entries | Edit Icon      | Records   |
       | My Entries | &VISITED_NAME& | Long Term |
 
-  @WEB  @HEALTH_RECORDS @SANITY_PATH
-  Scenario Template: Changing machines timezone
-
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
+#  @WEB  @HEALTH_RECORDS @SANITY_PATH
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 #Note:{#118:If share with doctor is uncheck then the records is not shared to health centre/provider & kept private in classification tab
    #These tests Case Covered The Scenario NO: S14
   #}
@@ -392,15 +392,15 @@ Feature: Health_Records
       | My Entries | Edit Icon      | Records   |
       | My Entries | &VISITED_NAME& | Long Term |
 
-  @WEB  @SANITY_PATH  @HEALTH_RECORDS
-  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
-    Given As a user I am on beta MMH login Page
-    And I enter "<Email Address>" and "<Password>" For Beta
-    When I click SignIn button
-    Then I should see user successfully logs in to the MMH portal
-    Examples:
-      | Email Address   | Password           |
-      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+#  @WEB  @SANITY_PATH  @HEALTH_RECORDS
+#  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+#    Given As a user I am on beta MMH login Page
+#    And I enter "<Email Address>" and "<Password>" For Beta
+#    When I click SignIn button
+#    Then I should see user successfully logs in to the MMH portal
+#    Examples:
+#      | Email Address   | Password           |
+#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
 
 
@@ -421,14 +421,14 @@ Feature: Health_Records
     And I click on the more info icon to see all the Test Results Entries From the Health center Medicine details
       | &LAB_RESULT_TABLE_DATA& | &TEST_RESULT_ICON_DATA& | &TEST_MOBILE_RESULT_ICON_DATA& |
 
-  @WEB   @HEALTH_RECORDS @SANITY_PATH
-  Scenario Template: Changing machines timezone
-
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
+#  @WEB   @HEALTH_RECORDS @SANITY_PATH
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 
 
 
@@ -475,14 +475,14 @@ Feature: Health_Records
       | My Entries | Edit Icon      | Records         |
       | My Entries | &VISITED_NAME& | &EDIT_LOCATION& |
 
-  @WEB  @HEALTH_RECORDS @SANITY_PATH
-  Scenario Template: Changing machines timezone
-
-    Given I change Windows "<TimeZone>"
-
-    Examples:
-      | TimeZone                  |
-      | New Zealand Standard Time |
+#  @WEB  @HEALTH_RECORDS @SANITY_PATH
+#  Scenario Template: Changing machines timezone
+#
+#    Given I change Windows "<TimeZone>"
+#
+#    Examples:
+#      | TimeZone                  |
+#      | New Zealand Standard Time |
 #Note:{#131:If share with doctor is uncheck then the records is not shared to health centre/provider & kept private in clinic notes tab
    # These tests Case Covered The Scenario NO: S18
   #}

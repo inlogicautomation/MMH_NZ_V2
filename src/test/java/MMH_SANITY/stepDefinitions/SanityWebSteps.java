@@ -2115,7 +2115,7 @@ public class SanityWebSteps {
         Assert.assertTrue(sanityPageContainer.viewJournal.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.homePage.verifyHomePageOfMMHPortal());
         Assert.assertTrue(sanityPageContainer.viewJournal.clickMyHealthToolsOptionFromMenu());
-//        Assert.assertTrue(sanityPageContainer.goalTracking.clickGoalTracking());
+        Assert.assertTrue(sanityPageContainer.goalTracking.clickGoalTracking());
     }
 
     //
@@ -2211,7 +2211,7 @@ public class SanityWebSteps {
     @When("I click on Goal Tracking & Add Goal Tracking Details kept private are not shared with the provider")
     public void iClickOnGoalTrackingAddGoalTrackingDetailsKeptPrivateAreNotSharedWithTheProvider(String viewJournal) {
         List<String> strviewjournalData = TestDataUtil.getListOfValue(viewJournal);
-        Assert.assertTrue(sanityPageContainer.goalTracking.clickGoalTracking());
+//        Assert.assertTrue(sanityPageContainer.goalTracking.clickGoalTracking());
         Assert.assertTrue(sanityPageContainer.goalTracking.clickADDGoal());
         Assert.assertTrue(sanityPageContainer.goalTracking.enterGaolName(TestDataUtil.getValue(strviewjournalData.get(0))));
         Assert.assertTrue(sanityPageContainer.goalTracking.selectType(TestDataUtil.getValue(strviewjournalData.get(1))));
@@ -2269,7 +2269,7 @@ public class SanityWebSteps {
     public void iClickOnEditIconIEditGoalTrackingRecords(String details, String listCreateData) {
         Assert.assertTrue(sanityPageContainer.goalTracking.ClickEditViewJournalTableData(TestDataUtil.getListOfValue(details)));
         Assert.assertTrue(sanityPageContainer.goalTracking.EditDescription(TestDataUtil.getValue(listCreateData)));
-        Assert.assertTrue(sanityPageContainer.goalTracking.clickEditSaveButton());
+        Assert.assertTrue(sanityPageContainer.goalTracking.clickGoalEditSaveButton());
     }
 
     @And("I click on Delete Icon {string} in the goal tracking grid for a specific goal will delete the goal from the grid")
@@ -3080,6 +3080,7 @@ public class SanityWebSteps {
     public void clickOnAddValueIconAddMeasuredValueDateCommentsClickOnSave(List<String> GoalTracking) {
 //        List<String> strGoalTrackingData = TestDataUtil.getListOfValue(GoalTracking);
         System.out.println(">>>>>>>>>>>>>>>>>GoalTracking" + GoalTracking);
+        Assert.assertTrue(sanityPageContainer.goalTracking.clickRadioButton(TestDataUtil.getListOfValue(GoalTracking.get(0))));
         for (String String : GoalTracking) {
             System.out.println(">> TestDataUtil.getListOfValue(String) : " + TestDataUtil.getValue(String));
             Assert.assertTrue(sanityPageContainer.goalTracking.ClickAddValueTableData(TestDataUtil.getListOfValue(String)));
@@ -3167,7 +3168,7 @@ public class SanityWebSteps {
         System.out.println(">>>>>>>>>>>>>>>>>>>>listCreateData" + listCreateData);
         Assert.assertTrue(sanityPageContainer.goalTracking.ClickEditFutureTaskTableData(TestDataUtil.getListOfValue(details)));
         Assert.assertTrue(sanityPageContainer.goalTracking.EditFutureTaskDescription(TestDataUtil.getValue(listCreateData)));
-        Assert.assertTrue(sanityPageContainer.goalTracking.clickEditSaveButton());
+        Assert.assertTrue(sanityPageContainer.goalTracking.clickFutureTaskEditSaveButton());
     }
 
     @When("click on Add task icon & Add enter Previous task details and click on save")
@@ -3230,7 +3231,7 @@ public class SanityWebSteps {
     public void iClickOnEditIconIEditPreviousTaskRecords(String details, String listCreateData) {
         Assert.assertTrue(sanityPageContainer.goalTracking.ClickEditPreviousTaskTableData(TestDataUtil.getListOfValue(details)));
         Assert.assertTrue(sanityPageContainer.goalTracking.EditFutureTaskDescription(TestDataUtil.getValue(listCreateData)));
-        Assert.assertTrue(sanityPageContainer.goalTracking.clickEditSaveButton());
+        Assert.assertTrue(sanityPageContainer.goalTracking.clickPreviousTaskEditSaveButton());
     }
 
     @And("I click on Delete Icon {string} in the Previous Task goal tracking grid for a specific goal will delete the goal from the grid")
@@ -3546,6 +3547,13 @@ public class SanityWebSteps {
         Assert.assertTrue(sanityPageContainer.viewJournal.clickDashBoard());
     }
 
+    @And("I click on {string} Add Task delete icon")
+    public void iClickOnAddTaskDeleteIcon(String Taskdetails) {
+        Assert.assertTrue(sanityPageContainer.goalTracking.ClickDeleteFutureTaskTableData(TestDataUtil.getValue(Taskdetails)));
+        System.out.println(">>>>>>>>>>>>>"+TestDataUtil.getValue(Taskdetails));
+
+
+    }
 }
 
 

@@ -523,8 +523,16 @@ public class MessagesPage extends BasePage {
     @AndroidFindBy(xpath = "//android.widget.Button[@text='WHILE USING THE APP']")
     protected WebElement WhileUsingTheApp;
 
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='While using the app']")
+    protected WebElement WhileUsingTheAppForA13;
+
     @FindBy(xpath = "//android.widget.TextView[@text='Files']")
     protected WebElement FileIcon;
+
+    @AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc='Show roots']")
+    protected WebElement iconHamburger;
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Downloads' and @resource-id='android:id/title']")
+    protected WebElement optDownloads;
 
     String strTextViewLocator = new StringBuilder()
             .append("//android.widget.TextView[@text='")
@@ -2419,14 +2427,27 @@ public class MessagesPage extends BasePage {
                     click(WhileUsingTheApp);
                     waitForSeconds(3);
                     click(WhileUsingTheApp);
+                    waitForSeconds(3);
+                    click(FileIcon);
+                    waitForSeconds(3);
+                    click(iconHamburger);
+                    waitForSeconds(3);
+                    click(optDownloads);
                 }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Samsung Galaxy S21")) {
                     waitForSeconds(3);
                     click(WhileUsingTheApp);
+                    waitForSeconds(3);
+                    click(FileIcon);
 
                 }
-                waitForSeconds(3);
-                click(FileIcon);
+                if (System.getProperty("deviceName").equalsIgnoreCase("Motorola One Fusion+")){
+                    waitForSeconds(3);
+                    click(WhileUsingTheAppForA13);
+                    waitForSeconds(2);
+                    click(FileIcon);
+                }
+
                 WebElement elmntImage = waitForElement(By.xpath(strTextViewLocator.replace("<<TEXT>>", "MMHtest.jpg")));
                 click(elmntImage);
                 waitForSeconds(3);

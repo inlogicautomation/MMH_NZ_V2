@@ -144,8 +144,14 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Pay at health centre')]")
     protected WebElement btnPayAtHealthCentre;
 
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Pay at health centre')])[2]")
+    protected WebElement btnMobilePayAtHealthCentre;
+
     @FindBy(how = How.XPATH, using = "//span[text()='Pay Now']")
     protected WebElement btnPayNow;
+
+    @FindBy(how = How.XPATH, using = "(//span[text()='Pay Now'])[2]")
+    protected WebElement btnMobilePayNow;
 
     @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Payment')]")
     protected WebElement txtPayment;
@@ -655,8 +661,8 @@ public class RepeatPrescription extends BasePage {
             jsClick(btnNextRRP);
             waitForSeconds(3);
 //            jsScrollIntoView(btnPayNow);
-            waitForElement(btnPayNow);
-            blResult = verifyElement(btnPayNow);
+            waitForElement(btnMobilePayNow);
+            blResult = verifyElement(btnMobilePayNow);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -676,7 +682,7 @@ public class RepeatPrescription extends BasePage {
             WebElement ddlUrgrencyType = waitForElement(By.xpath(selectUrgrency.replace("<<REPLACEMENT>>", strUrgency)));
             waitForSeconds(2);
             waitForElementClickable(ddlUrgrencyType);
-            mouseClick(ddlUrgrencyType);
+            jsClick(ddlUrgrencyType);
             blResult = true;
 
         } catch (Exception e) {
@@ -796,6 +802,26 @@ public class RepeatPrescription extends BasePage {
         return blResult;
     }
 
+    public boolean clickMobilePayAtHealthCentre() {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(btnMobilePayAtHealthCentre);
+            waitForSeconds(4);
+            click(btnMobilePayAtHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            System.out.println(" Successfully Selected Pay at Health centre Button >>>");
+            waitForElementToAppear(driver, By.xpath(emlntSuccessPopUp1));
+            waitForElement(emlntSuccessPopUp);
+            blResult = verifyElement(emlntSuccessPopUp);
+
+        } catch (Exception e) {
+            System.out.println("Failed to Select Pay at Health centre Button >>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
     public boolean clickPayNow() {
         boolean blResult = false;
         try {
@@ -803,6 +829,26 @@ public class RepeatPrescription extends BasePage {
             waitForElementClickable(btnPayNow);
             waitForSeconds(4);
             click(btnPayNow);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(6);
+            takeScreenshot(driver);
+            System.out.println("Successfully clicked Pay now button >>>");
+            blResult = verifyElement(txtPayment);
+
+        } catch (Exception e) {
+            System.out.println("Failed to clicked Pay now button >>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+    public boolean clickMobilePayNow() {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(btnMobilePayNow);
+            waitForSeconds(4);
+            click(btnMobilePayNow);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(6);
             takeScreenshot(driver);

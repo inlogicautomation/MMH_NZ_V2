@@ -31,6 +31,10 @@ public class GoalTracking extends BasePage {
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Goal Tracking')]")
     protected WebElement elmtsgoaltracking;
 
+    protected String ClickRadioButton = new StringBuilder()
+            .append("//a[contains(text(),'")
+            .append("<<REPLACEMENT1>>").append("')]").toString();
+
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Add Goal')]")
     protected WebElement elmtAddGoal;
 
@@ -132,8 +136,14 @@ public class GoalTracking extends BasePage {
     @FindBy(how = How.XPATH, using = "//textarea[@formcontrolname='notes']")
     protected WebElement elmntNotes;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Update')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Save')]")
     protected WebElement btnEditviewjournalSave;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),' Update ')]")
+    protected WebElement btnEditGoalTrackingSave;
+
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Save')])[3]")
+    protected WebElement btnFutureTaskEditviewjournalSave;
 
     protected String strDeleteGoalTrackingTableData = new StringBuilder()
             .append("(//tr//td//following::td//a[contains(text(),'")
@@ -312,7 +322,7 @@ public class GoalTracking extends BasePage {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(4);
         waitForElement(elmtAddGoal);
-        click(elmtAddGoal);
+        jsClick(elmtAddGoal);
         waitForSeconds(3);
         return verifyElement(elmtsAddNewGoal);
     }
@@ -539,6 +549,7 @@ public class GoalTracking extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(3)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(4)))));
+            waitForSeconds(3);
             waitForElement(elmntPrescriptionTableData);
             verifyElement(elmntPrescriptionTableData);
             blResult = true;
@@ -685,6 +696,41 @@ public class GoalTracking extends BasePage {
 
     }
 
+    public boolean clickGoalEditSaveButton() {
+        waitForSeconds(3);
+        waitForElementClickable(btnEditGoalTrackingSave);
+        jsClick(btnEditGoalTrackingSave);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(3);
+        waitForElement(elmtsgoaltracking);
+        return verifyElement(elmtsgoaltracking);
+
+    }
+
+    public boolean clickFutureTaskEditSaveButton() {
+        waitForSeconds(3);
+        waitForElementClickable(btnFutureTaskEditviewjournalSave);
+        jsClick(btnFutureTaskEditviewjournalSave);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(3);
+//        jsClick(elmtsPreviousTask);
+        waitForElement(elmtsgoaltracking);
+        return verifyElement(elmtsgoaltracking);
+
+    }
+
+    public boolean clickPreviousTaskEditSaveButton() {
+        waitForSeconds(3);
+        waitForElementClickable(btnFutureTaskEditviewjournalSave);
+        jsClick(btnFutureTaskEditviewjournalSave);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(3);
+        jsClick(elmtsPreviousTask);
+        waitForElement(elmtsgoaltracking);
+        return verifyElement(elmtsgoaltracking);
+
+    }
+
     public boolean ClickDeleteViewJournalTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
@@ -696,6 +742,7 @@ public class GoalTracking extends BasePage {
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
+            jsScrollIntoView(elmntBloodPressureTableData);
             waitForElementClickable(elmntBloodPressureTableData);
             waitForSeconds(3);
             jsClick(elmntBloodPressureTableData);
@@ -978,6 +1025,24 @@ public class GoalTracking extends BasePage {
         return verifyElement(elmtsgoaltracking);
     }
 
+    public boolean clickRadioButton(List<String> strConditionName) {
+        boolean isVerified = false;
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            System.out.println(">>>>>>>>>>>>>>>strConditionName"+strConditionName);
+            waitForSeconds(2);
+            String strdata=TestDataUtil.getValue(strConditionName.get(0).concat(strExecutionID));
+            WebElement elmntPrescriptionTableData = waitForElement(By.xpath(ClickRadioButton
+                    .replace("<<REPLACEMENT1>>",strdata)));
+            System.out.println(">>>>>>>>>>>>>>"+elmntPrescriptionTableData);
+            waitForSeconds(3);
+            jsClick(elmntPrescriptionTableData);
+            waitForSeconds(3);
+            isVerified = verifyElement(elmntPrescriptionTableData);
+        }
+
+        return isVerified;
+    }
+
     public boolean ClickAddValueTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
@@ -1125,9 +1190,9 @@ public class GoalTracking extends BasePage {
     //h1[contains(text(),'Goal Analysis')]//
 
     public boolean clickAddTaskIcon() {
-        driver.navigate().refresh();
-        waitForSeconds(5);
-        waitForElementDisappear(driver,btnAddTaskButton);
+//        driver.navigate().refresh();
+//        waitForSeconds(5);
+//        waitForElementDisappear(driver,btnAddTaskButton);
         waitForSeconds(3);
         jsScrollIntoView(btnAddTaskButton);
         waitForElementClickable(btnAddTaskButton);
@@ -1352,17 +1417,41 @@ public class GoalTracking extends BasePage {
         return blResult;
     }
 
-    public boolean ClickDeleteFutureTaskTableData(List<String> lstDetails) {
+    public boolean ClickDeleteFutureTaskTableData(String lstDetails) {
         boolean blResult = false;
         try {
-//            List<String>strdata=TestDataUtil.getListOfValue(lstDetails);
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            System.out.println(">>>>>>>>>>>>"+lstDetails);
             WebElement elmntBloodPressureTableData = waitForElement(By.xpath(ClickFutureTaskDeleteIconTableData
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0).concat(strExecutionID)))));
-
-            waitForElementClickable(elmntBloodPressureTableData);
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.concat(strExecutionID)))));
+            System.out.println(">>>>>>>>>>>"+elmntBloodPressureTableData);
             waitForSeconds(3);
+            waitForElementClickable(elmntBloodPressureTableData);
             jsClick(elmntBloodPressureTableData);
+            waitForSeconds(3);
+            waitForElementClickable(btnBloodPressureyes);
+            jsClick(btnBloodPressureyes);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+
+    public boolean ClickDeletePreviousTaskTableData(String lstDetails) {
+        boolean blResult = false;
+        try {
+            System.out.println(">>>>>>>>>>>>"+lstDetails);
+            WebElement elmntBloodPressureTableData = waitForElement(By.xpath(ClickFutureTaskDeleteIconTableData
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.concat(strExecutionID)))));
+            System.out.println(">>>>>>>>>>>"+elmntBloodPressureTableData);
+            waitForSeconds(3);
+            waitForElementClickable(elmntBloodPressureTableData);
+            jsClick(elmntBloodPressureTableData);
+            waitForSeconds(3);
+            waitForElementClickable(btnBloodPressureyes);
+            jsClick(btnBloodPressureyes);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {

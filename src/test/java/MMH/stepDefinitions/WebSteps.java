@@ -576,7 +576,17 @@ public class WebSteps {
         }
         Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(5)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
-        Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
+
+        }
     }
 
     @And("I should see the successful message and I navigate to view history of the Prescription")
@@ -628,7 +638,19 @@ public class WebSteps {
         }
         Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(9)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
-        Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
+
+        }
+
 
     }
 
@@ -661,7 +683,19 @@ public class WebSteps {
         }
         Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(8)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
-        Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
+
+        }
+
 
 
     }
@@ -693,7 +727,18 @@ public class WebSteps {
         }
         Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(8)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
-        Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayNow());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayNow());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayNow());
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayNow());
+
+        }
+
 
 
     }
@@ -1700,7 +1745,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.clickImmunisationSave();
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            demoPageContainer.myHealthRecordsPage.clickAddRecord();
+            demoPageContainer.myHealthRecordsPage.clickImmunisationAddRecord();
             demoPageContainer.myHealthRecordsPage.enterImmunisationVaccineName(TestDataUtil.getValue(listCreateData.get(0)));
             demoPageContainer.myHealthRecordsPage.enterImmunisationDateGiven();
             demoPageContainer.myHealthRecordsPage.enterAdditionalInformation(TestDataUtil.getValue(listCreateData.get(1)));
@@ -1708,7 +1753,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.clickImmunisationSave();
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
-            demoPageContainer.myHealthRecordsPage.clickAddRecord();
+            demoPageContainer.myHealthRecordsPage.clickImmunisationAddRecord();
             demoPageContainer.myHealthRecordsPage.enterImmunisationVaccineName(TestDataUtil.getValue(listCreateData.get(0)));
             demoPageContainer.myHealthRecordsPage.enterImmunisationDateGiven();
             demoPageContainer.myHealthRecordsPage.enterAdditionalInformation(TestDataUtil.getValue(listCreateData.get(1)));
