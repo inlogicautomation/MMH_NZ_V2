@@ -1052,11 +1052,13 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean VerifyLabResultsTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
+            waitForSeconds(4);
             WebElement elmntLabResultTableData = waitForElement(By.xpath(strLabResultsIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
                     .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))));
+            waitForSeconds(4);
             waitForElement(elmntLabResultTableData);
             verifyElement(elmntLabResultTableData);
             blResult = verifyElement(headerLabResults);
