@@ -159,6 +159,9 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//h2[text()='Payment Checkout']")
     protected WebElement txtPaymentCheckOut;
 
+    @FindBy(how = How.XPATH, using = "//input[@id='Account2Account']//following::label[contains(text(),'Account2Account')]")
+    protected WebElement selectAcToAc;
+
     @FindBy(how = How.XPATH, using = "//iframe[@id='iframePayment']")
     protected WebElement CardPaymentFrame;
 
@@ -200,6 +203,9 @@ public class RepeatPrescription extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Payment Confirmation')]/i")
     protected WebElement btnBackPaymentConfirmation;
+
+    protected String btnBackPaymentConfirmation1 = "//h1[contains(text(),'Payment Confirmation')]/i";
+
 
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'View Previous Requests')]")
     protected WebElement txtViewPreviousRequests;
@@ -587,7 +593,7 @@ public class RepeatPrescription extends BasePage {
             waitForSeconds(10);
             waitForElementClickable(drpdownLocation);
             waitForSeconds(4);
-            click(drpdownLocation);
+            jsClick(drpdownLocation);
             waitForSeconds(4);
             System.out.println(" select Location Locator :: " + selectLocation.replace("<<REPLACEMENT>>", strLocation) + "\n");
             WebElement ddlLocation = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
@@ -665,7 +671,7 @@ public class RepeatPrescription extends BasePage {
             waitForSeconds(3);
             jsClick(btnNextRRP);
             waitForSeconds(3);
-//            jsScrollIntoView(btnPayNow);
+            jsScrollIntoView(btnMobilePayNow);
             waitForElement(btnMobilePayNow);
             blResult = verifyElement(btnMobilePayNow);
         } catch (Exception e) {
@@ -896,7 +902,7 @@ public class RepeatPrescription extends BasePage {
             waitForElement(txtPayment);
             verifyElement(txtPayment);
             waitForElementClickable(btnPaymentOk);
-            click(btnPaymentOk);
+            jsClick(btnPaymentOk);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -1641,12 +1647,37 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             waitForSeconds(2);
             waitForElement(txtPaymentCheckOut);
             verifyElement(txtPaymentCheckOut);
-            waitForSeconds(2);
+            waitForSeconds(3);
             WebElement selectPaymentMethod = waitForElement(By.xpath(paymentMethod.replace("<<REPLACEMENT>>", strPaymentMethod)));
             System.out.println("selectPaymentMethod XPath >>>" + paymentMethod.replace("<<REPLACEMENT>>", strPaymentMethod));
             waitForElement(selectPaymentMethod);
-            waitForElementClickable(selectPaymentMethod);
             jsClick(selectPaymentMethod);
+//            waitForElementClickable(selectAcToAc);
+//            jsClick(selectAcToAc);
+            System.out.println("Successfully payment method was selected >>>>>");
+
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Failed to Select payment method  >>>>>");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+    public boolean selectAccountToAccountPaymentMethod(String strPaymentMethod) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtPaymentCheckOut);
+            verifyElement(txtPaymentCheckOut);
+            waitForSeconds(3);
+//            WebElement selectPaymentMethod = waitForElement(By.xpath(paymentMethod.replace("<<REPLACEMENT>>", strPaymentMethod)));
+//            System.out.println("selectPaymentMethod XPath >>>" + paymentMethod.replace("<<REPLACEMENT>>", strPaymentMethod));
+//            waitForElement(selectPaymentMethod);
+//            waitAndClick(selectPaymentMethod);
+            waitForElementClickable(selectAcToAc);
+            jsClick(selectAcToAc);
             System.out.println("Successfully payment method was selected >>>>>");
 
             blResult = true;
@@ -1692,6 +1723,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             waitForSeconds(3);
             waitForElementClickable(btnSubmit);
             jsClick(btnSubmit);
+
             System.out.println("Successfully Enter Card Details >>>>>");
             blResult = true;
 
@@ -1741,8 +1773,9 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             txtboxCustomerNumber.sendKeys(strCustomerNumber);
             waitForSeconds(2);
             txtboxPassword.sendKeys(strPassword);
+            waitForSeconds(3);
             waitForElementClickable(btnNextA2A);
-            click(btnNextA2A);
+            jsClick(btnNextA2A);
 
             blResult = true;
 
@@ -1763,10 +1796,11 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             WebElement selectAccountForpayment = waitForElement(By.xpath(rdoBtnSelectAccount.replace("<<REPLACEMENT>>", strAccountForPayment)));
             System.out.println("PaymentStatus Xpath >>>> " + rdoBtnSelectAccount.replace("<<REPLACEMENT>>", strAccountForPayment));
             waitForElementClickable(selectAccountForpayment);
-            click(selectAccountForpayment);
+            jsClick(selectAccountForpayment);
+            waitForSeconds(3);
             waitForElementClickable(btnNextA2A);
             takeScreenshot(driver);
-            click(btnNextA2A);
+            jsClick(btnNextA2A);
             System.out.println("Select Account For Payment was Successful >>>");
 
             blResult = true;
@@ -1787,11 +1821,11 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             System.out.println("reference Details >>>>> " + referenceDetails);
             waitForElementClickable(btnNextA2A);
             takeScreenshot(driver);
-            click(btnNextA2A);
-            waitForElement(elmntSuccessA2A);
-
+            jsClick(btnNextA2A);
+            waitForSeconds(3);
+//            waitForElement(elmntSuccessA2A);
             System.out.println("Reference details was Successful >>>");
-            blResult = verifyElement(elmntSuccessA2A);
+            blResult =true;
         } catch (Exception e) {
             System.out.println("Failed Reference details was Successful >>>");
             e.printStackTrace();
@@ -1853,10 +1887,12 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             waitForSeconds(2);
 //            waitForElement(elmntOnlineCardSuccessPopUp);
 //            verifyElement(elmntOnlineCardSuccessPopUp);
-            waitForSeconds(2);
+            waitForSeconds(4);
             takeScreenshot(driver);
 //            waitForElementClickable(btnBackToRRP);
 //            click(btnBackToRRP);
+            waitForElementToAppear(driver, By.xpath(btnBackPaymentConfirmation1));
+            jsScrollIntoView(btnBackPaymentConfirmation);
             waitForElementClickable(btnBackPaymentConfirmation);
             jsClick(btnBackPaymentConfirmation);
             waitForSeconds(5);

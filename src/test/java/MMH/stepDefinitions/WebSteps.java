@@ -767,8 +767,7 @@ public class WebSteps {
 
         System.out.println("strCardDetails " + strAccountDetails);
         List<String> lstStrAccountDetails = TestDataUtil.getListOfValue(strAccountDetails);
-
-        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPaymentMethod(lstStrAccountDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectAccountToAccountPaymentMethod(lstStrAccountDetails.get(0)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectBank(lstStrAccountDetails.get(1)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.enterAccountDetails(lstStrAccountDetails.get(2), lstStrAccountDetails.get(3)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectAccountForPayment(lstStrAccountDetails.get((4))));
