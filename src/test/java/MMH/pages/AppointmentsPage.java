@@ -308,6 +308,9 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//img[@id='DpsCustomerLogo']")
     protected WebElement elmntPaymentPage;
 
+    @FindBy(how = How.XPATH, using = "//iframe[@id='iframePayment']")
+    protected WebElement CardPaymentFrame;
+
     @FindBy(how = How.XPATH, using = "//div//span[contains(text(),'Ok')]")
     protected WebElement btnPaymentPopupOK;
 
@@ -409,10 +412,10 @@ public class AppointmentsPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntLocationCenter);
             waitForSeconds(2);
-            waitAndClick(elmntLocationCenter);
+            jsClick(elmntLocationCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>", strLocation)));
-            waitAndClick(elmntSelectLocation);
+            jsClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntCovidPreScreeningPopup);
             blResult = verifyElement(elmntCovidPreScreeningPopup);
@@ -429,7 +432,7 @@ public class AppointmentsPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntCovidPreScreeningPopup);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitAndClick(elmntDeclineCovidPreScreening);
+            jsClick(elmntDeclineCovidPreScreening);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(4);
             blResult = verifyElement(elmntAppointmentPanel);
@@ -1448,6 +1451,10 @@ public class AppointmentsPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(6);
             compareCurrentUrlTill("https://uat.paymentexpress.com/pxmi3https://uat.paymentexpress.com/pxmi3", "i3");
+            waitForSeconds(3);
+            driver.switchTo().frame(CardPaymentFrame);
+            System.out.println("Succesfully Switch to frame");
+            waitForSeconds(3);
             blResult = verifyElement(elmntPaymentPage);
             ;
         } catch (Exception e) {
@@ -1526,8 +1533,9 @@ public class AppointmentsPage extends BasePage {
     public boolean clickSubmitPayment() {
         boolean blResult = false;
         try {
+            jsScrollIntoView(btnSubmit);
             waitForElement(btnSubmit);
-            click(btnSubmit);
+            jsClick(btnSubmit);
             waitForSeconds(2);
             blResult = true;
         } catch (Exception e) {
@@ -1969,6 +1977,13 @@ public class AppointmentsPage extends BasePage {
         }
         WebElement elmntReservationDetails = waitForElement(By.xpath(eleAppointmentSummaryDetails.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDateMonth))));
         verifyElement(elmntReservationDetails);
+//        waitAndAcceptAlert();
+        System.out.println("Successfully Accept Alert");
+        waitForSeconds(3);
+        driver.switchTo().defaultContent();
+        System.out.println("Successfully default page");
+
+
         return blResult;
     }
 

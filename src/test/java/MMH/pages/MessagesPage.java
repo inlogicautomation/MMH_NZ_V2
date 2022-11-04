@@ -1107,12 +1107,12 @@ public class MessagesPage extends BasePage {
     public boolean selectAutomaticRepliesSetting() {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            waitForSeconds(3);
+            jsScrollIntoView(btnSave);
             waitForElement(btnSave);
-            click(drpDownAutomaticRepliesSetting);
-            waitForSeconds(1);
+            jsClick(drpDownAutomaticRepliesSetting);
+            waitForSeconds(3);
             waitForElement(chkboxAutomaticReply);
-
             System.out.println("Automatic Replies Setting was selected >>> ::");
             blResult = verifyElement(chkboxAutomaticReply);
 
@@ -1607,10 +1607,11 @@ public class MessagesPage extends BasePage {
         boolean blResult = false;
 
         try {
-            waitForSeconds(1);
+            waitForSeconds(3);
             takeScreenshot(driver);
             waitForElementClickable(btnSave);
-            click(btnSave);
+            jsClick(btnSave);
+            waitForSeconds(3);
             waitForElement(txtSettingSuccessPopUp);
             blResult = verifyElement(txtSettingSuccessPopUp);
             System.out.println("Save button clicked successfully >>>>::");
@@ -2218,7 +2219,7 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(btnGroupTo);
             Select healthCentre = new Select(driver.findElement(By.xpath("(//select[contains(@id,'GroupMessage1')])[4]")));
             healthCentre.selectByVisibleText(strFamilyMember);
-            waitForSeconds(1);
+            waitForSeconds(10);
             blResult = true;
             System.out.println("\nSuccessfully selected the health centre >>> :: ");
         } catch (Exception e) {
@@ -2482,14 +2483,13 @@ public class MessagesPage extends BasePage {
                 System.out.println(strUploadDocumentName);
                 waitForSeconds(2);
                 waitForElement(btnAttachClick);
-                click(btnAttachClick);
-
+                jsClick(btnAttachClick);
                 String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
                 System.out.println(strFloorplanDocumentName);
                 btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
                 waitForSeconds(3);
                 waitForElement(btnAttachUpload);
-                click(btnAttachUpload);
+                jsClick(btnAttachUpload);
 
             }
             blResult = true;
@@ -2545,6 +2545,7 @@ public class MessagesPage extends BasePage {
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForSeconds(3);
+            jsScrollDown();
             jsScrollIntoView(btnMobileReplysendMessage);
             waitForElementClickable(btnMobileReplysendMessage);
             jsClick(btnMobileReplysendMessage);
@@ -3149,7 +3150,7 @@ public class MessagesPage extends BasePage {
     public boolean enterGroupSubject(String strSubject) {
         boolean blResult = false;
         try {
-
+            waitForSeconds(5);
             waitForElementClickable(txtGroupBoxSubject);
             txtGroupBoxSubject.clear();
             waitForElementClickable(txtGroupBoxSubject);

@@ -323,16 +323,16 @@ Feature: My Health Records
       | Tab             | Record         | Location        |
       | Clinician Notes | &VISITED_NAME& | &EDIT_LOCATION& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
-  Scenario Template: User Successfully logs in to the MMH Portal.
-
-    Given As a user I am on MMH login Page
-    And I enter "<Email Address>" and "<Password>" For Beta
-    When I click SignIn button
-    Then I should see user successfully logs in to the MMH portal
-    Examples:
-      | Email Address      | Password              |
-      | &EMAIL_FOR_HEALTH& | &PASSWORD_FOR_HEALTH& |
+#  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+#  Scenario Template: User Successfully logs in to the MMH Portal.
+#
+#    Given As a user I am on MMH login Page
+#    And I enter "<Email Address>" and "<Password>" For Beta
+#    When I click SignIn button
+#    Then I should see user successfully logs in to the MMH portal
+#    Examples:
+#      | Email Address      | Password              |
+#      | &EMAIL_FOR_HEALTH& | &PASSWORD_FOR_HEALTH& |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario: S12-Patient to View Health Records & Verify the Recalls Entries from Health Centre Medicine Details

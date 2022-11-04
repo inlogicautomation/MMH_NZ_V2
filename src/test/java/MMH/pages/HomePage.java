@@ -171,8 +171,9 @@ public class HomePage extends BasePage {
     public boolean clickBetaLoginButton() {
         boolean blResult = false;
         try {
+            waitForSeconds(3);
             waitForElement(betaLoginBtn);
-            click(betaLoginBtn);
+            jsClick(betaLoginBtn);
             blResult = true;
             System.out.println("Try Block 1 executed");
         } catch (Exception e) {

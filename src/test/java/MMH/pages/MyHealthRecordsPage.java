@@ -437,7 +437,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='dateTaken'])[2]")
     protected WebElement elmntMobilePrescriptionDateToken;
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@name='counterMobile']")
+    @FindBy(how = How.XPATH, using = "(//mat-select[@formcontrolname='howOften'])[2]")
     protected WebElement elmntMobileHowmanydrop;
 
     protected String elmntMobilePrescriptionHowmanyDrop = new StringBuilder().append("//span[@class='mat-option-text'][contains(text(),'")

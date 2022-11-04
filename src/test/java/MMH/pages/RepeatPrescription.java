@@ -159,6 +159,9 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//h2[text()='Payment Checkout']")
     protected WebElement txtPaymentCheckOut;
 
+    @FindBy(how = How.XPATH, using = "//iframe[@id='iframePayment']")
+    protected WebElement CardPaymentFrame;
+
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Transaction Approved') and @id='Success']")
     protected WebElement elmntPaymentSuccessForCard;
 
@@ -203,6 +206,8 @@ public class RepeatPrescription extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//h4 [contains(text(),'Success!')]/following::p[contains(text(),'Your request has been sent successfully. Once the request has been processed, you will get an email confirmation.')]/parent::div")
     protected WebElement txtRRPSuccessPopUp;
+
+    protected String txtRRPSuccessPopUp1 = "//h4 [contains(text(),'Success!')]/following::p[contains(text(),'Your request has been sent successfully. Once the request has been processed, you will get an email confirmation.')]/parent::div";
 
     @FindBy(how = How.XPATH, using = "//span[text()=' Back to RRP ']")
     protected WebElement btnBackToRRP;
@@ -766,8 +771,9 @@ public class RepeatPrescription extends BasePage {
     public boolean selectTermsAndCondition() {
         boolean blResult = false;
         try {
+            waitForSeconds(3);
             waitForElementClickable(chkTermsAndCondion);
-            click(chkTermsAndCondion);
+            jsClick(chkTermsAndCondion);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             takeScreenshot(driver);
             System.out.println("Terms and Condition was selected in the Request Medication");
@@ -845,10 +851,11 @@ public class RepeatPrescription extends BasePage {
     public boolean clickMobilePayNow() {
         boolean blResult = false;
         try {
+            jsScrollIntoView(btnMobilePayNow);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(btnMobilePayNow);
             waitForSeconds(4);
-            click(btnMobilePayNow);
+            jsClick(btnMobilePayNow);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(6);
             takeScreenshot(driver);
@@ -867,9 +874,9 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(3);
-//            waitForElement(txtRRPSuccessPopUp);
-//            verifyElement(txtRRPSuccessPopUp);
+         waitForElementToAppear(driver,By.xpath(txtRRPSuccessPopUp1));
+            waitForElement(txtRRPSuccessPopUp);
+            verifyElement(txtRRPSuccessPopUp);
             waitForSeconds(5);
             waitForElement(txtViewPreviousRequests);
             blResult = verifyElement(txtViewPreviousRequests);
@@ -893,6 +900,9 @@ public class RepeatPrescription extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(3);
+            driver.switchTo().frame(CardPaymentFrame);
+            waitForSeconds(3);
             waitForElement(txtPaymentCheckOut);
             blResult = verifyElement(txtPaymentCheckOut);
             System.out.println("Repeat Prescription was success  and Successfully to navigate the View History Page>>>>>>");
@@ -1456,17 +1466,17 @@ public class RepeatPrescription extends BasePage {
     public boolean selectPharmacy(String strPharmacy) {
         boolean blResult = false;
         try {
-
+jsScrollIntoView(drpDownSelectForPharmacyName);
             waitForSeconds(3);
             waitForElement(drpDownSelectForPharmacyName);
             waitForElementClickable(drpDownSelectForPharmacyName);
-            click(drpDownSelectForPharmacyName);
+            jsClick(drpDownSelectForPharmacyName);
             waitForSeconds(2);
             WebElement selectPharmacy = waitForElement(By.xpath(ddlSelectFileds.replace("<<REPLACEMENT>>", strPharmacy)));
             System.out.println("selectPharmacy XPath >>>" + ddlSelectFileds.replace("<<REPLACEMENT>>", strPharmacy));
             waitForElement(selectPharmacy);
             waitForElementClickable(selectPharmacy);
-            click(selectPharmacy);
+            jsClick(selectPharmacy);
             waitForSeconds(2);
             try {
                 jsScrollIntoView(btnChange);
@@ -1636,7 +1646,7 @@ public class RepeatPrescription extends BasePage {
             System.out.println("selectPaymentMethod XPath >>>" + paymentMethod.replace("<<REPLACEMENT>>", strPaymentMethod));
             waitForElement(selectPaymentMethod);
             waitForElementClickable(selectPaymentMethod);
-            click(selectPaymentMethod);
+            jsClick(selectPaymentMethod);
             System.out.println("Successfully payment method was selected >>>>>");
 
             blResult = true;
@@ -1679,10 +1689,11 @@ public class RepeatPrescription extends BasePage {
             waitForElement(txtboxCVC);
             txtboxCVC.sendKeys(strCVC);
             takeScreenshot(driver);
+            waitForSeconds(3);
             waitForElementClickable(btnSubmit);
-            click(btnSubmit);
+            jsClick(btnSubmit);
             System.out.println("Successfully Enter Card Details >>>>>");
-            blResult = verifyElement(elmntPaymentSuccessForCard);
+            blResult = true;
 
 
         } catch (Exception e) {
@@ -1703,11 +1714,13 @@ public class RepeatPrescription extends BasePage {
             WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
             System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
             waitForElementClickable(selectRdoBtnBank);
-            click(selectRdoBtnBank);
+            jsClick(selectRdoBtnBank);
+            waitForSeconds(3);
             waitForElementClickable(chkBoxA2ATnC);
-            click(chkBoxA2ATnC);
+            jsClick(chkBoxA2ATnC);
+            waitForSeconds(3);
             waitForElementClickable(btnNextA2A);
-            click(btnNextA2A);
+            jsClick(btnNextA2A);
 
             blResult = true;
 
@@ -1756,7 +1769,7 @@ public class RepeatPrescription extends BasePage {
             click(btnNextA2A);
             System.out.println("Select Account For Payment was Successful >>>");
 
-            blResult = verifyElement(txtReferenceDetails);
+            blResult = true;
         } catch (Exception e) {
             System.out.println("Failed to Select Account For Payment >>>");
             e.printStackTrace();
@@ -1838,14 +1851,17 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(elmntOnlineCardSuccessPopUp);
-            verifyElement(elmntOnlineCardSuccessPopUp);
+//            waitForElement(elmntOnlineCardSuccessPopUp);
+//            verifyElement(elmntOnlineCardSuccessPopUp);
             waitForSeconds(2);
             takeScreenshot(driver);
 //            waitForElementClickable(btnBackToRRP);
 //            click(btnBackToRRP);
             waitForElementClickable(btnBackPaymentConfirmation);
-            click(btnBackPaymentConfirmation);
+            jsClick(btnBackPaymentConfirmation);
+            waitForSeconds(5);
+            driver.switchTo().defaultContent();
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(txtViewPreviousRequests);
             System.out.println("verify The Prescription Details Online was Successful >>>>>");
         } catch (Exception e) {

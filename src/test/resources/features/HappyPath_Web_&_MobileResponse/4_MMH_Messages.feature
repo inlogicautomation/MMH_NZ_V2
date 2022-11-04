@@ -130,7 +130,7 @@ Feature: Messages
       | Message Details              |
       | &SENT_GROUP_MESSAGE_DETAILS& |
 
-  @WEB @MESSAGES @HAPPY_PATH
+  @WEB @MESSAGES @HAPPY_PATH @Test
   Scenario Template: User Successfully logs in to the MMH v2 Portal as Patient.
 
     Given As a user I am on MMH login Page
@@ -142,7 +142,7 @@ Feature: Messages
       | Email Address       | Password               |
       | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
 
-  @WEB @MESSAGES @HAPPY_PATH
+  @WEB @MESSAGES @HAPPY_PATH @Test
   Scenario Template: S5-  User verifies the Patient Group Message
 
     Given As a user I am on HomePage and navigate to GroupMessage

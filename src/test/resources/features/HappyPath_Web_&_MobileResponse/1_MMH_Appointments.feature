@@ -44,7 +44,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details                         | Details_For_Appointment                        | Future_Date   |
       | Book Appointment | &BOOK_VISIT_APPOINTMENT_USING_CARD_PAYMENT& | &VISIT_APPOINTMENT_DETAILS_USING_CARD_PAYMENT& | &FUTURE_DATE& |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Te
   Scenario Template: S5 - Patient Booking Appointment - Using Card Payment
 
     And I select payment option "<Payment_Option>"
@@ -153,7 +153,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details               | Details_For_Appointment              | Appointment_Summary                  | Future_Date   |
       | Book Appointment | &BOOK_VISIT_IN_VIDEO_APPOINTMENT& | &VISIT_IN_VIDEO_APPOINTMENT_DETAILS& | &VISIT_IN_VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @te
   Scenario Template: S4 - Patient Booking Appointment - Phone Appointment
 
     Given As a user I am on HomePage

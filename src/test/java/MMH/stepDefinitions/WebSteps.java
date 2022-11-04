@@ -93,9 +93,9 @@ public class WebSteps {
     public void iEnterTheVisitAppointmentDetails(String strHealthCenter) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
-            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -107,9 +107,9 @@ public class WebSteps {
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
-            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -162,9 +162,9 @@ public class WebSteps {
     public void iEnterTheVideoAppointmentDetails(String strVideoAppointmentDetails) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strVideoAppointmentDetails);
-            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -177,9 +177,9 @@ public class WebSteps {
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strVideoAppointmentDetails);
-            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -312,9 +312,9 @@ public class WebSteps {
     public void iEnterThePhoneAppointmentDetails(String strHealthCenter) {
         List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -328,9 +328,9 @@ public class WebSteps {
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -380,7 +380,7 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.appointmentsPage.selectExpiryDate());
         Assert.assertTrue(demoPageContainer.appointmentsPage.enterCVCNumber(TestDataUtil.getValue(lstPayOnlineDetails.get(3))));
         Assert.assertTrue(demoPageContainer.appointmentsPage.clickSubmitPayment());
-        Assert.assertTrue(demoPageContainer.appointmentsPage.clickPaymentCheckOut());
+//        Assert.assertTrue(demoPageContainer.appointmentsPage.clickPaymentCheckOut());
     }
 
 //    @Then("I should see payment has been processed successfully with appointment details {string}")
@@ -752,7 +752,7 @@ public class WebSteps {
         System.out.println("\n >>> lstStrCardDetails : " + lstStrCardDetails);
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPaymentMethod(lstStrCardDetails.get(0)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.enterCardDetails(lstStrCardDetails.get(1), lstStrCardDetails.get(2), lstStrCardDetails.get(3), lstStrCardDetails.get(4), lstStrCardDetails.get(5)));
-        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyPaymentSuccessForCard());
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyPaymentSuccessForCard());
         Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetails());
 
     }
@@ -773,7 +773,7 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.enterAccountDetails(lstStrAccountDetails.get(2), lstStrAccountDetails.get(3)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectAccountForPayment(lstStrAccountDetails.get((4))));
         Assert.assertTrue(demoPageContainer.repeatPrescription.referenceDetails());
-        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyPaymentSuccessForA2A());
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyPaymentSuccessForA2A());
         Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetails());
     }
 

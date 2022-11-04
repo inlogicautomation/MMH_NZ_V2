@@ -93,7 +93,7 @@ Feature: Repeat Request Prescription
       | Medication Details                  | Payment Details      | Prescription Verification Details             |
       | &DATA MEDS PAY BY USING ONLINE A2A& | &ACCOUNT TO ACCOUNT& | &VERIFICATION DATA FOR MEDS PAY BY USING A2A& |
 
-  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @RT
   Scenario Outline: S8- Request Repeat Prescription - View History
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
