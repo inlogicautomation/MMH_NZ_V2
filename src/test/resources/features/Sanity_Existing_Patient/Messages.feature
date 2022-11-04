@@ -11,7 +11,7 @@ Feature: Messages
 #      | Email Address | Password   |
 #      | &EMAIL&       | &PASSWORD& |
 
-  @WEB @MESSAGES @SANITY_PATH
+  @WEB @MESSAGES1 @SANITY_PATH
   Scenario Template: S1- User Successfully logs in to the V2UAT Portal.
 
     Given As a user I am on beta MMH login Page
@@ -147,7 +147,7 @@ Feature: Messages
 #    55:Click Delete All under draft
 #    These test Case Covered The Scenario NO: S7
 #  }
-  @WEB @MESSAGES @SANITY_PATH
+  @WEB @MESSAGES1 @SANITY_PATH
   Scenario Template: S7- Patient Save Message as Draft
 
     Given As a Existing user I am on HomePage and navigate to Compose Message

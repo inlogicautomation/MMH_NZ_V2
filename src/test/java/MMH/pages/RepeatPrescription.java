@@ -880,9 +880,9 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-         waitForElementToAppear(driver,By.xpath(txtRRPSuccessPopUp1));
-            waitForElement(txtRRPSuccessPopUp);
-            verifyElement(txtRRPSuccessPopUp);
+//         waitForElementToAppear(driver,By.xpath(txtRRPSuccessPopUp1));
+//            waitForElement(txtRRPSuccessPopUp);
+//            verifyElement(txtRRPSuccessPopUp);
             waitForSeconds(5);
             waitForElement(txtViewPreviousRequests);
             blResult = verifyElement(txtViewPreviousRequests);
@@ -1897,6 +1897,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             jsClick(btnBackPaymentConfirmation);
             waitForSeconds(5);
             driver.switchTo().defaultContent();
+            System.out.println("Successfully Switch to Default Page");
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(txtViewPreviousRequests);
             System.out.println("verify The Prescription Details Online was Successful >>>>>");

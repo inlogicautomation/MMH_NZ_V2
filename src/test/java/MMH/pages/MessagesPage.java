@@ -2263,7 +2263,8 @@ public class MessagesPage extends BasePage {
             jsClick(btnServiceName);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntServiceName.replace("<<REPLACEMENT>>", strFamilyMember)));
-            waitForSeconds(1);
+            waitForSeconds(3);
+            jsScrollIntoView(elmntEntriesFromHealthCentre);
             waitForElementClickable(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -2328,7 +2329,7 @@ public class MessagesPage extends BasePage {
     public void clickCheckBox() {
         waitForSeconds(3);
         if (verifyElement(btnCheckBox)) {
-            click(btnCheckBox);
+            jsScrollIntoView(btnCheckBox);
         } else {
             System.out.println("CheckBox are checked::>>");
         }
@@ -2466,10 +2467,9 @@ public class MessagesPage extends BasePage {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
                 System.out.println("Member " + strUploadDocumentName);
                 System.out.println(strUploadDocumentName);
-                waitForSeconds(2);
+                waitForSeconds(3);
                 waitForElement(btnAttachClick);
-                click(btnAttachClick);
-
+                jsClick(btnAttachClick);
                 String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
                 System.out.println(strFloorplanDocumentName);
                 btnFloorplanUpload.sendKeys(strFloorplanDocumentName);

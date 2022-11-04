@@ -121,7 +121,7 @@ Feature: Dashboard
 
 
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES @TEST123
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
   Scenario Template: S3- User successfully login into Doctor Portal
 
     Given As a user Launch the "<V1 Portal>"

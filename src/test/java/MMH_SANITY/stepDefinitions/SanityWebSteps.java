@@ -2046,7 +2046,7 @@ public class SanityWebSteps {
         Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToDashboard());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToBookAppointmentPage());
-        Assert.assertTrue(sanityPageContainer.dashboardPage.declineCovidPreScreeningPopup());
+//        Assert.assertTrue(sanityPageContainer.dashboardPage.declineCovidPreScreeningPopup());
 
 
     }

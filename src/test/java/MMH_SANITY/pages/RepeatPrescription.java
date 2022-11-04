@@ -252,6 +252,9 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'OK')]")
     protected WebElement btnPaymentOk;
 
+    @FindBy(how = How.XPATH, using = "//iframe[@id='iframePayment']")
+    protected WebElement CardPaymentFrame;
+
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'Your request has been sent successfully. Once the request has been processed, you will get an email ')]")
     protected WebElement emlntSuccessPopUp;
 
@@ -391,6 +394,7 @@ public class RepeatPrescription extends BasePage {
             waitForSeconds(2);
             System.out.println("Doctor xpath >>> : " + selectDoctor.replace("<<REPLACEMENT>>", strDoctor));
             WebElement ddlDoctor = waitForElement(By.xpath(selectDoctor.replace("<<REPLACEMENT>>", strDoctor)));
+            jsScrollIntoView(ddlDoctor);
             waitForElement(ddlDoctor);
             waitForElementClickable(ddlDoctor);
             waitForSeconds(4);
@@ -562,7 +566,7 @@ public class RepeatPrescription extends BasePage {
             waitForElement(btnPayNow);
             waitForElementClickable(btnPayNow);
             waitForSeconds(4);
-            click(btnPayNow);
+            jsClick(btnPayNow);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(6);
             takeScreenshotSanity(driver);
@@ -586,10 +590,13 @@ public class RepeatPrescription extends BasePage {
             waitForElement(txtPayment);
             verifyElement(txtPayment);
             waitForElementClickable(btnPaymentOk);
-            click(btnPaymentOk);
+            jsClick(btnPaymentOk);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(3);
+            driver.switchTo().frame(CardPaymentFrame);
+            waitForSeconds(3);
             waitForElement(txtPaymentCheckOut);
             blResult = verifyElement(txtPaymentCheckOut);
             System.out.println("Repeat Prescription was success  and Successfully to navigate the View History Page>>>>>>");

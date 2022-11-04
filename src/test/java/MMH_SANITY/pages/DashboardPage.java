@@ -238,7 +238,6 @@ public class DashboardPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
             waitForElement(elmntWelcomeMessage);
-
             jsScrollIntoView(elmntBookAppointment);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntBookAppointment);
@@ -263,11 +262,11 @@ public class DashboardPage extends BasePage {
         try {
             waitForSeconds(3);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(elmntCovidPreScreeningPopup);
+//            waitForElement(elmntCovidPreScreeningPopup);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(elmntDeclineCovidPreScreening);
-            waitForElementClickable(elmntDeclineCovidPreScreening);
-            waitAndClick(elmntDeclineCovidPreScreening);
+//            waitForElement(elmntDeclineCovidPreScreening);
+//            waitForElementClickable(elmntDeclineCovidPreScreening);
+//            waitAndClick(elmntDeclineCovidPreScreening);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(4);
             blResult = verifyElement(elmntAppointmentPanel);
