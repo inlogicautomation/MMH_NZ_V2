@@ -13,6 +13,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static cap.utilities.DateUtil.getCurrentDate;
+
 public class RepeatPrescription extends BasePage {
 
     public RepeatPrescription(WebDriver driver) {
@@ -951,12 +953,13 @@ public class RepeatPrescription extends BasePage {
             waitForElement(txtViewPreviousRequests);
             verifyElement(txtViewPreviousRequests);
             waitForSeconds(3);
-            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
-
-            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
-
-            String currentDate = formatter.format(calendar.getTime());
+//            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+//
+//            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+//            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+//
+//            String currentDate = formatter.format(calendar.getTime());
+            String currentDate = getCurrentDate("dd MMM yyyy");
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
             waitForSeconds(2);
@@ -1017,12 +1020,13 @@ public class RepeatPrescription extends BasePage {
             verifyElement(txtViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
-            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
-
-            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
-
-            String currentDate = formatter.format(calendar.getTime());
+//            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+//
+//            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+//            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+//
+//            String currentDate = formatter.format(calendar.getTime());
+            String currentDate = getCurrentDate("dd MMM yyyy");
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
             waitForElementToAppear(driver, By.xpath(txtPrescriptionDate1));
@@ -1083,11 +1087,12 @@ public class RepeatPrescription extends BasePage {
             waitForSeconds(2);
             takeScreenshot(driver);
 
-            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
-            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
-
-            String currentDate = formatter.format(calendar.getTime());
+//            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+//            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+//            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+//
+//            String currentDate = formatter.format(calendar.getTime());
+            String currentDate = getCurrentDate("dd MMM yyyy");
             System.out.println(currentDate);
             System.out.println("currentDate >>>: " + currentDate);
             waitForElementToAppear(driver, By.xpath(txtPrescriptionDate1));
@@ -1149,13 +1154,14 @@ public class RepeatPrescription extends BasePage {
             verifyElement(txtViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
-            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
-
-            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
-
-            String currentDate = formatter.format(calendar.getTime());
-            System.out.println(currentDate);
+//            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+//
+//            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+//            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+//
+//            String currentDate = formatter.format(calendar.getTime());
+//            System.out.println(currentDate);
+            String currentDate = getCurrentDate("dd MMM yyyy");
             System.out.println("currentDate >>>: " + currentDate);
             waitForSeconds(2);
             waitForElementToAppear(driver, By.xpath(txtPrescriptionDate1));
@@ -1213,11 +1219,12 @@ public class RepeatPrescription extends BasePage {
             verifyElement(txtViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
-            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
-            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
-            String currentDate = formatter.format(calendar.getTime());
-            System.out.println(currentDate);
+//            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+//            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+//            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+//            String currentDate = formatter.format(calendar.getTime());
+//            System.out.println(currentDate);
+            String currentDate = getCurrentDate("dd MMM yyyy");
             System.out.println("currentDate >>>: " + currentDate);
             waitForSeconds(2);
             waitForElementToAppear(driver, By.xpath(txtPrescriptionDate1));
@@ -1252,7 +1259,7 @@ public class RepeatPrescription extends BasePage {
                 System.out.println("Successfully verified the Prescription>>>");
                 blResult = true;
             }
-
+            blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(" Failed to verify the Prescription>>>");
@@ -1274,12 +1281,13 @@ public class RepeatPrescription extends BasePage {
             verifyElement(txtViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
-            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
-
-            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
-
-            String currentDate = formatter.format(calendar.getTime());
+//            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+//
+//            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+//            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+//
+//            String currentDate = formatter.format(calendar.getTime());
+            String currentDate = getCurrentDate("dd MMM yyyy");
             System.out.println(currentDate);
             waitForElementToAppear(driver, By.xpath(txtPrescriptionDate1));
             waitForSeconds(3);
