@@ -546,6 +546,7 @@ public class MessagesPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator btn-primary-pill mat-button mat-button-base'])[1]")
     protected WebElement btnReplysendMessage;
+//    (//span[contains(text(),'Send message')])[1]
 
     @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator btn-primary-pill mat-button mat-button-base'])[2]")
     protected WebElement btnMobileReplysendMessage;
@@ -2330,6 +2331,7 @@ public class MessagesPage extends BasePage {
         waitForSeconds(3);
         if (verifyElement(btnCheckBox)) {
             jsScrollIntoView(btnCheckBox);
+            jsClick(btnCheckBox);
         } else {
             System.out.println("CheckBox are checked::>>");
         }

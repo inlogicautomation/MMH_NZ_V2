@@ -383,13 +383,14 @@ public class ViewJournal extends BasePage {
 
     public boolean clickMaxvalue1() {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        jsScrollIntoView(elmntDownArrow1);
         waitForElement(elmntDownArrow1);
-        click(elmntDownArrow1);
+        jsClick(elmntDownArrow1);
         elmntDownArrow1.sendKeys(Keys.ARROW_DOWN);
         elmntDownArrow1.sendKeys(Keys.ARROW_DOWN);
         elmntDownArrow1.sendKeys(Keys.ARROW_DOWN);
         elmntDownArrow1.sendKeys(Keys.ENTER);
-        return verifyElement(elmntDownArrow);
+        return verifyElement(elmntDownArrow1);
     }
 
     public static void main(String[] args) {

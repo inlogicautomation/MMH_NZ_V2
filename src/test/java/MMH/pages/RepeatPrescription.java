@@ -468,7 +468,7 @@ public class RepeatPrescription extends BasePage {
             waitForElementClickable(elmntRequestNewScript);
             click(elmntRequestNewScript);
             waitForSeconds(2);
-            refreshPage();
+//            refreshPage();
             waitForSeconds(2);
             waitForElement(txtRequestNewScript);
             blResult = verifyElement(txtRequestNewScript);

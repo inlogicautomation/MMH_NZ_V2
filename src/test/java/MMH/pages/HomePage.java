@@ -64,6 +64,11 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'SIGN OUT')]")
     protected WebElement btnExitApp;
 
+    @FindBy(how = How.XPATH, using = "//mat-icon[contains(text(),'exit_to_app')]")
+    protected WebElement btnExitAppMobile;
+
+    //mat-icon[contains(text(),'exit_to_app')]
+
     @FindBy(how = How.XPATH, using = "//input[@id='UserName']")
     protected WebElement txtEmail;
 
@@ -342,23 +347,23 @@ public class HomePage extends BasePage {
             waitForElement(elmntDashBoard);
             click(elmntDashBoard);
             waitForSeconds(3);
-            click(btnExitApp);
+            jsClick(btnExitApp);
             waitForSeconds(180);
             waitForElement(txtEmail);
             isVerified = verifyElement(txtEmail);
         }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            waitForElement(btnExitApp);
-            click(btnExitApp);
+            waitForElement(btnExitAppMobile);
+            jsClick(btnExitAppMobile);
             waitForSeconds(120);
             waitForElement(txtEmail);
             isVerified = verifyElement(txtEmail);
         }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
-            waitForElement(btnExitApp);
-            click(btnExitApp);
+            waitForElement(btnExitAppMobile);
+            click(btnExitAppMobile);
             waitForSeconds(120);
             waitForElement(txtEmail);
             isVerified = verifyElement(txtEmail);
