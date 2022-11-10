@@ -262,11 +262,11 @@ public class DashboardPage extends BasePage {
         try {
             waitForSeconds(3);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-//            waitForElement(elmntCovidPreScreeningPopup);
+            waitForElement(elmntCovidPreScreeningPopup);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-//            waitForElement(elmntDeclineCovidPreScreening);
+            waitForElement(elmntDeclineCovidPreScreening);
 //            waitForElementClickable(elmntDeclineCovidPreScreening);
-//            waitAndClick(elmntDeclineCovidPreScreening);
+            jsClick(elmntDeclineCovidPreScreening);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(4);
             blResult = verifyElement(elmntAppointmentPanel);
@@ -526,6 +526,8 @@ public class DashboardPage extends BasePage {
         boolean isVerified = false;
         List<String> lstDetails = TestDataUtil.getListOfValue(strDetails);
         System.out.println("lstDetails >>> :: " + lstDetails);
+//        AFTER_THREE_DAYS;Dr Sam Entwistle
+
         try {
 
             waitForElement(elmntUpcomingAppointments);

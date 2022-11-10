@@ -15,3 +15,5 @@ import io.cucumber.testng.CucumberOptions;
 public class MobileCukes extends AbstractTestNGCucumberTests {
 
 }
+
+//        clean test -Dapp=MMH_MobileApp -Drunner=MobileCukes -Dexecution_type=webmobile -Dconfig=local_android_Poco_M2_Mobile_App -Denv=QA -Dbrowser_name=chrome "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/MobileApp-QAResults.html -Dsysteminfo.AppName=Demo-QA"

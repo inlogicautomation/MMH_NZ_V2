@@ -21,6 +21,8 @@ public class DateUtil {
     }
 
     public static void main(String[] args) {
+        String currentDate = getCurrentDate("dd MMM yyyy");
+        System.out.println(currentDate);
 
     }
 
