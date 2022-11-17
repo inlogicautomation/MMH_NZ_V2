@@ -2597,7 +2597,8 @@ public class MyHealthIndicators extends BasePage {
             waitForSeconds(3);
             System.out.println(elmntActiveCardData);
             waitForElement(elmntActiveCardData);
-            click(elmntActiveCardData);
+            jsScrollIntoView(elmntActiveCardData);
+            jsClick(elmntActiveCardData);
             waitForSeconds(3);
 
             blResult = true;
@@ -2826,10 +2827,10 @@ public class MyHealthIndicators extends BasePage {
 
 
     public boolean clickLDLReminderSetting() {
-        waitForSeconds(3);
+        waitForSeconds(4);
         waitForElementClickable(elmtReminderSetting);
-        click(elmtReminderSetting);
-        waitForSeconds(3);
+        jsClick(elmtReminderSetting);
+        waitForSeconds(4);
         waitForElement(elmtLDL);
         return verifyElement(elmtLDL);
     }

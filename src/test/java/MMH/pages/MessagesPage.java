@@ -1529,7 +1529,7 @@ public class MessagesPage extends BasePage {
             waitForSeconds(2);
             System.out.println("SignatureMessage >>> :: " + TestDataUtil.getValue(strMessage));
             waitForElement(btnAttachFile);
-            driver.switchTo().frame(frameCompose);
+//            driver.switchTo().frame(frameCompose);
             WebElement txtSignature = waitForElement(By.xpath(messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             jsScrollIntoView(txtSignature);
             waitForElement(txtSignature);
@@ -1541,7 +1541,7 @@ public class MessagesPage extends BasePage {
                 System.out.println("Verified Signature text Message successfully >>> ::");
                 blResult = true;
             }
-            driver.switchTo().parentFrame();
+//            driver.switchTo().parentFrame();
 
         } catch (Exception e) {
             System.out.println("Failed to verify signature text message");
@@ -2369,7 +2369,7 @@ public class MessagesPage extends BasePage {
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
 
-            driver.switchTo().frame(btnFocusFrame);
+//            driver.switchTo().frame(btnFocusFrame);
             waitForSeconds(2);
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
@@ -2381,7 +2381,7 @@ public class MessagesPage extends BasePage {
             robotKeyRelease(KeyEvent.VK_V);
             robotKeyRelease(KeyEvent.VK_CONTROL);
             takeScreenshot(driver);
-            driver.switchTo().defaultContent();
+//            driver.switchTo().defaultContent();
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
 

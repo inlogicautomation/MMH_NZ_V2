@@ -196,6 +196,7 @@ public class ViewJournal extends BasePage {
             waitForElementClickable(elmtHealthTools);
             click(elmtHealthTools);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            jsScrollIntoView(elmtGoalTracking);
             waitForElement(elmtGoalTracking);
             blResult = verifyElement(elmtGoalTracking);
 

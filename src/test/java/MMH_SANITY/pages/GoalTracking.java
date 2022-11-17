@@ -379,6 +379,7 @@ public class GoalTracking extends BasePage {
     public void enterGaolTrackingDateTaken() {
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForSeconds(3);
             waitForElement(elmntStartDate);
             click(elmntStartDate);
             String strDateFormat = "d";
@@ -397,12 +398,14 @@ public class GoalTracking extends BasePage {
     public void enterGaolTrackingEndTaken() {
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForSeconds(3);
+            jsScrollIntoView(elmntEndDate);
             waitForElement(elmntEndDate);
-            click(elmntEndDate);
+            jsClick(elmntEndDate);
             waitForSeconds(3);
             waitForElement(elmntMonthAndYear);
             waitForElementClickable(elmntMonthAndYear);
-            waitAndClick(elmntMonthAndYear);
+            jsClick(elmntMonthAndYear);
 
 
             String date = getDayAfterTommorrowDate("d");
@@ -420,7 +423,7 @@ public class GoalTracking extends BasePage {
             waitForSeconds(3);
             waitForElement(selectYear);
             waitForElementClickable(selectYear);
-            waitAndClick(selectYear);
+            jsClick(selectYear);
 
             System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", month));
             WebElement selectMonth = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", month)));
@@ -428,7 +431,7 @@ public class GoalTracking extends BasePage {
             waitForSeconds(3);
             waitForElement(selectMonth);
             waitForElementClickable(selectMonth);
-            waitAndClick(selectMonth);
+            jsClick(selectMonth);
 
             System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", date));
             WebElement selectDate = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", date)));
@@ -436,7 +439,7 @@ public class GoalTracking extends BasePage {
             waitForSeconds(3);
             waitForElement(selectDate);
             waitForElementClickable(selectDate);
-            waitAndClick(selectDate);
+            jsClick(selectDate);
 
             System.out.println("Value >>> :: " + elmntCalendar.getAttribute("value"));
             waitForElement(elmntCalendar);
@@ -902,12 +905,13 @@ public class GoalTracking extends BasePage {
     public void enterSetReminderEndTaken() {
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            jsScrollIntoView(elmntEndDate);
             waitForElement(elmntEndDate);
-            click(elmntEndDate);
+            jsClick(elmntEndDate);
             waitForSeconds(3);
             waitForElement(elmntMonthAndYear);
             waitForElementClickable(elmntMonthAndYear);
-            waitAndClick(elmntMonthAndYear);
+            jsClick(elmntMonthAndYear);
 
 
             String date = getDayAfterTommorrowDate("d");
@@ -925,7 +929,7 @@ public class GoalTracking extends BasePage {
             waitForSeconds(3);
             waitForElement(selectYear);
             waitForElementClickable(selectYear);
-            waitAndClick(selectYear);
+            jsClick(selectYear);
 
             System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", month));
             WebElement selectMonth = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", month)));
@@ -933,7 +937,7 @@ public class GoalTracking extends BasePage {
             waitForSeconds(3);
             waitForElement(selectMonth);
             waitForElementClickable(selectMonth);
-            waitAndClick(selectMonth);
+            jsClick(selectMonth);
 
             System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", date));
             WebElement selectDate = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", date)));
@@ -941,7 +945,7 @@ public class GoalTracking extends BasePage {
             waitForSeconds(3);
             waitForElement(selectDate);
             waitForElementClickable(selectDate);
-            waitAndClick(selectDate);
+            jsClick(selectDate);
 
             System.out.println("Value >>> :: " + elmntCalendar.getAttribute("value"));
             waitForElement(elmntCalendar);

@@ -1954,13 +1954,14 @@ public class MyHealthRecordsPage extends BasePage {
             waitForElement(elmntPrescriptionMyEntiresIconData);
             jsClick(elmntPrescriptionMyEntiresIconData);
             for (String str : lstDetails1) {
-                waitForSeconds(3);
+                waitForSeconds(2);
                 WebElement elmntMyEntries = waitForElement(By.xpath(strPrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
                 verifyElement(elmntMyEntries);
             }
+            waitForSeconds(5);
             waitForElementClickable(elmntIcon);
             jsClick(elmntIcon);
-            waitForSeconds(3);
+            waitForSeconds(5);
             blResult = verifyElement(headerPrescriptions);
         } catch (Exception e) {
             e.printStackTrace();

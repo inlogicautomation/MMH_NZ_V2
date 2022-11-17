@@ -189,11 +189,11 @@ public class MyHealthCentresPage extends BasePage {
             if (!elmntConnectToHealthCentre.isDisplayed()){
             waitForElement(elmntMyHealthCentres);
             waitForElementClickable(elmntMyHealthCentres);
-            waitAndClick(elmntMyHealthCentres);}
-
+            jsClick(elmntMyHealthCentres);}
+            waitForSeconds(3);
             waitForElement(elmntConnectToHealthCentre);
             waitForElementClickable(elmntConnectToHealthCentre);
-            waitAndClick(elmntConnectToHealthCentre);
+            jsClick(elmntConnectToHealthCentre);
 
             blResult = verifyElement(txtConnectAHealthCentre);
         } catch (Exception e) {

@@ -535,8 +535,8 @@ public class ProfilesPage extends BasePage {
     public boolean clickAddContactButton() {
         waitForElement(btnAddContact);
         waitForElementClickable(btnAddContact);
-        waitAndClick(btnAddContact);
-        waitForSeconds(1);
+        jsClick(btnAddContact);
+        waitForSeconds(4);
         waitForElement(successPopup);
         return verifyElement(successPopup);
     }
@@ -545,7 +545,8 @@ public class ProfilesPage extends BasePage {
         waitForElement(txtCalendarSettings);
         waitForElement(elmntGeneral);
         waitForElementClickable(elmntGeneral);
-        waitAndClick(elmntGeneral);
+        jsClick(elmntGeneral);
+        waitForSeconds(3);
         waitForElement(btnSave);
         return verifyElement(btnSave);
     }
