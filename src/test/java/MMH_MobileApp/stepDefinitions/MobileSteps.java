@@ -21,8 +21,11 @@ public class MobileSteps {
 
     @Given("I am on MMH Login screen")
     public void iAmOnMMHLoginScreen() {
-        Assert.assertTrue(demoScreenContainer.loginScreen.verifyMMHLoginScreen());
-
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            Assert.assertTrue(demoScreenContainer.loginScreen.verifyMMHLoginScreenForiOS());
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            Assert.assertTrue(demoScreenContainer.loginScreen.verifyMMHLoginScreen());
+        }
     }
 
     @When("I enter {string} and {string} in login screen")
@@ -33,7 +36,11 @@ public class MobileSteps {
 
     @Then("I should see MMH Home screen")
     public void iShouldSeeMMHHomeScreen() {
-        Assert.assertTrue(demoScreenContainer.homeScreen.verifyMMHHomeScreen());
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            Assert.assertTrue(demoScreenContainer.homeScreen.verifyMMHHomeScreen());
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("iOS")) {
+            Assert.assertTrue(demoScreenContainer.homeScreen.verifyMMHHomeScreeniOS());
+        }
     }
 
     @Given("I am on MMH Home screen")
@@ -43,7 +50,11 @@ public class MobileSteps {
 
     @And("I tap on {string} option in home screen")
     public void iTapOnOptionInHomeScreen(String strOption) {
-        demoScreenContainer.homeScreen.tapOptionsInHomeScreen(TestDataUtil.getValue(strOption));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            demoScreenContainer.homeScreen.tapOptionsInHomeScreen(TestDataUtil.getValue(strOption));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            demoScreenContainer.homeScreen.tapOptionsInHomeScreeniOS(TestDataUtil.getValue(strOption));
+        }
     }
 
     @Then("I should see Future and Past tabs")
@@ -69,19 +80,33 @@ public class MobileSteps {
     @And("I enter the {string} {string}")
     public void iEnterTheVisitAppointmentDetails(String strAppointment, String strAppointmentDetails) {
         List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strAppointmentDetails);
-        demoScreenContainer.appointmentsScreen.selectLocation(lstAppointmentDetails.get(0));
-        demoScreenContainer.appointmentsScreen.tapNoInAppointmentPreScreening();
-        demoScreenContainer.appointmentsScreen.selectProvider(lstAppointmentDetails.get(1));
-        demoScreenContainer.appointmentsScreen.selectAppointmentDate(lstAppointmentDetails.get(1), lstAppointmentDetails.get(2));
-        demoScreenContainer.appointmentsScreen.selectAppointmentOption(TestDataUtil.getValue(strAppointment));
-        demoScreenContainer.appointmentsScreen.selectAvailableTimeSlot();
-        demoScreenContainer.appointmentsScreen.selectReason(lstAppointmentDetails.get(3));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            demoScreenContainer.appointmentsScreen.selectLocation(lstAppointmentDetails.get(0));
+            demoScreenContainer.appointmentsScreen.tapNoInAppointmentPreScreening();
+            demoScreenContainer.appointmentsScreen.selectProvider(lstAppointmentDetails.get(1));
+            demoScreenContainer.appointmentsScreen.selectAppointmentDate(lstAppointmentDetails.get(1), lstAppointmentDetails.get(2));
+            demoScreenContainer.appointmentsScreen.selectAppointmentOption(TestDataUtil.getValue(strAppointment));
+            demoScreenContainer.appointmentsScreen.selectAvailableTimeSlot();
+            demoScreenContainer.appointmentsScreen.selectReason(lstAppointmentDetails.get(3));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            demoScreenContainer.appointmentsScreen.selectLocationIOS(lstAppointmentDetails.get(0));
+            demoScreenContainer.appointmentsScreen.tapNoInAppointmentPreScreening();
+            demoScreenContainer.appointmentsScreen.selectProviderIOS(lstAppointmentDetails.get(1));
+            demoScreenContainer.appointmentsScreen.selectAppointmentDateIOS(lstAppointmentDetails.get(1), lstAppointmentDetails.get(2));
+            demoScreenContainer.appointmentsScreen.selectAppointmentOptionIOS(TestDataUtil.getValue(strAppointment));
+            demoScreenContainer.appointmentsScreen.selectAvailableTimeSlotIOS();
+            demoScreenContainer.appointmentsScreen.selectReasonIOS(lstAppointmentDetails.get(3));
+        }
     }
 
     @And("I should see Confirm Appointment details {string} {string}")
     public void iShouldSeeConfirmAppointmentDetails(String strAppointmentDetails, String strFutureDate) {
         List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentDetails);
-        Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyDetailsOfConfirmAppointment(lstDetails, TestDataUtil.getValue(strFutureDate)));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyDetailsOfConfirmAppointment(lstDetails, TestDataUtil.getValue(strFutureDate)));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyDetailsOfConfirmAppointmentIOS(lstDetails, TestDataUtil.getValue(strFutureDate)));
+        }
     }
 
     @And("I Send Appointment Request through pay at health centre")
@@ -93,16 +118,24 @@ public class MobileSteps {
     }
 
     @Then("I should see booked {string} displayed under Service Tab {string} {string}")
-    public void iShouldSeeBookedAppointmentDisplayedUnderServiceTab(String strAppointment, String strAppointmentDetails, String strFutureDate) {
+    public void iShouldSeeBookedAppointmentDisplayedUnderServiceTab(String strAppointment, String
+            strAppointmentDetails, String strFutureDate) {
         List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentDetails);
-        Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyCreatedAppointmentInServiceTab(lstDetails, TestDataUtil.getValue(strFutureDate), TestDataUtil.getValue(strAppointment)));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyCreatedAppointmentInServiceTab(lstDetails, TestDataUtil.getValue(strFutureDate), TestDataUtil.getValue(strAppointment)));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyCreatedAppointmentInServiceTabIOS(lstDetails, TestDataUtil.getValue(strFutureDate), TestDataUtil.getValue(strAppointment)));
+        }
     }
 
     @And("I enter the {string} in Confirm Appointment")
     public void iEnterTheInConfirmAppointment(String strContactNumber) {
-        demoScreenContainer.appointmentsScreen.enterContactNumber(TestDataUtil.getValue(strContactNumber));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            demoScreenContainer.appointmentsScreen.enterContactNumber(TestDataUtil.getValue(strContactNumber));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            demoScreenContainer.appointmentsScreen.enterContactNumberIOS(TestDataUtil.getValue(strContactNumber));
+        }
     }
-
     @Given("I am on Payment Options screen")
     public void iAmOnPaymentOptionsScreen() {
         Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyPaymentOptions());
@@ -125,7 +158,11 @@ public class MobileSteps {
         List<String> lstDetails = TestDataUtil.getListOfValue(strCardDetails);
         demoScreenContainer.appointmentsScreen.enterCardNumber(lstDetails.get(0));
         demoScreenContainer.appointmentsScreen.enterCardName(lstDetails.get(1));
-        demoScreenContainer.appointmentsScreen.selectExpiryDate(lstDetails.get(2), lstDetails.get(3));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            demoScreenContainer.appointmentsScreen.selectExpiryDate(lstDetails.get(2), lstDetails.get(3));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            demoScreenContainer.appointmentsScreen.selectExpiryDateIOS(lstDetails.get(2), lstDetails.get(3));
+        }
         demoScreenContainer.appointmentsScreen.enterCVCNumber(lstDetails.get(4));
         demoScreenContainer.appointmentsScreen.tapSubmit();
     }
@@ -138,9 +175,14 @@ public class MobileSteps {
     }
 
     @And("I should see payment {string} displayed under Service Tab {string} {string}")
-    public void iShouldSeePaymentDisplayedUnderServiceTab(String strAppointment, String strAppointmentDetails, String strFutureDate) {
+    public void iShouldSeePaymentDisplayedUnderServiceTab(String strAppointment, String
+            strAppointmentDetails, String strFutureDate) {
         List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentDetails);
-        Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyCreatedPaymentAppointmentInServiceTab(lstDetails, TestDataUtil.getValue(strFutureDate), TestDataUtil.getValue(strAppointment)));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyCreatedPaymentAppointmentInServiceTab(lstDetails, TestDataUtil.getValue(strFutureDate), TestDataUtil.getValue(strAppointment)));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            Assert.assertTrue(demoScreenContainer.appointmentsScreen.verifyCreatedPaymentAppointmentInServiceTabIOS(lstDetails, TestDataUtil.getValue(strFutureDate), TestDataUtil.getValue(strAppointment)));
+        }
     }
 
     @Given("I am on Confirm Appointment screen")
@@ -156,16 +198,26 @@ public class MobileSteps {
 
     @And("I tap on {string} in Health Records")
     public void iTapOnInHealthRecords(String strHealthRecordOption) {
-        demoScreenContainer.healthRecordsScreen.tapHealthRecordOption(TestDataUtil.getValue(strHealthRecordOption));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            demoScreenContainer.healthRecordsScreen.tapHealthRecordOption(TestDataUtil.getValue(strHealthRecordOption));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            demoScreenContainer.healthRecordsScreen.tapHealthRecordOptionIOS(TestDataUtil.getValue(strHealthRecordOption));
+        }
     }
 
     @Then("I should see {string} and {string} in {string}")
     public void iShouldSeeAnd(String strRecords, String strDetails, String strRecordOption) {
         List<String> lstRecords = TestDataUtil.getListOfValue(strRecords);
         List<String> lstDetails = TestDataUtil.getListOfValue(strDetails);
-        Assert.assertTrue(demoScreenContainer.healthRecordsScreen.verifyRecords(TestDataUtil.getValue(strRecordOption), lstRecords));
-        demoScreenContainer.healthRecordsScreen.tapRecordView(lstRecords);
-        Assert.assertTrue(demoScreenContainer.healthRecordsScreen.verifyRecordDetails(lstDetails));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            Assert.assertTrue(demoScreenContainer.healthRecordsScreen.verifyRecords(TestDataUtil.getValue(strRecordOption), lstRecords));
+            demoScreenContainer.healthRecordsScreen.tapRecordView(lstRecords);
+            Assert.assertTrue(demoScreenContainer.healthRecordsScreen.verifyRecordDetails(lstDetails));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            Assert.assertTrue(demoScreenContainer.healthRecordsScreen.verifyRecordsIOS(TestDataUtil.getValue(strRecordOption), lstRecords));
+            demoScreenContainer.healthRecordsScreen.tapRecordViewIOS(lstRecords);
+            Assert.assertTrue(demoScreenContainer.healthRecordsScreen.verifyRecordDetailsIOS(lstDetails));
+        }
     }
 
     @And("I should see Pathology Tests Explanation under Help")
@@ -178,11 +230,19 @@ public class MobileSteps {
     @And("I select the {string} for {string}")
     public void iSelectTheFor(String strMedicationDetails, String strPickUpMethod) {
         List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
-        demoScreenContainer.repeatRequestPrescriptionScreen.selectLocation(lstMedicationDetails.get(0));
-        demoScreenContainer.repeatRequestPrescriptionScreen.selectProvider(lstMedicationDetails.get(1));
-        demoScreenContainer.repeatRequestPrescriptionScreen.selectMedications(lstMedicationDetails.get(2));
-        demoScreenContainer.repeatRequestPrescriptionScreen.selectPickUpMethod(lstMedicationDetails.get(3));
-        demoScreenContainer.repeatRequestPrescriptionScreen.selectUrgency(lstMedicationDetails.get(4));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            demoScreenContainer.repeatRequestPrescriptionScreen.selectLocation(lstMedicationDetails.get(0));
+            demoScreenContainer.repeatRequestPrescriptionScreen.selectProvider(lstMedicationDetails.get(1));
+            demoScreenContainer.repeatRequestPrescriptionScreen.selectMedications(lstMedicationDetails.get(2));
+            demoScreenContainer.repeatRequestPrescriptionScreen.selectPickUpMethod(lstMedicationDetails.get(3));
+            demoScreenContainer.repeatRequestPrescriptionScreen.selectUrgency(lstMedicationDetails.get(4));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            demoScreenContainer.repeatRequestPrescriptionScreen.selectLocationIOS(lstMedicationDetails.get(0));
+            demoScreenContainer.repeatRequestPrescriptionScreen.selectProviderIOS(lstMedicationDetails.get(1));
+            demoScreenContainer.repeatRequestPrescriptionScreen.selectMedicationsIOS(lstMedicationDetails.get(2));
+            demoScreenContainer.repeatRequestPrescriptionScreen.selectPickUpMethodIOS(lstMedicationDetails.get(3));
+            demoScreenContainer.repeatRequestPrescriptionScreen.selectUrgencyIOS(lstMedicationDetails.get(4));
+        }
     }
 
     @And("I enter {string} and accept the terms & conditions")
@@ -212,12 +272,22 @@ public class MobileSteps {
     @And("I select the {string} to send script")
     public void iSelectTheToSendScript(String strPharmacyDetails) {
         List<String> lstPharmacyDetails = TestDataUtil.getListOfValue(strPharmacyDetails);
-        if (strPharmacyDetails.contains("SEND_SCRIPT_TO_PHARMACY")) {
-            demoScreenContainer.repeatRequestPrescriptionScreen.selectPharmacy(lstPharmacyDetails);
-        } else if (strPharmacyDetails.contains("DELIVERY_MED_BY_PHARMACY"))  {
-            demoScreenContainer.repeatRequestPrescriptionScreen.selectMedByPharmacy(lstPharmacyDetails);
-        }else if (strPharmacyDetails.contains("DELIVER_VIA_ZOOM_PHARMACY"))  {
-            demoScreenContainer.repeatRequestPrescriptionScreen.selectDeliveryAddress(lstPharmacyDetails);
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            if (strPharmacyDetails.contains("SEND_SCRIPT_TO_PHARMACY")) {
+                demoScreenContainer.repeatRequestPrescriptionScreen.selectPharmacy(lstPharmacyDetails);
+            } else if (strPharmacyDetails.contains("DELIVERY_MED_BY_PHARMACY")) {
+                demoScreenContainer.repeatRequestPrescriptionScreen.selectMedByPharmacy(lstPharmacyDetails);
+            } else if (strPharmacyDetails.contains("DELIVER_VIA_ZOOM_PHARMACY")) {
+                demoScreenContainer.repeatRequestPrescriptionScreen.selectDeliveryAddress(lstPharmacyDetails);
+            }
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            if (strPharmacyDetails.contains("SEND_SCRIPT_TO_PHARMACY")) {
+                demoScreenContainer.repeatRequestPrescriptionScreen.selectPharmacyIOS(lstPharmacyDetails);
+            } else if (strPharmacyDetails.contains("DELIVERY_MED_BY_PHARMACY")) {
+                demoScreenContainer.repeatRequestPrescriptionScreen.selectMedByPharmacyIOS(lstPharmacyDetails);
+            } else if (strPharmacyDetails.contains("DELIVER_VIA_ZOOM_PHARMACY")) {
+                demoScreenContainer.repeatRequestPrescriptionScreen.selectDeliveryAddress(lstPharmacyDetails);
+            }
         }
     }
 
@@ -241,15 +311,22 @@ public class MobileSteps {
         demoScreenContainer.messageScreen.verifyInformation();
         demoScreenContainer.appointmentsScreen.tapOK();
         demoScreenContainer.messageScreen.selectStaff(lstMessageDetails.get(2));
-        Assert.assertTrue(demoScreenContainer.messageScreen.verifyDetails(lstMessageDetails));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            Assert.assertTrue(demoScreenContainer.messageScreen.verifyDetails(lstMessageDetails));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            Assert.assertTrue(demoScreenContainer.messageScreen.verifyDetailsIOS(lstMessageDetails));
+        }
     }
 
     @And("I enter {string} and attach the file")
     public void iEnterAndAttachTheFile(String strMessageAndImage) {
         List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageAndImage);
         demoScreenContainer.messageScreen.enterMessage(TestDataUtil.getValue(lstMessageDetails.get(0)));
-        demoScreenContainer.messageScreen.uploadFile(lstMessageDetails.get(1));
-
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            demoScreenContainer.messageScreen.uploadFile(lstMessageDetails.get(1));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            demoScreenContainer.messageScreen.uploadFileIOS(lstMessageDetails.get(1));
+        }
     }
 
     @When("I tap send message button")
@@ -275,14 +352,23 @@ public class MobileSteps {
 
     @Then("I should Message sent Successfully info message")
     public void iShouldMessageSentSuccessfullyInfoMessage() {
-        Assert.assertTrue(demoScreenContainer.messageScreen.verifySuccessfullMessage());
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            Assert.assertTrue(demoScreenContainer.messageScreen.verifySuccessfullMessage());
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            Assert.assertTrue(demoScreenContainer.messageScreen.verifySuccessfullMessageIOS());
+        }
     }
 
     @And("I should see sent {string} under {string} tab")
     public void iShouldSeeSentUnderTab(String strMessageDetails, String strTab) {
         List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
         demoScreenContainer.messageScreen.tapTabInInbox(TestDataUtil.getValue(strTab));
-        Assert.assertTrue(demoScreenContainer.messageScreen.verifySentMessage(lstMessageDetails));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            Assert.assertTrue(demoScreenContainer.messageScreen.verifySentMessage(lstMessageDetails));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            Assert.assertTrue(demoScreenContainer.messageScreen.verifySentMessageIOS(lstMessageDetails));
+        }
+
     }
 
     @And("I select the {string} for Doctor Sending Message")
@@ -294,7 +380,11 @@ public class MobileSteps {
         demoScreenContainer.messageScreen.verifyInformation();
         demoScreenContainer.appointmentsScreen.tapOK();
         demoScreenContainer.messageScreen.selectRole(lstMessageDetails.get(2));
-        demoScreenContainer.messageScreen.enterPatient(lstMessageDetails.get(3));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            demoScreenContainer.messageScreen.enterPatient(lstMessageDetails.get(3));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            demoScreenContainer.messageScreen.enterPatientIOS(lstMessageDetails.get(3));
+        }
 //        Assert.assertTrue(demoScreenContainer.messageScreen.verifyDetails(lstMessageDetails));
     }
 
@@ -333,7 +423,11 @@ public class MobileSteps {
     public void iShouldSeeSpecificMessageNavigateToArchiveMessage(String strReceivedMessageDetails, String strTab) {
         List<String> lstReceivedMessageDetails = TestDataUtil.getListOfValue(strReceivedMessageDetails);
         demoScreenContainer.messageScreen.tapTabInInbox(TestDataUtil.getValue(strTab));
-        Assert.assertTrue(demoScreenContainer.messageScreen.verifyReceivedMessage(lstReceivedMessageDetails));
+        if (strReceivedMessageDetails.contains("REPLY_MESSAGE")) {
+            demoScreenContainer.messageScreen.verifyReplyMessage(lstReceivedMessageDetails);
+        } else {
+            Assert.assertTrue(demoScreenContainer.messageScreen.verifyReceivedMessage(lstReceivedMessageDetails));
+        }
     }
 
     @And("I tap Reply and enter {string}")
@@ -343,10 +437,19 @@ public class MobileSteps {
         demoScreenContainer.messageScreen.enterReplyMessage(TestDataUtil.getValue(lstReplyMessageDetails.get(1)));
     }
 
+
     @And("I should see specific {string} in details")
     public void iShouldSeeSpecificInDetails(String strReceivedMessageDetails) {
         List<String> lstReceivedMessageDetails = TestDataUtil.getListOfValue(strReceivedMessageDetails);
-        Assert.assertTrue(demoScreenContainer.messageScreen.verifySpecificMsgDetails(lstReceivedMessageDetails));
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            Assert.assertTrue(demoScreenContainer.messageScreen.verifySpecificMsgDetails(lstReceivedMessageDetails));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            if (strReceivedMessageDetails.contains("GROUP_MESSAGE")) {
+                Assert.assertTrue(demoScreenContainer.messageScreen.verifyGroupMsgDetailsIOS(lstReceivedMessageDetails));
+            } else {
+                Assert.assertTrue(demoScreenContainer.messageScreen.verifySpecificMsgDetailsIOS(lstReceivedMessageDetails));
+            }
+        }
     }
 
     @And("I tap on Notification icon in Home screen")
@@ -357,8 +460,11 @@ public class MobileSteps {
 
     @And("I switch to Account to Account payment method")
     public void iSwitchToAccountToAccountPaymentMethod() {
-
-        Assert.assertTrue(demoScreenContainer.repeatRequestPrescriptionScreen.selectAccountToAccount());
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            Assert.assertTrue(demoScreenContainer.repeatRequestPrescriptionScreen.selectAccountToAccount());
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            demoScreenContainer.repeatRequestPrescriptionScreen.selectAccountToAccountIOS();
+        }
     }
 
 
@@ -383,9 +489,12 @@ public class MobileSteps {
 
     @And("I select bank {string} and Next")
     public void iSelectBankAndNext(String strDetails) {
-        List <String> lstDetails=TestDataUtil.getListOfValue(strDetails);
-        Assert.assertTrue(demoScreenContainer.repeatRequestPrescriptionScreen.selectBank(lstDetails.get(0)));
-
+        List<String> lstDetails = TestDataUtil.getListOfValue(strDetails);
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+            Assert.assertTrue(demoScreenContainer.repeatRequestPrescriptionScreen.selectBank(lstDetails.get(0)));
+        } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+            Assert.assertTrue(demoScreenContainer.repeatRequestPrescriptionScreen.selectBankIOS(lstDetails.get(0)));
+        }
     }
 
     @Then("I should see the Transaction Approved message for AtoA Payment")

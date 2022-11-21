@@ -123,25 +123,6 @@ Feature: Messages_Scenarios
       | Message                |
       | &SENT_MESSAGE_DETAILS& |
 
-
-  @MOBILE @Mobile_Message @HAPPY_PATH_MOBILE
-  Scenario Outline: S4 - Patient Received Message
-
-    Given I am on MMH Home screen
-    And I tap on "Inbox" option in home screen
-    And I tap on "Inbox" tab
-    And I should see "<Message>" received by patient
-    And I tap on "<Message>" to view the details
-    And I should see specific "<Message>" in details
-    And I tap on on attached file and file gets downloaded
-    When I tap Achieve icon for the specific message
-    Then I should see specific "<Message>" navigate to "Archive" message
-
-    Examples:
-      | Message           |
-      | &RECEIVE_MESSAGE& |
-
-
   @MOBILE @Mobile_Message @HAPPY_PATH_MOBILE
   Scenario Outline: S5 - Patient Reply Message
 
@@ -172,3 +153,20 @@ Feature: Messages_Scenarios
     Examples:
       | Group Message   |
       | &GROUP_MESSAGE& |
+
+  @MOBILE @Mobile_Message @HAPPY_PATH_MOBILE
+  Scenario Outline: S4 - Patient Received Message
+
+    Given I am on MMH Home screen
+    And I tap on "Inbox" option in home screen
+    And I tap on "Inbox" tab
+    And I should see "<Message>" received by patient
+    And I tap on "<Message>" to view the details
+    And I should see specific "<Message>" in details
+    And I tap on on attached file and file gets downloaded
+    When I tap Achieve icon for the specific message
+    Then I should see specific "<Message>" navigate to "Archive" message
+
+    Examples:
+      | Message           |
+      | &RECEIVE_MESSAGE& |

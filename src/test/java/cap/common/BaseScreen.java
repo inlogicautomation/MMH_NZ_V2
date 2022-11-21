@@ -381,12 +381,33 @@ public class BaseScreen {
         return wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
     }
 
+
     public void navigateToBack() {
         try {
-            driver.navigate().back();
+            if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+                driver.navigate().back();
+            }  else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+                swipeLeftIOS();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void swipeLeftIOS() {
+        waitForSecond(1);
+        Dimension size = driver.manage().window().getSize();
+
+        int startY = (int) (size.height / 2);
+        int startX = (int) (size.width * 0.05);
+        int endX = (int) (size.width * 0.90);
+        new TouchAction((PerformsTouchActions) driver)
+                .press(PointOption.point(startX, startY))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+                .moveTo(PointOption.point(endX, startY))
+                .release()
+                .perform();
+
     }
 
     public WebElement fluentWaitForElement(By element) {
@@ -410,6 +431,14 @@ public class BaseScreen {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void reLaunchAppIOS() {
+        ((AppiumDriver<WebElement>)driver).terminateApp("managemyhealth.co.nz");
+        System.out.println("App Teriminated");
+        waitForSecond(3);
+        ((AppiumDriver<WebElement>)driver).launchApp();
+        System.out.println("App ReLaunched");
     }
 
 }

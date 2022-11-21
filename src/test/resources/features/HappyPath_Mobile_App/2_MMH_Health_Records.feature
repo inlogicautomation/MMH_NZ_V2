@@ -20,7 +20,7 @@ Feature: Mobile_Health_Records_Scenarios
     And I tap on "Health Records" option in home screen
     When I tap on "Test results" in Health Records
     Then I should see "<Test Result Records>" and "<Test Result Details>" in "Test results"
-    And I should see Pathology Tests Explanation under Help
+#    And I should see Pathology Tests Explanation under Help
 
     Examples:
       | Test Result Records    | Test Result Details    |
