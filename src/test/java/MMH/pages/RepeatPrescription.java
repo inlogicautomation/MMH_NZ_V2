@@ -2,9 +2,12 @@ package MMH.pages;
 
 import cap.common.BasePage;
 import cap.utilities.TestDataUtil;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.Select;
@@ -225,6 +228,10 @@ public class RepeatPrescription extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//div[@id='PxPayAccount2AccountAuth_Logo' and @name='PxPayAccount2AccountAuth_Logo']")
     protected WebElement txtAccount2Account;
+
+    @AndroidFindBy(xpath = "//android.widget.CheckBox")
+    protected WebElement txtcheckbox;
+
 
     @FindBy(how = How.XPATH, using = "//span[text()='Please enter the A2A test credentials:']")
     protected WebElement txtA2ACredentials;
@@ -1753,14 +1760,39 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             waitForSeconds(2);
             WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
             System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
+            jsScrollIntoView(selectRdoBtnBank);
             waitForElementClickable(selectRdoBtnBank);
             jsClick(selectRdoBtnBank);
+            System.out.println("Successfully Select RdoBtnBank");
+            waitForSeconds(4);
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("autoGrantPermissions", "true");
+            AppiumDriver appiumDriver = (AppiumDriver) driver;
+            Set<String> contextNames = appiumDriver.getContextHandles();
+            for (String strContextName : contextNames) {
+                if (strContextName.contains("NATIVE_APP")) {
+                    appiumDriver.context("NATIVE_APP");
+                    break;
+                }
+            }
+            System.out.println("Success Switch Native App");
+            capabilities.setCapability("autoGrantPermissions", "true");
+            waitForElement(txtcheckbox);
+            click(txtcheckbox);
+            System.out.println("Success Select check box");
+            Set<String> contextNames1 = appiumDriver.getContextHandles();
+            for (String strContextName : contextNames1) {
+                if (strContextName.contains("CHROMIUM")) {
+                    appiumDriver.context("CHROMIUM");
+                    break;
+                }
+            }
+            System.out.println("Successfully Select chkBoxA2ATnC");
             waitForSeconds(3);
-            waitForElementClickable(chkBoxA2ATnC);
-            jsClick(chkBoxA2ATnC);
-            waitForSeconds(3);
+            jsScrollIntoView(btnNextA2A);
             waitForElementClickable(btnNextA2A);
             jsClick(btnNextA2A);
+            System.out.printf("Successfully Select btnNextA2A");
 
             blResult = true;
 

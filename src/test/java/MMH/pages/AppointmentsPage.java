@@ -4,8 +4,11 @@ import cap.common.BasePage;
 import cap.helpers.Constants;
 import cap.utilities.DateUtil;
 import cap.utilities.TestDataUtil;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.cucumber.java.an.E;
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -18,6 +21,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class AppointmentsPage extends BasePage {
 
@@ -334,6 +338,18 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//input[@name='Cvc2']")
     protected WebElement txtCVCNumber;
+
+    @AndroidFindBy(xpath = "//android.view.View[@text='Expiry Date (MM)']")
+    protected WebElement drpExpiryMonth;
+
+    @AndroidFindBy(xpath = "//android.view.View[@text='Expiry Date (YY)']")
+    protected WebElement drpExpiryYear;
+
+    @AndroidFindBy(xpath = "//android.widget.CheckedTextView[@text='02']")
+    protected WebElement strCheckedTextLocator;
+
+    @AndroidFindBy(xpath = "//android.widget.CheckedTextView[@text='24']")
+    protected WebElement strCheckedTextLocatoryear;
 
     @FindBy(how = How.XPATH, using = "//button[@name='Add']")
     protected WebElement btnSubmit;
@@ -1504,13 +1520,71 @@ public class AppointmentsPage extends BasePage {
     public boolean selectExpiryDate() {
         boolean blResult = false;
         try {
-            Select DateExpiryMonth = new Select(driver.findElement(By.id("DateExpiry_1")));
-            DateExpiryMonth.selectByVisibleText("02");
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
 
-            Select DateExpiryYear = new Select(driver.findElement(By.id("DateExpiry_2")));
-            DateExpiryYear.selectByVisibleText("24");
+                if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy A13")) {
+                    DesiredCapabilities capabilities = new DesiredCapabilities();
+                    capabilities.setCapability("autoGrantPermissions", "true");
+                    AppiumDriver appiumDriver = (AppiumDriver) driver;
+                    Set<String> contextNames = appiumDriver.getContextHandles();
+                    for (String strContextName : contextNames) {
+                        if (strContextName.contains("NATIVE_APP")) {
+                            appiumDriver.context("NATIVE_APP");
+                            break;
+                        }
+                    }
+                    System.out.println("Success Switch Native App");
+                    capabilities.setCapability("autoGrantPermissions", "true");
+                    waitForSeconds(2);
+                    waitForElement(drpExpiryMonth);
+                    click(drpExpiryMonth);
+                    waitForSeconds(2);
+                    waitForElement(strCheckedTextLocator);
+                    click(strCheckedTextLocator);
+                    waitForSeconds(2);
+                    waitForElement(drpExpiryYear);
+                    click(drpExpiryYear);
+                    waitForSeconds(2);
+                    waitForElement(strCheckedTextLocatoryear);
+                    click(strCheckedTextLocatoryear);
+                    System.out.printf("Successfully write text message");
+                    Set<String> contextNames1 = appiumDriver.getContextHandles();
+                    for (String strContextName : contextNames1) {
+                        if (strContextName.contains("CHROMIUM")) {
+                            appiumDriver.context("CHROMIUM");
+                            break;
+                        }
+                    }
 
+                }
+
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                waitForSeconds(2);
+                jsScrollUp();
+                Select DateExpiryMonth = new Select(driver.findElement(By.id("DateExpiry_1")));
+                DateExpiryMonth.selectByVisibleText("02");
+                jsScrollUp();
+                Select DateExpiryYear = new Select(driver.findElement(By.id("DateExpiry_2")));
+                DateExpiryYear.selectByVisibleText("24");
+                System.out.printf("Successflly select DateExpiryMonth");
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                waitForSeconds(2);
+                jsScrollUp();
+                Select DateExpiryMonth = new Select(driver.findElement(By.id("DateExpiry_1")));
+                DateExpiryMonth.selectByVisibleText("02");
+                jsScrollUp();
+                Select DateExpiryYear = new Select(driver.findElement(By.id("DateExpiry_2")));
+                DateExpiryYear.selectByVisibleText("24");
+                System.out.printf("Successflly select DateExpiryMonth");
+
+            }
+            waitForSeconds(2);
+            waitForElement(txtCVCNumber);
             blResult = verifyElement(txtCVCNumber);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
