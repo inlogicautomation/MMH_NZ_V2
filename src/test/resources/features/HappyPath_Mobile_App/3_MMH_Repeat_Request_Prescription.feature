@@ -1,6 +1,6 @@
 Feature: Repeat_Request_Prescription_Scenarios
 
-  @MOBILE @RELAUNCH @Mobile_RRP @HAPPY_PATH_MOBILE
+  @MOBILE @RELAUNCH @Mobile_RRP @HAPPY_PATH_MOBILE @TestRPP
   Scenario Outline: Pre-Req - User login with valid credential and verifies MMH Home screen
 
     Given I am on MMH Login screen
@@ -45,7 +45,7 @@ Feature: Repeat_Request_Prescription_Scenarios
       | &SEND_SCRIPT_BY_POST_DETAILS& | &RPR_MESSAGE& | &RP_SEND_SCRIPT_BY_POST_STATUS& |
 
 
-  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE
+  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE @TestRPP
   Scenario Outline: S3 - Request Repeat Prescription - Sent script to pharmacy
 
     Given I am on MMH Home screen

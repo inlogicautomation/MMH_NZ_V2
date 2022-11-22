@@ -4,6 +4,9 @@ package MMH_MobileApp;
 import MMH_MobileApp.screens.*;
 import cap.utilities.SharedDriver;
 
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.appmanagement.ApplicationState;
+import io.appium.java_client.ios.IOSDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -58,13 +61,34 @@ public class DemoScreenContainer {
         scenario.attach(imageBytes, "image/png", "");
         System.out.println("\n Scenario outline: " + scenario.getName());
         System.out.println("\n Scenario Status: " + scenario.getStatus());
-        if (scenario.getSourceTagNames().contains("@RELAUNCH")) {
-            homeScreen.appRelaunch();
+
+        if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+
+            if (scenario.getSourceTagNames().contains("@RELAUNCH")) {
+                homeScreen.appRelaunch();
+            } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+                loginScreen.reLaunchAppIOS();
+            }
         }
         if (scenario.isFailed()) {
-            homeScreen.appRelaunch();
+            System.out.println("Scenario Failed");
+            if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
+                ApplicationState activity = ((AndroidDriver) driver).queryAppState("managemyhealth.co.nz");
+                System.out.println("\n >> Get Current Activity: " + activity);
+                if (activity.toString().contains("BACKGROUND") || activity.toString().contains("NOT_RUNNING")) {
+                    System.out.println("\n In this execution, " + scenario.getName() + " -  App Closed unfortunately...");
+                    loginScreen.reLaunchAppAndroid();
+                }
+            } else if (System.getProperty("PLATFORM").equalsIgnoreCase("ios")) {
+                ApplicationState activity = ((IOSDriver) driver).queryAppState("managemyhealth.co.nz");
+                if (activity.toString().contains("BACKGROUND") || activity.toString().contains("NOT_RUNNING")) {
+                    System.out.println("Get Current APP Activity:: " + activity);
+                    loginScreen.reLaunchAppIOS();
+                }
+            }
         }
     }
+
 
     @Before("@MOBILE")
     //@Before("not @API and not @WEB and not @Desktop")

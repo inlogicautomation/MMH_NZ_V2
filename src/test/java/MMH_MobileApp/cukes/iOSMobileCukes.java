@@ -12,7 +12,7 @@ import io.cucumber.testng.CucumberOptions;
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         })
 
-public class MobileCukes extends AbstractTestNGCucumberTests {
+public class iOSMobileCukes extends AbstractTestNGCucumberTests {
 
 }
 
