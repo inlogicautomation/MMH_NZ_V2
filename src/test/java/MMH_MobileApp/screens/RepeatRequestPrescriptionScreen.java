@@ -105,7 +105,7 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
     @iOSXCUITFindBy(id = "medkit Services")
     protected WebElement elmntServicesIcon;
 
-    @AndroidFindBy(xpath = "//android.widget.Button[@text='Select Pharmacy']")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Select Pharmacy']")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name='Select Pharmacy']")
     protected WebElement elmntSelectPharmacyHearder;
 
@@ -345,7 +345,7 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
         System.out.println("PickUpMethod: " + strPickUpMethod);
         attachStepLog("PickUpMethod", strPickUpMethod);
         waitForElement(elmntSelectPickupMethod);
-        waitForElement(elmntPickupMethodUrgency);
+//        waitForElement(elmntPickupMethodUrgency);
         WebElement elmntPickUpMethod = waitForElement(By.xpath(strRadioButtonTextLocator.replace("<<TEXT>>", strPickUpMethod)));
         click(elmntPickUpMethod);
     }
@@ -549,6 +549,7 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
     }
 
     public void selectPharmacy(List<String> lstPharmacy) {
+        waitForSecond(4);
         waitForElementIgnoreStale(elmntSelectPharmacyHearder);
         click(elmntFindAPharmacy);
 

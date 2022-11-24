@@ -71,10 +71,10 @@ public class HomeScreen extends BaseScreen {
         while (!(verifyElementWithoutWait(iconHome) && i <= 10)) {
             navigateToBack();
             i++;
-            if (verifyElement(iconHome)) {
-                System.out.println("Loop Break 1");
-                break;
-            }
+//            if (verifyElement(iconHome)) {
+//                System.out.println("Loop Break 1");
+//                break;
+//            }
         }
         waitForSecond(3);
         click(iconHome);

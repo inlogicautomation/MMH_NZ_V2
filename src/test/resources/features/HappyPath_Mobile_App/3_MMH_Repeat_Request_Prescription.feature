@@ -13,7 +13,7 @@ Feature: Repeat_Request_Prescription_Scenarios
       | &EMAIL&  | &PASSWORD& |
 
 
-  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE
+  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE @TestRPP
   Scenario Outline: S1 - Request Repeat Prescription - Patient to collect script
 
     Given I am on MMH Home screen
@@ -29,7 +29,7 @@ Feature: Repeat_Request_Prescription_Scenarios
       | &PATIENT_TO_COLLECT_SCRIPT_DETAILS& | &RPR_MESSAGE& | &RP_PATIENT_TO_COLLECT_SCRIPT_STATUS& |
 
 
-  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE
+  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE @TestRPP
   Scenario Outline: S2 - Request Repeat Prescription - Sent script by post
 
     Given I am on MMH Home screen
