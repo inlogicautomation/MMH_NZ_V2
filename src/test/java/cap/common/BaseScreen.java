@@ -1,11 +1,10 @@
 package cap.common;
 
-import MMH_MobileApp.DemoScreenContainer;
+import Happy_Path_Patient_Mobile_App.DemoScreenContainer;
 import cap.helpers.Constants;
 import io.appium.java_client.*;
 import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.android.StartsActivity;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;

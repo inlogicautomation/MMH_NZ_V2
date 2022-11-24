@@ -1,9 +1,8 @@
 package cap.common;
 
-import MMH_SANITY.SanityPageContainer;
+import Sanity_Patient_Web.SanityPageContainer;
 import cap.helpers.Constants;
 import cap.utilities.WaitTimeUtil;
-import com.google.gson.internal.bind.util.ISO8601Utils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
@@ -12,7 +11,6 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import lombok.Getter;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.openqa.selenium.*;
@@ -21,10 +19,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import MMH.DemoPageContainer;
+import Happy_Path_Patient_Web_and_MR.DemoPageContainer;
 
 import java.awt.*;
 import java.io.File;
@@ -33,8 +30,6 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 
