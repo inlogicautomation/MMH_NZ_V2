@@ -1,6 +1,6 @@
 Feature: Repeat Request Prescription
 
-  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @RR
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature: Repeat Request Prescription
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @RR
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -118,7 +118,7 @@ Feature: Repeat Request Prescription
       | Email Address   | Password           |
       | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
-  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @RR
   Scenario Outline: S9- Request Repeat Prescription - Script Urgency
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription

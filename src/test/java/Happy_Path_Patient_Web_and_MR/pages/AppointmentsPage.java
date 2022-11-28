@@ -329,7 +329,7 @@ public class AppointmentsPage extends BasePage {
     protected String elmntSelectPaymentOption = new StringBuilder().append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]/parent::button").toString();
 
-    protected String elmntPayAmount = new StringBuilder().append("//span[contains(text(),'")
+    protected String elmntPayAmount = new StringBuilder().append("//abbr[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
     @FindBy(how = How.XPATH, using = "//input[@name='CardNumber']")

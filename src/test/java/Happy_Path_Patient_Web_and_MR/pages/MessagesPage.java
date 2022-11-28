@@ -3245,8 +3245,12 @@ public class MessagesPage extends BasePage {
             System.out.println(strBodyMessage);
             waitForSeconds(2);
             jsClick(txtgroupmessage);
+//            txtgroupmessage.click();
             waitForSeconds(2);
-            txtgroupmessage.sendKeys(TestDataUtil.getValue(strBodyMessage));
+            driver.switchTo().activeElement().sendKeys(strBodyMessage);
+
+//            waitForSeconds(2);
+//            txtgroupmessage.sendKeys(TestDataUtil.getValue(strBodyMessage));
             waitForSeconds(3);
             driver.switchTo().parentFrame();
             blResult = true;

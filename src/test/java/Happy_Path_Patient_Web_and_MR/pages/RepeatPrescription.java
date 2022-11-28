@@ -1,6 +1,7 @@
 package Happy_Path_Patient_Web_and_MR.pages;
 
 import cap.common.BasePage;
+import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -159,7 +160,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Payment')]")
     protected WebElement txtPayment;
 
-    @FindBy(how = How.XPATH, using = "//h2[text()='Payment Checkout']")
+    @FindBy(how = How.XPATH, using = "//h1[text()='Payment Checkout']")
     protected WebElement txtPaymentCheckOut;
 
     @FindBy(how = How.XPATH, using = "//input[@id='Account2Account']//following::label[contains(text(),'Account2Account')]")
@@ -224,7 +225,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@id='Account2Account' or @value='Account2Account']/parent::div")
     protected WebElement btnAccount2Account;
 
-    @FindBy(how = How.XPATH, using = "//div[@id='PxPayAccount2AccountAuth_Logo' and @name='PxPayAccount2AccountAuth_Logo']")
+    @FindBy(how = How.XPATH, using = "//div[@id='PxPayAccount2AccountAuth_Logo' and @data-name='PxPayAccount2AccountAuth_Logo']")
     protected WebElement txtAccount2Account;
 
     @AndroidFindBy(xpath = "//android.widget.CheckBox")
@@ -237,7 +238,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//h2[text()='Credit Card Payment']")
     protected WebElement txtCreditCardPayment;
 
-    @FindBy(how = How.XPATH, using = "//div[text()='NEXT']")
+    @FindBy(how = How.XPATH, using = "//div[text()='Next']")
     protected WebElement btnNextA2A;
 
     @FindBy(how = How.XPATH, using = "//div[@id='PxPayAccount2AccountAuth_PaymentSuccess' and @title='Payment Success']")
@@ -1752,6 +1753,27 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
     public boolean selectBank(String strBank) {
         boolean blResult = false;
         try {
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                waitForSeconds(2);
+                waitForElement(txtAccount2Account);
+                verifyElement(txtAccount2Account);
+                waitForSeconds(2);
+                WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
+                System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
+                jsScrollIntoView(selectRdoBtnBank);
+                waitForElementClickable(selectRdoBtnBank);
+                jsClick(selectRdoBtnBank);
+                System.out.println("Successfully Select RdoBtnBank");
+                waitForSeconds(4);
+                jsClick(chkBoxA2ATnC);
+                System.out.println("Successfully Select chkBoxA2ATnC");
+                waitForSeconds(3);
+                jsScrollIntoView(btnNextA2A);
+                waitForElementClickable(btnNextA2A);
+                jsClick(btnNextA2A);
+                System.out.printf("Successfully Select btnNextA2A");
+                blResult = true;
+            }
             waitForSeconds(2);
             waitForElement(txtAccount2Account);
             verifyElement(txtAccount2Account);
