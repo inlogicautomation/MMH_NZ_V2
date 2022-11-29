@@ -141,7 +141,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Payment')]")
     protected WebElement txtPayment;
 
-    @FindBy(how = How.XPATH, using = "//h2[text()='Payment Checkout']")
+    @FindBy(how = How.XPATH, using = "//h1[text()='Payment Checkout']")
     protected WebElement txtPaymentCheckOut;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Transaction Approved') and @id='Success']")
