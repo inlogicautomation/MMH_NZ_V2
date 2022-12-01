@@ -8,6 +8,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -22,6 +23,8 @@ public class RepeatPrescription extends BasePage {
     public RepeatPrescription(WebDriver driver) {
         super(driver);
     }
+
+    public static String strBrowserName;
 
 
     @FindBy(how = How.XPATH, using = "//div[@class='navbar-header']")
@@ -915,7 +918,7 @@ public class RepeatPrescription extends BasePage {
             waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
-            driver.switchTo().frame(CardPaymentFrame);
+//            driver.switchTo().frame(CardPaymentFrame);
             waitForSeconds(3);
             waitForElement(txtPaymentCheckOut);
             blResult = verifyElement(txtPaymentCheckOut);
@@ -1730,9 +1733,20 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
                     (By.xpath("//select[@id='DateExpiry_2' or @name='DateExpiry_2']")));
             expiryYear.selectByVisibleText(strExpiryYear);
 
-            waitForSeconds(2);
-            waitForElement(txtboxCVC);
-            txtboxCVC.sendKeys(strCVC);
+            if (System.getProperty(Constants.ENV_VARIABLE_BROWSER_NAME,"").equalsIgnoreCase("safari")){
+    Actions builder = new Actions(driver);
+    builder.moveToElement(driver.findElement(By.xpath("//input[@name='Cvc2']"))).click().build().perform();
+    waitForSeconds(2);
+    builder.moveToElement(driver.findElement(By.xpath("//input[@name='Cvc2']"))).sendKeys(strCVC).build().perform();
+            }else {
+                waitForSeconds(2);
+//                waitForElement(txtboxCVC);
+//                txtboxCVC.sendKeys(strCVC);
+                txtboxCVC.click();
+                waitForSeconds(2);
+                driver.switchTo().activeElement().sendKeys(strCVC);
+                waitForSeconds(2);
+            }
             takeScreenshot(driver);
             waitForSeconds(3);
             waitForElementClickable(btnSubmit);
@@ -1944,11 +1958,14 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
     public boolean verifyThePrescriptionDetails() {
         boolean blResult = false;
         try {
+            driver.switchTo().defaultContent();
+            System.out.println("Successfully Switch to Default Page");
             waitForSeconds(2);
 //            waitForElement(elmntOnlineCardSuccessPopUp);
 //            verifyElement(elmntOnlineCardSuccessPopUp);
-            waitForSeconds(4);
+//            waitForSeconds(4);
             takeScreenshot(driver);
+            driver.switchTo().defaultContent();
 //            waitForElementClickable(btnBackToRRP);
 //            click(btnBackToRRP);
             waitForElementToAppear(driver, By.xpath(btnBackPaymentConfirmation1));
@@ -1956,8 +1973,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             waitForElementClickable(btnBackPaymentConfirmation);
             jsClick(btnBackPaymentConfirmation);
             waitForSeconds(5);
-            driver.switchTo().defaultContent();
-            System.out.println("Successfully Switch to Default Page");
+
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(txtViewPreviousRequests);
             System.out.println("verify The Prescription Details Online was Successful >>>>>");

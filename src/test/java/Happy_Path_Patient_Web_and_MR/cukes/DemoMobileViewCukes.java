@@ -20,7 +20,7 @@ import static Happy_Path_Patient_Web_and_MR.pages.HomePage.strAppVersion;
 
         })
 
-//clean test -Dapp=Happy_Path_Patient_Web_and_MR -Dexecution_type=mobileview -Drunner=DemoMobileViewCukes -Dbrowser_name=chrome -Denv=PROD "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/MobileResponse-QAResults.html -Dsysteminfo.AppName=Demo-QA"
+//clean test -Dapp=Happy_Path_Patient_Web_and_MR -Dexecution_type=mobile -Drunner=DemoMobileViewCukes -Dbrowser_name=chrome -Denv=PROD "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/MobileResponse-QAResults.html -Dsysteminfo.AppName=Demo-QA"
 
 
 public class DemoMobileViewCukes extends AbstractTestNGCucumberTests {

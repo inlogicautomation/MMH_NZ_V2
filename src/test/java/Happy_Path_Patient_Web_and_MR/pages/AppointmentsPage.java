@@ -7,6 +7,7 @@ import cap.utilities.TestDataUtil;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -703,6 +704,7 @@ public class AppointmentsPage extends BasePage {
                 String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
                 System.out.println("DATE" + strDateValue);
                 WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strDateValue)));
+                jsScrollIntoView(elmntAppointmentDetails);
                 verifyElement(elmntAppointmentDetails);
 
                 String strConvertedTime = strSlotDate;
@@ -1600,9 +1602,24 @@ public class AppointmentsPage extends BasePage {
     public boolean enterCVCNumber(String strCVCNumber) {
         boolean blResult = false;
         try {
-            waitForElement(txtCVCNumber);
-            enterValue(txtCVCNumber, strCVCNumber);
-            waitForSeconds(2);
+            if (System.getProperty(Constants.ENV_VARIABLE_BROWSER_NAME,"").equalsIgnoreCase("safari")){
+                Actions builder = new Actions(driver);
+                builder.moveToElement(driver.findElement(By.xpath("//input[@name='Cvc2']"))).click().build().perform();
+                waitForSeconds(2);
+                builder.moveToElement(driver.findElement(By.xpath("//input[@name='Cvc2']"))).sendKeys(strCVCNumber).build().perform();
+
+            }
+            else {
+//                waitForElement(txtCVCNumber);
+//                enterValue(txtCVCNumber, strCVCNumber);
+                waitForSeconds(2);
+                txtCVCNumber.click();
+                waitForSeconds(2);
+                driver.switchTo().activeElement().sendKeys(strCVCNumber);
+                waitForSeconds(2);
+            }
+
+
             blResult = verifyElement(btnSubmit);
         } catch (Exception e) {
             e.printStackTrace();
