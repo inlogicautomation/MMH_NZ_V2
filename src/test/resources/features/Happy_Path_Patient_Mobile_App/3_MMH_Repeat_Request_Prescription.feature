@@ -1,6 +1,6 @@
 Feature: Repeat_Request_Prescription_Scenarios
 
-  @MOBILE @RELAUNCH @Mobile_RRP @HAPPY_PATH_MOBILE @TestRPP
+  @MOBILE @RELAUNCH @Mobile_RRP @HAPPY_PATH_MOBILE @TestRPP @Fix
   Scenario Outline: Pre-Req - User login with valid credential and verifies MMH Home screen
 
     Given I am on MMH Login screen
@@ -174,7 +174,7 @@ Feature: Repeat_Request_Prescription_Scenarios
       | Medication Details                             | Message       | Repeat Prescription Status                       | Pharmacy Details                            |
       | &DELIVER_VIA_ZOOM_PHARMACY_DETAILS_$0_PAYMENT& | &RPR_MESSAGE& | &RP_DELIVER_VIA_ZOOM_PHARMACY_STATUS_$0_PAYMENT& | &DELIVER_VIA_ZOOM_PHARMACY_ADDRESS_DETAILS& |
 
-  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE
+  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE @Fix
   Scenario Outline: S16 - Request Repeat Prescription - Pay Online (A2A) - Patient to collect script
     Given I am on MMH Home screen
     And I tap on "Repeat Prescriptions" option in home screen
@@ -186,7 +186,7 @@ Feature: Repeat_Request_Prescription_Scenarios
       | Medication Details                          | Message       |
       | &PATIENT_TO_COLLECT_SCRIPT_DETAILS_PAYMENT& | &RPR_MESSAGE& |
 
-  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE
+  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE @Fix
   Scenario Outline: S16 -Request Repeat Prescription - Pay Online (A2A) - Patient to collect script
 
     Given I am on Payment Options screen

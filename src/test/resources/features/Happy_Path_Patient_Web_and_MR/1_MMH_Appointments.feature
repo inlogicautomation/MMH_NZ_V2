@@ -1,6 +1,6 @@
 Feature: Appointments
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature: Appointments
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -153,7 +153,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details               | Details_For_Appointment              | Appointment_Summary                  | Future_Date   |
       | Book Appointment | &BOOK_VISIT_IN_VIDEO_APPOINTMENT& | &VISIT_IN_VIDEO_APPOINTMENT_DETAILS& | &VISIT_IN_VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
   Scenario Template: S4 - Patient Booking Appointment - Phone Appointment
 
     Given As a user I am on HomePage
@@ -169,7 +169,7 @@ Feature: Appointments
       | Book Appointment | &BOOK_PHONE_APPOINTMENT& | &PHONE_APPOINTMENT_DETAILS& | &PHONE_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
   Scenario Template: S7 - Patient can view all the future date booked appointments in card view
 
     Given As a user I am on HomePage
@@ -181,7 +181,7 @@ Feature: Appointments
       | Appointments        |
       | Future Appointments |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
   Scenario Template: S7 - Patient can view all the future date booked appointments in grid view
 
     Given I am on "<Tab>" page
@@ -192,7 +192,7 @@ Feature: Appointments
       | Tab                 |
       | Future Appointments |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
   Scenario Template: S8 - Patient can view all the past date booked appointments in card view
 
     Given As a user I am on HomePage
@@ -204,7 +204,7 @@ Feature: Appointments
       | Appointments      |
       | Past Appointments |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
   Scenario Template: S8 - Patient can view all the past date booked appointments in card view
 
     Given I am on "<Tab>" page
@@ -215,7 +215,7 @@ Feature: Appointments
       | Tab               |
       | Past Appointments |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
   Scenario Template: S9 - Patient can view all the video appointments invites sent from PMS/Provider in grid view
 
     Given As a user I am on HomePage

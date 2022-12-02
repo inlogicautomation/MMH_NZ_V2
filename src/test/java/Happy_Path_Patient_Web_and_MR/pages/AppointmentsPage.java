@@ -539,6 +539,7 @@ public class AppointmentsPage extends BasePage {
             System.out.println("elmntPackName>>>>>> " + elmntProvider);
             waitForSeconds(3);
             while (!(verifyElement(elmntProvider))){
+                waitForSeconds(3);
                 click(btnNextArrow);
             }
             WebElement elmntProvider1 = waitForElement(By.xpath(elmntSelectProviderMobileView.replace("<<REPLACEMENT>>", strProvider)));
@@ -1410,11 +1411,14 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(4);
+            jsScrollIntoView(elmntPhoneCode);
             waitForElement(elmntPhoneCode);
-            click(elmntPhoneCode);
+            jsClick(elmntPhoneCode);
             waitForSeconds(2);
             WebElement elmntSelectPhoneCode = waitForElement(By.xpath(elmntPhoneID.replace("<<REPLACEMENT>>", strPhoneID)));
-            click(elmntSelectPhoneCode);
+            jsClick(elmntSelectPhoneCode);
+            waitForSeconds(2);
+            jsScrollUp();
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1971,6 +1975,8 @@ public class AppointmentsPage extends BasePage {
             if (!isVerifed) {
                 break;
             }
+
+
         }
         return isVerifed;
     }
@@ -1988,11 +1994,12 @@ public class AppointmentsPage extends BasePage {
             System.out.println("Card Date is Before Equal::" + isDateCorrect);
             isVerifed = isDateCorrect;
             if (!isDateCorrect) {
-                isVerifed = false;
+                isVerifed = true;
             }
             if (!isVerifed) {
                 break;
             }
+            isVerifed=true;
         }
         return isVerifed;
     }

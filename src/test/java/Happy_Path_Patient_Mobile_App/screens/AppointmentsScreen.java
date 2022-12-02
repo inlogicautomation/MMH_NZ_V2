@@ -139,11 +139,11 @@ public class AppointmentsScreen extends BaseScreen {
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeStaticText[@name='Payment Checkout'])[1]")
     protected WebElement elmntPaymentCheckout;
 
-    @AndroidFindBy(xpath = "//android.view.View[@text='Card Number:*']/following-sibling::android.view.View//android.widget.EditText")
+    @AndroidFindBy(xpath = "//android.view.View[@text='Card Number: required']/following-sibling::android.view.View//android.widget.EditText")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name='Card Number:']/following::XCUIElementTypeTextField[1]")
     protected WebElement txtCardNumber;
 
-    @AndroidFindBy(xpath = "//android.view.View[@text='Name On Card:*']/following-sibling::android.view.View//android.widget.EditText")
+    @AndroidFindBy(xpath = "(//android.widget.TextView[@text='Name On Card:']/following::android.view.View//following::android.widget.EditText)[1]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name='Name On Card:']/following::XCUIElementTypeTextField[1]")
     protected WebElement txtCardName;
 
@@ -493,7 +493,7 @@ public class AppointmentsScreen extends BaseScreen {
         attachStepLog("Appointment Time", strDateValue);
         lstDetails.add(strDateValue);
 
-        waitForSecond(120);
+        waitForSecond(180);
 
         reLaunchAppAndroid();
         waitForElement(elmntServicesIcon);

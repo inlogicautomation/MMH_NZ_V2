@@ -499,7 +499,7 @@ public class MessagesPage extends BasePage {
             .append(Constants.IMAGES_FOLDER).append(File.separator)
             .append("<<FILENAME>>").toString();
 
-    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='Attachment']")
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='Attachment']//parent::div[contains(text(),'ADD Files')]")
     protected WebElement btnFloorplanUpload;
 
     @FindBy(how = How.XPATH, using = "//input[@type='file']")
@@ -2481,7 +2481,7 @@ public class MessagesPage extends BasePage {
                 jsScrollUp();
                 jsClick(btnAttachClick);
                 waitForSeconds(2);
-                mouseClick(btnFloorplanUpload);
+                jsClick(btnFloorplanUpload);
                 waitForSeconds(4);
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.setCapability("autoGrantPermissions", "true");
