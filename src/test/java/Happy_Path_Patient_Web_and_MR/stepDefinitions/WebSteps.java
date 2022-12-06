@@ -3131,8 +3131,48 @@ public class WebSteps {
 
     }
 
+    @And("I should see all the COVIDImmunisations Edit My Entries Medicine details in more info")
+    public void iShouldSeeAllTheCOVIDImmunisationsEditMyEntriesMedicineDetailsInMoreInfo(DataTable dataTable) {
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.clickMaxvalue1());
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                System.out.println(strKey);
+                List<String> list1 = TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = TestDataUtil.getListOfValue(strKey2);
+                System.out.println(list1);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesCOVIDImmunisationData(list1, list2));
+            }
+        }
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                String strKey3 = tableData.get(i).get(2).trim();
+                List<String> list1 = cap.utilities.TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                List<String> list3 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileCovidImmusationMyEntriesDataIcon(list1, list3));
+            }
+        }
+        if (System.getProperty(cap.helpers.Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            List<List<String>> tableData = dataTable.asLists(String.class);
+            for (int i = 0; i < tableData.size(); i++) {
+                String strKey = tableData.get(i).get(0).trim();
+                String strKey2 = tableData.get(i).get(1).trim();
+                String strKey3 = tableData.get(i).get(2).trim();
+                List<String> list1 = cap.utilities.TestDataUtil.getListOfValue(strKey);
+                List<String> list2 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                List<String> list3 = cap.utilities.TestDataUtil.getListOfValue(strKey2);
+                Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMobileCovidImmusationMyEntriesDataIcon(list1, list3));
+            }
+        }
+    }
+    }
 
-}
 
   
 

@@ -1788,45 +1788,72 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
                 System.out.printf("Successfully Select btnNextA2A");
                 blResult = true;
             }
-            waitForSeconds(2);
-            waitForElement(txtAccount2Account);
-            verifyElement(txtAccount2Account);
-            waitForSeconds(2);
-            WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
-            System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
-            jsScrollIntoView(selectRdoBtnBank);
-            waitForElementClickable(selectRdoBtnBank);
-            jsClick(selectRdoBtnBank);
-            System.out.println("Successfully Select RdoBtnBank");
-            waitForSeconds(4);
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("autoGrantPermissions", "true");
-            AppiumDriver appiumDriver = (AppiumDriver) driver;
-            Set<String> contextNames = appiumDriver.getContextHandles();
-            for (String strContextName : contextNames) {
-                if (strContextName.contains("NATIVE_APP")) {
-                    appiumDriver.context("NATIVE_APP");
-                    break;
-                }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                waitForSeconds(2);
+                waitForElement(txtAccount2Account);
+                verifyElement(txtAccount2Account);
+                waitForSeconds(2);
+                WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
+                System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
+                jsScrollIntoView(selectRdoBtnBank);
+                waitForElementClickable(selectRdoBtnBank);
+                jsClick(selectRdoBtnBank);
+                System.out.println("Successfully Select RdoBtnBank");
+                waitForSeconds(4);
+                jsClick(chkBoxA2ATnC);
+                System.out.println("Successfully Select chkBoxA2ATnC");
+                waitForSeconds(3);
+                jsScrollIntoView(btnNextA2A);
+                waitForElementClickable(btnNextA2A);
+                jsClick(btnNextA2A);
+                System.out.printf("Successfully Select btnNextA2A");
+                blResult = true;
             }
-            System.out.println("Success Switch Native App");
-            capabilities.setCapability("autoGrantPermissions", "true");
-            waitForElement(txtcheckbox);
-            click(txtcheckbox);
-            System.out.println("Success Select check box");
-            Set<String> contextNames1 = appiumDriver.getContextHandles();
-            for (String strContextName : contextNames1) {
-                if (strContextName.contains("CHROMIUM")) {
-                    appiumDriver.context("CHROMIUM");
-                    break;
+
+
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                waitForSeconds(2);
+                waitForElement(txtAccount2Account);
+                verifyElement(txtAccount2Account);
+                waitForSeconds(2);
+                WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
+                System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
+                jsScrollIntoView(selectRdoBtnBank);
+                waitForElementClickable(selectRdoBtnBank);
+                jsClick(selectRdoBtnBank);
+                System.out.println("Successfully Select RdoBtnBank");
+                waitForSeconds(4);
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("autoGrantPermissions", "true");
+                AppiumDriver appiumDriver = (AppiumDriver) driver;
+                Set<String> contextNames = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames) {
+                    if (strContextName.contains("NATIVE_APP")) {
+                        appiumDriver.context("NATIVE_APP");
+                        break;
+                    }
                 }
+                System.out.println("Success Switch Native App");
+                capabilities.setCapability("autoGrantPermissions", "true");
+                waitForElement(txtcheckbox);
+                click(txtcheckbox);
+                System.out.println("Success Select check box");
+                Set<String> contextNames1 = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames1) {
+                    if (strContextName.contains("CHROMIUM")) {
+                        appiumDriver.context("CHROMIUM");
+                        break;
+                    }
+                }
+                System.out.println("Successfully Select chkBoxA2ATnC");
+                waitForSeconds(3);
+                jsScrollIntoView(btnNextA2A);
+                waitForElementClickable(btnNextA2A);
+                jsClick(btnNextA2A);
+                System.out.printf("Successfully Select btnNextA2A");
+                blResult = true;
             }
-            System.out.println("Successfully Select chkBoxA2ATnC");
-            waitForSeconds(3);
-            jsScrollIntoView(btnNextA2A);
-            waitForElementClickable(btnNextA2A);
-            jsClick(btnNextA2A);
-            System.out.printf("Successfully Select btnNextA2A");
+
 
             blResult = true;
 
