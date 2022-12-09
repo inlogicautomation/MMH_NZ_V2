@@ -614,7 +614,7 @@ public class AppointmentsPage extends BasePage {
             lstAvailableSlots.size();
 
             System.out.println("Available Slots" + lstAvailableSlots);
-            strSlotDate = lstAvailableSlots.get(1).getText();
+            strSlotDate = lstAvailableSlots.get(1).getText().trim();
             System.out.println("Slot Date" + strSlotDate);
             waitAndClick(lstAvailableSlots.get(1));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -709,8 +709,8 @@ public class AppointmentsPage extends BasePage {
                 verifyElement(elmntAppointmentDetails);
 
                 String strConvertedTime = strSlotDate;
-
-                strConvertedTime = "0" + strConvertedTime;
+//
+////                strConvertedTime = "0" + strConvertedTime;
 
                 String strFinalOutDateTime = strConvertedTime;
 
