@@ -483,22 +483,37 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@class='mat-focus-indicator btn-increment mat-stroked-button mat-button-base']")
     protected WebElement btnDose;
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-9-input']")
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='clinicianCheckbox']//input[@aria-checked='true'])[1]")
     protected WebElement elmntCheckBox;
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-10-input']")
-    protected WebElement elmntClassiCheckBox;
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='clinicianCheckbox']//input[@aria-checked='true'])[2]")
+    protected WebElement elmntMobileCheckBox;
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-6-input']")
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='privacyCheckBox']//input[@aria-checked='true'])[1]")
+    protected WebElement elmntConditionCheckBox;
+
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='privacyCheckBox']//input[@aria-checked='true'])[2]")
+    protected WebElement elmntMobileConditionCheckBox;
+
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='shareWithDoctors']//input[@aria-checked='true'])[1]")
     protected WebElement elmntAllergiesCheckBox;
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-5-input']")
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='shareWithDoctors']//input[@aria-checked='true'])[2]")
+    protected WebElement elmntMobileAllergiesCheckBox;
+
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='privacyCheckbox']//input[@aria-checked='true'])[1]")
     protected WebElement elmntPrescriptionCheckBox;
 
-    @FindBy(how = How.XPATH, using = "(//div[@class='footer-checkbox']//following::mat-checkbox[@class='mat-checkbox mat-accent ng-valid ng-dirty ng-touched mat-checkbox-checked'])[2]")
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='privacyCheckbox']//input[@aria-checked='true'])[3]")
+    protected WebElement elmntMobilePrescriptionCheckBox;
+
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='privacyCheckbox']//input[@aria-checked='true'])[2]")
     protected WebElement elmtImmunisationsiCheckBox;
 
-    @FindBy(how = How.XPATH, using = "//mat-checkbox[not(contains(@class,'mat-checkbox-checked'))][@formcontrolname='isconf']")
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='privacyCheckbox']//input[@aria-checked='true'])[4]")
+    protected WebElement elmtMobileImmunisationsiCheckBox;
+
+    @FindBy(how = How.XPATH, using = "//mat-checkbox[@formcontrolname='isconf']//input[@aria-checked='true']")
     protected WebElement elmtCovidImmunisationsiCheckBox;
 
 
@@ -2892,23 +2907,48 @@ public class MyHealthRecordsPage extends BasePage {
         verifyElement(elmntCheckBox);
     }
 
-    public void clickClassiCheckBox() {
+    public void clickMobileCheckBox() {
         waitForSeconds(3);
-        verifyElement(elmntClassiCheckBox);
+        verifyElement(elmntMobileCheckBox);
+    }
+
+    public void clickConditionCheckBox() {
+        waitForSeconds(3);
+        verifyElement(elmntConditionCheckBox);
+    }
+
+    public void clickMobileConditionCheckBox() {
+        waitForSeconds(3);
+        verifyElement(elmntMobileConditionCheckBox);
     }
 
     public boolean clickAllergiesCheckBox() {
         waitForSeconds(3);
         return verifyElement(elmntAllergiesCheckBox);
     }
+
+    public boolean clickMobileAllergiesCheckBox() {
+        waitForSeconds(3);
+        return verifyElement(elmntMobileAllergiesCheckBox);
+    }
     public boolean clickPrescriptionCheckBox() {
         waitForSeconds(3);
         return verifyElement(elmntPrescriptionCheckBox);
     }
 
+    public boolean clickMobilePrescriptionCheckBox() {
+        waitForSeconds(3);
+        return verifyElement(elmntMobilePrescriptionCheckBox);
+    }
+
     public void clickImmuCheckBox() {
         waitForSeconds(3);
         verifyElement(elmtImmunisationsiCheckBox);
+    }
+
+    public void clickMobileImmuCheckBox() {
+        waitForSeconds(3);
+        verifyElement(elmtMobileImmunisationsiCheckBox);
     }
 
     public void clickCovidCheckBox() {

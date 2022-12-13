@@ -1651,7 +1651,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterVisitedLocation(TestDataUtil.getValue(listCreateData.get(1)));
             demoPageContainer.myHealthRecordsPage.enterVisitedDate();
             demoPageContainer.myHealthRecordsPage.enterClinicianNotesAdditionalInformation(TestDataUtil.getValue(listCreateData.get(2)));
-            demoPageContainer.myHealthRecordsPage.clickCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickMobileCheckBox();
             demoPageContainer.myHealthRecordsPage.clickSave();
             demoPageContainer.myHealthRecordsPage.RefreshPage();
         }
@@ -1661,7 +1661,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterVisitedLocation(TestDataUtil.getValue(listCreateData.get(1)));
             demoPageContainer.myHealthRecordsPage.enterVisitedDate();
             demoPageContainer.myHealthRecordsPage.enterClinicianNotesAdditionalInformation(TestDataUtil.getValue(listCreateData.get(2)));
-            demoPageContainer.myHealthRecordsPage.clickCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickMobileCheckBox();
             demoPageContainer.myHealthRecordsPage.clickSave();
             demoPageContainer.myHealthRecordsPage.RefreshPage();
         }
@@ -1708,7 +1708,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterStartDate();
             demoPageContainer.myHealthRecordsPage.enterEndDate();
             demoPageContainer.myHealthRecordsPage.enterClassiAdditionalInformation(TestDataUtil.getValue(listCreateData.get(2)));
-            demoPageContainer.myHealthRecordsPage.clickClassiCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickConditionCheckBox();
             demoPageContainer.myHealthRecordsPage.clickClassificationsSave();
             demoPageContainer.myHealthRecordsPage.RefreshPage();
         }
@@ -1719,7 +1719,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterStartDate();
             demoPageContainer.myHealthRecordsPage.enterEndDate();
             demoPageContainer.myHealthRecordsPage.enterClassiAdditionalInformation(TestDataUtil.getValue(listCreateData.get(2)));
-            demoPageContainer.myHealthRecordsPage.clickClassiCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickMobileConditionCheckBox();
             demoPageContainer.myHealthRecordsPage.clickClassificationsSave();
             demoPageContainer.myHealthRecordsPage.RefreshPage();
         }
@@ -1730,7 +1730,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterStartDate();
             demoPageContainer.myHealthRecordsPage.enterEndDate();
             demoPageContainer.myHealthRecordsPage.enterClassiAdditionalInformation(TestDataUtil.getValue(listCreateData.get(2)));
-            demoPageContainer.myHealthRecordsPage.clickClassiCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickMobileConditionCheckBox();
             demoPageContainer.myHealthRecordsPage.clickClassificationsSave();
             demoPageContainer.myHealthRecordsPage.RefreshPage();
         }
@@ -1756,7 +1756,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterImmunisationVaccineName(TestDataUtil.getValue(listCreateData.get(0)));
             demoPageContainer.myHealthRecordsPage.enterImmunisationDateGiven();
             demoPageContainer.myHealthRecordsPage.enterAdditionalInformation(TestDataUtil.getValue(listCreateData.get(1)));
-            demoPageContainer.myHealthRecordsPage.clickImmuCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickMobileImmuCheckBox();
             demoPageContainer.myHealthRecordsPage.clickImmunisationSave();
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
@@ -1764,7 +1764,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterImmunisationVaccineName(TestDataUtil.getValue(listCreateData.get(0)));
             demoPageContainer.myHealthRecordsPage.enterImmunisationDateGiven();
             demoPageContainer.myHealthRecordsPage.enterAdditionalInformation(TestDataUtil.getValue(listCreateData.get(1)));
-            demoPageContainer.myHealthRecordsPage.clickImmuCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickMobileImmuCheckBox();
             demoPageContainer.myHealthRecordsPage.clickImmunisationSave();
         }
     }
@@ -1795,7 +1795,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterAllergiesEndDate();
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectMobileAllergicdropdown1(TestDataUtil.getValue(listCreateData.get(2))));
             demoPageContainer.myHealthRecordsPage.enterAllergiesAdditionalInformation(TestDataUtil.getValue(listCreateData.get(3)));
-            demoPageContainer.myHealthRecordsPage.clickAllergiesCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickMobileAllergiesCheckBox();
             demoPageContainer.myHealthRecordsPage.clickAllergiesSave();
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
@@ -1806,7 +1806,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterAllergiesEndDate();
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectMobileAllergicdropdown1(TestDataUtil.getValue(listCreateData.get(2))));
             demoPageContainer.myHealthRecordsPage.enterAllergiesAdditionalInformation(TestDataUtil.getValue(listCreateData.get(3)));
-            demoPageContainer.myHealthRecordsPage.clickAllergiesCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickMobileAllergiesCheckBox();
             demoPageContainer.myHealthRecordsPage.clickAllergiesSave();
         }
     }
@@ -1848,7 +1848,7 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectMobilePrescriptiondropdown(TestDataUtil.getValue(listCreateData.get(2))));
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectMobilePrescriptiondropdown1(TestDataUtil.getValue(listCreateData.get(3))));
             demoPageContainer.myHealthRecordsPage.enterPrescriptionAdditionalInformation(TestDataUtil.getValue(listCreateData.get(4)));
-            demoPageContainer.myHealthRecordsPage.clickPrescriptionCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickMobilePrescriptionCheckBox();
             demoPageContainer.myHealthRecordsPage.clickPrescriptionSave();
             demoPageContainer.myHealthRecordsPage.RefreshPage();
 
@@ -1863,7 +1863,7 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectMobilePrescriptiondropdown(TestDataUtil.getValue(listCreateData.get(2))));
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectMobilePrescriptiondropdown1(TestDataUtil.getValue(listCreateData.get(3))));
             demoPageContainer.myHealthRecordsPage.enterPrescriptionAdditionalInformation(TestDataUtil.getValue(listCreateData.get(4)));
-            demoPageContainer.myHealthRecordsPage.clickPrescriptionCheckBox();
+            demoPageContainer.myHealthRecordsPage.clickMobilePrescriptionCheckBox();
             demoPageContainer.myHealthRecordsPage.clickPrescriptionSave();
             demoPageContainer.myHealthRecordsPage.RefreshPage();
 

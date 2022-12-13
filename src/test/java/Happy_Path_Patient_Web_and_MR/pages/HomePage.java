@@ -40,6 +40,9 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Login']")
     protected WebElement betaLoginBtn;
 
+    @FindBy(how = How.XPATH, using = "//span[text()='  LOG IN   ']")
+    protected WebElement ClickPatientLoginBtn;
+
     @FindBy(how = How.XPATH, using = "//img[@class='profile-pic img-fluid']")
     protected WebElement elmntProfile;
 
@@ -71,6 +74,11 @@ public class HomePage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//input[@id='UserName']")
     protected WebElement txtEmail;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Provider Login']")
+    protected WebElement txtProviderPortal;
+
+    //p[text()='Login to Manage My Health Patient Portal']
 
     @FindBy(how = How.XPATH, using = "//input[@id='EncrySecuredPassword']")
     protected WebElement txtPassword;
@@ -116,7 +124,7 @@ public class HomePage extends BasePage {
     protected WebElement txtBoxPassword;
 
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Sign in']")
+    @FindBy(how = How.XPATH, using = "//span[text()=' Sign in ']")
     protected WebElement SignInBtn;
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
@@ -141,6 +149,9 @@ public class HomePage extends BasePage {
     }
 
     public void enterEmail(String strEmail) {
+        waitForSeconds(2);
+        jsClick(txtProviderPortal);
+        waitForSeconds(3);
         waitForElementClickable(txtEmail);
         enterValue(txtEmail, strEmail);
     }
@@ -177,8 +188,10 @@ public class HomePage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(3);
-            waitForElement(betaLoginBtn);
+                        waitForElement(betaLoginBtn);
             jsClick(betaLoginBtn);
+//            waitForElement(ClickPatientLoginBtn);
+//            jsClick(ClickPatientLoginBtn);
             blResult = true;
             System.out.println("Try Block 1 executed");
         } catch (Exception e) {
@@ -349,6 +362,9 @@ public class HomePage extends BasePage {
             waitForSeconds(3);
             jsClick(btnExitApp);
             waitForSeconds(180);
+            waitForSeconds(2);
+            jsClick(txtProviderPortal);
+            waitForSeconds(3);
             waitForElement(txtEmail);
             isVerified = verifyElement(txtEmail);
         }
@@ -357,6 +373,9 @@ public class HomePage extends BasePage {
             waitForElement(btnExitAppMobile);
             jsClick(btnExitAppMobile);
             waitForSeconds(120);
+            waitForSeconds(2);
+            jsClick(txtProviderPortal);
+            waitForSeconds(3);
             waitForElement(txtEmail);
             isVerified = verifyElement(txtEmail);
         }
@@ -365,6 +384,9 @@ public class HomePage extends BasePage {
             waitForElement(btnExitAppMobile);
             click(btnExitAppMobile);
             waitForSeconds(120);
+            waitForSeconds(2);
+            jsClick(txtProviderPortal);
+            waitForSeconds(3);
             waitForElement(txtEmail);
             isVerified = verifyElement(txtEmail);
         }
