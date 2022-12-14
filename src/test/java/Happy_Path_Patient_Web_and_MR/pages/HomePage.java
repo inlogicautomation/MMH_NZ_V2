@@ -363,10 +363,10 @@ public class HomePage extends BasePage {
             jsClick(btnExitApp);
             waitForSeconds(180);
             waitForSeconds(2);
-            jsClick(txtProviderPortal);
+//            jsClick(txtProviderPortal);
             waitForSeconds(3);
-            waitForElement(txtEmail);
-            isVerified = verifyElement(txtEmail);
+            waitForElement(txtBoxEmail);
+            isVerified = verifyElement(txtBoxEmail);
         }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -374,10 +374,10 @@ public class HomePage extends BasePage {
             jsClick(btnExitAppMobile);
             waitForSeconds(120);
             waitForSeconds(2);
-            jsClick(txtProviderPortal);
+//            jsClick(txtProviderPortal);
             waitForSeconds(3);
-            waitForElement(txtEmail);
-            isVerified = verifyElement(txtEmail);
+            waitForElement(txtBoxEmail);
+            isVerified = verifyElement(txtBoxEmail);
         }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
@@ -385,10 +385,10 @@ public class HomePage extends BasePage {
             click(btnExitAppMobile);
             waitForSeconds(120);
             waitForSeconds(2);
-            jsClick(txtProviderPortal);
+//            jsClick(txtProviderPortal);
             waitForSeconds(3);
-            waitForElement(txtEmail);
-            isVerified = verifyElement(txtEmail);
+            waitForElement(txtBoxEmail);
+            isVerified = verifyElement(txtBoxEmail);
         }
         return isVerified;
     }
