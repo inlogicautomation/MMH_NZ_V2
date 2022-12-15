@@ -13,7 +13,7 @@ Feature: Mobile_Health_Records_Scenarios
       | &EMAIL&  | &PASSWORD& |
 
 
-  @MOBILE @Mobile_Health_Record @HAPPY_PATH_MOBILE
+  @MOBILE @Mobile_Health_Record1 @HAPPY_PATH_MOBILE
   Scenario Outline: S2 - Patient to View Health Records - Test Results (Entries from Health Centre)
 
     Given I am on MMH Home screen

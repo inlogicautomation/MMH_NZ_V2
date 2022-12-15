@@ -133,7 +133,7 @@ Feature: Dashboard
 
 
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES @dash
   Scenario Template: S3- User successfully login into Doctor Portal
 
     Given As a user Launch the "<V1 Portal>"
@@ -145,7 +145,7 @@ Feature: Dashboard
       | V1 Portal | Email Address      | Password              |
       | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES @dash
   Scenario: S3- Preparation for Received Message
 
     Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module
@@ -161,7 +161,7 @@ Feature: Dashboard
     And I log out from Doctor Portal
 
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES @dash
   Scenario Template: S1- User Successfully logs in to the V2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -178,7 +178,7 @@ Feature: Dashboard
 #  14	Dashboard	Check Unread message count in New Messages Card
 
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES @dash
   Scenario: View latest three New messages received in new message card
 
     Given As a Existing user I am on HomePage and I click Dashboard

@@ -34,8 +34,8 @@ public class HealthRecordsScreen extends BaseScreen {
     protected List<WebElement> lstHealthRecordNo;
 
     String strContainsTextViewLocator = new StringBuilder()
-            .append("//android.widget.TextView[contains(@text,\"")
-            .append("<<TEXT>>").append("\")]").toString();
+            .append("(//android.widget.TextView[contains(@text,\"")
+            .append("<<TEXT>>").append("\")])[1]").toString();
 
     String strContainsStaticTextLocatorIOS = new StringBuilder()
             .append("//XCUIElementTypeStaticText[contains(@name,\"")
@@ -78,6 +78,7 @@ public class HealthRecordsScreen extends BaseScreen {
         waitForElementIgnoreStale(elmntHealthRecords);
         WebElement elmntHealthRecords = waitForElement(By.xpath(strContainsTextViewLocator.replace("<<TEXT>>", strHealthRecordOption)));
         waitForElementClickable(elmntHealthRecords);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>"+elmntHealthRecords);
         click(elmntHealthRecords);
     }
 
@@ -87,6 +88,7 @@ public class HealthRecordsScreen extends BaseScreen {
 
         for (String strRecord : lstRecords) {
             WebElement elmntRecord = waitForElement(By.xpath(strContainsTextViewLocator.replace("<<TEXT>>", strRecord)));
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>elmntRecord"+elmntRecord);
             blResult = verifyElement(elmntRecord);
             if (blResult == false) {
                 takeScreenshot(driver);
@@ -102,6 +104,7 @@ public class HealthRecordsScreen extends BaseScreen {
         WebElement elmntRecord = waitForElement(By.xpath(strRecordsViewLocator1
                 .replace("<<TEXT1>>", lstRecords.get(0))
                 .replace(("<<TEXT2>>"), lstRecords.get(1))));
+        System.out.println(">>>>>>>>>>>>>>>>elmntRecord"+elmntRecord);
         click(elmntRecord);
     }
 

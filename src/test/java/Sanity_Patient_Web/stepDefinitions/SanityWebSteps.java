@@ -148,12 +148,12 @@ public class SanityWebSteps {
             Assert.assertTrue(sanityPageContainer.messagesPage.selectServiceName(TestDataUtil.getValue(lstMessageDetails.get(2))));
             Assert.assertTrue(sanityPageContainer.messagesPage.selectRole(TestDataUtil.getValue(lstMessageDetails.get(3))));
             Assert.assertTrue(sanityPageContainer.messagesPage.selectTo(TestDataUtil.getValue(lstMessageDetails.get(4))));
-            Assert.assertTrue(sanityPageContainer.messagesPage.enterSubject(TestDataUtil.getValue(lstMessageDetails.get(5))));
+            Assert.assertTrue(sanityPageContainer.messagesPage.enterSubjectDoctor(TestDataUtil.getValue(lstMessageDetails.get(5))));
             Assert.assertTrue(sanityPageContainer.messagesPage.enableTermAndConditions());
             Assert.assertTrue(sanityPageContainer.messagesPage.enterBodyMessage(TestDataUtil.getValue(lstMessageDetails.get(6))));
             Assert.assertTrue(sanityPageContainer.messagesPage.attachTheFile(TestDataUtil.getValue(lstMessageDetails.get(7))));
 
-            Assert.assertTrue(sanityPageContainer.messagesPage.clickDoctorSendMessageButton());
+            Assert.assertTrue(sanityPageContainer.messagesPage.clickSendMessageAndNavigateToHomePage());
 
         }
     }
@@ -161,10 +161,9 @@ public class SanityWebSteps {
     @Then("I navigate to Sent items and verify the Sent Message Details")
     public void iNavigateToSentItemsAndVerifyTheSentMessageDetails(List<String> strDetails) {
 
-        Assert.assertTrue(sanityPageContainer.messagesPage.navigateToDoctorHomepage());
+//        Assert.assertTrue(sanityPageContainer.messagesPage.navigateToDoctorHomepage());
         Assert.assertTrue(sanityPageContainer.messagesPage.navigateToSentItems());
         for (String strMessageDetails : strDetails) {
-
             List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
             System.out.println("List Message Details >>> :: " + lstMessageDetails);
             Assert.assertTrue(sanityPageContainer.messagesPage.verifySentMessages(TestDataUtil.getValue(lstMessageDetails.get(5))));

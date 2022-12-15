@@ -50,7 +50,7 @@ Feature: My Health Centre
 
     Given As a user I am on Doctor portal homepage and Navigate to Post notice board
     And I Enter the notice board message "<Details>"
-    And I log out from Doctor Portal
+#    And I log out from Doctor Portal
 
     Examples:
       | Details                |

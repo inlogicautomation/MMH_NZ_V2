@@ -44,7 +44,7 @@ public class WebSteps {
 
     @When("I click login button")
     public void iClickLoginButton() {
-        demoPageContainer.homePage.clickLoginButton();
+        demoPageContainer.homePage.clickSignInButton();
     }
 
 //    @Given("As a user I am on HomePage")
@@ -2190,7 +2190,7 @@ public class WebSteps {
     @Given("As a user Launch the {string}")
     public void asAUserLaunchTheAndLoginWith(String strURL) {
         Assert.assertTrue(demoPageContainer.messagesPage.launchInNewTab(TestDataUtil.getValue(strURL)));
-
+        Assert.assertTrue(demoPageContainer.homePage.clickBetaLoginButton());
 
     }
 
@@ -2801,13 +2801,13 @@ public class WebSteps {
     public void IEnterTheComposeGroupMessage(String listCreateData) {
         List<String> list = TestDataUtil.getListOfValue(listCreateData);
         System.out.println(list);
-        demoPageContainer.messagesPage.selectFrom(list.get(0));
-        demoPageContainer.messagesPage.selectProvider(list.get(1));
-        demoPageContainer.messagesPage.selectGenderPreference(list.get(2));
+//        demoPageContainer.messagesPage.selectFrom(list.get(0));
+//        demoPageContainer.messagesPage.selectProvider(list.get(1));
+//        demoPageContainer.messagesPage.selectGenderPreference(list.get(2));
         demoPageContainer.messagesPage.selecGroupTo(list.get(3));
         Assert.assertTrue(demoPageContainer.messagesPage.enterGroupSubject(TestDataUtil.getValue(list.get(4))));
         Assert.assertTrue(demoPageContainer.messagesPage.enterGroupMessage(TestDataUtil.getValue(list.get(5))));
-        demoPageContainer.messagesPage.selecGroupTo(list.get(3));
+//        demoPageContainer.messagesPage.selecGroupTo(list.get(3));
     }
 
     @And("I send the group message to the patient users")

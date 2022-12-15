@@ -40,7 +40,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Login']")
     protected WebElement betaLoginBtn;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='  LOG IN   ']")
+    @FindBy(how = How.XPATH, using = "//span[text()='Provider Login']")
     protected WebElement ClickPatientLoginBtn;
 
     @FindBy(how = How.XPATH, using = "//img[@class='profile-pic img-fluid']")
@@ -52,7 +52,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='appVersion']/small")
     protected WebElement txtAppVersion;
 
-    @FindBy(how = How.XPATH, using = "//*[contains(text(),'My Home page') or contains(text(),'Welcome,') or contains(text(),'Start managing your health, today')]")
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'My Home page') or contains(text(),'Welcome') or contains(text(),'Start managing your health, today')]")
     protected WebElement elmntVerifyHomePage;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
@@ -124,14 +124,15 @@ public class HomePage extends BasePage {
     protected WebElement txtBoxPassword;
 
 
-    @FindBy(how = How.XPATH, using = "//span[text()=' Sign in ']")
+    @FindBy(how = How.XPATH, using = "//span[text()='Sign in']")
     protected WebElement SignInBtn;
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
     public void clickSignInButton() {
+        waitForSeconds(3);
         waitForElement(SignInBtn);
-        click(SignInBtn);
+        jsClick(SignInBtn);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
     }
 
@@ -150,10 +151,10 @@ public class HomePage extends BasePage {
 
     public void enterEmail(String strEmail) {
         waitForSeconds(2);
-        jsClick(txtProviderPortal);
+//        jsClick(txtProviderPortal);
         waitForSeconds(3);
-        waitForElementClickable(txtEmail);
-        enterValue(txtEmail, strEmail);
+        waitForElementClickable(txtBoxEmail);
+        enterValue(txtBoxEmail, strEmail);
     }
 
 
@@ -174,8 +175,8 @@ public class HomePage extends BasePage {
     }
 
     public void enterpassword(String strPassword) {
-        waitForElementClickable(txtPassword);
-        enterValue(txtPassword, strPassword);
+        waitForElementClickable(txtBoxPassword);
+        enterValue(txtBoxPassword, strPassword);
     }
 
     public boolean clickLoginButton() {
@@ -187,11 +188,12 @@ public class HomePage extends BasePage {
     public boolean clickBetaLoginButton() {
         boolean blResult = false;
         try {
+//            waitForElement(ClickPatientLoginBtn);
+//            jsClick(ClickPatientLoginBtn);
             waitForSeconds(3);
                         waitForElement(betaLoginBtn);
             jsClick(betaLoginBtn);
-//            waitForElement(ClickPatientLoginBtn);
-//            jsClick(ClickPatientLoginBtn);
+
             blResult = true;
             System.out.println("Try Block 1 executed");
         } catch (Exception e) {
