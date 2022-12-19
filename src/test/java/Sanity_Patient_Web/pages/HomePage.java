@@ -62,6 +62,9 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashBoard;
 
+//    @FindBy(how = How.XPATH, using = "//*[contains(text(),'My Home page') or contains(text(),'Welcome') or contains(text(),'Start managing your health, today')]")
+//    protected WebElement elmntVerifyHomePage;
+
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")
     protected WebElement btnMobileMenu;
 
@@ -215,10 +218,10 @@ public class HomePage extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(3);
+            waitForSeconds(4);
             waitForElement(elmntLogo);
             waitForElementClickable(elmntLogo);
-            click(elmntLogo);
+            jsClick(elmntLogo);
 //            refreshPage();
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);

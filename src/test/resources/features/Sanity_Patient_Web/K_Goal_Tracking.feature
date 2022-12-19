@@ -1,6 +1,6 @@
 Feature: Goal_Tracking
 
-  @WEB  @SANITY_PATH @GOAL_TRACKING
+  @WEB  @SANITY_PATH @GOAL_TRACKING1
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature: Goal_Tracking
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB  @GOAL_TRACKING @SANITY_PATH
+  @WEB  @GOAL_TRACKING1 @SANITY_PATH
   Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
     Given As a user I am on beta MMH login Page
     And I enter "<Email Address>" and "<Password>" For Beta
@@ -346,7 +346,7 @@ Feature: Goal_Tracking
       #}
 
 
-  @WEB @GOAL_TRACKING @SANITY_PATH
+  @WEB @GOAL_TRACKING1 @SANITY_PATH
   Scenario Template:S10-Existing Patient Verify Goal Tracking Details and validate Add New Task ,Add Another Task in Goal Tracking Details
 
     Given As a Existing user I am on HomePage and I click the Health Tools

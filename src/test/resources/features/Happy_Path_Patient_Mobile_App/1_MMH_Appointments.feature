@@ -1,6 +1,6 @@
     Feature: Mobile_Appointments_Scenarios
 
-  @MOBILE @RELAUNCH @Mobile_Appointment @HAPPY_PATH_MOBILE
+  @MOBILE @RELAUNCH @Mobile_Appointment @HAPPY_PATH_MOBILE @Test
   Scenario Outline: S1 - User login with valid credential and verifies MMH Home screen
 
     Given I am on MMH Login screen
@@ -13,7 +13,7 @@
       | &EMAIL&  | &PASSWORD& |
 
 
-  @MOBILE @Mobile_Appointment @HAPPY_PATH_MOBILE
+  @MOBILE @Mobile_Appointment @HAPPY_PATH_MOBILE @Test
   Scenario Outline: S2 - Patient Send the Appointment Request [Mobile-Visit]
 
     Given I am on MMH Home screen
@@ -28,7 +28,7 @@
       | &BOOK_VISIT_APPOINTMENT_USING_CARD_PAYMENT& | &VISIT_APPOINTMENT_DETAILS_USING_CARD_PAYMENT& | &FUTURE_DATE_PAYMENT_FOR_VISIT& |
 
 
-  @MOBILE @Mobile_Appointment @HAPPY_PATH_MOBILE
+  @MOBILE @Mobile_Appointment @HAPPY_PATH_MOBILE @Test
   Scenario Outline: S2 - Patient Booking Appointment - Visit Appointment Using Card Payment with $X amount [Mobile]
 
     Given I am on Payment Options screen

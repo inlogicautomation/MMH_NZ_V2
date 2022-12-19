@@ -347,7 +347,7 @@ public class HomePage extends BasePage {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(2);
         waitForElement(elmntDashBoard);
-        click(elmntDashBoard);
+        jsClick(elmntDashBoard);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         driver.navigate().refresh();
@@ -367,8 +367,8 @@ public class HomePage extends BasePage {
             waitForSeconds(2);
 //            jsClick(txtProviderPortal);
             waitForSeconds(3);
-            waitForElement(txtBoxEmail);
-            isVerified = verifyElement(txtBoxEmail);
+            waitForElement(txtProviderPortal);
+            isVerified = verifyElement(txtProviderPortal);
         }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {

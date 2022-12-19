@@ -132,7 +132,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@text='Refresh']")
     protected WebElement elmntRefresh;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(@class,'breadcrumbs')]/descendant::span[contains(text(),'Inbox')]")
+    @FindBy(how = How.XPATH, using = "(//h1[text()='Inbox'])[1]")
     protected WebElement txtInbox;
 
     @FindBy(how = How.XPATH, using = "(//h1[text()='Sent'])[1]")
@@ -319,7 +319,7 @@ public class MessagesPage extends BasePage {
 
 
     protected String elmntSubject = new StringBuilder()
-            .append("(//mat-card-title[contains(text(),'")
+            .append("(//b[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')])[1]")
             .toString();
@@ -531,7 +531,7 @@ public class MessagesPage extends BasePage {
             .append(Constants.IMAGES_FOLDER).append(File.separator)
             .append("<<FILENAME>>").toString();
 
-    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='Attachment']//parent::div[contains(text(),'ADD Files')]")
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='Attachment']")
     protected WebElement btnFloorplanUpload;
 
     @FindBy(how = How.XPATH, using = "//input[@type='file']")
@@ -582,13 +582,13 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator btn-primary-pill mat-button mat-button-base'])[2]")
     protected WebElement btnMobileReplysendMessage;
 
-    @FindBy(how = How.XPATH, using = "(//span[contains(text(),' Save As Draft')]//parent::span[@class='mat-button-wrapper'])[1]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),' Save as Draft')])[1]")
     protected WebElement btnSaveDraft;
 
     @FindBy(how = How.XPATH, using = "//button[@type='button']//span[text()=' OK ']")
     protected WebElement btnokDraft;
 
-    @FindBy(how = How.XPATH, using = "(//span[contains(text(),' Save As Draft')]//parent::span[@class='mat-button-wrapper'])[2]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),' Save as Draft')])[2]")
     protected WebElement btnMobileSaveDraft;
 
 
@@ -611,10 +611,10 @@ public class MessagesPage extends BasePage {
     protected WebElement btnGroupMessageHeader;
 
 
-    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'Message sent successfully')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Message sent successfully')]")
     protected WebElement btnSentSuccessfullyPopup;
 
-    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'draft saved successfully')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'draft saved successfully')]")
     protected WebElement btnDraftSuccessfullyPopup;
 
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'File downloaded successfully')]")
@@ -1734,12 +1734,13 @@ public class MessagesPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(3);
-            waitForElement(txtMyHomePage);
-            waitForElement(elmntsMenu);
-            waitForElement(elmntInboxDoctor);
-            waitForElementClickable(elmntInboxDoctor);
-            click(elmntInboxDoctor);
-            waitForSeconds(1);
+//            waitForElement(txtMyHomePage);
+//            waitForElement(elmntsMenu);
+//            waitForElement(elmntInboxDoctor);
+//            waitForElementClickable(elmntInboxDoctor);
+//            click(elmntInboxDoctor);
+            refreshPage();
+            waitForSeconds(4);
             waitForElement(txtInbox);
             blResult = verifyElement(txtInbox);
             System.out.println("Successfully navigated to the inbox");
@@ -1862,16 +1863,18 @@ public class MessagesPage extends BasePage {
         try {
             waitForSeconds(3);
             waitForElement(txtInbox);
-            waitForElement(elmntsMenu);
+//            waitForElement(elmntsMenu);
             System.out.println("X Path for Inbox Subject >>> :: " + elmntSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetails.get(2))));
             WebElement Subject = waitForElement(By.xpath(elmntSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetails.get(2)))));
+            jsScrollIntoView(Subject);
             waitForElementClickable(Subject);
-            click(Subject);
+            jsClick(Subject);
             waitForSeconds(5);
             System.out.println("X Path for Inbox Subject >>> ::" + txtAutoReply.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetails.get(2))));
             WebElement replyText = waitForElement(By.xpath(txtAutoReply.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetails.get(2)))));
+            jsScrollIntoView(replyText);
             waitForElement(replyText);
-            click(replyText);
+            jsClick(replyText);
             waitForElement(replyText);
             takeScreenshot(driver);
             blResult = verifyElement(replyText);
@@ -2711,6 +2714,7 @@ public class MessagesPage extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
 
             waitForSeconds(3);
+            jsScrollIntoView(btnSaveDraft);
             waitForElementClickable(btnSaveDraft);
             jsClick(btnSaveDraft);
             waitForElementClickable(btnokDraft);

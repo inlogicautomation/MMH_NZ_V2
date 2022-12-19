@@ -68,7 +68,9 @@ public class SanityWebSteps {
     @Given("As a Existing user I am on HomePage and I click Dashboard")
     public void asAExistingUserIAmOnHomePageAndIClickDashboard() {
 
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
+        Assert.assertTrue(sanityPageContainer.homePage.verifyHomePageOfMMHPortal());
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(sanityPageContainer.homePage.clickHamburgerIcon());
         }
@@ -346,7 +348,8 @@ public class SanityWebSteps {
 
     @Given("As a Existing user I am on HomePage and I navigate to change password in the My Profile")
     public void asAExistingUserIAmOnHomePageAndINavigateToChangePasswordInTheMyProfile() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToMyProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.mouseOverProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToChangePassword());
@@ -387,7 +390,8 @@ public class SanityWebSteps {
 
     @Given("As a Existing user I am on HomePage and I navigate to change address in the My Profile")
     public void asAExistingUserIAmOnHomePageAndINavigateToChangeAddressInTheMyProfile() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToMyProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.mouseOverProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToChangeAddress());
@@ -403,7 +407,8 @@ public class SanityWebSteps {
 
     @Given("As a Existing user I am on HomePage and I navigate to change Phone number in the My Profile")
     public void asAExistingUserIAmOnHomePageAndINavigateToChangePhoneNumberInTheMyProfile() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToMyProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.mouseOverProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToChangePhoneNumber());
@@ -423,7 +428,8 @@ public class SanityWebSteps {
 
     @And("I navigate to Profile and I see View Profile tab")
     public void iNavigateToProfileAndISeeViewProfileTab() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToMyProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.mouseOverProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToViewProfile());
@@ -431,7 +437,8 @@ public class SanityWebSteps {
 
     @And("I navigate to View Profile and I see My Health Centres")
     public void iNavigateToViewProfileAndISeeMyHealthCentres() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToMyProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.mouseOverProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToMyHealthCentres());
@@ -458,7 +465,8 @@ public class SanityWebSteps {
 
     @Given("As a Existing user I am on HomePage and I navigate to Emergency Contacts in the My Profile")
     public void asAExistingUserIAmOnHomePageAndINavigateToEmergencyContactsInTheMyProfile() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToMyProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.mouseOverProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToEmergencyContacts());
@@ -501,7 +509,8 @@ public class SanityWebSteps {
 
     @Given("As a Existing user I am on HomePage and I navigate to Calendar in the Profile module")
     public void asAExistingUserIAmOnHomePageAndINavigateToCalendarInTheProfileModule() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToMyProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.mouseOverProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToCalendar());
@@ -611,7 +620,9 @@ public class SanityWebSteps {
 
     @Given("As a Existing user I am on HomePage and I click to Practice {string} under the My health menu")
     public void asAExistingUserIAmOnHomePageAndIClickToPracticeUnderTheMyHealthMenu(String strName) {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
+        Assert.assertTrue(sanityPageContainer.homePage.verifyHomePageOfMMHPortal());
         Assert.assertTrue(sanityPageContainer.myHealthCentresPage.clickPracticeName(TestDataUtil.getValue(strName)));
 
 
@@ -619,7 +630,8 @@ public class SanityWebSteps {
 
     @And("I am on HomePage and I click Notice board under the My health menu")
     public void iAmOnHomePageAndIClickNoticeBoardUnderTheMyHealthMenu() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.myHealthCentresPage.clickNoticeBoard());
 
     }
@@ -627,7 +639,8 @@ public class SanityWebSteps {
     @And("I am on HomePage and I click connect health centre under the My health menu")
     public void iAmOnHomePageAndIClickConnectHealthCentreUnderTheMyHealthMenu() {
 
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.myHealthCentresPage.clickConnectToHealthCentre());
     }
 
@@ -1918,7 +1931,8 @@ public class SanityWebSteps {
 
     @Given("As a Existing user I am on HomePage and navigate to Resources")
     public void asAExistingUserIAmOnHomePageAndNavigateToResources() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "")
                 .equalsIgnoreCase("MOBILEVIEW")) {
@@ -1941,8 +1955,8 @@ public class SanityWebSteps {
 
     @Given("As a Existing user I am on HomePage and navigate to My Health Documents")
     public void asAExistingUserIAmOnHomePageAndNavigateToMyHealthDocuments() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
-
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "")
                 .equalsIgnoreCase("MOBILEVIEW")) {
 
@@ -2042,7 +2056,8 @@ public class SanityWebSteps {
 
     @And("Navigate to book appointment page in Upcoming appointments card from dashboard")
     public void navigateToBookAppointmentPageInUpcomingAppointmentsCardFromDashboard() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToDashboard());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToBookAppointmentPage());
 //        Assert.assertTrue(sanityPageContainer.dashboardPage.declineCovidPreScreeningPopup());
@@ -2052,7 +2067,8 @@ public class SanityWebSteps {
 
     @And("Navigate to Inbox bar by clicking View Message from text dashboard")
     public void navigateToInboxBarByClickingViewMessageFromTextDashboard() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToDashboard());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToViewMessages());
     }
@@ -2082,21 +2098,21 @@ public class SanityWebSteps {
 
     @And("Navigate to Request Medication page by Clicking on New Repeat Prescription text from dashboard")
     public void navigateToRequestMedicationPageByClickingOnNewRepeatPrescriptionTextFromDashboard() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToDashboard());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToNewRepeatPrescription());
     }
 
     @And("Navigate to My Health Indicators page by clicking View all Indicators text from dashboard")
     public void navigateToMyHealthIndicatorsPageByClickingViewAllIndicatorsTextFromDashboard() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToDashboard());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToMyHealthIndicators());
     }
 
     @And("Navigate to Health Summary page by clicking View Health Summary text from dashboard")
     public void navigateToHealthSummaryPageByClickingViewHealthSummaryTextFromDashboard() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToDashboard());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToMyHealthRecords());
     }

@@ -4,12 +4,16 @@ import cap.common.BasePage;
 import cap.utilities.DateUtil;
 import cap.utilities.TestDataUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import static Happy_Path_Patient_Web_and_MR.pages.AppointmentsPage.strSlotDate;
@@ -42,28 +46,28 @@ public class DashboardPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashboard;
 
-    @FindBy(how = How.XPATH, using = "(//a[contains(text(),'View All MESSAGES')])[2]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'View All MESSAGES')]")
     protected WebElement elmntViewMessage;
 
     @FindBy(how = How.XPATH, using = "(//a[contains(text(),'CONNECT HEALTH CENTRE')])[2]")
     protected WebElement elmntConnectHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "(//a[contains(text(),'New Repeat Prescription') or contains(text(),'Request New Script')])[2]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'New Repeat Prescription') or contains(text(),'Request New Script')]")
     protected WebElement elmntNewRepeatPrescription;
 
-    @FindBy(how = How.XPATH, using = "(//a[contains(text(),'View all indicators')])[2]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'View all indicators')]")
     protected WebElement elmntViewAllIndicators;
 
     @FindBy(how = How.XPATH, using = "(//mat-card-title[contains(text(),'My Health Indicators')])[2]")
     protected WebElement elmntMyHealthIndicators;
 
-    @FindBy(how = How.XPATH, using = "(//mat-card-title[contains(text(),'Upcoming Appointments')])[3]")
+    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Upcoming Appointments')]")
     protected WebElement elmntUpcomingAppointments;
 
-    @FindBy(how = How.XPATH, using = "(//mat-card-title[contains(text(),'New Messages')])[2]")
+    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'New Messages')]")
     protected WebElement elmntNewMessages;
 
-    @FindBy(how = How.XPATH, using = "(//mat-card-title[contains(text(),'My Health Centres')])[2]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'My Health Centres')]")
     protected WebElement elmntMyHealthCentres;
 
     @FindBy(how = How.XPATH, using = "(//mat-card-title[contains(text(),'My Repeat Prescriptions')])[2]")
@@ -72,10 +76,10 @@ public class DashboardPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//mat-card-title[contains(text(),'My Health Records')])[2]")
     protected WebElement elmntMyHealthRecords;
 
-    @FindBy(how = How.XPATH, using = "(//a[contains(text(),'View health summary')])[2]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'View health summary')]")
     protected WebElement elmntViewHealthSummary;
 
-    @FindBy(how = How.XPATH, using = "(//a[contains(text(),'Book an Appointment')])[3]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Book an Appointment')]")
     protected WebElement elmntBookAppointment;
 
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Settings')]")
@@ -102,6 +106,16 @@ public class DashboardPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Connect a health centre')]")
     protected WebElement txtConnectAHealthCentre;
 
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
+    protected WebElement elmntDashBoard;
+
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health, today')]")
+    protected WebElement elmntVerifyHomePage;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='appVersion']/small")
+    protected WebElement txtAppVersion;
+
+
     @FindBy(how = How.XPATH, using = "(//div[contains(@class,'alert-info')])[2]")
     protected WebElement elmntUnreadMessage;
 
@@ -117,11 +131,11 @@ public class DashboardPage extends BasePage {
 
     //(//h5[contains(text(),'aP-2 3m')]/following-sibling::p[contains(text(),'08 Jun 2022 7:34 PM')])[2]/parent::div
     protected String verifyMyHealthRecords = new StringBuilder()
-            .append("(//h5[contains(text(),'")
+            .append("//h5[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]/following-sibling::p[contains(text(),'")
             .append("<<REPLACEMENT1>>")
-            .append("')])[2]/parent::div")
+            .append("')]")
             .toString();
 
 
@@ -143,7 +157,7 @@ public class DashboardPage extends BasePage {
 //  (//app-dashboard-appointments)[3]//h5[contains(text(),'18 Sep 2022 | 8:15 AM')]/following-sibling::p[contains(text(),'Dr Tim')]
 
     protected String verifyAppointments = new StringBuilder()
-            .append("(//app-dashboard-appointments)[3]//h5[contains(text(),'")
+            .append("//h5[contains(text(),'")
             .append("<<DATE>>")
             .append("')]/following-sibling::p[contains(text(),'")
             .append("<<NAME>>")
@@ -152,12 +166,12 @@ public class DashboardPage extends BasePage {
 
     // (//h5[contains(text(),'11 Sep 2022, Dr Paul Anderson')]/following-sibling::p[contains(text(),'Dashboard Msg Testing1-MMQWSDGI')])[2]/parent::div
     protected static String verifyDashboardMessages = new StringBuilder()
-            .append("(//h5[contains(text(),'")
+            .append("//h5[contains(text(),'")
             .append("<<DATE>>").append(", ")
             .append("<<DOCTOR_NAME>>")
             .append("')]/following-sibling::p[contains(text(),'")
             .append("<<MESSAGE>>")
-            .append("')])[2]/parent::div")
+            .append("')]")
             .toString();
 
     //(//app-dashboard-repeat-prescriptions)[2]//h5[contains(text(),'VM04Practice')]/following-sibling::p[contains(text(),'09 Sep 2022')]//span[contains(text(),'Pending')]
@@ -214,7 +228,7 @@ public class DashboardPage extends BasePage {
             jsScrollIntoView(elmntNewRepeatPrescription);
             waitForElement(elmntNewRepeatPrescription);
             waitForElementClickable(elmntNewRepeatPrescription);
-            click(elmntNewRepeatPrescription);
+            jsClick(elmntNewRepeatPrescription);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtRequestNewScript);
             blResult = verifyElement(txtRequestNewScript);
@@ -238,11 +252,11 @@ public class DashboardPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
             waitForElement(elmntWelcomeMessage);
-            jsScrollIntoView(elmntBookAppointment);
+//            jsScrollIntoView(elmntBookAppointment);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntBookAppointment);
             waitForElementClickable(elmntBookAppointment);
-            click(elmntBookAppointment);
+            jsClick(elmntBookAppointment);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntAppointmentPanel);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -282,11 +296,11 @@ public class DashboardPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
             waitForElement(elmntWelcomeMessage);
-
-            jsScrollIntoView(elmntViewMessage);
+//            jsScrollIntoView(elmntViewMessage);
+            jsScrollDown();
             waitForElement(elmntViewMessage);
-            waitForElementClickable(elmntViewMessage);
-            click(elmntViewMessage);
+//            waitForElementClickable(elmntViewMessage);
+            jsClick(elmntViewMessage);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtInboxPatient);
             blResult = verifyElement(txtInboxPatient);
@@ -335,7 +349,7 @@ public class DashboardPage extends BasePage {
             waitForElement(elmntViewAllIndicators);
             waitForElementClickable(elmntViewAllIndicators);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            click(elmntViewAllIndicators);
+            jsClick(elmntViewAllIndicators);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtMyHealthIndicator);
             blResult = verifyElement(txtMyHealthIndicator);
@@ -358,7 +372,7 @@ public class DashboardPage extends BasePage {
             jsScrollIntoView(elmntViewHealthSummary);
             waitForElement(elmntViewHealthSummary);
             waitForElementClickable(elmntViewHealthSummary);
-            click(elmntViewHealthSummary);
+            jsClick(elmntViewHealthSummary);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtMyHealthRecords);
             blResult = verifyElement(txtMyHealthRecords);
@@ -372,16 +386,45 @@ public class DashboardPage extends BasePage {
         return blResult;
     }
 
+    public boolean clickDashBoard() {
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(2);
+        waitForElement(elmntDashBoard);
+        click(elmntDashBoard);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(3);
+        driver.navigate().refresh();
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        return verifyElement(elmntVerifyHomePage);
+    }
+
+//    public boolean verifyHomePageOfMMHPortal() {
+//        waitForSeconds(5);
+//        waitForElement(elmntVerifyHomePage);
+//        if (verifyElement(txtAppVersion)) {
+//            strAppVersion = txtAppVersion.getText();
+//        }
+//        Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+//        strBrowserName = cap.getBrowserName();
+//        strBrowserVersion = cap.getVersion();
+//        try {
+//            strSystemName= InetAddress.getLocalHost().getHostName();
+//        } catch (UnknownHostException e) {
+//            e.printStackTrace();
+//        }
+//        takeScreenshot(driver);
+//        return verifyElement(elmntVerifyHomePage);
+//    }
+
     public boolean navigateToDashboard() {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
-            waitForElement(txtConnectAHealthCentre);
-
+//            waitForElement(txtConnectAHealthCentre);
             waitForElement(elmntDashboard);
             waitForElementClickable(elmntDashboard);
-            click(elmntDashboard);
+            jsClick(elmntDashboard);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntWelcomeMessage);
             blResult = verifyElement(elmntWelcomeMessage);

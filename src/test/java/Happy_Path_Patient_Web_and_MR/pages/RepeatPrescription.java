@@ -148,13 +148,13 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'I accept the Repeat Precriptions')]/preceding-sibling::mat-checkbox/label/div")
     protected WebElement chkTermsAndCondion;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Pay at health centre')]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Pay At Health Centre')])[1]")
     protected WebElement btnPayAtHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Pay at health centre')])[2]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Pay At Health Centre')])[2]")
     protected WebElement btnMobilePayAtHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Pay Now']")
+    @FindBy(how = How.XPATH, using = "(//span[text()='Pay Now'])[2]")
     protected WebElement btnPayNow;
 
     @FindBy(how = How.XPATH, using = "(//span[text()='Pay Now'])[2]")
@@ -474,10 +474,10 @@ public class RepeatPrescription extends BasePage {
 
             waitForSeconds(3);
             waitForElementClickable(elmntRepeatPrescriptions);
-            click(elmntRepeatPrescriptions);
+            jsClick(elmntRepeatPrescriptions);
             waitForSeconds(3);
             waitForElementClickable(elmntRequestNewScript);
-            click(elmntRequestNewScript);
+            jsClick(elmntRequestNewScript);
             waitForSeconds(2);
 //            refreshPage();
             waitForSeconds(2);
@@ -810,7 +810,7 @@ public class RepeatPrescription extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(btnPayAtHealthCentre);
             waitForSeconds(4);
-            click(btnPayAtHealthCentre);
+            jsClick(btnPayAtHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println(" Successfully Selected Pay at Health centre Button >>>");
             waitForElementToAppear(driver, By.xpath(emlntSuccessPopUp1));

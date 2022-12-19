@@ -147,7 +147,7 @@ Feature: Messages
 #    55:Click Delete All under draft
 #    These test Case Covered The Scenario NO: S7
 #  }
-  @WEB @MESSAGES1 @SANITY_PATH
+  @WEB @MESSAGES @SANITY_PATH
   Scenario Template: S7- Patient Save Message as Draft
 
     Given As a Existing user I am on HomePage and navigate to Compose Message
@@ -235,7 +235,7 @@ Feature: Messages
 #    68:Click on Automatic replies & Enable automatic replies & enter details that need to be sent to sender automatically#    These test Case Covered The Scenario NO: S10
 #    These test Case Covered The Scenario NO: S10
 #  }
-  @WEB @MESSAGES @SANITY_PATH
+  @WEB @MESSAGES1 @SANITY_PATH
   Scenario Outline: S10- Patient Automatic Reply Settings
     Given As a user I am on HomePage and navigate to Messages Setting
     And I click the Automatic Replies Settings and Enable Replies Settings option
@@ -247,7 +247,7 @@ Feature: Messages
       | Message                   |
       | &AUTOMATIC REPLY MESSAGE& |
 
-  @WEB  @MESSAGES @SANITY_PATH
+  @WEB  @MESSAGES1 @SANITY_PATH
   Scenario Template: S10- User successfully login into Doctor Portal
 
     Given As a user Launch the "<V1 Portal>"
@@ -263,7 +263,7 @@ Feature: Messages
 #    Note: {
 #    68:Click on Automatic replies & Enable automatic replies & enter details that need to be sent to sender automatically#    These test Case Covered The Scenario NO: S10
 #  }
-  @WEB @MESSAGES @SANITY_PATH
+  @WEB @MESSAGES1 @SANITY_PATH
   Scenario Template: S10- Patient verifies the Automatic Reply Messages.
 
     Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module

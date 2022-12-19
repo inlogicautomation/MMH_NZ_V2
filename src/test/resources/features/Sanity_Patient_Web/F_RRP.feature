@@ -1,6 +1,6 @@
 Feature: Repeat Request Prescription
 
-  @WEB @SANITY_PATH_RRP @SANITY_PATH
+  @WEB @SANITY_PATH_RRP1 @SANITY_PATH
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -58,7 +58,7 @@ Feature: Repeat Request Prescription
     #    Note: {
 #    These test Case Covered The Scenario NO: S10
 #  }
-  @WEB @SANITY_PATH_RRP @SANITY_PATH
+  @WEB @SANITY_PATH_RRP1 @SANITY_PATH
   Scenario Outline: S2- Existing Patient to view History of Request the Repeat Prescription
 
     Given As a Existing user I am on HomePage and I click the Repeat Prescription

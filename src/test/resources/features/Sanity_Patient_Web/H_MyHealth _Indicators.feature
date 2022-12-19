@@ -24,7 +24,7 @@ Feature:MyHealth_Indicators
   #145:Click on Inactive to view all inactive indicators in card view
    # These tests Case Covered The Scenario NO: S1
   #}
-  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS1
   Scenario:S1-Patient can view all the Active & Inactive My Health Indicators Records in the card view.
 
     Given As a Existing user I am on HomePage and I click the My Health Indicators

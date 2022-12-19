@@ -270,7 +270,7 @@ public class GoalTracking extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Add this task to Calendar')]//preceding::div[@class='mat-checkbox-inner-container']//child::input[@aria-checked='true']")
     protected WebElement btnAddthistasktoCalendar;
 
-    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Completed')]//preceding::div[@class='mat-checkbox-inner-container']/child::input)[6]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Completed')]//preceding::div[@class='mat-checkbox-inner-container']/child::input)[2]")
     protected WebElement btnStatusCompleted;
 
 
@@ -280,7 +280,7 @@ public class GoalTracking extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),' Save & Add Another Task ')]//parent::button")
     protected WebElement getElmtAddAnotherTasksavebutton;
 
-    @FindBy(how = How.XPATH, using = "(//span[contains(text(),' cancel ')]//parent::button)[4]")
+    @FindBy(how = How.XPATH, using = "(//mat-icon[contains(text(),'close')])[4]")
     protected WebElement getElmtAddTaskcancelbutton;
 
 
@@ -1384,6 +1384,9 @@ public class GoalTracking extends BasePage {
             WebElement elmntPrescriptionIconData = waitForElement(By.xpath(ClickFutureTaskInfoIconTableData
                             .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0).concat(strExecutionID)))));
             System.out.println(">>>>>>>>>>>>elmntPrescriptionIconData"+elmntPrescriptionIconData);
+            waitForSeconds(2);
+//            jsScrollIntoView(elmntPrescriptionIconData);
+//            jsScrollUp();
             waitForElementClickable(elmntPrescriptionIconData);
             jsClick(elmntPrescriptionIconData);
 //            waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -1550,8 +1553,9 @@ public class GoalTracking extends BasePage {
         waitForSeconds(3);
         click(getElmtAddAnotherTasksavebutton);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        waitForSeconds(2);
-        click(getElmtAddTaskcancelbutton);
+        waitForSeconds(3);
+        jsScrollIntoView(getElmtAddTaskcancelbutton);
+        jsClick(getElmtAddTaskcancelbutton);
         waitForSeconds(3);
         return verifyElement(elmtsgoaltracking);
     }
@@ -1560,7 +1564,7 @@ public class GoalTracking extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(3);
-            click(elmtsPreviousTask);
+            jsClick(elmtsPreviousTask);
             waitForSeconds(3);
             System.out.println(">>>>>>>>>>>>>>>>>lstDetails" + lstDetails);
             WebElement elmntPrescriptionTableData = waitForElement(By.xpath(ClickReminderSettingIconTableData
@@ -1582,7 +1586,7 @@ public class GoalTracking extends BasePage {
         try {
 
             waitForSeconds(3);
-            click(elmtsPreviousTask);
+            jsClick(elmtsPreviousTask);
             System.out.println(">>>>>>>>>>>>>>>>>lstDetails"+lstDetails);
             WebElement elmntPrescriptionIconData = waitForElement(By.xpath(ClickFutureTaskInfoIconTableData
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0).concat(strExecutionID)))));

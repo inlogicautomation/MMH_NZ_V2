@@ -234,9 +234,15 @@ public class MessagesPage extends BasePage {
 
 
     protected String receivedMessageSubject = new StringBuilder()
-            .append("//div[contains(text(),'")
+            .append("(//div[contains(text(),'")
             .append("<<REPLACEMENT>>")
-            .append("')]")
+            .append("')])[1]")
+            .toString();
+
+    protected String receivedMessageBody = new StringBuilder()
+            .append("(//p[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')])[1]")
             .toString();
 
     protected String selectTo = new StringBuilder()
@@ -733,7 +739,7 @@ public class MessagesPage extends BasePage {
     protected String elmntMessagesSuccessfullyPopup = "//p[text()='Message sent successfully']";
 
 
-    @FindBy(how = How.XPATH, using = "//button[@id='Login']")
+    @FindBy(how = How.XPATH, using = "(//button[@type='button']//span)[3]")
     protected WebElement btnLogin;
 
     @FindBy(how = How.XPATH, using = "//p[text()='Message sent successfully']")
@@ -952,15 +958,16 @@ public class MessagesPage extends BasePage {
             waitForElement(txtGroupMessagesPatient);
             System.out.println("X Path-inboxSubject >>> :: " + inboxMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage)));
             WebElement inboxSubject = waitForElement(By.xpath(inboxMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage))));
+            jsScrollIntoView(inboxSubject);
             waitForElement(inboxSubject);
             takeScreenshotSanity(driver);
             waitForElementClickable(inboxSubject);
-            click(inboxSubject);
+            jsClick(inboxSubject);
             System.out.println("X Path-inboxMessageSubject >>> :: " + receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage)));
             WebElement inboxReceivedSubject = waitForElement(By.xpath(receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage))));
             waitForElement(inboxReceivedSubject);
-            System.out.println("X Path-inboxMessageSubject >>> :: " + receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strBody)));
-            WebElement bodyMessage = waitForElement(By.xpath(receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strBody))));
+            System.out.println("X Path-inboxMessageSubject >>> :: " + receivedMessageBody.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strBody)));
+            WebElement bodyMessage = waitForElement(By.xpath(receivedMessageBody.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strBody))));
             waitForElement(bodyMessage);
             takeScreenshotSanity(driver);
             blResult = verifyElement(bodyMessage);
@@ -1280,9 +1287,8 @@ public class MessagesPage extends BasePage {
             waitForSeconds(2);
             waitForElement(elmntLogOut);
             waitForElementClickable(elmntLogOut);
-            click(elmntLogOut);
+            jsClick(elmntLogOut);
             waitForElement(btnLogin);
-
             blResult = verifyElement(btnLogin);
             waitForSeconds(10);
             System.out.println("Patient Log out Successfully");

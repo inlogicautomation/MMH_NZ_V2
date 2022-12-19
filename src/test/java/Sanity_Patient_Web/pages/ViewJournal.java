@@ -384,7 +384,7 @@ public class ViewJournal extends BasePage {
 
     public boolean clickMaxvalue1() {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        jsScrollIntoView(elmntDownArrow1);
+//        jsScrollIntoView(elmntDownArrow1);
         waitForElement(elmntDownArrow1);
         jsClick(elmntDownArrow1);
         elmntDownArrow1.sendKeys(Keys.ARROW_DOWN);

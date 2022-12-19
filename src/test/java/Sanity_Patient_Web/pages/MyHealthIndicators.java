@@ -124,7 +124,7 @@ public class MyHealthIndicators extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Add New')]")
     protected WebElement btnAddnew;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'New Health Indicator')]")
+    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'NEW HEALTH INDICATOR')]")
     protected WebElement elmtVerifyAddnewHeader;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Blood Pressure')]")
@@ -255,7 +255,7 @@ public class MyHealthIndicators extends BasePage {
     @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Alcohol')]")
     protected WebElement elmntAlcohol;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Anxiety (GAD-7)')]")
+    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Anxiety Severity')]")
     protected WebElement elmntAnxiety;
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Blood Sugar')]")
     protected WebElement elmntBloodSugar;
@@ -392,10 +392,10 @@ public class MyHealthIndicators extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Alcohol')]")
     protected WebElement getElmntAlcoholHealthIndicator;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Anxiety (GAD-7)')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Anxiety Severity')]")
     protected WebElement getElmntAnxietyHealthIndicator;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Depression (PHQ-9)')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Depression Severity')]")
     protected WebElement getElmntDepressionHealthIndicator;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Drinking Survey')]")
@@ -533,7 +533,7 @@ public class MyHealthIndicators extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//p[text()='I would like to add an indicator for']//following::mat-radio-group[@role='radiogroup']//div[@class='mat-radio-container']//following-sibling::input)[45]")
     protected WebElement getHasarelativefriendordoctor;
-    @FindBy(how = How.XPATH, using = "//h3[text()='New Health Indicator']")
+    @FindBy(how = How.XPATH, using = "//h3[text()='NEW HEALTH INDICATOR']")
     protected WebElement getElmntNewHealthIndicator;
     @FindBy(how = How.XPATH, using = "//h3[text()='My Health Indicators']")
     protected WebElement getNewHealthIndicator;
@@ -2536,6 +2536,7 @@ public class MyHealthIndicators extends BasePage {
 
     public boolean clickBloodSugarConfirmButton() {
         waitForSeconds(3);
+        jsScrollIntoView(btnBloodPressureconfrim);
         waitForElementClickable(btnBloodPressureconfrim);
         jsClick(btnBloodPressureconfrim);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -5312,9 +5313,9 @@ public class MyHealthIndicators extends BasePage {
 
     public boolean clickDashBoard() {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        waitForSeconds(2);
+        waitForSeconds(3);
         waitForElement(elmntDashBoard);
-        click(elmntDashBoard);
+        jsClick(elmntDashBoard);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         driver.navigate().refresh();

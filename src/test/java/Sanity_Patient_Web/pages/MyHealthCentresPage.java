@@ -190,11 +190,10 @@ public class MyHealthCentresPage extends BasePage {
             waitForElement(elmntMyHealthCentres);
             waitForElementClickable(elmntMyHealthCentres);
             jsClick(elmntMyHealthCentres);}
-            waitForSeconds(3);
+            waitForSeconds(4);
             waitForElement(elmntConnectToHealthCentre);
             waitForElementClickable(elmntConnectToHealthCentre);
             jsClick(elmntConnectToHealthCentre);
-
             blResult = verifyElement(txtConnectAHealthCentre);
         } catch (Exception e) {
             System.out.println("\n Failed to click Connect To HealthCentre >>> :: ");
@@ -235,11 +234,11 @@ public class MyHealthCentresPage extends BasePage {
             System.out.println("\nX-path for address >>> :: "+healthCentre.replace("<<REPLACEMENT>>",strHealthCentre));
             WebElement HealthCentre=waitForElement(By.xpath(healthCentre.replace("<<REPLACEMENT>>",strHealthCentre)));
             waitForElement(HealthCentre);
-            waitAndClick(HealthCentre);
+            jsClick(HealthCentre);
 
             waitForElement(btnNext);
             waitForElementClickable(btnNext);
-            waitAndClick(btnNext);
+            jsClick(btnNext);
 
             waitForElement(btnConnect);
             blResult = verifyElement(btnConnect);

@@ -483,7 +483,8 @@ public class ProfilesPage extends BasePage {
             waitForSeconds(2);
             waitForElement(btnUpdate);
             waitForElementClickable(btnUpdate);
-            waitAndClick(btnUpdate);
+            jsClick(btnUpdate);
+            waitForSeconds(2);
             waitForElement(successPopup);
             blResult = verifyElement(successPopup);
         } catch (Exception e) {
@@ -575,7 +576,7 @@ public class ProfilesPage extends BasePage {
         waitForElement(txtCalendarSettings);
         waitForElement(elmntCategories);
         waitForElementClickable(elmntCategories);
-        waitAndClick(elmntCategories);
+        jsClick(elmntCategories);
         waitForSeconds(2);
         waitForElement(headerName);
         return headerName.isDisplayed();
@@ -588,13 +589,13 @@ public class ProfilesPage extends BasePage {
                 waitForSeconds(2);
                 waitForElement(delete);
                 waitForElementClickable(delete);
-                waitAndClick(delete);
+                jsClick(delete);
                 waitForSeconds(1);
                 waitForElement(btnYes);
                 waitForSeconds(1);
                 waitForElementClickable(btnYes);
                 waitForSeconds(1);
-                waitAndClick(btnYes);
+                jsClick(btnYes);
 
                 waitForElement(successPopup);
                 waitForSeconds(3);
@@ -656,18 +657,18 @@ public class ProfilesPage extends BasePage {
 
             waitForElement(drpDownCategoryTheme);
             waitForElementClickable(drpDownCategoryTheme);
-            waitAndClick(drpDownCategoryTheme);
+            jsClick(drpDownCategoryTheme);
 
             String strTheme = TestDataUtil.getValue(lstDetails.get(1));
             WebElement theme = waitForElement(By.xpath(ddlTheme.replace("<<REPLACEMENT>>", strTheme)));
             waitForElement(theme);
             waitForElementClickable(theme);
-            waitAndClick(theme);
+            jsClick(theme);
 
             waitForElement(chkBoxShow);
             if (!chkBoxShow.isSelected()) {
                 waitForElementClickable(chkBoxShow);
-                waitAndClick(chkBoxShow);
+                jsClick(chkBoxShow);
             }
             takeScreenshotSanity(driver);
             blResult = true;

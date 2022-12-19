@@ -132,10 +132,10 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'I accept the Repeat Precriptions')]/preceding-sibling::mat-checkbox/label/div")
     protected WebElement chkTermsAndCondion;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Pay at health centre')]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Pay At Health Centre')])[1]")
     protected WebElement btnPayAtHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Pay Now']")
+    @FindBy(how = How.XPATH, using = "(//span[text()='Pay Now'])[1]")
     protected WebElement btnPayNow;
 
     @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Payment')]")

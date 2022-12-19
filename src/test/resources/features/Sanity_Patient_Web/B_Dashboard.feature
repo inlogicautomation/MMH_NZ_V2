@@ -10,7 +10,7 @@ Feature: Dashboard
       | New Zealand Standard Time |
 
 
-  @WEB @DASHBOARD @SANITY_PATH
+  @WEB @DASHBOARD1 @SANITY_PATH
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -31,7 +31,7 @@ Feature: Dashboard
 #  22	Dashboard	Navigate to Health Summary page by clicking View Health Summary option (text)in Health Records card
 
 
-  @WEB @DASHBOARD @SANITY_PATH
+  @WEB @DASHBOARD1 @SANITY_PATH
   Scenario: Dashboard
 
     Given As a Existing user I am on HomePage and I click Dashboard

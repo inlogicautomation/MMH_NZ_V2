@@ -550,7 +550,9 @@ public class WebSteps {
     @Given("As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription")
     public void NavigateToRepeatMedicationPage() {
 
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
+        Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
@@ -3123,7 +3125,9 @@ public class WebSteps {
     }
     @Given("As a Existing user I am on HomePage and I click the Repeat Prescription")
     public void asAExistingUserIAmOnHomePageAndIClickTheRepeatPrescription() {
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
+        Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
