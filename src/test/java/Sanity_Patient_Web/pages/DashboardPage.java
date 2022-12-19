@@ -46,10 +46,10 @@ public class DashboardPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashboard;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'View All MESSAGES')]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'View MESSAGES')]")
     protected WebElement elmntViewMessage;
 
-    @FindBy(how = How.XPATH, using = "(//a[contains(text(),'CONNECT HEALTH CENTRE')])[2]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'CONNECT HEALTH CENTRE')]")
     protected WebElement elmntConnectHealthCentre;
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'New Repeat Prescription') or contains(text(),'Request New Script')]")
@@ -149,7 +149,7 @@ public class DashboardPage extends BasePage {
 
     //(//mat-card-title[contains(text(),'My Health centres')])[2]/ancestor::mat-card-header/parent::mat-card//h5[contains(text(),'')]
     protected String verifyMyHealthCentre = new StringBuilder()
-            .append("(//mat-card-title[contains(text(),'My Health Centres')])[2]/ancestor::mat-card-header/parent::mat-card//h5[contains(text(),'")
+            .append("//mat-card-title[contains(text(),'My Health Centres')]/ancestor::mat-card-header/parent::mat-card//h5[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]")
             .toString();
@@ -300,7 +300,7 @@ public class DashboardPage extends BasePage {
             jsScrollDown();
             waitForElement(elmntViewMessage);
 //            waitForElementClickable(elmntViewMessage);
-            jsClick(elmntViewMessage);
+            mouseClick(elmntViewMessage);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtInboxPatient);
             blResult = verifyElement(txtInboxPatient);
@@ -324,7 +324,7 @@ public class DashboardPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntConnectHealthCentre);
             waitForElementClickable(elmntConnectHealthCentre);
-            click(elmntConnectHealthCentre);
+            jsClick(elmntConnectHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtConnectAHealthCentre);
             blResult = verifyElement(txtConnectAHealthCentre);
@@ -422,6 +422,7 @@ public class DashboardPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
 //            waitForElement(txtConnectAHealthCentre);
+            jsScrollIntoView(elmntDashboard);
             waitForElement(elmntDashboard);
             waitForElementClickable(elmntDashboard);
             jsClick(elmntDashboard);

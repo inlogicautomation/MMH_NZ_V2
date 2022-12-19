@@ -448,7 +448,8 @@ public class SanityWebSteps {
     @And("I navigate to View Profile and I see My Subscriptions")
     public void iNavigateToViewProfileAndISeeMySubscriptions() {
 
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToMyProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.mouseOverProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToMySubscriptions());
@@ -457,7 +458,8 @@ public class SanityWebSteps {
     @And("I navigate to View Profile and I see Access Information")
     public void iNavigateToViewProfileAndISeeAccessInformation() {
 
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToMyProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.mouseOverProfile());
         Assert.assertTrue(sanityPageContainer.profilesPage.navigateToAccessInformation());
@@ -563,7 +565,7 @@ public class SanityWebSteps {
         System.out.println("lstDetails >>> :: " + lstDetails);
 
         Assert.assertTrue(sanityPageContainer.profilesPage.clickCategories());
-        Assert.assertTrue(sanityPageContainer.profilesPage.deleteAllCategories());
+//        Assert.assertTrue(sanityPageContainer.profilesPage.deleteAllCategories());
         Assert.assertTrue(sanityPageContainer.profilesPage.clickAddCategoryButton());
         Assert.assertTrue(sanityPageContainer.profilesPage.addCategory(strDetails));
 
@@ -2075,7 +2077,7 @@ public class SanityWebSteps {
 
     @And("Navigate to Connect health centre page by clicking Connect Health Centre text from dashboard")
     public void navigateToConnectHealthCentrePageByClickingConnectHealthCentreTextFromDashboard() {
-        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(sanityPageContainer.homePage.navigateToHomePage());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToDashboard());
         Assert.assertTrue(sanityPageContainer.dashboardPage.navigateToMyHealthCentre());
     }

@@ -142,7 +142,7 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'We have notified your health centre with your profile changes.Your health centre needs to accept these changes to update on their system')]")
     protected WebElement successPopupForPhoneNumberChanged;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Update')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Create')]")
     protected WebElement btnUpdate;
 
 
@@ -299,7 +299,7 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'calendar settings')]")
     protected WebElement btnCalendarSettings;
 
-    @FindBy(how = How.XPATH, using = "//mat-checkbox[@formcontrolname='categoryShow']")
+    @FindBy(how = How.XPATH, using = "//mat-checkbox[@formcontrolname='categoryShow']//input")
     protected WebElement chkBoxShow;
 
     @FindBy(how = How.XPATH, using = "//div[@class='leftside']")
@@ -448,7 +448,7 @@ public class ProfilesPage extends BasePage {
             waitForSeconds(2);
             waitForElement(elmntMyProfile);
             waitForElementClickable(elmntMyProfile);
-            waitAndClick(elmntMyProfile);
+            jsClick(elmntMyProfile);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntProfile);
             blResult = verifyElement(elmntProfile);
@@ -584,7 +584,7 @@ public class ProfilesPage extends BasePage {
     public boolean deleteAllCategories() {
         waitForElement(elmntAddCategory);
         try {
-            waitForElements(btnDeleteIcon);
+//            waitForElements(btnDeleteIcon);
             for (WebElement delete: btnDeleteIcon) {
                 waitForSeconds(2);
                 waitForElement(delete);

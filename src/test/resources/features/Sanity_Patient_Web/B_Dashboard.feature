@@ -31,7 +31,7 @@ Feature: Dashboard
 #  22	Dashboard	Navigate to Health Summary page by clicking View Health Summary option (text)in Health Records card
 
 
-  @WEB @DASHBOARD1 @SANITY_PATH
+  @WEB @DASHBOARD @SANITY_PATH
   Scenario: Dashboard
 
     Given As a Existing user I am on HomePage and I click Dashboard
@@ -46,7 +46,7 @@ Feature: Dashboard
     #  15	Dashboard	View patient connected Health Centre list in My Health Centre card
 #  16	Dashboard	Navigate to Connect health centre page by clicking Connect Health Centre option(text) in My Health Centres card
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_HEALTH-CENTRE
+  @WEB @DASHBOARD1 @SANITY_PATH @DASHBOARD_HEALTH-CENTRE
   Scenario Outline: View patient connected Health Centre
 
     Given As a Existing user I am on HomePage and I click Dashboard
