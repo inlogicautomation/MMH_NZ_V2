@@ -1665,10 +1665,11 @@ public class MessagesPage extends BasePage {
 //            waitForElement(btnHome);
 //            waitForElementClickable(btnHome);
 //            click(btnHome);
-//           waitForElement(elmntMessagesSuccessfullyPopup1);
-//         waitForElementToAppear(driver,By.xpath(elmntMessagesSuccessfullyPopup));
-//         verifyElement(elmntMessagesSuccessfullyPopup1);
-            waitForSeconds(60);
+//            waitForSeconds(180);
+           waitForElement(elmntMessagesSuccessfullyPopup1);
+         waitForElementToAppear(driver,By.xpath(elmntMessagesSuccessfullyPopup));
+         verifyElement(elmntMessagesSuccessfullyPopup1);
+
          waitForElementClickable(elmntComposeDoctor);
             jsClick(elmntComposeDoctor);
             waitForSeconds(2);

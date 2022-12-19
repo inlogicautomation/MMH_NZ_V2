@@ -1,6 +1,6 @@
 Feature: Dashboard
 
-  @WEB @DASHBOARD @SANITY_PATH
+  @WEB @DASHBOARD @SANITY_PATH @dash
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -10,7 +10,7 @@ Feature: Dashboard
       | New Zealand Standard Time |
 
 
-  @WEB @DASHBOARD1 @SANITY_PATH
+  @WEB @DASHBOARD @SANITY_PATH
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -46,7 +46,7 @@ Feature: Dashboard
     #  15	Dashboard	View patient connected Health Centre list in My Health Centre card
 #  16	Dashboard	Navigate to Connect health centre page by clicking Connect Health Centre option(text) in My Health Centres card
 
-  @WEB @DASHBOARD1 @SANITY_PATH @DASHBOARD_HEALTH-CENTRE
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_HEALTH-CENTRE
   Scenario Outline: View patient connected Health Centre
 
     Given As a Existing user I am on HomePage and I click Dashboard

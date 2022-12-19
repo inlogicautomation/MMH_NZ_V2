@@ -16,7 +16,7 @@ Feature: Patient Profile
 #    389:Navigate to profile & click on Change password - Enter current password, new password & confirm new password & click on change
 #    These test Case Covered The Scenario NO: S1
 #  }
-  @WEB @PROFILE1 @SANITY_PATH
+  @WEB @PROFILE @SANITY_PATH
   Scenario Template: S1- Existing Patient change the password.
 
     Given As a Existing user I am on HomePage and I navigate to change password in the My Profile
@@ -45,7 +45,7 @@ Feature: Patient Profile
 #    391:Navigate to profile & click on Change address - Enter New address details accordingly & click on update
 #    These test Case Covered The Scenario NO: S2
 #  }
-  @WEB @PROFILE1 @SANITY_PATH
+  @WEB @PROFILE @SANITY_PATH
   Scenario Template: S2- Existing Patient change the Address.
 
     Given As a Existing user I am on HomePage and I navigate to change address in the My Profile
@@ -66,7 +66,7 @@ Feature: Patient Profile
 #    400:Navigate to profile & click on View Profile - & click on Access Information
 #    These test Case Covered The Scenario NO: S3
 #  }
-  @WEB @PROFILE1 @SANITY_PATH
+  @WEB @PROFILE @SANITY_PATH
   Scenario Template: S3- Existing Patient change the Phone Number.
 
     Given As a Existing user I am on HomePage and I navigate to change Phone number in the My Profile
@@ -89,7 +89,7 @@ Feature: Patient Profile
 #  These test Case Covered The Scenario NO: S4
 #  }
 
-  @WEB @PROFILE1 @SANITY_PATH
+  @WEB @PROFILE @SANITY_PATH
   Scenario Template: S4- Existing Patient Add the New Emergency Contacts.
 
     Given As a Existing user I am on HomePage and I navigate to Emergency Contacts in the My Profile

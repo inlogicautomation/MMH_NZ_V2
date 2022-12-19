@@ -145,6 +145,9 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Create')]")
     protected WebElement btnUpdate;
 
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Update')]")
+    protected WebElement btnPassWordUpdate;
+
 
     protected String btnEventDelete = new StringBuilder()
             .append("//div[contains(text(),'")
@@ -494,6 +497,23 @@ public class ProfilesPage extends BasePage {
         return blResult;
     }
 
+    public boolean clickPasswordUpdateButton() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(btnPassWordUpdate);
+            waitForElementClickable(btnPassWordUpdate);
+            jsClick(btnPassWordUpdate);
+            waitForSeconds(2);
+            waitForElement(successPopup);
+            blResult = verifyElement(successPopup);
+        } catch (Exception e) {
+            System.out.println("Failed to Navigate My Profile >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
     public boolean verifyPasswordSuccess() {
         waitForElement(successPopup);
         return verifyElement(successPopup);
@@ -584,7 +604,7 @@ public class ProfilesPage extends BasePage {
     public boolean deleteAllCategories() {
         waitForElement(elmntAddCategory);
         try {
-//            waitForElements(btnDeleteIcon);
+            waitForElements(btnDeleteIcon);
             for (WebElement delete: btnDeleteIcon) {
                 waitForSeconds(2);
                 waitForElement(delete);
@@ -1080,7 +1100,7 @@ public class ProfilesPage extends BasePage {
 
             waitForElement(drpDownEventCategory);
             waitForElementClickable(drpDownEventCategory);
-            waitAndClick(drpDownEventCategory);
+            jsClick(drpDownEventCategory);
             waitForSeconds(3);
 
             String strCategory = TestDataUtil.getValue(lstDetails.get(1));
@@ -1093,7 +1113,7 @@ public class ProfilesPage extends BasePage {
             waitForElement(category);
             waitForElementClickable(category);
             takeScreenshotSanity(driver);
-            waitAndClick(category);
+            jsClick(category);
 
             String strWhere = TestDataUtil.getValue(lstDetails.get(2));
             System.out.println("strWhat >>> :: " + strWhat);
@@ -1142,14 +1162,14 @@ public class ProfilesPage extends BasePage {
                     .replace("<<REPLACEMENT>>", TestDataUtil.getValue(lstDetails.get(0)))));
 
             waitForElement(deletePopup);
-            waitAndClick(deletePopup);
+            jsClick(deletePopup);
             waitForElement(txtDeleteEvent);
             waitForElement(btnEventConfirmDelete);
             waitForElementClickable(btnEventConfirmDelete);
-            waitAndClick(btnEventConfirmDelete);
-            waitForElement(successPopup);
+            jsClick(btnEventConfirmDelete);
+//            waitForElement(successPopup);
             takeScreenshotSanity(driver);
-            blResult = verifyElement(successPopup);
+            blResult = true;
 
         } catch (Exception e) {
             System.out.println("Failed to Enter Event Details >>> :: ");

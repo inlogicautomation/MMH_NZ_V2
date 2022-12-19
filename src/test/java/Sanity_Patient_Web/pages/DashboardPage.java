@@ -166,22 +166,22 @@ public class DashboardPage extends BasePage {
 
     // (//h5[contains(text(),'11 Sep 2022, Dr Paul Anderson')]/following-sibling::p[contains(text(),'Dashboard Msg Testing1-MMQWSDGI')])[2]/parent::div
     protected static String verifyDashboardMessages = new StringBuilder()
-            .append("//h5[contains(text(),'")
+            .append("(//h5[contains(text(),'")
             .append("<<DATE>>").append(", ")
             .append("<<DOCTOR_NAME>>")
             .append("')]/following-sibling::p[contains(text(),'")
             .append("<<MESSAGE>>")
-            .append("')]")
+            .append("')])[1]")
             .toString();
 
     //(//app-dashboard-repeat-prescriptions)[2]//h5[contains(text(),'VM04Practice')]/following-sibling::p[contains(text(),'09 Sep 2022')]//span[contains(text(),'Pending')]
     protected static String verifyDashboardRRP = new StringBuilder()
-            .append("(//app-dashboard-repeat-prescriptions)[2]//h5[contains(text(),'")
+            .append("(//h5[contains(text(),'")
             .append("<<LOCATION>>")
             .append("')]/following-sibling::p[contains(text(),'")
             .append("<<DATE>>")
             .append("')]//span[contains(text(),'")
-            .append("<<STATUS>>").append("')]")
+            .append("<<STATUS>>").append("')])[1]")
             .toString();
 
     //tr[./td[contains(text(),'08 Jun 2022')]][./td[contains(text(),'aP-2 3m')]]

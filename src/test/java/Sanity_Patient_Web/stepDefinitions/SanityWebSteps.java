@@ -358,7 +358,7 @@ public class SanityWebSteps {
 
     @When("I click Update Button")
     public void iClickUpdateButton() {
-        Assert.assertTrue(sanityPageContainer.profilesPage.clickUpdateButton());
+        Assert.assertTrue(sanityPageContainer.profilesPage.clickPasswordUpdateButton());
     }
 
     @And("I enter the {string} and New {string}")
@@ -565,7 +565,7 @@ public class SanityWebSteps {
         System.out.println("lstDetails >>> :: " + lstDetails);
 
         Assert.assertTrue(sanityPageContainer.profilesPage.clickCategories());
-//        Assert.assertTrue(sanityPageContainer.profilesPage.deleteAllCategories());
+        Assert.assertTrue(sanityPageContainer.profilesPage.deleteAllCategories());
         Assert.assertTrue(sanityPageContainer.profilesPage.clickAddCategoryButton());
         Assert.assertTrue(sanityPageContainer.profilesPage.addCategory(strDetails));
 
