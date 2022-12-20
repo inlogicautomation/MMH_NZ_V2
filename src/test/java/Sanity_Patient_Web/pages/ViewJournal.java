@@ -153,9 +153,9 @@ public class ViewJournal extends BasePage {
         waitForSeconds(4);
         jsScrollIntoView(elmntDashBoard);
 //        waitForElementDisappear(driver,elmntLoadingSpinner);
-        waitForSeconds(4);
+//        waitForSeconds(4);
         waitForElement(elmntDashBoard);
-        click(elmntDashBoard);
+        jsClick(elmntDashBoard);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         driver.navigate().refresh();
