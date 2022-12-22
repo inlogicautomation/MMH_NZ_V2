@@ -288,7 +288,7 @@ public class MyHealthCentresPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(3);
-            waitForElement(txtMyHomePage);
+//            waitForElement(txtMyHomePage);
             waitForElement(elmntsMenu);
             waitForElement(elmntPostNoticeBoard);
             waitForElementClickable(elmntPostNoticeBoard);

@@ -614,12 +614,17 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'Message sent successfully')]")
     protected WebElement btnSentSuccessfullyPopup;
 
+    protected String btnSentSuccessfullyPopup1 = "//p[contains(text(),'Message sent successfully')]";
+
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'draft saved successfully')]")
     protected WebElement btnDraftSuccessfullyPopup;
+
+    protected String btnDraftSuccessfullyPopup1 = "//p[contains(text(),'draft saved successfully')]";
 
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'File downloaded successfully')]")
     protected WebElement btnAttachdowloadSuccessfullyPopup;
 
+    protected String btnAttachdowloadSuccessfullyPopup1 = "//p[contains(text(),'File downloaded successfully')]";
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "(//mat-icon[contains(text(),'drive_file_rename_outline')]/following-sibling::span[contains(text(),'Reply')])[1]"),
@@ -1054,21 +1059,30 @@ public class MessagesPage extends BasePage {
             txtBoxReplySubject.sendKeys(strRandomSubjectMessage);
             waitForSeconds(2);
             jsScrollDown();
-            jsScrollIntoView(btnReplySendMessage);
-            driver.switchTo().frame(btnReplyfocusframe);
+//            jsScrollIntoView(btnReplySendMessage);
+////            driver.switchTo().frame(btnReplyfocusframe);
+//            waitForSeconds(2);
+//            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+//            robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
+//            robotKey(btnWriteMessage, KeyEvent.VK_A);
+//            StringSelection stringSelection = new StringSelection(strMessage);
+//            clipboard.setContents(stringSelection, stringSelection);
+//            robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
+//            robotKey(btnWriteMessage, KeyEvent.VK_V);
+//            robotKeyRelease(KeyEvent.VK_V);
+//            robotKeyRelease(KeyEvent.VK_CONTROL);
+//            waitForSeconds(7);
+//            System.out.println(" switch to default frame::: " + driver.switchTo().defaultContent());
             waitForSeconds(2);
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
-            robotKey(btnWriteMessage, KeyEvent.VK_A);
-            StringSelection stringSelection = new StringSelection(strMessage);
-            clipboard.setContents(stringSelection, stringSelection);
-            robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
-            robotKey(btnWriteMessage, KeyEvent.VK_V);
-            robotKeyRelease(KeyEvent.VK_V);
-            robotKeyRelease(KeyEvent.VK_CONTROL);
-            waitForSeconds(7);
-            System.out.println(" switch to default frame::: " + driver.switchTo().defaultContent());
+            btnWriteMessage.click();
             waitForSeconds(2);
+            driver.switchTo().activeElement().clear();
+            waitForSeconds(2);
+            btnWriteMessage.click();
+            waitForSeconds(2);
+            driver.switchTo().activeElement().sendKeys(strMessage);
+            waitForSeconds(2);
+
             blResult = true;
 
         } catch (Exception e) {
@@ -1130,6 +1144,7 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(btnReplySendMessage);
             click(btnReplySendMessage);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementToAppear(driver,By.xpath(btnSentSuccessfullyPopup1));
             waitForElement(btnSentSuccessfullyPopup);
             blResult = verifyElement(btnSentSuccessfullyPopup);
 
@@ -3242,17 +3257,20 @@ public class MessagesPage extends BasePage {
     }
 
     public boolean verifySentSuccessfully() {
+        waitForElementToAppear(driver,By.xpath(btnSentSuccessfullyPopup1));
         waitForElement(btnSentSuccessfullyPopup);
         return verifyElement(btnSentSuccessfullyPopup);
     }
 
     public boolean verifyDraftSuccessfully() {
+        waitForElementToAppear(driver,By.xpath(btnDraftSuccessfullyPopup1));
         waitForElement(btnDraftSuccessfullyPopup);
         return verifyElement(btnDraftSuccessfullyPopup);
     }
 
     public boolean VerifyAttachdowloadSuccessfully() {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForElementToAppear(driver,By.xpath(btnAttachdowloadSuccessfullyPopup1));
         waitForElement(btnAttachdowloadSuccessfullyPopup);
         return verifyElement(btnAttachdowloadSuccessfullyPopup);
     }

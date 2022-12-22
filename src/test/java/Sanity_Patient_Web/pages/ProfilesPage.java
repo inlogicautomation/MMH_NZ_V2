@@ -308,13 +308,19 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='leftside']")
     protected WebElement elmntsMenu;
 
-    @FindBy(how = How.XPATH, using = "//select[contains(@id,'Search_cmbPractice')]")
+    @FindBy(how = How.XPATH, using = "//mat-select[@role='combobox']")
     protected WebElement drpDownHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "//div[@class='rounded']//a[contains(text(),'Search')]")
+    protected String elmntHealthcentreDrop = new StringBuilder().append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[1]").toString();
+
+
+
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),' Search ')]")
     protected WebElement btnSearchForPatient;
 
-    @FindBy(how = How.XPATH, using = "//td/div/input")
+    @FindBy(how = How.XPATH, using = "//input[@class='k-input']")
     protected WebElement txtBoxPatientName;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Date Recorded')]")
@@ -326,19 +332,26 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome')])[1]")
     protected WebElement txtMyHomePage;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Search Patients')]/ancestor::div[contains(@class,'breadcrumbs')]")
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),' Search Patients ')]")
     protected WebElement txtBCSearchPatient;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Practice Menu']")
+    protected WebElement elmntPraticeMenuDoctor;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Search  Patients')]")
+    protected WebElement getElmntSearchPatientsDoctor;
+
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Search Patients')]")
     protected WebElement txtSearchPatients;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'View Goals')]")
+    @FindBy(how = How.XPATH, using = "(//a[contains(text(),'View Goals')])[1]")
     protected WebElement elmntViewGoals;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Goal Tracking')]")
+    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Goal Tracking')]")
     protected WebElement txtGoalTracking;
 
-    @FindBy(how = How.XPATH, using = "//b[contains(text(),'Search Results:')]")
+    @FindBy(how = How.XPATH, using = "//h3[contains(text(),' Back to search ')]")
     protected WebElement txtSearchResults;
 
 //    @FindBy(how = How.XPATH, using = "//mat-checkbox[@formcontrolname='categoryShow']//input")
@@ -352,9 +365,11 @@ public class ProfilesPage extends BasePage {
 
     //label[contains(text(),'Last Name First Name')]/preceding-sibling::input
     protected String searchOrder = new StringBuilder()
-            .append("//label[contains(text(),'")
+            .append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>")
-            .append("')]/preceding-sibling::input").toString();
+            .append("')]").toString();
+
+//    (//div[contains(text(),'First Name Last Name')]//preceding::input)[5]
 
     //div[contains(text(),'test-wqewrytyet')]
     protected String elmntCalendarEvent = new StringBuilder()
@@ -1660,12 +1675,12 @@ public class ProfilesPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(3);
-            waitForElement(txtMyHomePage);
-            waitForElement(elmntsMenu);
-            waitForElement(elmntSearchPatients);
-            waitForElementClickable(elmntSearchPatients);
-            click(elmntSearchPatients);
-            waitForSeconds(1);
+//            waitForElement(txtMyHomePage);
+//            waitForElement(elmntsMenu);
+            waitForElement(elmntPraticeMenuDoctor);
+            jsClick(elmntPraticeMenuDoctor);
+            waitForElement(getElmntSearchPatientsDoctor);
+            jsClick(getElmntSearchPatientsDoctor);
             waitForElement(txtBCSearchPatient);
             blResult = verifyElement(txtBCSearchPatient);
             System.out.println("Successfully navigated to the Search Patient");
@@ -1683,12 +1698,11 @@ public class ProfilesPage extends BasePage {
             waitForSeconds(2);
             waitForElement(txtSearchPatients);
             waitForElement(drpDownHealthCentre);
-            waitForElementClickable(drpDownHealthCentre);
-            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'Search_cmbPractice')]")));
-            System.out.println("strHealthCenter >>> :: "+strHealthCenter);
-            healthCentre.selectByVisibleText(strHealthCenter);
+           jsClick(drpDownHealthCentre);
             waitForSeconds(2);
-
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntHealthcentreDrop.replace("<<REPLACEMENT>>", strHealthCenter)));
+            jsClick(elmntEntriesFromHealthCentre);
+            waitForSeconds(2);
             blResult = true;
             System.out.println("\nSuccessfully selected the health centre >>> :: ");
         } catch (Exception e) {
@@ -1703,7 +1717,7 @@ public class ProfilesPage extends BasePage {
         System.out.println("X-path for rdoBtn >>> :: "+searchOrder.replace("<<REPLACEMENT>>",strOrder));
         WebElement rdoBtn = waitForElement(By.xpath(searchOrder.replace("<<REPLACEMENT>>",strOrder)));
         waitForElementClickable(rdoBtn);
-        waitAndClick(rdoBtn);
+        jsClick(rdoBtn);
 
     }
 
@@ -1711,12 +1725,14 @@ public class ProfilesPage extends BasePage {
         try {
             waitForElement(txtSearchPatients);
             waitForSeconds(3);
+            txtBoxPatientName.click();
+            waitForSeconds(2);
             txtBoxPatientName.sendKeys(strName);
             waitForSeconds(2);
-            System.out.println("Xpath for Patient >>> :: " + selectPatientName.replace("<<REPLACEMENT>>", strName));
-            WebElement patient = waitForElement(By.xpath(selectPatientName.replace("<<REPLACEMENT>>", strName)));
-            waitForElementClickable(patient);
-            waitAndClick(patient);
+//            System.out.println("Xpath for Patient >>> :: " + selectPatientName.replace("<<REPLACEMENT>>", strName));
+//            WebElement patient = waitForElement(By.xpath(selectPatientName.replace("<<REPLACEMENT>>", strName)));
+//            waitForElementClickable(patient);
+//            waitAndClick(patient);
             waitForSeconds(1);
 
             System.out.println("\nSuccessfully Entered To>>> :: ");
@@ -1734,7 +1750,7 @@ public class ProfilesPage extends BasePage {
             waitForElement(txtSearchPatients);
             waitForElement(btnSearchForPatient);
             waitForElementClickable(btnSearchForPatient);
-            waitAndClick(btnSearchForPatient);
+            jsClick(btnSearchForPatient);
             waitForSeconds(2);
             waitForElement(txtSearchResults);
             blResult = verifyElement(txtSearchResults);
@@ -1754,8 +1770,9 @@ public class ProfilesPage extends BasePage {
 
             waitForElement(elmntViewGoals);
             waitForElementClickable(elmntViewGoals);
-            waitAndClick(elmntViewGoals);
+            jsClick(elmntViewGoals);
             waitForSeconds(2);
+            jsScrollIntoView(txtGoalTracking);
             waitForElement(txtGoalTracking);
             blResult = verifyElement(txtGoalTracking);
             takeScreenshotSanity(driver);

@@ -1,6 +1,6 @@
 Feature: Appointments
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
+  @WEB @Mobile @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature: Appointments
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
+  @WEB @Mobile @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -20,7 +20,7 @@ Feature: Appointments
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test
+  @WEB @Mobile @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test
   Scenario Template: Prep- Canceling all the appointments
 
     Given As a user I am on HomePage
@@ -138,7 +138,7 @@ Feature: Appointments
       | Appointment         | Join_Consultation                                 | All_Icons     |
       | Future Appointments | &APPOINTMENT_DETAILS_FOR_JOIN_VIDEO_CONSULTATION& | &VIDEO_ICONS& |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test
+  @WEB @APP @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test
   Scenario Template: S3 - Patient Booking Appointment - Visit in video slot Appointment
 
     Given As a user I am on HomePage
