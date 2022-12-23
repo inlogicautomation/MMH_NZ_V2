@@ -655,8 +655,8 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement elmntMobileclassificationdrop;
 
 
-    protected String elmntCovidImmunisationsDrop = new StringBuilder().append("//span[text()='")
-            .append("<<REPLACEMENT>>").append("']").toString();
+    protected String elmntCovidImmunisationsDrop = new StringBuilder().append("(//span[text()='")
+            .append("<<REPLACEMENT>>").append("'])[2]").toString();
 
     protected String elmntAddAllergicDrop = new StringBuilder().append("//span[@class='mat-option-text'][contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
@@ -2088,6 +2088,7 @@ public class MyHealthRecordsPage extends BasePage {
     }
 
     public void enterCovidImmunisationBatchNo(String strVisitedName) {
+        waitForSeconds(3);
         waitForElement(elmntCovidImmunisationBatchNo);
         enterValue(elmntCovidImmunisationBatchNo, strVisitedName);
     }
@@ -3701,6 +3702,7 @@ public class MyHealthRecordsPage extends BasePage {
             waitForSeconds(2);
             jsClick(elmntCovidImmunisationsdrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntCovidImmunisationsDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
+            System.out.println(">>>>>>>>>>>>>>>>>>>>elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
 
             blResult = true;

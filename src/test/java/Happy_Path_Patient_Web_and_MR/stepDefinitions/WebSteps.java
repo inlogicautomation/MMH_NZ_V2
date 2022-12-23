@@ -2020,7 +2020,7 @@ public class WebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             demoPageContainer.myHealthRecordsPage.clickCovidAddRecord();
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectCovidImmunisationsdropdown(TestDataUtil.getValue(listCreateData.get(0))));
-            demoPageContainer.myHealthRecordsPage.clickCovidDose();
+//            demoPageContainer.myHealthRecordsPage.clickCovidDose();
             demoPageContainer.myHealthRecordsPage.enterCovidImmunisationBatchNo(TestDataUtil.getValue(listCreateData.get(1)));
             demoPageContainer.myHealthRecordsPage.enterCovidImmunisationDateGiven();
             demoPageContainer.myHealthRecordsPage.enterCovidClinicalSite(TestDataUtil.getValue(listCreateData.get(2)));
@@ -2034,7 +2034,7 @@ public class WebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             demoPageContainer.myHealthRecordsPage.clickCovidAddRecord();
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectMobileCovidImmunisationsdropdown(TestDataUtil.getValue(listCreateData.get(0))));
-            demoPageContainer.myHealthRecordsPage.clickCovidDose();
+//            demoPageContainer.myHealthRecordsPage.clickCovidDose();
             demoPageContainer.myHealthRecordsPage.enterCovidImmunisationBatchNo(TestDataUtil.getValue(listCreateData.get(1)));
             demoPageContainer.myHealthRecordsPage.enterCovidImmunisationDateGiven();
             demoPageContainer.myHealthRecordsPage.enterCovidClinicalSite(TestDataUtil.getValue(listCreateData.get(2)));
@@ -2046,7 +2046,7 @@ public class WebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             demoPageContainer.myHealthRecordsPage.clickCovidAddRecord();
             Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectMobileCovidImmunisationsdropdown(TestDataUtil.getValue(listCreateData.get(0))));
-            demoPageContainer.myHealthRecordsPage.clickCovidDose();
+//            demoPageContainer.myHealthRecordsPage.clickCovidDose();
             demoPageContainer.myHealthRecordsPage.enterCovidImmunisationBatchNo(TestDataUtil.getValue(listCreateData.get(1)));
             demoPageContainer.myHealthRecordsPage.enterCovidImmunisationDateGiven();
             demoPageContainer.myHealthRecordsPage.enterCovidClinicalSite(TestDataUtil.getValue(listCreateData.get(2)));
