@@ -107,7 +107,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Back')]/i)[2]")
     protected WebElement btnBackInDraft;
 
-    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Sent')]")
+    @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Sent')])[1]")
     protected WebElement txtSentPatient;
 
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'User settings updated successfully')]")
@@ -847,8 +847,8 @@ public class MessagesPage extends BasePage {
             if (PageUrl.contains("Sent")) {
                 blResult = true;
             }
-//            waitForElement(txtSentPatient);
-//            blResult = verifyElement(txtSentPatient);
+            waitForElement(txtSentPatient);
+            blResult = verifyElement(txtSentPatient);
         } catch (Exception e) {
             System.out.println("Failed navigate to Patient Sent messages >>>>> :: ");
             e.printStackTrace();

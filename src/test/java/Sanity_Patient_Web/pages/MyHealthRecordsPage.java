@@ -426,24 +426,24 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@class='mat-focus-indicator btn-increment mat-stroked-button mat-button-base']")
     protected WebElement btnDose;
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-9-input']")
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='clinicianCheckbox']//input)[1]")
     protected WebElement elmntCheckBox;
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-8-input']")
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='privacyCheckBox']//input)[1]")
     protected WebElement elmntClassiCheckBox;
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-6-input']")
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='shareWithDoctors'])[1]//input")
     protected WebElement elmntAllergiesCheckBox;
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-5-input']")
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='privacyCheckbox'])[1]//input")
     protected WebElement elmntPrescriptionCheckBox;
 
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-7-input']")
+    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@formcontrolname='privacyCheckbox'])[2]//input")
     protected WebElement elmtImmunisationsiCheckBox;
 
 
-    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true'][@id='mat-checkbox-15-input']")
+    @FindBy(how = How.XPATH, using = "//mat-checkbox[@formcontrolname='isconf']//input")
     protected WebElement elmtCovidImmunisationsiCheckBox;
 
 
