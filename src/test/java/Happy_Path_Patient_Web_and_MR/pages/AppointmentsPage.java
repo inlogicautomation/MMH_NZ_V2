@@ -99,6 +99,11 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='reason']")
     protected WebElement elmntReason;
 
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='otherReason']")
+    protected WebElement elmntReasonTextBox;
+
+    //input[@formcontrolname='otherReason']
+
     protected String strReasonForAppointment = new StringBuilder().append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
@@ -497,6 +502,7 @@ public class AppointmentsPage extends BasePage {
                     verifyElement(elmntReasonForAppointment);
                     waitAndClick(elmntReasonForAppointment);
 
+
                 }
             } else {
                 WebElement elmntReasonForAppointment = waitForElementClickable(By.xpath(strReasonForAppointment.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strReason))));
@@ -505,6 +511,8 @@ public class AppointmentsPage extends BasePage {
             }
             waitForSeconds(2);
             elmntReason.sendKeys(Keys.TAB);
+            waitForSeconds(3);
+            elmntReasonTextBox.sendKeys(strReason);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();

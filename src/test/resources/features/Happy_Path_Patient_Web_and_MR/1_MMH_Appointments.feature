@@ -9,7 +9,7 @@ Feature: Appointments
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Test @video
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
