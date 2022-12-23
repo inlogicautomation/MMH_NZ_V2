@@ -139,8 +139,8 @@ Feature: Messages
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
-      | Email Address       | Password               |
-      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
+      | Email Address      | Password               |
+      | &EMAIL_FOR_HEALTH& | &PASSWORD FOR MESSAGE& |
 
   @WEB @MESSAGES1 @HAPPY_PATH
   Scenario Template: S5-  User verifies the Patient Group Message
@@ -326,5 +326,5 @@ Feature: Messages
     And I verify the provider sent "<Group Message Details>"
 
     Examples:
-      | Group Message Details        |
+      | Group Message Details                   |
       | &MOBILE_RESPONSE_GROUP_MESSAGE_DETAILS& |
