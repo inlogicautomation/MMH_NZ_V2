@@ -3,7 +3,7 @@ package cap.utilities;
 import cap.helpers.Constants;
 
 public class WaitTimeUtil {
-
+	/**The implicitlyWait command waits for an element to load for a specified duration..*/
 	public static int getWaitTime(String strWaitVaribaleName){
 		int inWaitTime=30;
 		
@@ -18,7 +18,7 @@ public class WaitTimeUtil {
 		}
 		return inWaitTime;
 	}
-
+	/**The waits for an invisibilityelement to load for a specified duration..*/
 	public static int getWaitForInvisibilityTime(String strWaitVaribaleName){
 		int inWaitTime=60;
 

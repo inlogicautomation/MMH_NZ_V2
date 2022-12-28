@@ -13,6 +13,8 @@ import java.util.Map;
 /**
  * Created by codoid-   pc on 30/12/2021.
  */
+
+/**Testdatautil is used to get TestData files, such as XML, into your system..*/
 public class TestDataUtil {
 
     public static LinkedHashMap<String, String> testDataMap = new LinkedHashMap<String, String>();
@@ -46,6 +48,7 @@ public class TestDataUtil {
         return testDataMap;
     }
 
+    /**The updatedata method  is used to update any value from your test data. */
     public static void updateData(String strTestDataFilePath, String strSheetName, String strDataName, String strDataValue) {
         Fillo fillo = new Fillo();
         Connection connection = null;
@@ -83,7 +86,7 @@ public class TestDataUtil {
         long executionID = Math.round(Math.random() * 100000);
         return executionID;
     }
-
+/**The getValue method is used to get any value from your test data. */
     public static String getValue(String strKey) {
         String strValue = strKey;
         String strRandomPattern = Constants.RANDOM_STRING;
@@ -112,6 +115,8 @@ public class TestDataUtil {
         }
         return strValue;
     }
+
+    /**The getListOfValueValue method  is used to get GroupOfvalue from your test data. */
 
     /*@Description: Get a list of values in Excel sheet*/
     public static List<String> getListOfValue(String strKey) {

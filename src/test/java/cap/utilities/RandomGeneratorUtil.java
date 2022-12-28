@@ -2,7 +2,11 @@ package cap.utilities;
 
 import java.util.Random;
 
+
+
 public class RandomGeneratorUtil {
+
+    /** getRandomString is used to Instantly generate a secure, random password with the LastPass online tool.*/
 
     public static String getRandomString() {
         int leftLimit = 97; // letter 'a'

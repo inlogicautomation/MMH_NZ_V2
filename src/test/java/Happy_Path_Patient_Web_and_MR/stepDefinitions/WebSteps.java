@@ -47,19 +47,6 @@ public class WebSteps {
         demoPageContainer.homePage.clickSignInButton();
     }
 
-//    @Given("As a user I am on HomePage")
-//    public void asAUserIAmOnHomePage() {
-//        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-//            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
-//            Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
-//            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
-//        }
-//        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-//            Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
-//            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
-//        }
-//
-//    }
 
     @When("I navigate to the Future Appointments page")
     public void iNavigateToTheFutureAppointmentsPage() {
@@ -550,8 +537,8 @@ public class WebSteps {
     @Given("As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription")
     public void NavigateToRepeatMedicationPage() {
 
-//        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
-        Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+//        Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
@@ -707,7 +694,6 @@ public class WebSteps {
         }
 
 
-
     }
 
     @And("I select the Medication details for Delivery Meds by Pharmacy and Pay Online with Card {string}")
@@ -748,7 +734,6 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayNow());
 
         }
-
 
 
     }
@@ -860,7 +845,6 @@ public class WebSteps {
         demoPageContainer.homePage.clickBetaLoginButton();
 
     }
-
 
 
     @Then("I should see the Prescription status for Request by card {string}")
@@ -3116,6 +3100,7 @@ public class WebSteps {
     public void iChangeWindowsTimeZone(String strTimeZone) {
         Assert.assertTrue(demoPageContainer.homePage.changeTimeZone(strTimeZone));
     }
+
     @Given("As a Existing Patient Login with valid {string} and {string}")
     public void asAExistingPatientLoginWithValidAnd(String strEmail, String strPassword) {
         demoPageContainer.homePage.visit();
@@ -3123,6 +3108,7 @@ public class WebSteps {
         demoPageContainer.homePage.enterEmailForBeta(TestDataUtil.getValue(strEmail));
         demoPageContainer.homePage.enterPasswordForBeta(TestDataUtil.getValue(strPassword));
     }
+
     @Given("As a Existing user I am on HomePage and I click the Repeat Prescription")
     public void asAExistingUserIAmOnHomePageAndIClickTheRepeatPrescription() {
 //        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
@@ -3175,7 +3161,270 @@ public class WebSteps {
             }
         }
     }
+
+    //    ============================================== REPEATSCRIPTSETTINGS.Feature =============================================
+    @And("I click SignIn button then I should see user successfully logs in to the MMH portal")
+    public void iClickSignInButtonThenIShouldSeeUserSuccessfullyLogsInToTheMMHPortal() {
+        demoPageContainer.homePage.clickSignInButton();
+        Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
     }
+
+    @When("I navigate to patient portal and verify the change")
+    public void iNavigateToPatientPortalAndVerifyTheChange() {
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToRequestNewScript());
+    }
+
+    @Then("I should see the changes based on Rule A")
+    public void iShouldSeeTheChangesBasedOnRuleA() {
+        System.out.println("==================================Rule A Verification ============================================");
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyRuleAData());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @Then("I should see the changes based on Rule B")
+    public void iShouldSeeTheChangesBasedOnRuleB() {
+        System.out.println("==================================Rule B Verification ============================================");
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyRuleBData());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @Then("I should see the changes based on Rule C")
+    public void iShouldSeeTheChangesBasedOnRuleC() {
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyRuleCData());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @Then("I should see the changes based on restricting to Named Provider in each Location{string}")
+    public void iShouldSeeTheChangesBasedOnRestrictingToNamedProviderInEachLocation(String strDetail) {
+        System.out.println("==================================Named Provider Verification ============================================");
+        System.out.println("RRPScriptInstructionSetting details >>> :: ");
+        List<String> lstDetails = TestDataUtil.getListOfValue(strDetail);
+        System.out.println("RRPScriptInstructionSetting details >>> :: " + lstDetails);
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyRestrictedByLocation(lstDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyRestrictedByProvider(lstDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @Then("I should see the changes based on Patient to Collect Script{string},{string},{string} and {string}")
+    public void iShouldSeeTheChangesBasedOnPatientToCollectScript(String strScriptInstruction, String ScriptUrgencies, String strMedicalDetails, String strLocationdetails) {
+        List<String> lstscriptDetails = TestDataUtil.getListOfValue(strScriptInstruction);
+        List<String> lstscriptUrgencies = TestDataUtil.getListOfValue(ScriptUrgencies);
+        List<String> lstMedicalDetails = TestDataUtil.getListOfValue(strMedicalDetails);
+        List<String> lstLocationDetails = TestDataUtil.getListOfValue(strLocationdetails);
+        System.out.println("RRPScriptFee details >>> :: " + lstLocationDetails);
+        System.out.println("RRPScriptFee Instructions details >>> :: " + lstscriptDetails);
+        System.out.println("RRPScript Urgencies details >>> :: " + lstscriptUrgencies);
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyLocation(lstLocationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyProviderName(lstLocationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptInstruction(lstscriptDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgency(TestDataUtil.getListOfValue(ScriptUrgencies)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @Then("I should see the changes based on Send Script by Post{string},{string},{string} and {string}")
+    public void iShouldSeeTheChangesBasedOnSendScriptByPost(String strScriptInstruction, String ScriptUrgencies, String strMedicalDetails, String strLocationdetails) {
+        List<String> lstscriptDetails = TestDataUtil.getListOfValue(strScriptInstruction);
+        List<String> lstscriptUrgencies = TestDataUtil.getListOfValue(ScriptUrgencies);
+        List<String> lstMedicalDetails = TestDataUtil.getListOfValue(strMedicalDetails);
+        List<String> lstLocationDetails = TestDataUtil.getListOfValue(strLocationdetails);
+        System.out.println("RRPScriptFee details >>> :: " + lstLocationDetails);
+        System.out.println("RRPScriptFee Instructions details >>> :: " + lstscriptDetails);
+        System.out.println("RRPScript Urgencies details >>> :: " + lstscriptUrgencies);
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyLocation(lstLocationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyProviderName(lstLocationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptInstruction(lstscriptDetails.get(3)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgency(TestDataUtil.getListOfValue(ScriptUrgencies)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @Then("I should see the changes based on Send Script to Pharmacy{string},{string},{string} and {string}")
+    public void iShouldSeeTheChangesBasedOnSendScriptToPharmacy(String strScriptInstruction, String ScriptUrgencies, String strMedicalDetails, String strLocationdetails) {
+        List<String> lstscriptDetails = TestDataUtil.getListOfValue(strScriptInstruction);
+        List<String> lstscriptUrgencies = TestDataUtil.getListOfValue(ScriptUrgencies);
+        List<String> lstMedicalDetails = TestDataUtil.getListOfValue(strMedicalDetails);
+        List<String> lstLocationDetails = TestDataUtil.getListOfValue(strLocationdetails);
+        System.out.println("RRPScriptFee details >>> :: " + lstLocationDetails);
+        System.out.println("RRPScriptFee Instructions details >>> :: " + lstscriptDetails);
+        System.out.println("RRPScript Urgencies details >>> :: " + lstscriptUrgencies);
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyLocation(lstLocationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyProviderName(lstLocationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptInstructionSSTP(lstscriptDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgency(TestDataUtil.getListOfValue(ScriptUrgencies)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptSendingOption(TestDataUtil.getValue("&SAVED_SCRIPT_OPTION_ADDRESS&")));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @Then("I should see the changes based on Deliver Meds By Pharmacy{string},{string},{string} and {string}")
+    public void iShouldSeeTheChangesBasedOnDeliverMedsByPharmacy(String strScriptInstruction, String ScriptUrgencies, String strMedicalDetails, String strLocationdetails) {
+        List<String> lstscriptDetails = TestDataUtil.getListOfValue(strScriptInstruction);
+        List<String> lstscriptUrgencies = TestDataUtil.getListOfValue(ScriptUrgencies);
+        List<String> lstMedicalDetails = TestDataUtil.getListOfValue(strMedicalDetails);
+        List<String> lstLocationDetails = TestDataUtil.getListOfValue(strLocationdetails);
+        System.out.println("RRPScriptFee details >>> :: " + lstLocationDetails);
+        System.out.println("RRPScriptFee Instructions details >>> :: " + lstscriptDetails);
+        System.out.println("RRPScript Urgencies details >>> :: " + lstscriptUrgencies);
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyLocation(lstLocationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyProviderName(lstLocationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptInstructionSSTP(lstscriptDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgency(TestDataUtil.getListOfValue(ScriptUrgencies)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectDMBPOption(TestDataUtil.getValue("&SAVED_SCRIPT_OPTION_ADDRESS_DMBP&")));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectSearchAddress(TestDataUtil.getValue("&SAVED_ADDRESS_FOR_DMBP&")));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @When("I select the Patient to collect Script Medication details{string} {string}")
+    public void iSelectThePatientToCollectScriptMedicationDetails(String strMedicationDetails, String SelectScriptDropDownDetails) {
+        System.out.println("\nMedicationDetails >>> :" + strMedicationDetails);
+        System.out.println("\nSelectScriptDropDownDetails >>> :" + SelectScriptDropDownDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("\nlstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("\nSize Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.VeriflyPatienttoCollectScriptDetails(TestDataUtil.getListOfValue(SelectScriptDropDownDetails)));
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(3)));
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickNextButton());
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeatForMobile(lstMedicationDetails.get(4)));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicationDetails.get(4)));
+        }
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(5)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+    }
+
+    @Then("I select the Send Script By Post Medication details{string} {string}")
+    public void iSelectTheSendScriptByPostMedicationDetails(String strMedicationDetails, String SelectScriptDropDownDetails) {
+        System.out.println("\nMedicationDetails >>> :" + strMedicationDetails);
+        System.out.println("\nSelectScriptDropDownDetails >>> :" + SelectScriptDropDownDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("\nlstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("\nSize Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.VeriflyPatienttoCollectScriptDetails(TestDataUtil.getListOfValue(SelectScriptDropDownDetails)));
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(3)));
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickNextButton());
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeatForMobile(lstMedicationDetails.get(4)));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicationDetails.get(4)));
+        }
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(5)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+
+    }
+
+    @Then("I select the Send Script to Pharmacy Medication details{string} {string}")
+    public void iSelectTheSendScriptToPharmacyMedicationDetails(String strMedicationDetails, String SelectScriptDropDownDetails) {
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(7)));
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForSentScriptToPharmacy());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyTypeForSentScript(lstMedicationDetails.get(3)));
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectSearchPharmacyForSentScript(lstMedicationDetails.get(3)));
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectCity(lstMedicationDetails.get(4)));
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectSubUrban(lstMedicationDetails.get(5)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.VeriflyPatienttoCollectScriptDetails(TestDataUtil.getListOfValue(SelectScriptDropDownDetails)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacy(lstMedicationDetails.get(6)));
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickNextButton());
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeatForMobile(lstMedicationDetails.get(8)));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickNextButton());
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeatForMobile(lstMedicationDetails.get(8)));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicationDetails.get(8)));
+
+        }
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(9)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
+
+        }
+
+
+    }
+
+    @Then("I select the Deliver Meds by Pharmacy Medication details{string} {string}")
+    public void iSelectTheDeliverMedsByPharmacyMedicationDetails(String strMedicationDetails, String SelectScriptDropDownDetails) {
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(6)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.VeriflyPatienttoCollectScriptDetails(TestDataUtil.getListOfValue(SelectScriptDropDownDetails)));
+
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForDeliveryMedsByPharmacy());
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedListForDelivery(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacy(lstMedicationDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectAddress(lstMedicationDetails.get(5)));
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickNextButton());
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeatForMobile(lstMedicationDetails.get(7)));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickNextButton());
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeatForMobile(lstMedicationDetails.get(7)));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicationDetails.get(7)));
+        }
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(8)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
+        }
+    }
+}
 
 
   

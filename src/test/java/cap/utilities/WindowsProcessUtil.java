@@ -18,6 +18,7 @@ public class WindowsProcessUtil {
         }
         return process;
     }
+/**   The startTimeZoneProcess Method is used to change your time zone while the programme is running. such as New Land Time Zone,*/
 
     public static Process startTimeZoneProcess(String strTimeZone) {
         Process pb = null;
@@ -30,6 +31,8 @@ public class WindowsProcessUtil {
         return pb;
     }
 
+
+    /**   The stopProcess Method is used to stop the startTimeZoneProcess*/
     public static void stopProcess(Process pb) {
         try {
             pb.destroy();

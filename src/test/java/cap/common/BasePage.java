@@ -57,7 +57,7 @@ public class BasePage {
     }
 
     StopWatch pageLoad = new StopWatch();
-
+/**The visit Method used to get URL in testdata.  */
     protected void visit(String URL) {
         driver.manage().deleteAllCookies();
 //        driver.manage().window().maximize();
@@ -65,7 +65,7 @@ public class BasePage {
         driver.get(URL);
         System.out.println("=======================>Launched URL");
     }
-
+    /**When an element on the page is not clickable, Selenium waits for it to be clickable, and it takes a long time to load all elements.In this method, declare the elements Xpath and Secs..   */
     protected WebElement waitForElementClickable(By by, int secs) {
         return new WebDriverWait(driver, secs).until(ExpectedConditions.elementToBeClickable(by));
     }
@@ -73,23 +73,26 @@ public class BasePage {
     protected boolean verifyURLContains(String strURLValue) {
         return wait.until(ExpectedConditions.urlContains(strURLValue));
     }
+/** explicit wait condition where we can pause or wait for an element before proceeding to the next step.In this method, declare the elements Xpath like containsText,Text....*/
 
     protected WebElement waitForElement(By by) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
+    /** explicit wait condition where we can pause or wait for an element before proceeding to the next step.In this method, declare the elements Xpath and Secs..  */
     protected WebElement waitForElement(By by, int secs) {
         return new WebDriverWait(driver, secs).until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
+    /** explicit wait condition where we can pause or wait for an element before proceeding to the next step.In this method, declare the elements of Xpath like Id, and Name.  */
     protected WebElement waitForElement(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
-
+    /**When an element on the page is not clickable, Selenium waits for it to be clickable, and it takes a long time to load all elements.In this method, declare the elements Xpath   */
     protected WebElement waitForElementClickable(By by) {
         return wait.until(ExpectedConditions.elementToBeClickable(by));
     }
-
+    /**When an element on the page is not clickable, Selenium waits for it to be clickable, and it takes a long time to load all elements.In this method, declare the elements Xpath like Id,Name..  */
     protected WebElement waitForElementClickable(WebElement element) {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
 //        return wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -98,8 +101,8 @@ public class BasePage {
     protected boolean verifyText(String strExpectedText) {
         return driver.getPageSource().contains(strExpectedText);
     }
-
-    public void waitForSeconds(int secs) {
+/**The implicitlyWait command waits for an element to load for a specified duration..*/
+ public void waitForSeconds(int secs) {
         try {
             Thread.sleep(secs * 1000);
         } catch (Exception e) {
@@ -165,12 +168,13 @@ public class BasePage {
         frameDriver = new WebDriverWait(driver, 60).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
         return frameDriver;
     }
-
+/**   The mouseOver  method specifies two functions to run when the mouse pointer hovers over the selected elements.*/
     public void mouseOver(WebElement element) {
         Actions actions = new Actions(driver);
         actions.moveToElement(element).build().perform();
     }
 
+/** The mouseClick method specifies two functions to run. Mouse over the present element, then click the element.*/
     public void mouseClick(WebElement element) {
         Actions actions = new Actions(driver);
         waitForElement(element);
@@ -206,19 +210,22 @@ public class BasePage {
         wait.until(ExpectedConditions.alertIsPresent()).accept();
 
     }
-
+/**   While clicking a link, we get the IllegalStateException, to avoid this exception, the JavaScript executor is used instead of the method click. Declare the ID and name of an element in this method..*/
     public void jsClick(WebElement element) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("var elem=arguments[0]; setTimeout(function() {elem.click();}, 100)", element);
         waitForSeconds(1);
     }
-
+    /**   While clicking a link, we get the IllegalStateException, to avoid this exception, the JavaScript executor is used instead of the method click. Declare the Xpath of an element in this method..*/
     public void jsClick(By by) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("var elem=arguments[0]; setTimeout(function() {elem.click();}, 100)",
                 driver.findElement(by));
         waitForSeconds(1);
     }
+
+
+/**This method is used to Windows Screen scroll up or down with Selenium..*/
 
     public void jsScroll() {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -259,7 +266,7 @@ public class BasePage {
         Select select = new Select(element);
         select.selectByIndex(i);
     }
-
+    /**This method is used to Enter the value of the present Textbox with Selenium.*/
     public void enterValue(WebElement elmnt, String strValue) {
         elmnt.click();
         elmnt.clear();
@@ -270,17 +277,19 @@ public class BasePage {
     public void waitForWindow(int inWindowIndex) {
         wait.until(ExpectedConditions.numberOfWindowsToBe(inWindowIndex));
     }
-
+/**   This method used to close your current window */
     public void closeWindow(int inWindowIndex) {
         Object[] handles = driver.getWindowHandles().toArray();
         driver.switchTo().window((String) handles[inWindowIndex - 1]).close();
 
     }
 
+/**   This method used refresh on your windows screen */
     public void refreshPage() {
         driver.navigate().refresh();
     }
 
+    /**   This method used Focus on your windows screen */
     public void focusWindow(int inWindowIndex) {
         Object[] handles = driver.getWindowHandles().toArray();
 
@@ -294,6 +303,8 @@ public class BasePage {
     public Boolean waitForInvisibilityOfElement(WebElement element) {
         return invisibleWait.until(ExpectedConditions.invisibilityOf(element));
     }
+
+/**    This method is used to wait until the elements are hidden.*/
     public static boolean waitForElementDisappear(WebDriver driver, By by) {
         boolean isElementDisappear = false;
         try {
@@ -310,6 +321,8 @@ public class BasePage {
         }
         return isElementDisappear;
     }
+
+    /**    This method is used to wait until the elements are Showing.*/
     public static boolean waitForElementToAppear(WebDriver driver, By by) {
         boolean isElementDisappear = false;
         try {
@@ -352,6 +365,7 @@ public class BasePage {
         wait.until(ExpectedConditions.presenceOfElementLocated((By.ByXPath) element));
     }
 
+/**  This method is used to verify the present elements...*/
     public boolean verifyElement(WebElement element) {
         boolean isVerify = false;
         try {
@@ -414,6 +428,7 @@ public class BasePage {
         return blResult;
     }
 
+    /**  This method is used to click the present elements...*/
     public static boolean click(WebElement element) {
         boolean blResult = false;
         try {
@@ -429,6 +444,7 @@ public class BasePage {
         return blResult;
     }
 
+    /**  This method is used to click two times on the present elements....*/
     public static boolean doubleClick(WebDriver driver, WebElement element) {
         boolean blResult = false;
         try {
@@ -563,7 +579,7 @@ public class BasePage {
     }
 
     public static DemoPageContainer pageContainer;
-
+    /**   This method is used to take screenshots of the current page.*/
     public void takeScreenshot(WebDriver driver) {
         try {
             pageContainer.myScenario.attach(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES), "image/png", "");
@@ -602,7 +618,7 @@ public class BasePage {
         executor.executeScript("arguments[0].scrollIntoView();", element);
         waitForSeconds(1);
     }
-
+/**   verifies if a certain element is present and displayed. */
     public boolean isElementDisplayed(WebElement element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, 1);
@@ -630,6 +646,7 @@ public class BasePage {
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
 
+    /**   verifies if a certain element is not present and is not displayed. */
     public boolean notVerifyElement(By by) {
         boolean isVerify = false;
         try {
@@ -728,6 +745,7 @@ public class BasePage {
                 .moveTo(PointOption.point(endx, endy)).release().perform();
     }
 
+/**   This method is used to take screenshots of the current page.*/
     public void takeScreenshotSanity(WebDriver driver) {
         try {
             SanityPageContainer.myScenario.attach(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES), "image/png", "");

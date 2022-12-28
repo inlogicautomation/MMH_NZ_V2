@@ -17,7 +17,7 @@ public class PatternHandlerUtil {
         }
         return strFirstMatch;
     }
-
+/**get testvalue in used this method getMatchContent.*/
     public static String getMatchContent(String strPattern, String strValue) {
         Pattern p = Pattern.compile(strPattern);
         Matcher m = p.matcher(strValue);

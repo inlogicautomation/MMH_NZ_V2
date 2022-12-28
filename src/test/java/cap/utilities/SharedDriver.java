@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by codoid-pc on 6/5/2018.
  */
+
+/** The share driver util is used to determine which Execution Type run in your program receives a run time.Like BROWSER,MOBILEVIEW,MOBILE */
 public class SharedDriver {
 
     protected static WebDriver driver;
@@ -14,6 +16,7 @@ public class SharedDriver {
     public static long randomID;
     public static String strExecutionID;
 
+/**  Using this method, get a Windows driver. A run time is assigned to each execution type that runs in your program. Like BROWSER,MOBILEVIEW,MOBILE */
     public static WebDriver getDriver() {
         return driver;
     }
@@ -21,7 +24,7 @@ public class SharedDriver {
     public static WebDriver getWindowDriver() {
         return windowsDriver;
     }
-
+    /**  Using this method, get a Mobile driver.A run time is assigned to each execution type that runs in your program */
     public static WebDriver getMobileDriver() {
         return mobileDriver;
     }

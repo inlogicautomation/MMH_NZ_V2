@@ -4,6 +4,8 @@ public class OSValidator {
 	/**
 	 * @return
 	 */
+
+/**	Using this to get your operating system's name for run time*/
 	public static String getOSName() {
 		return org.openqa.selenium.Platform.getCurrent().toString();
 	}
@@ -11,6 +13,7 @@ public class OSValidator {
 	/**
 	 * @return
 	 */
+	/**	Using this to get your Windows name for run time*/
 	public static boolean isWindows() {
 		String os = System.getProperty("os.name").toLowerCase();
 		// windows

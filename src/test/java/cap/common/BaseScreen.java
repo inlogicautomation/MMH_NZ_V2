@@ -41,6 +41,7 @@ public class BaseScreen {
     public AndroidDriver androidDriver;
     protected final WebDriverWait wait;
 
+/**   This method is used to connect the mobile class page to the base screen page.*/
     public BaseScreen(WebDriver driver) {
         PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(5)), this);
         this.driver = driver;
@@ -56,16 +57,18 @@ public class BaseScreen {
         ((HidesKeyboard) driver).hideKeyboard();
     }
 
+    /** explicit wait condition where we can pause or wait for an element before proceeding to the next step.In this method, declare the elements Xpath like containsText,Text....*/
     public WebElement waitForElement(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    /**When an element on the page is not clickable, Selenium waits for it to be clickable, and it takes a long time to load all elements.In this method, declare the elements Xpath like Id,Name..  */
     public WebElement waitForElementClickable(WebElement element) {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     static String strPlatformName = System.getProperty("platformName");
-
+    /**  This method is used to click the present element.In this method, declare the elements Xpath like Id,Name..*/
     public boolean click(WebElement element) {
         WebElement ele;
         try {
@@ -77,6 +80,7 @@ public class BaseScreen {
             return false;
         }
     }
+    /**  This method is used to click the present element.In this method, declare the elements Xpath.*/
     public boolean click(By by) {
         WebElement ele;
         try {
@@ -101,7 +105,7 @@ public class BaseScreen {
         }
 
     }
-
+    /**  This method is used to verify the present elements.In this method, declare the elements Xpath like Id,Name..*/
     public boolean verifyElement(WebElement element) {
 
         try {
@@ -114,6 +118,7 @@ public class BaseScreen {
         }
     }
 
+    /**  This method is used to verify the present elements.In this method, declare the elements Xpath*/
     public boolean verifyElement(By element) {
         boolean isVerify = false;
         try {
@@ -142,6 +147,7 @@ public class BaseScreen {
         return blResult;
     }
 
+    /**The implicitlyWait command waits for an element to load for a specified duration..*/
     public void waitForSecond(int i) {
         try {
             Thread.sleep(i * 1000);
@@ -159,6 +165,7 @@ public class BaseScreen {
         return isFrameFocused;
     }
 
+/**  Using this method, the mobile application is terminated and relaunched*/
     public void reLaunchAppAndroid() {
         ((AppiumDriver<WebElement>) driver).closeApp();
         System.out.println("App Teriminated");
@@ -166,7 +173,7 @@ public class BaseScreen {
         ((AppiumDriver<WebElement>) driver).activateApp("managemyhealth.co.nz");
         System.out.println("App ReLaunched");
     }
-
+/**This method is used to obtain the element's coordinates (x,y value) before tapping it.*/
     public void tapCooridinatesByElement(WebElement element) {
         waitForSecond(3);
         int Xcoordinate = element.getLocation().x;
@@ -174,12 +181,12 @@ public class BaseScreen {
         TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
         touchAction.tap(PointOption.point(Xcoordinate, Ycoordinate)).perform();
     }
-
+    /**The implicitlyWait command waits for an element to load for a specified duration..*/
     public List<WebElement> waitForElements(List<WebElement> element) {
         return wait.until(ExpectedConditions.visibilityOfAllElements(element));
     }
 
-
+    /**This method is used to Enter the value of the present Textbox with Selenium.*/
     public boolean enterValue(WebElement element, String strVlaue) {
         try {
             waitForElement(element).click();
@@ -214,7 +221,7 @@ public class BaseScreen {
                     .perform();
         }
     }
-
+    /**  This method is used with mobiledriver to scroll the mobile screen a short distance.*/
     public void swipeUpShort() {
         Dimension size = driver.manage().window().getSize();
         System.out.println("Swipe Up");
@@ -230,7 +237,7 @@ public class BaseScreen {
                 .waitAction(waitOptions(Duration.ofSeconds(1)))
                 .moveTo(PointOption.point(endx, endy)).release().perform();
     }
-
+/**   This method is used to make the mobile screen scroll up or down with the mobile driver.*/
     public void swipeUp() {
         Dimension size = driver.manage().window().getSize();
         System.out.println(size);
@@ -247,7 +254,7 @@ public class BaseScreen {
                 .moveTo(PointOption.point(endx, endy)).release().perform();
     }
 
-
+    /**   This method is used to Mobile Screen down with MobileDriver.*/
     public void swipeDown() {
         Dimension size = driver.manage().window().getSize();
         int startx = (int) (size.width * 0.2);
@@ -332,6 +339,7 @@ public class BaseScreen {
 
     public static DemoScreenContainer pageContainer;
 
+    /**   This method is used to take screenshots of the current page.*/
     public void takeScreenshot(WebDriver driver) {
         try {
             pageContainer.myScenario.attach(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES), "image/png", "");
@@ -340,6 +348,7 @@ public class BaseScreen {
         }
     }
 
+    /**   Using an Android driver, you can use this method to Attach,Upload any file into your mobile device.*/
     public void attachStepLog(String strKey, String strvalue) {
         try {
             pageContainer.printTestDataMap.put(strKey, strvalue);
@@ -352,6 +361,8 @@ public class BaseScreen {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
+
+    /**This method is used to obtain the element's coordinates (x,y value) before tapping it.*/
     public void tapByCoordinates(int startX, int startY) {
         try {
             TouchAction act = new TouchAction((PerformsTouchActions) driver);
@@ -375,6 +386,8 @@ public class BaseScreen {
     public boolean exitLoop(int milliSec, long startTime) {
         return (System.currentTimeMillis() - startTime) < milliSec;
     }
+
+/**    While clicking a link,element we get the IllegalStateException, to avoid this exception, the JavaScript executor is used instead of the method */
 
     public WebElement waitForElementIgnoreStale(WebElement element) {
         return wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
@@ -424,6 +437,7 @@ public class BaseScreen {
 
     public static String strImageDirectory = System.getProperty("user.dir") + "\\config\\Images\\";
 
+/**   Using an Android driver, you can use this method to push any file into your mobile device.*/
     public void pushFileToDevice(String strImageName) {
         try {
             ((AndroidDriver<WebElement>) driver).pushFile("/sdcard/Download/" + strImageName + "", new File(strImageDirectory + strImageName));

@@ -8,12 +8,16 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 
+
+
 public class DateUtil {
 
     /**
      * @param strFormat
      * @return
      */
+
+    /** This method is used for getting the current date in your system runtime.*/
     public static String getCurrentDate(String strFormat) {
         DateFormat dateFormat = new SimpleDateFormat(strFormat);
         Date date = new Date();
@@ -29,6 +33,8 @@ public class DateUtil {
     /**
      * @return
      */
+
+    /** This method is used for getting the current date and Time in your system runtime.*/
     public static String getCurrentDateTime() {
         String ranNum = "";
         DateFormat formatter = new SimpleDateFormat("MMM");
@@ -53,7 +59,7 @@ public class DateUtil {
         }
         return ranNum;
     }
-
+    /** This method is used for getting the DayAfterTommorrowDate in your system runtime.*/
     public static String getDayAfterTommorrowDate() {
         DateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy");
         Date date = new Date();
@@ -67,6 +73,7 @@ public class DateUtil {
         return strNextMonthAndYear;
     }
 
+    /** This method is used for getting the Date in your system runtime.*/
     public static String getDate(int inDate, String strDateFormat) {
         SimpleDateFormat formatter = new SimpleDateFormat(strDateFormat);
         Date today = new Date();
@@ -77,7 +84,7 @@ public class DateUtil {
         return strDate;
     }
 
-
+    /** This method is used for getting the Date in your system runtime.*/
     public static String getDate(String strDay, String strDateFormat) {
         SimpleDateFormat formatter = new SimpleDateFormat(strDateFormat);
         int day = 0;
@@ -133,6 +140,8 @@ public class DateUtil {
         return strDate;
     }
 
+    /** This method is used for getting the CurrentDateByTimeZone in your system runtime.*/
+
     public static String getCurrentDateByTimeZone(String strDateFormat, String strTimeZone) {
 
         Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
@@ -143,6 +152,7 @@ public class DateUtil {
         return currentDate;
     }
 
+    /** This method is used for getting the DayAfterTommorrowDate in your system runtime.*/
     public static String getDayAfterTommorrowDate(String strFormat) {
         DateFormat dateFormat = new SimpleDateFormat(strFormat);
         Date date = new Date();

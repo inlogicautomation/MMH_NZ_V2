@@ -55,8 +55,11 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'My Home page') or contains(text(),'Welcome') or contains(text(),'Start managing your health, today')]")
     protected WebElement elmntVerifyHomePage;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
-    protected WebElement elmntDashBoard;
+    @FindBy(how = How.XPATH, using = "//a/span[contains(text(),'Dashboard')]")
+    protected WebElement elmntDashboard;
+
+    @FindBy(xpath = "//h1[contains(text(),'Welcome')]//span[contains(text(),'Christopher Michael!')]")
+    protected WebElement txtWelcome;
 
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")
     protected WebElement btnMobileMenu;
@@ -131,22 +134,39 @@ public class HomePage extends BasePage {
 
     public void clickSignInButton() {
         waitForSeconds(3);
-        waitForElement(SignInBtn);
-        jsClick(SignInBtn);
-        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        if (verifyElement(SignInBtn)) {
+//            waitForElement(SignInBtn);
+            waitForSeconds(3);
+            jsClick(SignInBtn);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        } else if (!verifyElement(SignInBtn)) {
+            System.out.println("user already in the home page");
+        }
     }
 
 
     public void visit() {
-        visit(TestDataUtil.getValue("&URL&"));
-        takeScreenshot(driver);
-        waitForSeconds(5);
+        int WindowsCount = driver.getWindowHandles().size();
+        System.out.println(">>>>>>>>>>>>>>>>>>>>" + WindowsCount);
+        if (WindowsCount == 2) {
+            focusWindow(1);
+        }
+        if (WindowsCount == 1) {
+            visit(TestDataUtil.getValue("&URL&"));
+            takeScreenshot(driver);
+            waitForSeconds(5);
+        }
     }
 
     public void enterPasswordForBeta(String strPassword) {
-//        waitForElement(txtBoxPassword);
-        waitForElementClickable(txtBoxPassword);
-        enterValue(txtBoxPassword, strPassword);
+        if (verifyElement(txtBoxPassword)) {
+            waitForElementClickable(txtBoxPassword);
+            enterValue(txtBoxPassword, strPassword);
+        }
+        if (!verifyElement(txtBoxPassword)) {
+            System.out.println("User here in home page");
+        }
+
     }
 
     public void enterEmail(String strEmail) {
@@ -169,9 +189,19 @@ public class HomePage extends BasePage {
 
 
     public void enterEmailForBeta(String strEmail) {
-        waitForElement(txtBoxEmail);
-        waitForElementClickable(txtBoxEmail);
-        enterValue(txtBoxEmail, strEmail);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(3);
+        if (verifyElement(txtBoxEmail)) {
+            waitForSeconds(3);
+            waitForElementClickable(txtBoxEmail);
+            enterValue(txtBoxEmail, strEmail);
+        }
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(3);
+        if (!verifyElement(txtBoxEmail)) {
+            System.out.println("User here in home page");
+        }
+
     }
 
     public void enterpassword(String strPassword) {
@@ -188,13 +218,17 @@ public class HomePage extends BasePage {
     public boolean clickBetaLoginButton() {
         boolean blResult = false;
         try {
-//            waitForElement(ClickPatientLoginBtn);
-//            jsClick(ClickPatientLoginBtn);
-            waitForSeconds(3);
-                        waitForElement(betaLoginBtn);
-            jsClick(betaLoginBtn);
-
-            blResult = true;
+            int WindowsCount = driver.getWindowHandles().size();
+            System.out.println(">>>>>>>>>>>>>>>>>>>>" + WindowsCount);
+            if (WindowsCount == 1) {
+                waitForElement(betaLoginBtn);
+                click(betaLoginBtn);
+                blResult = true;
+            }
+            if (WindowsCount == 2) {
+                focusWindow(1);
+                System.out.println("user in Provider Home Page");
+            }
             System.out.println("Try Block 1 executed");
         } catch (Exception e) {
             try {
@@ -225,7 +259,7 @@ public class HomePage extends BasePage {
         strBrowserName = cap.getBrowserName();
         strBrowserVersion = cap.getVersion();
         try {
-            strSystemName= InetAddress.getLocalHost().getHostName();
+            strSystemName = InetAddress.getLocalHost().getHostName();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -236,28 +270,30 @@ public class HomePage extends BasePage {
     public boolean navigateToHomePage() {
         boolean blResult = false;
         try {
-            refreshPage();
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(elmntLogo);
-            waitForElementClickable(elmntLogo);
-            click(elmntLogo);
-            refreshPage();
-            waitForSeconds(3);
-            String pageTitle = driver.getTitle();
-            System.out.println("pageTitle >>> : " + pageTitle);
-            try {
-                pageTitle.equalsIgnoreCase("PostRegistration");
-
-                System.out.println("User on the ProviderHomePage and Verified the ProviderHomePage >>>>");
-                blResult = true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("User not in the ProviderHomePage >>>>");
+//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            if (isElementDisplayed(txtWelcome)) {
+                verifyElement(elmntDashboard);
+                waitForElementClickable(elmntDashboard);
+                jsClick(elmntDashboard);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForElement(txtWelcome);
+                blResult = verifyElement(txtWelcome);
             }
-
+            if (!isElementDisplayed(txtWelcome)) {
+                focusWindow(2);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForElement(elmntDashboard);
+                waitForElementClickable(elmntDashboard);
+                click(elmntDashboard);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                blResult = verifyElement(txtWelcome);
+                System.out.println("User on the Patient HomePage and Verified>>>>");
+            }
+            return blResult;
 
         } catch (Exception e) {
-            System.out.println("Failed to Navigate the ProviderHomePage >>>>");
+            System.out.println("User not Navigated to Patient Portal");
+
             e.printStackTrace();
         }
         return blResult;
@@ -321,7 +357,7 @@ public class HomePage extends BasePage {
 
     public boolean clickAppointmentsExpandIcon() {
         waitForSeconds(3);
-        waitForElement(elmntDashBoard);
+        waitForElement(elmntDashboard);
         waitForElement(btnAppointmentExpand);
         jsClick(btnAppointmentExpand);
         return verifyElement(elmntFutureAppointment);
@@ -334,8 +370,8 @@ public class HomePage extends BasePage {
         waitForElementClickable(btnMobileMenu);
         jsClick(btnMobileMenu);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        waitForElement(elmntDashBoard);
-        click(elmntDashBoard);
+        waitForElement(elmntDashboard);
+        click(elmntDashboard);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         driver.navigate().refresh();
@@ -346,8 +382,9 @@ public class HomePage extends BasePage {
     public boolean clickDashBoard() {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(2);
-        waitForElement(elmntDashBoard);
-        jsClick(elmntDashBoard);
+        jsScrollIntoView(elmntDashboard);
+        waitForElement(elmntDashboard);
+        jsClick(elmntDashboard);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         driver.navigate().refresh();
@@ -359,8 +396,8 @@ public class HomePage extends BasePage {
         boolean isVerified = false;
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             takeScreenshot(driver);
-            waitForElement(elmntDashBoard);
-            click(elmntDashBoard);
+            waitForElement(elmntDashboard);
+            click(elmntDashboard);
             waitForSeconds(3);
             jsClick(btnExitApp);
             waitForSeconds(180);
@@ -396,10 +433,9 @@ public class HomePage extends BasePage {
     }
 
 
-
     public boolean clickMesagesExpandIcon() {
         waitForSeconds(3);
-        waitForElement(elmntDashBoard);
+        waitForElement(elmntDashboard);
         waitForElement(btnMessagesExpand);
         jsClick(btnMessagesExpand);
         return verifyElement(elmntFutureAppointment);

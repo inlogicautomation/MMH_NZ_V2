@@ -31,10 +31,14 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by codoid-pc on 6/20/2018.
  */
+
+
 public class DriverUtil {
 
     public static DesiredCapabilities capability = null;
 
+
+/**    get driver(String URL) Attempts to locate a driver that understands the given URL. */
     public static WebDriver getDriver() {
 
         WebDriver driver = null;
@@ -70,6 +74,10 @@ public class DriverUtil {
         return driver;
     }
 
+//    The getMobileDriver method used to
+
+    /** The getMobileDriver method is used for getting Variable ExecutionType the in your system runtime.Like MobileView,Mobile*/
+
     public static WebDriver getMobileDriver() {
         WebDriver driver = null;
         String strExecutionType = System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "");
@@ -99,7 +107,7 @@ public class DriverUtil {
         return driver;
     }
 
-
+    /** To determine which platform will run your script, use the getLocalDriver method. Like Chrome,Edge.*/
     private static WebDriver getLocalDriver(String strBrowserName) {
         WebDriver driver = null;
         String strExecutionView = System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "");
@@ -169,6 +177,7 @@ public class DriverUtil {
         return driver;
     }
 
+/**   we can use the setCapability method from the DesiredCapabilities class to set the different types of capabilities of the browser.*/
 
     public static DesiredCapabilities getCapability(String strExecutionType, String strConfig, String strBrowser) {
         DesiredCapabilities capability = new DesiredCapabilities();
@@ -420,6 +429,7 @@ public class DriverUtil {
         return driver;
     }
 
+    /**   safari Capabilities are options for customising and configuring a SafariDriver session..*/
     public static DesiredCapabilities safariCapabilities() {
         String strWorkingDirectory = System.getProperty("user.dir");
         String strDownloadLocation = new StringBuilder(strWorkingDirectory)
@@ -440,7 +450,7 @@ public class DriverUtil {
 
         return capabilities;
     }
-
+/**   Chrome Capabilities are options for customising and configuring a ChromeDriver session..*/
     public static ChromeOptions chromeCapabilities() {
 
         String strWorkingDirectory = System.getProperty("user.dir");
@@ -474,6 +484,8 @@ public class DriverUtil {
         return options;
     }
 
+    /**   It is used to control the behavior of FirefoxIt is used to define options which control how Firefox gets started and run.*/
+
     public static FirefoxOptions firefoxOptions() throws Exception {
         FirefoxOptions options = new FirefoxOptions();
         String strWorkingDirectory = System.getProperty("user.dir");
@@ -506,7 +518,7 @@ public class DriverUtil {
         options.addPreference("browser.download.manager.closeWhenDone", false);
         return options;
     }
-
+/**    Gets or sets a value indicating whether to clear the Internet Explorer cache before launching the browser.*/
     public static InternetExplorerOptions ieCapabilities() {
         InternetExplorerOptions options = new InternetExplorerOptions();
 
@@ -530,6 +542,7 @@ public class DriverUtil {
         return options;
     }
 
+/**   ChromeOptions is a class in Selenium which is used to set the capability and customization and configuration of the ChromeDriver session as well.*/
     public static ChromeOptions chromeCapabilitiesForMobileView() {
         String strWorkingDirectory = System.getProperty("user.dir");
         String strDownloadLocation = new StringBuilder(strWorkingDirectory)
@@ -557,7 +570,7 @@ public class DriverUtil {
         cap.setCapability(ChromeOptions.CAPABILITY, options);
         return options;
     }
-
+    /**   ChromeOptions is a class in Selenium which is used to set the capability and customization and configuration of the ChromeDriver session as well.*/
     public static ChromeOptions chromeCapabilitiesForTabletView() {
         String strWorkingDirectory = System.getProperty("user.dir");
         String strDownloadLocation = new StringBuilder(strWorkingDirectory)
