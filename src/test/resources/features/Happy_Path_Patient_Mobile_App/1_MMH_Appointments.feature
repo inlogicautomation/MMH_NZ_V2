@@ -1,6 +1,6 @@
     Feature: Mobile_Appointments_Scenarios
 
-  @MOBILE @RELAUNCH @Mobile_Appointment @HAPPY_PATH_MOBILE @Test
+  @MOBILE @RELAUNCH @Mobile_Appointment @HAPPY_PATH_MOBILE @Test1
   Scenario Outline: S1 - User login with valid credential and verifies MMH Home screen
 
     Given I am on MMH Login screen

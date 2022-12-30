@@ -54,6 +54,12 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'All Sources')]/ancestor::mat-form-field//span[text()]")
     protected WebElement elmntFilterdropPrescriptions;
 
+    @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Entries From Health Centre(s)')]//preceding::input[@class='mat-radio-input cdk-visually-hidden'])[2]")
+    protected WebElement elmntEntriesfromhealthcentreRadioButton;
+
+    @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Entries From Health Centre(s)')]//preceding::input[@class='mat-radio-input cdk-visually-hidden'])[1]")
+    protected WebElement elmntMyEntriesRadioButton;
+
     @FindBy(how = How.XPATH, using = "//mat-option//child::span[normalize-space(text())='My Entries']")
     protected WebElement elmntFilterdropMyEntries;
     protected String elmntFilterbyDrop = new StringBuilder().append("//mat-option//child::span[normalize-space(text())='")
@@ -749,17 +755,41 @@ public class MyHealthRecordsPage extends BasePage {
         jsClick(btnMyHealthRecordsExpand);
     }
 
-    public boolean selectFilterbyIsFor(String strFamilyMember) {
+    public boolean selectEntriesFromHealthCentre(String strFamilyMember) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(2);
-            waitForElementClickable(elmntFilterdropPrescriptions);
-            waitForSeconds(2);
-            jsClick(elmntFilterdropPrescriptions);
-            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
-            jsClick(elmntEntriesFromHealthCentre);
+//            waitForSeconds(2);
+//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//            waitForSeconds(2);
+//            waitForElementClickable(elmntFilterdropPrescriptions);
+//            waitForSeconds(2);
+//            jsClick(elmntFilterdropPrescriptions);
+//            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
+//            jsClick(elmntEntriesFromHealthCentre);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
+
+
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectMyEntriesRadioButton() {
+        boolean blResult = false;
+        try {
+//            waitForSeconds(2);
+//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//            waitForSeconds(2);
+//            waitForElementClickable(elmntFilterdropPrescriptions);
+//            waitForSeconds(2);
+//            jsClick(elmntFilterdropPrescriptions);
+//            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
+//            jsClick(elmntEntriesFromHealthCentre);
+            jsClick(elmntMyEntriesRadioButton);
+
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -3428,6 +3458,7 @@ public class MyHealthRecordsPage extends BasePage {
 //        strVisitedName = strCreatedRecord;
             WebElement btnEdit = waitForElement(By.xpath(elmntPrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
             click(btnEdit);
+
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             String strMedicationName = strCreatedRecord.concat(strExecutionID);

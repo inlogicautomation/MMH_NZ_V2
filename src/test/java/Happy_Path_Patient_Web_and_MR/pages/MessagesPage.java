@@ -575,6 +575,9 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Send message')]//parent::span[@class='mat-button-wrapper'])[1]")
     protected WebElement btnReplySendMessage;
 
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='Subject'])[1]")
+    protected WebElement btnReplySendMessageSubject;
+
     @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator btn-primary-pill mat-button mat-button-base'])[1]")
     protected WebElement btnReplysendMessage;
 //    (//span[contains(text(),'Send message')])[1]
@@ -1138,11 +1141,12 @@ public class MessagesPage extends BasePage {
     public boolean clickReplySendMessage() {
         boolean blResult = false;
         try {
-            waitForElement(btnReplySendMessage);
+            jsClick(btnReplySendMessageSubject);
+            waitForSeconds(2);
             jsScrollDown();
             jsScrollIntoView(btnReplySendMessage);
-            waitForElementClickable(btnReplySendMessage);
-            click(btnReplySendMessage);
+            waitForElement(btnReplySendMessage);
+            jsClick(btnReplySendMessage);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementToAppear(driver,By.xpath(btnSentSuccessfullyPopup1));
             waitForElement(btnSentSuccessfullyPopup);
@@ -1570,7 +1574,7 @@ public class MessagesPage extends BasePage {
 //                robotKeyRelease(KeyEvent.VK_V);
 //                robotKeyRelease(KeyEvent.VK_CONTROL);
                 waitForSeconds(2);
-                txtBoxMessages.click();
+                click(txtBoxMessages);
                 waitForSeconds(2);
                 driver.switchTo().activeElement().clear();
                 waitForSeconds(2);
@@ -1606,7 +1610,7 @@ public class MessagesPage extends BasePage {
 //                robotKeyRelease(KeyEvent.VK_V);
 //                robotKeyRelease(KeyEvent.VK_CONTROL);
                 waitForSeconds(2);
-                txtBoxMessages.click();
+                click(txtBoxMessages);
                 waitForSeconds(2);
                 driver.switchTo().activeElement().clear();
                 waitForSeconds(2);
@@ -2541,7 +2545,7 @@ public class MessagesPage extends BasePage {
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
 
-//            driver.switchTo().frame(btnFocusFrame);
+            driver.switchTo().frame(btnFocusFrame);
 //            waitForSeconds(2);
 //            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 //            robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
@@ -2562,6 +2566,7 @@ public class MessagesPage extends BasePage {
             btnWriteMessage.click();
             waitForSeconds(2);
             driver.switchTo().activeElement().sendKeys(strConditionName);
+            driver.switchTo().parentFrame();
         }
     }
 

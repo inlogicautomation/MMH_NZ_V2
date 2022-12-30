@@ -962,20 +962,20 @@ public class WebSteps {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
             demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
             demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
             demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
         }
 
     }
@@ -1054,7 +1054,7 @@ public class WebSteps {
         List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
         demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes();
-        Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+        Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
     }
 
     @Then("I should see all the Clinic Notes Entries From Health center Medicine Details in a grid view")
@@ -1134,19 +1134,19 @@ public class WebSteps {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
             demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             List<String> lstAllergiesDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
             demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(lstAllergiesDetails.get(0))));
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAllergiesDetails.get(0))));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             List<String> lstAllergiesDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
             demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(lstAllergiesDetails.get(0))));
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAllergiesDetails.get(0))));
         }
 
     }
@@ -1225,7 +1225,7 @@ public class WebSteps {
         List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
         demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations();
-        Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+        Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
     }
 
 
@@ -1511,7 +1511,7 @@ public class WebSteps {
 
     @When("I select {string} filter dropdown")
     public void iSelectFilterDropdown(String strOption) {
-        Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(strOption)));
+        Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectMyEntriesRadioButton());
 
     }
 
@@ -2086,19 +2086,19 @@ public class WebSteps {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
             demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
             demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
             demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectFilterbyIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
         }
     }
 
