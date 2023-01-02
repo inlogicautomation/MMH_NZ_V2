@@ -58,7 +58,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a/span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashboard;
 
-    @FindBy(xpath = "//h1[contains(text(),'Welcome')]//span[contains(text(),'Christopher Michael!')]")
+    @FindBy(xpath = "//h1[contains(text(),'Welcome')]")
     protected WebElement txtWelcome;
 
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")
@@ -278,17 +278,24 @@ public class HomePage extends BasePage {
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForElement(txtWelcome);
                 blResult = verifyElement(txtWelcome);
-            }
-            if (!isElementDisplayed(txtWelcome)) {
-                focusWindow(2);
-                waitForElementDisappear(driver, By.xpath(elmntSpinner));
-                waitForElement(elmntDashboard);
+            }else {
+                jsScrollIntoView(elmntDashboard);
                 waitForElementClickable(elmntDashboard);
-                click(elmntDashboard);
+                jsClick(elmntDashboard);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
-                blResult = verifyElement(txtWelcome);
-                System.out.println("User on the Patient HomePage and Verified>>>>");
+               refreshPage();
+                blResult =verifyElement(txtWelcome);
             }
+//            if (!isElementDisplayed(txtWelcome)) {
+//                focusWindow(2);
+//                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//                waitForElement(elmntDashboard);
+//                waitForElementClickable(elmntDashboard);
+//                click(elmntDashboard);
+//                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//                blResult = verifyElement(txtWelcome);
+//                System.out.println("User on the Patient HomePage and Verified>>>>");
+//            }
             return blResult;
 
         } catch (Exception e) {

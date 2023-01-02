@@ -11,7 +11,7 @@ import static Happy_Path_Patient_Web_and_MR.pages.HomePage.*;
 
 @CucumberOptions(features = {"src/test/resources/features/Happy_Path_Patient_Web_and_MR"},
         monochrome = true,
-        tags = "@HAPPY_PATH",
+        tags = "@APPOINTMENTS",
         glue = {"Happy_Path_Patient_Web_and_MR"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

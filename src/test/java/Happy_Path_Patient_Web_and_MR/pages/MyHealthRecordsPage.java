@@ -303,9 +303,9 @@ public class MyHealthRecordsPage extends BasePage {
 
     protected String StrShareDoctorCOVIDImmunisationsIconLocator = new StringBuilder()
             .append("(//td[contains(text(),'")
-            .append("<<REPLACEMENT1>>").append("')]/following-sibling::td[contains(text(),'")
-            .append("<<REPLACEMENT2>>").append("')]/following-sibling::td/button[contains(@class,'mat-button')])[1]").toString();
-
+            .append("<<REPLACEMENT1>>").append("')]//following-sibling::td/span[contains(text(),'")
+            .append("<<REPLACEMENT2>>").append("')]//following::td//following::td/button[contains(@class,'mat-button')])[1]").toString();
+//(//td[contains(text(),'30 Dec 2022')]//following-sibling::td/span[contains(text(),'Comirnaty, COVID-19 mRNA (Pfizer-BioNTech)')]//following::td//following::td/button[contains(@class,'mat-button')])[1]
 
     protected String StrShareDoctorImmunisationsIconLocator = new StringBuilder()
             .append("//td[contains(text(),'")
@@ -609,9 +609,9 @@ public class MyHealthRecordsPage extends BasePage {
     protected String elmntEdit = new StringBuilder().append("//td[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]//parent::tr//button[contains(@class,'edit')]").toString();
 
-    protected String elmntCovidEdit = new StringBuilder().append("//td[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')]//parent::tr//button[contains(@class,'edit')]").toString();
-
+    protected String elmntCovidEdit = new StringBuilder().append("//td//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]//following::td//following::td//button[contains(@class,'edit')]").toString();
+    //td//span[contains(text(),'Comirnaty, COVID-19 mRNA (Pfizer-BioNTech)')]//following::td//following::td//button[contains(@class,'edit')]
     protected String elmntPrescriptionsEdit = new StringBuilder().append("//td[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]//parent::tr//button[contains(@class,'edit')]").toString();
 
@@ -631,7 +631,12 @@ public class MyHealthRecordsPage extends BasePage {
             .append("<<REPLACEMENT2>>").append("')]").toString();
 
     protected String elmntDelete = new StringBuilder().append("//td[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')]//parent::tr//button[contains(@class,'remove')]").toString();
+            .append("<<REPLACEMENT>>").append("')]//following::td//following::td//button[contains(@class,'remove')]").toString();
+
+    protected String elmntImmunisationDelete = new StringBuilder().append("//td[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]//following::td//button[contains(@class,'remove')]").toString();
+
+    //td//span[contains(text(),'Comirnaty, COVID-19 mRNA (Pfizer-BioNTech)')]//following::td//following::td//button[contains(@class,'remove')]
 
     protected String elmntVerifyDelete = new StringBuilder().append("//td[text()='")
             .append("<<REPLACEMENT>>").append("']").toString();
@@ -662,7 +667,7 @@ public class MyHealthRecordsPage extends BasePage {
 
 
     protected String elmntCovidImmunisationsDrop = new StringBuilder().append("(//span[text()='")
-            .append("<<REPLACEMENT>>").append("'])[2]").toString();
+            .append("<<REPLACEMENT>>").append("'])[1]").toString();
 
     protected String elmntAddAllergicDrop = new StringBuilder().append("//span[@class='mat-option-text'][contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
@@ -787,7 +792,8 @@ public class MyHealthRecordsPage extends BasePage {
 //            jsClick(elmntFilterdropPrescriptions);
 //            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
 //            jsClick(elmntEntriesFromHealthCentre);
-            jsClick(elmntMyEntriesRadioButton);
+//            jsClick(elmntMyEntriesRadioButton);
+//            doubleClick(driver,elmntMyEntriesRadioButton);
 
 
             blResult = true;
@@ -2118,7 +2124,7 @@ public class MyHealthRecordsPage extends BasePage {
     }
 
     public void enterCovidImmunisationBatchNo(String strVisitedName) {
-        waitForSeconds(3);
+        waitForSeconds(5);
         waitForElement(elmntCovidImmunisationBatchNo);
         enterValue(elmntCovidImmunisationBatchNo, strVisitedName);
     }
@@ -2876,6 +2882,7 @@ public class MyHealthRecordsPage extends BasePage {
 
     public void clickCovidAddRecord() {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            refreshPage();
             waitForSeconds(3);
             waitForElementClickable(btnCovidAddRecord);
             jsClick(btnCovidAddRecord);
@@ -3088,24 +3095,27 @@ public class MyHealthRecordsPage extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForSeconds(3);
             driver.navigate().refresh();
-            waitForSeconds(3);
-            waitForElementClickable(elmntFilterdropPrescriptions);
-            jsClick(elmntFilterdropPrescriptions);
+//            waitForSeconds(3);
+//            waitForElementClickable(elmntFilterdropPrescriptions);
+//            jsClick(elmntFilterdropPrescriptions);
             waitForSeconds(2);
-            waitForElement(elmntFilterdropMyEntries);
-            jsClick(elmntFilterdropMyEntries);
+            waitForElement(elmntMyEntriesRadioButton);
+            jsClick(elmntMyEntriesRadioButton);
+            waitForSeconds(2);
+            waitForElement(elmntMyEntriesRadioButton);
+            jsClick(elmntMyEntriesRadioButton);
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
 
             waitForSeconds(3);
             driver.navigate().refresh();
-            waitForSeconds(3);
-            waitForElementClickable(elmntFilterdropPrescriptions);
-            jsClick(elmntFilterdropPrescriptions);
+//            waitForSeconds(3);
+//            waitForElementClickable(elmntFilterdropPrescriptions);
+//            jsClick(elmntFilterdropPrescriptions);
             waitForSeconds(2);
-            waitForElement(elmntFilterdropMyEntries);
-            jsClick(elmntFilterdropMyEntries);
+            waitForElement(elmntMyEntriesRadioButton);
+            jsClick(elmntMyEntriesRadioButton);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
 
@@ -3655,6 +3665,48 @@ public class MyHealthRecordsPage extends BasePage {
         }
     }
 
+    public void clickImmuDelete(String strCreatedRecord) {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            String strMedicationName = strCreatedRecord.concat(strExecutionID);
+//          strVisitedName = strCreatedRecord;
+            waitForSeconds(2);
+            WebElement btnDelete = waitForElement(By.xpath(elmntImmunisationDelete.replace("<<REPLACEMENT>>", strMedicationName)));
+            waitAndClick(btnDelete);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(5);
+            waitForElementClickable(btnYes);
+            waitAndClick(btnYes);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            String strMedicationName = strCreatedRecord.concat(strExecutionID);
+            WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
+            jsClick(btnEdit);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(4);
+            jsScrollIntoView(btnMobilePrescriptionDelete);
+            waitForElementClickable(btnMobilePrescriptionDelete);
+            jsClick(btnMobilePrescriptionDelete);
+            waitForSeconds(4);
+            waitForElement(btnYes);
+            waitAndClick(btnYes);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            String strMedicationName = strCreatedRecord.concat(strExecutionID);
+            WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
+            jsClick(btnEdit);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(4);
+            jsScrollIntoView(btnMobilePrescriptionDelete);
+            waitForElementClickable(btnMobilePrescriptionDelete);
+            jsClick(btnMobilePrescriptionDelete);
+            waitForSeconds(4);
+            waitForElement(btnYes);
+            waitAndClick(btnYes);
+        }
+    }
+
+
+
     public void clickCovidDelete(String strCreatedRecord) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -3734,7 +3786,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntCovidImmunisationsdrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntCovidImmunisationsDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             System.out.println(">>>>>>>>>>>>>>>>>>>>elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
-            jsClick(elmntEntriesFromHealthCentre);
+            mouseClick(elmntEntriesFromHealthCentre);
 
             blResult = true;
         } catch (Exception e) {
