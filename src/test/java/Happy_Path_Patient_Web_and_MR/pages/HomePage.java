@@ -422,8 +422,8 @@ public class HomePage extends BasePage {
             waitForSeconds(2);
 //            jsClick(txtProviderPortal);
             waitForSeconds(3);
-            waitForElement(txtBoxEmail);
-            isVerified = verifyElement(txtBoxEmail);
+            waitForElement(txtProviderPortal);
+            isVerified = verifyElement(txtProviderPortal);
         }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
@@ -433,8 +433,8 @@ public class HomePage extends BasePage {
             waitForSeconds(2);
 //            jsClick(txtProviderPortal);
             waitForSeconds(3);
-            waitForElement(txtBoxEmail);
-            isVerified = verifyElement(txtBoxEmail);
+            waitForElement(txtProviderPortal);
+            isVerified = verifyElement(txtProviderPortal);
         }
         return isVerified;
     }

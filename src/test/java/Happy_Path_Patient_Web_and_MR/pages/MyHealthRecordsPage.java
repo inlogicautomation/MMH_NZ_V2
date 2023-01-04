@@ -468,7 +468,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Add Record')]//parent::button")
     protected WebElement btnAddRecord;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(@class,'mb-flo-wrp icon-immunisation-add mobile-view')]//span//child::img")
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'mb-flo-wrpi mobile-view')]//span//child::img")
     protected WebElement btnMobileImmunisationAddRecord;
 
     @FindBy(how = How.XPATH, using = "//i[contains(@class,'icon-cent-add-plus-add icon-white')]")
@@ -477,7 +477,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),' Add COVID Immunisation ')]//parent::button")
     protected WebElement btnCovidAddRecord;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(@class,'mb-flo-wrp settings-btn-float icon-immunisation-covid mobile-view')]//span//child::img")
+    @FindBy(how = How.XPATH, using = "(//div[contains(@class,'mobile-view')]//span//child::img)[2]")
     protected WebElement btnMobileCovidAddRecord;
 
     @FindBy(how = How.XPATH, using = "//mat-dialog-actions//span[text()='Save']")
