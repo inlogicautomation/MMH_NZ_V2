@@ -2300,11 +2300,15 @@ public class WebSteps {
 
     @Given("As a Existing user I am on HomePage and navigate to Compose Message")
     public void asAExistingUserIAmOnHomePageAndNavigateToComposeMessage() {
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoardForMobile());
+            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessage());

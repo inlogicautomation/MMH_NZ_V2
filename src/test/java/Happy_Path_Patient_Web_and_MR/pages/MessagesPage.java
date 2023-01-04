@@ -524,14 +524,14 @@ public class MessagesPage extends BasePage {
     protected WebElement btnReplyfocusframe;
 
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Attach Files')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Attach Files')]/parent::button")
     protected WebElement btnAttachClick;
 
     protected String strFloorplanFilePath = new StringBuilder().append(System.getProperty("user.dir")).append(File.separator).append(Constants.CONFIG_FOLDER).append(File.separator)
             .append(Constants.IMAGES_FOLDER).append(File.separator)
             .append("<<FILENAME>>").toString();
 
-    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='Attachment']")
+    @FindBy(how = How.XPATH, using = "//div[text()='ADD Files ']")
     protected WebElement btnFloorplanUpload;
 
     @FindBy(how = How.XPATH, using = "//input[@type='file']")
@@ -2095,11 +2095,13 @@ public class MessagesPage extends BasePage {
         try {
             System.out.println("strSubject >>> :: " + TestDataUtil.getValue(strSubject));
             waitForSeconds(2);
+            jsScrollIntoView(txtBoxSubjectPatient);
+            waitForSeconds(2);
             waitForElement(txtBoxSubjectPatient);
             waitForElementClickable(txtBoxSubjectPatient);
-            txtBoxSubjectPatient.clear();
+//            txtBoxSubjectPatient.clear();
             waitForSeconds(2);
-            txtBoxSubjectPatient.click();
+            jsClick(txtBoxSubjectPatient);
             waitForSeconds(1);
             txtBoxSubjectPatient.sendKeys(TestDataUtil.getValue(strSubject));
             takeScreenshot(driver);
@@ -2436,7 +2438,7 @@ public class MessagesPage extends BasePage {
             jsClick(btnRole);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntRole.replace("<<REPLACEMENT>>", strFamilyMember)));
-            waitForSeconds(1);
+            waitForSeconds(3);
             waitForElementClickable(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -2479,6 +2481,7 @@ public class MessagesPage extends BasePage {
 
     public void clickCheckBox() {
         waitForSeconds(3);
+        jsScrollDown();
         if (verifyElement(btnCheckBox)) {
             jsScrollIntoView(btnCheckBox);
             jsClick(btnCheckBox);
@@ -2576,10 +2579,11 @@ public class MessagesPage extends BasePage {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
 
                 waitForSeconds(3);
-                jsScrollUp();
+                jsScrollIntoView(btnAttachClick);
+                waitForSeconds(3);
                 jsClick(btnAttachClick);
                 waitForSeconds(2);
-                jsClick(btnFloorplanUpload);
+                mouseClick(btnFloorplanUpload);
                 waitForSeconds(4);
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.setCapability("autoGrantPermissions", "true");
@@ -2607,11 +2611,13 @@ public class MessagesPage extends BasePage {
                     waitForSeconds(3);
                     click(optDownloads);
                 }
-                if (System.getProperty("deviceName").equalsIgnoreCase("Samsung Galaxy S21")) {
+                if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy A13")) {
                     waitForSeconds(3);
-                    click(WhileUsingTheApp);
+                    mouseClick(WhileUsingTheApp);
                     waitForSeconds(3);
-                    click(FileIcon);
+                    mouseClick(WhileUsingTheApp);
+                    waitForSeconds(3);
+                    mouseClick(FileIcon);
 
                 }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Motorola One Fusion+")){
