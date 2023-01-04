@@ -536,14 +536,18 @@ public class WebSteps {
 
     @Given("As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription")
     public void NavigateToRepeatMedicationPage() {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
 
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
 //        Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
-        Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
+            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
+        }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoardForMobile());
+            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToRequestNewScript());
@@ -1718,7 +1722,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterClassiAdditionalInformation(TestDataUtil.getValue(listCreateData.get(2)));
             demoPageContainer.myHealthRecordsPage.clickMobileConditionCheckBox();
             demoPageContainer.myHealthRecordsPage.clickClassificationsSave();
-            demoPageContainer.myHealthRecordsPage.RefreshPage();
+//            demoPageContainer.myHealthRecordsPage.RefreshPage();
         }
     }
 
@@ -1836,7 +1840,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterPrescriptionAdditionalInformation(TestDataUtil.getValue(listCreateData.get(4)));
             demoPageContainer.myHealthRecordsPage.clickMobilePrescriptionCheckBox();
             demoPageContainer.myHealthRecordsPage.clickPrescriptionSave();
-            demoPageContainer.myHealthRecordsPage.RefreshPage();
+//            demoPageContainer.myHealthRecordsPage.RefreshPage();
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
@@ -1851,7 +1855,7 @@ public class WebSteps {
             demoPageContainer.myHealthRecordsPage.enterPrescriptionAdditionalInformation(TestDataUtil.getValue(listCreateData.get(4)));
             demoPageContainer.myHealthRecordsPage.clickMobilePrescriptionCheckBox();
             demoPageContainer.myHealthRecordsPage.clickPrescriptionSave();
-            demoPageContainer.myHealthRecordsPage.RefreshPage();
+//            demoPageContainer.myHealthRecordsPage.RefreshPage();
 
         }
     }

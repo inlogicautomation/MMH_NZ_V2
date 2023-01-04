@@ -613,7 +613,7 @@ public class MyHealthRecordsPage extends BasePage {
             .append("<<REPLACEMENT>>").append("')]//following::td//following::td//button[contains(@class,'edit')]").toString();
     //td//span[contains(text(),'Comirnaty, COVID-19 mRNA (Pfizer-BioNTech)')]//following::td//following::td//button[contains(@class,'edit')]
     protected String elmntPrescriptionsEdit = new StringBuilder().append("//td[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')]//parent::tr//button[contains(@class,'edit')]").toString();
+            .append("<<REPLACEMENT>>").append("')]//parent::tr//button[contains(@class,'Edit')]").toString();
 
     protected String elmntMobilePrescriptionsEdit = new StringBuilder().append("//h2[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
@@ -623,7 +623,7 @@ public class MyHealthRecordsPage extends BasePage {
 
 //    protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
-    @FindBy(how = How.XPATH, using = "//mat-expansion-panel-header[@aria-expanded='true']//following::div[contains(@style,'visibility: visible')]//button[@class='btn-mobile-text'][text()='edit']")
+    @FindBy(how = How.XPATH, using = "//mat-expansion-panel-header[@aria-expanded='true']//following::div[contains(@style,'visibility: visible')]//button[@class='btn-mobile-text'][text()='Edit']")
     protected WebElement btnMobilePrescriptionsEdit;
 
     protected String elmntEditedLocation = new StringBuilder().append("//td[contains(text(),'")
