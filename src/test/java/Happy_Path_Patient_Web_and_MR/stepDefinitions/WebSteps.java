@@ -2145,11 +2145,15 @@ public class WebSteps {
 
     @Given("As a user I am on HomePage and navigate to Messages Setting")
     public void asAUserIAmOnHomePageAndNavigateToMessagesSetting() {
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoardForMobile());
+            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
@@ -2226,12 +2230,15 @@ public class WebSteps {
 
         List<String> lstStrMessage = TestDataUtil.getListOfValue(strMessage);
         System.out.println("lstStrMessage >>> :: " + lstStrMessage);
-
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoardForMobile());
+            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
@@ -2248,13 +2255,16 @@ public class WebSteps {
 
     @Then("I Should see the Signature Based on {string} entered and signature must get auto populated in Compose mail")
     public void iShouldSeeTheSignatureBasedOnEnteredAndSignatureMustGetAutoPopulatedInComposeMail(String strMessage) {
-
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
             Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessageForMobile());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoardForMobile());
+            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
             Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessageForMobile());
         }
@@ -2342,7 +2352,7 @@ public class WebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
             System.out.println("List Message Details >>> :: " + lstMessageDetails);
-            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+//            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
             Assert.assertTrue(demoPageContainer.messagesPage.navigateToDraftMessage());
             Assert.assertTrue(demoPageContainer.messagesPage.VerifyMobileDraftMessage(TestDataUtil.getListOfValue(strMessageDetails)));
@@ -2373,8 +2383,9 @@ public class WebSteps {
 
         List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
         System.out.println("List Message Details >>> :: " + lstMessageDetails);
-
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
             Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientSentMessage());
@@ -2588,13 +2599,17 @@ public class WebSteps {
     public void iShouldVerifyTheAutomaticReplies(String strMessage) {
         List<String> lstStrMessage = TestDataUtil.getListOfValue(strMessage);
         System.out.println("lstStrMessage >>> :: " + lstStrMessage);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
 
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+//            Assert.assertTrue(demoPageContainer.homePage.clickDashBoardForMobile());
+//            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
@@ -2678,11 +2693,15 @@ public class WebSteps {
 
     @Given("As a user I am on HomePage and navigate to Inbox")
     public void asAUserIAmOnHomePageAndNavigateToInbox() {
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoardForMobile());
+            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientInboxMessage());
@@ -2811,11 +2830,15 @@ public class WebSteps {
 
     @Given("As a user I am on HomePage and navigate to GroupMessage")
     public void asAUserIAmOnHomePageAndNavigateToGroupMessage() {
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoardForMobile());
+            Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
         }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientGroupMessage());

@@ -2099,9 +2099,10 @@ public class MessagesPage extends BasePage {
             waitForSeconds(2);
             waitForElement(txtBoxSubjectPatient);
             waitForElementClickable(txtBoxSubjectPatient);
-//            txtBoxSubjectPatient.clear();
             waitForSeconds(2);
             jsClick(txtBoxSubjectPatient);
+            waitForSeconds(1);
+            txtBoxSubjectPatient.clear();
             waitForSeconds(1);
             txtBoxSubjectPatient.sendKeys(TestDataUtil.getValue(strSubject));
             takeScreenshot(driver);
@@ -2613,11 +2614,11 @@ public class MessagesPage extends BasePage {
                 }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy A13")) {
                     waitForSeconds(3);
-                    mouseClick(WhileUsingTheApp);
+                    click(WhileUsingTheAppForA13);
                     waitForSeconds(3);
-                    mouseClick(WhileUsingTheApp);
+                    click(WhileUsingTheAppForA13);
                     waitForSeconds(3);
-                    mouseClick(FileIcon);
+                    click(FileIcon);
 
                 }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Motorola One Fusion+")){
