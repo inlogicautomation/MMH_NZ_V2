@@ -1,8 +1,7 @@
 package Happy_Path_Provider_Web;
 
-import Happy_Path_Provider_Web.pages.ProviderHomePage;
-import Happy_Path_Provider_Web.pages.RRPScriptFeeSettingsPage;
-import Happy_Path_Provider_Web.pages.RepeatScriptSettingPage;
+import Happy_Path_Patient_Web_and_MR.pages.AppointmentsPage;
+import Happy_Path_Provider_Web.pages.*;
 import cap.utilities.SharedDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -10,6 +9,7 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import Happy_Path_Patient_Web_and_MR.pages.HomePage;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -23,6 +23,11 @@ public class ProviderPageContainer {
 
     public RRPScriptFeeSettingsPage rrpScriptFeeSettingsPage;
 
+    public PreScreeningPage preScreeningPage;
+
+    public AppointmentMessagePage appointmentMessagePage;
+    public AppointmentsPage appointmentsPage;
+    public HomePage homePage;
 
 
 
@@ -36,6 +41,9 @@ public class ProviderPageContainer {
         providerHomePage = new ProviderHomePage(driver);
         repeatScriptSettingPage = new RepeatScriptSettingPage(driver);
         rrpScriptFeeSettingsPage = new RRPScriptFeeSettingsPage(driver);
+        preScreeningPage = new PreScreeningPage(driver);
+        appointmentMessagePage = new AppointmentMessagePage(driver);
+        appointmentsPage = new AppointmentsPage(driver);
     }
 
     @After("@WEB")

@@ -9,10 +9,14 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+import static cap.utilities.SharedDriver.strExecutionID;
+
 public class RRPScriptFeeSettingsPage extends BasePage {
     public RRPScriptFeeSettingsPage(WebDriver driver){
         super(driver);
     }
+
+    public static String SystolicMedicationName = "";
 
     @FindBy(xpath = "//span[contains(text(),'Edit')]")
     protected WebElement elmntRRPScriptInstructionsEditButton;
@@ -37,12 +41,211 @@ public class RRPScriptFeeSettingsPage extends BasePage {
 
     protected String strRRPScriptInstructionsFeeSetupEditAction = new StringBuilder()
             .append("//td[contains(text(),'")
-            .append("<<REPLACEMENT1>>").append("')]//following::td[contains(text(),'")
-            .append("<<REPLACEMENT2>>").append("')]//following::td/button").toString();
+            .append("<<REPLACEMENT1>>").append("')]//following::td//following::td/button").toString();
 
     //mat-label[contains(text(),'Health Centre')]//preceding::mat-select
 
-    //td[contains(text(),'VM04Practice')]//following::td[contains(text(),'Vm04TestProvider')]//following::td/button
+    //td[contains(text(),'VM04Practice')]//following::td//following::td/button
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[1]")
+    protected WebElement  elmntPatienttoCollectScriptCheckBox;
+
+    @FindBy(xpath = "//mat-checkbox[@class='mat-checkbox mat-accent ng-valid ng-dirty ng-touched']//child::input")
+    protected WebElement  elmntUnCheckBox;
+
+
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Urgent/Same day'])[1]")
+    protected WebElement elmntUrgentSamedayServiceoption;
+    //mat-checkbox[@class='mat-checkbox mat-accent ng-valid ng-dirty ng-touched']//child::input
+
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[1]")
+    protected WebElement getElmntUrgentSamedayFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[2]")
+    protected WebElement elmntNextDayCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Next Day'])[1]")
+    protected WebElement elmntNextDayServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[4]")
+    protected WebElement elmntNextDayFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[3]")
+    protected WebElement elmnt48HoursCheckBox;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[7]")
+    protected WebElement elmntSendScriptByPost48HoursCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='48 Hours'])[1]")
+    protected WebElement elmnt48HoursServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='48 Hours'])[1]")
+    protected WebElement elmntSendScriptByPost48HoursServiceoption;
+
+
+
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[7]")
+    protected WebElement elmnt48HoursFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[4]")
+    protected WebElement elmnt72HoursCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='72 Hours'])[1]")
+    protected WebElement elmnt72HoursServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[10]")
+    protected WebElement elmnt72HoursFee;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Fee'])[10]")
+    protected WebElement elmntSendScriptByPost72HoursFee;
+
+
+    @FindBy(xpath = "//span[contains(text(),'Save')] ")
+    protected WebElement elmntSaveButton;
+
+
+    @FindBy(xpath = "//h3[contains(text(),'RRP Script Instructions Fee Setup')]")
+    protected WebElement elmntRRPScriptInstructionsFeeSetupHeader;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[5]")
+    protected WebElement elmntSendScriptbyPostCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Urgent/Same day'])[1]")
+    protected WebElement getElmntSendScriptbyPostUrgentSameday;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Fee'])[1]")
+    protected WebElement getElmntSendScriptbyPostUrgentSamedayFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[6]")
+    protected WebElement elmntSendScriptByPostNextDayCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Next Day'])[1]")
+    protected WebElement elmntSendScriptByPostNextDayServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Fee'])[4]")
+    protected WebElement elmntSendScriptByPostNextDayFee;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Fee'])[7]")
+    protected WebElement elmntSendScriptByPost48HoursFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[8]")
+    protected WebElement elmntSendScriptByPost72HoursCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='72 Hours'])[1]")
+    protected WebElement elmntSendScriptByPost72HoursServiceoption;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[9]")
+    protected WebElement elmntSendScripttoPharmacyCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Urgent/Same day'])[1]")
+    protected WebElement getElmntSendScripttoPharmacyUrgentSameday;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Fee'])[1]")
+    protected WebElement getElmntSendScripttoPharmacyUrgentSamedayFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[10]")
+    protected WebElement elmntSendScriptToPharmacyNextDayCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Next Day'])[1]")
+    protected WebElement elmntSendScriptToPharmacyNextDayServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Fee'])[4]")
+    protected WebElement elmntSendScriptToPharmacyNextDayFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[11]")
+    protected WebElement elmntSendScriptToPharmacy48HoursCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='48 Hours'])[1]")
+    protected WebElement elmntSendScriptToPharmacy48HoursServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Fee'])[7]")
+    protected WebElement elmntSendScriptToPharmacy48HoursFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[12]")
+    protected WebElement elmntSendScriptToPharmacy72HoursCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='72 Hours'])[1]")
+    protected WebElement elmntSendScriptToPharmacy72HoursServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Fee'])[4]")
+    protected WebElement elmntSendScriptToPhamacy72HoursFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[13]")
+    protected WebElement elmntDeliverMedsByPharmacyCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Urgent/Same day'])[1]")
+    protected WebElement getElmntDeliverMedsByPharmacyUrgentSameday;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Fee'])[1]")
+    protected WebElement getElmntDeliverMedsByPharmacyUrgentSamedayFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[14]")
+    protected WebElement elmntDeliverMedsByPharmacyNextDayCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Next Day'])[1]")
+    protected WebElement elmntDeliverMedsPharmacyNextDayServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Fee'])[2]")
+    protected WebElement elmntDeliverMedsByToPharmacyNextDayFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[15]")
+    protected WebElement elmntDeliverMedsByPharmacy48HoursCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='48 Hours'])[1]")
+    protected WebElement elmntDeliverMedsByPharmacy48HoursServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Fee'])[3]")
+    protected WebElement elmntDeliverMedsByPharmacy48HoursFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[16]")
+    protected WebElement elmntDeliverMedsByPharmacy72HoursCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='72 Hours'])[1]")
+    protected WebElement elmntDeliverMedsByPharmacy72HoursServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Fee'])[4]")
+    protected WebElement elmntDeliverMedsByPhamacy72HoursFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[17]")
+    protected WebElement elmntDeliverViaZoomPharmacyCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='Urgent/Same day'])[1]")
+    protected WebElement getElmntDeliverViaZoomPharmacyUrgentSameday;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='Fee'])[1]")
+    protected WebElement getElmntDeliverViaZoomPharmacyUrgentSamedayFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[18]")
+    protected WebElement elmntDeliverViaZoomPharmacyNextDayCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='Next Day'])[1]")
+    protected WebElement elmntDeliverViaZoomPharmacyNextDayServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='Fee'])[2]")
+    protected WebElement elmntDeliverViaZoomPharmacyNextDayFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[19]")
+    protected WebElement elmntDeliverViaZoomPharmacy48HoursCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='48 Hours'])[1]")
+    protected WebElement elmntDeliverViaZoomPharmacy48HoursServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='Fee'])[3]")
+    protected WebElement elmntDeliverViaZoomPharmacy48HoursFee;
+
+    @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[20]")
+    protected WebElement elmntDeliverViaZoomPharmacy72HoursCheckBox;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='72 Hours'])[1]")
+    protected WebElement elmntDeliverViaZoomPharmacy72HoursServiceoption;
+
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Fee'])[4]")
+    protected WebElement elmntDeliverViaZoomPhamacy72HoursFee;
+
+
+
+
+
 
 
     public boolean clickEditButton() {
@@ -50,10 +253,10 @@ public class RRPScriptFeeSettingsPage extends BasePage {
         waitForElementClickable(elmntRRPScriptInstructionsEditButton);
         jsClick(elmntRRPScriptInstructionsEditButton);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        waitForSeconds(2);
+        waitForSeconds(3);
         waitForElementClickable(elmntRRPScriptInstructionsYesButton);
         jsClick(elmntRRPScriptInstructionsYesButton);
-        waitForElement(elmntRRPScriptInstructionsEditButton);
+//        waitForElement(elmntRRPScriptInstructionsEditButton);
         waitForSeconds(3);
         waitForElementClickable(elmntRRPScriptInstructionsSaveButton);
         click(elmntRRPScriptInstructionsSaveButton);
@@ -78,6 +281,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
             waitForSeconds(2);
             jsClick(elmntHealthCentre);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(SelectHealthCentre.replace("<<REPLACEMENT>>", strHealthCentre)));
+            System.out.printf(">>>>>>>>>>>>>>>>>>"+elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
@@ -93,11 +297,12 @@ public class RRPScriptFeeSettingsPage extends BasePage {
         boolean blResult = false;
         try {
             WebElement elmntPrescriptionTableData = waitForElement(By.xpath(strRRPScriptInstructionsFeeSetupEditAction
-                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))));
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))));
+            System.out.printf(">>>>>>>>>>>"+elmntPrescriptionTableData);
             waitForElement(elmntPrescriptionTableData);
             verifyElement(elmntPrescriptionTableData);
             waitForSeconds(3);
+            jsClick(elmntPrescriptionTableData);
             blResult =true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,5 +310,655 @@ public class RRPScriptFeeSettingsPage extends BasePage {
 
         return blResult;
     }
+
+    public boolean clickPatienttoCollectScriptCheckBox() {
+           jsScrollDown();
+        if (elmntPatienttoCollectScriptCheckBox.isDisplayed()){
+//            jsScrollIntoView(elmntPatienttoCollectScriptCheckBox);
+            verifyElement(elmntPatienttoCollectScriptCheckBox);
+            System.out.println("Successfullt Verifly Check Box Checked");
+            return verifyElement(elmntPatienttoCollectScriptCheckBox);
+        }
+          else {
+            waitForElement(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+            System.out.println("Successfully Click Check Box");
+          }
+          return true;
+    }
+
+    public boolean clickServiceOptionUrgentSameday(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(5);
+//        jsScrollIntoView(elmntUrgentSamedayServiceoption);
+        waitForElementClickable(elmntUrgentSamedayServiceoption);
+        enterValue(elmntUrgentSamedayServiceoption, SystolicMedicationName);
+        System.out.println(">>>>>>>>>>>Successfully Enter the UrgentSameDay Name");
+        waitForSeconds(3);
+        return verifyElement(elmntUrgentSamedayServiceoption);
+    }
+    public boolean clickFeeUrgentSameday(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(getElmntUrgentSamedayFee);
+        enterValue(getElmntUrgentSamedayFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(getElmntUrgentSamedayFee);
+    }
+
+    public boolean clickNextDayCheckBox() {
+        if (elmntNextDayCheckBox.isDisplayed()){
+            verifyElement(elmntNextDayCheckBox);
+            System.out.println("Successfullt Verifly Check Box Checked");
+        }
+        else {
+            waitForElement(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+            System.out.println("Successfully Click Check Box");
+        }
+        return true;
+    }
+
+    public boolean clickServiceOptionNextDay(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntNextDayServiceoption);
+        enterValue(elmntNextDayServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntNextDayServiceoption);
+    }
+
+    public boolean clickNextDayFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntNextDayFee);
+        enterValue(elmntNextDayFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntNextDayFee);
+    }
+
+    public boolean click48HoursCheckBox() {
+        if (elmnt48HoursCheckBox.isDisplayed()){
+            verifyElement(elmnt48HoursCheckBox);
+            System.out.println("Successfullt Verifly Check Box Checked");
+        }
+        else {
+            waitForElement(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+            System.out.println("Successfully Click Check Box");
+        }
+
+        return true;
+    }
+
+    public boolean clickServiceOption48Hours(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmnt48HoursServiceoption);
+        enterValue(elmnt48HoursServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmnt48HoursServiceoption);
+    }
+
+    public boolean click48HoursFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmnt48HoursFee);
+        enterValue(elmnt48HoursFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmnt48HoursFee);
+    }
+
+    public boolean click72HoursCheckBox() {
+        if (elmnt72HoursCheckBox.isDisplayed()){
+            verifyElement(elmnt72HoursCheckBox);
+            System.out.println("Successfullt Verifly Check Box Checked");
+        }
+        else {
+            waitForElement(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+            System.out.println("Successfully Click Check Box");
+        }
+        return true;
+    }
+
+    public boolean clickServiceOption72Hours(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmnt72HoursServiceoption);
+        enterValue(elmnt72HoursServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmnt72HoursServiceoption);
+    }
+
+    public boolean click72HoursFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmnt72HoursFee);
+        enterValue(elmnt72HoursFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmnt72HoursFee);
+    }
+
+    public boolean clickSaveButton() {
+        waitForSeconds(3);
+        jsScrollIntoView(elmntSaveButton);
+        waitForElementClickable(elmntSaveButton);
+        jsClick(elmntSaveButton);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(2);
+        return verifyElement(elmntRRPScriptInstructionsFeeSetupHeader);
+    }
+
+    public boolean clickSendScriptbyPostCheckBox() {
+        jsScrollDown();
+        waitForSeconds(2);
+        if (elmntSendScriptbyPostCheckBox.isDisplayed()) {
+            verifyElement(elmntSendScriptbyPostCheckBox);
+            System.out.println("CheckBox Checked");
+        } else {
+            waitForSeconds(3);
+            waitForElementClickable(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+        }
+        return true;
+    }
+
+    public boolean EnterSendScriptByPostUrgentSamedayTextBox(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(getElmntSendScriptbyPostUrgentSameday);
+        enterValue(getElmntSendScriptbyPostUrgentSameday, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(getElmntSendScriptbyPostUrgentSameday);
+    }
+
+    public boolean clickSendScriptByPostFeeUrgentSameday(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(getElmntSendScriptbyPostUrgentSamedayFee);
+        enterValue(getElmntSendScriptbyPostUrgentSamedayFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(getElmntSendScriptbyPostUrgentSamedayFee);
+    }
+
+    public boolean clickSendScriptByPostNextDayCheckBox() {
+//        jsScrollDown();
+//        waitForSeconds(2);
+        if (elmntSendScriptByPostNextDayCheckBox.isDisplayed()) {
+            verifyElement(elmntSendScriptByPostNextDayCheckBox);
+            System.out.println("CheckBox Checked");
+        } else {
+            waitForSeconds(3);
+            waitForElementClickable(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+        }
+
+        return true;
+    }
+
+    public boolean clickSendScriptByPostServiceOptionNextDay(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntSendScriptByPostNextDayServiceoption);
+        enterValue(elmntSendScriptByPostNextDayServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntSendScriptByPostNextDayServiceoption);
+    }
+
+    public boolean clickSendScriptByPostNextDayFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntSendScriptByPostNextDayFee);
+        enterValue(elmntSendScriptByPostNextDayFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntSendScriptByPostNextDayFee);
+    }
+
+    public boolean clickSendScriptByPost48HoursCheckBox() {
+        if (elmntSendScriptByPost48HoursCheckBox.isDisplayed()){
+            verifyElement(elmntSendScriptByPost48HoursCheckBox);
+            System.out.println("Successfullt Verifly Check Box Checked");
+        }
+        else {
+            waitForElement(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+            System.out.println("Successfully Click Check Box");
+        }
+
+        return true;
+    }
+
+    public boolean clickSendScriptByPostServiceOption48Hours(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntSendScriptByPost48HoursServiceoption);
+        enterValue(elmntSendScriptByPost48HoursServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntSendScriptByPost48HoursServiceoption);
+    }
+
+    public boolean clickSendScriptByPost48HoursFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntSendScriptByPost48HoursFee);
+        enterValue(elmntSendScriptByPost48HoursFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntSendScriptByPost48HoursFee);
+    }
+
+    public boolean clickSendScriptByPost72HoursCheckBox() {
+//        jsScrollDown();
+//        waitForSeconds(2);
+        if (elmntSendScriptByPost72HoursCheckBox.isDisplayed()){
+            verifyElement(elmntSendScriptByPost72HoursCheckBox);
+            System.out.println("Successfullt Verifly Check Box Checked");
+        }
+        else {
+            waitForElement(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+            System.out.println("Successfully Click Check Box");
+        }
+        return true;
+    }
+
+    public boolean clickSendScriptPostServiceOption72Hours(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntSendScriptByPost72HoursServiceoption);
+        enterValue(elmntSendScriptByPost72HoursServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntSendScriptByPost72HoursServiceoption);
+    }
+
+    public boolean clickSendScriptByPost72HoursFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntSendScriptByPost72HoursFee);
+        enterValue(elmntSendScriptByPost72HoursFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntSendScriptByPost72HoursFee);
+    }
+
+    public boolean clickSendScripttoPharmacyCheckBox() {
+        jsScrollDown();
+        waitForSeconds(2);
+        if (elmntSendScripttoPharmacyCheckBox.isDisplayed()) {
+            verifyElement(elmntSendScripttoPharmacyCheckBox);
+            System.out.println("CheckBox Checked");
+        } else {
+            waitForSeconds(3);
+            waitForElementClickable(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+        }
+        return true;
+    }
+
+    public boolean EnterSendScripttoPharmacyUrgentSamedayTextBox(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(getElmntSendScripttoPharmacyUrgentSameday);
+        enterValue(getElmntSendScripttoPharmacyUrgentSameday, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(getElmntSendScripttoPharmacyUrgentSameday);
+    }
+
+    public boolean clickSendScriptToPharamacyFeeUrgentSameday(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(getElmntSendScripttoPharmacyUrgentSamedayFee);
+        enterValue(getElmntSendScripttoPharmacyUrgentSamedayFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(getElmntSendScripttoPharmacyUrgentSamedayFee);
+    }
+
+    public boolean clickSendScripttoPharmacyNextDayCheckBox() {
+        if (elmntSendScriptToPharmacyNextDayCheckBox.isDisplayed()) {
+            verifyElement(elmntSendScriptToPharmacyNextDayCheckBox);
+            System.out.println("CheckBox Checked");
+        } else {
+            waitForSeconds(3);
+            waitForElementClickable(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+        }
+
+        return true;
+    }
+
+    public boolean clickSendScriptToPharmacyServiceOptionNextDay(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntSendScriptToPharmacyNextDayServiceoption);
+        enterValue(elmntSendScriptToPharmacyNextDayServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntSendScriptToPharmacyNextDayServiceoption);
+    }
+
+    public boolean clickSendScriptToPharmacyNextDayFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntSendScriptToPharmacyNextDayFee);
+        enterValue(elmntSendScriptToPharmacyNextDayFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntSendScriptToPharmacyNextDayFee);
+    }
+
+    public boolean clickSendScriptToPharmacy48HoursCheckBox() {
+        if (elmntSendScriptToPharmacy48HoursCheckBox.isDisplayed()){
+            verifyElement(elmntSendScriptToPharmacy48HoursCheckBox);
+            System.out.println("Successfullt Verifly Check Box Checked");
+        }
+        else {
+            waitForElement(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+            System.out.println("Successfully Click Check Box");
+        }
+
+        return true;
+    }
+
+    public boolean clickSendScriptToPharmacyServiceOption48Hours(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntSendScriptToPharmacy48HoursServiceoption);
+        enterValue(elmntSendScriptToPharmacy48HoursServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntSendScriptToPharmacy48HoursServiceoption);
+    }
+
+    public boolean clickSendScriptToPharmacy48HoursFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntSendScriptToPharmacy48HoursFee);
+        enterValue(elmntSendScriptToPharmacy48HoursFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntSendScriptToPharmacy48HoursFee);
+    }
+
+    public boolean clickSendScriptToPharmacy72HoursCheckBox() {
+        if (elmntSendScriptToPharmacy72HoursCheckBox.isDisplayed()){
+            verifyElement(elmntSendScriptToPharmacy72HoursCheckBox);
+            System.out.println("Successfullt Verifly Check Box Checked");
+        }
+        else {
+            waitForElement(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+            System.out.println("Successfully Click Check Box");
+        }
+        return true;
+    }
+
+    public boolean clickSendScriptToPharmacyServiceOption72Hours(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntSendScriptToPharmacy72HoursServiceoption);
+        enterValue(elmntSendScriptToPharmacy72HoursServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntSendScriptToPharmacy72HoursServiceoption);
+    }
+
+    public boolean clickSendScriptToPharmacy72HoursFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntSendScriptToPhamacy72HoursFee);
+        enterValue(elmntSendScriptToPhamacy72HoursFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntSendScriptToPhamacy72HoursFee);
+    }
+
+    public boolean clickDeliverMedsbyPharmacyCheckBox() {
+        jsScrollDown();
+        waitForSeconds(2);
+        if (elmntDeliverMedsByPharmacyCheckBox.isDisplayed()) {
+            verifyElement(elmntDeliverMedsByPharmacyCheckBox);
+            System.out.println("CheckBox Checked");
+        } else {
+            waitForSeconds(3);
+            waitForElementClickable(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+        }
+        return true;
+    }
+    public boolean EnterDeliverMedsByPharmacyUrgentSamedayTextBox(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(getElmntDeliverMedsByPharmacyUrgentSameday);
+        enterValue(getElmntDeliverMedsByPharmacyUrgentSameday, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(getElmntDeliverMedsByPharmacyUrgentSameday);
+    }
+
+    public boolean clickDeliverMedsByPharamacyFeeUrgentSameday(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(getElmntDeliverMedsByPharmacyUrgentSamedayFee);
+        enterValue(getElmntDeliverMedsByPharmacyUrgentSamedayFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(getElmntDeliverMedsByPharmacyUrgentSamedayFee);
+    }
+
+    public boolean clickDeliverMedsByPharmacyNextDayCheckBox() {
+        if (elmntDeliverMedsByPharmacyNextDayCheckBox.isDisplayed()) {
+            verifyElement(elmntDeliverMedsByPharmacyNextDayCheckBox);
+            System.out.println("CheckBox Checked");
+        } else {
+            waitForSeconds(3);
+            waitForElementClickable(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+        }
+
+        return true;
+    }
+
+    public boolean clickDeliverMedsByPharmacyServiceOptionNextDay(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntDeliverMedsPharmacyNextDayServiceoption);
+        enterValue(elmntDeliverMedsPharmacyNextDayServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntDeliverMedsPharmacyNextDayServiceoption);
+    }
+
+    public boolean clickDeliverMedsByPharmacyNextDayFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntDeliverMedsByToPharmacyNextDayFee);
+        enterValue(elmntDeliverMedsByToPharmacyNextDayFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntDeliverMedsByToPharmacyNextDayFee);
+    }
+
+    public boolean clickDeliverMedsByToPharmacy48HoursCheckBox() {
+        if (elmntDeliverMedsByPharmacy48HoursCheckBox.isDisplayed()){
+            verifyElement(elmntDeliverMedsByPharmacy48HoursCheckBox);
+            System.out.println("Successfullt Verifly Check Box Checked");
+        }
+        else {
+            waitForElement(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+            System.out.println("Successfully Click Check Box");
+        }
+
+        return true;
+    }
+
+    public boolean clickDeliverMedsByPharmacyServiceOption48Hours(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntDeliverMedsByPharmacy48HoursServiceoption);
+        enterValue(elmntDeliverMedsByPharmacy48HoursServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntDeliverMedsByPharmacy48HoursServiceoption);
+    }
+
+    public boolean clickDeliverMedsByPharmacy48HoursFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntDeliverMedsByPharmacy48HoursFee);
+        enterValue(elmntDeliverMedsByPharmacy48HoursFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntDeliverMedsByPharmacy48HoursFee);
+    }
+
+    public boolean clickDeliverMedsByPharmacy72HoursCheckBox() {
+        if (elmntDeliverMedsByPharmacy72HoursCheckBox.isDisplayed()){
+            verifyElement(elmntDeliverMedsByPharmacy72HoursCheckBox);
+            System.out.println("Successfullt Verifly Check Box Checked");
+        }
+        else {
+            waitForElement(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+            System.out.println("Successfully Click Check Box");
+        }
+        return true;
+    }
+
+    public boolean clickDeliverMedsByPharmacyServiceOption72Hours(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntDeliverMedsByPharmacy72HoursServiceoption);
+        enterValue(elmntDeliverMedsByPharmacy72HoursServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntDeliverMedsByPharmacy72HoursServiceoption);
+    }
+
+    public boolean clickDeliverMedsByPharmacy72HoursFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntDeliverMedsByPhamacy72HoursFee);
+        enterValue(elmntDeliverMedsByPhamacy72HoursFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntDeliverMedsByPhamacy72HoursFee);
+    }
+
+    public boolean clickDeliverviaZoomPharmacyCheckBox() {
+        jsScrollDown();
+        waitForSeconds(2);
+        if (elmntDeliverViaZoomPharmacyCheckBox.isDisplayed()) {
+            verifyElement(elmntDeliverViaZoomPharmacyCheckBox);
+            System.out.println("CheckBox Checked");
+        } else {
+            waitForSeconds(3);
+            waitForElementClickable(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+        }
+        return true;
+    }
+
+    public boolean EnterDeliverViaZoomPharmacyUrgentSamedayTextBox(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(getElmntDeliverViaZoomPharmacyUrgentSameday);
+        enterValue(getElmntDeliverViaZoomPharmacyUrgentSameday, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(getElmntDeliverViaZoomPharmacyUrgentSameday);
+    }
+
+    public boolean clickDeliverViaZoomPharamacyFeeUrgentSameday(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(getElmntDeliverViaZoomPharmacyUrgentSamedayFee);
+        enterValue(getElmntDeliverViaZoomPharmacyUrgentSamedayFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(getElmntDeliverViaZoomPharmacyUrgentSamedayFee);
+    }
+
+    public boolean clickDeliverViaZoomPharmacyNextDayCheckBox() {
+        if (elmntDeliverViaZoomPharmacyNextDayCheckBox.isDisplayed()) {
+            verifyElement(elmntDeliverViaZoomPharmacyNextDayCheckBox);
+            System.out.println("CheckBox Checked");
+        } else {
+            waitForSeconds(3);
+            waitForElementClickable(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+        }
+
+        return true;
+    }
+
+    public boolean clickDeliverViaZoomPharmacyServiceOptionNextDay(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntDeliverViaZoomPharmacyNextDayServiceoption);
+        enterValue(elmntDeliverViaZoomPharmacyNextDayServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntDeliverViaZoomPharmacyNextDayServiceoption);
+    }
+
+
+    public boolean clickDeliverViaZoomPharmacyNextDayFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntDeliverViaZoomPharmacyNextDayFee);
+        enterValue(elmntDeliverViaZoomPharmacyNextDayFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntDeliverViaZoomPharmacyNextDayFee);
+    }
+
+    public boolean clickDeliverViaZoomPharmacy48HoursCheckBox() {
+        if (elmntDeliverViaZoomPharmacy48HoursCheckBox.isDisplayed()){
+            verifyElement(elmntDeliverViaZoomPharmacy48HoursCheckBox);
+            System.out.println("Successfullt Verifly Check Box Checked");
+        }
+        else {
+            waitForElement(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+            System.out.println("Successfully Click Check Box");
+        }
+
+        return true;
+    }
+
+    public boolean clickDeliverViaZoomPharmacyServiceOption48Hours(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntDeliverViaZoomPharmacy48HoursServiceoption);
+        enterValue(elmntDeliverViaZoomPharmacy48HoursServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntDeliverViaZoomPharmacy48HoursServiceoption);
+    }
+
+    public boolean clickDeliverViaZoomPharmacy48HoursFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntDeliverViaZoomPharmacy48HoursFee);
+        enterValue(elmntDeliverViaZoomPharmacy48HoursFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntDeliverViaZoomPharmacy48HoursFee);
+    }
+
+    public boolean clickDeliverViaZoomPharmacy72HoursCheckBox() {
+        if (elmntDeliverViaZoomPharmacy72HoursCheckBox.isDisplayed()){
+            verifyElement(elmntDeliverViaZoomPharmacy72HoursCheckBox);
+            System.out.println("Successfullt Verifly Check Box Checked");
+        }
+        else {
+            waitForElement(elmntUnCheckBox);
+            jsClick(elmntUnCheckBox);
+            System.out.println("Successfully Click Check Box");
+        }
+        return true;
+    }
+
+    public boolean clickDeliverViaZoomPharmacyServiceOption72Hours(String strConditionName) {
+        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntDeliverViaZoomPharmacy72HoursServiceoption);
+        enterValue(elmntDeliverViaZoomPharmacy72HoursServiceoption, SystolicMedicationName);
+        waitForSeconds(3);
+        return verifyElement(elmntDeliverViaZoomPharmacy72HoursServiceoption);
+    }
+
+    public boolean clickDeliverViaZoomPharmacy72HoursFee(String strConditionName) {
+//        SystolicMedicationName = strConditionName.concat(strExecutionID);
+        waitForSeconds(2);
+        waitForElementClickable(elmntDeliverViaZoomPhamacy72HoursFee);
+        enterValue(elmntDeliverViaZoomPhamacy72HoursFee, strConditionName);
+        waitForSeconds(3);
+        return verifyElement(elmntDeliverViaZoomPhamacy72HoursFee);
+    }
+
+
+
 
 }

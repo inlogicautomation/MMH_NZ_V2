@@ -5,22 +5,33 @@ import com.aventstack.extentreports.service.ExtentService;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 import static Happy_Path_Patient_Web_and_MR.pages.HomePage.*;
 import static Happy_Path_Patient_Web_and_MR.pages.HomePage.strSystemName;
 
 @CucumberOptions(features = {"src/test/resources/features/Happy_Path_Provider_Web"},
         monochrome = true,
-        tags = "@PROVIDER_RRP",
+        tags = "@PROVIDER_RRP_SCRIPT_FEE_SETTING",
         glue = {"Happy_Path_Provider_Web", "Happy_Path_Patient_Web_and_MR"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
                 "html:reports/WEB/index.html",
-                "json:reports/WEB/cucumber.json"
+                "json:reports/WEB/cucumber.json",
+                "rerun:target/failedrerun.txt"
 
         })
 
 public class ProviderWebCukes extends AbstractTestNGCucumberTests {
+    @BeforeClass
+    public void Rerun(){
+        System.setProperty("app", "Happy_Path_Provider_Web");
+        System.setProperty("execution_type","browser");
+        System.setProperty("runner","ProviderWebCukes");
+        System.setProperty("browser_name","chrome");
+        System.setProperty("env","PROD");
+
+    }
     @AfterClass
     public void teardown() {
         ExtentService.getInstance().setSystemInfo("Application Name", "V2 Feature Development");
