@@ -613,7 +613,7 @@ public class MyHealthRecordsPage extends BasePage {
             .append("<<REPLACEMENT>>").append("')]//following::td//following::td//button[contains(@class,'edit')]").toString();
     //td//span[contains(text(),'Comirnaty, COVID-19 mRNA (Pfizer-BioNTech)')]//following::td//following::td//button[contains(@class,'edit')]
     protected String elmntPrescriptionsEdit = new StringBuilder().append("//td[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')]//parent::tr//button[contains(@class,'Edit')]").toString();
+            .append("<<REPLACEMENT>>").append("')]//parent::tr//button[contains(@class,'edit')]").toString();
 
     protected String elmntMobilePrescriptionsEdit = new StringBuilder().append("//h2[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
