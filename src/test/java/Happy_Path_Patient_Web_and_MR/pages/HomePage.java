@@ -52,16 +52,16 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='appVersion']/small")
     protected WebElement txtAppVersion;
 
-    @FindBy(how = How.XPATH, using = "//*[contains(text(),'My Home page') or contains(text(),'Welcome') or contains(text(),'Start managing your health, today')]")
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'My Home page') or contains(text(),'Welcome,') or contains(text(),'Start managing your health, today')]")
     protected WebElement elmntVerifyHomePage;
 
     @FindBy(how = How.XPATH, using = "//a/span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashboard;
 
-    @FindBy(xpath = "//h1[contains(text(),'Welcome')]")
+    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]")
     protected WebElement txtWelcome;
 
-    @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")
+    @FindBy(how = How.XPATH, using = "//button[contains(@class,'hamburger')]")
     protected WebElement btnMobileMenu;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
@@ -449,13 +449,13 @@ public class HomePage extends BasePage {
     }
 
     public boolean clickHamburgerIcon() {
-        waitForSeconds(3);
+//        waitForSeconds(3);
         refreshPage();
         waitForElement(btnHamburgerIcon);
         waitForElementClickable(btnHamburgerIcon);
-        waitForSeconds(2);
-        waitAndClick(btnHamburgerIcon);
-        waitForSeconds(1);
+//        waitForSeconds(2);
+        jsClick(btnHamburgerIcon);
+//        waitForSeconds(1);
         waitForElement(elmntSideBar);
         return verifyElement(elmntSideBar);
     }

@@ -1,6 +1,6 @@
 Feature: My Health Records
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Verifly @dow
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature: My Health Records
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Verifly @dow
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -146,7 +146,7 @@ Feature: My Health Records
       | Immunisations    |
       | &FILTER_BY_DATA& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Verifly
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Immunisations Details
 
     Given As a user I am on HomePage
@@ -164,7 +164,7 @@ Feature: My Health Records
       | Option     |
       | My Entries |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Verifly
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6-Patient validate edit and delete in My entries Immunisation Details
 
     Given I am on "<Tab>" Immunisation page
@@ -177,7 +177,7 @@ Feature: My Health Records
       | Tab           | Record         | AdditionalName    |
       | Immunisations | &VISITED_NAME& | &EDIT_ADDITIONAL& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @Verifly
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6-Patient validate edit and delete in My entries COVID Immunisation Details
 
     Given I am on "<Tab>" CovidImmunisation page
@@ -351,7 +351,7 @@ Feature: My Health Records
       | &RECALLS_REMAINDER_TABLE_DATA& | &RECALLS_REMAINDER_ICON_DATA& | &MOBILE_RECALLS_REMAINDER_ICON_DATA& |
     And I navigate to the Homepage
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @dow
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario: S13-Patient to View Summary
 
     Given As a user I am on HomePage

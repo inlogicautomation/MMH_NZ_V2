@@ -2731,6 +2731,10 @@ public class WebSteps {
         demoPageContainer.messagesPage.clickInboxAttachButton();
         demoPageContainer.messagesPage.VerifyAttachdowloadSuccessfully();
         demoPageContainer.messagesPage.DeleteFile();
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            demoPageContainer.messagesPage.clickInboxCloseButton();
+        }
+
     }
 
 

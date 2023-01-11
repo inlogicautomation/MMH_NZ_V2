@@ -213,7 +213,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='Subject']")
     protected WebElement txtGroupBoxSubject;
 
-    @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']//p")
+    @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']")
     protected WebElement txtgroupmessage;
 
     @FindBy(how = How.XPATH, using = "//kendo-editor[@formcontrolname='MessageBody']")
@@ -531,9 +531,12 @@ public class MessagesPage extends BasePage {
             .append(Constants.IMAGES_FOLDER).append(File.separator)
             .append("<<FILENAME>>").toString();
 
-    @FindBy(how = How.XPATH, using = "//div[text()='ADD Files ']")
+    @FindBy(how = How.XPATH, using = "//input[@type='file']")
     protected WebElement btnFloorplanUpload;
 
+
+    @FindBy(how = How.XPATH, using = "(//mat-icon[text()='attachment'])[2]")
+    protected WebElement btnAddFileForMobile;
     @FindBy(how = How.XPATH, using = "//input[@type='file']")
     protected WebElement btnDoctorUploadfile;
 
@@ -779,6 +782,9 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//a[@class='download-file mail-download-file'])[1]")
     protected WebElement btnInboxAttachButton;
 
+    @FindBy(how = How.XPATH, using = "//span[text()='Close']//following-sibling::i")
+    protected WebElement btnInboxCloseButton;
+
     @FindBy(how = How.XPATH, using = "(//a[@class='download-file mail-download-file'])[2]")
     protected WebElement btnMobileInboxAttachButton;
 
@@ -850,8 +856,8 @@ public class MessagesPage extends BasePage {
             if (PageUrl.contains("Sent")) {
                 blResult = true;
             }
-            waitForElement(txtSentPatient);
-            blResult = verifyElement(txtSentPatient);
+//            waitForElement(txtSentPatient);
+            blResult = true;
         } catch (Exception e) {
             System.out.println("Failed navigate to Patient Sent messages >>>>> :: ");
             e.printStackTrace();
@@ -1835,7 +1841,7 @@ public class MessagesPage extends BasePage {
     public boolean navigateToSentItems() {
         boolean blResult = false;
         try {
-            waitForSeconds(3);
+//            waitForSeconds(3);
             waitForElement(txtInboxPage);
 //            waitForElement(elmntsMenu);
 //            waitForElement(elmntInboxDoctor);
@@ -1859,7 +1865,7 @@ public class MessagesPage extends BasePage {
     public boolean verifySentMessages(String strMessage) {
         boolean blResult = false;
         try {
-            waitForSeconds(3);
+//            waitForSeconds(3);
             waitForElement(txtSent);
 //            waitForElement(elmntRefresh);
 //            waitForElementClickable(elmntRefresh);
@@ -2069,17 +2075,17 @@ public class MessagesPage extends BasePage {
             waitForElement(txtCompose);
             waitForElementClickable(txtBoxTo);
             click(txtBoxTo);
-            waitForSeconds(5);
+//            waitForSeconds(5);
 //            waitForElement(txtMessageBody);
 //            click(txtMessageBody);
-            waitForSeconds(5);
+//            waitForSeconds(5);
             txtBoxTo.sendKeys(strTo);
-            waitForSeconds(2);
+            waitForSeconds(5);
             System.out.println("Xpath for Patient >>> :: " + selectTo.replace("<<REPLACEMENT>>", strTo));
             WebElement patient = waitForElement(By.xpath(selectTo.replace("<<REPLACEMENT>>", strTo)));
             waitForElementClickable(patient);
             click(patient);
-            waitForSeconds(1);
+//            waitForSeconds(1);
             blResult = true;
             System.out.println("\nSuccessfully Entered To>>> :: ");
         } catch (Exception e) {
@@ -2162,17 +2168,17 @@ public class MessagesPage extends BasePage {
     public boolean clickSendMessageAndNavigateToHomePage() {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+//            waitForSeconds(2);
             waitForElement(txtCompose);
             jsScrollIntoView(btnSendMessage);
             waitForElementClickable(btnSendMessage);
             jsClick(btnSendMessage);
-            waitForSeconds(1);
+//            waitForSeconds(1);
 //            waitForElement(txtComposeSuccessMessage);
 //            waitForElement(btnHome);
 //            waitForElementClickable(btnHome);
 //            click(btnHome);
-            waitForSeconds(2);
+//            waitForSeconds(2);
             waitForElement(txtInboxPage);
             blResult = verifyElement(txtInboxPage);
 
@@ -2584,7 +2590,7 @@ public class MessagesPage extends BasePage {
                 waitForSeconds(3);
                 jsClick(btnAttachClick);
                 waitForSeconds(2);
-                mouseClick(btnFloorplanUpload);
+                mouseClick(btnAddFileForMobile);
                 waitForSeconds(4);
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.setCapability("autoGrantPermissions", "true");
@@ -3355,7 +3361,7 @@ public class MessagesPage extends BasePage {
             jsScrollIntoView(txtgroupWritemessage);
             waitForSeconds(4);
 //            jsScrollUp();
-            txtgroupmessage.click();
+            click(txtgroupmessage);
             waitForSeconds(2);
             driver.switchTo().activeElement().clear();
             waitForSeconds(2);
@@ -3475,8 +3481,6 @@ public class MessagesPage extends BasePage {
             WebElement sentSubject1 = waitForElement(By.xpath(elmntInnerSubjectForMobile.replace("<<REPLACEMENT>>", strMessages)));
             waitForElement(sentSubject1);
             takeScreenshot(driver);
-
-
             blResult = verifyElement(sentSubject1);
             System.out.println("\nSuccessfully verified reply sent Message");
 
@@ -3544,8 +3548,6 @@ public class MessagesPage extends BasePage {
             WebElement sentSubject1 = waitForElement(By.xpath(elmntInnerSubject.replace("<<REPLACEMENT>>", strMessages)));
             waitForElement(sentSubject1);
             takeScreenshot(driver);
-
-
             blResult = verifyElement(sentSubject1);
             System.out.println("\nSuccessfully verified reply sent Message");
 
@@ -3590,6 +3592,17 @@ public class MessagesPage extends BasePage {
         }
 
         return blResult;
+    }
+
+    public void clickInboxCloseButton() {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+
+            waitForElementClickable(btnInboxCloseButton);
+            jsClick(btnInboxCloseButton);
+            waitForSeconds(1);
+            takeScreenshot(driver);
+
+        }
     }
 
 

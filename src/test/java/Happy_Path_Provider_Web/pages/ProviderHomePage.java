@@ -25,7 +25,7 @@ public class ProviderHomePage extends BasePage {
     protected WebElement elmntSavebtn;
 
     public String elmntModule = new StringBuilder()
-            .append("//span[contains(text(),'")
+            .append("//div[contains(text(),'")
             .append("<<NAME>>")
             .append("')]").toString();
 
@@ -44,7 +44,7 @@ public class ProviderHomePage extends BasePage {
     protected WebElement elmtMMHLogo;
 
     //h1[contains(text(),'Welcome,')]//span[contains(text(),'ApptProvider!') or contains(text(),'Tim!')]
-    @FindBy(xpath = "//h1[contains(text(),'Welcome ')]//span[contains(text(),'Dr.')]")
+    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Dr.')]")
     protected WebElement txtWelcome;
 
     @FindBy(xpath = "//h1[contains(text(),'Welcome ')]//span[contains(text(),'Harry Harry!')]")
@@ -87,10 +87,11 @@ public class ProviderHomePage extends BasePage {
         boolean blResult = false;
         try {
             jsScrollIntoView(elmtRepeatScriptSettings);
-//            waitForElement(elmtRepeatScriptSettings);
+            waitForElement(elmtRepeatScriptSettings);
+            jsClick(elmtRepeatScriptSettings);
             WebElement element = driver.findElement(By.xpath(elmntModule.replace("<<NAME>>",strName)));
             jsScrollIntoView(element);
-//            waitForElement(element);
+            waitForElement(element);
 //            waitForElementClickable(element);
             click(element);
             waitForElement(txtRRPScriptInstructionsSettings);
@@ -238,7 +239,10 @@ public class ProviderHomePage extends BasePage {
             System.out.println(">>>>>>>>>>>>>>>>>>>>" + WindowsCount);
             if (WindowsCount == 2) {
                 focusWindow(2);
+                verifyElement(verifyPatientHomePage);
                 System.out.println("user here in patient portal homepage");
+            }else {
+                visit(TestDataUtil.getValue("&PATIENT_URL&"));
             }
             if (WindowsCount == 1) {
                 ((JavascriptExecutor) driver).executeScript("window.open()");
@@ -334,10 +338,13 @@ public class ProviderHomePage extends BasePage {
     @FindBy (how = How.XPATH, using = "//span[text()='Pre-Screening Settings']")
     protected WebElement elmntScreeningSettings;
 
-    @FindBy (how = How.XPATH, using = "//span[text()='Appointment Message']")
+    @FindBy (how = How.XPATH, using = "//div[text()='Appointment Message']")
     protected WebElement elmntAppointmentMessage;
 
-    @FindBy (how = How.XPATH, using = "//h1[text()='Appointment Message']")
+    @FindBy (how = How.XPATH, using = "//span[text()='Appointment Settings']")
+    protected WebElement elmntAppointmentSetting;
+
+    @FindBy (how = How.XPATH, using = "//h1[contains(text(),'Appointment Message')]")
     protected WebElement elmntAppoitmentMssgHeading;
 
     @FindBy (how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health, today')]")
@@ -450,9 +457,13 @@ public class ProviderHomePage extends BasePage {
     public boolean clickAppointmentMessage(){
         boolean blresult = false;
         try{
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+//            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            jsScrollIntoView(elmntAppointmentSetting);
+            waitForElement(elmntAppointmentSetting);
+            jsClick(elmntAppointmentSetting);
+            jsScrollIntoView(elmntAppointmentMessage);
             waitForElementClickable(elmntAppointmentMessage);
-            click(elmntAppointmentMessage);
+            jsClick(elmntAppointmentMessage);
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             blresult = verifyElement(elmntAppoitmentMssgHeading);
         }catch (Exception e){

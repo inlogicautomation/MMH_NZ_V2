@@ -262,10 +262,10 @@ public class RepeatScriptSettingPage extends BasePage {
 
     public boolean clickRRPScriptInstructionSetting() {
         boolean isVerified = false;
-        waitForSeconds(3);
+//        waitForSeconds(3);
         waitForElement(elmntRRPScriptInstructionsSettings);
         waitForElementClickable(elmntRRPScriptInstructionsSettings);
-        waitAndClick(elmntRRPScriptInstructionsSettings);
+        jsClick(elmntRRPScriptInstructionsSettings);
         waitForElement(txtRRPScriptInstructionsSettings);
         isVerified = verifyElement(txtRRPScriptInstructionsSettings);
         return isVerified;
@@ -273,10 +273,10 @@ public class RepeatScriptSettingPage extends BasePage {
 
     public boolean clickRRPScriptInstructionSettingEditButton() {
         boolean isVerified = false;
-        waitForSeconds(3);
+//        waitForSeconds(3);
         waitForElement(btnEdit);
         waitForElementClickable(btnEdit);
-        waitAndClick(btnEdit);
+        click(btnEdit);
         waitForElement(btnSave);
         return isVerified = verifyElement(btnSave);
     }

@@ -40,7 +40,7 @@ Feature: Repeat Script Setting
       | System_Menu            | Details                       |
       | Repeat Script Settings | &REPEAT_SCRIPT_SETTINGS_DATA& |
 
-#  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH
+  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH
   Scenario Outline: S4- RRP Script Settings Default Provider - Rule C
     Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
     And I click the edit button and changing the data as per Rule C"<Details>"

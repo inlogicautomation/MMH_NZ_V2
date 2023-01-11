@@ -11,7 +11,7 @@ import static Happy_Path_Patient_Web_and_MR.pages.HomePage.*;
 
 @CucumberOptions(features = {"src/test/resources/features/Happy_Path_Patient_Web_and_MR"},
         monochrome = true,
-        tags = "@APPOINTMENTS",
+        tags = "@HAPPY_PATH",
         glue = {"Happy_Path_Patient_Web_and_MR"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
@@ -38,4 +38,4 @@ public class DemoWebCukes extends AbstractTestNGCucumberTests {
     }
 }
 //    clean test -Dapp=Happy_Path_Patient_Web_and_MR -Dexecution_type=browser -Drunner=DemoWebCukes -Dbrowser_name=chrome -Denv=PROD "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/Web-QAResults.html -Dsysteminfo.AppName=Demo-QA"
-//clean test -Dapp=Happy_Path_Patient_Web_and_MR -Drunner=DemoMobileViewCukes -Dexecution_type=mobile -Dconfig=local_android_Galaxy_A13_Chrome -Denv=PROD -Dbrowser_name=chrome "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/RealDeviceMobile-QAResults.html -Dsysteminfo.AppName=Demo-QA"
+

@@ -18,26 +18,48 @@ public class AppointmentMessagePage extends BasePage {
     }
 
 
-    @FindBy(how = How.XPATH, using = "//h1[text()='Appointment Message']")
+    @FindBy(how = How.XPATH, using = "//h1[text()=' Appointment Message ']")
     protected WebElement elmntAppointmentMssgHeading;
 
     @FindBy(how = How.XPATH, using = "//div[.='keyboard_arrow_down']")
     protected WebElement elmntSelectHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "//p[.='Easy Booking-Enable Banner Message']/parent::div/descendant::mat-radio-button[@value='true']/descendant::div[@class='mat-radio-inner-circle']")
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='easyBookingBanner']//following::input)[1]")
     protected WebElement elmntEnableBannerMssg;
 
-    @FindBy(how = How.XPATH, using = "//p[.='Easy Booking-Enable Banner Message']/parent::div/descendant::mat-radio-button[@value='false']/descendant::div[@class='mat-radio-inner-circle']")
+//    (//mat-radio-group[@formcontrolname='easyBookingBanner']//following::mat-radio-button[@class='mat-radio-button mat-accent mat-radio-checked']//input)[1]
+
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='easyBookingBanner']//following::input)[2]")
     protected WebElement elmntDisableBannerMssg;
 
+
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='easyBookingBanner']//following::input)[4]")
+    protected WebElement elmntEnableWebBannerMessage;
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='easyBookingHeading']")
     protected WebElement elmntBannerHeading;
+
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='WebAppointmentBannerHeading']")
+    protected WebElement elmntWebBannerHeading;
+
+
 
     @FindBy(how = How.XPATH, using = "(//iframe[@class='k-iframe'])[1]")
     protected WebElement frameBannerMessage;
 
+    @FindBy(how = How.XPATH, using = "(//iframe[@class='k-iframe'])[2]")
+    protected WebElement frameWebBannerMessage;
+
     @FindBy(how = How.XPATH, using = "//kendo-editor[@formcontrolname='easyBookingBannerMessage']/descendant::div")
     protected WebElement elmntBannerMessage;
+
+    @FindBy(how = How.XPATH, using = "//kendo-editor[@formcontrolname='webAppointmentBannerMessage']")
+    protected WebElement elmntWebBannerMessage;
+
+    @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror']//p)[1]")
+    protected WebElement elmntWriteBannerMessage;
+
+    @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror']//p)[2]")
+    protected WebElement elmntWriteWebBannerMessage;
 
     @FindBy(how = How.XPATH, using = "//button[.=' Edit ']")
     protected WebElement elmntEditbtn;
@@ -51,7 +73,7 @@ public class AppointmentMessagePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//label[text()='All']")
     protected WebElement elmntAll;
 
-    @FindBy(how = How.XPATH, using = "//div//a[@class='close']")
+    @FindBy(how = How.XPATH, using = "//span[text()=' Close ']")
     protected WebElement elmntCloseSuccessLogin;
 
     @FindBy(how = How.XPATH, using = "//input[@placeholder='Enter search keyword here']")
@@ -88,6 +110,9 @@ public class AppointmentMessagePage extends BasePage {
     protected String elmntVerifyBannerHeading = new StringBuilder()
             .append("//h4/b[text()='").append("<<REPLACEMENT>>").append(":']").toString();
 
+    protected String elmntVerifyWebBannerHeading = new StringBuilder()
+            .append("//p[text()='").append("<<REPLACEMENT>>").append("']").toString();
+
     protected String elmntVerifyBannerMessage = new StringBuilder()
             .append("//h4/p[text()='").append("<<REPLACEMENT>>").append("']").toString();
 
@@ -109,7 +134,7 @@ public class AppointmentMessagePage extends BasePage {
         try {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             waitForElement(elmntEnableBannerMssg);
-            click(elmntEnableBannerMssg);
+            jsClick(elmntEnableBannerMssg);
             blresult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,12 +143,12 @@ public class AppointmentMessagePage extends BasePage {
     }
 
 
-    public boolean clickBannerMssgNoRadioBtn() {
+    public boolean clickBannerMessageNoRadioBtn() {
         boolean blresult = false;
         try {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             waitForElement(elmntDisableBannerMssg);
-            click(elmntDisableBannerMssg);
+            jsClick(elmntDisableBannerMssg);
             blresult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -137,7 +162,10 @@ public class AppointmentMessagePage extends BasePage {
         try {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             waitForElement(elmntBannerHeading);
+            jsClick(elmntBannerHeading);
+            waitForSeconds(2);
             elmntBannerHeading.clear();
+            waitForSeconds(2);
             elmntBannerHeading.sendKeys(strHeading);
             blresult = true;
         } catch (Exception e) {
@@ -151,19 +179,20 @@ public class AppointmentMessagePage extends BasePage {
         boolean blresult = false;
         try {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            jsScrollIntoView(elmntBannerMessage);
             waitForElement(elmntBannerMessage);
-            elmntBannerMessage.click();
+//            elmntBannerMessage.click();
             driver.switchTo().frame(frameBannerMessage);
-            Robot robot = new Robot();
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_A);
-            robot.keyPress(KeyEvent.VK_BACK_SPACE);
-            robot.keyRelease(KeyEvent.VK_BACK_SPACE);
-            robot.keyRelease(KeyEvent.VK_A);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-            WebElement activeElmnt = driver.switchTo().activeElement();
-            activeElmnt.sendKeys(strBannerMssg);
-            focusBackToDefaultFrame();
+            waitForSeconds(2);
+            click(elmntWriteBannerMessage);
+            waitForSeconds(2);
+            driver.switchTo().activeElement().clear();
+            waitForSeconds(2);
+            elmntWriteBannerMessage.click();
+            waitForSeconds(2);
+            driver.switchTo().activeElement().sendKeys(strBannerMssg);
+            waitForSeconds(2);
+            driver.switchTo().defaultContent();
             blresult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,8 +205,11 @@ public class AppointmentMessagePage extends BasePage {
         boolean blresult = false;
         try {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            jsScrollIntoView(elmntEditbtn);
             waitForElementClickable(elmntEditbtn);
+            waitForSeconds(2);
             click(elmntEditbtn);
+            System.out.println("Successfully click Edit Button");
             blresult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -190,9 +222,10 @@ public class AppointmentMessagePage extends BasePage {
         boolean blresult = false;
         try {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            jsScrollIntoView(elmntAppointmentMssgHeading);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            verifyElement(elmntAppointmentMssgHeading);
+            jsScrollIntoView(elmntCloseSuccessLogin);
             click(elmntCloseSuccessLogin);
+            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             blresult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -270,6 +303,7 @@ public class AppointmentMessagePage extends BasePage {
         try {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             enterValue(elmntSearchBox, strLocation);
+            waitForElement(btnSearch);
             click(btnSearch);
             blresult = true;
         } catch (Exception e) {
@@ -285,10 +319,12 @@ public class AppointmentMessagePage extends BasePage {
             By bookedAppointment = By.xpath(elmntFindHealthCenterLocation.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation)));
             if (verifyElement(bookedAppointment)){
                 WebElement elmntLocation = waitForElement(By.xpath(elmntFindHealthCenterLocation.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));
+                verifyElement(elmntLocation);
             }else {
                 refreshPage();
                 waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
                 WebElement elmntLocation = waitForElement(By.xpath(elmntFindHealthCenterLocation.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));
+                verifyElement(elmntLocation);
             }
             blresult = verifyElement(elmntLocation);
         } catch (Exception e) {
@@ -366,6 +402,76 @@ public class AppointmentMessagePage extends BasePage {
         }
         return blresult;
     }
+
+    public boolean clickPatientWebBannerMessageYesRadioBtn() {
+        boolean blresult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElement(elmntEnableWebBannerMessage);
+            jsClick(elmntEnableWebBannerMessage);
+            blresult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blresult;
+    }
+
+    public boolean enterWebBannerHeading(String strHeading) {
+        boolean blresult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElement(elmntWebBannerHeading);
+            jsClick(elmntWebBannerHeading);
+            waitForElement(elmntWebBannerHeading);
+//            waitForSeconds(2);
+            elmntWebBannerHeading.clear();
+//            waitForSeconds(2);
+            elmntWebBannerHeading.sendKeys(strHeading);
+            blresult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blresult;
+    }
+
+    public boolean enterWebBannerMessage(String strBannerMssg) {
+        boolean blresult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            jsScrollIntoView(elmntWebBannerMessage);
+            waitForElement(elmntWebBannerMessage);
+//            elmntBannerMessage.click();
+            driver.switchTo().frame(frameWebBannerMessage);
+            waitForSeconds(2);
+            click(elmntWriteWebBannerMessage);
+            waitForSeconds(2);
+            driver.switchTo().activeElement().clear();
+            waitForSeconds(2);
+            elmntWriteWebBannerMessage.click();
+            waitForSeconds(2);
+            driver.switchTo().activeElement().sendKeys(strBannerMssg);
+            waitForSeconds(2);
+            driver.switchTo().defaultContent();
+            blresult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blresult;
+    }
+
+    public boolean verifyWebBannerHeading(String strHeading) {
+        boolean blresult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyWebBannerHeading.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strHeading))));
+            blresult = verifyElement(elmntBannerHeading);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blresult;
+    }
+
+
 
 
 

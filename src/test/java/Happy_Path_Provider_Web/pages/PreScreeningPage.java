@@ -26,7 +26,7 @@ public class PreScreeningPage extends BasePage {
     protected WebElement elmntSelectHealthCentre;
 
 
-    @FindBy(how = How.XPATH, using = "//span[normalize-space(text())='Update']")
+    @FindBy(how = How.XPATH, using = "//span[normalize-space(text())='Save']")
     protected WebElement elmntUpdate;
 
 
@@ -120,6 +120,7 @@ public class PreScreeningPage extends BasePage {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             WebElement elmntHealthCentreLocation = waitForElement(By.xpath(strHealthCentreLocation.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strHealthCentre))));
             click(elmntHealthCentreLocation);
+            System.out.printf("Successfully select a Health centre");
             blresult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -146,6 +147,7 @@ public class PreScreeningPage extends BasePage {
         boolean blresult = false;
         try {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            jsScrollIntoView(elmntUpdate);
             waitForElementClickable(elmntUpdate);
             click(elmntUpdate);
             blresult = true;

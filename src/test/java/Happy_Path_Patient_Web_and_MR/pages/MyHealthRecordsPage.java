@@ -633,6 +633,9 @@ public class MyHealthRecordsPage extends BasePage {
     protected String elmntDelete = new StringBuilder().append("//td[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]//following::td//following::td//button[contains(@class,'remove')]").toString();
 
+    protected String elmnCovidtDelete = new StringBuilder().append("//td//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]//following::td//following::td//button[contains(@class,'remove')]").toString();
+
     protected String elmntImmunisationDelete = new StringBuilder().append("//td[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]//following::td//button[contains(@class,'remove')]").toString();
 
@@ -2882,21 +2885,21 @@ public class MyHealthRecordsPage extends BasePage {
 
     public void clickCovidAddRecord() {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            refreshPage();
-            waitForSeconds(3);
+//            refreshPage();
+//            waitForSeconds(3);
             waitForElementClickable(btnCovidAddRecord);
             jsClick(btnCovidAddRecord);
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
 
-            waitForSeconds(3);
+//            waitForSeconds(3);
             waitForElementClickable(btnMobileCovidAddRecord);
             jsClick(btnMobileCovidAddRecord);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
 
-            waitForSeconds(3);
+//            waitForSeconds(3);
             waitForElementClickable(btnMobileCovidAddRecord);
             jsClick(btnMobileCovidAddRecord);
         }
@@ -2905,13 +2908,15 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean selectMobileCovidImmunisationsdropdown(String strFamilyMember) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+//            waitForSeconds(2);
+            waitForElement(elmntCovidImmunisationsdrop);
             waitForElementClickable(elmntCovidImmunisationsdrop);
-            waitForSeconds(2);
+//            waitForSeconds(2);
             jsClick(elmntCovidImmunisationsdrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntCovidImmunisationsDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
-            jsClick(elmntEntriesFromHealthCentre);
-
+            System.out.println(">>>>>>>"+elmntEntriesFromHealthCentre);
+            waitForElement(elmntEntriesFromHealthCentre);
+            mouseClick(elmntEntriesFromHealthCentre);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -3711,7 +3716,7 @@ public class MyHealthRecordsPage extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             strVisitedName = strCreatedRecord;
-            WebElement btnDelete = waitForElement(By.xpath(elmntDelete.replace("<<REPLACEMENT>>", strCreatedRecord)));
+            WebElement btnDelete = waitForElement(By.xpath(elmnCovidtDelete.replace("<<REPLACEMENT>>", strCreatedRecord)));
             click(btnDelete);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);

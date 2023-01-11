@@ -299,9 +299,10 @@ public class RRPScriptFeeSettingsPage extends BasePage {
             WebElement elmntPrescriptionTableData = waitForElement(By.xpath(strRRPScriptInstructionsFeeSetupEditAction
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))));
             System.out.printf(">>>>>>>>>>>"+elmntPrescriptionTableData);
+            jsScrollIntoView(elmntPrescriptionTableData);
             waitForElement(elmntPrescriptionTableData);
             verifyElement(elmntPrescriptionTableData);
-            waitForSeconds(3);
+//            waitForSeconds(3);
             jsClick(elmntPrescriptionTableData);
             blResult =true;
         } catch (Exception e) {
@@ -312,10 +313,9 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     }
 
     public boolean clickPatienttoCollectScriptCheckBox() {
-           jsScrollDown();
+//           jsScrollIntoView(elmntPatienttoCollectScriptCheckBox);
+        jsScrollDown();
         if (elmntPatienttoCollectScriptCheckBox.isDisplayed()){
-//            jsScrollIntoView(elmntPatienttoCollectScriptCheckBox);
-            verifyElement(elmntPatienttoCollectScriptCheckBox);
             System.out.println("Successfullt Verifly Check Box Checked");
             return verifyElement(elmntPatienttoCollectScriptCheckBox);
         }
