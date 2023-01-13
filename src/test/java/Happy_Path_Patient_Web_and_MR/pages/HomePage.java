@@ -86,14 +86,17 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@id='EncrySecuredPassword']")
     protected WebElement txtPassword;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(@class,'header')]/span[text()='Appointments']//following-sibling::mat-icon")
+    @FindBy(how = How.XPATH, using = "//a[contains(@class,'header')]/span[text()='Appointments']")
     protected WebElement btnAppointmentExpand;
 
     @FindBy(how = How.XPATH, using = "//a[contains(@class,'header')]/span[text()='Messages']//following-sibling::mat-icon")
     protected WebElement btnMessagesExpand;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Future Appointments')]")
+    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Future Appointments')]")
     protected WebElement elmntFutureAppointment;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Future Appointments')]")
+    protected WebElement elmntMobileFutureAppointment;
 
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'hamburger')]")
     protected WebElement btnHamburgerIcon;
@@ -368,6 +371,14 @@ public class HomePage extends BasePage {
         waitForElement(btnAppointmentExpand);
         jsClick(btnAppointmentExpand);
         return verifyElement(elmntFutureAppointment);
+    }
+
+    public boolean clickMobileAppointmentsExpandIcon() {
+        waitForSeconds(3);
+        waitForElement(elmntDashboard);
+        waitForElement(btnAppointmentExpand);
+        jsClick(btnAppointmentExpand);
+        return verifyElement(elmntMobileFutureAppointment);
     }
 
     public boolean clickDashBoardForMobile() {

@@ -24,7 +24,7 @@ Feature: Appointments
   Scenario Template: Prep- Canceling all the appointments
 
     Given As a user I am on HomePage
-    And I navigate to the "<Appointment>" page
+    And I navigate to the "<Appointment>" Future Appointments page
     And I canceling all the available appointments
 
     Examples:
@@ -85,7 +85,7 @@ Feature: Appointments
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @Mobile @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6 - Patient Cancel Appointment
 
     And I navigate to the "<Appointment>" page
@@ -173,7 +173,7 @@ Feature: Appointments
   Scenario Template: S7 - Patient can view all the future date booked appointments in card view
 
     Given As a user I am on HomePage
-    And I navigate to the "<Appointments>" page
+    And I navigate to the "<Appointments>" page Card View
     When I switch to card view in future appointments page
     Then I should see all the future date appointments in card view
 
@@ -196,7 +196,7 @@ Feature: Appointments
   Scenario Template: S8 - Patient can view all the past date booked appointments in card view
 
     Given As a user I am on HomePage
-    And I navigate to the "<Appointments>" page
+    And I navigate to the "<Appointments>" page Card View
     When I switch to card view in past appointments page
     Then I should see all the past date appointments in card view
 
@@ -219,7 +219,7 @@ Feature: Appointments
   Scenario Template: S9 - Patient can view all the video appointments invites sent from PMS/Provider in grid view
 
     Given As a user I am on HomePage
-    When I navigate to the "<Appointments>" page
+    When I navigate to the "<Appointments>" page Card View
     Then I should see all the all the video appointments invites sent from PMS Provider in grid view
 #   And I join Video Consultation by clicking Join now Icon in Video invitations Gid "<All_Icons>"
     And I should see Appointment is not for today popup

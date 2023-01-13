@@ -28,7 +28,7 @@ public class MyHealthRecordsPage extends BasePage {
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
-    @FindBy(how = How.XPATH, using = "//a[@class='menu-header ng-star-inserted']/following::span[text()='My Health Records']/following-sibling::mat-icon")
+    @FindBy(how = How.XPATH, using = "//a[@class='menu-header ng-star-inserted']/following::span[text()='My Health Records']")
     protected WebElement btnMyHealthRecordsExpand;
 
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")
@@ -56,6 +56,28 @@ public class MyHealthRecordsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Entries From Health Centre(s)')]//preceding::input[@class='mat-radio-input cdk-visually-hidden'])[2]")
     protected WebElement elmntEntriesfromhealthcentreRadioButton;
+
+    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Prescriptions')]")
+    protected WebElement elmntMobilePrescription;
+
+    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Allergies')]")
+    protected WebElement elmntMobileAllergies;
+
+    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Immunisations')]")
+    protected WebElement elmntMobileImmunisation;
+
+    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Conditions')]")
+    protected WebElement elmntMobileCondition;
+
+    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Lab Results')]")
+    protected WebElement elmntMobileLabresults;
+
+    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Clinician Notes')]")
+    protected WebElement elmntMobileClinicianNotes;
+
+    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Recalls')]")
+    protected WebElement elmntMobileRecalls;
+
 
     @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Entries From Health Centre(s)')]//preceding::input[@class='mat-radio-input cdk-visually-hidden'])[1]")
     protected WebElement elmntMyEntriesRadioButton;
@@ -732,28 +754,36 @@ public class MyHealthRecordsPage extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElementClickable(btnMyHealthRecordsExpand);
             jsClick(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntPrescriptions);
-            jsClick(elmntPrescriptions);
+//            waitForElementClickable(elmntPrescriptions);
+//            jsClick(elmntPrescriptions);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            waitForSeconds(3);
+//            waitForSeconds(3);
             waitForElementClickable(btnMobileMenu);
             jsClick(btnMobileMenu);
             waitForElementClickable(btnMyHealthRecordsExpand);
             jsClick(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntPrescriptions);
-            jsClick(elmntPrescriptions);
+//            waitForElementClickable(elmntPrescriptions);
+//            jsClick(elmntPrescriptions);
+            waitForElement(elmntMobilePrescription);
+            click(elmntMobilePrescription);
+            waitForElement(elmntEntriesfromhealthcentreRadioButton);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
-            waitForSeconds(3);
+//            waitForSeconds(3);
             waitForElementClickable(btnMobileMenu);
             jsClick(btnMobileMenu);
             waitForElementClickable(btnMyHealthRecordsExpand);
             jsClick(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntPrescriptions);
-            jsClick(elmntPrescriptions);
+//            waitForElementClickable(elmntPrescriptions);
+//            jsClick(elmntPrescriptions);
+            waitForElement(elmntMobilePrescription);
+            click(elmntMobilePrescription);
+            waitForElement(elmntEntriesfromhealthcentreRadioButton);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
         }
     }
 
@@ -774,6 +804,30 @@ public class MyHealthRecordsPage extends BasePage {
 //            jsClick(elmntFilterdropPrescriptions);
 //            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
 //            jsClick(elmntEntriesFromHealthCentre);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
+
+
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectMobileEntriesFromHealthCentre(String strFamilyMember) {
+        boolean blResult = false;
+        try {
+//            waitForSeconds(2);
+//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//            waitForSeconds(2);
+//            waitForElementClickable(elmntFilterdropPrescriptions);
+//            waitForSeconds(2);
+//            jsClick(elmntFilterdropPrescriptions);
+//            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
+//            jsClick(elmntEntriesFromHealthCentre);
+            waitForElement(elmntMobilePrescription);
+            click(elmntMobilePrescription);
+            waitForElement(elmntEntriesfromhealthcentreRadioButton);
             jsClick(elmntEntriesfromhealthcentreRadioButton);
 
 
@@ -927,12 +981,13 @@ public class MyHealthRecordsPage extends BasePage {
     }
 
     public void clickMobileMyHealthRecordsOptionMenu() {
-        waitForSeconds(2);
-        jsClick(btnMobileMenu);
-        waitForSeconds(2);
-        jsScrollIntoView(btnMyHealthRecordsExpand);
-        waitForElementClickable(btnMyHealthRecordsExpand);
-        jsClick(btnMyHealthRecordsExpand);
+        waitForElement(btnMobileMenu);
+//        waitForSeconds(2);
+        click(btnMobileMenu);
+//        waitForSeconds(2);
+//        jsScrollIntoView(btnMyHealthRecordsExpand);
+//        waitForElementClickable(btnMyHealthRecordsExpand);
+//        jsClick(btnMyHealthRecordsExpand);
 
     }
 
@@ -951,9 +1006,14 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntConditions);
-            jsClick(elmntConditions);
+//            waitForElementClickable(elmntConditions);
+//            jsClick(elmntConditions);
+            waitForElement(elmntMobileCondition);
+            click(elmntMobileCondition);
+            waitForElement(elmntEntriesfromhealthcentreRadioButton);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(3);
@@ -961,8 +1021,12 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntConditions);
-            jsClick(elmntConditions);
+            waitForElement(elmntMobileCondition);
+            click(elmntMobileCondition);
+            waitForElement(elmntEntriesfromhealthcentreRadioButton);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
+//            waitForElementClickable(elmntConditions);
+//            jsClick(elmntConditions);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
 
@@ -1072,9 +1136,13 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            jsScrollIntoView(elmntClinicalNotes);
-            waitForElementClickable(elmntClinicalNotes);
-            jsClick(elmntClinicalNotes);
+//            jsScrollIntoView(elmntClinicalNotes);
+//            waitForElementClickable(elmntClinicalNotes);
+//            jsClick(elmntClinicalNotes);
+            waitForElement(elmntMobileClinicianNotes);
+            click(elmntMobileClinicianNotes);
+            waitForElement(elmntEntriesfromhealthcentreRadioButton);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
@@ -1083,9 +1151,13 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            jsScrollIntoView(elmntClinicalNotes);
-            waitForElementClickable(elmntClinicalNotes);
-            jsClick(elmntClinicalNotes);
+//            jsScrollIntoView(elmntClinicalNotes);
+//            waitForElementClickable(elmntClinicalNotes);
+//            jsClick(elmntClinicalNotes);
+            waitForElement(elmntMobileClinicianNotes);
+            click(elmntMobileClinicianNotes);
+            waitForElement(elmntEntriesfromhealthcentreRadioButton);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
     }
@@ -1106,10 +1178,10 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            jsScrollIntoView(elmntSummary);
-            waitForElementClickable(elmntSummary);
-            jsClick(elmntSummary);
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//            jsScrollIntoView(elmntSummary);
+//            waitForElementClickable(elmntSummary);
+//            jsClick(elmntSummary);
+//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(3);
@@ -1117,13 +1189,14 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            jsScrollIntoView(elmntSummary);
-            waitForElementClickable(elmntSummary);
-            jsClick(elmntSummary);
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//            jsScrollIntoView(elmntSummary);
+//            waitForElementClickable(elmntSummary);
+//            jsClick(elmntSummary);
+//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
     }
     public void clickExportButton() {
+        waitForElement(elmntExport);
         click(elmntExport);
     }
 
@@ -1236,8 +1309,12 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntAllergies);
-            jsClick(elmntAllergies);
+//            waitForElementClickable(elmntAllergies);
+//            jsClick(elmntAllergies);
+            waitForElement(elmntMobileAllergies);
+            click(elmntMobileAllergies);
+            waitForElement(elmntEntriesfromhealthcentreRadioButton);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(3);
@@ -1245,8 +1322,12 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntAllergies);
-            jsClick(elmntAllergies);
+//            waitForElementClickable(elmntAllergies);
+//            jsClick(elmntAllergies);
+            waitForElement(elmntMobileAllergies);
+            click(elmntMobileAllergies);
+            waitForElement(elmntEntriesfromhealthcentreRadioButton);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
         }
     }
 
@@ -1263,8 +1344,12 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntImmunisations);
-            jsClick(elmntImmunisations);
+//            waitForElementClickable(elmntImmunisations);
+//            jsClick(elmntImmunisations);
+            waitForElement(elmntMobileImmunisation);
+            click(elmntMobileImmunisation);
+            waitForElement(elmntEntriesfromhealthcentreRadioButton);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
@@ -1273,8 +1358,12 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntImmunisations);
-            jsClick(elmntImmunisations);
+//            waitForElementClickable(elmntImmunisations);
+//            jsClick(elmntImmunisations);
+            waitForElement(elmntMobileImmunisation);
+            click(elmntMobileImmunisation);
+            waitForElement(elmntEntriesfromhealthcentreRadioButton);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
     }
@@ -1295,8 +1384,12 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntLabResults);
-            jsClick(elmntLabResults);
+//            waitForElementClickable(elmntLabResults);
+//            jsClick(elmntLabResults);
+            waitForElement(elmntMobileLabresults);
+            click(elmntMobileLabresults);
+//            waitForElement(elmntEntriesfromhealthcentreRadioButton);
+//            jsClick(elmntEntriesfromhealthcentreRadioButton);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
@@ -1305,8 +1398,12 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntLabResults);
-            jsClick(elmntLabResults);
+//            waitForElementClickable(elmntLabResults);
+//            jsClick(elmntLabResults);
+            waitForElement(elmntMobileLabresults);
+            click(elmntMobileLabresults);
+//            waitForElement(elmntEntriesfromhealthcentreRadioButton);
+//            jsClick(elmntEntriesfromhealthcentreRadioButton);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
     }
@@ -1635,9 +1732,11 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            jsScrollIntoView(elmntRecalls);
-            waitForElementClickable(elmntRecalls);
-            jsClick(elmntRecalls);
+//            jsScrollIntoView(elmntRecalls);
+//            waitForElementClickable(elmntRecalls);
+//            jsClick(elmntRecalls);
+            waitForElement(elmntMobileRecalls);
+            click(elmntMobileRecalls);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
@@ -1646,9 +1745,11 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            jsScrollIntoView(elmntRecalls);
-            waitForElementClickable(elmntRecalls);
-            jsClick(elmntRecalls);
+//            jsScrollIntoView(elmntRecalls);
+//            waitForElementClickable(elmntRecalls);
+//            jsClick(elmntRecalls);
+            waitForElement(elmntMobileRecalls);
+            click(elmntMobileRecalls);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
 
@@ -1920,6 +2021,8 @@ public class MyHealthRecordsPage extends BasePage {
     public boolean VerifyMobileCovidImmusationMyEntriesDataIcon(List<String> lstDetails, List<String> lstDetails1) {
         boolean blResult = false;
         try {
+            System.out.println(">>>>lstDetails: "+lstDetails);
+            System.out.println(">>>>lstDetails1: "+lstDetails1);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             String currentDate = getCurrentDate("dd MMM yyyy");

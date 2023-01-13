@@ -9,7 +9,7 @@ Feature: Repeat Script Setting
     And I enter "&EMAIL_FOR_PATIENT&" and "&PASSWORD&" For Beta
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
-  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH
+  @WEB @PROVIDER_RRP_SCRIPT_SETTING @PROVIDER_HAPPY_PATH
   Scenario Template: S1- RRP Script Instructions Settings - Disable.
     Given As a Provider I am on HomePage and navigate to RRP Script Instructions in "<System_Menu>"
     And I navigate to RRP Script Instructions Settings and click edit button
@@ -17,10 +17,10 @@ Feature: Repeat Script Setting
     Then I should verify disabled RRP Script Instructions Settings "<Details>"
 
     Examples:
-      | System_Menu       | Details                            |
-      | Repeat Script Fee | &RRP_SCRIPT_INSTRUCTIONS_SETTINGS& |
+      | System_Menu             | Details                            |
+      | RRP Script Fee Settings | &RRP_SCRIPT_INSTRUCTIONS_SETTINGS& |
 
-  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH
+  @WEB @PROVIDER_RRP_SCRIPT_SETTING @PROVIDER_HAPPY_PATH
   Scenario Outline: S2- RRP Script Settings Default Provider - Rule A
     Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
     And I click the edit button and changing the data as per Rule A"<Details>"

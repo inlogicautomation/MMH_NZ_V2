@@ -153,7 +153,8 @@ public class ProviderHomePage extends BasePage {
     public boolean navigateToRepeatScriptSettings(String strName) {
         boolean blResult = false;
         try {
-//            waitForElement(elmtRepeatScriptSettings);
+            waitForElement(elmtRepeatScriptSettings);
+            click(elmtRepeatScriptSettings);
             WebElement element = driver.findElement(By.xpath(elmntModule.replace("<<NAME>>", strName)));
             jsScrollIntoView(element);
             waitForElement(element);

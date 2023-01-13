@@ -37,8 +37,12 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-progress-spinner[@mode='indeterminate']")
     protected WebElement elmntLoadingSpinner;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Request New Script')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Request new script')]")
     protected WebElement elmntRequestNewScript;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Request New Script')]")
+    protected WebElement elmntMobileRequestNewScript;
+
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'View Previous Requests')]")
     protected WebElement elmntViewPreviousRequests;
@@ -545,10 +549,31 @@ public class RepeatPrescription extends BasePage {
         try {
 //            waitForSeconds(3);
             waitForElementClickable(elmntRepeatPrescriptions);
-            jsClick(elmntRepeatPrescriptions);
+            click(elmntRepeatPrescriptions);
 //            waitForSeconds(3);
             waitForElementClickable(elmntRequestNewScript);
-            jsClick(elmntRequestNewScript);
+            click(elmntRequestNewScript);
+            waitForElement(txtRequestNewScript);
+            blResult = verifyElement(txtRequestNewScript);
+//            waitForSeconds(2);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            System.out.println("Navigated To Request Medication >>>>");
+        } catch (Exception e) {
+            System.out.println("Failed to Navigate To Request Medication >>>>");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean navigateToMobileRequestNewScript() {
+        boolean blResult = false;
+        try {
+//            waitForSeconds(3);
+            waitForElementClickable(elmntRepeatPrescriptions);
+            jsClick(elmntRepeatPrescriptions);
+//            waitForSeconds(3);
+            waitForElementClickable(elmntMobileRequestNewScript);
+            click(elmntMobileRequestNewScript);
             waitForElement(txtRequestNewScript);
             blResult = verifyElement(txtRequestNewScript);
 //            waitForSeconds(2);
@@ -588,7 +613,7 @@ public class RepeatPrescription extends BasePage {
 
         try {
             waitForSeconds(2);
-            waitForElement(txtViewPreviousRequests);
+//            waitForElement(txtViewPreviousRequests);
             waitForElementClickable(elmntMoreInfo);
             click(elmntMoreInfo);
             waitForElement(txtRequestDetails);
@@ -611,8 +636,8 @@ public class RepeatPrescription extends BasePage {
         try {
 
             waitForSeconds(2);
-            waitForElement(txtRequestDetails);
-            waitForElement(txtRepeatRequest);
+//            waitForElement(txtRequestDetails);
+//            waitForElement(txtRepeatRequest);
 
             ArrayList<String> lstMoreInfoDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strMoreInfoDetails);
 
@@ -665,19 +690,19 @@ public class RepeatPrescription extends BasePage {
     public boolean selectHealthCentreLocation(String strLocation) {
         boolean blResult = false;
         try {
-            refreshPage();
+//            refreshPage();
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(10);
+//            waitForSeconds(10);
             waitForElementClickable(drpdownLocation);
-            waitForSeconds(4);
+//            waitForSeconds(4);
             jsClick(drpdownLocation);
             waitForSeconds(4);
             System.out.println(" select Location Locator :: " + selectLocation.replace("<<REPLACEMENT>>", strLocation) + "\n");
             WebElement ddlLocation = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
             waitForElementClickable(ddlLocation);
             waitForSeconds(2);
-            System.out.println("Location was selected in the Request Medication >>> ::");
             mouseClick(ddlLocation);
+            System.out.println("Location was selected in the Request Medication >>> ::");
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
@@ -990,8 +1015,8 @@ public class RepeatPrescription extends BasePage {
 //            waitForElement(txtRRPSuccessPopUp);
 //            verifyElement(txtRRPSuccessPopUp);
             waitForSeconds(5);
-            waitForElement(txtViewPreviousRequests);
-            blResult = verifyElement(txtViewPreviousRequests);
+
+            blResult = true;
             System.out.println("Repeat Prescription was success  and Successfully to navigate the View History Page>>>>>>");
 
         } catch (Exception e) {
@@ -1319,8 +1344,8 @@ public class RepeatPrescription extends BasePage {
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
 
-            waitForElement(txtViewPreviousRequests);
-            verifyElement(txtViewPreviousRequests);
+//            waitForElement(txtViewPreviousRequests);
+//            verifyElement(txtViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
 //            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));

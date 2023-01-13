@@ -34,10 +34,10 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Messages')]")
     protected WebElement elmntMessages;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Draft')]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Draft')]")
     protected WebElement elmntDraft;
 
-    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Group Message')])[1]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Group Messages')]")
     protected WebElement elmntGroupMessagePatient;
 
 
@@ -58,19 +58,27 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Setting')]")
     protected WebElement elmntMessagesSettings;
 
+    @FindBy(how = How.XPATH, using = " //div[contains(@class,'settings')]//span//img")
+    protected WebElement elmntMobileMessagesSettings;
+
+    //div[contains(@class,'settings')]//span//img
+
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Settings')]")
     protected WebElement txtSettings;
 
     @FindBy(how = How.XPATH, using = "//h1[@class='view-info']")
     protected WebElement txtComposeMail;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Compose')]")
+    @FindBy(how = How.XPATH, using = "//span[text()='Compose']")
     protected WebElement elmntComposePatient;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Inbox')]")
+    @FindBy(how = How.XPATH, using = "//span[text()='COMPOSE']")
+    protected WebElement elmntMobileComposePatient;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Inbox')]")
     protected WebElement elmntInboxPatient;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Sent')]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Sent')]")
     protected WebElement elmntSentPatient;
 
     @FindBy(how = How.XPATH, using = "//span[text()='Compose']")
@@ -638,7 +646,7 @@ public class MessagesPage extends BasePage {
     })
     protected WebElement btnReply;
 
-    @FindBy(how = How.XPATH, using = "(//mat-icon[text()=' drive_file_rename_outline']//following::span[text()='Reply'])[2]")
+    @FindBy(how = How.XPATH, using = "(//mat-icon[text()=' drive_file_rename_outline'])[2]")
     protected WebElement btnMobileReply;
 
 
@@ -810,6 +818,49 @@ public class MessagesPage extends BasePage {
         return blResult;
     }
 
+    public boolean navigateMobileToMessageSetting() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntMessages);
+            waitForElementClickable(elmntMessages);
+            click(elmntMessages);
+            waitForSeconds(1);
+            waitForElementClickable(elmntMobileMessagesSettings);
+            click(elmntMobileMessagesSettings);
+            waitForSeconds(1);
+            waitForElement(btnSave);
+            blResult = verifyElement(btnSave);
+            System.out.println("Successfully navigated to messages settings >>>>> :: ");
+        } catch (Exception e) {
+            System.out.println("Failed navigate to messages settings >>>>> :: ");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean navigateToMobileMessageSetting() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntMessages);
+            waitForElementClickable(elmntMessages);
+            click(elmntMessages);
+            waitForSeconds(1);
+            waitForElementClickable(elmntMobileMessagesSettings);
+            click(elmntMobileMessagesSettings);
+            waitForSeconds(1);
+            waitForElement(btnSave);
+            blResult = verifyElement(btnSave);
+            System.out.println("Successfully navigated to messages settings >>>>> :: ");
+        } catch (Exception e) {
+            System.out.println("Failed navigate to messages settings >>>>> :: ");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
     public boolean navigateToPatientInboxMessage() {
         boolean blResult = false;
         try {
@@ -846,6 +897,7 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(elmntMessages);
             jsClick(elmntMessages);
             waitForSeconds(1);
+            jsScrollIntoView(elmntSentPatient);
             waitForElement(elmntSentPatient);
             waitForElementClickable(elmntSentPatient);
             jsClick(elmntSentPatient);
@@ -906,6 +958,36 @@ public class MessagesPage extends BasePage {
             waitForSeconds(1);
             waitForElementClickable(elmntComposePatient);
             click(elmntComposePatient);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(1);
+            String PageUrl = driver.getCurrentUrl();
+            System.out.println("PageUrl >>> :: " + PageUrl);
+            if (PageUrl.contains("Compose")) {
+                blResult = true;
+            }
+//            waitForElement(txtComposeMail);
+//            blResult = verifyElement(btnSendMessage);
+
+            System.out.println("Successfully navigated to Compose message >>>>> :: " );
+        } catch (Exception e) {
+            System.out.println("Failed navigate to Compose message >>>>> :: " );
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean navigateToMobileComposeMessage() {
+        boolean blResult = false;
+        try {
+
+            waitForSeconds(2);
+            waitForElementClickable(elmntMessages);
+            click(elmntMessages);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(1);
+            waitForElementClickable(elmntMobileComposePatient);
+            click(elmntMobileComposePatient);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(1);
             String PageUrl = driver.getCurrentUrl();
@@ -1029,7 +1111,7 @@ public class MessagesPage extends BasePage {
     public boolean verifyPatientReceivedGroupMessageForMobile(String strSubjectMessage, String strBody) {
         boolean blResult = false;
         try {
-            waitForElement(txtGroupMessagePatient);
+//            waitForElement(txtGroupMessagePatient);
             System.out.println("X Path-inboxSubject >>> :: " + inboxMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage)));
             WebElement inboxSubject = waitForElement(By.xpath(inboxMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage))));
             waitForElement(inboxSubject);
@@ -1058,10 +1140,61 @@ public class MessagesPage extends BasePage {
         try {
             strRandomSubjectMessage = strSubject.concat(" - ").concat(getRandomString());
             System.out.println("strRandomSubjectMessage >>> :: " + strRandomSubjectMessage);
-            waitForElement(txtInboxPatient);
-            waitForElement(btnReply);
-            waitForElementClickable(btnReply);
-            click(btnReply);
+//            waitForElement(txtInboxPatient);
+//            waitForElement(btnReply);
+//            waitForElementClickable(btnReply);
+            waitForSeconds(6);
+            jsClick(btnReply);
+            waitForElement(txtBoxReplySubject);
+            waitForElementClickable(txtBoxReplySubject);
+            txtBoxReplySubject.clear();
+            txtBoxReplySubject.sendKeys(strRandomSubjectMessage);
+            waitForSeconds(2);
+            jsScrollDown();
+//            jsScrollIntoView(btnReplySendMessage);
+////            driver.switchTo().frame(btnReplyfocusframe);
+//            waitForSeconds(2);
+//            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+//            robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
+//            robotKey(btnWriteMessage, KeyEvent.VK_A);
+//            StringSelection stringSelection = new StringSelection(strMessage);
+//            clipboard.setContents(stringSelection, stringSelection);
+//            robotKey(btnWriteMessage, KeyEvent.VK_CONTROL);
+//            robotKey(btnWriteMessage, KeyEvent.VK_V);
+//            robotKeyRelease(KeyEvent.VK_V);
+//            robotKeyRelease(KeyEvent.VK_CONTROL);
+//            waitForSeconds(7);
+//            System.out.println(" switch to default frame::: " + driver.switchTo().defaultContent());
+            waitForSeconds(2);
+            btnWriteMessage.click();
+            waitForSeconds(2);
+            driver.switchTo().activeElement().clear();
+            waitForSeconds(2);
+            btnWriteMessage.click();
+            waitForSeconds(2);
+            driver.switchTo().activeElement().sendKeys(strMessage);
+            waitForSeconds(2);
+
+            blResult = true;
+
+        } catch (Exception e) {
+            System.out.println("Failed verify Patient Received Message >>>>> :: " );
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean replyToMobilePatientReceivedMessage(String strSubject, String strMessage) {
+        boolean blResult = false;
+        try {
+            strRandomSubjectMessage = strSubject.concat(" - ").concat(getRandomString());
+            System.out.println("strRandomSubjectMessage >>> :: " + strRandomSubjectMessage);
+//            waitForElement(txtInboxPatient);
+//            waitForElement(btnReply);
+            waitForElement(btnMobileReply);
+            waitForElementClickable(btnMobileReply);
+            jsClick(btnMobileReply);
             waitForElement(txtBoxReplySubject);
             waitForElementClickable(txtBoxReplySubject);
             txtBoxReplySubject.clear();
@@ -1510,8 +1643,8 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(elmntMessages);
             click(elmntMessages);
             waitForSeconds(1);
-            waitForElementClickable(elmntComposePatient);
-            click(elmntComposePatient);
+            waitForElementClickable(elmntMobileComposePatient);
+            click(elmntMobileComposePatient);
             waitForSeconds(1);
             waitForElement(txtComposeMailForMobile);
             blResult = verifyElement(txtComposeMailForMobile);
@@ -1530,7 +1663,7 @@ public class MessagesPage extends BasePage {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
                 waitForElement(btnSave);
                 waitForElementClickable(drpDownSignatureSettings);
-                click(drpDownSignatureSettings);
+                jsClick(drpDownSignatureSettings);
 //                jsScrollIntoView(txtBoxMessages);
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.setCapability("autoGrantPermissions", "true");
@@ -2513,9 +2646,11 @@ public class MessagesPage extends BasePage {
             }
             System.out.println("Success Switch Native App");
             capabilities.setCapability("autoGrantPermissions", "true");
-            swipeUp();
+//            swipeUp();
             waitForSeconds(2);
-            waitForElement(txtMessage);
+//            waitForElement(txtMessage);
+//            waitForSeconds(2);
+            click(txtMessage);
             waitForSeconds(2);
             enterValueRealDevice(txtMessage, strConditionName);
             Set<String> contextNames1 = appiumDriver.getContextHandles();
@@ -3415,9 +3550,10 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(elmntMessages);
             click(elmntMessages);
             waitForSeconds(1);
+            jsScrollIntoView(elmntGroupMessagePatient);
             waitForElement(elmntGroupMessagePatient);
             waitForElementClickable(elmntGroupMessagePatient);
-            click(elmntGroupMessagePatient);
+            jsClick(elmntGroupMessagePatient);
             waitForSeconds(5);
 
             String pageTitle = driver.getCurrentUrl();
@@ -3595,10 +3731,10 @@ public class MessagesPage extends BasePage {
     }
 
     public void clickInboxCloseButton() {
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForElement(btnInboxCloseButton);
             waitForElementClickable(btnInboxCloseButton);
-            jsClick(btnInboxCloseButton);
+            click(btnInboxCloseButton);
             waitForSeconds(1);
             takeScreenshot(driver);
 

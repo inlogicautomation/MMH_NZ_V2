@@ -21,7 +21,7 @@ Feature: Repeat Request Prescription
       | Email Address   | Password           |
       | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
-  @WEB @Mobile @RRP1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S2- Patient to collect the Prescription
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
@@ -35,7 +35,7 @@ Feature: Repeat Request Prescription
       | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &MORE INFO VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& |
 
 
-  @WEB @Mobile @RRP1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S3- Patient Collect the medication by Sent Script by Post
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
