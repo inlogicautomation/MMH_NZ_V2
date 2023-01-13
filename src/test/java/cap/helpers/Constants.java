@@ -63,7 +63,7 @@ public class Constants {
 
     //Drivers mac
     public static final String GECKO_DRIVER_MAC_PATH = CONFIG_FOLDER + "/" + DRIVERS_FOLDER + "/" + "geckodriver_mac";
-    public static final String CHROME_DRIVER_MAC_PATH = CONFIG_FOLDER + "/" + DRIVERS_FOLDER + "/" + "chromedriver_mac";
+    public static final String CHROME_DRIVER_MAC_PATH = CONFIG_FOLDER + "/" + DRIVERS_FOLDER + "/" + "chromedriver";
     public static final String IE_DRIVER_MAC_PATH = CONFIG_FOLDER + "/" + DRIVERS_FOLDER + "/" + "IEDriverServer1.exe";
 
     //Testdata
