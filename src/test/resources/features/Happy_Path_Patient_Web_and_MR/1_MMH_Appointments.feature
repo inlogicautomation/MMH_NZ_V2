@@ -88,7 +88,7 @@ Feature: Appointments
   @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6 - Patient Cancel Appointment
 
-    And I navigate to the "<Appointment>" page
+    And I navigate to the "<Appointment>" Future Appointments page
     And I click cancel button for the created appointment "<Appointment_Cancel_Button>"
     And I enter reason to cancel appointment
     When I click cancel your appointment button
