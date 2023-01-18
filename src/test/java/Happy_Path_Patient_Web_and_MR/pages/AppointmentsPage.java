@@ -49,6 +49,8 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'page-content')]")
     protected WebElement elmntAppointmentPanel;
 
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT')]/i")
+    protected WebElement elmntBookAppointment;
     @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Let’s book your appointment.')]")
     protected WebElement VerflyMobileBookAppointmentPage;
 
@@ -403,10 +405,13 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
 //            waitForElement(elmntWelcomeMessage);
-            WebElement elmntBookAppointment = waitForElement(By.xpath(strAppointments.replace("<<REPLACEMENT>>", strAppointment)));
+//            WebElement elmntBookAppointment = waitForElement(By.xpath(strAppointments.replace("<<REPLACEMENT>>", strAppointment)));
+//            click(elmntBookAppointment);
+//            waitForElement(elmntAppointmentPanel);
+            waitForElement(elmntBookAppointment);
             click(elmntBookAppointment);
-            waitForElement(elmntAppointmentPanel);
-            blResult = verifyElement(elmntAppointmentPanel);
+            waitForElement(VerflyMobileBookAppointmentPage);
+            blResult = verifyElement(VerflyMobileBookAppointmentPage);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -430,6 +435,25 @@ public class AppointmentsPage extends BasePage {
         }
         return blResult;
     }
+
+    public boolean navigateToWebBookAppointmentPage(String strAppointment) {
+        boolean blResult = false;
+        try {
+//            waitForElement(elmntWelcomeMessage);
+//            WebElement elmntBookAppointment = waitForElement(By.xpath(strMobileAppointments.replace("<<REPLACEMENT>>", strAppointment)));
+//            click(elmntBookAppointment);
+            waitForElement(elmntAppointmentPanel);
+            verifyElement(elmntAppointmentPanel);
+            waitForElement(elmntMobileBookAppointmentimg);
+            click(elmntMobileBookAppointmentimg);
+            waitForElement(VerflyMobileBookAppointmentPage);
+            blResult = verifyElement(VerflyMobileBookAppointmentPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
 
     public boolean navigateToMobileFutureAppointmentPage(String strAppointment) {
         boolean blResult = false;
@@ -457,7 +481,7 @@ public class AppointmentsPage extends BasePage {
 //          jsScrollIntoView(elmntSlotTimes);
             jsScrollIntoView(elmntAppointmentPanel);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitAndClick(elmntHealtCenter);
+            click(elmntHealtCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
