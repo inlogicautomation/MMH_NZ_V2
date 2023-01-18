@@ -51,8 +51,15 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT')]/i")
     protected WebElement elmntBookAppointment;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Future appointments')]")
+    protected WebElement elmntWebFutureAppointment;
     @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Let’s book your appointment.')]")
     protected WebElement VerflyMobileBookAppointmentPage;
+
+    @FindBy(how = How.XPATH, using = "//h3[contains(text(),' Future Appointments')]")
+    protected WebElement VerflyWebFutureAppointmentPage;
+
 
     @FindBy(how = How.XPATH, using = "//button[@ng-reflect-message='Book appointment']//span//img")
     protected WebElement elmntMobileBookAppointmentimg;
@@ -60,8 +67,10 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h4[text()='Let’s book the appointment.']")
     protected WebElement lblBookAppointment;
 
-    protected String strAppointments = new StringBuilder().append("//span[contains(text(),'")
+    protected String strAppointments = new StringBuilder().append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
+
+    //div[contains(text(),'Past appointments')]
 
     protected String strMobileAppointments = new StringBuilder().append("//a[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
@@ -407,11 +416,62 @@ public class AppointmentsPage extends BasePage {
 //            waitForElement(elmntWelcomeMessage);
 //            WebElement elmntBookAppointment = waitForElement(By.xpath(strAppointments.replace("<<REPLACEMENT>>", strAppointment)));
 //            click(elmntBookAppointment);
+            waitForElement(elmntAppointmentPanel);
+            waitForElement(elmntBookAppointment);
+            click(elmntBookAppointment);
+            waitForElement(VerflyMobileBookAppointmentPage);
+            blResult = verifyElement(VerflyMobileBookAppointmentPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean navigateToPastAppointmentPage(String strAppointment) {
+        boolean blResult = false;
+        try {
+//            waitForElement(elmntWelcomeMessage);
+            WebElement elmntBookAppointment = waitForElement(By.xpath(strAppointments.replace("<<REPLACEMENT>>", strAppointment)));
+            click(elmntBookAppointment);
+//            waitForElement(elmntAppointmentPanel);
+//            waitForElement(elmntBookAppointment);
+//            click(elmntBookAppointment);
+//            waitForElement(VerflyMobileBookAppointmentPage);
+            blResult=true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean navigateToAppointmentPage(String strAppointment) {
+        boolean blResult = false;
+        try {
+//            waitForElement(elmntWelcomeMessage);
+//            WebElement elmntBookAppointment = waitForElement(By.xpath(strAppointments.replace("<<REPLACEMENT>>", strAppointment)));
+//            click(elmntBookAppointment);
 //            waitForElement(elmntAppointmentPanel);
             waitForElement(elmntBookAppointment);
             click(elmntBookAppointment);
             waitForElement(VerflyMobileBookAppointmentPage);
             blResult = verifyElement(VerflyMobileBookAppointmentPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean navigateToWebFutureAppointmentPage(String strAppointment) {
+        boolean blResult = false;
+        try {
+//            waitForElement(elmntWelcomeMessage);
+//            WebElement elmntBookAppointment = waitForElement(By.xpath(strAppointments.replace("<<REPLACEMENT>>", strAppointment)));
+//            click(elmntBookAppointment);
+//            waitForElement(elmntAppointmentPanel);
+            waitForElement(elmntWebFutureAppointment);
+            click(elmntWebFutureAppointment);
+            waitForElement(VerflyWebFutureAppointmentPage);
+            blResult = verifyElement(VerflyWebFutureAppointmentPage);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -786,7 +846,7 @@ public class AppointmentsPage extends BasePage {
 
                 String strConvertedTime = strSlotDate;
 //
-////                strConvertedTime = "0" + strConvertedTime;
+//                strConvertedTime = "0" + strConvertedTime;
 
                 String strFinalOutDateTime = strConvertedTime;
 

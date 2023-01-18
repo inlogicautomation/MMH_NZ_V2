@@ -33,7 +33,7 @@ public class MyHealthRecordsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")
     protected WebElement btnMobileMenu;
-    @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-prescription-extra-medicine']//following::span[1]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Prescriptions')]")
     protected WebElement elmntPrescriptions;
 
     @FindBy(how = How.XPATH, using = "(//h3[text()='Prescriptions'])[1]")
@@ -84,10 +84,10 @@ public class MyHealthRecordsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//mat-option//child::span[normalize-space(text())='My Entries']")
     protected WebElement elmntFilterdropMyEntries;
-    protected String elmntFilterbyDrop = new StringBuilder().append("//mat-option//child::span[normalize-space(text())='")
-            .append("<<REPLACEMENT>>").append("']").toString();
+    protected String elmntFilterbyDrop = new StringBuilder().append(" //div[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]").toString();
 
-
+    //div[contains(text(),'Prescriptions')]
     @FindBy(how = How.XPATH, using = "//span[text()='Conditions']")
     protected WebElement elmntConditions;
 
@@ -750,12 +750,14 @@ public class MyHealthRecordsPage extends BasePage {
 
     }
 
-    public void clickMyHealthRecordsOptionFromMenu() {
+    public void clickMyHealthRecordsOptionFromMenu(String Strdata) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElementClickable(btnMyHealthRecordsExpand);
             jsClick(btnMyHealthRecordsExpand);
 //            waitForElementClickable(elmntPrescriptions);
 //            jsClick(elmntPrescriptions);
+                        WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", Strdata)));
+            jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         }
@@ -793,7 +795,7 @@ public class MyHealthRecordsPage extends BasePage {
         jsClick(btnMyHealthRecordsExpand);
     }
 
-    public boolean selectEntriesFromHealthCentre(String strFamilyMember) {
+    public boolean selectEntriesFromHealthCentre() {
         boolean blResult = false;
         try {
 //            waitForSeconds(2);
@@ -991,12 +993,14 @@ public class MyHealthRecordsPage extends BasePage {
 
     }
 
-    public void clickMyHealthRecordsOptionFromMenuClassifications() {
+    public void clickMyHealthRecordsOptionFromMenuClassifications(String strdata) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntConditions);
-            jsClick(elmntConditions);
+//            waitForElementClickable(elmntConditions);
+//            jsClick(elmntConditions);
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strdata)));
+            jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         }
@@ -1119,14 +1123,18 @@ public class MyHealthRecordsPage extends BasePage {
         return blResult;
     }
 
-    public void clickMyHealthRecordsOptionFromMenuClinicNotes() {
+    public void clickMyHealthRecordsOptionFromMenuClinicNotes(String strdata) {
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
             jsScrollIntoView(elmntClinicalNotes);
-            waitForElementClickable(elmntClinicalNotes);
-            jsClick(elmntClinicalNotes);
+//            waitForElementClickable(elmntClinicalNotes);
+//            jsClick(elmntClinicalNotes);
+
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strdata)));
+            jsScrollIntoView(elmntEntriesFromHealthCentre);
+            jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
 
@@ -1295,12 +1303,14 @@ public class MyHealthRecordsPage extends BasePage {
         return blResult;
     }
 
-    public void clickMyHealthRecordsOptionFromMenuAllergies() {
+    public void clickMyHealthRecordsOptionFromMenuAllergies(String strdata) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntAllergies);
-            jsClick(elmntAllergies);
+//            waitForElementClickable(elmntAllergies);
+//            jsClick(elmntAllergies);
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strdata)));
+            jsClick(elmntEntriesFromHealthCentre);
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -1331,12 +1341,14 @@ public class MyHealthRecordsPage extends BasePage {
         }
     }
 
-    public void clickMyHealthRecordsOptionFromMenuImmunisations() {
+    public void clickMyHealthRecordsOptionFromMenuImmunisations(String strdata) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntImmunisations);
-            jsClick(elmntImmunisations);
+//            waitForElementClickable(elmntImmunisations);
+//            jsClick(elmntImmunisations);
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strdata)));
+            jsClick(elmntEntriesFromHealthCentre);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForSeconds(3);
@@ -3137,6 +3149,8 @@ public class MyHealthRecordsPage extends BasePage {
                 }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy A13")){
                     waitForSeconds(3);
+                    click(WhileUsingTheAppForA13);
+                    waitForSeconds(2);
                     click(WhileUsingTheAppForA13);
                     waitForSeconds(2);
                     click(FileIcon);

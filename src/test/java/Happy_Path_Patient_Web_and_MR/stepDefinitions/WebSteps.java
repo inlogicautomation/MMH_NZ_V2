@@ -981,20 +981,20 @@ public class WebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications(strHealthCenter);
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre());
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications();
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications(strHealthCenter);
 //            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications();
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications(strHealthCenter);
 //            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
         }
 
@@ -1074,15 +1074,15 @@ public class WebSteps {
         List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
 
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes(strHealthCenter);
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes();
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes(strHealthCenter);
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes();
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes(strHealthCenter);
 
         }
     }
@@ -1161,21 +1161,21 @@ public class WebSteps {
     @When("I navigate to the {string}Allergies page dropdown")
     public void iNavigateToTheAllergiesPageDropdown(String strHealthCenter) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
+//            List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies(strHealthCenter);
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             List<String> lstAllergiesDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies();
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies(strHealthCenter);
 //            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAllergiesDetails.get(0))));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             List<String> lstAllergiesDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies();
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies(strHealthCenter);
 //            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAllergiesDetails.get(0))));
         }
 
@@ -1252,17 +1252,17 @@ public class WebSteps {
 
     @When("I navigate to the {string}Immunisations page dropdown")
     public void iNavigateToTheImmunisationsPageDropdown(String strHealthCenter) {
-        List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
+//        List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
 
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations(strHealthCenter);
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations();
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations(strHealthCenter);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations();
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations(strHealthCenter);
 
         }
     }
@@ -1542,11 +1542,11 @@ public class WebSteps {
         }
     }
 
-    @When("I navigate to the Clinic Notes")
-    public void iNavigateToTheClinicNotes() {
-        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes();
-
-    }
+//    @When("I navigate to the Clinic Notes")
+//    public void iNavigateToTheClinicNotes(String strHealthCenter) {
+//        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes(strHealthCenter);
+//
+//    }
 
     @When("I select {string} filter dropdown")
     public void iSelectFilterDropdown(String strOption) {
@@ -1562,10 +1562,10 @@ public class WebSteps {
         }
     }
 
-    @And("I navigate to the Prescriptions")
-    public void iNavigateToThePrescriptions() {
-        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu();
-    }
+//    @And("I navigate to the Prescriptions")
+//    public void iNavigateToThePrescriptions(String strdata) {
+//        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu(strdata);
+//    }
 
     @Then("I sholud see all My Entries in Prescription page")
     public void iSholudSeeAllMyEntriesInPrescriptionPage(List<String> PrescriptionsMyEntries) {
@@ -1575,10 +1575,10 @@ public class WebSteps {
         }
     }
 
-    @And("I navigate to the Allergies")
-    public void iNavigateToTheAllergies() {
-        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies();
-    }
+//    @And("I navigate to the Allergies")
+//    public void iNavigateToTheAllergies(String strHealthCenter) {
+//        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies(strHealthCenter);
+//    }
 
     @Then("I sholud see all My Entries Allergies page")
     public void iSholudSeeAllMyEntriesAllergiesPage(List<String> AllergiesMyEntries) {
@@ -1588,10 +1588,10 @@ public class WebSteps {
         }
     }
 
-    @And("I navigate to the Immunisations")
-    public void iNavigateToTheImmunisations() {
-        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations();
-    }
+//    @And("I navigate to the Immunisations")
+//    public void iNavigateToTheImmunisations(String strHealthCenter) {
+//        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations(strHealthCenter);
+//    }
 
 
     @Then("I sholud see all My Entries Immunisations page")
@@ -1602,10 +1602,10 @@ public class WebSteps {
         }
     }
 
-    @And("I navigate to the Conditions")
-    public void iNavigateToTheConditions() {
-        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications();
-    }
+//    @And("I navigate to the Conditions")
+//    public void iNavigateToTheConditions(String strHealthCenter) {
+//        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications(strHealthCenter);
+//    }
 
     @Then("I sholud see all My Entries Classifications page")
     public void iSholudSeeAllMyEntriesClassificationsPage(List<String> ClassificationsMyEntries) {
@@ -2122,21 +2122,21 @@ public class WebSteps {
     @When("I navigate to the Prescription {string} page")
     public void iNavigateToThePrescriptionPage(String strHealthCenter) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
+//            List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu();
-            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu(strHealthCenter);
+            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu();
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu(strHealthCenter);
 //            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectMobileEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
 
-            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu();
+            demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu(strHealthCenter);
 //            Assert.assertTrue(demoPageContainer.myHealthRecordsPage.selectMobileEntriesFromHealthCentre(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
         }
     }
@@ -3548,7 +3548,7 @@ public class WebSteps {
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
-            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToBookAppointmentPage(strAppointments));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToWebFutureAppointmentPage(strAppointments));
         }
     }
 
@@ -3566,8 +3566,33 @@ public class WebSteps {
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
-            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToBookAppointmentPage(strAppointments));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToPastAppointmentPage(strAppointments));
         }
+    }
+
+    @And("I navigate to the Prescriptions {string}")
+    public void iNavigateToThePrescriptions(String strdata) {
+        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu(strdata);
+    }
+
+    @And("I navigate to the Allergies {string}")
+    public void iNavigateToTheAllergies(String strHealthCenter) {
+        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies(strHealthCenter);
+    }
+
+    @And("I navigate to the Immunisations {string}")
+    public void iNavigateToTheImmunisations(String strHealthCenter) {
+        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations(strHealthCenter);
+    }
+
+    @And("I navigate to the Conditions {string}")
+    public void iNavigateToTheConditions(String strHealthCenter) {
+        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications(strHealthCenter);
+    }
+
+    @And("I navigate to the Clinic Notes {string}")
+    public void iNavigateToTheClinicNotes(String strHealthCenter) {
+        demoPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes(strHealthCenter);
     }
 }
 

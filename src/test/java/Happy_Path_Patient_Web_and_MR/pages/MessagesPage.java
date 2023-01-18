@@ -55,7 +55,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Compose Email')])[2]")
     protected WebElement txtComposeMailForMobile;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Setting')]")
+    @FindBy(how = How.XPATH, using = "//img[@mattooltip='Message settings']")
     protected WebElement elmntMessagesSettings;
 
     @FindBy(how = How.XPATH, using = " //div[contains(@class,'settings')]//span//img")
@@ -121,7 +121,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'User settings updated successfully')]")
     protected WebElement txtSettingSuccessPopUp;
 
-    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Inbox')])[2]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Inbox')]")
     protected WebElement elmntInboxDoctor;
 
     @FindBy(how = How.XPATH, using = "//span[text()='Practice Menu']")
@@ -296,6 +296,12 @@ public class MessagesPage extends BasePage {
             .append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]")
+            .toString();
+
+    protected String receivedBodyMessage = new StringBuilder()
+            .append("(//p[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')])[1]")
             .toString();
 
     protected String receivedMessageSubjectForMobile = new StringBuilder()
@@ -1095,8 +1101,8 @@ public class MessagesPage extends BasePage {
             System.out.println("X Path-inboxMessageSubject >>> :: " + receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage)));
             WebElement inboxReceivedSubject = waitForElement(By.xpath(receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage))));
             waitForElement(inboxReceivedSubject);
-            System.out.println("X Path-inboxMessageSubject >>> :: " + receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strBody)));
-            WebElement bodyMessage = waitForElement(By.xpath(receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strBody))));
+            System.out.println("X Path-inboxMessageSubject >>> :: " + receivedBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strBody)));
+            WebElement bodyMessage = waitForElement(By.xpath(receivedBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strBody))));
             waitForElement(bodyMessage);
             takeScreenshot(driver);
             blResult = verifyElement(bodyMessage);
@@ -2095,8 +2101,8 @@ public class MessagesPage extends BasePage {
             waitForSeconds(3);
             waitForElement(txtMyHomePage);
 //            waitForElement(elmntsMenu);
-            waitForElement(elmntPraticeMenuDoctor);
-            jsClick(elmntPraticeMenuDoctor);
+//            waitForElement(elmntPraticeMenuDoctor);
+//            jsClick(elmntPraticeMenuDoctor);
             waitForSeconds(3);
             jsScrollIntoView(elmntInboxDoctor);
             waitForElementClickable(elmntInboxDoctor);

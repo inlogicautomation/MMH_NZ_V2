@@ -35,14 +35,14 @@ Feature: My Health Records
       | &PRESCRIPTION_TABLE_DATA_2& | &PRESCRIPTION_ICON_DATA_2& | &PRESCRIPTION_MOBILE_ICON_DATA_2& |
     And I navigate to the Homepage
     Examples:
-      | Prescription     |
-      | &FILTER_BY_DATA& |
+      | Prescription  |
+      | Prescriptions |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S2 -Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Prescriptions Details
 
     Given As a user I am on HomePage
-    And I navigate to the Prescriptions
+    And I navigate to the Prescriptions "<Header>"
     And  I should see all the Prescription Entries From Health center Medicine Details in a grid view
       | &PRESCRIPTION_TABLE_DATA&   |
       | &PRESCRIPTION_TABLE_DATA_1& |
@@ -58,8 +58,8 @@ Feature: My Health Records
     Then I should see all the Prescription My Entries Medicine details in more info
       | &MY_ENTRIES_PRESCRIPTIONS_DATA& | &PRESCRIPTIONS_INFO_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_PRESCRIPTIONS& |
     Examples:
-      | Option     |
-      | My Entries |
+      | Header        |
+      | Prescriptions |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S2 -Patient validate edit and delete in My entries Prescriptions Details
@@ -92,14 +92,14 @@ Feature: My Health Records
     And I navigate to the Homepage
 
     Examples:
-      | Allergies        |
-      | &FILTER_BY_DATA& |
+      | Allergies |
+      | Allergies |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S4-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Allergies Details
 
     Given As a user I am on HomePage
-    And I navigate to the Allergies
+    And I navigate to the Allergies "<Header>"
     And I should see all the Allergies Entries From Health center Medicine Details in a grid view
       | &ALLERGIES_TABLE_DATA&   |
       | &ALLERGIES_TABLE_DATA_1& |
@@ -113,8 +113,8 @@ Feature: My Health Records
     Then I should see all the Allergies My Entries Medicine details in more info
       | &MY_ENTRIES_ALLERGIES_DATA& | &ALLERGIES_INFO_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_ALLERGIES& |
     Examples:
-      | Option     |
-      | My Entries |
+      | Header    |
+      | Allergies |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S4-Patient validate edit and delete in My entries Allergies Details
@@ -143,14 +143,14 @@ Feature: My Health Records
       | &IMMUNISATIONS_TABLE_DATA_1& | &IMMUNISATIONS_ICON_DATA_1& | &IMMUNISATION_MOBILE_ICON_DATA_1& |
     And I navigate to the Homepage
     Examples:
-      | Immunisations    |
-      | &FILTER_BY_DATA& |
+      | Immunisations |
+      | Immunisations |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Immunisations Details
 
     Given As a user I am on HomePage
-    And I navigate to the Immunisations
+    And I navigate to the Immunisations "<Header>"
     And I should see all the Immunisations Entries From Health center Medicine Details in a grid view
       | &IMMUNISATIONS_TABLE_DATA&   |
       | &IMMUNISATIONS_TABLE_DATA_1& |
@@ -161,8 +161,8 @@ Feature: My Health Records
     Then I should see all the Immunisations My Entries Medicine details in more info
       | &MY_ENTRIES_IMMUNISATIONS_DATA& | &IMMUNISATION_INFO_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_IMMUNISATIONS& |
     Examples:
-      | Option     |
-      | My Entries |
+      | Header        |
+      | Immunisations |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6-Patient validate edit and delete in My entries Immunisation Details
@@ -213,14 +213,14 @@ Feature: My Health Records
       | &CLASSIFICATIONS_TABLE_DATA_2& | &CLASSIFICATIONS_ICON_DATA_2& | &CLASSIFICATIONS_MOBILE_ICON_DATA_2& |
     And I navigate to the Homepage
     Examples:
-      | Conditions       |
-      | &FILTER_BY_DATA& |
+      | Conditions |
+      | Conditions |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S8-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Classifications Details
 
     Given As a user I am on HomePage
-    And I navigate to the Conditions
+    And I navigate to the Conditions "<Header>"
     And I should see all the Conditions Entries From Health center Medicine Details in a grid view
       | &CLASSIFICATIONS_TABLE_DATA&   |
       | &CLASSIFICATIONS_TABLE_DATA_1& |
@@ -233,8 +233,8 @@ Feature: My Health Records
     Then I should see all the Conditions My Entries Medicine details in more info
       | &DATA_MY_ENTRIES_CLASSIFICATIONS& | &CLASSIFICATIONS_INFO_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLASSIFICATION& |
     Examples:
-      | Option     |
-      | My Entries |
+      | Header     |
+      | Conditions |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S8-Patient validate edit and delete in My entries Classifications Details
@@ -286,14 +286,14 @@ Feature: My Health Records
     And I navigate to the Homepage
 
     Examples:
-      | ClinicNotes      |
-      | &FILTER_BY_DATA& |
+      | ClinicNotes     |
+      | Clinician Notes |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S11-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Clinic Notes Details
 
     Given As a user I am on HomePage
-    And I navigate to the Clinic Notes
+    And I navigate to the Clinic Notes "<Header>"
     And I should see all the Clinic Notes Entries From Health center Medicine Details in a grid view
       | &CLINIC_TABLE_DATA&   |
       | &CLINIC_TABLE_DATA_1& |
@@ -308,8 +308,8 @@ Feature: My Health Records
       | &DATA_MY_ENTRIES_CLINIC_NOTES_1& | &CLINIC_NOTES_INFO_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLINIC_NOTES_1& |
 
     Examples:
-      | Option     |
-      | My Entries |
+      | Header          |
+      | Clinician Notes |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S11-Patient validate edit and delete in My entries Clinic Notes Details

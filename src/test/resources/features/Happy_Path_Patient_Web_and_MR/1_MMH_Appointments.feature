@@ -129,7 +129,7 @@ Feature: Appointments
   @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S2 - Join Video Appointment
 
-    And I navigate to the "<Appointment>" page
+    And I navigate to the "<Appointment>" Future Appointments page
     And I join now button for video consultation "<Join_Consultation>"
     Then I should see Appointment is not for today popup in future appointments page
 #   Then I should see video consultation window with icons "<All_Icons>"
@@ -169,7 +169,7 @@ Feature: Appointments
       | Book Appointment | &BOOK_PHONE_APPOINTMENT& | &PHONE_APPOINTMENT_DETAILS& | &PHONE_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @APP @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S7 - Patient can view all the future date booked appointments in card view
 
     Given As a user I am on HomePage
@@ -181,7 +181,7 @@ Feature: Appointments
       | Appointments        |
       | Future Appointments |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @APP @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S7 - Patient can view all the future date booked appointments in grid view
 
     Given I am on "<Tab>" page
@@ -202,7 +202,7 @@ Feature: Appointments
 
     Examples:
       | Appointments      |
-      | Past Appointments |
+      | Past appointments |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S8 - Patient can view all the past date booked appointments in card view
@@ -213,7 +213,7 @@ Feature: Appointments
 
     Examples:
       | Tab               |
-      | Past Appointments |
+      | Past appointments |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S9 - Patient can view all the video appointments invites sent from PMS/Provider in grid view
