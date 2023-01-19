@@ -933,7 +933,7 @@ public class MessagesPage extends BasePage {
             click(elmntMessages);
             waitForSeconds(1);
             waitForElementClickable(elmntDraft);
-            click(elmntDraft);
+            jsClick(elmntDraft);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(1);
             String PageUrl = driver.getCurrentUrl();
@@ -1989,7 +1989,7 @@ public class MessagesPage extends BasePage {
             waitForElement(txtInboxPage);
             waitForElement(elmntSentDoctor);
             waitForElementClickable(elmntSentDoctor);
-            click(elmntSentDoctor);
+            jsClick(elmntSentDoctor);
             waitForElement(txtSent);
             blResult = verifyElement(txtSent);
             System.out.println("Successfully navigated to the inbox");
@@ -3080,9 +3080,10 @@ public class MessagesPage extends BasePage {
         try {
             waitForSeconds(2);
             WebElement Subject = waitForElement(By.xpath(draftSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(lstDetails.get(5)))));
+            System.out.println(">>>>>>>>>>>>"+Subject);
             waitForElement(Subject);
             waitForElementClickable(Subject);
-            waitAndClick(Subject);
+            jsClick(Subject);
 
             List<String> LstDetails = new ArrayList<>();
 //            LstDetails.add(TestDataUtil.getValue(lstDetails.get(1)));

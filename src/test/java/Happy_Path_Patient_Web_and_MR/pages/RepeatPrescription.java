@@ -44,7 +44,7 @@ public class RepeatPrescription extends BasePage {
     protected WebElement elmntMobileRequestNewScript;
 
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'View Previous Requests')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'View history')]")
     protected WebElement elmntViewPreviousRequests;
 
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Request New Script')]")

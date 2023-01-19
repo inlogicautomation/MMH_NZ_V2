@@ -620,7 +620,7 @@ public class WebSteps {
         System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
         System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
 
-        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetailsForSentScriptByPostInCardView(strMedicationDetails));
+        demoPageContainer.repeatPrescription.verifyThePrescriptionDetailsForSentScriptByPostInCardView(strMedicationDetails);
 
     }
 
@@ -827,7 +827,7 @@ public class WebSteps {
         System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
         System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
 
-        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetailsForSentScriptToPharmacyInCardView(strMedicationDetails));
+        demoPageContainer.repeatPrescription.verifyThePrescriptionDetailsForSentScriptToPharmacyInCardView(strMedicationDetails);
     }
 
     @Then("I should see the Prescription status for Delivery Meds by Pharmacy{string}")

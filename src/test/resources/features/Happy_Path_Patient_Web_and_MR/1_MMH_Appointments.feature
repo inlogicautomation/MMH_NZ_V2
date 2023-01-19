@@ -179,7 +179,7 @@ Feature: Appointments
 
     Examples:
       | Appointments        |
-      | Future Appointments |
+      | Future appointments |
 
   @WEB @APP @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S7 - Patient can view all the future date booked appointments in grid view
@@ -190,7 +190,7 @@ Feature: Appointments
 
     Examples:
       | Tab                 |
-      | Future Appointments |
+      | Future appointments |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S8 - Patient can view all the past date booked appointments in card view
@@ -226,4 +226,4 @@ Feature: Appointments
 
     Examples:
       | Appointments      | All_Icons     |
-      | Video Invitations | &VIDEO_ICONS& |
+      | Video invitations | &VIDEO_ICONS& |

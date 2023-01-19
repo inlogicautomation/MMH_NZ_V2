@@ -824,7 +824,7 @@ public class AppointmentsPage extends BasePage {
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
-            waitForElement(elmntPaymentProfile);
+//            waitForElement(elmntPaymentProfile);
             String strDatePattern1 = "dd MMM yyyy";
             String strDate = TestDataUtil.getValue(strFutureDate);
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
@@ -844,7 +844,7 @@ public class AppointmentsPage extends BasePage {
         } catch (Exception e) {
             try {
                 waitForSeconds(2);
-                waitForElement(elmntPaymentProfile);
+//                waitForElement(elmntPaymentProfile);
                 String strDatePattern1 = "dd MMM yyyy";
                 String strDate = TestDataUtil.getValue(strFutureDate);
                 String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
@@ -975,7 +975,7 @@ public class AppointmentsPage extends BasePage {
 
             String strConvertedTime = strTime;
 
-            strConvertedTime = "0" + strConvertedTime;
+//            strConvertedTime = "0" + strConvertedTime;
 
             String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
 

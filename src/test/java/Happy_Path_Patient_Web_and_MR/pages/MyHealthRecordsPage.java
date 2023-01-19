@@ -36,6 +36,9 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Prescriptions')]")
     protected WebElement elmntPrescriptions;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Clinician Notes')]")
+    protected WebElement elmntClinicianNotes;
+
     @FindBy(how = How.XPATH, using = "(//h3[text()='Prescriptions'])[1]")
     protected WebElement headerPrescriptions;
     @FindBy(how = How.XPATH, using = "(//h3[text()='Allergies'])[1]")
@@ -187,7 +190,7 @@ public class MyHealthRecordsPage extends BasePage {
             .append("<<REPLACEMENT2>>").append("']/following-sibling::td[text()='")
             .append("<<REPLACEMENT3>>").append("']/following-sibling::td[text()='")
             .append("<<REPLACEMENT4>>").append("']/following-sibling::td//following-sibling::span[@class=\"mat-ripple mat-button-ripple\"]").toString();
-    @FindBy(how = How.XPATH, using = "//span[text()='Lab Results']")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Lab Results')]")
     protected WebElement elmntLabResults;
 
 
@@ -1131,8 +1134,8 @@ public class MyHealthRecordsPage extends BasePage {
 //            jsScrollIntoView(elmntClinicalNotes);
 //            waitForElementClickable(elmntClinicalNotes);
 //            jsClick(elmntClinicalNotes);
-
-            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strdata)));
+jsScrollIntoView(elmntClinicianNotes);
+            WebElement elmntEntriesFromHealthCentre = waitForElementClickable(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strdata)));
             jsScrollIntoView(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
