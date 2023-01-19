@@ -337,7 +337,14 @@ public class MessagesPage extends BasePage {
             .append("<<REPLACEMENT>>")
             .append("')])[1]")
             .toString();
+
+    protected String elmntDoctorSentSubject = new StringBuilder()
+            .append("(//mat-card-title[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')])[1]")
+            .toString();
 //(//mat-card-title[contains(text(),'Received Msg Testing-DOOWGQFJ')])[1]
+//    (//mat-card-title[contains(text(),'Received Msg Testing-OCMDIQWF')])[1]
     protected String elmntinnerSubject = new StringBuilder()
             .append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
@@ -2010,8 +2017,8 @@ public class MessagesPage extends BasePage {
 //            waitForElementClickable(elmntRefresh);
 //            click(elmntRefresh);
             waitForSeconds(3);
-            System.out.println(elmntSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
-            WebElement Subject = waitForElement(By.xpath(elmntSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
+            System.out.println(elmntDoctorSentSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
+            WebElement Subject = waitForElement(By.xpath(elmntDoctorSentSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             waitForElement(Subject);
             blResult = verifyElement(Subject);
             System.out.println("Successfully verified sent Message");
@@ -3711,6 +3718,7 @@ public class MessagesPage extends BasePage {
             WebElement bodyMessage = waitForElement(By.xpath(txtBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(lstDetails))));
             System.out.println("X-Path for txtBodyMessageForMobile >>> :: " + txtBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(lstDetails)));
             takeScreenshot(driver);
+            jsScrollDown();
             jsScrollIntoView(bodyMessage);
             blResult = verifyElement(bodyMessage);
             driver.switchTo().defaultContent();
