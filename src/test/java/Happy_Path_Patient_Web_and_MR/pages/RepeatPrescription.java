@@ -423,10 +423,10 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "(//button//span[text()='Select'])[1]")
     protected WebElement btnSelectForSentScript;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Change')]")
+    @FindBy(how = How.XPATH, using = "//span[text()='Change ']")
     protected WebElement btnChange;
 
-    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Change')])[2]")
+    @FindBy(how = How.XPATH, using = "//span[text()='Change ']")
     protected WebElement btnChangeForMobile;
 
     @FindBy(how = How.XPATH, using = "(//button//span[text()='Select'])[2]")

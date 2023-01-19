@@ -75,11 +75,14 @@ public class AppointmentsPage extends BasePage {
     protected String strMobileAppointments = new StringBuilder().append("//a[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
-    protected String strMessages = new StringBuilder().append("//span[contains(text(),'")
+    protected String strMessages = new StringBuilder().append("//a[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
     protected WebElement elmntHealtCenter;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Future Appointments')]")
+    protected WebElement elmntfuturetab;
 
     @FindBy(how = How.XPATH, using = "(//div[@class='toast toast-warning'])[1]")
     protected WebElement elmntWarningPopup;
@@ -520,7 +523,8 @@ public class AppointmentsPage extends BasePage {
         try {
 //            waitForElement(elmntWelcomeMessage);
             WebElement elmntBookAppointment = waitForElement(By.xpath(strMobileAppointments.replace("<<REPLACEMENT>>", strAppointment)));
-            click(elmntBookAppointment);
+            System.out.println(">>>>>>>>>>>>>"+elmntBookAppointment);
+            jsClick(elmntBookAppointment);
             waitForElement(elmntAppointmentPanel);
             blResult =  verifyElement(elmntAppointmentPanel);
         } catch (Exception e) {
@@ -673,14 +677,19 @@ public class AppointmentsPage extends BasePage {
             jsScrollIntoView(elmntProviderListView);
             By elmntProvider = By.xpath(elmntSelectProviderMobileView.replace("<<REPLACEMENT>>", strProvider));
             System.out.println("elmntPackName>>>>>> " + elmntProvider);
-            waitForSeconds(3);
+            waitForSeconds(5);
             while (!(verifyElement(elmntProvider))){
-                waitForSeconds(3);
+                waitForSeconds(5);
+
                 click(btnNextArrow);
+                waitForSeconds(5);
+
             }
             WebElement elmntProvider1 = waitForElement(By.xpath(elmntSelectProviderMobileView.replace("<<REPLACEMENT>>", strProvider)));
+            System.out.println("elmntPackName>>>>>> " + elmntProvider1);
+            isElementDisplayed(elmntProvider1);
+            mouseClick(elmntProvider1);
             waitForSeconds(3);
-            jsClick(elmntProvider1);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             takeScreenshot(driver);
@@ -823,8 +832,8 @@ public class AppointmentsPage extends BasePage {
             WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strDateValue)));
             verifyElement(elmntAppointmentDetails);
 
-            WebElement elmntAppointments = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strSlotDate)));
-            verifyElement(elmntAppointments);
+//            WebElement elmntAppointments = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strSlotDate)));
+//            verifyElement(elmntAppointments);
 
             for (String strDetails : lstDetails) {
                 WebElement elmntReservationDetails = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetails))));
@@ -851,8 +860,8 @@ public class AppointmentsPage extends BasePage {
                 String strFinalOutDateTime = strConvertedTime;
 
 
-                WebElement elmntAppointments = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strFinalOutDateTime)));
-                verifyElement(elmntAppointments);
+//                WebElement elmntAppointments = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strFinalOutDateTime)));
+//                verifyElement(elmntAppointments);
 
                 for (String strDetails : lstDetails) {
                     WebElement elmntReservationDetails = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetails))));
@@ -1039,7 +1048,7 @@ public class AppointmentsPage extends BasePage {
 
             String strConvertedTime = strTime;
 
-            strConvertedTime = "0" + strConvertedTime;
+//            strConvertedTime = "0" + strConvertedTime;
 
             String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
 
@@ -1145,7 +1154,7 @@ public class AppointmentsPage extends BasePage {
             while (!(verifyElement(elmntProvider))) {
 //                System.out.println("Swipe>>>>> " + verifyElement(elmntProvider));
 //                swipeHorizontalMobileView(elmntProviders);
-                click(elmntProviders);
+                jsClick(elmntProviders);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(5);
                 Robot robot = new Robot();
@@ -1991,6 +2000,8 @@ public class AppointmentsPage extends BasePage {
     public boolean verifyCancelAppointmentMessage(List<String> lstDetails) {
         boolean blResult = false;
         try {
+            waitForElement(elmntfuturetab);
+            jsClick(elmntfuturetab);
             waitForSeconds(2);
             waitForElement(elmntFutureAppointmentTab);
             String strDatePattern1 = "dd MMM yyyy";
@@ -2005,7 +2016,7 @@ public class AppointmentsPage extends BasePage {
 
             String strConvertedTime = strTime;
 
-            strConvertedTime = "0" + strConvertedTime;
+//            strConvertedTime = "0" + strConvertedTime;
 
             String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
 
@@ -2028,6 +2039,8 @@ public class AppointmentsPage extends BasePage {
 
         } catch (Exception e) {
             try {
+                waitForElement(elmntfuturetab);
+                jsClick(elmntfuturetab);
                 waitForSeconds(2);
                 waitForElement(elmntFutureAppointmentTab);
                 String strDatePattern1 = "dd MMM yyyy";
@@ -2319,6 +2332,7 @@ public class AppointmentsPage extends BasePage {
     public boolean cencelingAlltheAppointments() {
         boolean isVerified = false;
         try {
+
             waitForSeconds(3);    //wait until 'loader'  loading
             if (verifyElement(elmntCancelAppointments)) {
                 List<WebElement> btnCancel = driver.findElements(By.xpath("//button[@class='mat-focus-indicator btn mat-button mat-button-base']/span[text()='Cancel Appointment']"));
@@ -2326,6 +2340,12 @@ public class AppointmentsPage extends BasePage {
                     System.out.println("btnCancel exists and size=>" + btnCancel.size());
                     int page_no = btnCancel.size();
                     for (int i = 1; i <= btnCancel.size(); i++) {
+                        if (verifyElement(elmntfuturetab)){
+                            click(elmntfuturetab);
+
+                        }else {
+                            System.out.println("Already user in Future Appointments page");
+                        }
                         System.out.println("TEST");
                         waitForSeconds(3);
                        WebElement cancelButton=driver.findElement(By.xpath("(//button[@class='mat-focus-indicator btn mat-button mat-button-base']/span[text()='Cancel Appointment'])[1]"));

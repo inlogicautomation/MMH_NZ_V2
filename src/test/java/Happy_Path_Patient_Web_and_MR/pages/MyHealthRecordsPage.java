@@ -136,7 +136,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Clinician Notes']")
     protected WebElement elmntClinicalNotes;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Summary']")
+    @FindBy(how = How.XPATH, using = "//span[text()='Export']")
     protected WebElement elmntSummary;
     @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-file-export-files']/following::span[text()='Export']")
     protected WebElement elmntExport;
@@ -224,7 +224,7 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement elmntDownArrow1;
 
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Recalls')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Recalls')]")
     protected WebElement elmntRecalls;
 
 
@@ -1128,7 +1128,7 @@ public class MyHealthRecordsPage extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            jsScrollIntoView(elmntClinicalNotes);
+//            jsScrollIntoView(elmntClinicalNotes);
 //            waitForElementClickable(elmntClinicalNotes);
 //            jsClick(elmntClinicalNotes);
 
@@ -1175,8 +1175,8 @@ public class MyHealthRecordsPage extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntSummary);
-            jsClick(elmntSummary);
+//            waitForElementClickable(elmntSummary);
+//            jsClick(elmntSummary);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         }
@@ -1385,6 +1385,7 @@ public class MyHealthRecordsPage extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
+            jsScrollIntoView(elmntLabResults);
             waitForElementClickable(elmntLabResults);
             jsClick(elmntLabResults);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
