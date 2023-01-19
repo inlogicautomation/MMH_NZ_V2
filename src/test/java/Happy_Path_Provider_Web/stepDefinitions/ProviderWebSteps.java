@@ -629,4 +629,48 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.preScreeningPage.selectHealthCentre(strHealthCentre));
         Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickPatientWebBannerMessageYesRadioBtn());
     }
+
+    @And("I click the edit button and changing the data as per Deliver Via Zoom Pharmacy requirements{string}")
+    public void iClickTheEditButtonAndChangingTheDataAsPerDeliverViaZoomPharmacyRequirement(String strDetail) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strDetail);
+        System.out.println("RRPScriptSetting details >>> :: " + lstDetails);
+        providerPageContainer.providerHomePage.clickEditButton();
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectHealthCentreLocation(lstDetails.get(0)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectServiceName(lstDetails.get(1)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectOtherReqData());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqDataRuleA());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.select1stDVZPServiceOption(lstDetails.get(2)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeFor1stDVZPSelectedServiceOption(lstDetails.get(3)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescFor1stDVZPSelectedServiceOption(lstDetails.get(4)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.select2ndDVZPServiceOption(lstDetails.get(5)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeFor2ndDVZPSelectedServiceOption(lstDetails.get(6)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescFor2ndDVZPSelectedServiceOption(lstDetails.get(7)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.select3rdDVZPServiceOption(lstDetails.get(8)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeFor3rdDVZPSelectedServiceOption(lstDetails.get(9)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescFor3rdDVZPSelectedServiceOption(lstDetails.get(10)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.select4thDVZPServiceOption(lstDetails.get(11)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeFor4thDVZPSelectedServiceOption(lstDetails.get(12)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescFor4thDVZPSelectedServiceOption(lstDetails.get(13)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+    }
+    @Then("I should see the changes based on Deliver Via Zoom Pharmacy{string},{string},{string} and {string}")
+    public void iShouldSeeTheChangesBasedOnDeliverViaZoomPharmacy(String strScriptInstruction, String ScriptUrgencies, String strMedicalDetails, String strLocationdetails) {
+        List<String> lstscriptDetails = TestDataUtil.getListOfValue(strScriptInstruction);
+        List<String> lstscriptUrgencies = TestDataUtil.getListOfValue(ScriptUrgencies);
+        List<String> lstMedicalDetails = TestDataUtil.getListOfValue(strMedicalDetails);
+        List<String> lstLocationDetails = TestDataUtil.getListOfValue(strLocationdetails);
+        System.out.println("RRPScriptFee details >>> :: " + lstLocationDetails);
+        System.out.println("RRPScriptFee Instructions details >>> :: " + lstscriptDetails);
+        System.out.println("RRPScript Urgencies details >>> :: " + lstscriptUrgencies);
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyLocation(lstLocationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyProviderName(lstLocationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptInstructionSSTP(lstscriptDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgency(TestDataUtil.getListOfValue(ScriptUrgencies)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptSendingOption(TestDataUtil.getValue("&SAVED_SCRIPT_OPTION_ADDRESS&")));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
 }

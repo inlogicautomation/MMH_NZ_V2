@@ -67,7 +67,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Next Day'])[1]")
     protected WebElement elmntNextDayServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[4]")
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[2]")
     protected WebElement elmntNextDayFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[3]")
@@ -79,12 +79,12 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='48 Hours'])[1]")
     protected WebElement elmnt48HoursServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='48 Hours'])[1]")
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Urgent/Same day'])[3]")
     protected WebElement elmntSendScriptByPost48HoursServiceoption;
 
 
 
-    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[7]")
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[3]")
     protected WebElement elmnt48HoursFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[4]")
@@ -93,10 +93,10 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='72 Hours'])[1]")
     protected WebElement elmnt72HoursServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[10]")
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[4]")
     protected WebElement elmnt72HoursFee;
 
-    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Fee'])[10]")
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Fee'])[4]")
     protected WebElement elmntSendScriptByPost72HoursFee;
 
 
@@ -119,13 +119,13 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[6]")
     protected WebElement elmntSendScriptByPostNextDayCheckBox;
 
-    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Next Day'])[1]")
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Next Day'])[2]")
     protected WebElement elmntSendScriptByPostNextDayServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Fee'])[4]")
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Fee'])[2]")
     protected WebElement elmntSendScriptByPostNextDayFee;
 
-    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Fee'])[7]")
+    @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Fee'])[3]")
     protected WebElement elmntSendScriptByPost48HoursFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[8]")
@@ -149,7 +149,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Next Day'])[1]")
     protected WebElement elmntSendScriptToPharmacyNextDayServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Fee'])[4]")
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Fee'])[2]")
     protected WebElement elmntSendScriptToPharmacyNextDayFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[11]")
@@ -158,7 +158,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='48 Hours'])[1]")
     protected WebElement elmntSendScriptToPharmacy48HoursServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Fee'])[7]")
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Fee'])[3]")
     protected WebElement elmntSendScriptToPharmacy48HoursFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[12]")
@@ -299,10 +299,9 @@ public class RRPScriptFeeSettingsPage extends BasePage {
             WebElement elmntPrescriptionTableData = waitForElement(By.xpath(strRRPScriptInstructionsFeeSetupEditAction
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))));
             System.out.printf(">>>>>>>>>>>"+elmntPrescriptionTableData);
-            jsScrollIntoView(elmntPrescriptionTableData);
             waitForElement(elmntPrescriptionTableData);
             verifyElement(elmntPrescriptionTableData);
-//            waitForSeconds(3);
+            waitForSeconds(3);
             jsClick(elmntPrescriptionTableData);
             blResult =true;
         } catch (Exception e) {
@@ -313,9 +312,10 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     }
 
     public boolean clickPatienttoCollectScriptCheckBox() {
-//           jsScrollIntoView(elmntPatienttoCollectScriptCheckBox);
-        jsScrollDown();
+           jsScrollDown();
         if (elmntPatienttoCollectScriptCheckBox.isDisplayed()){
+//            jsScrollIntoView(elmntPatienttoCollectScriptCheckBox);
+            verifyElement(elmntPatienttoCollectScriptCheckBox);
             System.out.println("Successfullt Verifly Check Box Checked");
             return verifyElement(elmntPatienttoCollectScriptCheckBox);
         }
