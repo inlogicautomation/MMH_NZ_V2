@@ -305,7 +305,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'20')]")
     protected WebElement elmntMaxValue;
 
-    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Video Invitations')]")
+    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Video Invitations')]")
     protected WebElement elmntVideoPage;
 
     @FindBy(how = How.XPATH, using = "//td/mat-icon[contains(text(),'videocam')]")
