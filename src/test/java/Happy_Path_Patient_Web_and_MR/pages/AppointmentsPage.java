@@ -193,7 +193,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='payment-profile']")
     protected WebElement elmntPaymentProfile;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(@class,'checkbox')]/mat-checkbox")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),' I accept the ')]//preceding::input[@class='mat-checkbox-input cdk-visually-hidden']")
     protected WebElement chkAcceptandTerms;
 
     @FindBy(how = How.XPATH, using = "//div[contains(@id,'mobile-view')]//span[contains(text(),'Confirm')]/parent::button")
@@ -201,11 +201,14 @@ public class AppointmentsPage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//div[@id='desktop-view']//button/span[text()='Confirm your booking now']"), // Without Fees
-            @FindBy(how = How.XPATH, using = "//div[@id='desktop-view']//button/span[text()='Confirm & Continue']"),//With Fees
-            @FindBy(how = How.XPATH, using = "//div[@id='desktop-view']//button/span[text()='Pay & Continue']"),//PayOnline
+            @FindBy(how = How.XPATH, using = "//button[@class='mat-focus-indicator btn-primary with-green mat-button mat-button-base ng-star-inserted']//span[contains(text(),'Confirm & Continue')]"),//With Fees
+            @FindBy(how = How.XPATH, using = "//button[@class='mat-focus-indicator btn-primary with-green mat-button mat-button-base ng-star-inserted']//span[contains(text(),'Pay & Continue')]"),//PayOnline
 
     })
     protected WebElement btnConfirmYourBookingEnabled;
+
+    @FindBy(how = How.XPATH, using = "//button[@class='mat-focus-indicator btn-primary with-green mat-button mat-button-base ng-star-inserted mat-button-disabled']")
+    protected WebElement btnConfirmYourBookingDiabled;
 
     protected String elmntAppointmentDetail = new StringBuilder().append("//p[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
@@ -832,8 +835,8 @@ public class AppointmentsPage extends BasePage {
             WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strDateValue)));
             verifyElement(elmntAppointmentDetails);
 
-//            WebElement elmntAppointments = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strSlotDate)));
-//            verifyElement(elmntAppointments);
+            WebElement elmntAppointments = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strSlotDate)));
+            verifyElement(elmntAppointments);
 
             for (String strDetails : lstDetails) {
                 WebElement elmntReservationDetails = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetails))));
@@ -854,14 +857,14 @@ public class AppointmentsPage extends BasePage {
                 verifyElement(elmntAppointmentDetails);
 
                 String strConvertedTime = strSlotDate;
-//
-//                strConvertedTime = "0" + strConvertedTime;
+
+                strConvertedTime = "0" + strConvertedTime;
 
                 String strFinalOutDateTime = strConvertedTime;
 
 
-//                WebElement elmntAppointments = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strFinalOutDateTime)));
-//                verifyElement(elmntAppointments);
+                WebElement elmntAppointments = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strFinalOutDateTime)));
+                verifyElement(elmntAppointments);
 
                 for (String strDetails : lstDetails) {
                     WebElement elmntReservationDetails = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetails))));
@@ -929,8 +932,9 @@ public class AppointmentsPage extends BasePage {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
                 waitForSeconds(2);
                 waitForElement(elmntPaymentProfile);
+                verifyElement(btnConfirmYourBookingDiabled);
                 waitForElementClickable(chkAcceptandTerms);
-                click(chkAcceptandTerms);
+                jsClick(chkAcceptandTerms);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 blResult = verifyElement(btnConfirmYourBookingEnabled);
             }
@@ -939,7 +943,7 @@ public class AppointmentsPage extends BasePage {
                 jsScrollIntoView(chkAcceptandTerms);
                 waitForElement(elmntPaymentProfile);
                 waitForElementClickable(chkAcceptandTerms);
-                click(chkAcceptandTerms);
+                jsClick(chkAcceptandTerms);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 blResult = verifyElement(btnConfirmYourBookingEnabledmobile);
             }
@@ -948,7 +952,7 @@ public class AppointmentsPage extends BasePage {
                 jsScrollIntoView(chkAcceptandTerms);
                 waitForElement(elmntPaymentProfile);
                 waitForElementClickable(chkAcceptandTerms);
-                click(chkAcceptandTerms);
+                jsClick(chkAcceptandTerms);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 blResult = verifyElement(btnConfirmYourBookingEnabledmobile);
             }
@@ -975,7 +979,7 @@ public class AppointmentsPage extends BasePage {
 
             String strConvertedTime = strTime;
 
-//            strConvertedTime = "0" + strConvertedTime;
+            strConvertedTime = "0" + strConvertedTime;
 
             String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
 

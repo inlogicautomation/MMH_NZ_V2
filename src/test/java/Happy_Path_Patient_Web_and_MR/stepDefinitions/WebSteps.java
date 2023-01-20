@@ -3330,6 +3330,7 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgency(TestDataUtil.getListOfValue(ScriptUrgencies)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicalDetails.get(3)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
     }

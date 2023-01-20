@@ -58,7 +58,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a/span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashboard;
 
-    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]")
+    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]/following::h3[contains(text(),'Start managing your health, today')]")
     protected WebElement txtWelcome;
 
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'hamburger')]")
@@ -282,6 +282,7 @@ public class HomePage extends BasePage {
                 waitForElement(txtWelcome);
                 blResult = verifyElement(txtWelcome);
             }else {
+                focusWindow(2);
                 jsScrollIntoView(elmntDashboard);
                 waitForElementClickable(elmntDashboard);
                 jsClick(elmntDashboard);

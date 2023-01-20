@@ -128,7 +128,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-checkbox[@formcontrolname='termsConditions']")
     protected WebElement checkBoxTermsAndConditions;
 
-    @FindBy(how = How.XPATH, using = "(//span[text()='Pay at health centre'])[1]")
+    @FindBy(how = How.XPATH, using = "(//span[text()='Pay At Health Centre'])[1]")
     protected WebElement BtnPayAtHealthCentre;
 
     @FindBy(how = How.XPATH, using = "//div[@class='toast-content']")

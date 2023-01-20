@@ -111,8 +111,18 @@ Feature: Repeat Script Setting
       | System_Menu            | Details                     | Script_Instructions   | Script_Urgencies   | Medication Details                            | Location Details              |
       | Repeat Script Settings | &DELIVER_VIA_ZOOM_PHARMACY& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &REPEAT_SCRIPT_SETTINGS_DATA& |
 
-  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH
+  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @RRPP
   Scenario Outline: S11- RRP Script Settings - Repeat Script Terms & Conditions
+    Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
+    And I click the edit button and changing the data as per Patient to Collect Script requirements"<Details>"
+    When I navigate to patient portal and verify the change
+    Then I should see the changes based on Patient to Collect Script"<Script_Instructions>","<Script_Urgencies>","<Medication Details>" and "<Location Details>"
+    Examples:
+      | System_Menu            | Details                     | Script_Instructions   | Script_Urgencies   | Medication Details                            | Location Details              |
+      | Repeat Script Settings | &PATIENT_TO_COLLECT_SCRIPT& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &REPEAT_SCRIPT_SETTINGS_DATA& |
+
+  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH
+  Scenario Outline: S12- RRP Script Settings - Reason for RRP is Mandatory
     Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
     And I click the edit button and changing the data as per Patient to Collect Script requirements"<Details>"
     When I navigate to patient portal and verify the change
