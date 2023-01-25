@@ -81,7 +81,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
     protected WebElement elmntHealtCenter;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Future Appointments')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Future Appointments')]")
     protected WebElement elmntfuturetab;
 
     @FindBy(how = How.XPATH, using = "(//div[@class='toast toast-warning'])[1]")
@@ -119,7 +119,7 @@ public class AppointmentsPage extends BasePage {
     protected String elmntFamilyMember = new StringBuilder().append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='reason']")
+    @FindBy(how = How.XPATH, using = "//input[@class='k-input']")
     protected WebElement elmntReason;
 
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='otherReason']")
@@ -628,26 +628,28 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(2);
             waitForElementClickable(elmntReason);
             waitAndClick(elmntReason);
+            elmntReason.sendKeys(strReason);
 
-            if (strReason.contains(",")) {
-                String[] strReasonFor = strReason.split(",");
-                for (String strReasonInHierarchy : strReasonFor) {
-                    strReasonInHierarchy = strReasonInHierarchy.trim();
-                    WebElement elmntReasonForAppointment = waitForElementClickable(By.xpath(strReasonForAppointment.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strReasonInHierarchy))));
-                    verifyElement(elmntReasonForAppointment);
-                    waitAndClick(elmntReasonForAppointment);
-
-
-                }
-            } else {
-                WebElement elmntReasonForAppointment = waitForElementClickable(By.xpath(strReasonForAppointment.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strReason))));
-                verifyElement(elmntReasonForAppointment);
-                waitAndClick(elmntReasonForAppointment);
-            }
+//
+//            if (strReason.contains(",")) {
+//                String[] strReasonFor = strReason.split(",");
+//                for (String strReasonInHierarchy : strReasonFor) {
+//                    strReasonInHierarchy = strReasonInHierarchy.trim();
+//                    WebElement elmntReasonForAppointment = waitForElementClickable(By.xpath(strReasonForAppointment.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strReasonInHierarchy))));
+//                    verifyElement(elmntReasonForAppointment);
+//                    waitAndClick(elmntReasonForAppointment);
+//
+//
+//                }
+//            } else {
+//                WebElement elmntReasonForAppointment = waitForElementClickable(By.xpath(strReasonForAppointment.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strReason))));
+//                verifyElement(elmntReasonForAppointment);
+//                waitAndClick(elmntReasonForAppointment);
+//            }
             waitForSeconds(2);
-            elmntReason.sendKeys(Keys.TAB);
-            waitForSeconds(3);
-            elmntReasonTextBox.sendKeys(strReason);
+            elmntReason.sendKeys(Keys.ENTER);
+//            waitForSeconds(3);
+//            elmntReasonTextBox.sendKeys(strReason);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
