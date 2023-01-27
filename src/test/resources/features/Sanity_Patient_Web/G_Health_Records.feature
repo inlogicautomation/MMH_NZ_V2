@@ -1,4 +1,5 @@
 Feature: Health_Records
+
   @WEB   @HEALTH_RECORDS @SANITY_PATH
   Scenario Template: Changing machines timezone
 
@@ -34,8 +35,8 @@ Feature: Health_Records
     And I click on the more info icon to see all the Prescription Entries From the Health center Medicine details
       | &PRESCRIPTION_TABLE_DATA& | &PRESCRIPTION_ICON_DATA& | &PRESCRIPTION_MOBILE_ICON_DATA& |
     Examples:
-      | Prescription     |
-      | &FILTER_BY_DATA& |
+      | Prescription  |
+      | Prescriptions |
 
 
 
@@ -65,8 +66,8 @@ Feature: Health_Records
       | &MY_ENTRIES_PRESCRIPTIONS_DATA& | &SHARE_WITH_DOCTOR_PRESCRIPTIONS_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_PRESCRIPTIONS& |
     And I click on Delete Icon "<Edit Icon>"& I verify the Prescription My Entries Record is deleted
     Examples:
-      | My Entries | Edit Icon      | Records |
-      | My Entries | &VISITED_NAME& | 3 time  |
+      | My Entries    | Edit Icon      | Records |
+      | Prescriptions | &VISITED_NAME& | 3 time  |
 
 #  @WEB  @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
@@ -100,8 +101,8 @@ Feature: Health_Records
       | &MY_ENTRIES_PRESCRIPTIONS_DATA& | &SHARE_WITH_OUT_DOCTOR_PRESCRIPTIONS_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_PRESCRIPTIONS& |
     And I click on Delete Icon "<Edit Icon>"& I verify the Prescription My Entries Record is deleted
     Examples:
-      | My Entries | Edit Icon      | Records |
-      | My Entries | &VISITED_NAME& | 3 time  |
+      | My Entries    | Edit Icon      | Records |
+      | Prescriptions | &VISITED_NAME& | 3 time  |
 
 #Note:{91:Click on Allergies
   #92:Health centre entries displays all the allergies name given by provider/updated from pms
@@ -119,8 +120,8 @@ Feature: Health_Records
     And I click on the more info icon to see all the Allergies Entries From the Health center Medicine details
       | &ALLERGIES_TABLE_DATA& | &ALLERGIES_ICON_DATA& | &ALLERGIES_MOBILE_ICON_DATA& |
     Examples:
-      | Allergies        |
-      | &FILTER_BY_DATA& |
+      | Allergies |
+      | Allergies |
 
 #  @WEB   @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
@@ -154,7 +155,7 @@ Feature: Health_Records
     And I click on Delete Icon "<Edit Icon>"& I verify the  Allergies My Entries Record is deleted
     Examples:
       | My Entries | Edit Icon      | Records |
-      | My Entries | &VISITED_NAME& | Low     |
+      | Allergies  | &VISITED_NAME& | Low     |
 
 #  @WEB  @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
@@ -185,7 +186,7 @@ Feature: Health_Records
     And I click on Delete Icon "<Edit Icon>"& I verify the  Allergies My Entries Record is deleted
     Examples:
       | My Entries | Edit Icon      | Records |
-      | My Entries | &VISITED_NAME& | Low     |
+      | Allergies  | &VISITED_NAME& | Low     |
 #Note:{#101:Click on Immunisation
   #102:Health centre entries displays all the Immunisation/vaccine name given by provider/updated from pms
   #103:View all the details in grid & click on more info icon for specific vaccine name details in immunisation tab
@@ -202,8 +203,8 @@ Feature: Health_Records
     And I click on the more info icon to see all the Immunisations Entries From the Health center Medicine details
       | &IMMUNISATIONS_TABLE_DATA& | &IMMUNISATIONS_ICON_DATA& | &IMMUNISATION_MOBILE_ICON_DATA& |
     Examples:
-      | Immunisations    |
-      | &FILTER_BY_DATA& |
+      | Immunisations |
+      | Immunisations |
 
 #  @WEB  @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
@@ -234,8 +235,8 @@ Feature: Health_Records
       | &MY_ENTRIES_IMMUNISATIONS_DATA& | &SHARE_WITH_DOCTOR_IMMUNISATION_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_IMMUNISATIONS& |
     And I click on Delete Icon "<Edit Icon>"& I verify the Immunisations My Entries Record is deleted
     Examples:
-      | My Entries | Edit Icon      | AdditionalName    |
-      | My Entries | &VISITED_NAME& | &EDIT_ADDITIONAL& |
+      | My Entries    | Edit Icon      | AdditionalName    |
+      | Immunisations | &VISITED_NAME& | &EDIT_ADDITIONAL& |
 #Note:{#108:If share with doctor is uncheck then the records is not shared to health centre/provider & kept private in immunisation tab
    #These tests Case Covered The Scenario NO: S9
   #}
@@ -254,8 +255,8 @@ Feature: Health_Records
       | &MY_ENTRIES_IMMUNISATIONS_DATA& | &SHARE_WITH_OUT_DOCTOR_IMMUNISATION_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_IMMUNISATIONS& |
     And I click on Delete Icon "<Edit Icon>"& I verify the Immunisations My Entries Record is deleted
     Examples:
-      | My Entries | Edit Icon      | AdditionalName    |
-      | My Entries | &VISITED_NAME& | &EDIT_ADDITIONAL& |
+      | My Entries    | Edit Icon      | AdditionalName    |
+      | Immunisations | &VISITED_NAME& | &EDIT_ADDITIONAL& |
 #
 #  @WEB  @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
@@ -284,8 +285,8 @@ Feature: Health_Records
       | &MY_ENTRIES_COVID_IMMUNISATIONS_DATA& | &SHARE_WITH_DOCTOR_COVID_IMMUNISATIONS& | &MOBILE_DATA_MY_ENTRIES_INSIDE_COVID_IMMUNISATIONS& |
     And I click on Delete Icon & I verify the COVIDImmunisations My Entries Record is deleted
     Examples:
-      | My Entries | AdditionalName    |
-      | My Entries | &EDIT_ADDITIONAL& |
+      | My Entries    | AdditionalName    |
+      | Immunisations | &EDIT_ADDITIONAL& |
 
   @WEB  @HEALTH_RECORDS @SANITY_PATH
   Scenario Template: S11-Existing Patient Verify Medicine details and validate edit ,delete,Share WithOut Doctor in My entries COVIDImmunisations Medicine Details
@@ -303,8 +304,8 @@ Feature: Health_Records
       | &MY_ENTRIES_COVID_IMMUNISATIONS_DATA& | &SHARE_WITH_OUT_DOCTOR_COVID_IMMUNISATIONS& | &MOBILE_DATA_MY_ENTRIES_INSIDE_COVID_IMMUNISATIONS& |
     And I click on Delete Icon & I verify the COVIDImmunisations My Entries Record is deleted
     Examples:
-      | My Entries | AdditionalName    |
-      | My Entries | &EDIT_ADDITIONAL& |
+      | My Entries    | AdditionalName    |
+      | Immunisations | &EDIT_ADDITIONAL& |
 
 #  @WEB   @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
@@ -334,8 +335,8 @@ Feature: Health_Records
     And I click on the more info icon to see all the Classifications Entries From the Health center Medicine details
       | &CLASSIFICATIONS_TABLE_DATA& | &CLASSIFICATIONS_ICON_DATA& | &CLASSIFICATIONS_MOBILE_ICON_DATA& |
     Examples:
-      | Classifications  |
-      | &FILTER_BY_DATA& |
+      | Classifications |
+      | Conditions      |
 
 #Note:{#115:My entries grid displays all the Classification added by patient in classification tab in classification tab
   #116:Click on add record & enter the Classification name, status, start date, end date, additional info & share with doctor in classification tab
@@ -361,7 +362,7 @@ Feature: Health_Records
     And I click on Delete Icon "<Edit Icon>"& I verify the  Classifications My Entries Record is deleted
     Examples:
       | My Entries | Edit Icon      | Records   |
-      | My Entries | &VISITED_NAME& | Long Term |
+      | Conditions | &VISITED_NAME& | Long Term |
 
 #  @WEB  @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
@@ -390,7 +391,7 @@ Feature: Health_Records
     And I click on Delete Icon "<Edit Icon>"& I verify the  Classifications My Entries Record is deleted
     Examples:
       | My Entries | Edit Icon      | Records   |
-      | My Entries | &VISITED_NAME& | Long Term |
+      | Conditions | &VISITED_NAME& | Long Term |
 
 #  @WEB  @SANITY_PATH  @HEALTH_RECORDS
 #  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
@@ -447,8 +448,8 @@ Feature: Health_Records
     And I click on the more info icon to see all theClinic Notes Entries From the Health center Medicine details
       | &CLINIC_TABLE_DATA& | &CLINIC_ICON_DATA& | &CLINIC_MOBILE_ICON_DATA& |
     Examples:
-      | Clinic Notes     |
-      | &FILTER_BY_DATA& |
+      | Clinic Notes    |
+      | Clinician Notes |
     #Note:{#128:My entries grid displays all the clinic notes added by patient in clinic notes tab
   #129:Click on add record & enter who I visited, visited location, visited date, additional info & share with doctor in clinic notes tab
   #130:Click on confirm & save button, Record is submitted & added in My entries grid in clinic notes tab
@@ -472,8 +473,8 @@ Feature: Health_Records
       | &DATA_MY_ENTRIES_CLINIC_NOTES_1& | &SHARE_WITH_DOCTOR_CLINIC_NOTES_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLINIC_NOTES_1& |
     And I click on Delete Icon "<Edit Icon>"& I verify the Clinic Notes My Entries Record is deleted
     Examples:
-      | My Entries | Edit Icon      | Records         |
-      | My Entries | &VISITED_NAME& | &EDIT_LOCATION& |
+      | My Entries      | Edit Icon      | Records         |
+      | Clinician Notes | &VISITED_NAME& | &EDIT_LOCATION& |
 
 #  @WEB  @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
@@ -501,8 +502,8 @@ Feature: Health_Records
       | &DATA_MY_ENTRIES_CLINIC_NOTES_1& | &SHARE_WITH_OUT_DOCTOR_CLINIC_NOTES_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLINIC_NOTES_1& |
     And I click on Delete Icon "<Edit Icon>"& I verify the Clinic Notes My Entries Record is deleted
     Examples:
-      | My Entries | Edit Icon      | Records         |
-      | My Entries | &VISITED_NAME& | &EDIT_LOCATION& |
+      | My Entries      | Edit Icon      | Records         |
+      | Clinician Notes | &VISITED_NAME& | &EDIT_LOCATION& |
 #Note:{#135:Click on Recall
   #136:Health centre entries displays all the recall details scheduled by provider/updated from pms
   #137:View all the details in grid & click on more info icon for specific recall scheduled details in recall tab

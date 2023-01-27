@@ -665,9 +665,10 @@ public class SanityWebSteps {
 ////
     @When("I click on {string} Prescription Page")
     public void iClickOnPrescriptionPage(String strHealthCenter) {
-        List<String> lstFilterDropDown = TestDataUtil.getListOfValue(strHealthCenter);
-        sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu();
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(lstFilterDropDown.get(0))));
+//        List<String> lstFilterDropDown = TestDataUtil.getListOfValue(strHealthCenter);
+        sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu(strHealthCenter);
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre());
+//        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(lstFilterDropDown.get(0))));
     }
 
 
@@ -737,8 +738,8 @@ public class SanityWebSteps {
 
     @And("I select My Entries {string}")
     public void iSelectMyEntries(String strOption) {
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu());
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(strOption)));
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenu(strOption));
+//        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(strOption)));
     }
 
     @And("I click on Add record & Enter the Medicine Details")
@@ -876,20 +877,22 @@ public class SanityWebSteps {
 
     @When("I click on {string} Allergies Page")
     public void iClickOnAllergiesPage(String lstAppointmentDetails) {
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies());
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(lstAppointmentDetails)));
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies(lstAppointmentDetails));
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre());
+//        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(lstAppointmentDetails)));
     }
 
     @And("I select My Entries {string} Allergies Page")
     public void iSelectMyEntriesAllergiesPage(String strOption) {
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies());
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(strOption)));
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuAllergies(strOption));
+//        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(strOption)));
     }
 
     @When("I click on {string}Immunisations Page")
     public void iClickOnImmunisationsPage(String lstAppointmentDetails) {
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations());
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(lstAppointmentDetails)));
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations(lstAppointmentDetails));
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre());
+//        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(lstAppointmentDetails)));
     }
 
 
@@ -912,8 +915,8 @@ public class SanityWebSteps {
 
     @And("I select My Entries {string}Immunisations Page")
     public void iSelectMyEntriesImmunisationsPage(String strOption) {
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations());
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(strOption)));
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuImmunisations(strOption));
+//        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(strOption)));
 
     }
 
@@ -1035,8 +1038,9 @@ public class SanityWebSteps {
 
     @When("I click on {string} Classifications Page")
     public void iClickOnClassificationsPage(String lsClassificationsDetails) {
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications());
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(lsClassificationsDetails)));
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications(lsClassificationsDetails));
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectEntriesFromHealthCentre());
+//        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(lsClassificationsDetails)));
 
     }
 
@@ -1060,8 +1064,8 @@ public class SanityWebSteps {
 
     @And("I select My Entries {string} Classifications Page")
     public void iSelectMyEntriesClassificationsPage(String strOption) {
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications());
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(strOption)));
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClassifications(strOption));
+//        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(strOption)));
     }
 
     @And("I click on add record & Enter the  Classifications Medicine Details")
@@ -1187,8 +1191,8 @@ public class SanityWebSteps {
 
     @When("I click on {string} Clinic Notes Page")
     public void iClickOnClinicNotesPage(String lstClinicNotesDetails) {
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes());
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(lstClinicNotesDetails)));
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes(lstClinicNotesDetails));
+//        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(lstClinicNotesDetails)));
     }
 
 
@@ -1211,8 +1215,8 @@ public class SanityWebSteps {
 
     @And("I select My Entries {string} Clinic Notes Page")
     public void iSelectMyEntriesClinicNotesPage(String strOption) {
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes());
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(strOption)));
+        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickMyHealthRecordsOptionFromMenuClinicNotes(strOption));
+//        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectFilter(TestDataUtil.getValue(strOption)));
     }
 
     @And("I click on add record & Enter the Clinic Notes Medicine Details")

@@ -338,6 +338,17 @@ public class MyHealthIndicators extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Alcohol')]")
     protected WebElement elmtAlcohol;
 
+    @FindBy(how = How.XPATH, using = "//div[text()='Mental Health and Addictions']")
+    protected WebElement elmtMentalHealthAndAddictions;
+
+    @FindBy(how = How.XPATH, using = "//div[text()='Physical Health']")
+    protected WebElement elmtPhysicalHealth;
+
+    @FindBy(how = How.XPATH, using = "//div[text()='Heart Health']")
+    protected WebElement elmtHeartHealth;
+
+    @FindBy(how = How.XPATH, using = "//div[text()='Breathing']")
+    protected WebElement elmtBreathing;
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Anxiety')]")
     protected WebElement elmtAnxiety;
 
@@ -673,6 +684,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickBloodPressure() {
+        waitForElement(elmtPhysicalHealth);
+        jsClick(elmtPhysicalHealth);
         waitForSeconds(3);
         waitForElementClickable(elmtBloodPressure);
         jsClick(elmtBloodPressure);
@@ -1832,6 +1845,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickBMI() {
+        waitForElement(elmtPhysicalHealth);
+        jsClick(elmtPhysicalHealth);
         waitForSeconds(3);
         waitForElementClickable(elmtBMI);
         jsClick(elmtBMI);
@@ -2010,6 +2025,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickHBA1C() {
+        waitForElement(elmtHeartHealth);
+        jsClick(elmtHeartHealth);
         waitForSeconds(3);
         jsScrollIntoView(elmtHBA1C);
         waitForElementClickable(elmtHBA1C);
@@ -2020,6 +2037,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickHDL() {
+        waitForElement(elmtHeartHealth);
+        jsClick(elmtHeartHealth);
         waitForSeconds(3);
         jsScrollIntoView(elmtHDL);
         waitForElementClickable(elmtHDL);
@@ -2416,6 +2435,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickLDL() {
+        waitForElement(elmtHeartHealth);
+        jsClick(elmtHeartHealth);
         waitForSeconds(3);
         jsScrollIntoView(elmtLDL);
         waitForElementClickable(elmtLDL);
@@ -3128,6 +3149,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickAlcohol() {
+        waitForElement(elmtMentalHealthAndAddictions);
+        jsClick(elmtMentalHealthAndAddictions);
         waitForSeconds(3);
         waitForElementClickable(elmtAlcohol);
         jsClick(elmtAlcohol);
@@ -3137,6 +3160,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickAnxiety() {
+        waitForElement(elmtMentalHealthAndAddictions);
+        jsClick(elmtMentalHealthAndAddictions);
         waitForSeconds(3);
         waitForElementClickable(elmtAnxiety);
         jsClick(elmtAnxiety);
@@ -3146,6 +3171,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickBloodSugar() {
+        waitForElement(elmtHeartHealth);
+        jsClick(elmtHeartHealth);
         waitForSeconds(3);
         waitForElementClickable(elmtBloodSugar);
         jsClick(elmtBloodSugar);
@@ -3155,6 +3182,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickDepression() {
+        waitForElement(elmtMentalHealthAndAddictions);
+        jsClick(elmtMentalHealthAndAddictions);
         waitForSeconds(3);
         waitForElementClickable(elmtDepression);
         jsClick(elmtDepression);
@@ -3164,6 +3193,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickDrinkingSurvey() {
+        waitForElement(elmtMentalHealthAndAddictions);
+        jsClick(elmtMentalHealthAndAddictions);
         waitForSeconds(3);
         jsScrollIntoView(elmtDrinkingSurvey);
         waitForElementClickable(elmtDrinkingSurvey);
@@ -3174,6 +3205,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickPeakFlow() {
+        waitForElement(elmtBreathing);
+        jsClick(elmtBreathing);
         waitForSeconds(3);
         jsScrollIntoView(elmtPeakFlow);
         waitForElementClickable(elmtPeakFlow);
@@ -3184,6 +3217,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickSmoking() {
+        waitForElement(elmtMentalHealthAndAddictions);
+        jsClick(elmtMentalHealthAndAddictions);
         waitForSeconds(3);
         jsScrollIntoView(elmtSmoking);
         waitForElementClickable(elmtSmoking);
@@ -3194,6 +3229,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickTotalCholesterol() {
+        waitForElement(elmtHeartHealth);
+        jsClick(elmtHeartHealth);
         waitForSeconds(3);
         jsScrollIntoView(elmtTotalCholesterol);
         waitForElementClickable(elmtTotalCholesterol);
@@ -3204,6 +3241,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickTriglycerides() {
+        waitForElement(elmtHeartHealth);
+        jsClick(elmtHeartHealth);
         waitForSeconds(3);
         jsScrollIntoView(elmtTriglycerides);
         waitForElementClickable(elmtTriglycerides);
@@ -3214,6 +3253,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickWaistSize() {
+        waitForElement(elmtPhysicalHealth);
+        jsClick(elmtPhysicalHealth);
         waitForSeconds(3);
         jsScrollIntoView(elmtWaistSize);
         waitForElementClickable(elmtWaistSize);
@@ -3225,6 +3266,8 @@ public class MyHealthIndicators extends BasePage {
 
 
     public boolean clickHeightCard() {
+        waitForElement(elmtPhysicalHealth);
+        jsClick(elmtPhysicalHealth);
         waitForSeconds(3);
         jsScrollIntoView(elmtHeightCard);
         waitForSeconds(2);
@@ -3236,6 +3279,8 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickWeightCard() {
+        waitForElement(elmtPhysicalHealth);
+        jsClick(elmtPhysicalHealth);
         waitForSeconds(3);
         jsScrollIntoView(elmtWeightCard);
         waitForSeconds(2);

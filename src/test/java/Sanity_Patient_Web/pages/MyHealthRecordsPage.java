@@ -36,6 +36,9 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement btnMobileMenu;
     @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-prescription-extra-medicine']//following::span[1]")
     protected WebElement elmntPrescriptions;
+
+    @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Entries From Health Centre(s)')]//preceding::input[@class='mat-radio-input cdk-visually-hidden'])[2]")
+    protected WebElement elmntEntriesfromhealthcentreRadioButton;
     @FindBy(how = How.XPATH, using = "//mat-progress-spinner[@mode='indeterminate']")
     protected WebElement elmntLoadingSpinner;
 
@@ -66,7 +69,7 @@ public class MyHealthRecordsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//h3[text()='Recalls'])[1]")
     protected WebElement headerRecalls;
-    protected String elmntFilterbyDrop = new StringBuilder().append("//mat-option//child::span[normalize-space(text())='")
+    protected String elmntFilterbyDrop = new StringBuilder().append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>").append("']").toString();
     @FindBy(how = How.XPATH, using = "//span[text()='Conditions']")
     protected WebElement elmntConditions;
@@ -149,7 +152,7 @@ public class MyHealthRecordsPage extends BasePage {
             .append("<<REPLACEMENT2>>").append("']/following-sibling::td[text()='")
             .append("<<REPLACEMENT3>>").append("']/following-sibling::td[text()='")
             .append("<<REPLACEMENT4>>").append("']/following-sibling::td//following-sibling::span[@class=\"mat-ripple mat-button-ripple\"]").toString();
-    @FindBy(how = How.XPATH, using = "//span[text()='Lab Results']")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Lab Results')]")
     protected WebElement elmntLabResults;
     protected String strLabResultsIconLocator = new StringBuilder()
             .append("//td[contains(.,'")
@@ -658,7 +661,7 @@ public class MyHealthRecordsPage extends BasePage {
 
     }
 
-    public boolean clickMyHealthRecordsOptionFromMenu() {
+    public boolean clickMyHealthRecordsOptionFromMenu(String Strdata) {
         boolean blResult = false;
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForSeconds(3);
@@ -666,12 +669,14 @@ public class MyHealthRecordsPage extends BasePage {
             mouseClick(btnMyHealthRecordsExpand);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
-            waitForElementClickable(elmntPrescriptions);
-            jsClick(elmntPrescriptions);
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", Strdata)));
+            jsClick(elmntEntriesFromHealthCentre);
+//            waitForElementClickable(elmntPrescriptions);
+//            jsClick(elmntPrescriptions);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = verifyElement(elmntPrescriptions);
+            blResult = verifyElement(elmntEntriesFromHealthCentre);
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -687,6 +692,26 @@ public class MyHealthRecordsPage extends BasePage {
         return blResult;
     }
 
+    public boolean selectEntriesFromHealthCentre() {
+        boolean blResult = false;
+        try {
+//            waitForSeconds(2);
+//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//            waitForSeconds(2);
+//            waitForElementClickable(elmntFilterdropPrescriptions);
+//            waitForSeconds(2);
+//            jsClick(elmntFilterdropPrescriptions);
+//            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
+//            jsClick(elmntEntriesFromHealthCentre);
+            jsClick(elmntEntriesfromhealthcentreRadioButton);
+
+
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
     public boolean clickMyHealthRecordsOptionMenu() {
         jsScrollIntoView(btnMyHealthRecordsExpand);
         waitForElementClickable(btnMyHealthRecordsExpand);
@@ -797,7 +822,7 @@ public class MyHealthRecordsPage extends BasePage {
         return verifyElement(btnMyHealthRecordsExpand);
     }
 
-    public boolean clickMyHealthRecordsOptionFromMenuClassifications() {
+    public boolean clickMyHealthRecordsOptionFromMenuClassifications(String Strdata) {
         boolean isVerified = false;
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForSeconds(3);
@@ -805,8 +830,10 @@ public class MyHealthRecordsPage extends BasePage {
             click(btnMyHealthRecordsExpand);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
-            waitForElementClickable(elmntConditions);
-            jsClick(elmntConditions);
+//            waitForElementClickable(elmntConditions);
+//            jsClick(elmntConditions);
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", Strdata)));
+            jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             isVerified = verifyElement(elmntConditions);
 
@@ -850,19 +877,23 @@ public class MyHealthRecordsPage extends BasePage {
         return blResult;
     }
 
-    public boolean clickMyHealthRecordsOptionFromMenuClinicNotes() {
+    public boolean clickMyHealthRecordsOptionFromMenuClinicNotes(String Strdata) {
         boolean isVerified = false;
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForSeconds(3);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
             waitForSeconds(3);
-            jsScrollIntoView(elmntClinicalNotes);
+//            jsScrollIntoView(elmntClinicalNotes);
             waitForSeconds(3);
-            waitForElementClickable(elmntClinicalNotes);
-            click(elmntClinicalNotes);
+//            waitForElementClickable(elmntClinicalNotes);
+//            click(elmntClinicalNotes);
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", Strdata)));
+            jsScrollIntoView(elmntEntriesFromHealthCentre);
+            jsClick(elmntEntriesFromHealthCentre);
+
             waitForSeconds(3);
-            isVerified = verifyElement(elmntClinicalNotes);
+            isVerified = verifyElement(elmntEntriesFromHealthCentre);
 
         }
 
@@ -921,13 +952,15 @@ public class MyHealthRecordsPage extends BasePage {
 
 
 
-    public boolean clickMyHealthRecordsOptionFromMenuAllergies() {
+    public boolean clickMyHealthRecordsOptionFromMenuAllergies(String Strdata) {
         boolean isVerified = false;
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntAllergies);
-            jsClick(elmntAllergies);
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", Strdata)));
+            jsClick(elmntEntriesFromHealthCentre);
+//            waitForElementClickable(elmntAllergies);
+//            jsClick(elmntAllergies);
             isVerified = verifyElement(elmntAllergies);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -943,14 +976,16 @@ public class MyHealthRecordsPage extends BasePage {
         return isVerified;
     }
 
-    public boolean clickMyHealthRecordsOptionFromMenuImmunisations() {
+    public boolean clickMyHealthRecordsOptionFromMenuImmunisations(String Strdata) {
         boolean isVerified = false;
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-            waitForElementClickable(elmntImmunisations);
-            jsClick(elmntImmunisations);
-            isVerified = verifyElement(elmntImmunisations);
+//            waitForElementClickable(elmntImmunisations);
+//            jsClick(elmntImmunisations);
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", Strdata)));
+            jsClick(elmntEntriesFromHealthCentre);
+            isVerified = verifyElement(elmntEntriesFromHealthCentre);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForSeconds(3);
