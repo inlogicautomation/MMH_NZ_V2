@@ -760,13 +760,18 @@ public class AppointmentsPage extends BasePage {
             List<WebElement> lstAvailableSlots = driver.findElements(By.xpath("//div[@class='slot-start-time']//mat-chip[@aria-disabled='false']"));
 //            WebElement elmntAppointmentSlot = waitForElement(By.xpath(elmntSlots.replace("<<REPLACEMENT>>", strSlotsTime)));
 //            click(elmntAppointmentSlot);
-
+            for (WebElement ele: lstAvailableSlots) {
+                ele.getText();
+                System.out.println("Available Slots" +ele.getText());
+            }
             lstAvailableSlots.size();
+            System.out.println("Available Slots" +   lstAvailableSlots.size());
 
             System.out.println("Available Slots" + lstAvailableSlots);
-            strSlotDate = lstAvailableSlots.get(1).getText().trim();
+
+            strSlotDate = lstAvailableSlots.get(0).getText().trim();
             System.out.println("Slot Date" + strSlotDate);
-            waitAndClick(lstAvailableSlots.get(1));
+            waitAndClick(lstAvailableSlots.get(0));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
 //            for (int i = 1; i <= lstAvailableSlots.size(); i++) {
@@ -2007,6 +2012,7 @@ public class AppointmentsPage extends BasePage {
     public boolean verifyCancelAppointmentMessage(List<String> lstDetails) {
         boolean blResult = false;
         try {
+            waitForSeconds(2);
             waitForElement(elmntfuturetab);
             jsClick(elmntfuturetab);
             waitForSeconds(2);

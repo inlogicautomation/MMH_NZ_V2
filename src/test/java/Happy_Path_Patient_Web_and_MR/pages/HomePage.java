@@ -257,6 +257,7 @@ public class HomePage extends BasePage {
         waitForElement(elmntVerifyHomePage);
         if (verifyElement(txtAppVersion)) {
             strAppVersion = txtAppVersion.getText();
+            System.out.printf("TxtAPPVersion"+strAppVersion);
         }
         Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
         strBrowserName = cap.getBrowserName();
