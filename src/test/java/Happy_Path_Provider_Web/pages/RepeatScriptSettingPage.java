@@ -138,37 +138,37 @@ public class RepeatScriptSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//b[.='Patient to Collect Script']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txtFirstServiceOptionFeeHUHC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='Fee'][1]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='STD'][1]")
     protected WebElement txt1stServiceOptionFeeSTD;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='Fee'][2]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='CSC'][1]")
     protected WebElement txt1stServiceOptionFeeCSC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='Fee'][3]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txt1stServiceOptionFeeHUHC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='Fee'][1]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='STD'][1]")
     protected WebElement txt1stSSTPServiceOptionFeeSTD;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='Fee'][2]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='CSC'][1]")
     protected WebElement txt1stSSTPServiceOptionFeeCSC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='Fee'][3]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txt1stSSTPServiceOptionFeeHUHC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Deliver Meds by Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='Fee'][1]")
+    @FindBy(how = How.XPATH, using = "//b[.='Deliver Meds by Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='STD'][1]")
     protected WebElement txt1stDMBPServiceOptionFeeSTD;
 
     @FindBy(how = How.XPATH, using = "//b[.='Deliver via Zoom Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='Fee'][1]")
     protected WebElement txt1stDVZPServiceOptionFeeSTD;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Deliver Meds by Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='Fee'][2]")
+    @FindBy(how = How.XPATH, using = "//b[.='Deliver Meds by Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='CSC'][1]")
     protected WebElement txt1stDMBPServiceOptionFeeCSC;
 
     @FindBy(how = How.XPATH, using = "//b[.='Deliver via Zoom Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='Fee'][2]")
     protected WebElement txt1stDVZPServiceOptionFeeCSC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Deliver Meds by Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='Fee'][3]")
+    @FindBy(how = How.XPATH, using = "//b[.='Deliver Meds by Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txt1stDMBPServiceOptionFeeHUHC;
 
     @FindBy(how = How.XPATH, using = "//b[.='Deliver via Zoom Pharmacy']/following::input[@data-placeholder='Urgent/Same day'][1]/following::input[@data-placeholder='Fee'][3]")
@@ -183,37 +183,37 @@ public class RepeatScriptSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//b[.='Patient to Collect Script']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txtSecondServiceOptionFeeHUHC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='Fee'][1]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='STD'][1]")
     protected WebElement txt2ndServiceOptionFeeSTD;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='Fee'][2]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='CSC'][1]")
     protected WebElement txt2ndServiceOptionFeeCSC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='Fee'][3]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txt2ndServiceOptionFeeHUHC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='Fee'][1]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='STD'][1]")
     protected WebElement txt2ndSSTPServiceOptionFeeSTD;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='Fee'][2]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='CSC'][1]")
     protected WebElement txt2ndSSTPServiceOptionFeeCSC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='Fee'][3]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txt2ndSSTPServiceOptionFeeHUHC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='Fee'][1]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='STD'][1]")
     protected WebElement txt2ndDMBPServiceOptionFeeSTD;
 
     @FindBy(how = How.XPATH, using = "//b[.='Deliver via Zoom Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='Fee'][1]")
     protected WebElement txt2ndDVZPServiceOptionFeeSTD;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='Fee'][2]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='CSC'][1]")
     protected WebElement txt2ndDMBPServiceOptionFeeCSC;
 
     @FindBy(how = How.XPATH, using = "//b[.='Deliver via Zoom Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='Fee'][2]")
     protected WebElement txt2ndDVZPServiceOptionFeeCSC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='Fee'][3]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txt2ndDMBPServiceOptionFeeHUHC;
 
     @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='Next Day'][1]/following::input[@data-placeholder='Fee'][3]")
@@ -228,37 +228,37 @@ public class RepeatScriptSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//b[.='Patient to Collect Script']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txtThirdServiceOptionFeeHUHC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='Fee'][1]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='STD'][1]")
     protected WebElement txt3rdServiceOptionFeeSTD;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='Fee'][2]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='CSC'][1]")
     protected WebElement txt3rdServiceOptionFeeCSC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='Fee'][3]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txt3rdServiceOptionFeeHUHC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='Fee'][1]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='STD'][1]")
     protected WebElement txt3rdSSTPServiceOptionFeeSTD;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='Fee'][2]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='CSC'][1]")
     protected WebElement txt3rdSSTPServiceOptionFeeCSC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='Fee'][3]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txt3rdSSTPServiceOptionFeeHUHC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='Fee'][1]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='STD'][1]")
     protected WebElement txt3rdDMBPServiceOptionFeeSTD;
 
     @FindBy(how = How.XPATH, using = "//b[.='Deliver via Zoom Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='Fee'][1]")
     protected WebElement txt3rdDVZPServiceOptionFeeSTD;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='Fee'][2]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='CSC'][1]")
     protected WebElement txt3rdDMBPServiceOptionFeeCSC;
 
     @FindBy(how = How.XPATH, using = "//b[.='Deliver via Zoom Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='Fee'][2]")
     protected WebElement txt3rdDVZPServiceOptionFeeCSC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='Fee'][3]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txt3rdDMBPServiceOptionFeeHUHC;
 
     @FindBy(how = How.XPATH, using = "//b[.='Deliver via Zoom Pharmacy']/following::input[@data-placeholder='48 Hours'][1]/following::input[@data-placeholder='Fee'][3]")
@@ -273,37 +273,37 @@ public class RepeatScriptSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//b[.='Patient to Collect Script']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txtFourthServiceOptionFeeHUHC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='Fee'][1]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='STD'][1]")
     protected WebElement txt4thServiceOptionFeeSTD;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='Fee'][2]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='CSC'][1]")
     protected WebElement txt4thServiceOptionFeeCSC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='Fee'][3]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script by Post']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txt4thServiceOptionFeeHUHC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='Fee'][1]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='STD'][1]")
     protected WebElement txt4thSSTPServiceOptionFeeSTD;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='Fee'][2]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='CSC'][1]")
     protected WebElement txt4thSSTPServiceOptionFeeCSC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='Fee'][3]")
+    @FindBy(how = How.XPATH, using = "//b[.='Send Script to Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txt4thSSTPServiceOptionFeeHUHC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Deliver Meds by Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='Fee'][1]")
+    @FindBy(how = How.XPATH, using = "//b[.='Deliver Meds by Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='STD'][1]")
     protected WebElement txt4thDMBPServiceOptionFeeSTD;
 
     @FindBy(how = How.XPATH, using = "//b[.='Deliver via Zoom Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='Fee'][1]")
     protected WebElement txt4thDVZPServiceOptionFeeSTD;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Deliver Meds by Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='Fee'][2]")
+    @FindBy(how = How.XPATH, using = "//b[.='Deliver Meds by Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='CSC'][1]")
     protected WebElement txt4thDMBPServiceOptionFeeCSC;
 
     @FindBy(how = How.XPATH, using = "//b[.='Deliver via Zoom Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='Fee'][2]")
     protected WebElement txt4thDVZPServiceOptionFeeCSC;
 
-    @FindBy(how = How.XPATH, using = "//b[.='Deliver Meds by Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='Fee'][3]")
+    @FindBy(how = How.XPATH, using = "//b[.='Deliver Meds by Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='HUHC'][1]")
     protected WebElement txt4thDMBPServiceOptionFeeHUHC;
 
     @FindBy(how = How.XPATH, using = "//b[.='Deliver via Zoom Pharmacy']/following::input[@data-placeholder='72 Hours'][1]/following::input[@data-placeholder='Fee'][3]")

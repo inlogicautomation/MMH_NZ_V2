@@ -165,7 +165,7 @@ public class RepeatPrescription extends BasePage {
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "//mat-label[contains(@class,'required ng-tns-c176-48 ng-star-inserted') and normalize-space(text()='Select a Doctor')]")
+    @FindBy(how = How.XPATH, using = "//mat-label[text()=' Select a Doctor']")
     protected WebElement drpdownDoctorRuleC;
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='SelectedDoctor']")
@@ -2174,7 +2174,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
         boolean doctorPresenceForRuleC = false;
         boolean doctorPresence = false;
         try {
-            waitForElement(drpdownDoctor);
+//            waitForElement(drpdownDoctor);
             doctorPresence = !verifyElement(drpdownDoctor);
             System.out.println("Select Doctor dropdown is not present as per the Rule C");
             waitForElement(drpdownDoctorRuleC);
