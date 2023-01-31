@@ -21,7 +21,7 @@ public class BeatingTheBlues extends BasePage {
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'View Session1')]//parent::a")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'View Session 1')]//parent::a")
     protected WebElement elmtviewsession1;
 
 //    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Hi TOM KARRIE')]")

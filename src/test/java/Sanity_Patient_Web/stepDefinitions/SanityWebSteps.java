@@ -935,7 +935,7 @@ public class SanityWebSteps {
     @And("I click on Immunisations Confirm & Save Button")
     public void iClickOnImmunisationsConfirmSaveButton() {
         Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickImmunisationSave());
-        sanityPageContainer.myHealthRecordsPage.RefreshPage();
+//        sanityPageContainer.myHealthRecordsPage.RefreshPage();
     }
 
     @When("I click on {string}edit icon & I Edit Immunisations of My Entries records {string}")

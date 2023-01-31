@@ -145,7 +145,7 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Create')]")
     protected WebElement btnUpdate;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Update')]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Update')])[2]")
     protected WebElement btnPassWordUpdate;
 
 
@@ -342,7 +342,7 @@ public class ProfilesPage extends BasePage {
     protected WebElement getElmntSearchPatientsDoctor;
 
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Search Patients')]")
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Search Patients')]")
     protected WebElement txtSearchPatients;
 
     @FindBy(how = How.XPATH, using = "(//a[contains(text(),'View Goals')])[1]")
@@ -621,8 +621,8 @@ public class ProfilesPage extends BasePage {
         try {
             waitForElements(btnDeleteIcon);
             for (WebElement delete: btnDeleteIcon) {
-                waitForSeconds(2);
-                waitForElement(delete);
+                waitForSeconds(3);
+//                waitForElement(delete);
                 waitForElementClickable(delete);
                 jsClick(delete);
                 waitForSeconds(1);
@@ -646,7 +646,7 @@ public class ProfilesPage extends BasePage {
     public boolean deleteAllEmergencyContact() {
         waitForElement(txtEmergencyContacts);
         try {
-            waitForElements(btnDeleteIcon);
+//            waitForElements(btnDeleteIcon);
             for (WebElement delete: btnDeleteIcon) {
                 waitForSeconds(2);
                 waitForElement(delete);
@@ -1701,7 +1701,8 @@ public class ProfilesPage extends BasePage {
            jsClick(drpDownHealthCentre);
             waitForSeconds(2);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntHealthcentreDrop.replace("<<REPLACEMENT>>", strHealthCenter)));
-            jsClick(elmntEntriesFromHealthCentre);
+            System.out.printf(">>>>>>>>>>>>elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
+            mouseClick(elmntEntriesFromHealthCentre);
             waitForSeconds(2);
             blResult = true;
             System.out.println("\nSuccessfully selected the health centre >>> :: ");

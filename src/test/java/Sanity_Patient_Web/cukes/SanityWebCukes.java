@@ -10,7 +10,7 @@ import static Sanity_Patient_Web.pages.HomePage.*;
 
 @CucumberOptions(features = {"src/test/resources/features/Sanity_Patient_Web"},
         monochrome = true,
-        tags = "@SANITY_PATH",
+        tags = "@VIEW_JOURNAL",
         glue = {"Sanity_Patient_Web", "Happy_Path_Patient_Web_and_MR"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
@@ -29,6 +29,7 @@ public class SanityWebCukes extends AbstractTestNGCucumberTests {
                 ExtentService.getInstance().setSystemInfo("Execution Browser", strBrowserName);
                 ExtentService.getInstance().setSystemInfo("Browser Version", strBrowserVersion);
                 ExtentService.getInstance().setSystemInfo("Execution Machine", strSystemName);
+
                 ExtentService.getInstance().setSystemInfo("Automation QA", System.getProperty("user.name"));
 
 
@@ -36,4 +37,3 @@ public class SanityWebCukes extends AbstractTestNGCucumberTests {
 }
 
 //clean test -Dapp=Sanity_Patient_Web -Dexecution_type=browser -Drunner=SanityWebCukes -Dbrowser_name=chrome -Denv=PROD "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/WebApp-QAResults.html -Dsysteminfo.AppName=Demo-QA"
-

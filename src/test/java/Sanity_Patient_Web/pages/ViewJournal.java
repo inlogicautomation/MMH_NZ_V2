@@ -14,6 +14,7 @@ import org.openqa.selenium.support.How;
 import java.util.List;
 
 import static cap.utilities.DateUtil.getDate;
+import static cap.utilities.DateUtil.getDayAfterTommorrowDate;
 import static cap.utilities.SharedDriver.strExecutionID;
 
 public class ViewJournal extends BasePage {
@@ -86,10 +87,24 @@ public class ViewJournal extends BasePage {
             .append("<<REPLACEMENT>>").append("')]").toString();
 
     protected String elmntTimeDrop = new StringBuilder().append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[3]").toString();
+
+    protected String elmntDrop = new StringBuilder().append("(//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')])[2]").toString();
 
     @FindBy(how = How.XPATH, using = "//textarea[@formcontrolname='notes']")
     protected WebElement elmntNotes;
+
+    @FindBy(how = How.XPATH, using = "//button[@aria-label='Open calendar']")
+    protected WebElement elmntCalendar;
+
+    @FindBy(how = How.XPATH, using = "//button[@aria-label='Choose month and year']")
+    protected WebElement elmntMonthAndYear;
+
+    public String futureDate = new StringBuilder()
+            .append("//td/div[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
 
     @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='date']//following::button)[1]")
     protected WebElement elmntDate;
@@ -287,14 +302,62 @@ public class ViewJournal extends BasePage {
     public void enterviewJournalDateTaken() {
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            waitForElement(elmntDate);
-            click(elmntDate);
-            String strDateFormat = "d";
-            String strDay = "TOMORROW";
-            String strDate = DateUtil.getDate(strDay, strDateFormat);
-            System.out.println("Current Day ::>>" + strDate);
-            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
-            click(elmntDayAfterDate);
+//            waitForElement(elmntDate);
+//            click(elmntDate);
+//            String strDateFormat = "d";
+//            String strDay = "TOMORROW";
+//            String strDate = DateUtil.getDate(strDay, strDateFormat);
+//            System.out.println("Current Day ::>>" + strDate);
+//            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
+//            click(elmntDayAfterDate);
+            waitForElement(elmntCalendar);
+            waitForElementClickable(elmntCalendar);
+            waitAndClick(elmntCalendar);
+
+            waitForSeconds(3);
+            waitForElement(elmntMonthAndYear);
+            waitForElementClickable(elmntMonthAndYear);
+            waitAndClick(elmntMonthAndYear);
+
+
+            String date = getDate("TOMORROW","d");
+            String month = getDate("TOMORROW","MMM").toUpperCase();
+            String year = getDate("TOMORROW","YYYY");
+
+            System.out.println("getDayAfterTomorrowDate >>> :: " + date);
+            System.out.println("getDayAfterTomorrowDate >>> :: " + month);
+            System.out.println("getDayAfterTomorrowDate >>> :: " + year);
+
+
+            System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", year));
+            WebElement selectYear = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", year)));
+
+            waitForSeconds(3);
+            waitForElement(selectYear);
+            waitForElementClickable(selectYear);
+            waitAndClick(selectYear);
+
+            System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", month));
+            WebElement selectMonth = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", month)));
+
+            waitForSeconds(3);
+            waitForElement(selectMonth);
+            waitForElementClickable(selectMonth);
+            waitAndClick(selectMonth);
+
+            System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", date));
+            WebElement selectDate = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", date)));
+
+            waitForSeconds(3);
+            waitForElement(selectDate);
+            waitForElementClickable(selectDate);
+            waitAndClick(selectDate);
+
+            System.out.println("Value >>> :: " + elmntCalendar.getAttribute("value"));
+            waitForElement(elmntCalendar);
+            String strEnteredDate = elmntCalendar.getAttribute("value");
+            System.out.println("strEnteredDate >>>> :: "+strEnteredDate);
+            waitForSeconds(2);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
 
@@ -308,7 +371,7 @@ public class ViewJournal extends BasePage {
             waitForElementClickable(getElmntTime);
             waitForSeconds(2);
             jsClick(getElmntTime);
-            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntTimeDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
             blResult = verifyElement(getElmntTime);
         } catch (Exception e) {
@@ -363,7 +426,7 @@ public class ViewJournal extends BasePage {
             waitForSeconds(2);
             jsClick(getElmntEmailName);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntTimeDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
-            jsClick(elmntEntriesFromHealthCentre);
+            mouseClick(elmntEntriesFromHealthCentre);
             blResult = verifyElement(getElmntEmailName);
         } catch (Exception e) {
             e.printStackTrace();

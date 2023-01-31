@@ -29,7 +29,7 @@ public class MyHealthRecordsPage extends BasePage {
     static Process pb = null;
 
 
-    @FindBy(how = How.XPATH, using = "//a[@class='menu-header ng-star-inserted']/following::span[text()='My Health Records']/following-sibling::mat-icon")
+    @FindBy(how = How.XPATH, using = "//a[@class='menu-header ng-star-inserted']/following::span[text()='My Health Records']")
     protected WebElement btnMyHealthRecordsExpand;
 
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")
@@ -70,7 +70,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h3[text()='Recalls'])[1]")
     protected WebElement headerRecalls;
     protected String elmntFilterbyDrop = new StringBuilder().append("//div[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("']").toString();
+            .append("<<REPLACEMENT>>").append("')]").toString();
     @FindBy(how = How.XPATH, using = "//span[text()='Conditions']")
     protected WebElement elmntConditions;
     protected String strPrescriptionsIconContentLocator = new StringBuilder()
@@ -595,7 +595,9 @@ public class MyHealthRecordsPage extends BasePage {
 
 
     protected String elmntCovidImmunisationsDrop = new StringBuilder().append("//span[text()='")
-            .append("<<REPLACEMENT>>").append("']").toString();
+            .append("<<REPLACEMENT>>").append("'])[1]").toString();
+
+//    (//span[text()='Comirnaty, COVID-19 mRNA (Pfizer-BioNTech)'])[1]
 
     protected String elmntAddAllergicDrop = new StringBuilder().append("//span[@class='mat-option-text'][contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
@@ -961,7 +963,7 @@ public class MyHealthRecordsPage extends BasePage {
             jsClick(elmntEntriesFromHealthCentre);
 //            waitForElementClickable(elmntAllergies);
 //            jsClick(elmntAllergies);
-            isVerified = verifyElement(elmntAllergies);
+            isVerified = verifyElement(elmntEntriesFromHealthCentre);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForSeconds(3);

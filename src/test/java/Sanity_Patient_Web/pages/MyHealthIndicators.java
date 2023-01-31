@@ -98,10 +98,10 @@ public class MyHealthIndicators extends BasePage {
     protected WebElement elmtKeepthisprivate;
 
 
-    @FindBy(how = How.XPATH, using = "//h3[text()='Blood Pressure']")
+    @FindBy(how = How.XPATH, using = "//p[text()='Blood Pressure']")
     protected WebElement elmntBloodPressure;
 
-    @FindBy(how = How.XPATH, using = "//h3[text()='Alcohol']")
+    @FindBy(how = How.XPATH, using = "//p[text()='Alcohol']")
     protected WebElement elmntAlocohol;
 
     @FindBy(how = How.XPATH, using = "//span[text()='HEALTH CENTRE']")
@@ -166,7 +166,7 @@ public class MyHealthIndicators extends BasePage {
     protected WebElement getElmntReminderType;
 
     protected String elmntReminderType = new StringBuilder().append("(//span[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')])[2]").toString();
+            .append("<<REPLACEMENT>>").append("')])[3]").toString();
 
     @FindBy(how = How.XPATH, using = "//mat-label[text()='Frequency']//parent::label//parent::span//parent::div")
     protected WebElement getElmntFrequency;
@@ -249,45 +249,45 @@ public class MyHealthIndicators extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Yes')] ")
     protected WebElement btnBloodPressureyes;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'LDL')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'LDL')]")
     protected WebElement elmntLDL;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Alcohol')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Alcohol')]")
     protected WebElement elmntAlcohol;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Anxiety Severity')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Anxiety')]")
     protected WebElement elmntAnxiety;
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Blood Sugar')]")
     protected WebElement elmntBloodSugar;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Depression')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Depression')]")
     protected WebElement elmntDepression;
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Drinking Survey')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Drinking Survey')]")
     protected WebElement elmntDrinkingSurvey;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Peak Flow')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Peak Flow')]")
     protected WebElement elmntPeakFlow;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Smoking')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Smoking')]")
     protected WebElement elmntSmoking;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Total Cholesterol')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Total Cholesterol')]")
     protected WebElement elmntTotalCholesterol;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Triglycerides')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Triglycerides')]")
     protected WebElement elmntTriglycerides;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Waist Size')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Waist Size')]")
     protected WebElement elmntWaistSize;
 
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Height')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Height')]")
     protected WebElement elmntHeightCard;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Height')]")
     protected WebElement elmntsHeightCard;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Weight')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Weight')]")
     protected WebElement elmntWeightCard;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Weight')]")
@@ -301,7 +301,7 @@ public class MyHealthIndicators extends BasePage {
     @FindBy(how = How.XPATH, using = "//h3[text()='My Health Indicators']")
     protected WebElement elmtMyHealthIndicators;
 
-    @FindBy(how = How.XPATH, using = "//h3[text()='BMI']")
+    @FindBy(how = How.XPATH, using = "//p[text()='BMI']")
     protected WebElement elmntBMI;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'BMI')]")
@@ -321,13 +321,13 @@ public class MyHealthIndicators extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'HDL')]")
     protected WebElement elmtHDL;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'HbA1c')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'HbA1c')]")
     protected WebElement elmntHBA1C;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'HbA1c')]")
     protected WebElement elmntsHBA1C;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'HDL')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'HDL')]")
     protected WebElement elmntHDL;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'HDL')]")
@@ -403,10 +403,10 @@ public class MyHealthIndicators extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Alcohol')]")
     protected WebElement getElmntAlcoholHealthIndicator;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Anxiety Severity')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Anxiety')]")
     protected WebElement getElmntAnxietyHealthIndicator;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Depression Severity')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Depression')]")
     protected WebElement getElmntDepressionHealthIndicator;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Drinking Survey')]")
@@ -3316,6 +3316,7 @@ public class MyHealthIndicators extends BasePage {
             waitForSeconds(2);
             jsClick(getElmntAnxietyHealthIndicator);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntHealthIndicatorDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
+            System.out.printf(">>>>>>>>>>>>>>"+elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(getElmntAnxietyHealthIndicator);
@@ -4486,7 +4487,7 @@ public class MyHealthIndicators extends BasePage {
             jsScrollIntoView(elmntBloodPressureTableData);
             waitForElement(elmntBloodPressureTableData);
             verifyElement(elmntBloodPressureTableData);
-            blResult = verifyElement(elmntBloodSugar);
+            blResult = verifyElement(elmntBloodPressureTableData);
         } catch (Exception e) {
             e.printStackTrace();
         }

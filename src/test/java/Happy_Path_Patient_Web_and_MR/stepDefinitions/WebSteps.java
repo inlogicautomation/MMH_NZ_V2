@@ -2311,6 +2311,7 @@ public class WebSteps {
     @Then("I Should see the Signature Based on {string} entered and signature must get auto populated in Compose mail")
     public void iShouldSeeTheSignatureBasedOnEnteredAndSignatureMustGetAutoPopulatedInComposeMail(String strMessage) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
             Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -2662,7 +2663,7 @@ public class WebSteps {
         List<String> lstStrMessage = TestDataUtil.getListOfValue(strMessage);
         System.out.println("lstStrMessage >>> :: " + lstStrMessage);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
             Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
             Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
             Assert.assertTrue(demoPageContainer.messagesPage.selectAutomaticRepliesSetting());

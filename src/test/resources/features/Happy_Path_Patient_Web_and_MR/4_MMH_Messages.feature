@@ -9,7 +9,7 @@ Feature: Messages
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @MESSAGES1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -21,7 +21,7 @@ Feature: Messages
       | Email Address       | Password               |
       | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
 
-  @WEB @MESSAGES1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: S1- Patient Sending Message
 
     Given As a Existing user I am on HomePage and navigate to Compose Message
@@ -34,7 +34,7 @@ Feature: Messages
       | Compose Details   |
       | &COMPOSE_MESSAGE& |
 
-  @WEB @MESSAGES1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: S2- Patient Save Message as Draft
 
     Given As a Existing user I am on HomePage and navigate to Compose Message

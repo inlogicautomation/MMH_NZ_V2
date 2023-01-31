@@ -170,7 +170,7 @@ Feature: Patient Profile
 
 
 
-  @WEB @PROFILE1 @SANITY_PATH
+  @WEB @PROFILE @SANITY_PATH
   Scenario Template: S10- Preparation for Patient Automatic Reply Settings, Login as a Provider user
 
     Given As a user Launch the "<V1 Portal>"
@@ -179,10 +179,10 @@ Feature: Patient Profile
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
-      | V1 Portal | Email Address      | Password              |
-      | &V1 URL DOCTOR&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+      | V1 Portal       | Email Address      | Password              |
+      | &V1 URL& | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
-  @WEB @PROFILE1 @SANITY_PATH
+  @WEB @PROFILE @SANITY_PATH
   Scenario Template: S3- Preparation for Profile Access
 
     Given As a user I am on Doctor portal homepage and Navigate to Search Patient
@@ -195,7 +195,7 @@ Feature: Patient Profile
       | &PROFILE_ACCESS_INFORMATION& |
 
 
-  @WEB @PROFILE1 @SANITY_PATH
+  @WEB @PROFILE @SANITY_PATH
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -207,7 +207,7 @@ Feature: Patient Profile
       | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
 
 
-  @WEB @PROFILE1 @SANITY_PATH @PROFILE1
+  @WEB @PROFILE @SANITY_PATH
   Scenario Template: S3- Existing Patient change the Phone Number.
 
     Given I navigate to View Profile and I see Access Information
