@@ -238,7 +238,7 @@ public class ViewJournal extends BasePage {
             waitForSeconds(2);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntHealthIndicatorDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             System.out.println(">>>>>>>>>>>>>>>>>>>>"+elmntEntriesFromHealthCentre);
-            jsClick(elmntEntriesFromHealthCentre);
+            mouseClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
             blResult = verifyElement(getElmntCategoryName);

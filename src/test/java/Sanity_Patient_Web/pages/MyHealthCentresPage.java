@@ -42,13 +42,13 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome')])[1]")
     protected WebElement txtMyHomePage;
 
-    @FindBy(how = How.XPATH, using = "//div[@class='leftside']")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Practice Menu')]")
     protected WebElement elmntsMenu;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Search Patients')]/ancestor::div[contains(@class,'breadcrumbs')]")
     protected WebElement txtBCSearchPatient;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Post to Notice Board')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Post to Notice Board')]")
     protected WebElement elmntPostNoticeBoard;
 
     @FindBy(how = How.XPATH, using = "(//div[contains(text(),'GP')]//preceding-sibling::div/div[@class='mat-radio-outer-circle'])[1]")
@@ -69,7 +69,7 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'CONNECT')]")
     protected WebElement btnConnect;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'New Post')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'New Post')]")
     protected WebElement elmntNewPost;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Content Header')]")
@@ -290,6 +290,7 @@ public class MyHealthCentresPage extends BasePage {
             waitForSeconds(3);
 //            waitForElement(txtMyHomePage);
             waitForElement(elmntsMenu);
+            click(elmntsMenu);
             waitForElement(elmntPostNoticeBoard);
             waitForElementClickable(elmntPostNoticeBoard);
             click(elmntPostNoticeBoard);

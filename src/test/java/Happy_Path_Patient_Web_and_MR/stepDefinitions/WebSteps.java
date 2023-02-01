@@ -2279,6 +2279,7 @@ public class WebSteps {
         List<String> lstStrMessage = TestDataUtil.getListOfValue(strMessage);
         System.out.println("lstStrMessage >>> :: " + lstStrMessage);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
             Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
             Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
             Assert.assertTrue(demoPageContainer.messagesPage.selectOutOfOfficeSetting());
@@ -2447,6 +2448,7 @@ public class WebSteps {
         List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
         System.out.println("List Message Details >>> :: " + lstMessageDetails);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
             Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -2858,6 +2860,7 @@ public class WebSteps {
 
     @Then("I should verify the sent reply message in Sent items")
     public void iShouldVerifyTheSentReplyMessageInSentItems() {
+        Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientSentMessage());
         Assert.assertTrue(demoPageContainer.messagesPage.verifyReplySentMessage());

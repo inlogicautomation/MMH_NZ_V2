@@ -3090,7 +3090,7 @@ public class MessagesPage extends BasePage {
             System.out.println(">>>>>>>>>>>>"+Subject);
             waitForElement(Subject);
             waitForElementClickable(Subject);
-            jsClick(Subject);
+            mouseClick(Subject);
 
             List<String> LstDetails = new ArrayList<>();
 //            LstDetails.add(TestDataUtil.getValue(lstDetails.get(1)));
