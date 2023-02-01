@@ -3339,6 +3339,7 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicalDetails.get(3)));
+
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
     }
@@ -3619,6 +3620,27 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptSendingOption(TestDataUtil.getValue("&SAVED_SCRIPT_OPTION_ADDRESS&")));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @Then("I should see the only show Pay at Health center Button on Patient to Collect Script{string},{string},{string} and {string}")
+    public void iShouldSeeTheOnlyShowPayAtHealthCenterButtonOnPatientToCollectScriptAnd(String strScriptInstruction, String ScriptUrgencies, String strMedicalDetails, String strLocationdetails) {
+        List<String> lstscriptDetails = TestDataUtil.getListOfValue(strScriptInstruction);
+        List<String> lstscriptUrgencies = TestDataUtil.getListOfValue(ScriptUrgencies);
+        List<String> lstMedicalDetails = TestDataUtil.getListOfValue(strMedicalDetails);
+        List<String> lstLocationDetails = TestDataUtil.getListOfValue(strLocationdetails);
+        System.out.println("RRPScriptFee details >>> :: " + lstLocationDetails);
+        System.out.println("RRPScriptFee Instructions details >>> :: " + lstscriptDetails);
+        System.out.println("RRPScript Urgencies details >>> :: " + lstscriptUrgencies);
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyLocation(lstLocationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyProviderName(lstLocationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptInstruction(lstscriptDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgency(TestDataUtil.getListOfValue(ScriptUrgencies)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicalDetails.get(3)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.VerifyPayAtHealthCentre());
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
     }

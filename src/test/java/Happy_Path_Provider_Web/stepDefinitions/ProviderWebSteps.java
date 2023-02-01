@@ -655,4 +655,58 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }
 
+    @And("I click the edit button and changing the Reason for RRP is Mandatory data as per Patient to Collect Script requirements{string}")
+    public void iClickTheEditButtonAndChangingTheReasonForRRPIsMandatoryDataAsPerPatientToCollectScriptRequirements(String strDetail) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strDetail);
+        System.out.println("RRPScriptSetting details >>> :: " + lstDetails);
+        providerPageContainer.providerHomePage.clickEditButton();
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectHealthCentreLocation(lstDetails.get(0)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectServiceName(lstDetails.get(1)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectOtherReqData());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqDataRuleA());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFirstSelectedServiceOption(lstDetails.get(2)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForFirstSelectedServiceOption(lstDetails.get(3)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForFirstSelectedServiceOption(lstDetails.get(4)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSecondSelectedServiceOption(lstDetails.get(5)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForSecondSelectedServiceOption(lstDetails.get(6)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForSecondSelectedServiceOption(lstDetails.get(7)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectThirdSelectedServiceOption(lstDetails.get(8)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForThirdSelectedServiceOption(lstDetails.get(9)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForThirdSelectedServiceOption(lstDetails.get(10)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFourthSelectedServiceOption(lstDetails.get(11)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForFourthSelectedServiceOption(lstDetails.get(12)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForFourthSelectedServiceOption(lstDetails.get(13)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.ClickRequestisMandatoryYesButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+    }
+
+
+    @And("I click the edit button and changing the Payment Settings as per Patient to Collect Script requirements{string}")
+    public void iClickTheEditButtonAndChangingThePaymentSettingsAsPerPatientToCollectScriptRequirements(String strDetail) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strDetail);
+        System.out.println("RRPScriptSetting details >>> :: " + lstDetails);
+        providerPageContainer.providerHomePage.clickEditButton();
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectHealthCentreLocation(lstDetails.get(0)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectServiceName(lstDetails.get(1)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectOtherReqData());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqDataRuleA());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFirstSelectedServiceOption(lstDetails.get(2)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForFirstSelectedServiceOption(lstDetails.get(3)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForFirstSelectedServiceOption(lstDetails.get(4)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSecondSelectedServiceOption(lstDetails.get(5)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForSecondSelectedServiceOption(lstDetails.get(6)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForSecondSelectedServiceOption(lstDetails.get(7)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectThirdSelectedServiceOption(lstDetails.get(8)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForThirdSelectedServiceOption(lstDetails.get(9)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForThirdSelectedServiceOption(lstDetails.get(10)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFourthSelectedServiceOption(lstDetails.get(11)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForFourthSelectedServiceOption(lstDetails.get(12)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForFourthSelectedServiceOption(lstDetails.get(13)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.ClickRequestisMandatoryYesButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.ClickPaymentSettingPayAtHealthCentreButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+
+    }
 }

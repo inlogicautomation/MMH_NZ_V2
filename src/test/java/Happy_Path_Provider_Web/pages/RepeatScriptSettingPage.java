@@ -40,6 +40,9 @@ public class RepeatScriptSettingPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'Save')]")
     protected WebElement btnSave;
 
+    @FindBy(xpath = "(//mat-radio-group[@formcontrolname='isMessageMandatory']//div//div//following::input)[1]")
+    protected WebElement btnRequestisMandatoryYESButton;
+
     @FindBy(xpath = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'Changes Saved Successfully')]")
     protected WebElement successPopUp;
 
@@ -1758,6 +1761,38 @@ public class RepeatScriptSettingPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(successPopUp);
             blResult = verifyElement(successPopUp);
+        } catch (Exception e) {
+            System.out.println("Failed to verify the saved pop up");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean ClickRequestisMandatoryYesButton() {
+        boolean blResult = false;
+        try {
+            waitForElement(btnRequestisMandatoryYESButton);
+            jsScrollIntoView(btnRequestisMandatoryYESButton);
+            jsClick(btnRequestisMandatoryYESButton);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(btnSave);
+            blResult = verifyElement(btnSave);
+        } catch (Exception e) {
+            System.out.println("Failed to verify the saved pop up");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean ClickPaymentSettingPayAtHealthCentreButton() {
+        boolean blResult = false;
+        try {
+            waitForElement(btnRequestisMandatoryYESButton);
+            jsScrollIntoView(btnRequestisMandatoryYESButton);
+            jsClick(btnRequestisMandatoryYESButton);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(btnSave);
+            blResult = verifyElement(btnSave);
         } catch (Exception e) {
             System.out.println("Failed to verify the saved pop up");
             e.printStackTrace();

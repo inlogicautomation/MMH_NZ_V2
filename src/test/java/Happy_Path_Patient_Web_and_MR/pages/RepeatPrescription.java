@@ -2516,4 +2516,26 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
         return blPaymentVerify;
     }
 
+    public boolean VerifyPayAtHealthCentre() {
+        boolean blPaymentVerify = false;
+        try {
+            if (!verifyElement(btnPayNow)) {
+                waitForElementClickable(BtnPayAtHealthCentre);
+                waitForElement(BtnPayAtHealthCentre);
+                blPaymentVerify = verifyElement(BtnPayAtHealthCentre);
+                System.out.printf("Only Show The PayAtHealth Centre Button Only");
+            }else
+            {
+                verifyElement(btnPayNow);
+                System.out.printf("Show The PayNow Button");
+            }
+
+
+        } catch (Exception e) {
+            System.out.println("Not able to verify the Pay At Health Centre");
+            e.printStackTrace();
+        }
+        return blPaymentVerify;
+    }
+
 }

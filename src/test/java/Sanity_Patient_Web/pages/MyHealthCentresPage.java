@@ -189,11 +189,11 @@ public class MyHealthCentresPage extends BasePage {
             if (!elmntConnectToHealthCentre.isDisplayed()){
             waitForElement(elmntMyHealthCentres);
             waitForElementClickable(elmntMyHealthCentres);
-            jsClick(elmntMyHealthCentres);}
-            waitForSeconds(4);
+            jsClick(elmntMyHealthCentres);
+            }
+            jsScrollIntoView(elmntConnectToHealthCentre);
             waitForElement(elmntConnectToHealthCentre);
-            waitForElementClickable(elmntConnectToHealthCentre);
-            jsClick(elmntConnectToHealthCentre);
+            mouseClick(elmntConnectToHealthCentre);
             blResult = verifyElement(txtConnectAHealthCentre);
         } catch (Exception e) {
             System.out.println("\n Failed to click Connect To HealthCentre >>> :: ");
@@ -208,7 +208,7 @@ public class MyHealthCentresPage extends BasePage {
             waitForElement(txtConnectAHealthCentre);
             waitForElement(btnConnectAHealthCentre);
             waitForElementClickable(btnConnectAHealthCentre);
-            waitAndClick(btnConnectAHealthCentre);
+            jsClick(btnConnectAHealthCentre);
 
             waitForElement(txtBoxSearchForHealthCentre);
             blResult = verifyElement(txtBoxSearchForHealthCentre);
