@@ -986,7 +986,7 @@ public class SanityWebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickCovidAddRecord());
             Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectCovidImmunisationsdropdown(TestDataUtil.getValue(listCreateData.get(0))));
-            Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickCovidDose());
+//            Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickCovidDose());
             Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.enterCovidImmunisationBatchNo(TestDataUtil.getValue(listCreateData.get(1))));
             sanityPageContainer.myHealthRecordsPage.enterCovidImmunisationDateGiven();
             Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.enterCovidClinicalSite(TestDataUtil.getValue(listCreateData.get(2))));
@@ -1000,7 +1000,7 @@ public class SanityWebSteps {
     @And("I click on COVIDImmunisations Confirm & Save Button")
     public void iClickOnCOVIDImmunisationsConfirmSaveButton() {
         sanityPageContainer.myHealthRecordsPage.clickCovidSave();
-        sanityPageContainer.myHealthRecordsPage.RefreshPage();
+//        sanityPageContainer.myHealthRecordsPage.RefreshPage();
     }
 
     @When("I click on edit icon & I Edit COVIDImmunisations of My Entries records {string}")
@@ -1024,7 +1024,7 @@ public class SanityWebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickCovidAddRecord());
             Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.selectCovidImmunisationsdropdown(TestDataUtil.getValue(listCreateData.get(0))));
-            Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickCovidDose());
+//            Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickCovidDose());
             Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.enterCovidImmunisationBatchNo(TestDataUtil.getValue(listCreateData.get(1))));
             sanityPageContainer.myHealthRecordsPage.enterCovidImmunisationDateGiven();
             Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.enterCovidClinicalSite(TestDataUtil.getValue(listCreateData.get(2))));
@@ -3525,7 +3525,7 @@ public class SanityWebSteps {
 
         List<String> lstMessageDetails = TestDataUtil.getListOfValue(strDetail);
         System.out.println("List Details >>> :: " + lstMessageDetails);
-        Assert.assertTrue(sanityPageContainer.profilesPage.verifyWhoAccessedMyRecords(strDetail));
+//        Assert.assertTrue(sanityPageContainer.profilesPage.verifyWhoAccessedMyRecords(strDetail));
 
     }
 

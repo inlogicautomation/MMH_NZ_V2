@@ -208,7 +208,7 @@ Feature: Patient Profile
 
 
   @WEB @PROFILE @SANITY_PATH
-  Scenario Template: S3- Existing Patient change the Phone Number.
+  Scenario Template: S3- Verify for Profile Access
 
     Given I navigate to View Profile and I see Access Information
     And I verify the provider Access Information of patient "<Details>"

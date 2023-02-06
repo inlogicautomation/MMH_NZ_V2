@@ -87,7 +87,7 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'Deleted successfully')]/preceding::h4[contains(text(),'Success!')]")
     protected WebElement txtDeletedSuccessPopUp;
 
-    @FindBy(how = How.XPATH, using = "//select[contains(@id,'ddlPracticeList')]")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
     protected WebElement drpDownHealthCentre;
 
     @FindBy(how = How.XPATH, using = "//select[contains(@id,'ddlSelectType')]")
@@ -144,14 +144,13 @@ public class MyHealthCentresPage extends BasePage {
             System.out.println("strPracticeName >>> :: " + strPracticeName);
             waitForElement(elmntMyHealthCentres);
             waitForElementClickable(elmntMyHealthCentres);
-            waitAndClick(elmntMyHealthCentres);
-
-            waitForElement(elmntNoticeBoard);
+            jsClick(elmntMyHealthCentres);
+//            waitForElement(elmntNoticeBoard);
             System.out.println("X path practiceName >>> :: " + practiceName.replace("<<REPLACEMENT>>", strPracticeName));
             WebElement practice = waitForElement(By.xpath(practiceName.replace("<<REPLACEMENT>>", strPracticeName)));
             waitForElement(practice);
             waitForElementClickable(practice);
-            waitAndClick(practice);
+            jsClick(practice);
 
             blResult = verifyElement(elmntOverview);
         } catch (Exception e) {
@@ -312,7 +311,8 @@ public class MyHealthCentresPage extends BasePage {
             waitForSeconds(2);
             waitForElement(elmntNewPost);
             waitForElement(drpDownHealthCentre);
-            waitForElementClickable(drpDownHealthCentre);
+//            waitForElementClickable(drpDownHealthCentre);
+            jsClick(drpDownHealthCentre);
             Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'ddlPracticeList')]")));
             System.out.println("strHealthCenter >>> :: "+strHealthCenter);
             healthCentre.selectByVisibleText(strHealthCenter);

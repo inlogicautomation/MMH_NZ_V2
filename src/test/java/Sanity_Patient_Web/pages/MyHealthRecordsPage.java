@@ -594,10 +594,11 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement elmntMobileclassificationdrop;
 
 
-    protected String elmntCovidImmunisationsDrop = new StringBuilder().append("//span[text()='")
-            .append("<<REPLACEMENT>>").append("'])[1]").toString();
+    protected String elmntCovidImmunisationsDrop = new StringBuilder().append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[2]").toString();
 
 //    (//span[text()='Comirnaty, COVID-19 mRNA (Pfizer-BioNTech)'])[1]
+//    (//span[contains(text(),'Comirnaty, COVID-19 mRNA (Pfizer-BioNTech)')])[2]
 
     protected String elmntAddAllergicDrop = new StringBuilder().append("//span[@class='mat-option-text'][contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
@@ -837,7 +838,7 @@ public class MyHealthRecordsPage extends BasePage {
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", Strdata)));
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            isVerified = verifyElement(elmntConditions);
+            isVerified = verifyElement(elmntEntriesFromHealthCentre);
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -2513,7 +2514,7 @@ public class MyHealthRecordsPage extends BasePage {
             waitForSeconds(2);
             jsClick(elmntCovidImmunisationsdrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntCovidImmunisationsDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
-            jsClick(elmntEntriesFromHealthCentre);
+            mouseClick(elmntEntriesFromHealthCentre);
 
             blResult = true;
         } catch (Exception e) {

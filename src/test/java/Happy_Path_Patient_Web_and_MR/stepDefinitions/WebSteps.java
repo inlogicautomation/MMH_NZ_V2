@@ -3100,6 +3100,7 @@ public class WebSteps {
                 List<String> list1 = TestDataUtil.getListOfValue(strKey);
                 List<String> list2 = TestDataUtil.getListOfValue(strKey2);
                 System.out.println(list1);
+                System.out.println(list2);
                 Assert.assertTrue(demoPageContainer.myHealthRecordsPage.VerifyMyEntriesCOVIDImmunisationData(list1, list2));
             }
         }

@@ -3012,13 +3012,15 @@ public class MyHealthIndicators extends BasePage {
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))));
             waitForSeconds(3);
             System.out.println(elmntActiveCardData);
+            jsScrollIntoView(elmntActiveCardData);
             waitForElement(elmntActiveCardData);
-            waitForElementClickable(elmntActiveCardData);
+            //            waitForElementClickable(elmntActiveCardData);
             jsClick(elmntActiveCardData);
             waitForSeconds(3);
             waitForElementClickable(btnStatus);
             click(btnStatus);
             waitForSeconds(3);
+            jsScrollIntoView(btnInActive);
             waitForElementClickable(btnInActive);
             jsClick(btnInActive);
             waitForSeconds(3);

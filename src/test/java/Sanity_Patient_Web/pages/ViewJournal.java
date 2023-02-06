@@ -155,7 +155,7 @@ public class ViewJournal extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Save')]")
     protected WebElement btnEditBloodPressureSave;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Update')]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Update')])[2]")
     protected WebElement btnEditviewjournalSave;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Yes')] ")
