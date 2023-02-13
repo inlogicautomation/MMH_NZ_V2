@@ -55,7 +55,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Compose Email')])[2]")
     protected WebElement txtComposeMailForMobile;
 
-    @FindBy(how = How.XPATH, using = "//img[@mattooltip='Message settings']")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Settings')]")
     protected WebElement elmntMessagesSettings;
 
     @FindBy(how = How.XPATH, using = " //div[contains(@class,'settings')]//span//img")
@@ -194,7 +194,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h1[text()='Inbox'])[1]")
     protected WebElement txtInboxPage;
 
-    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='toUser']")
+    @FindBy(how = How.XPATH, using = "//input[@placeholder='Enter Patient first name']")
     protected WebElement txtBoxTo;
 
     @FindBy(how = How.XPATH, using = "//span[text()=' Send Message ']")
@@ -399,11 +399,11 @@ public class MessagesPage extends BasePage {
     protected WebElement drpDownSignatureSettings;
 
 
-    @FindBy(how = How.XPATH, using = "//div[@id='cdk-accordion-child-2']/descendant::iframe")
+    @FindBy(how = How.XPATH, using = "(//iframe)[1]")
     protected WebElement frameSignature;
 
 
-    @FindBy(how = How.XPATH, using = "//div[@id='cdk-accordion-child-3']//iframe")
+    @FindBy(how = How.XPATH, using = "(//iframe)[2]")
     protected WebElement frameOutOfOffice;
 
     @FindBy(how = How.XPATH, using = "//iframe[@class='k-iframe']")
@@ -2228,10 +2228,12 @@ public class MessagesPage extends BasePage {
 //            waitForSeconds(5);
             txtBoxTo.sendKeys(strTo);
             waitForSeconds(5);
-            System.out.println("Xpath for Patient >>> :: " + selectTo.replace("<<REPLACEMENT>>", strTo));
-            WebElement patient = waitForElement(By.xpath(selectTo.replace("<<REPLACEMENT>>", strTo)));
-            waitForElementClickable(patient);
-            click(patient);
+            txtBoxTo.sendKeys(Keys.ENTER);
+//            waitForSeconds(5);
+//            System.out.println("Xpath for Patient >>> :: " + selectTo.replace("<<REPLACEMENT>>", strTo));
+//            WebElement patient = waitForElement(By.xpath(selectTo.replace("<<REPLACEMENT>>", strTo)));
+//            waitForElementClickable(patient);
+//            click(patient);
 //            waitForSeconds(1);
             blResult = true;
             System.out.println("\nSuccessfully Entered To>>> :: ");
