@@ -981,6 +981,7 @@ public class MyHealthRecordsPage extends BasePage {
     public void clickDashboardFromMenu() {
         jsScrollIntoView(elmntdashboard);
         waitForElementClickable(elmntdashboard);
+        waitForElement(elmntdashboard);
         jsClick(elmntdashboard);
 
     }

@@ -609,9 +609,9 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(4);
             waitForElementClickable(elmntFamilyMemberCenter);
             waitForSeconds(2);
-            waitAndClick(elmntFamilyMemberCenter);
+            jsClick(elmntFamilyMemberCenter);
             WebElement elmntSelectFamilyMember = waitForElementFewSeconds(By.xpath(elmntFamilyMember.replace("<<REPLACEMENT>>", strFamilyMember)));
-            waitAndClick(elmntSelectFamilyMember);
+            jsClick(elmntSelectFamilyMember);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntAppointmentPanel);
             blResult = true;
@@ -1877,6 +1877,7 @@ public class AppointmentsPage extends BasePage {
             waitForElement(btnSubmit);
             jsClick(btnSubmit);
             waitForSeconds(2);
+            driver.switchTo().defaultContent();
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -2256,6 +2257,7 @@ public class AppointmentsPage extends BasePage {
     public boolean verifySucessMessage() {
         boolean blResult = false;
         try {
+            driver.switchTo().defaultContent();
             waitForSeconds(2);
             waitForElement(elmntPaymentSuccess);
             blResult = verifyElement(elmntPaymentSuccess);

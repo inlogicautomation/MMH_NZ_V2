@@ -390,7 +390,7 @@ public class MessagesPage extends BasePage {
             .toString();
 
     protected String messageText = new StringBuilder()
-            .append("//p[contains(text(),'")
+            .append("//body//p[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]")
             .toString();
@@ -419,7 +419,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//kendo-toolbar[@role='toolbar'])[1]")
     protected WebElement signatureToolbarHeader;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(@class,'ProseMirror')]/p")
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'ProseMirror')]")
     protected WebElement txtBoxMessages;
 
     @FindBy(how = How.XPATH, using = "(//kendo-toolbar[@role='toolbar'])[2]")
@@ -1843,6 +1843,7 @@ public class MessagesPage extends BasePage {
             waitForSeconds(2);
             waitForElement(chkboxAutomaticReply);
             driver.switchTo().frame(frameAutomaticReplies);
+            waitForSeconds(3);
             System.out.println("Xpath for Text Out Of Office >>>> :: " + messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
             WebElement txtAutomaticRepliesMessage = waitForElement(By.xpath(messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             jsScrollIntoView(txtAutomaticRepliesMessage);
