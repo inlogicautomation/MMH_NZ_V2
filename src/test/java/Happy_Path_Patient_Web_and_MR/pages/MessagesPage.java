@@ -1055,7 +1055,7 @@ public class MessagesPage extends BasePage {
             waitForElement(inboxSubject);
             takeScreenshot(driver);
             waitForElementClickable(inboxSubject);
-            waitAndClick(inboxSubject);
+            jsClick(inboxSubject);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("X Path-inboxSubject 2 >>> :: " + receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
             WebElement inboxReceivedSubject = waitForElement(By.xpath(receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
@@ -1994,9 +1994,11 @@ public class MessagesPage extends BasePage {
 //            waitForElementClickable(elmntInboxDoctor);
 //            click(elmntInboxDoctor);
             waitForElement(txtInboxPage);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntSentDoctor);
             waitForElementClickable(elmntSentDoctor);
             jsClick(elmntSentDoctor);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtSent);
             blResult = verifyElement(txtSent);
             System.out.println("Successfully navigated to the inbox");
@@ -2176,14 +2178,14 @@ public class MessagesPage extends BasePage {
             waitForElement(txtCompose);
             waitForElementClickable(drpDownServiceName);
             jsClick(drpDownServiceName);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(1);
 //            Select healthCentre = new Select(driver.findElement(By.xpath("//mat-select[@formcontrolname='serviceName']")));
 //            healthCentre.selectByVisibleText(strServiceName);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyDrop.replace("<<REPLACEMENT>>", strServiceName)));
             jsScrollIntoView(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
-
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
             System.out.println("\nSuccessfully selected the Service Name >>> :: ");
         } catch (Exception e) {
@@ -2222,11 +2224,13 @@ public class MessagesPage extends BasePage {
             waitForElement(txtCompose);
             waitForElementClickable(txtBoxTo);
             click(txtBoxTo);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            waitForSeconds(5);
 //            waitForElement(txtMessageBody);
 //            click(txtMessageBody);
 //            waitForSeconds(5);
             txtBoxTo.sendKeys(strTo);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(5);
             txtBoxTo.sendKeys(Keys.ENTER);
 //            waitForSeconds(5);

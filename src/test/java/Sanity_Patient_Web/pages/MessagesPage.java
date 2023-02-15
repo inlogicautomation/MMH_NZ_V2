@@ -85,7 +85,7 @@ public class MessagesPage extends BasePage {
     protected WebElement txtDraftPatient;
 
 
-    @FindBy(how = How.XPATH, using = "//img[@mattooltip='Message settings']/parent::span/preceding-sibling::button")
+    @FindBy(how = How.XPATH, using = "//span[text()='Delete All']")
     protected WebElement btnDeleteAllInDraft;
 
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Group Messages')]")
@@ -936,8 +936,8 @@ public class MessagesPage extends BasePage {
         try {
             waitForElement(elmntArchive);
             waitForElementClickable(elmntArchive);
-            waitAndClick(elmntArchive);
-
+            jsClick(elmntArchive);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElement(txtArchive);
             System.out.println("Navigate to Archive Successfully >>> :: "+verifyElement(txtSuccessForArchive));
@@ -1040,10 +1040,12 @@ public class MessagesPage extends BasePage {
             WebElement SentMessage =waitForElement(By.xpath(chkBoxInbox.replace("<<REPLACEMENT>>",strSubject)));
             waitForElement(SentMessage);
             waitForElementClickable(SentMessage);
-            waitAndClick(SentMessage);
+            jsClick(SentMessage);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(btnMoveTo);
             waitForElementClickable(btnMoveTo);
-            waitAndClick(btnMoveTo);
+            jsClick(btnMoveTo);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtSuccessForArchive);
             takeScreenshotSanity(driver);
             blResult = verifyElement(txtSuccessForArchive);
@@ -1062,10 +1064,10 @@ public class MessagesPage extends BasePage {
             WebElement SentMessage =waitForElement(By.xpath(chkBoxInbox.replace("<<REPLACEMENT>>",strSubject)));
             waitForElement(SentMessage);
             waitForElementClickable(SentMessage);
-            waitAndClick(SentMessage);
+            jsClick(SentMessage);
             waitForElement(btnMoveTo);
             waitForElementClickable(btnMoveTo);
-            waitAndClick(btnMoveTo);
+            jsClick(btnMoveTo);
             waitForElement(txtSuccessForMoveToSentFromArchive);
 //            takeScreenshotSanity(driver);
             blResult = verifyElement(txtSuccessForMoveToSentFromArchive);
@@ -1188,10 +1190,10 @@ public class MessagesPage extends BasePage {
 //            takeScreenshotSanity(driver);
             waitForElementClickable(sentSubject);
             click(sentSubject);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("X Path-inboxSubject >>> :: " + elmntInnerSubject.replace("<<REPLACEMENT>>", strMessages));
             WebElement sentSubject1 = waitForElement(By.xpath(elmntInnerSubject.replace("<<REPLACEMENT>>", strMessages)));
             waitForElement(sentSubject1);
-
             blResult = verifyElement(sentSubject1);
             System.out.println("\nSuccessfully verified reply sent Message");
 
@@ -1263,7 +1265,7 @@ public class MessagesPage extends BasePage {
         try {
             waitForElement(elmntSent);
             waitForElementClickable(elmntSent);
-            waitAndClick(elmntSent);
+            jsClick(elmntSent);
 
             waitForSeconds(2);
             waitForElement(txtSentForPatient);
@@ -1425,6 +1427,7 @@ public class MessagesPage extends BasePage {
         try {
             waitForSeconds(2);
             waitForElement(txtDraftPatient);
+            jsScrollIntoView(btnDeleteAllInDraft);
             waitForElement(btnDeleteAllInDraft);
             waitForElementClickable(btnDeleteAllInDraft);
             jsClick(btnDeleteAllInDraft);

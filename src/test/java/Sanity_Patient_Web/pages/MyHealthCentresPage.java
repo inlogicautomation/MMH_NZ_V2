@@ -63,8 +63,11 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Next')]")
     protected WebElement btnNext;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(@id,'btnSubmitEditor')]")
+    @FindBy(how = How.XPATH, using = "//span[text()='Save']")
     protected WebElement btnSave;
+
+    @FindBy(how = How.XPATH, using = "//h5[text()='ADD Post ' ] ")
+    protected WebElement AddPostHeader;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'CONNECT')]")
     protected WebElement btnConnect;
@@ -75,10 +78,10 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Content Header')]")
     protected WebElement txtContentHeader;
 
-    @FindBy(how = How.XPATH, using = "//iframe[@class='inner_iframe']")
+    @FindBy(how = How.XPATH, using = "//iframe")
     protected WebElement elmntIframe;
 
-    @FindBy(how = How.XPATH, using = "//body[@id='editorBody']")
+    @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']/p")
     protected WebElement elmntEditorBody;
 
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'Created successfully')]/preceding::h4[contains(text(),'Success!')]")
@@ -90,16 +93,16 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
     protected WebElement drpDownHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "//select[contains(@id,'ddlSelectType')]")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='contentType']")
     protected WebElement drpDownContentType;
 
-    @FindBy(how = How.XPATH, using = "//select[contains(@id,'ddlSelectHeader')]")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='contentHeader']")
     protected WebElement drpDownContentHeader;
 
-    @FindBy(how = How.XPATH, using = "//input[contains(@id,'txtEndDate')]")
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='endDate']")
     protected WebElement elmntEndDate;
 
-    @FindBy(how = How.XPATH, using = "//input[contains(@id,'txtStartDate')]")
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='startDate']")
     protected WebElement elmntStartDate;
 
     protected String practiceName = new StringBuilder()
@@ -114,9 +117,14 @@ public class MyHealthCentresPage extends BasePage {
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
+    protected String SelectHealthCentre = new StringBuilder()
+            .append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')])[2]").toString();
 
-    protected String ddlHealthCentre = new StringBuilder()
-            .append("//mat-option//span[contains(text(),'")
+
+    protected String SelectContentType = new StringBuilder()
+            .append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
@@ -133,7 +141,7 @@ public class MyHealthCentresPage extends BasePage {
 
     //div[contains(text(),'123456qwert')]
     protected String verifyContent = new StringBuilder()
-            .append("//div[contains(text(),'")
+            .append("//p[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
@@ -313,9 +321,13 @@ public class MyHealthCentresPage extends BasePage {
             waitForElement(drpDownHealthCentre);
 //            waitForElementClickable(drpDownHealthCentre);
             jsClick(drpDownHealthCentre);
-            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'ddlPracticeList')]")));
-            System.out.println("strHealthCenter >>> :: "+strHealthCenter);
-            healthCentre.selectByVisibleText(strHealthCenter);
+//            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'ddlPracticeList')]")));
+
+            WebElement header = waitForElement(By.xpath(SelectHealthCentre.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strHealthCenter))));
+                        System.out.println("header >>> :: "+header);
+            waitForElement(header);
+            jsClick(header);
+//            healthCentre.selectByVisibleText(strHealthCenter);
             waitForSeconds(2);
 
             blResult = true;
@@ -330,16 +342,19 @@ public class MyHealthCentresPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(elmntNewPost);
-            jsScrollIntoView(txtContentHeader);
+            waitForElement(AddPostHeader);
             waitForElement(drpDownContentHeader);
-            waitForElementClickable(drpDownContentHeader);
-            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'ddlSelectHeader')]")));
-            System.out.println("strHealthCenter >>> :: "+strHeader);
-            healthCentre.selectByVisibleText(strHeader);
+          jsClick(drpDownContentHeader);
+//            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'ddlSelectHeader')]")));
+//            System.out.println("strHealthCenter >>> :: "+strHeader);
+//            healthCentre.selectByVisibleText(strHeader);
             waitForSeconds(5);
-            waitForElement(txtContentHeader);
-            blResult = verifyElement(txtContentHeader);
+            WebElement header = waitForElement(By.xpath(SelectContentType.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strHeader))));
+            System.out.println("header >>> :: "+header);
+            waitForElement(header);
+            jsClick(header);
+            waitForElement(AddPostHeader);
+            blResult = verifyElement(AddPostHeader);
             System.out.println("\nSuccessfully selected the health centre >>> :: ");
         } catch (Exception e) {
             System.out.println("\nFailed to select the health centre >>> :: ");
@@ -354,10 +369,16 @@ public class MyHealthCentresPage extends BasePage {
             waitForElement(elmntNewPost);
             jsScrollIntoView(txtContentHeader);
             waitForElement(drpDownContentType);
-            waitForElementClickable(drpDownContentType);
-            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'ddlSelectType')]")));
-            System.out.println("strHealthCenter >>> :: "+strType);
-            healthCentre.selectByVisibleText(strType);
+            jsClick(drpDownContentType);
+//            waitForElementClickable(drpDownContentType);
+//            Select healthCentre = new Select(driver.findElement(By.xpath("//select[contains(@id,'ddlSelectType')]")));
+//            System.out.println("strHealthCenter >>> :: "+strType);
+//            healthCentre.selectByVisibleText(strType);
+
+            WebElement header = waitForElement(By.xpath(SelectContentType.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strType))));
+            System.out.println("header >>> :: "+header);
+            waitForElement(header);
+            jsClick(header);
 
             waitForSeconds(5);
             waitForElement(txtContentHeader);
@@ -400,12 +421,13 @@ public class MyHealthCentresPage extends BasePage {
             driver.switchTo().frame(elmntIframe);
             waitForSeconds(2);
             waitForElementClickable(elmntEditorBody);
-
-            elmntEditorBody.sendKeys(strBodyMessage);
+            elmntEditorBody.click();
+            waitForSeconds(2);
+            driver.switchTo().activeElement().sendKeys(strBodyMessage);
+//            elmntEditorBody.sendKeys(strBodyMessage);
             takeScreenshot(driver);
             waitForSeconds(3);
             driver.switchTo().parentFrame();
-
             waitForElement(btnSave);
             blResult = verifyElement(btnSave);
             System.out.println("\nSuccessfully Entered The Subject Body Message >>> :: ");
@@ -449,16 +471,16 @@ public class MyHealthCentresPage extends BasePage {
         waitForElementClickable(elmntNewPost);
         waitAndClick(elmntNewPost);
         waitForSeconds(2);
-        jsScrollIntoView(btnSave);
-        waitForElement(btnSave);
-        return verifyElement(btnSave);
+        jsScrollIntoView(AddPostHeader);
+        waitForElement(AddPostHeader);
+        return verifyElement(AddPostHeader);
     }
 
     public void clickSave(){
         waitForSeconds(2);
         waitForElement(btnSave);
         waitForElementClickable(btnSave);
-        waitAndClick(btnSave);
+        jsClick(btnSave);
     }
 
     public static void main(String[] args) {

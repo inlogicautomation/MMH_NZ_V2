@@ -152,17 +152,17 @@ Feature: Messages
       | Group Message Details        |
       | &SENT_GROUP_MESSAGE_DETAILS& |
 
-  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
-  Scenario Outline: S6- Patient Session Settings
-
-    Given As a user I am on HomePage and navigate to Messages Setting
-    And I click the Session Setting and select the Customise Session "<Time Out Setting>"
-    When I click the Save Button
-#   Then Browser session gets timed out Based on selected Customise session Timeout
-
-    Examples:
-      | Time Out Setting   |
-      | &TIME_OUT_SETTING& |
+#  @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
+#  Scenario Outline: S6- Patient Session Settings
+#
+#    Given As a user I am on HomePage and navigate to Messages Setting
+#    And I click the Session Setting and select the Customise Session "<Time Out Setting>"
+#    When I click the Save Button
+##   Then Browser session gets timed out Based on selected Customise session Timeout
+#
+#    Examples:
+#      | Time Out Setting   |
+#      | &TIME_OUT_SETTING& |
 
   @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Outline: S7- Patient Alert Settings

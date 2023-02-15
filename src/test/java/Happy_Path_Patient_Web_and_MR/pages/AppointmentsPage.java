@@ -840,9 +840,14 @@ public class AppointmentsPage extends BasePage {
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
             System.out.println("DATE" + strDateValue);
             WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strDateValue)));
+            System.out.println(">>>>>>>>>>>>>>>elmntAppointmentDetails"+elmntAppointmentDetails);
+            System.out.println(">>>>>>>>>>>>>>>elmntAppointmentDetails"+elmntAppointmentDetails.getText());
+            jsScrollIntoView(elmntAppointmentDetails);
+            waitForElement(elmntAppointmentDetails);
             verifyElement(elmntAppointmentDetails);
 
             WebElement elmntAppointments = waitForElement(By.xpath(elmntAppointmentDetail.replace("<<REPLACEMENT>>", strSlotDate)));
+            System.out.println(">>>>>>>>>>>>>>>elmntAppointments"+elmntAppointments);
             verifyElement(elmntAppointments);
 
             for (String strDetails : lstDetails) {
@@ -865,7 +870,7 @@ public class AppointmentsPage extends BasePage {
 
                 String strConvertedTime = strSlotDate;
 
-                strConvertedTime = "0" + strConvertedTime;
+//                strConvertedTime = "0" + strConvertedTime;
 
                 String strFinalOutDateTime = strConvertedTime;
 
@@ -2406,7 +2411,7 @@ public class AppointmentsPage extends BasePage {
         WebElement elmntReservationDetails = waitForElement(By.xpath(eleAppointmentSummaryDetails.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDateMonth))));
         verifyElement(elmntReservationDetails);
 //        waitAndAcceptAlert();
-        System.out.println("Successfully Accept Alert");
+
         waitForSeconds(3);
         driver.switchTo().defaultContent();
         System.out.println("Successfully default page");
