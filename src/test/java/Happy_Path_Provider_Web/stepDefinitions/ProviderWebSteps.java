@@ -22,9 +22,17 @@ public class ProviderWebSteps {
 
     @Given("As a Provider I am on HomePage and navigate to RRP Script Instructions in {string}")
     public void asAProviderIAmOnHomePageAndNavigateToRRPScriptInstructionsIn(String strName) {
-        Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
-        Assert.assertTrue(providerPageContainer.providerHomePage.clickSystemMenu());
-        Assert.assertTrue(providerPageContainer.providerHomePage.navigateToRepeatScriptFeeMessageSettings(strName));
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+            Assert.assertTrue(providerPageContainer.providerHomePage.clickSystemMenu());
+            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToRepeatScriptFeeMessageSettings(strName));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+            Assert.assertTrue(providerPageContainer.providerHomePage.clickMobileSystemMenu());
+            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToMobileRepeatScriptFeeMessageSettings(strName));
+
+        }
 
     }
 
@@ -708,5 +716,105 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
 
+    }
+
+    @And("I click the edit button and changing the Payment Settings to Pay online as per Patient to Collect Script requirements{string}")
+    public void iClickTheEditButtonAndChangingThePaymentSettingsToPayOnlineAsPerPatientToCollectScriptRequirements(String strDetail) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strDetail);
+        System.out.println("RRPScriptSetting details >>> :: " + lstDetails);
+        providerPageContainer.providerHomePage.clickEditButton();
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectHealthCentreLocation(lstDetails.get(0)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectServiceName(lstDetails.get(1)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectOtherReqData());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqDataRuleA());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFirstSelectedServiceOption(lstDetails.get(2)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForFirstSelectedServiceOption(lstDetails.get(3)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForFirstSelectedServiceOption(lstDetails.get(4)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSecondSelectedServiceOption(lstDetails.get(5)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForSecondSelectedServiceOption(lstDetails.get(6)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForSecondSelectedServiceOption(lstDetails.get(7)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectThirdSelectedServiceOption(lstDetails.get(8)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForThirdSelectedServiceOption(lstDetails.get(9)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForThirdSelectedServiceOption(lstDetails.get(10)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFourthSelectedServiceOption(lstDetails.get(11)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForFourthSelectedServiceOption(lstDetails.get(12)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForFourthSelectedServiceOption(lstDetails.get(13)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.ClickRequestisMandatoryYesButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.ClickPaymentSettingPayOnlineButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+    }
+
+    @And("I click the edit button and changing the Payment Settings to Pay at Health Centre or Online as per Patient to Collect Script requirements{string}")
+    public void iClickTheEditButtonAndChangingThePaymentSettingsToPayAtHealthCentreOrOnlineAsPerPatientToCollectScriptRequirements(String strDetail) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strDetail);
+        System.out.println("RRPScriptSetting details >>> :: " + lstDetails);
+        providerPageContainer.providerHomePage.clickEditButton();
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectHealthCentreLocation(lstDetails.get(0)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectServiceName(lstDetails.get(1)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectOtherReqData());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqDataRuleA());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFirstSelectedServiceOption(lstDetails.get(2)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForFirstSelectedServiceOption(lstDetails.get(3)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForFirstSelectedServiceOption(lstDetails.get(4)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSecondSelectedServiceOption(lstDetails.get(5)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForSecondSelectedServiceOption(lstDetails.get(6)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForSecondSelectedServiceOption(lstDetails.get(7)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectThirdSelectedServiceOption(lstDetails.get(8)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForThirdSelectedServiceOption(lstDetails.get(9)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForThirdSelectedServiceOption(lstDetails.get(10)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFourthSelectedServiceOption(lstDetails.get(11)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForFourthSelectedServiceOption(lstDetails.get(12)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForFourthSelectedServiceOption(lstDetails.get(13)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.ClickRequestisMandatoryYesButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.ClickPaymentSettingPayAtHealthCentreOrPayNowButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+    }
+
+    @When("I Click the Draft message and verify success pop up")
+    public void iClickTheDraftMessageAndVerifySuccessPopUp() {
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.clickProviderDraftMessage());
+
+    }
+
+    @Then("I navigate to Draft items and verify the Sent {string}")
+    public void iNavigateToDraftItemsAndVerifyTheSent(String strMessageDetails) {
+        List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
+        System.out.println("List Message Details >>> :: " + lstMessageDetails);
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToDraftItems());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyDraftMessages(TestDataUtil.getValue(lstMessageDetails.get(5))));
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyDraftBodyMessages(TestDataUtil.getListOfValue(strMessageDetails)));
+
+    }
+
+    @When("I Click Patient Send Message Button then I should see message sent Successfully popup")
+    public void iClickPatientSendMessageButtonThenIShouldSeeMessageSentSuccessfullyPopup() {
+        providerPageContainer.providerMessagesPage.clickSendMessageAndNavigateToHomePage();
+        providerPageContainer.providerMessagesPage.verifySentSuccessfully();
+
+    }
+
+    @And("I navigate to provider portal and verify the Reply message")
+    public void iNavigateToProviderPortalAndVerifyTheReplyMessage() {
+        Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToInboxMessageForDoctor());
+
+    }
+
+    @And("I navigate to inbox items and create a reply message {string}")
+    public void iNavigateToInboxItemsAndCreateAReplyMessage(String strMessageDetails) {
+        List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
+        System.out.println("List Message Details >>> :: " + lstMessageDetails);
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToDraftItems());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyDraftMessages(TestDataUtil.getValue(lstMessageDetails.get(5))));
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyDraftBodyMessages(TestDataUtil.getListOfValue(strMessageDetails)));
+
+    }
+
+
+
+    @Then("I navigate to Sent Items and verify the reply message {string}")
+    public void iNavigateToSentItemsAndVerifyTheReplyMessage(String arg0) {
     }
 }

@@ -809,6 +809,12 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//a[@class='download-file mail-download-file'])[2]")
     protected WebElement btnMobileInboxAttachButton;
 
+    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Dr.')]")
+    protected WebElement txtWelcome;
+
+    @FindBy(xpath = "//a[@class='navbar-brand']")
+    protected WebElement elmtMMHLogo;
+
     public boolean navigateToMessageSetting() {
         boolean blResult = false;
         try {
@@ -3763,6 +3769,35 @@ public class MessagesPage extends BasePage {
 
         }
     }
+
+    public boolean  navigateToProviderHomepage() {
+        boolean blResult = false;
+        try{
+            if (isElementDisplayed(txtWelcome)) {
+                verifyElement(txtWelcome);
+                waitForSeconds(3);
+                waitForElement(elmtMMHLogo);
+                waitForElementClickable(elmtMMHLogo);
+                jsClick(elmtMMHLogo);
+                waitForSeconds(3);
+                blResult = verifyElement(txtWelcome);
+            }
+            if (!isElementDisplayed(txtWelcome)){
+                focusWindow(1);
+                System.out.println("Successfully switch to doctor portal");
+                waitForElement(elmtMMHLogo);
+                waitForElementClickable(elmtMMHLogo);
+                jsClick(elmtMMHLogo);
+                System.out.println("Successfully click Logo");
+                waitForSeconds(3);
+                blResult=verifyElement(txtWelcome);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
 
 
 }

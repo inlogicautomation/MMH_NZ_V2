@@ -2,6 +2,7 @@ package Happy_Path_Provider_Web;
 
 import Happy_Path_Patient_Web_and_MR.pages.AppointmentsPage;
 import Happy_Path_Provider_Web.pages.*;
+import cap.helpers.Constants;
 import cap.utilities.SharedDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -35,8 +36,27 @@ public class ProviderPageContainer {
 
 
     public ProviderPageContainer() {
-        driver = SharedDriver.getDriver();
-        initPages();
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            driver = SharedDriver.getDriver();
+            initPages();
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            driver = SharedDriver.getDriver();
+            driver = SharedDriver.getMobileDriver();
+            initPages();
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            driver = SharedDriver.getDriver();
+            initPages();
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("WEBMOBILE")) {
+            driver = SharedDriver.getDriver();
+            initPages();
+        }
+
     }
 
     private void initPages() {

@@ -1,6 +1,7 @@
 package Happy_Path_Provider_Web.pages;
 
 import cap.common.BasePage;
+import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -29,8 +30,17 @@ public class ProviderHomePage extends BasePage {
             .append("<<NAME>>")
             .append("')]").toString();
 
+    public String MobileelmntModule = new StringBuilder()
+            .append("//a[contains(text(),'")
+            .append("<<NAME>>")
+            .append("')]").toString();
+
+
     @FindBy(xpath = "//span[contains(text(),'Systems Menu')]/following::mat-icon[contains(@class,'mat-icon notranslate dd')]")
     protected WebElement elmtSystemsMenu;
+
+    @FindBy(xpath = "//mat-icon[text()='menu']")
+    protected WebElement elmtMobileMenu;
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
@@ -55,6 +65,9 @@ public class ProviderHomePage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'SIGN OUT')]")
     protected WebElement elmntLogOut;
+
+    @FindBy(how = How.XPATH, using = "//mat-icon[text()='exit_to_app']")
+    protected WebElement elmntMobileLogOut;
     @FindBy(xpath = "//span[contains(text(),'Repeat Script Settings')]")
     protected WebElement elmtRepeatScriptSettings;
 
@@ -66,6 +79,9 @@ public class ProviderHomePage extends BasePage {
 
     @FindBy(xpath = "//h3[contains(text(),'RRP Script Instructions Settings')]")
     protected WebElement txtRRPScriptInstructionsSettings;
+
+    @FindBy(xpath = "//h3[contains(text(),'RRP Script Instructions Settings')]")
+    protected WebElement txtMobileRRPScriptInstructionsSettings;
 
     @FindBy(xpath = "//h3[contains(text(),'RRP Script Instructions Fee Setup')]")
     protected WebElement txtRRPScriptInstructionsFeeSetup;
@@ -90,6 +106,27 @@ public class ProviderHomePage extends BasePage {
             waitForElement(elmtRepeatScriptSettings);
             jsClick(elmtRepeatScriptSettings);
             WebElement element = driver.findElement(By.xpath(elmntModule.replace("<<NAME>>",strName)));
+            jsScrollIntoView(element);
+            waitForElement(element);
+//            waitForElementClickable(element);
+            click(element);
+            waitForElement(txtRRPScriptInstructionsSettings);
+            takeScreenshot(driver);
+            blResult =verifyElement(txtRRPScriptInstructionsSettings);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean navigateToMobileRepeatScriptFeeMessageSettings(String strName) {
+        boolean blResult = false;
+        try {
+            jsScrollIntoView(elmtRepeatScriptSettings);
+            waitForElement(elmtRepeatScriptSettings);
+            jsClick(elmtRepeatScriptSettings);
+            WebElement element = driver.findElement(By.xpath(MobileelmntModule.replace("<<NAME>>",strName)));
             jsScrollIntoView(element);
             waitForElement(element);
 //            waitForElementClickable(element);
@@ -130,6 +167,31 @@ public class ProviderHomePage extends BasePage {
     public boolean clickSystemMenu() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            jsScrollIntoView(elmtSystemsMenu);
+            waitForSeconds(2);
+            waitForElementClickable(elmtSystemsMenu);
+            System.out.println("Systems Menu is available to click");
+            jsClick(elmtSystemsMenu);
+            jsScrollIntoView(elmtRepeatScriptSettings);
+            System.out.println("scrolled ");
+            if (!verifyElement(elmtRepeatScriptSettings)){
+                click(elmntSystemMenu);
+            }
+            jsScrollIntoView(elmtRepeatScriptSettings);
+            blResult = verifyElement(elmtRepeatScriptSettings);
+        } catch (Exception e) {
+            System.out.println("Failed to click System Menu >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean clickMobileSystemMenu() {
+        boolean blResult = false;
+        try {
+            waitForElement(elmtMobileMenu);
+            jsClick(elmtMobileMenu);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmtSystemsMenu);
             waitForSeconds(2);
@@ -236,25 +298,50 @@ public class ProviderHomePage extends BasePage {
     public boolean launchPatientUrl() {
         boolean blresult = false;
         try {
-            int WindowsCount = driver.getWindowHandles().size();
-            System.out.println(">>>>>>>>>>>>>>>>>>>>" + WindowsCount);
-            if (WindowsCount == 2) {
-                focusWindow(2);
-                verifyElement(verifyPatientHomePage);
-                System.out.println("user here in patient portal homepage");
-            }else {
-                visit(TestDataUtil.getValue("&PATIENT_URL&"));
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                int WindowsCount = driver.getWindowHandles().size();
+                System.out.println(">>>>>>>>>>>>>>>>>>>>" + WindowsCount);
+                if (WindowsCount == 2) {
+                    focusWindow(2);
+                    verifyElement(verifyPatientHomePage);
+                    System.out.println("user here in patient portal homepage");
+                } else {
+                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                }
+                if (WindowsCount == 1) {
+                    ((JavascriptExecutor) driver).executeScript("window.open()");
+                    ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+                    driver.switchTo().window(tabs.get(1));
+                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    waitForSeconds(4);
+                    waitForElementClickable(elmntLogOut);
+                    jsClick(elmntLogOut);
+                    waitForSeconds(2);
+                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                }
             }
-            if (WindowsCount == 1) {
-                ((JavascriptExecutor) driver).executeScript("window.open()");
-                ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-                driver.switchTo().window(tabs.get(1));
-                visit(TestDataUtil.getValue("&PATIENT_URL&"));
-                waitForSeconds(4);
-                waitForElementClickable(elmntLogOut);
-                jsClick(elmntLogOut);
-                waitForSeconds(2);
-                visit(TestDataUtil.getValue("&PATIENT_URL&"));
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                int WindowsCount = driver.getWindowHandles().size();
+                System.out.println(">>>>>>>>>>>>>>>>>>>>" + WindowsCount);
+                if (WindowsCount == 2) {
+                    focusWindow(2);
+                    verifyElement(verifyPatientHomePage);
+                    System.out.println("user here in patient portal homepage");
+                } else {
+                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                }
+                if (WindowsCount == 1) {
+                    ((JavascriptExecutor) driver).executeScript("window.open()");
+                    ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+                    driver.switchTo().window(tabs.get(1));
+                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    waitForSeconds(4);
+                    waitForElementClickable(elmntMobileLogOut);
+                    jsClick(elmntMobileLogOut);
+                    waitForSeconds(2);
+                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                }
+
             }
 
             blresult = true;

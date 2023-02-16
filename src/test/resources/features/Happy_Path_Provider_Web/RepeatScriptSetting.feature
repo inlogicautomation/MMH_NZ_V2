@@ -9,6 +9,8 @@ Feature: Repeat Script Setting
     And I enter "&EMAIL_FOR_PATIENT&" and "&PASSWORD&" For Beta
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
+
+
   @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH
   Scenario Template: S1- RRP Script Instructions Settings - Disable.
     Given As a Provider I am on HomePage and navigate to RRP Script Instructions in "<System_Menu>"
@@ -131,7 +133,7 @@ Feature: Repeat Script Setting
       | System_Menu            | Details                     | Script_Instructions   | Script_Urgencies   | Medication Details                            | Location Details              |
       | Repeat Script Settings | &PATIENT_TO_COLLECT_SCRIPT& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &REPEAT_SCRIPT_SETTINGS_DATA& |
 
-  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @RRPTEST
+  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH
   Scenario Outline: S13- RRP Script Settings - Pay at Health Centre
     Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
     And I click the edit button and changing the Payment Settings as per Patient to Collect Script requirements"<Details>"
@@ -140,3 +142,25 @@ Feature: Repeat Script Setting
     Examples:
       | System_Menu            | Details                     | Script_Instructions   | Script_Urgencies   | Medication Details                            | Location Details              |
       | Repeat Script Settings | &PATIENT_TO_COLLECT_SCRIPT& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &REPEAT_SCRIPT_SETTINGS_DATA& |
+
+  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH
+  Scenario Outline: S14- RRP Script Settings - Pay at Online only
+    Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
+    And I click the edit button and changing the Payment Settings to Pay online as per Patient to Collect Script requirements"<Details>"
+    When I navigate to patient portal and verify the change
+    Then I should see the only show Pay Now Button on Patient to Collect Script"<Script_Instructions>","<Script_Urgencies>","<Medication Details>" and "<Location Details>"
+    Examples:
+      | System_Menu            | Details                     | Script_Instructions   | Script_Urgencies   | Medication Details                            | Location Details              |
+      | Repeat Script Settings | &PATIENT_TO_COLLECT_SCRIPT& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &REPEAT_SCRIPT_SETTINGS_DATA& |
+
+  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH
+  Scenario Outline: S15- RRP Script Settings -  Pay at Health Centre (or) Online
+    Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
+    And I click the edit button and changing the Payment Settings to Pay at Health Centre or Online as per Patient to Collect Script requirements"<Details>"
+    When I navigate to patient portal and verify the change
+    Then I should see the show Pay at Health center Button and Pay Now Button on Patient to Collect Script"<Script_Instructions>","<Script_Urgencies>","<Medication Details>" and "<Location Details>"
+    Examples:
+      | System_Menu            | Details                     | Script_Instructions   | Script_Urgencies   | Medication Details                            | Location Details              |
+      | Repeat Script Settings | &PATIENT_TO_COLLECT_SCRIPT& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &REPEAT_SCRIPT_SETTINGS_DATA& |
+
+

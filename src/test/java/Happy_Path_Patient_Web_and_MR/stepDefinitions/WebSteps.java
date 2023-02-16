@@ -2756,6 +2756,7 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToSentItems());
         Assert.assertTrue(demoPageContainer.messagesPage.verifySentMessages(TestDataUtil.getValue(lstMessageDetails.get(5))));
 
+
     }
 
     @And("I log out from Doctor Portal")
@@ -2885,7 +2886,7 @@ public class WebSteps {
 
     @Given("As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module")
     public void asAUserIAmOnDoctorPortalHomepageAndNavigateToComposeInInboxModule() {
-
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToProviderHomepage());
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessageForDoctor());
 
     }
@@ -3642,6 +3643,51 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicalDetails.get(3)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.VerifyPayAtHealthCentre());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @Then("I should see the only show Pay Now Button on Patient to Collect Script{string},{string},{string} and {string}")
+    public void iShouldSeeTheOnlyShowPayNowButtonOnPatientToCollectScriptAnd(String strScriptInstruction, String ScriptUrgencies, String strMedicalDetails, String strLocationdetails) {
+        List<String> lstscriptDetails = TestDataUtil.getListOfValue(strScriptInstruction);
+        List<String> lstscriptUrgencies = TestDataUtil.getListOfValue(ScriptUrgencies);
+        List<String> lstMedicalDetails = TestDataUtil.getListOfValue(strMedicalDetails);
+        List<String> lstLocationDetails = TestDataUtil.getListOfValue(strLocationdetails);
+        System.out.println("RRPScriptFee details >>> :: " + lstLocationDetails);
+        System.out.println("RRPScriptFee Instructions details >>> :: " + lstscriptDetails);
+        System.out.println("RRPScript Urgencies details >>> :: " + lstscriptUrgencies);
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyLocation(lstLocationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyProviderName(lstLocationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptInstruction(lstscriptDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgency(TestDataUtil.getListOfValue(ScriptUrgencies)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicalDetails.get(3)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.VerifyPayNowButton());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayNowButton());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.enterCardDetails(lstLocationDetails.get(3), lstLocationDetails.get(4), lstLocationDetails.get(5), lstLocationDetails.get(6), lstLocationDetails.get(7)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetails());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToDashboard());
+        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @Then("I should see the show Pay at Health center Button and Pay Now Button on Patient to Collect Script{string},{string},{string} and {string}")
+    public void iShouldSeeTheShowPayAtHealthCenterButtonAndPayNowButtonOnPatientToCollectScriptAnd(String strScriptInstruction, String ScriptUrgencies, String strMedicalDetails, String strLocationdetails) {
+        List<String> lstscriptDetails = TestDataUtil.getListOfValue(strScriptInstruction);
+        List<String> lstscriptUrgencies = TestDataUtil.getListOfValue(ScriptUrgencies);
+        List<String> lstMedicalDetails = TestDataUtil.getListOfValue(strMedicalDetails);
+        List<String> lstLocationDetails = TestDataUtil.getListOfValue(strLocationdetails);
+        System.out.println("RRPScriptFee details >>> :: " + lstLocationDetails);
+        System.out.println("RRPScriptFee Instructions details >>> :: " + lstscriptDetails);
+        System.out.println("RRPScript Urgencies details >>> :: " + lstscriptUrgencies);
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyLocation(lstLocationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyProviderName(lstLocationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptInstruction(lstscriptDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgency(TestDataUtil.getListOfValue(ScriptUrgencies)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicalDetails.get(3)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.VerifyPayAtHealthCentreAndPayNowButton());
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
     }

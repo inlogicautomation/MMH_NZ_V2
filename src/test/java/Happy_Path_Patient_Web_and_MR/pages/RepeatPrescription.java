@@ -549,7 +549,7 @@ public class RepeatPrescription extends BasePage {
         try {
 //            waitForSeconds(3);
             waitForElementClickable(elmntRepeatPrescriptions);
-            click(elmntRepeatPrescriptions);
+            jsClick(elmntRepeatPrescriptions);
 //            waitForSeconds(3);
             waitForElementClickable(elmntRequestNewScript);
             click(elmntRequestNewScript);
@@ -2278,7 +2278,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             waitForElement(inputProviderName);
             if (!verifyElement((By.xpath(selectedDrpDownOption.replace("<<REPLACEMENT>>", strProvider))))) {
                 waitForElementClickable(inputProviderName);
-                click(inputProviderName);
+                jsClick(inputProviderName);
                 WebElement ddlLocation = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strProvider)));
                 System.out.println(" select Provider name is ::" + ddlLocation);
                 waitForElementClickable(ddlLocation);
@@ -2516,6 +2516,28 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
         return blPaymentVerify;
     }
 
+    public boolean selectPayNowButton() {
+        boolean blPaymentVerify = false;
+        try {
+            waitForElementClickable(checkBoxTermsAndConditions);
+            click(checkBoxTermsAndConditions);
+            waitForElementClickable(btnPayNow);
+            click(btnPayNow);
+            verifyElement(txtPayment);
+            waitForElementClickable(btnPaymentOk);
+            jsClick(btnPaymentOk);
+            waitForSeconds(10);
+            waitForElement(CardPaymentFrame);
+            driver.switchTo().frame(CardPaymentFrame);
+            waitForElement(txtPaymentCheckOut);
+            blPaymentVerify = verifyElement(txtPaymentCheckOut);
+        } catch (Exception e) {
+            System.out.println("Not able to verify the Pay At Health Centre");
+            e.printStackTrace();
+        }
+        return blPaymentVerify;
+    }
+
     public boolean VerifyPayAtHealthCentre() {
         boolean blPaymentVerify = false;
         try {
@@ -2523,11 +2545,49 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
                 waitForElementClickable(BtnPayAtHealthCentre);
                 waitForElement(BtnPayAtHealthCentre);
                 blPaymentVerify = verifyElement(BtnPayAtHealthCentre);
-                System.out.printf("Only Show The PayAtHealth Centre Button Only");
+                System.out.println("Only Show The PayAtHealth Centre Button Only");
             }else
             {
                 verifyElement(btnPayNow);
-                System.out.printf("Show The PayNow Button");
+                System.out.println("Show The PayNow Button");
+            }
+
+
+        } catch (Exception e) {
+            System.out.println("Not able to verify the Pay At Health Centre");
+            e.printStackTrace();
+        }
+        return blPaymentVerify;
+    }
+
+    public boolean VerifyPayAtHealthCentreAndPayNowButton() {
+        boolean blPaymentVerify = false;
+        try {
+               waitForElement(btnPayNow);
+               verifyElement(btnPayNow);
+               waitForElement(BtnPayAtHealthCentre);
+                blPaymentVerify = verifyElement(BtnPayAtHealthCentre);
+                System.out.println(" Show The PayAtHealth Centre Button and Pay Now ");
+
+        } catch (Exception e) {
+            System.out.println("Not able to verify the Pay At Health Centre AND Pay Now Button");
+            e.printStackTrace();
+        }
+        return blPaymentVerify;
+    }
+
+    public boolean VerifyPayNowButton() {
+        boolean blPaymentVerify = false;
+        try {
+            if (!verifyElement(BtnPayAtHealthCentre)) {
+                waitForElementClickable(btnPayNow);
+                waitForElement(btnPayNow);
+                blPaymentVerify = verifyElement(btnPayNow);
+                System.out.println("Only Show The PayAtHealth Centre Button Only");
+            }else
+            {
+                verifyElement(BtnPayAtHealthCentre);
+                System.out.println("Show The PayNow Button");
             }
 
 

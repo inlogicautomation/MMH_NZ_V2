@@ -29,7 +29,6 @@ public class SanityWebCukes extends AbstractTestNGCucumberTests {
                 ExtentService.getInstance().setSystemInfo("Execution Browser", strBrowserName);
                 ExtentService.getInstance().setSystemInfo("Browser Version", strBrowserVersion);
                 ExtentService.getInstance().setSystemInfo("Execution Machine", strSystemName);
-
                 ExtentService.getInstance().setSystemInfo("Automation QA", System.getProperty("user.name"));
 
 

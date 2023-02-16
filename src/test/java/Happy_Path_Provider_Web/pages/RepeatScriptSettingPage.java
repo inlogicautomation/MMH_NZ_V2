@@ -43,6 +43,15 @@ public class RepeatScriptSettingPage extends BasePage {
     @FindBy(xpath = "(//mat-radio-group[@formcontrolname='isMessageMandatory']//div//div//following::input)[1]")
     protected WebElement btnRequestisMandatoryYESButton;
 
+    @FindBy(xpath = "//mat-radio-group[@formcontrolname='PaymentOption']//mat-radio-button[1]//input")
+    protected WebElement clickPayHealthCenterOnlyButton;
+
+    @FindBy(xpath = "//mat-radio-group[@formcontrolname='PaymentOption']//mat-radio-button[3]//input")
+    protected WebElement clickPayHealthCenterOnlyandPayNowButton;
+
+    @FindBy(xpath = "//mat-radio-group[@formcontrolname='PaymentOption']//mat-radio-button[2]//input")
+    protected WebElement clickPayNowButton;
+
     @FindBy(xpath = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'Changes Saved Successfully')]")
     protected WebElement successPopUp;
 
@@ -1787,9 +1796,41 @@ public class RepeatScriptSettingPage extends BasePage {
     public boolean ClickPaymentSettingPayAtHealthCentreButton() {
         boolean blResult = false;
         try {
-            waitForElement(btnRequestisMandatoryYESButton);
-            jsScrollIntoView(btnRequestisMandatoryYESButton);
-            jsClick(btnRequestisMandatoryYESButton);
+            waitForElement(clickPayHealthCenterOnlyButton);
+            jsScrollIntoView(clickPayHealthCenterOnlyButton);
+            jsClick(clickPayHealthCenterOnlyButton);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(btnSave);
+            blResult = verifyElement(btnSave);
+        } catch (Exception e) {
+            System.out.println("Failed to verify the saved pop up");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+
+    public boolean ClickPaymentSettingPayAtHealthCentreOrPayNowButton() {
+        boolean blResult = false;
+        try {
+            waitForElement(clickPayHealthCenterOnlyandPayNowButton);
+            jsScrollIntoView(clickPayHealthCenterOnlyandPayNowButton);
+            jsClick(clickPayHealthCenterOnlyandPayNowButton);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(btnSave);
+            blResult = verifyElement(btnSave);
+        } catch (Exception e) {
+            System.out.println("Failed to verify the saved pop up");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean ClickPaymentSettingPayOnlineButton() {
+        boolean blResult = false;
+        try {
+            waitForElement(clickPayNowButton);
+            jsScrollIntoView(clickPayNowButton);
+            jsClick(clickPayNowButton);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(btnSave);
             blResult = verifyElement(btnSave);

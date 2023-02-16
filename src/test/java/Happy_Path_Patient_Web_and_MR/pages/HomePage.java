@@ -311,6 +311,27 @@ public class HomePage extends BasePage {
         return blResult;
     }
 
+    public boolean navigateToDashboard() {
+        boolean blResult = false;
+        try {
+               jsScrollIntoView(elmntDashboard);
+                verifyElement(elmntDashboard);
+                waitForElementClickable(elmntDashboard);
+                jsClick(elmntDashboard);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForElement(txtWelcome);
+                blResult = verifyElement(txtWelcome);
+
+            return blResult;
+
+        } catch (Exception e) {
+            System.out.println("User not Navigated to Patient Portal");
+
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
 
     public void clickAppointmentOptionFromMenu() {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
