@@ -61,7 +61,7 @@ public class AppointmentsPage extends BasePage {
     protected WebElement VerflyWebFutureAppointmentPage;
 
 
-    @FindBy(how = How.XPATH, using = "//button[@ng-reflect-message='Book appointment']//span//img")
+    @FindBy(how = How.XPATH, using = "//button[@mattooltip='Book appointment']//span//img")
     protected WebElement elmntMobileBookAppointmentimg;
 
     @FindBy(how = How.XPATH, using = "//h4[text()='Let’s book the appointment.']")
@@ -493,7 +493,7 @@ public class AppointmentsPage extends BasePage {
             waitForElement(elmntAppointmentPanel);
             verifyElement(elmntAppointmentPanel);
             waitForElement(elmntMobileBookAppointmentimg);
-            click(elmntMobileBookAppointmentimg);
+            jsClick(elmntMobileBookAppointmentimg);
             waitForElement(VerflyMobileBookAppointmentPage);
             blResult = verifyElement(VerflyMobileBookAppointmentPage);
         } catch (Exception e) {
