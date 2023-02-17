@@ -797,8 +797,7 @@ public class ProviderWebSteps {
 
     @And("I navigate to provider portal and verify the Reply message")
     public void iNavigateToProviderPortalAndVerifyTheReplyMessage() {
-        Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
-        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToInboxMessageForDoctor());
+
 
     }
 
@@ -806,15 +805,34 @@ public class ProviderWebSteps {
     public void iNavigateToInboxItemsAndCreateAReplyMessage(String strMessageDetails) {
         List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
         System.out.println("List Message Details >>> :: " + lstMessageDetails);
-        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToDraftItems());
-        Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyDraftMessages(TestDataUtil.getValue(lstMessageDetails.get(5))));
         Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyDraftBodyMessages(TestDataUtil.getListOfValue(strMessageDetails)));
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.clickAttachButtonInboxMessages());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.EnterReplyBodyMessages(TestDataUtil.getValue(lstMessageDetails.get(8))));
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.clickSendMessageButtonInboxMessages());
 
     }
 
 
 
-    @Then("I navigate to Sent Items and verify the reply message {string}")
-    public void iNavigateToSentItemsAndVerifyTheReplyMessage(String arg0) {
+
+
+    @And("I navigate to provider portal and verify the Reply message {string}")
+    public void iNavigateToProviderPortalAndVerifyTheReplyMessage(String lstMessageDetails) {
+        List<String> lstMessage = TestDataUtil.getListOfValue(lstMessageDetails);
+        System.out.println(">>>>>>>>>>>>>>>>>>>"+lstMessage);
+        Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToInboxMessageForDoctor());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyProviderInboxMessages(TestDataUtil.getValue(lstMessage.get(8))));
+    }
+
+    @And("I navigate to Sent Items and verify the reply message {string}")
+    public void iNavigateToSentItemsAndVerifyTheReplyMessage(String strMessageDetails) {
+        List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
+        System.out.println("List Message Details >>> :: " + lstMessageDetails);
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToSentItems());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.verifySentMessages(TestDataUtil.getValue(lstMessageDetails.get(8))));
+
+
+
     }
 }

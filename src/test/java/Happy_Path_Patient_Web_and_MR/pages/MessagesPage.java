@@ -1994,12 +1994,6 @@ public class MessagesPage extends BasePage {
     public boolean navigateToSentItems() {
         boolean blResult = false;
         try {
-//            waitForSeconds(3);
-            waitForElement(txtInboxPage);
-//            waitForElement(elmntsMenu);
-//            waitForElement(elmntInboxDoctor);
-//            waitForElementClickable(elmntInboxDoctor);
-//            click(elmntInboxDoctor);
             waitForElement(txtInboxPage);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntSentDoctor);
@@ -2022,9 +2016,6 @@ public class MessagesPage extends BasePage {
         try {
 //            waitForSeconds(3);
             waitForElement(txtSent);
-//            waitForElement(elmntRefresh);
-//            waitForElementClickable(elmntRefresh);
-//            click(elmntRefresh);
             waitForSeconds(3);
             System.out.println(elmntDoctorSentSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
             WebElement Subject = waitForElement(By.xpath(elmntDoctorSentSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));

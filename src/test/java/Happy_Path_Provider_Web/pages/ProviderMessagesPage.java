@@ -16,7 +16,7 @@ public class ProviderMessagesPage extends BasePage {
     }
 
 
-    @FindBy(how = How.XPATH, using = "(//h1[text()=' Compose Email '])[1]")
+    @FindBy(how = How.XPATH, using = "//span[text()='Compose']")
     protected WebElement txtCompose;
 
     @FindBy(how = How.XPATH, using = "(//span[text()=' Save as Draft'])[1]")
@@ -31,6 +31,30 @@ public class ProviderMessagesPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//h1[text()='Inbox'])[1]")
     protected WebElement txtInboxPage;
+
+    @FindBy(how = How.XPATH, using = "(//mat-icon[text()='attach_file']//following::div//a[@class='download-file mail-download-file'])[1]")
+    protected WebElement txtAttachFile;
+
+    @FindBy(how = How.XPATH, using = "(//span[text()='Reply'])[1]")
+    protected WebElement txtReplyButton;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Send message']")
+    protected WebElement txtReplySendMessageButton;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Sent')]")
+    protected WebElement elmntSentDoctor;
+
+    @FindBy(how = How.XPATH, using = "(//h1[text()='Sent'])[1]")
+    protected WebElement txtSent;
+
+    protected String elmntDoctorSentSubject = new StringBuilder()
+            .append("(//mat-card-title[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')])[1]")
+            .toString();
+
+    @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror'][1]//p)[6]")
+    protected WebElement txtReplyBodyMessage;
 
     @FindBy(how = How.XPATH, using = "//a[text()=' Draft']")
     protected WebElement ElementDraftPage;
@@ -145,16 +169,7 @@ public class ProviderMessagesPage extends BasePage {
         boolean blResult = false;
         try {
             System.out.println("List Message Details >>> :: " + strMessage);
-//            List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessage);
-//            System.out.println("List Message Details >>> :: " + lstMessageDetails);
-//            waitForSeconds(3);
-            waitForElement(txtDraftPage);
             waitForSeconds(3);
-            System.out.println(elmntDoctorDraftSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage.get(5))));
-            WebElement Subject = waitForElement(By.xpath(elmntDoctorDraftSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage.get(5)))));
-            waitForElement(Subject);
-            verifyElement(Subject);
-            click(Subject);
             System.out.println(VerifyDoctorDraftBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage.get(6))));
             WebElement SubjectBodyMessage = waitForElement(By.xpath(VerifyDoctorDraftBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage.get(6)))));
             waitForElement(SubjectBodyMessage);
@@ -171,11 +186,12 @@ public class ProviderMessagesPage extends BasePage {
         boolean blResult = false;
         try {
 //            waitForSeconds(2);
-            waitForElement(txtCompose);
+//            waitForElement(txtCompose);
             jsScrollIntoView(btnSendMessage);
             waitForElementClickable(btnSendMessage);
             jsClick(btnSendMessage);
 //            waitForSeconds(1);
+            waitForElementToAppear(driver,By.xpath(btnSentSuccessfullyPopup1));
             waitForElement(btnSentSuccessfullyPopup);
             verifyElement(btnSentSuccessfullyPopup);
 //            waitForElement(btnHome);
@@ -224,4 +240,111 @@ public class ProviderMessagesPage extends BasePage {
         return blResult;
     }
 
+    public boolean verifyProviderInboxMessages(String strMessage) {
+        boolean blResult = false;
+        try {
+            System.out.println(">>>>>>>>>>>>>"+strMessage);
+            waitForElement(txtInboxPage);
+            System.out.println(elmntDoctorDraftSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
+            WebElement Subject = waitForElement(By.xpath(elmntDoctorDraftSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
+            waitForElement(Subject);
+            jsClick(Subject);
+            blResult =true;
+            System.out.println("Successfully verified sent Message");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to verify sent Message");
+        }
+        return blResult;
+    }
+
+    public boolean clickAttachButtonInboxMessages() {
+        boolean blResult = false;
+        try {
+
+            waitForElement(txtAttachFile);
+            jsClick(txtAttachFile);
+            waitForElement(txtReplyButton);
+            jsClick(txtReplyButton);
+
+            blResult =true;
+            System.out.println("Successfully verified sent Message");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to verify sent Message");
+        }
+        return blResult;
+    }
+
+    public boolean EnterReplyBodyMessages(String strMessage) {
+        boolean blResult = false;
+        try {
+            System.out.println("List Message Details >>> :: " + strMessage);
+            waitForSeconds(3);
+            txtReplyBodyMessage.click();
+            waitForSeconds(3);
+            driver.switchTo().activeElement().clear();
+            waitForSeconds(3);
+            driver.switchTo().activeElement().sendKeys(strMessage);
+
+            blResult = true;
+            System.out.println("Successfully verified sent Body Message");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to verify sent Body Message");
+        }
+        return blResult;
+    }
+
+    public boolean clickSendMessageButtonInboxMessages() {
+        boolean blResult = false;
+        try {
+            jsScrollIntoView(txtReplySendMessageButton);
+            waitForElement(txtReplySendMessageButton);
+            jsClick(txtReplySendMessageButton);
+            blResult =true;
+            System.out.println("Successfully verified sent Message");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to verify sent Message");
+        }
+        return blResult;
+    }
+
+    public boolean navigateToSentItems() {
+        boolean blResult = false;
+        try {
+            waitForElement(txtInboxPage);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntSentDoctor);
+            waitForElementClickable(elmntSentDoctor);
+            jsClick(elmntSentDoctor);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(txtSent);
+            blResult = verifyElement(txtSent);
+            System.out.println("Successfully navigated to the inbox");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to navigate the inbox");
+        }
+        return blResult;
+    }
+    public boolean verifySentMessages(String strMessage) {
+        boolean blResult = false;
+        try {
+//            waitForSeconds(3);
+            waitForElement(txtSent);
+            waitForSeconds(3);
+            System.out.println(elmntDoctorSentSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
+            WebElement Subject = waitForElement(By.xpath(elmntDoctorSentSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
+            waitForElement(Subject);
+            blResult = verifyElement(Subject);
+            System.out.println("Successfully verified sent Message");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to verify sent Message");
+        }
+        return blResult;
+    }
 }

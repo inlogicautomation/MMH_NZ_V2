@@ -40,7 +40,7 @@ Feature: Provider_Messages
     And I enter the "<Compose Details>" to compose an email
     And I Click Patient Send Message Button then I should see message sent Successfully popup
     When I navigate to Patient Sent items and verify the Sent "<Compose Details>"
-    And I navigate to provider portal and verify the Reply message
+    And I navigate to provider portal and verify the Reply message "<Message Details>"
     Then I navigate to inbox items and create a reply message "<Message Details>"
     And I navigate to Sent Items and verify the reply message "<Message Details>"
 
