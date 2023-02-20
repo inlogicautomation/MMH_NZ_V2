@@ -9,7 +9,7 @@ Feature: My Health Records
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @test
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @test @JENKINS
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -20,7 +20,7 @@ Feature: My Health Records
       | Email Address      | Password              |
       | &EMAIL_FOR_HEALTH& | &PASSWORD_FOR_HEALTH& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @JENKINS
   Scenario Template:S1-Patient to View Health Records & Verify the Prescription Entries from Health Centre Medicine Details
 
     Given As a user I am on HomePage
