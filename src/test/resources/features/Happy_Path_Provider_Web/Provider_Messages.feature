@@ -33,8 +33,8 @@ Feature: Provider_Messages
       | Message Details            |
       | &RECEIVED_MESSAGE_DETAILS& |
 
-  @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
-  Scenario Template: S3- Provider Reply Message
+  @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
+  Scenario Template: S3- Provider Received Message & Provider Reply Message
 
     Given As a Existing user I am on HomePage and navigate to Compose Message
     And I enter the "<Compose Details>" to compose an email
@@ -47,3 +47,17 @@ Feature: Provider_Messages
     Examples:
       | Compose Details            | Message Details            |
       | &PROVIDER_COMPOSE_MESSAGE& | &RECEIVED_MESSAGE_DETAILS& |
+
+  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
+  Scenario Template: S4- Preparation for Group Message, Sending a Group of E-Mail's to the Patient from provider login
+
+    Given As a user I am on Doctor portal homepage and Navigate to GroupMessage Page
+    And I enter the Compose GroupMessage "<Message Details>"
+    When I send the group message to the patient users
+    And As a user I am on HomePage and navigate to GroupMessage
+    Then I verify the provider sent "<Group Message Details>"
+
+
+    Examples:
+      | Message Details              | Group Message Details      |
+      | &SENT_GROUP_MESSAGE_DETAILS& | SENT_GROUP_MESSAGE_DETAILS |

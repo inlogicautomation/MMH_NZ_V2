@@ -3160,6 +3160,14 @@ jsScrollIntoView(elmntClinicianNotes);
                     waitForSeconds(2);
                     click(FileIcon);
                 }
+                if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy M53")){
+                    waitForSeconds(3);
+                    click(WhileUsingTheAppForA13);
+                    waitForSeconds(2);
+                    click(WhileUsingTheAppForA13);
+                    waitForSeconds(2);
+                    click(FileIcon);
+                }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Motorola One Fusion+")){
                     waitForSeconds(3);
                     click(WhileUsingTheAppForA13);

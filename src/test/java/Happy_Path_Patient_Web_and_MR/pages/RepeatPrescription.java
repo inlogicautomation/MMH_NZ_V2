@@ -426,7 +426,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Change ']")
     protected WebElement btnChange;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Change ']")
+    @FindBy(how = How.XPATH, using = "(//span[text()='Change '])[2]")
     protected WebElement btnChangeForMobile;
 
     @FindBy(how = How.XPATH, using = "(//button//span[text()='Select'])[2]")
@@ -573,7 +573,7 @@ public class RepeatPrescription extends BasePage {
             jsClick(elmntRepeatPrescriptions);
 //            waitForSeconds(3);
             waitForElementClickable(elmntMobileRequestNewScript);
-            click(elmntMobileRequestNewScript);
+            jsClick(elmntMobileRequestNewScript);
             waitForElement(txtRequestNewScript);
             blResult = verifyElement(txtRequestNewScript);
 //            waitForSeconds(2);

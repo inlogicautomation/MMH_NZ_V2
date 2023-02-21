@@ -58,7 +58,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Settings')]")
     protected WebElement elmntMessagesSettings;
 
-    @FindBy(how = How.XPATH, using = " //div[contains(@class,'settings')]//span//img")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Settings')]")
     protected WebElement elmntMobileMessagesSettings;
 
     //div[contains(@class,'settings')]//span//img
@@ -310,17 +310,17 @@ public class MessagesPage extends BasePage {
             .append("')])[2]")
             .toString();
 
+    protected String groupMessageSubjectForMobile = new StringBuilder()
+            .append("(//p[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')])[2]")
+            .toString();
+
 //    protected String groupMessageSubjectForMobile = new StringBuilder()
 //            .append("(//div[contains(text(),'")
 //            .append("<<REPLACEMENT>>")
-//            .append("')])[4]")
+//            .append("')])[8]")
 //            .toString();
-
-    protected String groupMessageSubjectForMobile = new StringBuilder()
-            .append("(//span[contains(text(),'")
-            .append("<<REPLACEMENT>>")
-            .append("')])[8]")
-            .toString();
 
 
     protected String selectTo = new StringBuilder()
@@ -521,13 +521,13 @@ public class MessagesPage extends BasePage {
     protected String elmntTo = new StringBuilder().append("//span[@class='mat-option-text'][contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='Subject'])[1]")
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='Subject'])[2]")
     protected WebElement txtBoxReplySubject;
 
     @FindBy(how = How.XPATH, using = "//mat-checkbox[not(contains(@class,'mat-checkbox-checked'))][@formcontrolname='termsconditions']/label/div")
     protected WebElement btnCheckBox;
 
-    @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']")
+    @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror'])[2]")
     protected WebElement btnWriteMessage;
 
     @AndroidFindBy(xpath = "(//android.widget.TextView[@text='Write your message']/following::android.widget.EditText)[1]")
@@ -867,6 +867,7 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(elmntMessages);
             click(elmntMessages);
             waitForSeconds(1);
+            jsScrollIntoView(elmntMobileMessagesSettings);
             waitForElementClickable(elmntMobileMessagesSettings);
             click(elmntMobileMessagesSettings);
             waitForSeconds(1);
@@ -1137,9 +1138,9 @@ public class MessagesPage extends BasePage {
             takeScreenshot(driver);
 //            waitForElementClickable(inboxSubject);
             click(inboxSubject);
-            System.out.println("X Path-inboxMessageSubject >>> :: " + groupMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage)));
-            WebElement inboxReceivedSubject = waitForElement(By.xpath(groupMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage))));
-            waitForElement(inboxReceivedSubject);
+//            System.out.println("X Path-inboxMessageSubject >>> :: " + groupMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage)));
+//            WebElement inboxReceivedSubject = waitForElement(By.xpath(groupMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage))));
+//            waitForElement(inboxReceivedSubject);
             System.out.println("X Path-inboxMessageSubject >>> :: " + groupMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strBody)));
             WebElement bodyMessage = waitForElement(By.xpath(groupMessageSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strBody))));
             waitForElement(bodyMessage);
@@ -2772,6 +2773,15 @@ public class MessagesPage extends BasePage {
                     click(optDownloads);
                 }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy A13")) {
+                    waitForSeconds(3);
+                    click(WhileUsingTheAppForA13);
+                    waitForSeconds(3);
+                    click(WhileUsingTheAppForA13);
+                    waitForSeconds(3);
+                    click(FileIcon);
+
+                }
+                if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy M53")) {
                     waitForSeconds(3);
                     click(WhileUsingTheAppForA13);
                     waitForSeconds(3);

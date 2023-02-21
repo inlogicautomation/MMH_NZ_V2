@@ -2900,13 +2900,13 @@ public class WebSteps {
     public void IEnterTheComposeGroupMessage(String listCreateData) {
         List<String> list = TestDataUtil.getListOfValue(listCreateData);
         System.out.println(list);
-//        demoPageContainer.messagesPage.selectFrom(list.get(0));
-//        demoPageContainer.messagesPage.selectProvider(list.get(1));
-//        demoPageContainer.messagesPage.selectGenderPreference(list.get(2));
+        demoPageContainer.messagesPage.selectFrom(list.get(0));
+        demoPageContainer.messagesPage.selectProvider(list.get(1));
+        demoPageContainer.messagesPage.selectGenderPreference(list.get(2));
         demoPageContainer.messagesPage.selecGroupTo(list.get(3));
         Assert.assertTrue(demoPageContainer.messagesPage.enterGroupSubject(TestDataUtil.getValue(list.get(4))));
         Assert.assertTrue(demoPageContainer.messagesPage.enterGroupMessage(TestDataUtil.getValue(list.get(5))));
-//        demoPageContainer.messagesPage.selecGroupTo(list.get(3));
+        demoPageContainer.messagesPage.selecGroupTo(list.get(3));
     }
 
     @And("I send the group message to the patient users")
@@ -3690,6 +3690,13 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.VerifyPayAtHealthCentreAndPayNowButton());
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @Given("As a user I am on Doctor portal homepage and Navigate to GroupMessage Page")
+    public void asAUserIAmOnDoctorPortalHomepageAndNavigateToGroupMessagePage() {
+        Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToProviderHomepage());
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToGroupMessageForDoctor());
     }
 }
 

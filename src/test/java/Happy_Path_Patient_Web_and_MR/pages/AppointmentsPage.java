@@ -1773,6 +1773,41 @@ public class AppointmentsPage extends BasePage {
         try {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
 
+                if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy M53")) {
+                    DesiredCapabilities capabilities = new DesiredCapabilities();
+                    capabilities.setCapability("autoGrantPermissions", "true");
+                    AppiumDriver appiumDriver = (AppiumDriver) driver;
+                    Set<String> contextNames = appiumDriver.getContextHandles();
+                    for (String strContextName : contextNames) {
+                        if (strContextName.contains("NATIVE_APP")) {
+                            appiumDriver.context("NATIVE_APP");
+                            break;
+                        }
+                    }
+                    System.out.println("Success Switch Native App");
+                    capabilities.setCapability("autoGrantPermissions", "true");
+                    waitForSeconds(2);
+                    waitForElement(drpExpiryMonth);
+                    click(drpExpiryMonth);
+                    waitForSeconds(2);
+                    waitForElement(strCheckedTextLocator);
+                    click(strCheckedTextLocator);
+                    waitForSeconds(2);
+                    waitForElement(drpExpiryYear);
+                    click(drpExpiryYear);
+                    waitForSeconds(2);
+                    waitForElement(strCheckedTextLocatoryear);
+                    click(strCheckedTextLocatoryear);
+                    System.out.printf("Successfully write text message");
+                    Set<String> contextNames1 = appiumDriver.getContextHandles();
+                    for (String strContextName : contextNames1) {
+                        if (strContextName.contains("CHROMIUM")) {
+                            appiumDriver.context("CHROMIUM");
+                            break;
+                        }
+                    }
+
+                }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy A13")) {
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability("autoGrantPermissions", "true");
