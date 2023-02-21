@@ -1,6 +1,6 @@
 Feature: Resources
 
-  @WEB @RESOURCES @SANITY_PATH
+  @WEB @RESOURCES @SANITY_PATH @SANITY_JENKINS
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -21,7 +21,7 @@ Feature: Resources
 #    These test Case Covered The Scenario NO: S3
 #  }
 
-  @WEB @RESOURCES @SANITY_PATH
+  @WEB @RESOURCES @SANITY_PATH @SANITY_JENKINS
   Scenario: S1- Navigate to Resources and view Activated resources.
 
     Given As a Existing user I am on HomePage and navigate to Resources

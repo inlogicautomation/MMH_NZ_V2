@@ -837,4 +837,12 @@ public class ProviderWebSteps {
     }
 
 
+    @Given("As a user I am on Doctor portal HomePage and navigate to Messages Setting")
+    public void asAUserIAmOnDoctorPortalHomePageAndNavigateToMessagesSetting() {
+//        Assert.assertTrue(providerPageContainer.homePage.clickDashBoard());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToDoctorMessageSetting());
+
+
+    }
 }

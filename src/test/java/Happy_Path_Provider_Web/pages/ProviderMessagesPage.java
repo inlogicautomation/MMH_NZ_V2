@@ -47,6 +47,12 @@ public class ProviderMessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h1[text()='Sent'])[1]")
     protected WebElement txtSent;
 
+    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Timprefer!')]")
+    protected WebElement txtWelcome;
+
+    @FindBy(xpath = "//a[@class='navbar-brand']")
+    protected WebElement elmtMMHLogo;
+
     protected String elmntDoctorSentSubject = new StringBuilder()
             .append("(//mat-card-title[contains(text(),'")
             .append("<<REPLACEMENT>>")
@@ -94,8 +100,19 @@ public class ProviderMessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome')])[1]")
     protected WebElement txtMyHomePage;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Inbox')]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Inbox')])[2]")
     protected WebElement elmntInboxDoctor;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),' Settings')]")
+    protected WebElement elmntDoctorMessageSetting;
+
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Message Settings')]")
+    protected WebElement txtDoctorMessageSetting;
+
+
+
+
+
 
 
 
@@ -347,4 +364,54 @@ public class ProviderMessagesPage extends BasePage {
         }
         return blResult;
     }
+
+    public boolean  navigateToProviderHomepage() {
+        boolean blResult = false;
+        try{
+            if (isElementDisplayed(txtWelcome)) {
+                verifyElement(txtWelcome);
+                waitForSeconds(3);
+                waitForElement(elmtMMHLogo);
+                waitForElementClickable(elmtMMHLogo);
+                jsClick(elmtMMHLogo);
+                waitForSeconds(3);
+                blResult = verifyElement(txtWelcome);
+            }
+            if (!isElementDisplayed(txtWelcome)){
+                focusWindow(1);
+                System.out.println("Successfully switch to doctor portal");
+                waitForElement(elmtMMHLogo);
+                waitForElementClickable(elmtMMHLogo);
+                jsClick(elmtMMHLogo);
+                System.out.println("Successfully click Logo");
+                waitForSeconds(3);
+                blResult=verifyElement(txtWelcome);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean navigateToDoctorMessageSetting() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntInboxDoctor);
+            waitForElementClickable(elmntInboxDoctor);
+            click(elmntInboxDoctor);
+            waitForSeconds(1);
+            waitForElementClickable(elmntDoctorMessageSetting);
+            click(elmntDoctorMessageSetting);
+            waitForSeconds(1);
+        waitForElement(txtDoctorMessageSetting);
+            blResult = verifyElement(txtDoctorMessageSetting);
+            System.out.println("Successfully navigated to messages settings >>>>> :: ");
+        } catch (Exception e) {
+            System.out.println("Failed navigate to messages settings >>>>> :: ");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
 }
