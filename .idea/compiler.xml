@@ -6,11 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="codoid-poc" />
+        <module name="mmh-automation" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="codoid-poc" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

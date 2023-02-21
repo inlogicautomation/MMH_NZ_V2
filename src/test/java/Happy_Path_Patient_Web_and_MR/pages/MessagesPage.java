@@ -221,7 +221,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='Subject']")
     protected WebElement txtGroupBoxSubject;
 
-    @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']")
+    @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']//p")
     protected WebElement txtgroupmessage;
 
     @FindBy(how = How.XPATH, using = "//kendo-editor[@formcontrolname='MessageBody']")
@@ -809,7 +809,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//a[@class='download-file mail-download-file'])[2]")
     protected WebElement btnMobileInboxAttachButton;
 
-    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Dr.')]")
+    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Timprefer!')]")
     protected WebElement txtWelcome;
 
     @FindBy(xpath = "//a[@class='navbar-brand']")
@@ -2466,7 +2466,8 @@ public class MessagesPage extends BasePage {
 //            healthCentre.selectByVisibleText(strFamilyMember);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
-            waitForSeconds(1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+
             blResult = true;
             System.out.println("\nSuccessfully selected the health centre >>> :: ");
         } catch (Exception e) {
@@ -2487,7 +2488,7 @@ public class MessagesPage extends BasePage {
 //            healthCentre.selectByVisibleText(strFamilyMember);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntProviderDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
-            waitForSeconds(1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
             System.out.println("\nSuccessfully selected the health centre >>> :: ");
         } catch (Exception e) {
@@ -2500,7 +2501,7 @@ public class MessagesPage extends BasePage {
     public boolean selectGenderPreference(String strFamilyMember) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+
 //            waitForElement(txtComposeNewMessage);
             waitForElementClickable(btnGenderPrefernce);
             jsClick(btnGenderPrefernce);
@@ -2508,7 +2509,8 @@ public class MessagesPage extends BasePage {
 //            healthCentre.selectByVisibleText(strFamilyMember);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntProviderDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
-            waitForSeconds(1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+
             blResult = true;
             System.out.println("\nSuccessfully selected the health centre >>> :: ");
         } catch (Exception e) {
@@ -2531,6 +2533,7 @@ public class MessagesPage extends BasePage {
 //            healthCentre.selectByVisibleText(strFamilyMember);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(10);
             blResult = true;
             System.out.println("\nSuccessfully selected the health centre >>> :: ");
@@ -3507,7 +3510,7 @@ public class MessagesPage extends BasePage {
 //            txtGroupBoxSubject.clear();
 //            waitForElementClickable(txtGroupBoxSubject);
             txtGroupBoxSubject.sendKeys(TestDataUtil.getValue(strSubject));
-            waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
             System.out.println("\nSuccessfully Entered The Subject Message >>> :: ");
         } catch (Exception e) {
@@ -3520,23 +3523,19 @@ public class MessagesPage extends BasePage {
     public boolean enterGroupMessage(String strBodyMessage) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            driver.switchTo().frame(frameComposeForDoctor);
             System.out.println(strBodyMessage);
             jsScrollIntoView(txtgroupWritemessage);
             waitForSeconds(4);
-//            jsScrollUp();
             click(txtgroupmessage);
             waitForSeconds(2);
             driver.switchTo().activeElement().clear();
             waitForSeconds(2);
-            txtgroupmessage.click();
+            click(txtgroupmessage);
             waitForSeconds(2);
             driver.switchTo().activeElement().sendKeys(strBodyMessage);
-
-//            waitForSeconds(2);
-//            txtgroupmessage.sendKeys(TestDataUtil.getValue(strBodyMessage));
-            waitForSeconds(3);
-//            driver.switchTo().parentFrame();
+            //            driver.switchTo().parentFrame();
             blResult = true;
             System.out.println("\nSuccessfully Entered The Subject Body Message >>> :: ");
         } catch (Exception e) {

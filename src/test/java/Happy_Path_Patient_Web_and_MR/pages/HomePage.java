@@ -52,7 +52,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='appVersion']/small")
     protected WebElement txtAppVersion;
 
-    @FindBy(how = How.XPATH, using = "//*[contains(text(),'My Home page') or contains(text(),'Welcome,') or contains(text(),'Start managing your health, today')]")
+    @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome,') or contains(text(),'Start managing your health, today')])[1]")
     protected WebElement elmntVerifyHomePage;
 
     @FindBy(how = How.XPATH, using = "//a/span[contains(text(),'Dashboard')]")
