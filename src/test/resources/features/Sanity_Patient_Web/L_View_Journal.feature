@@ -1,5 +1,5 @@
 Feature: View_Journal
-  @WEB  @SANITY_PATH  @VIEW_JOURNAL @SANITY_JENKINS
+  @WEB  @SANITY_PATH  @VIEW_JOURNAL
   Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
     Given As a user I am on beta MMH login Page
     And I enter "<Email Address>" and "<Password>" For Beta
@@ -19,7 +19,7 @@ Feature: View_Journal
    #These test Case Covered The Scenario NO: S1
       #}
 
-  @WEB @SANITY_PATH  @VIEW_JOURNAL @SANITY_JENKINS
+  @WEB @SANITY_PATH  @VIEW_JOURNAL
   Scenario Template:S1-Existing Patient VerifyJournal Details and validate enter subject, category, notes, start date, end date, schedule even, privacy settings,not shared with the provider in view Journal Details
 
     Given As a Existing user I am on HomePage and I click the Health Tools
