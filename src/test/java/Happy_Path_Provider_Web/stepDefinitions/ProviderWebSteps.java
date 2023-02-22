@@ -845,4 +845,12 @@ public class ProviderWebSteps {
 
 
     }
+
+    @Then("I Should see the Provider Signature Based on {string} entered and signature must get auto populated in Compose mail")
+    public void iShouldSeeTheProviderSignatureBasedOnEnteredAndSignatureMustGetAutoPopulatedInComposeMail(String strMessage) {
+//        Assert.assertTrue(providerPageContainer.homePage.clickDashBoard());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToComposeMessageForDoctor());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyEnteredProviderSignatureMessage(TestDataUtil.getValue(strMessage)));
+    }
 }

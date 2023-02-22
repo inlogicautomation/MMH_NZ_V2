@@ -75,7 +75,7 @@ Feature: Provider_Messages
     Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
     And I click the Signature Setting and Enter the "<Signature Message>"
     When I click the Save Button
-    Then I Should see the Signature Based on "<Signature Message>" entered and signature must get auto populated in Compose mail
+    Then I Should see the Provider Signature Based on "<Signature Message>" entered and signature must get auto populated in Compose mail
 
     Examples:
       | Signature Message            |

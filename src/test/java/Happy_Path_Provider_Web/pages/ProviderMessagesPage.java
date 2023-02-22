@@ -19,6 +19,15 @@ public class ProviderMessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Compose']")
     protected WebElement txtCompose;
 
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Attach Files')]")
+    protected WebElement btnAttachFile;
+
+    protected String messageText = new StringBuilder()
+            .append("//body//p[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]")
+            .toString();
+
     @FindBy(how = How.XPATH, using = "(//span[text()=' Save as Draft'])[1]")
     protected WebElement btnDraftMessage;
 
@@ -102,6 +111,10 @@ public class ProviderMessagesPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Inbox')])[2]")
     protected WebElement elmntInboxDoctor;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Compose']")
+    protected WebElement elmntComposeDoctor;
+
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),' Settings')]")
     protected WebElement elmntDoctorMessageSetting;
@@ -414,4 +427,56 @@ public class ProviderMessagesPage extends BasePage {
         return blResult;
     }
 
+    public boolean navigateToComposeMessageForDoctor() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(3);
+            waitForElement(txtMyHomePage);
+//            waitForElement(elmntsMenu);
+//            waitForElement(elmntPraticeMenuDoctor);
+//            jsClick(elmntPraticeMenuDoctor);
+            waitForSeconds(3);
+            jsScrollIntoView(elmntInboxDoctor);
+            waitForElementClickable(elmntInboxDoctor);
+            jsClick(elmntInboxDoctor);
+            waitForSeconds(1);
+            waitForElementClickable(elmntComposeDoctor);
+            jsClick(elmntComposeDoctor);
+            waitForElement(txtCompose);
+            blResult = verifyElement(txtCompose);
+            System.out.println("Successfully navigated to the compose");
+        } catch (Exception e) {
+            System.out.println("Failed to navigate the compose");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+
+    public boolean verifyEnteredProviderSignatureMessage(String strMessage) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            System.out.println("SignatureMessage >>> :: " + TestDataUtil.getValue(strMessage));
+            waitForElement(btnAttachFile);
+//            driver.switchTo().frame(frameCompose);
+            WebElement txtSignature = waitForElement(By.xpath(messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
+            jsScrollIntoView(txtSignature);
+            waitForElement(txtSignature);
+            verifyElement(txtSignature);
+            String signature = txtSignature.getText();
+            System.out.println("verify Entered Signature Message >>> :: " + TestDataUtil.getValue(strMessage) + "::" + signature);
+            takeScreenshot(driver);
+            if (signature.equalsIgnoreCase(TestDataUtil.getValue(strMessage))) {
+                System.out.println("Verified Signature text Message successfully >>> ::");
+                blResult = true;
+            }
+//            driver.switchTo().parentFrame();
+
+        } catch (Exception e) {
+            System.out.println("Failed to verify signature text message");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
 }

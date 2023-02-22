@@ -1715,9 +1715,8 @@ public class MessagesPage extends BasePage {
                 System.out.println("SignatureMessage >>> :: " + TestDataUtil.getValue(strMessage));
                 waitForSeconds(2);
                 waitForElement(btnSave);
-                waitForElementClickable(drpDownSignatureSettings);
-                click(drpDownSignatureSettings);
-                waitForSeconds(1);
+                waitForElement(drpDownSignatureSettings);
+                jsClick(drpDownSignatureSettings);
                 waitForElement(frameSignature);
                 driver.switchTo().frame(frameSignature);
                 System.out.println("Switched into frame");
