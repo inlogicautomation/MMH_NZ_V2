@@ -9,7 +9,7 @@ Feature: Health_Records
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB  @SANITY_PATH  @HEALTH_RECORDS
+  @WEB  @SANITY_PATH  @HEALTH_RECORDS @SANITY_PATH_JENKINS
   Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
     Given As a user I am on beta MMH login Page
     And I enter "<Email Address>" and "<Password>" For Beta
@@ -25,7 +25,7 @@ Feature: Health_Records
     #83:View all the details in grid & click on more info icon for specific medicine details in prescription tab
      #These test Case Covered The Scenario NO: S1
       #}
-  @WEB  @SANITY_PATH  @HEALTH_RECORDS
+  @WEB  @SANITY_PATH  @HEALTH_RECORDS @SANITY_PATH_JENKINS
   Scenario Template: S1-Verify the Prescription Entries From Health center Medicine Details in Existing Patient
 
     Given As a Existing user I am on HomePage and I click the Health Records
