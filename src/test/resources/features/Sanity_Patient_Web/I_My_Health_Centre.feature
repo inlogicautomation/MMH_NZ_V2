@@ -1,6 +1,6 @@
 Feature: My Health Centre
 
-  @WEB @MY_HEALTH_CENTRE @SANITY_PATH @SANITY_PATH_JENKINS
+  @WEB @MY_HEALTH_CENTRE @SANITY_PATH
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -19,7 +19,7 @@ Feature: My Health Centre
 #    These test Case Covered The Scenario NO: S2
 #  }
 
-  @WEB @MY_HEALTH_CENTRE @SANITY_PATH @SANITY_PATH_JENKINS
+  @WEB @MY_HEALTH_CENTRE @SANITY_PATH
   Scenario Template: S2- Existing Patient view the My Health Centre details.
 
     Given As a Existing user I am on HomePage and I click to Practice "<Name>" under the My health menu
