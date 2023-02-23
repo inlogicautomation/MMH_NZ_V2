@@ -54,7 +54,7 @@ public class ProviderHomePage extends BasePage {
     protected WebElement elmtMMHLogo;
 
     //h1[contains(text(),'Welcome,')]//span[contains(text(),'ApptProvider!') or contains(text(),'Tim!')]
-    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Dr.')]")
+    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]")
     protected WebElement txtWelcome;
 
     @FindBy(xpath = "//h1[contains(text(),'Welcome ')]//span[contains(text(),'Harry Harry!')]")

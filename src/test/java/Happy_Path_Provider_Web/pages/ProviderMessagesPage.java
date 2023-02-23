@@ -22,6 +22,18 @@ public class ProviderMessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Attach Files')]")
     protected WebElement btnAttachFile;
 
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Save')]")
+    protected WebElement btnSave;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Enable Out Of Office Reply')]/preceding-sibling::div/input")
+    protected WebElement chkboxOutOfOfficeReply;
+
+    @FindBy(how = How.XPATH, using = "(//iframe)[2]")
+    protected WebElement frameOutOfOffice;
+
+    @FindBy(how = How.XPATH, using = "//mat-panel-title[contains(text(),'Out of Office Settings')]")
+    protected WebElement drpDownOutOfOfficeSettings;
+
     protected String messageText = new StringBuilder()
             .append("//body//p[contains(text(),'")
             .append("<<REPLACEMENT>>")
@@ -121,6 +133,9 @@ public class ProviderMessagesPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Message Settings')]")
     protected WebElement txtDoctorMessageSetting;
+
+    @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Compose Email')])[1]")
+    protected WebElement txtProviderComposeEmail;
 
 
 
@@ -430,20 +445,14 @@ public class ProviderMessagesPage extends BasePage {
     public boolean navigateToComposeMessageForDoctor() {
         boolean blResult = false;
         try {
-            waitForSeconds(3);
             waitForElement(txtMyHomePage);
-//            waitForElement(elmntsMenu);
-//            waitForElement(elmntPraticeMenuDoctor);
-//            jsClick(elmntPraticeMenuDoctor);
-            waitForSeconds(3);
             jsScrollIntoView(elmntInboxDoctor);
-            waitForElementClickable(elmntInboxDoctor);
+            waitForElement(elmntInboxDoctor);
             jsClick(elmntInboxDoctor);
-            waitForSeconds(1);
-            waitForElementClickable(elmntComposeDoctor);
+            waitForElement(elmntComposeDoctor);
             jsClick(elmntComposeDoctor);
-            waitForElement(txtCompose);
-            blResult = verifyElement(txtCompose);
+            waitForElement(txtProviderComposeEmail);
+            blResult = verifyElement(txtProviderComposeEmail);
             System.out.println("Successfully navigated to the compose");
         } catch (Exception e) {
             System.out.println("Failed to navigate the compose");
@@ -475,6 +484,53 @@ public class ProviderMessagesPage extends BasePage {
 
         } catch (Exception e) {
             System.out.println("Failed to verify signature text message");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectProviderOutOfOfficeSetting() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(btnSave);
+            click(drpDownOutOfOfficeSettings);
+            waitForSeconds(1);
+            waitForElement(chkboxOutOfOfficeReply);
+
+
+            System.out.println("Out of Office Setting was selected >>> ::");
+            blResult = verifyElement(chkboxOutOfOfficeReply);
+
+        } catch (Exception e) {
+            System.out.println("Failed to select Out of Office Setting >>> ::");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean verifyEnteredProviderOutOfOfficeMessage(String strMessage) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(chkboxOutOfOfficeReply);
+            driver.switchTo().frame(frameOutOfOffice);
+            System.out.println("Xpath for Text Out Of Office >>>> :: " + messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
+            WebElement txtOutOfMessage = waitForElement(By.xpath(messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
+            jsScrollIntoView(txtOutOfMessage);
+            waitForElement(txtOutOfMessage);
+            verifyElement(txtOutOfMessage);
+            String outOfMessageText = txtOutOfMessage.getText();
+            System.out.println("verify Entered Signature Message >>> :: " + TestDataUtil.getValue(strMessage) + "::" + outOfMessageText);
+            takeScreenshot(driver);
+            if (outOfMessageText.equalsIgnoreCase(TestDataUtil.getValue(strMessage))) {
+                System.out.println("Verified Out of Office text Message successfully >>> ::");
+                blResult = true;
+            }
+            driver.switchTo().parentFrame();
+
+        } catch (Exception e) {
+            System.out.println("Failed to verify Out Of Office text message");
             e.printStackTrace();
         }
         return blResult;

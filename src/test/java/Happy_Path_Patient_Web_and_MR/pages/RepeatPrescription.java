@@ -8,6 +8,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
@@ -1037,7 +1038,9 @@ public class RepeatPrescription extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
+            waitForElement(CardPaymentFrame);
             driver.switchTo().frame(CardPaymentFrame);
             waitForSeconds(3);
             waitForElement(txtPaymentCheckOut);
@@ -1872,6 +1875,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             waitForElementClickable(btnSubmit);
             jsClick(btnSubmit);
 
+            chromeoptionHandle();
             System.out.println("Successfully Enter Card Details >>>>>");
             blResult = true;
 
@@ -1882,6 +1886,22 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
 
         }
         return blResult;
+    }
+
+    public void chromeoptionHandle() {
+        ChromeOptions options = new ChromeOptions();
+
+            HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        chromePrefs.put("credentials_enable_service",false);
+        chromePrefs.put("profile.password_manager_enabled",false);
+        options.setExperimentalOption("prefs", chromePrefs);
+//        options.add_experimental_option("prefs", chromePrefs);
+
+
+
+
+
+
     }
 
     public boolean selectBank(String strBank) {

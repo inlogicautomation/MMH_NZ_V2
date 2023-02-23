@@ -853,4 +853,22 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToComposeMessageForDoctor());
         Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyEnteredProviderSignatureMessage(TestDataUtil.getValue(strMessage)));
     }
+
+    @Then("I Should Verify the Provider Out Of Office Reply {string}")
+    public void iShouldVerifyTheProviderOutOfOfficeReply(String strMessage) {
+        List<String> lstStrMessage = TestDataUtil.getListOfValue(strMessage);
+        System.out.println("lstStrMessage >>> :: " + lstStrMessage);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+
+            Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToProviderHomepage());
+            Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToDoctorMessageSetting());
+            Assert.assertTrue(providerPageContainer.providerMessagesPage.selectProviderOutOfOfficeSetting());
+            Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyEnteredProviderOutOfOfficeMessage(TestDataUtil.getValue(lstStrMessage.get(0))));
+        }
+
+
+    }
+
+
+
 }

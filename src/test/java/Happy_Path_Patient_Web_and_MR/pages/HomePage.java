@@ -58,8 +58,14 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a/span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashboard;
 
-    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]/following::h3[contains(text(),'Start managing your health, today')]")
+//    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]/following::h3[contains(text(),'Start managing your health, today')]")
+//    protected WebElement txtWelcome;
+
+    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[text()=' Harry Harry!']")
     protected WebElement txtWelcome;
+
+    //h1[contains(text(),'Welcome,')]//span[text()=' Christopher Michael!']
+
 
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'hamburger')]")
     protected WebElement btnMobileMenu;

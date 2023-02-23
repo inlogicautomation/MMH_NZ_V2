@@ -3698,6 +3698,21 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToProviderHomepage());
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToGroupMessageForDoctor());
     }
+
+    @When("I click the Save Button and Verify the Automatic Replies {string}")
+    public void iClickTheSaveButtonAndVerifyTheAutomaticReplies(String strMessage) {
+        Assert.assertTrue(demoPageContainer.messagesPage.clickSaveButton());
+        List<String> lstStrMessage = TestDataUtil.getListOfValue(strMessage);
+        System.out.println("lstStrMessage >>> :: " + lstStrMessage);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
+            Assert.assertTrue(demoPageContainer.messagesPage.navigateToProviderHomepage());
+            Assert.assertTrue(demoPageContainer.messagesPage.navigateToDoctorMessageSetting());
+            Assert.assertTrue(demoPageContainer.messagesPage.selectAutomaticRepliesSetting());
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredAutomaticRepliesMessage(TestDataUtil.getValue(lstStrMessage.get(2))));
+        }
+
+    }
 }
 
 

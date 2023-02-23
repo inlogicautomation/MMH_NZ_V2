@@ -123,6 +123,11 @@ public class MessagesPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Inbox')]")
     protected WebElement elmntInboxDoctor;
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),' Settings')]")
+    protected WebElement elmntDoctorMessageSetting;
+
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Message Settings')]")
+    protected WebElement txtDoctorMessageSetting;
 
     @FindBy(how = How.XPATH, using = "//span[text()='Practice Menu']")
     protected WebElement elmntPraticeMenuDoctor;
@@ -527,7 +532,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-checkbox[not(contains(@class,'mat-checkbox-checked'))][@formcontrolname='termsconditions']/label/div")
     protected WebElement btnCheckBox;
 
-    @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror'])[2]")
+    @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']")
     protected WebElement btnWriteMessage;
 
     @AndroidFindBy(xpath = "(//android.widget.TextView[@text='Write your message']/following::android.widget.EditText)[1]")
@@ -3793,6 +3798,28 @@ public class MessagesPage extends BasePage {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean navigateToDoctorMessageSetting() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntInboxDoctor);
+            waitForElementClickable(elmntInboxDoctor);
+            click(elmntInboxDoctor);
+            waitForSeconds(1);
+            waitForElementClickable(elmntDoctorMessageSetting);
+            click(elmntDoctorMessageSetting);
+            waitForSeconds(1);
+            waitForElement(txtDoctorMessageSetting);
+            blResult = verifyElement(txtDoctorMessageSetting);
+            System.out.println("Successfully navigated to messages settings >>>>> :: ");
+        } catch (Exception e) {
+            System.out.println("Failed navigate to messages settings >>>>> :: ");
+            e.printStackTrace();
+
         }
         return blResult;
     }

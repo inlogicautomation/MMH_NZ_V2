@@ -70,7 +70,7 @@ Feature: Provider_Messages
       | Alert Type            |
       | &PROVIDER_ALERT TYPE& |
 
-  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
+  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
   Scenario Outline: S6- Provider Signature Settings
     Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
     And I click the Signature Setting and Enter the "<Signature Message>"
@@ -88,8 +88,25 @@ Feature: Provider_Messages
     And I click the Out of Office Settings and Enable Out Of Office Reply option
     And I select the Out of office "<Start Date>" and "<End Date>" and Enter the"<Message>"
     When I click the Save Button
-    Then I Should Verify the Out Of Office Reply "<Message>"
+    Then I Should Verify the Provider Out Of Office Reply "<Message>"
 
     Examples:
       | Start Date   | End Date   | Message                   |
       | &START DATE& | &END DATE& | &PROVIDER_OUT OF MESSAGE& |
+
+  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
+  Scenario Outline: S8- Provider Automatic Reply Settings
+
+    Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
+    And I click the Automatic Replies Settings and Enable Replies Settings option
+    And I Enter the Automatic Replies "<Message>"
+    When I click the Save Button and Verify the Automatic Replies "<Message>"
+    And As a Existing user I am on HomePage and navigate to Compose Message
+    And I enter the "<Compose Details>" to compose an email
+    Then I Click Patient Send Message Button then I should see message sent Successfully popup
+    And As a user I am on Doctor portal HomePage and navigate to Messages Setting
+    And I navigate to provider portal and verify the Reply message "<Message>"
+
+    Examples:
+      | Message                   | Compose Details            |
+      | &AUTOMATIC REPLY MESSAGE& | &PROVIDER_COMPOSE_MESSAGE& |
