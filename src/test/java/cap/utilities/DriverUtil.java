@@ -65,6 +65,7 @@ public class DriverUtil {
                 chromePrefs.put("profile.password_manager_enabled", false);
                 options.setExperimentalOption("prefs", chromePrefs);
 
+
                 driver = new RemoteWebDriver(url, options);
             } catch (Exception ex) {
                 System.out.println("Exception for Remote Execution : " + ex.getMessage());
@@ -483,6 +484,8 @@ public class DriverUtil {
         cap.setCapability(ChromeOptions.CAPABILITY, options);
         return options;
     }
+
+
 
     /**   It is used to control the behavior of FirefoxIt is used to define options which control how Firefox gets started and run.*/
 
