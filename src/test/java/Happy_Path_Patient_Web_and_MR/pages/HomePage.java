@@ -9,6 +9,7 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -61,10 +62,18 @@ public class HomePage extends BasePage {
 //    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]/following::h3[contains(text(),'Start managing your health, today')]")
 //    protected WebElement txtWelcome;
 
-    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[text()=' Harry Harry!']")
-    protected WebElement txtWelcome;
+//    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[text()=' Harry Harry!']")
+//    protected WebElement txtWelcome;
 
     //h1[contains(text(),'Welcome,')]//span[text()=' Christopher Michael!']
+
+        @FindAll({
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Harry Harry!']"),
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Christopher Michael!']"),
+                @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Ben!']")
+
+    })
+    protected WebElement txtWelcome;
 
 
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'hamburger')]")
