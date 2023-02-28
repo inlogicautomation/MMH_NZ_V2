@@ -187,6 +187,9 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'desktop-view')]//span[contains(text(),'Confirm')]/parent::button")
     protected WebElement btnConfirmDesktop;
 
+    @FindBy(how = How.XPATH, using = "(//h3[contains(text(),'Fee : $0.00 (Incl. GST)')])[2]")
+    protected WebElement VerifyZeroPayments;
+
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'mobile-view')]//span[contains(text(),'Confirm')]/parent::button")
     protected WebElement btnConfirmMobile;
 
@@ -783,6 +786,19 @@ public class AppointmentsPage extends BasePage {
             e.printStackTrace();
         }
         return blResult;
+    }
+
+    public boolean clickPatientBookAppointment(){
+        boolean blresult = false;
+        try{
+            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+waitForElement(VerifyZeroPayments);
+verifyElement(VerifyZeroPayments);
+            blresult = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return blresult;
     }
 
     public boolean clickConfirmButton() {

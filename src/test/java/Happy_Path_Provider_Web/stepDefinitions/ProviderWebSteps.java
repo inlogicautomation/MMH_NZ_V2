@@ -839,7 +839,7 @@ public class ProviderWebSteps {
 
     @Given("As a user I am on Doctor portal HomePage and navigate to Messages Setting")
     public void asAUserIAmOnDoctorPortalHomePageAndNavigateToMessagesSetting() {
-//        Assert.assertTrue(providerPageContainer.homePage.clickDashBoard());
+
         Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToProviderHomepage());
         Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToDoctorMessageSetting());
 
@@ -868,7 +868,37 @@ public class ProviderWebSteps {
 
 
     }
+    @Given("As a Provider I am on HomePage and navigate to Appointment Setting page")
+    public void asAProviderIAmOnHomePageAndNavigateToAppointmentSettingPage() {
+        Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickSystemMenu());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickAppointmentMessage());
 
 
+    }
 
+    @And("I enable RuleA Radio button and I click save button then I see Saved Successfully message")
+    public void iEnableRuleARadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage() {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleAButton());
+
+    }
+
+    @When("I navigate to Book Appointment select any provider with any Location")
+    public void iNavigateToBookAppointmentSelectAnyProviderWithAnyLocation() {
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickPatientBookAppointment());
+
+    }
+
+    @And("I navigate to Book Appointment select Default Location with Default Provider")
+    public void iNavigateToBookAppointmentSelectDefaultLocationWithDefaultProvider() {
+                Assert.assertTrue(providerPageContainer.homePage.clickDashBoard());
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickPatientBookAppointment());
+
+    }
+
+    @And("I navigate to Book Appointment select Default Location with Any Provider")
+    public void iNavigateToBookAppointmentSelectDefaultLocationWithAnyProvider() {
+        Assert.assertTrue(providerPageContainer.homePage.clickDashBoard());
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickPatientBookAppointment());
+    }
 }

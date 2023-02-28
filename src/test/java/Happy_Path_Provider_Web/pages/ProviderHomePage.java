@@ -441,8 +441,11 @@ public class ProviderHomePage extends BasePage {
     @FindBy (how = How.XPATH, using = "//span[text()='Appointments']")
     protected WebElement elmntAppointment;
 
-    @FindBy (how = How.XPATH, using = "//span[text()='Book Appointment']")
+    @FindBy (how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT']")
     protected WebElement elmntBookAppointment;
+
+    @FindBy (how = How.XPATH, using = "//span[text()='Book Appointment']")
+    protected WebElement elmntPatientBookAppointment;
 
 
 
@@ -581,6 +584,21 @@ public class ProviderHomePage extends BasePage {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             waitForElementClickable(elmntAppointment);
             click(elmntAppointment);
+            blresult = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return blresult;
+    }
+
+    public boolean clickPatientBookAppointment(){
+        boolean blresult = false;
+        try{
+            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementClickable(elmntAppointment);
+            click(elmntAppointment);
+            waitForElement(elmntPatientBookAppointment);
+            click(elmntPatientBookAppointment);
             blresult = true;
         }catch (Exception e){
             e.printStackTrace();

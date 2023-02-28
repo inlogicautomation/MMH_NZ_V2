@@ -21,15 +21,14 @@ public class ProviderPageContainer {
     public static LinkedHashMap<String, String> printTestDataMap = new LinkedHashMap<String, String>();
     public ProviderHomePage providerHomePage;
     public RepeatScriptSettingPage repeatScriptSettingPage;
-
     public RRPScriptFeeSettingsPage rrpScriptFeeSettingsPage;
-
     public PreScreeningPage preScreeningPage;
-
     public AppointmentMessagePage appointmentMessagePage;
     public AppointmentsPage appointmentsPage;
-
     public ProviderMessagesPage providerMessagesPage;
+
+    public AppointmentSettingPage appointmentSettingPage;
+
     public HomePage homePage;
 
 
@@ -67,6 +66,7 @@ public class ProviderPageContainer {
         appointmentMessagePage = new AppointmentMessagePage(driver);
         appointmentsPage = new AppointmentsPage(driver);
         providerMessagesPage = new ProviderMessagesPage(driver);
+        appointmentSettingPage = new AppointmentSettingPage(driver);
     }
 
     @After("@WEB")
