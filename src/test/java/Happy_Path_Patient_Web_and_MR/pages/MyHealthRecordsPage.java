@@ -97,8 +97,8 @@ public class MyHealthRecordsPage extends BasePage {
     protected String strPrescriptionsIconContentLocator = new StringBuilder()
             .append("//td[text()='")
             .append("<<REPLACEMENT1>>").append("']/following-sibling::td[text()='")
-            .append("<<REPLACEMENT2>>").append("']/following-sibling::td[text()='")
-            .append("<<REPLACEMENT3>>").append("']/following-sibling::td[text()='")
+            .append("<<REPLACEMENT2>>").append("']/following-sibling::td[contains(text(),'")
+            .append("<<REPLACEMENT3>>").append("')]/following-sibling::td[text()='")
             .append("<<REPLACEMENT4>>").append("']/following-sibling::td[text()='")
             .append("<<REPLACEMENT5>>").append("']/following-sibling::td//following-sibling::span[@class=\"mat-ripple mat-button-ripple\"]").toString();
 
@@ -1736,6 +1736,7 @@ jsScrollIntoView(elmntClinicianNotes);
             waitForSeconds(3);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(elmntRecalls);
             waitForSeconds(2);
             waitForElementClickable(elmntRecalls);
