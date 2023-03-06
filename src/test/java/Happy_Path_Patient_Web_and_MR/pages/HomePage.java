@@ -116,6 +116,12 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'hamburger')]")
     protected WebElement btnHamburgerIcon;
 
+    @FindBy (how = How.XPATH, using = "//span[text()='Appointments']")
+    protected WebElement elmntAppointment;
+
+    @FindBy (how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT')]")
+    protected WebElement elmntPatientBookAppointment;
+
     @FindBy(how = How.XPATH, using = "//h3[text()=' Future Appointments']")
     protected WebElement elmntFutureAppointments;
 
@@ -436,16 +442,22 @@ public class HomePage extends BasePage {
     }
 
     public boolean clickDashBoard() {
-        waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        waitForSeconds(2);
-        jsScrollIntoView(elmntDashboard);
-        waitForElement(elmntDashboard);
-        jsClick(elmntDashboard);
-        waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        waitForSeconds(3);
-        driver.navigate().refresh();
-        waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        return verifyElement(elmntVerifyHomePage);
+        boolean isVerified = false;
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            System.out.println("Successfully enter Dasboard");
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(2);
+            jsScrollIntoView(elmntDashboard);
+            waitForElement(elmntDashboard);
+            jsClick(elmntDashboard);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(3);
+            driver.navigate().refresh();
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntVerifyHomePage);
+            isVerified = verifyElement(elmntVerifyHomePage);
+        }
+        return isVerified;
     }
 
     public boolean clickLogoutButton() {
@@ -521,6 +533,21 @@ public class HomePage extends BasePage {
         }
         return blResult;
 
+    }
+
+    public boolean clickPatientBookAppointment(){
+        boolean blresult = false;
+        try{
+            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementClickable(elmntAppointment);
+            jsClick(elmntAppointment);
+            waitForElement(elmntPatientBookAppointment);
+            click(elmntPatientBookAppointment);
+            blresult = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return blresult;
     }
 }
 

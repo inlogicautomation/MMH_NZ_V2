@@ -877,11 +877,7 @@ public class ProviderWebSteps {
 
     }
 
-    @And("I enable RuleA Radio button and I click save button then I see Saved Successfully message")
-    public void iEnableRuleARadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage() {
-        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleAButton());
 
-    }
 
     @When("I navigate to Book Appointment select any provider with any Location")
     public void iNavigateToBookAppointmentSelectAnyProviderWithAnyLocation() {
@@ -889,16 +885,19 @@ public class ProviderWebSteps {
 
     }
 
-    @And("I navigate to Book Appointment select Default Location with Default Provider")
-    public void iNavigateToBookAppointmentSelectDefaultLocationWithDefaultProvider() {
-                Assert.assertTrue(providerPageContainer.homePage.clickDashBoard());
-        Assert.assertTrue(providerPageContainer.providerHomePage.clickPatientBookAppointment());
 
+
+
+
+    @And("I enable RuleA Radio button and I click save button then I see Saved Successfully message{string}")
+    public void iEnableRuleARadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleAButton());
     }
 
-    @And("I navigate to Book Appointment select Default Location with Any Provider")
-    public void iNavigateToBookAppointmentSelectDefaultLocationWithAnyProvider() {
-        Assert.assertTrue(providerPageContainer.homePage.clickDashBoard());
-        Assert.assertTrue(providerPageContainer.providerHomePage.clickPatientBookAppointment());
+    @And("I enable RuleB Radio button and I click save button then I see Saved Successfully message{string}")
+    public void iEnableRuleBRadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleBButton());
     }
 }

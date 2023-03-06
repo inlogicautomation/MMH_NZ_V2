@@ -57,7 +57,7 @@ public class ProviderHomePage extends BasePage {
     @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]")
     protected WebElement txtWelcome;
 
-    @FindBy(xpath = "//h1[contains(text(),'Welcome ')]//span[contains(text(),'Harry Harry!')]")
+    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Harry Harry!')]")
     protected WebElement txtHarryHarryWelcome;
 
     @FindBy(how = How.XPATH, using = "//a/span[contains(text(),'Dashboard')]")
@@ -444,7 +444,7 @@ public class ProviderHomePage extends BasePage {
     @FindBy (how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT']")
     protected WebElement elmntBookAppointment;
 
-    @FindBy (how = How.XPATH, using = "//span[text()='Book Appointment']")
+    @FindBy (how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT')]")
     protected WebElement elmntPatientBookAppointment;
 
 
@@ -596,7 +596,7 @@ public class ProviderHomePage extends BasePage {
         try{
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             waitForElementClickable(elmntAppointment);
-            click(elmntAppointment);
+            jsClick(elmntAppointment);
             waitForElement(elmntPatientBookAppointment);
             click(elmntPatientBookAppointment);
             blresult = true;
@@ -672,13 +672,13 @@ public class ProviderHomePage extends BasePage {
         boolean blResult = false;
         try {
 //            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            if (isElementDisplayed(txtHarryHarryWelcome)) {
+            if (verifyElement(txtHarryHarryWelcome)) {
                 verifyElement(elmntDashboard);
                 waitForElementClickable(elmntDashboard);
                 jsClick(elmntDashboard);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
-                waitForElement(txtWelcome);
-                blResult = verifyElement(txtWelcome);
+                waitForElement(txtHarryHarryWelcome);
+                blResult = verifyElement(txtHarryHarryWelcome);
             }else {
                 focusWindow(2);
                 jsScrollIntoView(elmntDashboard);
@@ -686,7 +686,7 @@ public class ProviderHomePage extends BasePage {
                 jsClick(elmntDashboard);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 refreshPage();
-                blResult =verifyElement(txtWelcome);
+                blResult =verifyElement(txtHarryHarryWelcome);
             }
 //            if (!isElementDisplayed(txtWelcome)) {
 //                focusWindow(2);
