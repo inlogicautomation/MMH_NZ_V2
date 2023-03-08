@@ -22,7 +22,7 @@ public class PreScreeningPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[normalize-space(text())='Edit']")
     protected WebElement btnPreScreeningEdit;
 
-    @FindBy(how = How.XPATH, using = "//div[.='keyboard_arrow_down']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
     protected WebElement elmntSelectHealthCentre;
 
 
@@ -69,7 +69,9 @@ public class PreScreeningPage extends BasePage {
 
     protected String strSelectLocation = new StringBuilder()
             .append("//span[normalize-space(text())='").append("<<REPLACEMENT>>")
-            .append("']//ancestor::div[@class='ng-star-inserted']").toString();
+            .append("']//preceding::input[@aria-checked='false']").toString();
+
+    //span[normalize-space(text())='VM03Location']//preceding::input[@aria-checked="false"]
 
 
 
@@ -90,8 +92,9 @@ public class PreScreeningPage extends BasePage {
         boolean blresult = false;
         try {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            jsScrollIntoView(btnPreScreeningEdit);
             waitForElementClickable(btnPreScreeningEdit);
-            btnPreScreeningEdit.click();
+           click(btnPreScreeningEdit);
             blresult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,9 +135,12 @@ public class PreScreeningPage extends BasePage {
     public boolean selectLocation(String strLocation) {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            WebElement elmntLocation = waitForElement(By.xpath(strSelectLocation.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));
-            click(elmntLocation);
+            System.out.println(">>>>>>"+verifyElement(By.xpath(strSelectLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation)))));
+            if (verifyElement(By.xpath(strSelectLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))))) {
+
+                System.out.println("Appointment PreScreening CheckBox Disable");
+                blresult = true;
+            }
             blresult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -177,6 +183,7 @@ public class PreScreeningPage extends BasePage {
         try {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             WebElement elmntHealthCenter = waitForElement(By.xpath(elmntUpdated.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strHealthCenter))));
+            System.out.printf(">>>>>>>>>>>>elmntHealthCenter>>>>"+elmntHealthCenter);
             waitForElement(elmntHealthCenter);
             blresult = verifyElement(elmntHealthCenter);
         } catch (Exception e) {

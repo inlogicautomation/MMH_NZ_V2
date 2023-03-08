@@ -493,11 +493,15 @@ public class ProviderWebSteps {
 
     @And("I click Edit button to select {string} and {string}")
     public void iClickEditButtonToSelectAnd(String strHealthCentre, String strLocation) {
-
+        List<String>strtestdata=TestDataUtil.getListOfValue(strLocation);
         Assert.assertTrue(providerPageContainer.preScreeningPage.clickPreScreeningEdit());
         Assert.assertTrue(providerPageContainer.preScreeningPage.clickHealthCentreDropDown());
         Assert.assertTrue(providerPageContainer.preScreeningPage.selectHealthCentre(strHealthCentre));
-        Assert.assertTrue(providerPageContainer.preScreeningPage.selectLocation(strLocation));
+        for (String strdata:strtestdata) {
+            System.out.println(">>>>>>>strdata"+strdata);
+            Assert.assertTrue(providerPageContainer.preScreeningPage.selectLocation(TestDataUtil.getValue(strdata)));
+        }
+
         Assert.assertTrue(providerPageContainer.preScreeningPage.clickUpdateButton());
         Assert.assertTrue(providerPageContainer.preScreeningPage.verifyUpdates(strHealthCentre));
         Assert.assertTrue(providerPageContainer.preScreeningPage.clickCloseButton());

@@ -441,7 +441,7 @@ public class ProviderHomePage extends BasePage {
     @FindBy (how = How.XPATH, using = "//span[text()='Appointments']")
     protected WebElement elmntAppointment;
 
-    @FindBy (how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT']")
+    @FindBy (how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT')]")
     protected WebElement elmntBookAppointment;
 
     @FindBy (how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT')]")
