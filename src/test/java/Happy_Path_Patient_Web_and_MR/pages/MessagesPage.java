@@ -226,7 +226,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='Subject']")
     protected WebElement txtGroupBoxSubject;
 
-    @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']//p")
+    @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']")
     protected WebElement txtgroupmessage;
 
     @FindBy(how = How.XPATH, using = "//kendo-editor[@formcontrolname='MessageBody']")
@@ -420,6 +420,9 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='k-editor-content ng-star-inserted']/descendant::iframe")
     protected WebElement btnFocusFrame;
 
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Save as Draft')])[1]")
+    protected WebElement btnSaveandDraft;
+
 
     @FindBy(how = How.XPATH, using = "(//kendo-toolbar[@role='toolbar'])[1]")
     protected WebElement signatureToolbarHeader;
@@ -526,7 +529,7 @@ public class MessagesPage extends BasePage {
     protected String elmntTo = new StringBuilder().append("//span[@class='mat-option-text'][contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='Subject'])[2]")
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='Subject'])[1]")
     protected WebElement txtBoxReplySubject;
 
     @FindBy(how = How.XPATH, using = "//mat-checkbox[not(contains(@class,'mat-checkbox-checked'))][@formcontrolname='termsconditions']/label/div")
@@ -3733,10 +3736,13 @@ public class MessagesPage extends BasePage {
             if (verifyElement(btnFocusFrame)) {
                 driver.switchTo().frame(btnFocusFrame);
             }
+//            jsScrollIntoView(btnSaveandDraft);
+            jsScrollDown();
+            waitForSeconds(2);
             WebElement bodyMessage = waitForElement(By.xpath(txtBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(lstDetails))));
             System.out.println("X-Path for txtBodyMessageForMobile >>> :: " + txtBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(lstDetails)));
             takeScreenshot(driver);
-            jsScrollDown();
+//            jsScrollDown();
             jsScrollIntoView(bodyMessage);
             blResult = verifyElement(bodyMessage);
             driver.switchTo().defaultContent();

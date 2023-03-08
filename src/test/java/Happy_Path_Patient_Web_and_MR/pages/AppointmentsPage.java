@@ -81,7 +81,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
     protected WebElement elmntHealtCenter;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Future Appointments')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Future appointments')]")
     protected WebElement elmntfuturetab;
 
     @FindBy(how = How.XPATH, using = "(//div[@class='toast toast-warning'])[1]")
@@ -2198,7 +2198,7 @@ public class AppointmentsPage extends BasePage {
 
             String strConvertedTime = strTime;
 
-//            strConvertedTime = "0" + strConvertedTime;
+            strConvertedTime = "0" + strConvertedTime;
 
             String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
 

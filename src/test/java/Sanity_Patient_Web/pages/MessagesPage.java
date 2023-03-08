@@ -1334,6 +1334,7 @@ public class MessagesPage extends BasePage {
 //            Select healthCentre = new Select(driver.findElement(By.xpath("//mat-select[@formcontrolname='serviceName']")));
 //            healthCentre.selectByVisibleText(strServiceName);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyDrop.replace("<<REPLACEMENT>>", strServiceName)));
+            jsScrollIntoView(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
 
 

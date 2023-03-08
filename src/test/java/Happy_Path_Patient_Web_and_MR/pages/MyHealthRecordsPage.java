@@ -1135,6 +1135,7 @@ public class MyHealthRecordsPage extends BasePage {
 //            jsScrollIntoView(elmntClinicalNotes);
 //            waitForElementClickable(elmntClinicalNotes);
 //            jsClick(elmntClinicalNotes);
+            waitForSeconds(3);
 jsScrollIntoView(elmntClinicianNotes);
             WebElement elmntEntriesFromHealthCentre = waitForElementClickable(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strdata)));
             jsScrollIntoView(elmntEntriesFromHealthCentre);
@@ -1389,6 +1390,7 @@ jsScrollIntoView(elmntClinicianNotes);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
+            waitForSeconds(3);
             jsScrollIntoView(elmntLabResults);
             waitForElementClickable(elmntLabResults);
             jsClick(elmntLabResults);

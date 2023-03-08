@@ -566,9 +566,10 @@ public class ViewJournal extends BasePage {
     }
 
     public boolean clickYesButton() {
-        waitForSeconds(3);
+//        waitForSeconds(3);
+        waitForElement(btnBloodPressureyes);
         waitForElementClickable(btnBloodPressureyes);
-        jsClick(btnBloodPressureyes);
+        mouseClick(btnBloodPressureyes);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         waitForElement(elmtsViewJournal);
