@@ -792,8 +792,8 @@ public class AppointmentsPage extends BasePage {
         boolean blresult = false;
         try{
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-waitForElement(VerifyZeroPayments);
-verifyElement(VerifyZeroPayments);
+            waitForElement(VerifyZeroPayments);
+            verifyElement(VerifyZeroPayments);
             System.out.println("Successfully verify Zero Payments");
             blresult = true;
         }catch (Exception e){
@@ -807,27 +807,32 @@ verifyElement(VerifyZeroPayments);
         boolean blresult = false;
         try{
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElementClickable(elmntLocationCenter);
-            waitForSeconds(2);
+            waitForElement(elmntLocationCenter);
             jsClick(elmntLocationCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(8)))));
             System.out.println("elmntSelectLocation"+elmntSelectLocation);
             verifyElement(elmntSelectLocation);
+            click(elmntSelectLocation);
+            waitForElement(elmntLocationCenter);
+            jsClick(elmntLocationCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectLocation2 = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(9)))));
-            System.out.println("elmntSelectLocation2"+elmntSelectLocation2);
-            if (isElementDisplayed(elmntSelectLocation2)){
+            if (verifyElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(9)))))) {
+                WebElement elmntSelectLocation2 = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(9)))));
+                verifyElement(elmntSelectLocation2);
+                click(elmntSelectLocation2);
                 System.out.println("Successfully Verfied the Rule A");
+                blresult = true;
             }
-           else {
-                System.out.println("Successfully Verfied the Rule B");
+            if (!verifyElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(9)))))) {
 
+                System.out.println("Successfully Verfied the Rule B");
             }
-            System.out.println("Successfully verify the Patient Location");
+
+//            System.out.println("Successfully verify the Patient Location");
             blresult = true;
         }catch (Exception e){
-            System.out.println("Cannot verify the Patient Location");
+            System.out.println("Cannot verify the verify Patient visit Appointments Location");
             e.printStackTrace();
         }
         return blresult;
@@ -838,17 +843,29 @@ verifyElement(VerifyZeroPayments);
         try{
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntLocationCenter);
-            waitForSeconds(2);
             jsClick(elmntLocationCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(10)))));
             System.out.println("elmntSelectLocation"+elmntSelectLocation);
             verifyElement(elmntSelectLocation);
+            click(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectLocation2 = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(11)))));
-            System.out.println("elmntSelectLocation2"+elmntSelectLocation2);
-            verifyElement(elmntSelectLocation2);
-            System.out.println("Successfully verify the Patient Location");
+//            WebElement elmntSelectLocation2 = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(11)))));
+//            System.out.println("elmntSelectLocation2"+elmntSelectLocation2);
+//            verifyElement(elmntSelectLocation2);
+            if (verifyElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(11)))))) {
+                WebElement elmntSelectLocation2 = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(11)))));
+                verifyElement(elmntSelectLocation2);
+                click(elmntSelectLocation2);
+                System.out.println("Successfully Verfied the Rule A");
+                blresult = true;
+            }
+            if (!verifyElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(11)))))) {
+
+                System.out.println("Successfully Verfied the Rule B");
+                blresult = true;
+            }
+
             blresult = true;
         }catch (Exception e){
             System.out.println("Cannot verify the Patient Location");
@@ -862,16 +879,30 @@ verifyElement(VerifyZeroPayments);
         try{
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntLocationCenter);
-            waitForSeconds(2);
             jsClick(elmntLocationCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(9)))));
             System.out.println("elmntSelectLocation"+elmntSelectLocation);
             verifyElement(elmntSelectLocation);
+            click(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectLocation2 = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(10)))));
-            System.out.println("elmntSelectLocation2"+elmntSelectLocation2);
-            verifyElement(elmntSelectLocation2);
+//            WebElement elmntSelectLocation2 = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(10)))));
+//            System.out.println("elmntSelectLocation2"+elmntSelectLocation2);
+//            verifyElement(elmntSelectLocation2);
+            waitForElementClickable(elmntLocationCenter);
+            click(elmntLocationCenter);
+            if (verifyElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(11)))))) {
+                WebElement elmntSelectLocation2 = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(11)))));
+                verifyElement(elmntSelectLocation2);
+                click(elmntSelectLocation2);
+                System.out.println("Successfully Verfied the Rule A");
+                blresult = true;
+            }
+            if (!verifyElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(11)))))) {
+
+                System.out.println("Successfully Verfied the Rule B");
+                blresult = true;
+            }
             System.out.println("Successfully verify the Patient Location");
             blresult = true;
         }catch (Exception e){

@@ -770,8 +770,6 @@ public class RepeatPrescription extends BasePage {
         try {
             System.out.println("SelectScriptDropDownDetails>>>>>" + SelectScriptDropDownDetails);
             waitForSeconds(3);
-
-            waitForSeconds(2);
             for (String str : SelectScriptDropDownDetails) {
                 waitForElementClickable(drpdownUrgrency);
                 jsClick(drpdownUrgrency);
@@ -782,8 +780,6 @@ public class RepeatPrescription extends BasePage {
                 waitForSeconds(3);
                 jsClick(SelectScriptDetails);
             }
-
-
             blResult = true;
 
         } catch (Exception e) {

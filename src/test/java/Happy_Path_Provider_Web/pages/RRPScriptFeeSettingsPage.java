@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 
 import java.util.List;
 
@@ -52,6 +53,33 @@ public class RRPScriptFeeSettingsPage extends BasePage {
 
     @FindBy(xpath = "//mat-checkbox[@class='mat-checkbox mat-accent ng-valid ng-dirty ng-touched']//child::input")
     protected WebElement  elmntUnCheckBox;
+
+
+    @FindBy(how = How.XPATH, using = "(//b[.='Deliver via Zoom Pharmacy']/following::input/following::textarea)[1]")
+    protected WebElement txtDeliveryViaZoomPharmacyUrgentSameDayDescription;
+
+    @FindBy(how = How.XPATH, using = "(//b[.='Deliver Meds by Pharmacy']/following::input/following::textarea)[1]")
+    protected WebElement txtDeliveryMedsByPharmacyUrgentSameDayDescription;
+
+
+    @FindBy(how = How.XPATH, using = "(//b[.='Deliver via Zoom Pharmacy']/following::input/following::textarea)[2]")
+    protected WebElement txtDeliveryViaZoomPharmacyNextDayDescription;
+
+    @FindBy(how = How.XPATH, using = "(//b[.='Deliver Meds by Pharmacy']/following::input/following::textarea)[2]")
+    protected WebElement txtDeliveryMedsByPharmacyNextDayDescription;
+
+
+    @FindBy(how = How.XPATH, using = "(//b[.='Deliver via Zoom Pharmacy']/following::input/following::textarea)[3]")
+    protected WebElement txtDeliveryViaZoomPharmacy48HoursDescription;
+
+    @FindBy(how = How.XPATH, using = "(//b[.='Deliver Meds by Pharmacy']/following::input/following::textarea)[3]")
+    protected WebElement txtDeliveryMedsByPharmacy48HoursDescription;
+
+    @FindBy(how = How.XPATH, using = "(//b[.='Deliver via Zoom Pharmacy']/following::input/following::textarea)[4]")
+    protected WebElement txtDeliveryViaZoomPharmacy72HoursDescription;
+
+    @FindBy(how = How.XPATH, using = "(//b[.='Deliver Meds by Pharmacy']/following::input/following::textarea)[4]")
+    protected WebElement txtDeliveryMedsByPharmacy72HoursDescription;
 
 
     @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Urgent/Same day'])[1]")
@@ -176,7 +204,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Urgent/Same day'])[1]")
     protected WebElement getElmntDeliverMedsByPharmacyUrgentSameday;
 
-    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Fee'])[1]")
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='STD'])[1]")
     protected WebElement getElmntDeliverMedsByPharmacyUrgentSamedayFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[14]")
@@ -185,7 +213,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Next Day'])[1]")
     protected WebElement elmntDeliverMedsPharmacyNextDayServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Fee'])[2]")
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='STD'])[2]")
     protected WebElement elmntDeliverMedsByToPharmacyNextDayFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[15]")
@@ -194,7 +222,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='48 Hours'])[1]")
     protected WebElement elmntDeliverMedsByPharmacy48HoursServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Fee'])[3]")
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='STD'])[3]")
     protected WebElement elmntDeliverMedsByPharmacy48HoursFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[16]")
@@ -203,43 +231,43 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='72 Hours'])[1]")
     protected WebElement elmntDeliverMedsByPharmacy72HoursServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Fee'])[4]")
+    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='STD'])[4]")
     protected WebElement elmntDeliverMedsByPhamacy72HoursFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[17]")
     protected WebElement elmntDeliverViaZoomPharmacyCheckBox;
 
-    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='Urgent/Same day'])[1]")
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input)[1]")
     protected WebElement getElmntDeliverViaZoomPharmacyUrgentSameday;
 
-    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='Fee'])[1]")
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='STD'])[1]")
     protected WebElement getElmntDeliverViaZoomPharmacyUrgentSamedayFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[18]")
     protected WebElement elmntDeliverViaZoomPharmacyNextDayCheckBox;
 
-    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='Next Day'])[1]")
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input)[6]")
     protected WebElement elmntDeliverViaZoomPharmacyNextDayServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='Fee'])[2]")
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='STD'])[2]")
     protected WebElement elmntDeliverViaZoomPharmacyNextDayFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[19]")
     protected WebElement elmntDeliverViaZoomPharmacy48HoursCheckBox;
 
-    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='48 Hours'])[1]")
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input)[11]")
     protected WebElement elmntDeliverViaZoomPharmacy48HoursServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='Fee'])[3]")
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='STD'])[3]")
     protected WebElement elmntDeliverViaZoomPharmacy48HoursFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[20]")
     protected WebElement elmntDeliverViaZoomPharmacy72HoursCheckBox;
 
-    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='72 Hours'])[1]")
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input)[16]")
     protected WebElement elmntDeliverViaZoomPharmacy72HoursServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Deliver Meds by Pharmacy')]//following::input[@data-placeholder='Fee'])[4]")
+    @FindBy(xpath = "(//b[contains(text(),'Deliver via Zoom Pharmacy')]//following::input[@data-placeholder='STD'])[4]")
     protected WebElement elmntDeliverViaZoomPhamacy72HoursFee;
 
 
@@ -327,7 +355,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
           return true;
     }
 
-    public boolean clickServiceOptionUrgentSameday(String strConditionName) {
+    public boolean EnterServiceOptionUrgentSameday(String strConditionName) {
         SystolicMedicationName = strConditionName.concat(strExecutionID);
         waitForSeconds(5);
 //        jsScrollIntoView(elmntUrgentSamedayServiceoption);
@@ -854,7 +882,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
         return verifyElement(getElmntDeliverViaZoomPharmacyUrgentSameday);
     }
 
-    public boolean clickDeliverViaZoomPharamacyFeeUrgentSameday(String strConditionName) {
+    public boolean EnterDeliverViaZoomPharamacyFeeUrgentSameday(String strConditionName) {
 //        SystolicMedicationName = strConditionName.concat(strExecutionID);
         waitForSeconds(2);
         waitForElementClickable(getElmntDeliverViaZoomPharmacyUrgentSamedayFee);
@@ -876,7 +904,43 @@ public class RRPScriptFeeSettingsPage extends BasePage {
         return true;
     }
 
-    public boolean clickDeliverViaZoomPharmacyServiceOptionNextDay(String strConditionName) {
+    public boolean selectDeliveryViaZoomPharmacyUrgentSameDayDescription(String strDescription) {
+        boolean blResult = false;
+        try {
+//            waitForElement(txtDeliveryViaZoomPharmacyUrgentSameDayDescription);
+            String firstServiceOptionDescriptionText = "Description value "+ strDescription;
+            System.out.println("UrgentSameDay Description data    " + firstServiceOptionDescriptionText);
+            jsScrollIntoView(txtDeliveryViaZoomPharmacyUrgentSameDayDescription);
+            jsClick(txtDeliveryViaZoomPharmacyUrgentSameDayDescription);
+            enterValue(txtDeliveryViaZoomPharmacyUrgentSameDayDescription, firstServiceOptionDescriptionText);
+            blResult = verifyElement(txtDeliveryViaZoomPharmacyUrgentSameDayDescription);
+        } catch (Exception e) {
+            System.out.println("Not able to add the Delivery Via ZoomPharmacy UrgentSameDay Description>>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectDeliveryMedsByPharmacyUrgentSameDayDescription(String strDescription) {
+        boolean blResult = false;
+        try {
+//            waitForElement(txtDeliveryViaZoomPharmacyUrgentSameDayDescription);
+            String firstServiceOptionDescriptionText = "Description value "+ strDescription;
+            System.out.println("UrgentSameDay Description data    " + firstServiceOptionDescriptionText);
+            jsScrollIntoView(txtDeliveryMedsByPharmacyUrgentSameDayDescription);
+            jsClick(txtDeliveryMedsByPharmacyUrgentSameDayDescription);
+            enterValue(txtDeliveryMedsByPharmacyUrgentSameDayDescription, firstServiceOptionDescriptionText);
+            blResult = verifyElement(txtDeliveryMedsByPharmacyUrgentSameDayDescription);
+        } catch (Exception e) {
+            System.out.println("Not able to add the Delivery Via ZoomPharmacy UrgentSameDay Description>>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+
+
+    public boolean EnterDeliverViaZoomPharmacyServiceOptionNextDay(String strConditionName) {
         SystolicMedicationName = strConditionName.concat(strExecutionID);
         waitForSeconds(2);
         waitForElementClickable(elmntDeliverViaZoomPharmacyNextDayServiceoption);
@@ -886,7 +950,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     }
 
 
-    public boolean clickDeliverViaZoomPharmacyNextDayFee(String strConditionName) {
+    public boolean EnterDeliverViaZoomPharmacyNextDayFee(String strConditionName) {
 //        SystolicMedicationName = strConditionName.concat(strExecutionID);
         waitForSeconds(2);
         waitForElementClickable(elmntDeliverViaZoomPharmacyNextDayFee);
@@ -909,7 +973,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
         return true;
     }
 
-    public boolean clickDeliverViaZoomPharmacyServiceOption48Hours(String strConditionName) {
+    public boolean EnterDeliverViaZoomPharmacyServiceOption48Hours(String strConditionName) {
         SystolicMedicationName = strConditionName.concat(strExecutionID);
         waitForSeconds(2);
         waitForElementClickable(elmntDeliverViaZoomPharmacy48HoursServiceoption);
@@ -918,7 +982,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
         return verifyElement(elmntDeliverViaZoomPharmacy48HoursServiceoption);
     }
 
-    public boolean clickDeliverViaZoomPharmacy48HoursFee(String strConditionName) {
+    public boolean EnterDeliverViaZoomPharmacy48HoursFee(String strConditionName) {
 //        SystolicMedicationName = strConditionName.concat(strExecutionID);
         waitForSeconds(2);
         waitForElementClickable(elmntDeliverViaZoomPharmacy48HoursFee);
@@ -940,7 +1004,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
         return true;
     }
 
-    public boolean clickDeliverViaZoomPharmacyServiceOption72Hours(String strConditionName) {
+    public boolean EnterDeliverViaZoomPharmacyServiceOption72Hours(String strConditionName) {
         SystolicMedicationName = strConditionName.concat(strExecutionID);
         waitForSeconds(2);
         waitForElementClickable(elmntDeliverViaZoomPharmacy72HoursServiceoption);
@@ -949,13 +1013,115 @@ public class RRPScriptFeeSettingsPage extends BasePage {
         return verifyElement(elmntDeliverViaZoomPharmacy72HoursServiceoption);
     }
 
-    public boolean clickDeliverViaZoomPharmacy72HoursFee(String strConditionName) {
+    public boolean EnterDeliverViaZoomPharmacy72HoursFee(String strConditionName) {
 //        SystolicMedicationName = strConditionName.concat(strExecutionID);
         waitForSeconds(2);
         waitForElementClickable(elmntDeliverViaZoomPhamacy72HoursFee);
         enterValue(elmntDeliverViaZoomPhamacy72HoursFee, strConditionName);
         waitForSeconds(3);
         return verifyElement(elmntDeliverViaZoomPhamacy72HoursFee);
+    }
+
+    public boolean selectDeliveryViaZoomPharmacyNextDayDescription(String strDescription) {
+        boolean blResult = false;
+        try {
+//            waitForElement(txtDeliveryViaZoomPharmacyUrgentSameDayDescription);
+            String firstServiceOptionDescriptionText = "Description value "+ strDescription;
+            System.out.println("UrgentSameDay Description data    " + firstServiceOptionDescriptionText);
+            jsScrollIntoView(txtDeliveryViaZoomPharmacyNextDayDescription);
+//            jsClick(txtDeliveryViaZoomPharmacyNextDayDescription);
+            enterValue(txtDeliveryViaZoomPharmacyNextDayDescription, firstServiceOptionDescriptionText);
+            blResult = verifyElement(txtDeliveryViaZoomPharmacyNextDayDescription);
+        } catch (Exception e) {
+            System.out.println("Not able to add the Delivery Via ZoomPharmacy UrgentSameDay Description>>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectDeliveryMedsByPharmacyNextDayDescription(String strDescription) {
+        boolean blResult = false;
+        try {
+//            waitForElement(txtDeliveryViaZoomPharmacyUrgentSameDayDescription);
+            String firstServiceOptionDescriptionText = "Description value "+ strDescription;
+            System.out.println("UrgentSameDay Description data    " + firstServiceOptionDescriptionText);
+            jsScrollIntoView(txtDeliveryMedsByPharmacyNextDayDescription);
+//            jsClick(txtDeliveryViaZoomPharmacyNextDayDescription);
+            enterValue(txtDeliveryMedsByPharmacyNextDayDescription, firstServiceOptionDescriptionText);
+            blResult = verifyElement(txtDeliveryMedsByPharmacyNextDayDescription);
+        } catch (Exception e) {
+            System.out.println("Not able to add the Delivery Via ZoomPharmacy UrgentSameDay Description>>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectDeliveryViaZoomPharmacy48HoursDescription(String strDescription) {
+        boolean blResult = false;
+        try {
+//            waitForElement(txtDeliveryViaZoomPharmacyUrgentSameDayDescription);
+            String firstServiceOptionDescriptionText = "Description value "+ strDescription;
+            System.out.println("UrgentSameDay Description data    " + firstServiceOptionDescriptionText);
+            jsScrollIntoView(txtDeliveryViaZoomPharmacy48HoursDescription);
+//            jsClick(txtDeliveryViaZoomPharmacyNextDayDescription);
+            enterValue(txtDeliveryViaZoomPharmacy48HoursDescription, firstServiceOptionDescriptionText);
+            blResult = verifyElement(txtDeliveryViaZoomPharmacy48HoursDescription);
+        } catch (Exception e) {
+            System.out.println("Not able to add the Delivery Via ZoomPharmacy UrgentSameDay Description>>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectDeliveryMedsByPharmacy48HoursDescription(String strDescription) {
+        boolean blResult = false;
+        try {
+//            waitForElement(txtDeliveryViaZoomPharmacyUrgentSameDayDescription);
+            String firstServiceOptionDescriptionText = "Description value "+ strDescription;
+            System.out.println("UrgentSameDay Description data    " + firstServiceOptionDescriptionText);
+            jsScrollIntoView(txtDeliveryMedsByPharmacy48HoursDescription);
+//            jsClick(txtDeliveryViaZoomPharmacyNextDayDescription);
+            enterValue(txtDeliveryMedsByPharmacy48HoursDescription, firstServiceOptionDescriptionText);
+            blResult = verifyElement(txtDeliveryMedsByPharmacy48HoursDescription);
+        } catch (Exception e) {
+            System.out.println("Not able to add the Delivery Via ZoomPharmacy UrgentSameDay Description>>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectDeliveryViaZoomPharmacy72HoursDescription(String strDescription) {
+        boolean blResult = false;
+        try {
+//            waitForElement(txtDeliveryViaZoomPharmacyUrgentSameDayDescription);
+            String firstServiceOptionDescriptionText = "Description value "+ strDescription;
+            System.out.println("UrgentSameDay Description data    " + firstServiceOptionDescriptionText);
+            jsScrollIntoView(txtDeliveryViaZoomPharmacy72HoursDescription);
+//            jsClick(txtDeliveryViaZoomPharmacyNextDayDescription);
+            enterValue(txtDeliveryViaZoomPharmacy72HoursDescription, firstServiceOptionDescriptionText);
+            blResult = verifyElement(txtDeliveryViaZoomPharmacy72HoursDescription);
+        } catch (Exception e) {
+            System.out.println("Not able to add the Delivery Via ZoomPharmacy UrgentSameDay Description>>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectDeliveryMedsByPharmacy72HoursDescription(String strDescription) {
+        boolean blResult = false;
+        try {
+//            waitForElement(txtDeliveryViaZoomPharmacyUrgentSameDayDescription);
+            String firstServiceOptionDescriptionText = "Description value "+ strDescription;
+            System.out.println("UrgentSameDay Description data    " + firstServiceOptionDescriptionText);
+            jsScrollIntoView(txtDeliveryMedsByPharmacy72HoursDescription);
+//            jsClick(txtDeliveryViaZoomPharmacyNextDayDescription);
+            enterValue(txtDeliveryMedsByPharmacy72HoursDescription, firstServiceOptionDescriptionText);
+            blResult = verifyElement(txtDeliveryMedsByPharmacy72HoursDescription);
+        } catch (Exception e) {
+            System.out.println("Not able to add the Delivery Via ZoomPharmacy UrgentSameDay Description>>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
     }
 
 

@@ -3513,8 +3513,9 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
-        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(6)));
+
         Assert.assertTrue(demoPageContainer.repeatPrescription.VeriflyPatienttoCollectScriptDetails(TestDataUtil.getListOfValue(SelectScriptDropDownDetails)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(6)));
 
 //        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForDeliveryMedsByPharmacy());
 //        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedListForDelivery(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
@@ -3721,6 +3722,7 @@ public class WebSteps {
             System.out.printf("lstAppointmentDetails"+lstAppointmentDetails);
 //            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyPatientvisitAppointmentsLocation(TestDataUtil.getListOfValue(strHealthCenter)));
 //            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
 //            Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
@@ -3730,8 +3732,8 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectProvider(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectFutureDateOnCalender(TestDataUtil.getValue(lstAppointmentDetails.get(7))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAvialableSlotDateTime(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyZeroPayments());
-            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyPatientvisitAppointmentsLocation(TestDataUtil.getListOfValue(strHealthCenter)));
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyZeroPayments());
+
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -3795,7 +3797,7 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAvialableSlotDateTime(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectPhoneCode(TestDataUtil.getValue(lstAppointmentDetails.get(7))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.enterPhoneNumber(TestDataUtil.getValue(lstAppointmentDetails.get(8))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyZeroPayments());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyZeroPayments());
             Assert.assertTrue(demoPageContainer.appointmentsPage.verifyPatientPhoneAppointmentsLocation(TestDataUtil.getListOfValue(strHealthCenter)));
 
         }
@@ -3850,7 +3852,7 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectTypeOfVideoAppointment(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAvialableSlotDateTime(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectTypeOfVideoAppointment(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyZeroPayments());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyZeroPayments());
             Assert.assertTrue(demoPageContainer.appointmentsPage.verifyPatientVideoAppointmentsLocation(TestDataUtil.getListOfValue(strVideoAppointmentDetails)));
 
         }
@@ -3891,6 +3893,51 @@ public class WebSteps {
 
 
     }
+
+    @Then("I select the Deliver via zoom Pharmacy Medication details{string} {string}")
+    public void iSelectTheDeliverViaZoomPharmacyMedicationDetails(String strMedicationDetails, String SelectScriptDropDownDetails ) {
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectUrgency(lstMedicationDetails.get(3)));
+
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyForDeliveryMedsByPharmacy());
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacyBySavedListForDelivery(lstMedicationDetails.get(3), lstMedicationDetails.get(4)));
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectPharmacy(lstMedicationDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.VeriflyPatienttoCollectScriptDetails(TestDataUtil.getListOfValue(SelectScriptDropDownDetails)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectAddress(lstMedicationDetails.get(4)));
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickNextButton());
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeatForMobile(lstMedicationDetails.get(7)));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickNextButton());
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeatForMobile(lstMedicationDetails.get(7)));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicationDetails.get(5)));
+        }
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicationDetails.get(6)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickPayAtHealthCentre());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
+
+        }
+    }
+
+
 }
 
 

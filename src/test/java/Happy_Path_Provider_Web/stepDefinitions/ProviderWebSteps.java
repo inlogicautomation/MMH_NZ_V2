@@ -80,7 +80,7 @@ public class ProviderWebSteps {
     public void iClickPatientToCollectScriptCheckboxEnterServiceOptionNameFeesAndDescriptionForAllFourServiceOption(String strdata) {
         List<String> strData = TestDataUtil.getListOfValue(strdata);
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickPatienttoCollectScriptCheckBox());
-        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickServiceOptionUrgentSameday(strData.get(0)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.EnterServiceOptionUrgentSameday(strData.get(0)));
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickFeeUrgentSameday(strData.get(1)));
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickNextDayCheckBox());
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickServiceOptionNextDay(strData.get(2)));
@@ -453,15 +453,19 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverMedsbyPharmacyCheckBox());
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.EnterDeliverMedsByPharmacyUrgentSamedayTextBox(strData.get(0)));
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverMedsByPharamacyFeeUrgentSameday(strData.get(1)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.selectDeliveryMedsByPharmacyUrgentSameDayDescription(strData.get(0)));
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverMedsByPharmacyNextDayCheckBox());
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverMedsByPharmacyServiceOptionNextDay(strData.get(2)));
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverMedsByPharmacyNextDayFee(strData.get(3)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.selectDeliveryMedsByPharmacyNextDayDescription(strData.get(2)));
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverMedsByToPharmacy48HoursCheckBox());
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverMedsByPharmacyServiceOption48Hours(strData.get(4)));
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverMedsByPharmacy48HoursFee(strData.get(5)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.selectDeliveryMedsByPharmacy48HoursDescription(strData.get(4)));
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverMedsByPharmacy72HoursCheckBox());
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverMedsByPharmacyServiceOption72Hours(strData.get(6)));
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverMedsByPharmacy72HoursFee(strData.get(7)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.selectDeliveryMedsByPharmacy72HoursDescription(strData.get(6)));
         Assert.assertTrue(providerPageContainer.providerHomePage.clickSaveButton());
     }
 
@@ -470,16 +474,20 @@ public class ProviderWebSteps {
         List<String>strData=TestDataUtil.getListOfValue(strdata);
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverviaZoomPharmacyCheckBox());
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.EnterDeliverViaZoomPharmacyUrgentSamedayTextBox(strData.get(0)));
-        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverViaZoomPharamacyFeeUrgentSameday(strData.get(1)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.EnterDeliverViaZoomPharamacyFeeUrgentSameday(strData.get(1)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.selectDeliveryViaZoomPharmacyUrgentSameDayDescription(strData.get(0)));
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverViaZoomPharmacyNextDayCheckBox());
-        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverViaZoomPharmacyServiceOptionNextDay(strData.get(2)));
-        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverViaZoomPharmacyNextDayFee(strData.get(3)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.EnterDeliverViaZoomPharmacyServiceOptionNextDay(strData.get(2)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.EnterDeliverViaZoomPharmacyNextDayFee(strData.get(3)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.selectDeliveryViaZoomPharmacyNextDayDescription(strData.get(2)));
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverViaZoomPharmacy48HoursCheckBox());
-        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverViaZoomPharmacyServiceOption48Hours(strData.get(4)));
-        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverViaZoomPharmacy48HoursFee(strData.get(5)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.EnterDeliverViaZoomPharmacyServiceOption48Hours(strData.get(4)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.EnterDeliverViaZoomPharmacy48HoursFee(strData.get(5)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.selectDeliveryViaZoomPharmacy48HoursDescription(strData.get(4)));
         Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverViaZoomPharmacy72HoursCheckBox());
-        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverViaZoomPharmacyServiceOption72Hours(strData.get(6)));
-        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.clickDeliverViaZoomPharmacy72HoursFee(strData.get(7)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.EnterDeliverViaZoomPharmacyServiceOption72Hours(strData.get(6)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.EnterDeliverViaZoomPharmacy72HoursFee(strData.get(7)));
+        Assert.assertTrue(providerPageContainer.rrpScriptFeeSettingsPage.selectDeliveryViaZoomPharmacy72HoursDescription(strData.get(6)));
         Assert.assertTrue(providerPageContainer.providerHomePage.clickSaveButton());
     }
 

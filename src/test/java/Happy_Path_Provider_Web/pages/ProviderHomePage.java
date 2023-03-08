@@ -423,8 +423,8 @@ public class ProviderHomePage extends BasePage {
     @FindBy (how = How.XPATH, using = "//span[text()='Systems Menu']")
     protected WebElement elmntSystemMenu;
 
-    @FindBy (how = How.XPATH, using = "//span[text()='Pre-Screening Settings']")
-    protected WebElement elmntScreeningSettings;
+    @FindBy (how = How.XPATH, using = "//span[text()='Appointment Settings']")
+    protected WebElement elmntAppointmentSettings;
 
     @FindBy (how = How.XPATH, using = "//div[text()='Appointment Message']")
     protected WebElement elmntAppointmentMessage;
@@ -533,10 +533,10 @@ public class ProviderHomePage extends BasePage {
     public boolean clickPreScreeningSettings(){
         boolean blresult = false;
         try{
-            jsScrollIntoView(elmntScreeningSettings);
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            waitForElement(elmntScreeningSettings);
-            click(elmntScreeningSettings);
+            jsScrollIntoView(elmntAppointmentSettings);
+            waitForElement(elmntAppointmentSettings);
+            click(elmntAppointmentSettings);
             blresult = true;
         }catch (Exception e){
             e.printStackTrace();
