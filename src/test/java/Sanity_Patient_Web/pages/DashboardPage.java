@@ -17,6 +17,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 import static Happy_Path_Patient_Web_and_MR.pages.AppointmentsPage.strSlotDate;
+import static cap.utilities.DateUtil.getCurrentDate;
 import static cap.utilities.DateUtil.getCurrentDateByTimeZone;
 
 public class DashboardPage extends BasePage {
@@ -116,7 +117,7 @@ public class DashboardPage extends BasePage {
     protected WebElement txtAppVersion;
 
 
-    @FindBy(how = How.XPATH, using = "(//div[contains(@class,'alert-info')])[2]")
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'alert-info')]")
     protected WebElement elmntUnreadMessage;
 
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'View Previous Requests')]")
@@ -494,9 +495,10 @@ public class DashboardPage extends BasePage {
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntNewMessages);
-            String strCurrentDate = getCurrentDateByTimeZone("dd MMM YYY", "GMT+12");
-            System.out.println("Xpath for Dashboard message >>> :: " + verifyDashboardMessages.replace("<<DATE>>", strCurrentDate).replace("<<DOCTOR_NAME>>", TestDataUtil.getValue(lstDetails.get(0))).replace("<<MESSAGE>>", TestDataUtil.getValue(lstDetails.get(1))));
-            WebElement data = waitForElement(By.xpath(verifyDashboardMessages.replace("<<DATE>>", strCurrentDate).replace("<<DOCTOR_NAME>>", TestDataUtil.getValue(lstDetails.get(0))).replace("<<MESSAGE>>", TestDataUtil.getValue(lstDetails.get(1)))));
+//            String strCurrentDate = getCurrentDateByTimeZone("dd MMM YYY", "GMT+12");
+            String currentDate = getCurrentDate("dd MMM yyyy");
+            System.out.println("Xpath for Dashboard message >>> :: " + verifyDashboardMessages.replace("<<DATE>>", currentDate).replace("<<DOCTOR_NAME>>", TestDataUtil.getValue(lstDetails.get(0))).replace("<<MESSAGE>>", TestDataUtil.getValue(lstDetails.get(1))));
+            WebElement data = waitForElement(By.xpath(verifyDashboardMessages.replace("<<DATE>>", currentDate).replace("<<DOCTOR_NAME>>", TestDataUtil.getValue(lstDetails.get(0))).replace("<<MESSAGE>>", TestDataUtil.getValue(lstDetails.get(1)))));
             waitForElement(data);
             isVerified = verifyElement(data);
             takeScreenshotSanity(driver);

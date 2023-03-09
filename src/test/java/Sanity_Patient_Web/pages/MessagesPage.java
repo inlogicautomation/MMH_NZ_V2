@@ -153,7 +153,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome')])[1]")
     protected WebElement txtMyHomePage;
 
-    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='toUser']")
+    @FindBy(how = How.XPATH, using = "//kendo-autocomplete[@formcontrolname='toUser']//input")
     protected WebElement txtBoxTo;
 
     @FindBy(how = How.XPATH, using = "//a[contains(@id,'GroupMessage1_btnSend')]")
@@ -1334,6 +1334,7 @@ public class MessagesPage extends BasePage {
 //            Select healthCentre = new Select(driver.findElement(By.xpath("//mat-select[@formcontrolname='serviceName']")));
 //            healthCentre.selectByVisibleText(strServiceName);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyDrop.replace("<<REPLACEMENT>>", strServiceName)));
+            System.out.println(">>>>>>>elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
             jsScrollIntoView(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
 
@@ -1374,21 +1375,23 @@ public class MessagesPage extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(2);
+//            waitForSeconds(2);
             waitForElement(txtCompose);
             waitForElementClickable(txtBoxTo);
             click(txtBoxTo);
 //            waitForSeconds(5);
 //            waitForElement(txtMessageBody);
 //            click(txtMessageBody);
-            waitForSeconds(3);
+//            waitForSeconds(3);
             txtBoxTo.sendKeys(strTo);
-            waitForSeconds(6);
-            System.out.println("Xpath for Patient >>> :: " + selectTo.replace("<<REPLACEMENT>>", strTo));
-            WebElement patient = waitForElement(By.xpath(selectTo.replace("<<REPLACEMENT>>", strTo)));
-            waitForElementClickable(patient);
-            jsClick(patient);
-            waitForSeconds(1);
+            waitForSeconds(3);
+            txtBoxTo.sendKeys(Keys.ENTER);
+//            System.out.println("Xpath for Patient >>> :: " + selectTo.replace("<<REPLACEMENT>>", strTo));
+//            WebElement patient = waitForElement(By.xpath(selectTo.replace("<<REPLACEMENT>>", strTo)));
+//            waitForElementClickable(patient);
+//            jsClick(patient);
+
+//            waitForSeconds(1);
             blResult = true;
             System.out.println("\nSuccessfully Entered To>>> :: ");
         } catch (Exception e) {

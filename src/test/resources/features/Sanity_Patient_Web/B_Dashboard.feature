@@ -133,7 +133,7 @@ Feature: Dashboard
 
 
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES @dash
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
   Scenario Template: S3- User successfully login into Doctor Portal
 
     Given As a user Launch the "<V1 Portal>"
@@ -145,7 +145,7 @@ Feature: Dashboard
       | V1 Portal | Email Address      | Password              |
       | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES @dash
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
   Scenario: S3- Preparation for Received Message
 
     Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module
@@ -161,7 +161,7 @@ Feature: Dashboard
     And I log out from Doctor Portal
 
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES @dash
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
   Scenario Template: S1- User Successfully logs in to the V2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -178,7 +178,7 @@ Feature: Dashboard
 #  14	Dashboard	Check Unread message count in New Messages Card
 
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES @dash
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
   Scenario: View latest three New messages received in new message card
 
     Given As a Existing user I am on HomePage and I click Dashboard
@@ -264,7 +264,7 @@ Feature: Dashboard
   Scenario Template: Prep- Canceling all the appointments
 
     Given As a user I am on HomePage
-    And I navigate to the "<Appointment>" page
+    And I navigate to the "<Appointment>" Future Appointments page
     And I canceling all the available appointments
 
     Examples:
@@ -311,7 +311,7 @@ Feature: Dashboard
   @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS @App
   Scenario Template: S6 - Patient Cancel Appointment
 
-    And I navigate to the "<Appointment>" page
+    Given I navigate to the "<Appointment>" Future Appointments page
     And I click cancel button for the created appointment "<Appointment_Cancel_Button>"
     And I enter reason to cancel appointment
     When I click cancel your appointment button

@@ -173,6 +173,10 @@ public class MessagesPage extends BasePage {
     protected String elmntbyDrop = new StringBuilder().append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
+    protected String elmntProviderGroupMessageFromDrop = new StringBuilder().append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[1]").toString();
+
+
     protected String elmntProviderDrop = new StringBuilder().append("(//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')])[2]").toString();
 
@@ -2024,7 +2028,9 @@ public class MessagesPage extends BasePage {
         try {
 //            waitForSeconds(3);
             waitForElement(txtSent);
-            waitForSeconds(3);
+//            waitForSeconds(3);
+            driver.navigate().refresh();
+            waitForElement(txtSent);
             System.out.println(elmntDoctorSentSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
             WebElement Subject = waitForElement(By.xpath(elmntDoctorSentSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             waitForElement(Subject);
@@ -2471,8 +2477,9 @@ public class MessagesPage extends BasePage {
 
 //            Select healthCentre = new Select(driver.findElement(By.xpath("(//select[contains(@id,'GroupMessage1')])[1]")));
 //            healthCentre.selectByVisibleText(strFamilyMember);
-            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
-            jsClick(elmntEntriesFromHealthCentre);
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntProviderGroupMessageFromDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
+            System.out.println(">>>>>>>>>>>>>>>elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
+            mouseClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
             blResult = true;
