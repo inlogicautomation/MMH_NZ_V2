@@ -500,6 +500,7 @@ public class DashboardPage extends BasePage {
             System.out.println("Xpath for Dashboard message >>> :: " + verifyDashboardMessages.replace("<<DATE>>", currentDate).replace("<<DOCTOR_NAME>>", TestDataUtil.getValue(lstDetails.get(0))).replace("<<MESSAGE>>", TestDataUtil.getValue(lstDetails.get(1))));
             WebElement data = waitForElement(By.xpath(verifyDashboardMessages.replace("<<DATE>>", currentDate).replace("<<DOCTOR_NAME>>", TestDataUtil.getValue(lstDetails.get(0))).replace("<<MESSAGE>>", TestDataUtil.getValue(lstDetails.get(1)))));
             waitForElement(data);
+            jsScrollIntoView(data);
             isVerified = verifyElement(data);
             takeScreenshotSanity(driver);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -555,6 +556,7 @@ public class DashboardPage extends BasePage {
                     .replace("<<STATUS>>", TestDataUtil.getValue(lstDetails.get(1)))));
 
             waitForElement(data);
+            jsScrollIntoView(data);
             System.out.println("Data >>> :: " + data);
 
             waitForElement(data);
