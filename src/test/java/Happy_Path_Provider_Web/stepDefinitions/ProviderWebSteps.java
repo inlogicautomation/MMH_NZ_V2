@@ -138,11 +138,11 @@ public class ProviderWebSteps {
     @When("I select {string} and {string}")
     public void iSelectAnd(String strHealthCentre, String strLocation) {
 
-        Assert.assertTrue(providerPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//        Assert.assertTrue(providerPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(strHealthCentre)));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+//        Assert.assertTrue(providerPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(strLocation)));
-    }
+}
 
 
 
@@ -155,45 +155,11 @@ public class ProviderWebSteps {
     }
 
 
-
-
-    @Given("As a user Iam on Patient login page")
-    public void asAUserIamOnPatientLoginPage() {
-
-
-    }
-
-
-
-
-
-
-
     @Given("As a user I am on Provider Homepage")
     public void asAUserIAmOnProviderHomepage() {
 
         Assert.assertTrue(providerPageContainer.providerHomePage.verifyProviderHomePage());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @When("I login with valid {string} and {string} as patient")
@@ -202,15 +168,11 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.providerHomePage.MMHLogin(TestDataUtil.getValue(strUserName), TestDataUtil.getValue(strPassword)));
     }
 
-
     @Then("I should  verify the patient homepage")
     public void iShouldVerifyThePatientHomepage() {
 
         Assert.assertTrue(providerPageContainer.providerHomePage.verifyPatientHomePage());
     }
-
-
-
 
     @And("I Navigate to Provider Home Page")
     public void iNavigateToProviderHomePage() {
@@ -499,7 +461,7 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.preScreeningPage.selectHealthCentre(strHealthCentre));
         for (String strdata:strtestdata) {
             System.out.println(">>>>>>>strdata"+strdata);
-            Assert.assertTrue(providerPageContainer.preScreeningPage.selectLocation(TestDataUtil.getValue(strdata)));
+            Assert.assertTrue(providerPageContainer.preScreeningPage.deselectCovidPreScreeningPopup(TestDataUtil.getValue(strdata)));
         }
 
         Assert.assertTrue(providerPageContainer.preScreeningPage.clickUpdateButton());
@@ -911,5 +873,50 @@ public class ProviderWebSteps {
     public void iEnableRuleBRadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleBButton());
+    }
+
+
+    @Then("I select {string} and {string} and verify the Covid Pre-Screening popup is Undisplayed")
+    public void iSelectAndAndVerifyTheCovidPreScreeningPopupIsUndisplayed(String strHealthCentre, String strLocation) {
+        List<String>stsdta=TestDataUtil.getListOfValue(strLocation);
+                Assert.assertTrue(providerPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(strHealthCentre)));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(stsdta.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+        Assert.assertTrue(providerPageContainer.preScreeningPage.ClickDashBoard());
+
+    }
+
+    @And("I click Edit button to select {string} and {string} and Disable Appointment Pre-Screening Popup")
+    public void iClickEditButtonToSelectAndAndDisableAppointmentPreScreeningPopup(String strHealthCentre, String strLocation) {
+        List<String>strtestdata=TestDataUtil.getListOfValue(strLocation);
+        Assert.assertTrue(providerPageContainer.preScreeningPage.clickPreScreeningEdit());
+        Assert.assertTrue(providerPageContainer.preScreeningPage.clickHealthCentreDropDown());
+        Assert.assertTrue(providerPageContainer.preScreeningPage.selectHealthCentre(strHealthCentre));
+        for (String strdata:strtestdata) {
+            System.out.println(">>>>>>>strdata"+strdata);
+            Assert.assertTrue(providerPageContainer.preScreeningPage.deselectCovidPreScreeningPopup(TestDataUtil.getValue(strdata)));
+        }
+
+        Assert.assertTrue(providerPageContainer.preScreeningPage.clickUpdateButton());
+        Assert.assertTrue(providerPageContainer.preScreeningPage.verifyUpdates(strHealthCentre));
+        Assert.assertTrue(providerPageContainer.preScreeningPage.clickCloseButton());
+    }
+
+    @And("I click Edit button to select {string} and {string} and Enable Appointment Pre-Screening Popup")
+    public void iClickEditButtonToSelectAndAndEnableAppointmentPreScreeningPopup(String strHealthCentre, String strLocation) {
+        List<String>strtestdata=TestDataUtil.getListOfValue(strLocation);
+        Assert.assertTrue(providerPageContainer.preScreeningPage.clickPreScreeningEdit());
+        Assert.assertTrue(providerPageContainer.preScreeningPage.clickHealthCentreDropDown());
+        Assert.assertTrue(providerPageContainer.preScreeningPage.selectHealthCentre(strHealthCentre));
+        for (String strdata:strtestdata) {
+            System.out.println(">>>>>>>strdata"+strdata);
+            Assert.assertTrue(providerPageContainer.preScreeningPage.selectCovidPreScreeningPopup(TestDataUtil.getValue(strdata)));
+        }
+
+        Assert.assertTrue(providerPageContainer.preScreeningPage.clickUpdateButton());
+        Assert.assertTrue(providerPageContainer.preScreeningPage.verifyUpdates(strHealthCentre));
+        Assert.assertTrue(providerPageContainer.preScreeningPage.clickCloseButton());
     }
 }

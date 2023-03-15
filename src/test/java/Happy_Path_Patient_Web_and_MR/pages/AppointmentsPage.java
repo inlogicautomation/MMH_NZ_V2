@@ -543,22 +543,22 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(2);
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//            waitForSeconds(2);
+//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntHealtCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(2);
+//            waitForSeconds(2);
 //          jsScrollIntoView(elmntSlotTimes);
             jsScrollIntoView(elmntAppointmentPanel);
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             click(elmntHealtCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(2);
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//            waitForSeconds(2);
+//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectHealthCenter = waitForElementFewSeconds(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", strHealthCenter)));
-            waitForSeconds(2);
-            waitAndClick(elmntSelectHealthCenter);
-            waitForSeconds(2);
+//            waitForSeconds(2);
+            mouseClick(elmntSelectHealthCenter);
+//            waitForSeconds(2);
             blResult = verifyElement(elmntLocationCenter);
         } catch (Exception e) {
             e.printStackTrace();
@@ -590,14 +590,18 @@ public class AppointmentsPage extends BasePage {
     public boolean declineCovidPreScreeningPopup() {
         boolean blResult = false;
         try {
-            waitForSeconds(3);
+         if (verifyElement(elmntCovidPreScreeningPopup)) {
+             System.out.println("Covid Prescreening popup is displayed");
+             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+             waitForElementClickable(elmntDeclineCovidPreScreening);
+//             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+             jsClick(elmntDeclineCovidPreScreening);
+         }
+         if (!verifyElement(By.xpath("//div[contains(@id,'cdk-overlay')]"))){
+             System.out.println("Covid Prescreening popup is not displayed");
+         }
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElementClickable(elmntCovidPreScreeningPopup);
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            jsClick(elmntDeclineCovidPreScreening);
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(4);
-            blResult = verifyElement(elmntAppointmentPanel);
+         blResult = verifyElement(elmntAppointmentPanel);
         } catch (Exception e) {
             e.printStackTrace();
         }

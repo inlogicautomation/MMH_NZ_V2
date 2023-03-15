@@ -67,11 +67,19 @@ public class PreScreeningPage extends BasePage {
             .append("//div[@role='listbox']//span[normalize-space(text())='").append("<<REPLACEMENT>>").append("']").toString();
 
 
-    protected String strSelectLocation = new StringBuilder()
+    protected String deselectCovidPreScreeningPopup = new StringBuilder()
             .append("//span[normalize-space(text())='").append("<<REPLACEMENT>>")
-            .append("']//preceding::input[@aria-checked='false']").toString();
+            .append("']//ancestor::mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid']//input").toString();
 
-    //span[normalize-space(text())='VM03Location']//preceding::input[@aria-checked="false"]
+    //span[normalize-space(text())='VM03Location']//ancestor::mat-checkbox[@class='mat-checkbox mat-accent ng-valid ng-dirty ng-touched']//input
+
+    //span[normalize-space(text())='VM03Location']//ancestor::mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid']//input
+    protected String selectCovidPreScreeningPopup = new StringBuilder()
+            .append("//span[normalize-space(text())='").append("<<REPLACEMENT>>")
+            .append("']//ancestor::mat-checkbox[@class='mat-checkbox mat-accent ng-valid mat-checkbox-checked ng-dirty ng-touched']//input").toString();
+    //span[normalize-space(text())='VM03Location']//ancestor::mat-checkbox[@class='mat-checkbox mat-accent ng-valid ng-dirty ng-touched mat-checkbox-checked']//input
+
+    //span[normalize-space(text())='VM03Location2']//ancestor::mat-checkbox[@class='mat-checkbox mat-accent ng-valid mat-checkbox-checked ng-dirty ng-touched']//input
 
 
 
@@ -123,7 +131,7 @@ public class PreScreeningPage extends BasePage {
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             WebElement elmntHealthCentreLocation = waitForElement(By.xpath(strHealthCentreLocation.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strHealthCentre))));
             click(elmntHealthCentreLocation);
-            System.out.printf("Successfully select a Health centre");
+            System.out.println("Successfully select a Health centre");
             blresult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,21 +140,63 @@ public class PreScreeningPage extends BasePage {
     }
 
 
-    public boolean selectLocation(String strLocation) {
+    public boolean deselectCovidPreScreeningPopup(String strLocation) {
         boolean blresult = false;
         try {
-            System.out.println(">>>>>>"+verifyElement(By.xpath(strSelectLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation)))));
-            if (verifyElement(By.xpath(strSelectLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))))) {
-
-                System.out.println("Appointment PreScreening CheckBox Disable");
-                blresult = true;
+            jsScrollDown();
+            jsScrollIntoView(elmntUpdate);
+            WebElement elmntHealthCentreLocation = waitForElement(By.xpath(selectCovidPreScreeningPopup.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));
+            System.out.println(">>>>>>>>>>>>elmntHealthCentreLocation"+ elmntHealthCentreLocation);
+            if (verifyElement(By.xpath(deselectCovidPreScreeningPopup.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))))) {
+                System.out.println("Appointment PreScreening CheckBox Already Unchecked");
+            }
+            else {
+                jsClick(elmntHealthCentreLocation);
+                verifyElement(By.xpath(deselectCovidPreScreeningPopup.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))));
+                System.out.println("Appointment PreScreening CheckBox UnChecked::");
             }
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Cannot Successfully verify Appointment PreScreening CheckBox");
             e.printStackTrace();
         }
         return blresult;
     }
+
+    public boolean selectCovidPreScreeningPopup(String strLocation) {
+        boolean blresult = false;
+        try {
+            jsScrollDown();
+            jsScrollIntoView(elmntUpdate);
+            waitForSeconds(3);
+//            WebElement elmntHealthCentreLocation = waitForElementClickable(By.xpath(selectCovidPreScreeningPopup.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));
+//            System.out.println(">>>>>>>>>>>>elmntHealthCentreLocation"+ elmntHealthCentreLocation);
+////            verifyElement(elmntHealthCentreLocation);
+//            System.out.println("Appointment PreScreening CheckBox Already checked");
+            if (verifyElement(By.xpath(selectCovidPreScreeningPopup.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))))) {
+                System.out.println("Appointment PreScreening CheckBox Already checked");
+                blresult = true;
+            }
+            if (!verifyElement(By.xpath(selectCovidPreScreeningPopup.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))))) {
+            WebElement elmntHealthCentreLocation2 = waitForElementClickable(By.xpath(deselectCovidPreScreeningPopup.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));
+            System.out.println(">>>>>>>>>>>>elmntHealthCentreLocation2"+ elmntHealthCentreLocation2);
+//            jsScrollIntoView(elmntHealthCentreLocation2);
+            waitForElement(elmntHealthCentreLocation2);
+            jsClick(elmntHealthCentreLocation2);
+            verifyElement(By.xpath(selectCovidPreScreeningPopup.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))));
+            System.out.println("Appointment PreScreening CheckBox Checked::");
+                blresult = true;
+            }
+            blresult = true;
+        }
+        catch (Exception e) {
+
+            System.out.println("Cannot Successfully verify Appointment PreScreening CheckBox");
+                e.printStackTrace();
+        }
+        return blresult;
+    }
+
 
 
     public boolean clickUpdateButton() {

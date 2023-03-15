@@ -583,7 +583,7 @@ public class ProviderHomePage extends BasePage {
         try{
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             waitForElementClickable(elmntAppointment);
-            click(elmntAppointment);
+            jsClick(elmntAppointment);
             blresult = true;
         }catch (Exception e){
             e.printStackTrace();
@@ -611,13 +611,13 @@ public class ProviderHomePage extends BasePage {
         boolean blresult = false;
         try{
             if(verifyElement(elmntBookAppointment)){
-                waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+//                waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
                 waitForElementClickable(elmntBookAppointment);
-                click(elmntBookAppointment);
+                jsClick(elmntBookAppointment);
             }else {
                 waitForElementClickable(elmntAppointment);
                 click(elmntAppointment);
-                waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+//                waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
                 waitForElementClickable(elmntBookAppointment);
                 click(elmntBookAppointment);
             }

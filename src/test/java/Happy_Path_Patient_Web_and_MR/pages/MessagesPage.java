@@ -2012,6 +2012,7 @@ public class MessagesPage extends BasePage {
             waitForElementClickable(elmntSentDoctor);
             jsClick(elmntSentDoctor);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            driver.navigate().refresh();
             waitForElement(txtSent);
             blResult = verifyElement(txtSent);
             System.out.println("Successfully navigated to the inbox");

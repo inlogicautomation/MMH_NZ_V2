@@ -10,29 +10,31 @@ Feature: RRP_Pre-Screening Settings
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
   @WEB @PROVIDER_HAPPY_PATH @PRE_SCREENING_SETTINGS
-  Scenario Template:S1-Disable Pre-Screening Covid PopUp Settings in Provider
-
+  Scenario Template:S1-Enable Pre-Screening Covid PopUp Settings in Provider
     Given As a Provider I am on HomePage and navigate to  Pre-Screening Settings
     And I click Systems Menu and I navigating to Pre-Screening Settings page
-    And I click Edit button to select "<Health_Centre>" and "<Location>"
+    And I click Edit button to select "<Health_Centre>" and "<Location>" and Enable Appointment Pre-Screening Popup
     When As a user I am on HomePage and navigate to Book Appointment Page in Appointments
     And I navigate to Appointments Menu and I click the Book Appointment
-    And I select "<Health_Centre>" and "<Location>"
-    Then I should verify the Covid Pre-Screening popup is displayed
+    Then I select "<Health_Centre>" and "<Location>" and verify the Covid Pre-Screening popup is Undisplayed
+
+
     Examples:
       | Health_Centre                 | Location                     |
       | &PRE_SCREENING_HEALTH_CENTRE& | &PRE_SCREENING_LOCATION_VM3& |
 
   @WEB @PROVIDER_HAPPY_PATH @PRE_SCREENING_SETTINGS1
-  Scenario Template:S2-Enable Pre-Screening Covid PopUp Settings in Provider
+  Scenario Template:S2-Disable Pre-Screening Covid PopUp Settings in Provider
+
     Given As a Provider I am on HomePage and navigate to  Pre-Screening Settings
     And I click Systems Menu and I navigating to Pre-Screening Settings page
-    And I click Edit button to select "<Health_Centre_VM4>" and "<Location_VM4>"
+    And I click Edit button to select "<Health_Centre>" and "<Location>" and Disable Appointment Pre-Screening Popup
     When As a user I am on HomePage and navigate to Book Appointment Page in Appointments
     And I navigate to Appointments Menu and I click the Book Appointment
-    And I select "<Health_Centre>" and "<Location>"
-    Then I should verify the Covid Pre-Screening popup is displayed
+    Then I select "<Health_Centre>" and "<Location>" and verify the Covid Pre-Screening popup is Undisplayed
 
     Examples:
-      | Health_Centre_VM4   | Location_VM4   |
-      | &HEALTH_CENTER_VM4& | &LOCATION_VM4& |
+      | Health_Centre                 | Location                     |
+      | &PRE_SCREENING_HEALTH_CENTRE& | &PRE_SCREENING_LOCATION_VM3& |
+
+
