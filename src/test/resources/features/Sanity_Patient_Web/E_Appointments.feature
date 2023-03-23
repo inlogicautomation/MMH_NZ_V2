@@ -25,7 +25,7 @@ Feature: Appointments
   Scenario Template: Prep- Canceling all the appointments
 
     Given As a user I am on HomePage
-    And I navigate to the "<Appointment>" page
+    And I navigate to the "<Appointment>" Future Appointments page
     And I canceling all the available appointments
 
     Examples:
@@ -77,7 +77,7 @@ Feature: Appointments
   @WEB @SANITY_PATH @SANITY_PATH_APPOINTMENTS
   Scenario Template: S1 - Patient Cancel Appointment
 
-    And I navigate to the "<Appointment>" page
+    And I navigate to the "<Appointment>" Future Appointments page
     And I click cancel button for the created appointment "<Appointment_Cancel_Button>"
     And I enter reason to cancel appointment
     When I click cancel your appointment button
@@ -96,7 +96,7 @@ Feature: Appointments
   Scenario Template: S2 - Patient can view all the future date booked appointments in card view
 
     Given As a user I am on HomePage
-    And I navigate to the "<Appointments>" page
+    And I navigate to the "<Appointment>" Future Appointments page
     When I switch to card view in future appointments page
     Then I should see all the future date appointments in card view
     Examples:
@@ -158,7 +158,7 @@ Feature: Appointments
   @WEB @SANITY_PATH @SANITY_PATH_APPOINTMENTS
   Scenario Template: S3 - Join Video Appointment
 
-    And I navigate to the "<Appointment>" page
+    And I navigate to the "<Appointment>" Future Appointments page
     And I join now button for video consultation "<Join_Consultation>"
     Then I should see Appointment is not for today popup in future appointments page
 #    Then I should see video consultation window with icons "<All_Icons>"
@@ -176,7 +176,7 @@ Feature: Appointments
   Scenario Template: S4 - Patient can view all the past date booked appointments in card view
 
     Given As a user I am on HomePage
-    And I navigate to the "<Appointments>" page
+    And  I navigate to the "<Appointments>" page Card View
     When I switch to card view in past appointments page
     Then I should see all the past date appointments in card view
     Examples:
@@ -201,7 +201,7 @@ Feature: Appointments
   Scenario Template: S5 - Patient can view all the video appointments invites sent from PMS/Provider in grid view
 
     Given As a user I am on HomePage
-    When I navigate to the "<Appointments>" page
+    When I navigate to the "<Appointments>" page Card View
     Then I should see all the all the video appointments invites sent from PMS Provider in grid view
 #   And I join Video Consultation by clicking Join now Icon in Video invitations Gid "<All_Icons>"
     And I should see Appointment is not for today popup

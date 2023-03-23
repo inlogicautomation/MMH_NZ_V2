@@ -69,19 +69,20 @@ public class PreScreeningPage extends BasePage {
 
     protected String deselectCovidPreScreeningPopup = new StringBuilder()
             .append("//span[normalize-space(text())='").append("<<REPLACEMENT>>")
-            .append("']//ancestor::mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid']//input").toString();
+            .append("']//ancestor::mat-checkbox[@ng-reflect-model='false']//input").toString();
 
     //span[normalize-space(text())='VM03Location']//ancestor::mat-checkbox[@class='mat-checkbox mat-accent ng-valid ng-dirty ng-touched']//input
 
     //span[normalize-space(text())='VM03Location']//ancestor::mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid']//input
+    //span[normalize-space(text())='VM03Location2']//ancestor::mat-checkbox[@ng-reflect-model='false']//input
     protected String selectCovidPreScreeningPopup = new StringBuilder()
             .append("//span[normalize-space(text())='").append("<<REPLACEMENT>>")
-            .append("']//ancestor::mat-checkbox[@class='mat-checkbox mat-accent ng-valid mat-checkbox-checked ng-dirty ng-touched']//input").toString();
+            .append("']//ancestor::mat-checkbox[@ng-reflect-model='true']//input").toString();
     //span[normalize-space(text())='VM03Location']//ancestor::mat-checkbox[@class='mat-checkbox mat-accent ng-valid ng-dirty ng-touched mat-checkbox-checked']//input
 
     //span[normalize-space(text())='VM03Location2']//ancestor::mat-checkbox[@class='mat-checkbox mat-accent ng-valid mat-checkbox-checked ng-dirty ng-touched']//input
 
-
+//span[normalize-space(text())='VM03Location2']//ancestor::mat-checkbox[@ng-reflect-model='true']//input
 
 
 
@@ -145,14 +146,16 @@ public class PreScreeningPage extends BasePage {
         try {
             jsScrollDown();
             jsScrollIntoView(elmntUpdate);
-            WebElement elmntHealthCentreLocation = waitForElement(By.xpath(selectCovidPreScreeningPopup.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));
-            System.out.println(">>>>>>>>>>>>elmntHealthCentreLocation"+ elmntHealthCentreLocation);
             if (verifyElement(By.xpath(deselectCovidPreScreeningPopup.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))))) {
+                takeScreenshot(driver);
                 System.out.println("Appointment PreScreening CheckBox Already Unchecked");
             }
             else {
+                WebElement elmntHealthCentreLocation = waitForElement(By.xpath(selectCovidPreScreeningPopup.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));
+                System.out.println(">>>>>>>>>>>>elmntHealthCentreLocation"+ elmntHealthCentreLocation);
                 jsClick(elmntHealthCentreLocation);
                 verifyElement(By.xpath(deselectCovidPreScreeningPopup.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))));
+                takeScreenshot(driver);
                 System.out.println("Appointment PreScreening CheckBox UnChecked::");
             }
             blresult = true;
@@ -174,6 +177,7 @@ public class PreScreeningPage extends BasePage {
 ////            verifyElement(elmntHealthCentreLocation);
 //            System.out.println("Appointment PreScreening CheckBox Already checked");
             if (verifyElement(By.xpath(selectCovidPreScreeningPopup.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))))) {
+                takeScreenshot(driver);
                 System.out.println("Appointment PreScreening CheckBox Already checked");
                 blresult = true;
             }
@@ -184,6 +188,7 @@ public class PreScreeningPage extends BasePage {
             waitForElement(elmntHealthCentreLocation2);
             jsClick(elmntHealthCentreLocation2);
             verifyElement(By.xpath(selectCovidPreScreeningPopup.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))));
+                takeScreenshot(driver);
             System.out.println("Appointment PreScreening CheckBox Checked::");
                 blresult = true;
             }

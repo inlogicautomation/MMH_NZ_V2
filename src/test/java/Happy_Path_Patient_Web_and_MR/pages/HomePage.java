@@ -171,7 +171,7 @@ public class HomePage extends BasePage {
 
     public void visit() {
         int WindowsCount = driver.getWindowHandles().size();
-        System.out.println(">>>>>>>>>>>>>>>>>>>>" + WindowsCount);
+        System.out.println("===============>WindowsCount::" + WindowsCount);
         if (WindowsCount == 2) {
             focusWindow(1);
         }
@@ -243,7 +243,7 @@ public class HomePage extends BasePage {
         boolean blResult = false;
         try {
             int WindowsCount = driver.getWindowHandles().size();
-            System.out.println(">>>>>>>>>>>>>>>>>>>>" + WindowsCount);
+            System.out.println("===============>WindowsCount::" + WindowsCount);
             if (WindowsCount == 1) {
                 waitForElement(betaLoginBtn);
                 click(betaLoginBtn);
@@ -410,10 +410,12 @@ public class HomePage extends BasePage {
     }
 
     public boolean clickAppointmentsExpandIcon() {
-        waitForSeconds(3);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElement(elmntDashboard);
         waitForElement(btnAppointmentExpand);
         jsClick(btnAppointmentExpand);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForElement(elmntFutureAppointment);
         return verifyElement(elmntFutureAppointment);
     }
 
@@ -444,15 +446,18 @@ public class HomePage extends BasePage {
     public boolean clickDashBoard() {
         boolean isVerified = false;
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            System.out.println("Successfully enter Dasboard");
+            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(2);
+            waitForElement(elmntDashboard);
             jsScrollIntoView(elmntDashboard);
             waitForElement(elmntDashboard);
-            jsClick(elmntDashboard);
+            click(elmntDashboard);
+            takeScreenshot(driver);
+//            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
             driver.navigate().refresh();
+//            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntVerifyHomePage);
             isVerified = verifyElement(elmntVerifyHomePage);
@@ -469,9 +474,6 @@ public class HomePage extends BasePage {
             waitForSeconds(3);
             jsClick(btnExitApp);
             waitForSeconds(180);
-            waitForSeconds(2);
-//            jsClick(txtProviderPortal);
-            waitForSeconds(3);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }
@@ -479,10 +481,7 @@ public class HomePage extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForElement(btnExitAppMobile);
             jsClick(btnExitAppMobile);
-            waitForSeconds(120);
-            waitForSeconds(2);
-//            jsClick(txtProviderPortal);
-            waitForSeconds(3);
+            waitForSeconds(180);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }
@@ -490,10 +489,7 @@ public class HomePage extends BasePage {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(btnExitAppMobile);
             click(btnExitAppMobile);
-            waitForSeconds(120);
-            waitForSeconds(2);
-//            jsClick(txtProviderPortal);
-            waitForSeconds(3);
+            waitForSeconds(180);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }
@@ -538,9 +534,12 @@ public class HomePage extends BasePage {
     public boolean clickPatientBookAppointment(){
         boolean blresult = false;
         try{
+            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             waitForElementClickable(elmntAppointment);
             jsClick(elmntAppointment);
+            waitForElementToAppear(driver,By.xpath(elmntSpinner));
+            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
             waitForElement(elmntPatientBookAppointment);
             click(elmntPatientBookAppointment);
             blresult = true;
