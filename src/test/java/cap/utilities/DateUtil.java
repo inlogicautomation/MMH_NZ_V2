@@ -131,6 +131,16 @@ public class DateUtil {
                 System.out.println("AFTER_THREE_DAYS" + date);
                 break;
 
+            case "AFTER_FOUR_DAYS":
+                date = new Date(today.getTime() + 4 * (1000 * 60 * 60 * 24));
+                System.out.println("AFTER_THREE_DAYS" + date);
+                break;
+
+            case "AFTER_FIVE_DAYS":
+                date = new Date(today.getTime() + 5 * (1000 * 60 * 60 * 24));
+                System.out.println("AFTER_THREE_DAYS" + date);
+                break;
+
             default:
 //                date = new Date(today.getTime() + 0 * (1000 * 60 * 60 * 24));
                 System.out.println("Day String NOT MATCH !");

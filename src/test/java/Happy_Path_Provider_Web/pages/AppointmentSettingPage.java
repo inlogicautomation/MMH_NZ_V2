@@ -41,7 +41,11 @@ public class AppointmentSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-radio-button[@value='ruleE']//input")
     protected WebElement elmntRuleERadioButton;
 
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='allowtobookfamily']//input)[1]")
+    protected WebElement elmntAllowToBookFrendsYesButton;
+
     //mat-radio-button[@value='ruleE']//input
+
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Save')]")
     protected WebElement elmntSaveButton;
@@ -79,6 +83,10 @@ public class AppointmentSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'Changes saved successfully.')]")
     protected WebElement txtSuccessfullyMessagePopup;
 
+    @FindBy(how = How.XPATH, using = "//p[text()='Changes Saved Successfully']")
+    protected WebElement txtChangesSavedSuccessfullyMessagePopup;
+
+    //p[text()='Changes Saved Successfully']
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
@@ -336,6 +344,27 @@ public class AppointmentSettingPage extends BasePage {
             blresult = verifyElement(elmntVideoAppointmentIcon);
         } catch (Exception e) {
 
+        }
+        return blresult;
+    }
+
+
+    public boolean clickAllowtoBookForFamilyYesButton() {
+        boolean blresult = false;
+        try {
+            jsScrollIntoView(elmntAllowToBookFrendsYesButton);
+            waitForElement(elmntAllowToBookFrendsYesButton);
+            takeScreenshot(driver);
+            jsClick(elmntAllowToBookFrendsYesButton);
+            System.out.println("Successfully Click Allow To Book Friends Yes Radio Button");
+            jsScrollIntoView(elmntSaveButton);
+            waitForElement(elmntSaveButton);
+            click(elmntSaveButton);
+            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElement(txtChangesSavedSuccessfullyMessagePopup);
+            blresult = verifyElement(txtChangesSavedSuccessfullyMessagePopup);
+        } catch (Exception e) {
+        System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
         }
         return blresult;
     }

@@ -968,4 +968,13 @@ public class ProviderWebSteps {
         }
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickAppointmentsettingsRuleESaveButton());
     }
+
+
+
+    @And("I enable allow to book friends yes radio button{string} and click save button then I see Saved Successfully message")
+    public void iEnableAllowToBookFriendsYesRadioButtonAndClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickAllowtoBookForFamilyYesButton());
+
+    }
 }

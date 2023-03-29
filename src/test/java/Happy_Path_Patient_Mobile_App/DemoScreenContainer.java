@@ -2,6 +2,7 @@ package Happy_Path_Patient_Mobile_App;
 
 
 import Happy_Path_Patient_Mobile_App.screens.*;
+import cap.helpers.Constants;
 import cap.utilities.SharedDriver;
 
 import io.appium.java_client.android.AndroidDriver;
@@ -36,11 +37,31 @@ public class DemoScreenContainer {
 
 
     public DemoScreenContainer() {
-        driver = SharedDriver.getMobileDriver();
-        initScreens();
+//        driver = SharedDriver.getMobileDriver();
+//        initScreens();
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            driver = SharedDriver.getDriver();
+            initPages();
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            driver = SharedDriver.getDriver();
+            driver = SharedDriver.getMobileDriver();
+            initPages();
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            driver = SharedDriver.getDriver();
+            initPages();
+        }
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("WEBMOBILE")) {
+            driver = SharedDriver.getDriver();
+            initPages();
+        }
     }
 
-    private void initScreens() {
+    private void initPages() {
         // Mobile Application Screens
         loginScreen = new LoginScreen(driver);
         homeScreen = new HomeScreen(driver);

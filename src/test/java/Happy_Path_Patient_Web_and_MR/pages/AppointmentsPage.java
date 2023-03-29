@@ -145,6 +145,15 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='personData']")
     protected WebElement elmntFamilyMemberCenter;
 
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='relation']")
+    protected WebElement elmntRelationShipDropDown;
+
+
+
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='name']")
+    protected WebElement SelectFamilyMemberDropDown;
+
+
     protected String elmntFamilyMember = new StringBuilder().append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
@@ -3075,6 +3084,85 @@ public class AppointmentsPage extends BasePage {
         }
         return blresult;
     }
+
+    public boolean VerifyAppointmentIsForDropdownDetails(List<String> strFamilyMember) {
+        boolean blResult = false;
+        try {
+
+//            List<String>strdata=TestDataUtil.getListOfValue(strFamilyMember);
+            System.out.println(">>>>>>>strdata"+TestDataUtil.getValue(strFamilyMember.get(0)));
+            System.out.println(">>>>>>>strdata1"+TestDataUtil.getValue(strFamilyMember.get(1)));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(4);
+            waitForElementClickable(elmntFamilyMemberCenter);
+            waitForSeconds(2);
+            jsClick(elmntFamilyMemberCenter);
+            takeScreenshot(driver);
+            WebElement elmntSelectFamilyMember = waitForElementFewSeconds(By.xpath(elmntFamilyMember.replace("<<REPLACEMENT>>", strFamilyMember.get(0))));
+            if (verifyElement(elmntSelectFamilyMember)){
+                waitForElement(elmntSelectFamilyMember);
+                jsClick(elmntSelectFamilyMember);
+                System.out.println("Succcessfully Verified Myself");
+            }else {
+                System.out.println("Cannot Verified Myself");
+            }
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            jsClick(elmntFamilyMemberCenter);
+            WebElement elmntSelectFamilyMember2 = waitForElementFewSeconds(By.xpath(elmntFamilyMember.replace("<<REPLACEMENT>>", strFamilyMember.get(1))));
+            if (verifyElement(elmntSelectFamilyMember2)){
+                waitForElement(elmntSelectFamilyMember2);
+                jsClick(elmntSelectFamilyMember2);
+                System.out.println("Succcessfully Verified Family/Friends ");
+            }else {
+
+                System.out.println("cannot Verified Family/Friends ");
+            }
+
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(elmntAppointmentPanel);
+            blResult = verifyElement(elmntAppointmentPanel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean EnterFamilyMemberName(String strFamilyMember) {
+        boolean blResult = false;
+        try {
+            System.out.println(">>>>>strFamilyMember"+strFamilyMember);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(3);
+            waitForElementClickable(SelectFamilyMemberDropDown);
+            waitForSeconds(2);
+            SelectFamilyMemberDropDown.sendKeys(strFamilyMember);
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+
+    public boolean selectRelationship(String strFamilyMember) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(4);
+            waitForElementClickable(elmntRelationShipDropDown);
+            waitForSeconds(2);
+            jsClick(elmntRelationShipDropDown);
+            WebElement elmntSelectFamilyMember = waitForElementFewSeconds(By.xpath(strReasonForAppointment.replace("<<REPLACEMENT>>", strFamilyMember)));
+            jsClick(elmntSelectFamilyMember);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(elmntAppointmentPanel);
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
 
 
 }

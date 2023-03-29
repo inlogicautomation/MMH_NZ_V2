@@ -37,5 +37,9 @@ public class DemoWebCukes extends AbstractTestNGCucumberTests {
 
     }
 }
+
+
+//        xattr -d com.apple.quarantine /Users/inlogic/IdeaProjects/MMH_NZ_V2/config/drivers/chromedriver
+
 //    clean test -Dapp=Happy_Path_Patient_Web_and_MR -Dexecution_type=browser -Drunner=DemoWebCukes -Dbrowser_name=chrome -Denv=PROD "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/Web-QAResults.html -Dsysteminfo.AppName=Demo-QA"
 

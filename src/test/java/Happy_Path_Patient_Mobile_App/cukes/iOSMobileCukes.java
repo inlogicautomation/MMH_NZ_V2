@@ -16,4 +16,4 @@ public class iOSMobileCukes extends AbstractTestNGCucumberTests {
 
 }
 
-//        clean test -Dapp=MMH_MobileApp -Drunner=MobileCukes -Dexecution_type=webmobile -Dconfig=local_android_Poco_M2_Mobile_App -Denv=QA -Dbrowser_name=chrome "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/MobileApp-QAResults.html -Dsysteminfo.AppName=Demo-QA"
+//        clean test -Dapp=Happy_Path_Patient_Mobile_App -Drunner=iOSMobileCukes -Dexecution_type=webmobile -Dconfig=local_ios_iphone13 -Denv=QA -Dbrowser_name=chrome "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/MobileApp-QAResults.html -Dsysteminfo.AppName=Demo-QA"
