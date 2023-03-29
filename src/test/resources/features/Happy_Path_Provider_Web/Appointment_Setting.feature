@@ -9,6 +9,23 @@ Feature: Appointment Setting
     And I enter "&PATIENT_USER_LOGIN&" and "&PASSWORD&" For Beta
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
+  Scenario Template:S-Provider Enable Rule A verify Patient Booked (Payment) Visit Appointment based on Rule A (Any Location with Any Provider) and Verify the Appointments Booking Status
+
+    Given As a Provider I am on HomePage and navigate to Appointment Setting page
+    And I enable RuleA Radio button and I click save button then I see Saved Successfully message"<Location>"
+    And As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
+    When I navigate to Book Appointment select any provider with any Location
+    And I enter the visit appointment details "<Any_Location_with_Any_Provider_Appointment_Details>" and Verify the Any Locations Any ProviderName and payments "<VM03Location_Doctor_Name>" "<VM03Location2_Doctor_Name>"
+    And I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>" and I should see booked appointment displayed under the future tab "<Appointment_Summary>"
+    Then As a user I am on Patient Portal login Page and I enter "<Patient_User_Login>" and "<Password>" For Beta I should see user successfully logs in to the MMH portal
+    And I navigate to the "<Appointment>" Future Appointments page click cancel button for the created appointment "<Appointment_Cancel_Button>"
+    And I click cancel your appointment button Very the Appointment cancelled message "<Appointment_After_Cancel>"
+
+    Examples:
+      | Any_Location_with_Any_Provider_Appointment_Details      | Location     | VM03Location_Doctor_Name    | VM03Location2_Doctor_Name    | Details_For_Appointment            | Future_Date          | Appointment_Summary                | Patient_User_Login | Password           | Appointment         | Appointment_Cancel_Button               | Appointment_After_Cancel                     |
+      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | VM03Location | &VM03LOCATION_DOCTOR_NAMES& | &VM03LOCATION2_DOCTOR_NAMES& | &VMO3L2_VISIT_APPOINTMENT_DETAILS& | &VM03L2_FUTURE_DATE& | &VM03L2_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Future Appointments | &VM03L2_APPOINTMENT_DETAILS_FOR_CANCEL& | &VM03L2_APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
   Scenario Template:S1-Provider Enable Rule A verify Patient Book Visit Appointment based on Rule A (Any Location with Any Provider) & (Default Location with Default Provider) & (Default Location with Any Provider)
 
@@ -139,8 +156,8 @@ Feature: Appointment Setting
       | Location     | Default_Location_with_Default_Provider_Appointment_Details             | Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C | Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c | VM03Location_Doctor_Name    |
       | VM03Location | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  | &VM03LOCATION_DOCTOR_NAMES& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
-  Scenario Template:S9-Provider Enable Rule E verify Patient Book Visit,Phone and video Appointment based on Rule E Check Restricted provider are not displayed
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  Scenario Template:S9-Provider Enable Rule E verify Patient Book Visit Appointment based on Rule E Check Restricted provider are not displayed
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
     And I enable RuleE Radio button and I click restrict providers checkbox"<Location>" click save button then I see Saved Successfully message"<Restrict_Provider_Details>"
@@ -153,4 +170,56 @@ Feature: Appointment Setting
     Examples:
       | Location     | Restrict_Provider_Details | Default_Location_with_Default_Provider_Appointment_Details             | VM03Location_Doctor_Name    |
       | VM03Location | &RESTRICT_PROVIDER_DATA&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &VM03LOCATION_DOCTOR_NAMES& |
+
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  Scenario Template:S10-Provider Enable Rule E verify Patient Book Phone and video Appointment based on Rule E Check Restricted provider are not displayed
+
+    Given As a Provider I am on HomePage and navigate to Appointment Setting page
+    And I enable RuleE Radio button and I click restrict providers checkbox"<Location>" click save button then I see Saved Successfully message"<Restrict_Provider_Details>"
+    And As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
+    When I navigate to Book Appointment select Default Location "<Location>"
+    And I Check restricted providers are not visible for phone and video appointments made online "<Restrict_Provider_Details>"
+    Then I navigate to Book Appointment select Default Provider based on Rule E
+    Then I enter the phone appointment details "<Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C>" and Verify the Default Location Default ProviderName and payment "<VM03Location_Doctor_Name>"
+    And I navigate to Book Appointment select Default Location with Default Provider
+    And I enter the video appointment details "<Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c>" and Verify the Default Location Default ProviderName and payment "<VM03Location_Doctor_Name>"
+
+    Examples:
+      | Location     | Restrict_Provider_Details | Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C | VM03Location_Doctor_Name    | Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c |
+      | VM03Location | &RESTRICT_PROVIDER_DATA&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &VM03LOCATION_DOCTOR_NAMES& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  |
+
+
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  Scenario Template:S11-Provider Enable Rule E verify Patient Book Visit Appointment based on Rule E Check Not Restricted provider are displayed
+
+    Given As a Provider I am on HomePage and navigate to Appointment Setting page
+    And I enable RuleE Radio button and I check Non restrict providers checkbox"<Location>"and click save button then I see Saved Successfully message"<Restrict_Provider_Details>"
+    And As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
+    When I navigate to Book Appointment select Default Location "<Location>"
+    And I Check not restricted providers are visible for phone and video appointments made online "<Restrict_Provider_Details>"
+    Then I navigate to Book Appointment select Default Provider based on Rule E
+    And I enter the visit appointment details "<Default_Location_with_Default_Provider_Appointment_Details>" and Verify Restricted providers are not displayed Check Payments "<VM03Location_Doctor_Name>"
+
+    Examples:
+      | Location     | Restrict_Provider_Details    | Default_Location_with_Default_Provider_Appointment_Details             | VM03Location_Doctor_Name    |
+      | VM03Location | &NON_RESTRICT_PROVIDER_DATA& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &VM03LOCATION_DOCTOR_NAMES& |
+
+
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  Scenario Template:S12-Provider Enable Rule E verify Patient Book Phone and video Appointment based on Rule E Check Not Restricted provider are displayed
+
+    Given As a Provider I am on HomePage and navigate to Appointment Setting page
+    And I enable RuleE Radio button and I check Non restrict providers checkbox"<Location>"and click save button then I see Saved Successfully message"<Restrict_Provider_Details>"
+    And As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
+    When I navigate to Book Appointment select Default Location "<Location>"
+    And  I Check not restricted providers are visible for phone and video appointments made online "<Restrict_Provider_Details>"
+    Then I navigate to Book Appointment select Default Provider based on Rule E
+    Then I enter the phone appointment details "<Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C>" and Verify the Default Location Default ProviderName and payment "<VM03Location_Doctor_Name>"
+    And I navigate to Book Appointment select Default Location with Default Provider
+    And I enter the video appointment details "<Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c>" and Verify the Default Location Default ProviderName and payment "<VM03Location_Doctor_Name>"
+
+    Examples:
+      | Location     | Restrict_Provider_Details    | Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C | VM03Location_Doctor_Name    | Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c |
+      | VM03Location | &NON_RESTRICT_PROVIDER_DATA& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &VM03LOCATION_DOCTOR_NAMES& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  |
+
 

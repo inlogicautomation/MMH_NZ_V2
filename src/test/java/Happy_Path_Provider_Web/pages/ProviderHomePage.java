@@ -300,7 +300,7 @@ public class ProviderHomePage extends BasePage {
         try {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
                 int WindowsCount = driver.getWindowHandles().size();
-                System.out.println(">>>>>>>>>>>>>>>>>>>>" + WindowsCount);
+                System.out.println(">>>>>>>>>WindowsCount : :" + WindowsCount);
                 if (WindowsCount == 2) {
                     focusWindow(2);
                     verifyElement(verifyPatientHomePage);
@@ -322,7 +322,7 @@ public class ProviderHomePage extends BasePage {
             }
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
                 int WindowsCount = driver.getWindowHandles().size();
-                System.out.println(">>>>>>>>>>>>>>>>>>>>" + WindowsCount);
+                System.out.println(">>>>>>>>>WindowsCount : :" + WindowsCount);
                 if (WindowsCount == 2) {
                     focusWindow(2);
                     verifyElement(verifyPatientHomePage);

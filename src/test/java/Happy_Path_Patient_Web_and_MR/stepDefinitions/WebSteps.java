@@ -4013,6 +4013,7 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(strLocation)));
         Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
         Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(strLocation)));
+        Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
     }
 
     @And("I enter the visit appointment details {string} and Verify Restricted providers are not displayed Check Payments {string}")
@@ -4043,6 +4044,50 @@ public class WebSteps {
     public void iNavigateToBookAppointmentSelectDefaultProviderBasedOnRuleE() {
         Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
         Assert.assertTrue(demoPageContainer.homePage.clickPatientBookAppointment());
+    }
+
+
+
+    @And("I should see details of created appointment {string} {string} and I should see booked appointment displayed under the future tab {string}")
+    public void iShouldSeeDetailsOfCreatedAppointmentAndIShouldSeeBookedAppointmentDisplayedUnderTheFutureTab(String strAppointmentDetails, String strFutureDate, String strAppointmentSummary) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentDetails);
+        List<String> lstDetail = TestDataUtil.getListOfValue(strAppointmentSummary);
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyDetailsOfCreatedAppointment(lstDetails, (strFutureDate)));
+        Assert.assertTrue(demoPageContainer.appointmentsPage.acceptTermsAndConditionsForAppointment());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmYourBookingButton());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyCreatedAppointmentInFutureAppointmentTab(lstDetail));
+        Assert.assertTrue(demoPageContainer.homePage.clickLogoutButton());
+    }
+
+    @Then("As a user I am on Patient Portal login Page and I enter {string} and {string} For Beta I should see user successfully logs in to the MMH portal")
+    public void asAUserIAmOnPatientPortalLoginPageAndIEnterAndForBetaIShouldSeeUserSuccessfullyLogsInToTheMMHPortal(String strEmail, String strPassword) {
+        Assert.assertTrue(demoPageContainer.homePage.launchPatientUrl());
+        Assert.assertTrue(demoPageContainer.homePage.clickLogin());
+        demoPageContainer.homePage.enterEmailForBeta(TestDataUtil.getValue(strEmail));
+        demoPageContainer.homePage.enterPasswordForBeta(TestDataUtil.getValue(strPassword));
+        demoPageContainer.homePage.clickSignInButton();
+        Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
+    }
+
+
+    @And("I navigate to the {string} Future Appointments page click cancel button for the created appointment {string}")
+    public void iNavigateToTheFutureAppointmentsPageClickCancelButtonForTheCreatedAppointment(String strAppointments, String strAppointmentCancel) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentCancel);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToWebFutureAppointmentPage(strAppointments));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.clickCancelButtonForTheCreatedAppointment(lstDetails));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.entereasonForCancelAppointment());
+        }
+
+    }
+
+    @And("I click cancel your appointment button Very the Appointment cancelled message {string}")
+    public void iClickCancelYourAppointmentButtonVeryTheAppointmentCancelledMessage(String strAppointmentCancel) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentCancel);
+        Assert.assertTrue(demoPageContainer.appointmentsPage.clickCancelYourAppointment());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyCancelAppointmentMessage(lstDetails));
+
     }
 }
 

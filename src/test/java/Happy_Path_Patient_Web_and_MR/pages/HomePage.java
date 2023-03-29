@@ -4,10 +4,7 @@ import cap.common.BasePage;
 import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
 import cap.utilities.WindowsProcessUtil;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -15,6 +12,7 @@ import org.openqa.selenium.support.How;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 
 public class HomePage extends BasePage {
@@ -121,6 +119,17 @@ public class HomePage extends BasePage {
 
     @FindBy (how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT')]")
     protected WebElement elmntPatientBookAppointment;
+
+    @FindBy (how = How.XPATH, using = "//span[text()='Login']")
+    protected WebElement elmntloginbtn;
+
+    @FindBy(how = How.XPATH, using = "//mat-icon[text()='exit_to_app']")
+    protected WebElement elmntMobileLogOut;
+    @FindBy (how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health, today')]")
+    protected WebElement verifyPatientHomePage;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'SIGN OUT')]")
+    protected WebElement elmntLogOut;
 
     @FindBy(how = How.XPATH, using = "//h3[text()=' Future Appointments']")
     protected WebElement elmntFutureAppointments;
@@ -545,6 +554,86 @@ public class HomePage extends BasePage {
             blresult = true;
         }catch (Exception e){
             e.printStackTrace();
+        }
+        return blresult;
+    }
+
+    public boolean launchPatientUrl() {
+        boolean blresult = false;
+        try {
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                int WindowsCount = driver.getWindowHandles().size();
+                System.out.println(">>>>>>>>>>>>>>>>>>>>" + WindowsCount);
+                if (WindowsCount == 2) {
+                    focusWindow(2);
+                    if (verifyElement(verifyPatientHomePage)) {
+                        System.out.println("user here in patient portal homepage");
+                    } else {
+                        visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    }
+                }
+                if (WindowsCount == 1) {
+                    ((JavascriptExecutor) driver).executeScript("window.open()");
+                    ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+                    driver.switchTo().window(tabs.get(1));
+                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    waitForSeconds(4);
+                    waitForElementClickable(elmntLogOut);
+                    jsClick(elmntLogOut);
+                    waitForSeconds(2);
+                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                }
+            }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                int WindowsCount = driver.getWindowHandles().size();
+                System.out.println(">>>>>>>>>>>>>>>>>>>>" + WindowsCount);
+                if (WindowsCount == 2) {
+                    focusWindow(2);
+                    verifyElement(verifyPatientHomePage);
+                    System.out.println("user here in patient portal homepage");
+                } else {
+                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                }
+                if (WindowsCount == 1) {
+                    ((JavascriptExecutor) driver).executeScript("window.open()");
+                    ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+                    driver.switchTo().window(tabs.get(1));
+                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    waitForSeconds(4);
+                    waitForElementClickable(elmntMobileLogOut);
+                    jsClick(elmntMobileLogOut);
+                    waitForSeconds(2);
+                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                }
+
+            }
+
+            blresult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blresult;
+    }
+
+    public boolean clickLogin() {
+        boolean blresult = false;
+        try{
+            if (verifyElement(elmntloginbtn)) {
+                waitForSeconds(3);
+                jsClick(elmntloginbtn);
+                System.out.println(" sucessfully clicked login ");
+                refreshPage();
+                blresult = true;
+            }
+            if (!verifyElement(elmntloginbtn)){
+                System.out.println("user here in home page");
+                blresult = true;
+
+            }
+        }catch (Exception e){
+            System.out.println("user here in Patient Home Page");
+            blresult = true;
+
         }
         return blresult;
     }

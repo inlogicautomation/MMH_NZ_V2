@@ -944,4 +944,28 @@ public class ProviderWebSteps {
     }
 
 
+    @And("I Check not restricted providers are visible for phone and video appointments made online {string}")
+    public void iCheckNotRestrictedProvidersAreVisibleForPhoneAndVideoAppointmentsMadeOnline(String UnRestrictProviderData) {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickVisitIconCheckRestrictedproviderarenotdisplayed());
+        Assert.assertTrue(providerPageContainer.appointmentsPage.verifyNotRestrictProviderIsDisplayed(TestDataUtil.getListOfValue(UnRestrictProviderData)));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickVideoIconCheckRestrictedproviderarenotdisplayed());
+        Assert.assertTrue(providerPageContainer.appointmentsPage.verifyNotRestrictProviderIsDisplayed(TestDataUtil.getListOfValue(UnRestrictProviderData)));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickPhoneIconCheckRestrictedproviderarenotdisplayed());
+        Assert.assertTrue(providerPageContainer.appointmentsPage.verifyNotRestrictProviderIsDisplayed(TestDataUtil.getListOfValue(UnRestrictProviderData)));
+
+
+    }
+
+    @And("I enable RuleE Radio button and I check Non restrict providers checkbox{string}and click save button then I see Saved Successfully message{string}")
+    public void iEnableRuleERadioButtonAndICheckNonRestrictProvidersCheckboxAndClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData , String strRestrictProviders) {
+        List<String>strRestrictProvidersdata=TestDataUtil.getListOfValue(strRestrictProviders);
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleEButton());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        for (String strdata:strRestrictProvidersdata) {
+            System.out.println(">>>>>>>strdata"+strdata);
+            Assert.assertTrue(providerPageContainer.appointmentSettingPage.DeselectRestrictProviderscheckbox(TestDataUtil.getValue(strdata)));
+        }
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickAppointmentsettingsRuleESaveButton());
+    }
 }

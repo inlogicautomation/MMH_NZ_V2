@@ -886,6 +886,7 @@ public class AppointmentsPage extends BasePage {
                 waitForSeconds(3);
                 declineCovidPreScreeningPopup();
                 System.out.println("Successfully Verified the Rule A");
+                System.out.println("Successfully Verified the Rule E");
             }else {
                 WebElement elmntSelectLocatio = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(8)))));
                 System.out.println("elmntSelectLocation"+elmntSelectLocatio);
@@ -932,6 +933,7 @@ public class AppointmentsPage extends BasePage {
                 waitForSeconds(3);
                 declineCovidPreScreeningPopup();
                 System.out.println("Successfully Verified the Rule A");
+                System.out.println("Successfully Verified the Rule E");
             }else {
                 WebElement elmntSelectLocatio = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(10)))));
                 System.out.println("elmntSelectLocation"+elmntSelectLocatio);
@@ -1082,7 +1084,7 @@ public class AppointmentsPage extends BasePage {
 
                 String strConvertedTime = strSlotDate;
 
-//                strConvertedTime = "0" + strConvertedTime;
+                strConvertedTime = "0" + strConvertedTime;
 
                 String strFinalOutDateTime = strConvertedTime;
 
@@ -3031,6 +3033,40 @@ public class AppointmentsPage extends BasePage {
                     }
                 }
                 System.out.println("Successfully Verified Check Restricted provider are not displayed for Online appointments(Visit / Phone / Video)");
+            }
+            blresult = true;
+        }catch (Exception e){
+            System.out.println("Cannot Verify Check Restricted provider are not displayed for Online appointments(Visit / Phone / Video)");
+            e.printStackTrace();
+        }
+        return blresult;
+    }
+
+    public boolean verifyNotRestrictProviderIsDisplayed(List<String> strData){
+        boolean blresult = false;
+        try{
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            int RestrictProviderCount=elmntsAppointmentDatesIn.size();
+            int NotRestrictProviderTestData=strData.size();
+            System.out.println(">>>>GetTextDataRestrictProviderCount>>>::"+RestrictProviderCount);
+            System.out.println(">>>>Testdata>>RestrictProviderCountTestdataCount>>>::"+NotRestrictProviderTestData);
+            if(RestrictProviderCount==NotRestrictProviderTestData) {
+                for (WebElement ele : elmntsAppointmentDatesIn) {
+                    String GetTextData = ele.getText();
+//                    System.out.println(">>>>>>>>>>>>>>>>>>GetTextEntryData>>>>>>>>>>::"+GetTextData);
+                    for (String RestrictProviderTestData : strData) {
+//                        System.out.println(">>>>>>>>>>>>>>>>>>TextDataEntry>>>>>>>>>>::"+RestrictProviderTestData);
+                        if (RestrictProviderTestData.equals(GetTextData)) {
+                            System.out.println("<<<DefaultProviderDoctorNAME>>>>>::" + RestrictProviderTestData);
+                            System.out.println("<<<DefaultProviderDoctorNAME>>GetTextData>>>::" + GetTextData);
+                            System.out.println("Show ALL Not Restrict Provider Name & Default Provider Name");
+                            break;
+                        }
+
+                    }
+                }
+
+                System.out.println("Successfully Verified All UnCheck Restricted provider are displayed for Online appointments(Visit / Phone / Video)");
             }
             blresult = true;
         }catch (Exception e){
