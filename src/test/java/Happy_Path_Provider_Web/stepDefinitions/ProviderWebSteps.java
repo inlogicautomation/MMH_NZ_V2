@@ -837,12 +837,14 @@ public class ProviderWebSteps {
     public void iEnableRuleARadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleAButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }
 
     @And("I enable RuleB Radio button and I click save button then I see Saved Successfully message{string}")
     public void iEnableRuleBRadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleBButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }
 
 
@@ -895,6 +897,7 @@ public class ProviderWebSteps {
     public void iEnableRuleCRadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleCButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }
 
     @And("As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments")
@@ -907,6 +910,7 @@ public class ProviderWebSteps {
     public void iEnableRuleDRadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleDButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }
 
     @And("I enable RuleE Radio button and I click restrict providers checkbox and save button then I see Saved Successfully message{string}")
@@ -929,6 +933,7 @@ public class ProviderWebSteps {
             Assert.assertTrue(providerPageContainer.appointmentSettingPage.selectRestrictProviderscheckbox(TestDataUtil.getValue(strdata)));
         }
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickAppointmentsettingsRuleESaveButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
 
     }
 
@@ -975,6 +980,15 @@ public class ProviderWebSteps {
     public void iEnableAllowToBookFriendsYesRadioButtonAndClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickAllowtoBookForFamilyYesButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+
+    }
+
+    @And("I enable allow to book friends No radio button{string} and click save button then I see Saved Successfully message")
+    public void iEnableAllowToBookFriendsNoRadioButtonAndClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickAllowtoBookForFamilyNoButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
 
     }
 }

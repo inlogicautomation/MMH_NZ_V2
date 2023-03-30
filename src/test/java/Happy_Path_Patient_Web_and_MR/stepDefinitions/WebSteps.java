@@ -4104,7 +4104,7 @@ public class WebSteps {
 
     @And("I verify Myself and Friends and Family option is displayed in Appointment is for dropdown{string}")
     public void iVerifyMyselfAndFriendsAndFamilyOptionIsDisplayedInAppointmentIsForDropdown(String StrAppointmentIsForDropdownDetails) {
-        System.out.println(">>>>>StrAppointmentIsForDropdownDetails>>"+TestDataUtil.getListOfValue(StrAppointmentIsForDropdownDetails));
+//        System.out.println(">>>>>StrAppointmentIsForDropdownDetails>>"+TestDataUtil.getListOfValue(StrAppointmentIsForDropdownDetails));
         Assert.assertTrue(demoPageContainer.appointmentsPage.VerifyAppointmentIsForDropdownDetails(TestDataUtil.getListOfValue(StrAppointmentIsForDropdownDetails)));
     }
 
@@ -4117,10 +4117,16 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectRelationship(TestDataUtil.getValue(lstAppointmentDetails.get(4))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectTypeOfAppointment(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectProvider(TestDataUtil.getValue(lstAppointmentDetails.get(7))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.selectFutureDateOnCalender(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.selectAvialableSlotDateTime(TestDataUtil.getValue(lstAppointmentDetails.get(8))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectFutureDateOnCalender(TestDataUtil.getValue(lstAppointmentDetails.get(8))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.selectAvialableSlotDateTime(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.verifyZeroPayments());
         }
+    }
+
+    @Then("I verify Myself and Friends and Family option is Not displayed in Appointment is for dropdown{string}")
+    public void iVerifyMyselfAndFriendsAndFamilyOptionIsNotDisplayedInAppointmentIsForDropdown(String StrAppointmentIsForDropdownDetails) {
+        Assert.assertTrue(demoPageContainer.appointmentsPage.VerifyAppointmentIsForDropdownDetailsisnotDisplayed(TestDataUtil.getListOfValue(StrAppointmentIsForDropdownDetails)));
+
     }
 }
 

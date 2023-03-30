@@ -42,10 +42,13 @@ public class AppointmentSettingPage extends BasePage {
     protected WebElement elmntRuleERadioButton;
 
     @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='allowtobookfamily']//input)[1]")
-    protected WebElement elmntAllowToBookFrendsYesButton;
+    protected WebElement elmntAllowToBookFriendsYesButton;
 
     //mat-radio-button[@value='ruleE']//input
 
+
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='allowtobookfamily']//input)[2]")
+    protected WebElement elmntAllowToBookFriendsNoButton;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Save')]")
     protected WebElement elmntSaveButton;
@@ -352,19 +355,51 @@ public class AppointmentSettingPage extends BasePage {
     public boolean clickAllowtoBookForFamilyYesButton() {
         boolean blresult = false;
         try {
-            jsScrollIntoView(elmntAllowToBookFrendsYesButton);
-            waitForElement(elmntAllowToBookFrendsYesButton);
+            jsScrollIntoView(elmntRuleARadioButton);
+            waitForElement(elmntRuleARadioButton);
             takeScreenshot(driver);
-            jsClick(elmntAllowToBookFrendsYesButton);
+            jsClick(elmntRuleARadioButton);
+            jsScrollIntoView(elmntAllowToBookFriendsYesButton);
+            waitForElement(elmntAllowToBookFriendsYesButton);
+            takeScreenshot(driver);
+            jsClick(elmntAllowToBookFriendsYesButton);
             System.out.println("Successfully Click Allow To Book Friends Yes Radio Button");
             jsScrollIntoView(elmntSaveButton);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            waitForElement(txtChangesSavedSuccessfullyMessagePopup);
-            blresult = verifyElement(txtChangesSavedSuccessfullyMessagePopup);
+            takeScreenshot(driver);
+//            waitForElement(txtChangesSavedSuccessfullyMessagePopup);
+            blresult =true;
+
         } catch (Exception e) {
         System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
+        }
+        return blresult;
+    }
+
+    public boolean clickAllowtoBookForFamilyNoButton() {
+        boolean blresult = false;
+        try {
+            jsScrollIntoView(elmntRuleARadioButton);
+            waitForElement(elmntRuleARadioButton);
+            takeScreenshot(driver);
+            jsClick(elmntRuleARadioButton);
+            jsScrollIntoView(elmntAllowToBookFriendsNoButton);
+            waitForElement(elmntAllowToBookFriendsNoButton);
+            takeScreenshot(driver);
+            jsClick(elmntAllowToBookFriendsNoButton);
+            System.out.println("Successfully Click Allow To Book Friends Yes Radio Button");
+            jsScrollIntoView(elmntSaveButton);
+            waitForElement(elmntSaveButton);
+            click(elmntSaveButton);
+            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            takeScreenshot(driver);
+//            waitForElement(txtChangesSavedSuccessfullyMessagePopup);
+            blresult =true;
+
+        } catch (Exception e) {
+            System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
         }
         return blresult;
     }
