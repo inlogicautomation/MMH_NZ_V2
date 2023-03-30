@@ -26,9 +26,44 @@ public class AppointmentSettingPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//mat-radio-button[@value='ruleA']//input")
     protected WebElement elmntRuleARadioButton;
-    //mat-radio-button[@value='ruleA']//input
+
+    @FindBy(how = How.XPATH, using = "//div[text()='Turn-Off Appointments']")
+    protected WebElement elmntTurnOffAppointments;
+
+    @FindBy(how = How.XPATH, using = "//h1[text()='Turn-Off Appointments']")
+    protected WebElement elmntTurnOffAppointmentsHeader;
+
+    @FindBy(how = How.XPATH, using = "//span[text()=' Edit ']")
+    protected WebElement elmntEditButton;
+
+    @FindBy(how = How.XPATH, using = "//p[text()='Online Appointment booking has been turned-on']")
+    protected WebElement elmntTurnOnSuccessfullyPopup;
+
+    @FindBy(how = How.XPATH, using = "//p[text()='Online Appointment booking has been turned-off']")
+    protected WebElement elmntTurnOffSuccessfullyPopup;
 
 
+    @FindBy(how = How.XPATH, using = "//input[@id='SearchText']")
+    protected WebElement elmntSearchBox;
+
+    @FindBy(how = How.XPATH, using = "//button[text()='SEARCH']")
+    protected WebElement clicksearchicon;
+
+    @FindBy(how = How.XPATH, using = "(//h2[text()='VM03Location']//following::a[text()='Book now'])[1]")
+    protected WebElement clickVM03LocationBookNowButton;
+
+
+    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Use this form to request non urgent appointments')]")
+    protected WebElement AppointmentTimeSlotsisNotDisplaying;
+    //p[text()='Online Appointment booking has been turned-on']
+
+    @FindBy(how = How.XPATH, using = "//input[@aria-checked='true']")
+    protected WebElement elmntTurnOffOnlineAppointmentsCheckBoxChecked;
+    @FindBy(how = How.XPATH, using = "//input[@aria-checked='false']")
+    protected WebElement elmntTurnOffOnlineAppointmentsCheckBoxUnchecked;
+
+
+    //mat-checkbox[@formcontrolname='turnOffOnlinechecked']//input
     @FindBy(how = How.XPATH, using = "//mat-radio-button[@value='ruleB']//input")
     protected WebElement elmntRuleBRadioButton;
 
@@ -402,6 +437,67 @@ public class AppointmentSettingPage extends BasePage {
             System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
         }
         return blresult;
+    }
+
+    public boolean clickTurnoffAppointments() {
+        boolean blresult = false;
+        try {
+            waitForElement(elmntTurnOffAppointments);
+            takeScreenshot(driver);
+            jsClick(elmntTurnOffAppointments);
+            waitForElement(elmntTurnOffAppointmentsHeader);
+           verifyElement(elmntTurnOffAppointmentsHeader);
+            blresult =true;
+        } catch (Exception e) {
+            System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
+        }
+        return blresult;
+    }
+
+    public boolean clickTurnOffOnlineAppointmentsCheckBoxUnchecked() {
+        boolean blresult = false;
+        try {
+            System.out.println("Entry Turn Off Online Appointments");
+waitForElement(elmntEditButton);
+click(elmntEditButton);
+           if (isElementDisplayed(elmntTurnOffOnlineAppointmentsCheckBoxChecked)) {
+               System.out.println("Turn Off Online Appointments CheckBox Already checked");
+           }
+           if (isElementDisplayed(elmntTurnOffOnlineAppointmentsCheckBoxUnchecked)){
+               jsClick(elmntTurnOffOnlineAppointmentsCheckBoxUnchecked);
+               takeScreenshot(driver);
+               verifyElement(elmntTurnOffOnlineAppointmentsCheckBoxChecked);
+           }
+            waitForElement(elmntTurnOffAppointmentsHeader);
+            verifyElement(elmntTurnOffAppointmentsHeader);
+            waitForElement(elmntSaveButton);
+            click(elmntSaveButton);
+            takeScreenshot(driver);
+//            waitForElement(elmntTurnOffSuccessfullyPopup);
+            blresult =true;
+        } catch (Exception e) {
+            System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
+        }
+        return blresult;
+    }
+
+    public boolean EnterValueinSearchBox(String Strdata) {
+        boolean blresult = false;
+        try {
+            waitForElement(elmntSearchBox);
+            elmntSearchBox.sendKeys(Strdata);
+            waitForElement(clicksearchicon);
+            click(clicksearchicon);
+            waitForElement(clickVM03LocationBookNowButton);
+            click(clickVM03LocationBookNowButton);
+waitForElement(AppointmentTimeSlotsisNotDisplaying);
+blresult =verifyElement(AppointmentTimeSlotsisNotDisplaying);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return blresult;
+
     }
 }
 

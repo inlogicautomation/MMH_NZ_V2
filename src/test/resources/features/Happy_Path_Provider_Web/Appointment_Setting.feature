@@ -10,7 +10,7 @@ Feature: Appointment Setting
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
-  Scenario Template:S-Provider Enable Rule A verify Patient Booked (Payment) Visit Appointment based on Rule A (Any Location with Any Provider) and Verify the Appointments Booking Status
+  Scenario Template:S0-Provider Enable Rule A verify Patient Booked (Payment) Visit Appointment based on Rule A (Any Location with Any Provider) and Verify the Appointments Booking Status
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
     And I enable RuleA Radio button and I click save button then I see Saved Successfully message"<Location>"
@@ -223,7 +223,7 @@ Feature: Appointment Setting
       | VM03Location | &NON_RESTRICT_PROVIDER_DATA& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &VM03LOCATION_DOCTOR_NAMES& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
   Scenario Template:S13-Provider Allow to book for family / friends verify Friends and Family option is displayed in Appointment is for dropdown
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -241,7 +241,7 @@ Feature: Appointment Setting
       | Location     | Appointment_Reason | Appointment_Is_For_Details    | Appointment_Details                         | Details_For_Appointment                        | Future_Date                      | Appointment_Summary                            | Patient_User_Login | Password           | Appointment         | Appointment_Cancel_Button                           | Appointment_After_Cancel                                 |
       | VM03Location | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& | &FRIENDS_AND_FAMILY_BOOK_VISIT_APPOINTMENT& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_DETAILS& | &FRIENDS_AND_FAMILY_FUTURE_DATE& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Future Appointments | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_FOR_CANCEL& | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
   Scenario Template:S13-Provider Allow to book for family / friends verify Friends and Family option is displayed in Appointment is for dropdown
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -253,3 +253,16 @@ Feature: Appointment Setting
     Examples:
       | Location     | Appointment_Reason | Appointment_Is_For_Details    |
       | VM03Location | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& |
+
+
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
+  Scenario Template:S14-Provider Turn Off Online Appointments verify No Available appointment slot Text is displayed in Appointment Page
+
+    Given As a Provider I am on HomePage and navigate to Appointment Setting page
+    And I navigate to Turn Off Online Appointments "<Location>" and Enable turn-off online appointments checkbox click save button then I see turned-off Message
+    And I Log Out from Provider and Search for Health Centre Verify Online Appointment is not displayed for Easy booking"<Location>"and"<Provider_Login>"
+    When As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
+    And I navigate to Book Appointment then I enter the visit appointment details "<Appointment>" and "<Appointment_Details>"
+    Examples:
+      | Location     | Provider_Login           | Appointment_Details      | Appointment      |
+      | VM03Location | &PROVIDER_LOGIN_DETAILS& | &BOOK_VISIT_APPOINTMENT& | Book Appointment |

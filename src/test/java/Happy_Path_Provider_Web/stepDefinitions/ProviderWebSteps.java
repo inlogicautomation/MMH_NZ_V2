@@ -991,4 +991,29 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
 
     }
+
+    @And("I navigate to Turn Off Online Appointments {string} and Enable turn-off online appointments checkbox click save button then I see turned-off Message")
+    public void iNavigateToTurnOffOnlineAppointmentsAndEnableTurnOffOnlineAppointmentsCheckboxClickSaveButtonThenISeeTurnedOffMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickTurnoffAppointments());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickTurnOffOnlineAppointmentsCheckBoxUnchecked());
+//        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+
+    }
+
+
+    @And("I Log Out from Provider and Search for Health Centre Verify Online Appointment is not displayed for Easy booking{string}and{string}")
+    public void iLogOutFromProviderAndSearchForHealthCentreVerifyOnlineAppointmentIsNotDisplayedForEasyBookingAnd(String LocationData, String ProviderLoginData) {
+        List<String> strdata=TestDataUtil.getListOfValue(ProviderLoginData);
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickProviderLogoutButton());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.EnterValueinSearchBox(LocationData));
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickMMHLogo());
+        providerPageContainer.providerHomePage.Providervisit();
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickproviderLoginButton());
+        providerPageContainer.providerHomePage.enterEmailForBeta(TestDataUtil.getValue(strdata.get(0)));
+        providerPageContainer.providerHomePage.enterPasswordForBeta(TestDataUtil.getValue(strdata.get(1)));
+        providerPageContainer.providerHomePage.clickSignInButton();
+        Assert.assertTrue(providerPageContainer.providerHomePage.verifyHomePageOfMMHPortal());
+
+    }
 }

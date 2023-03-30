@@ -57,6 +57,9 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a/span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashboard;
 
+    @FindBy(how = How.XPATH, using = "(//img[@alt='ManageMyHealth'])[1]")
+    protected WebElement elmntMMHLogo;
+
 //    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]/following::h3[contains(text(),'Start managing your health, today')]")
 //    protected WebElement txtWelcome;
 
@@ -178,6 +181,16 @@ public class HomePage extends BasePage {
     }
 
 
+    public void Providervisit() {
+        int WindowsCount = driver.getWindowHandles().size();
+        System.out.println("===============>WindowsCount::" + WindowsCount);
+        if (WindowsCount == 2) {
+            focusWindow(1);
+            visit(TestDataUtil.getValue("&URL&"));
+        }
+
+    }
+
     public void visit() {
         int WindowsCount = driver.getWindowHandles().size();
         System.out.println("===============>WindowsCount::" + WindowsCount);
@@ -187,7 +200,7 @@ public class HomePage extends BasePage {
         if (WindowsCount == 1) {
             visit(TestDataUtil.getValue("&URL&"));
             takeScreenshot(driver);
-            waitForSeconds(5);
+
         }
     }
 
@@ -505,6 +518,21 @@ public class HomePage extends BasePage {
         return isVerified;
     }
 
+    public boolean clickProviderLogoutButton() {
+        boolean isVerified = false;
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            takeScreenshot(driver);
+            waitForElement(elmntDashboard);
+            click(elmntDashboard);
+            waitForSeconds(3);
+            jsClick(btnExitApp);
+            waitForElement(txtProviderPortal);
+            isVerified = verifyElement(txtProviderPortal);
+        }
+
+        return isVerified;
+    }
+
 
     public boolean clickMesagesExpandIcon() {
         waitForSeconds(3);
@@ -636,6 +664,36 @@ public class HomePage extends BasePage {
 
         }
         return blresult;
+    }
+
+    public boolean clickMMHLogo() {
+        boolean isVerified = false;
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            takeScreenshot(driver);
+            waitForElement(elmntMMHLogo);
+            click(elmntMMHLogo);
+            waitForElement(txtProviderPortal);
+            isVerified = verifyElement(txtProviderPortal);
+        }
+
+
+        return isVerified;
+    }
+
+    public void enterEmailForProvider(String strEmail) {
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(3);
+        if (verifyElement(txtBoxEmail)) {
+            waitForSeconds(3);
+            waitForElementClickable(txtBoxEmail);
+            enterValue(txtBoxEmail, strEmail);
+        }
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(3);
+        if (!verifyElement(txtBoxEmail)) {
+            System.out.println("User here in home page");
+        }
+
     }
 }
 

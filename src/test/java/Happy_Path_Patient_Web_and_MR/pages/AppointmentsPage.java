@@ -213,6 +213,11 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='slot-start-time']")
     protected WebElement elmntSlotTimes;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'No visit slots are available for the selected provider and date.')]")
+    protected WebElement elmntSlotTimesIsNotAvailable;
+
+
+
     protected String elmntSlots = new StringBuilder().append("//mat-chip[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
@@ -834,6 +839,21 @@ public class AppointmentsPage extends BasePage {
 //            }
 
             blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean VerifyAvialableSlotDateTimeIsNotDisplayed(String strSlotsTime) {
+        boolean blResult = false;
+        try {
+           waitForElement(elmntSlotTimesIsNotAvailable);
+           verifyElement(elmntSlotTimesIsNotAvailable);
+           if (!verifyElement(elmntSlotTimesIsNotAvailable)){
+               System.out.println("Appointments SlotTime is Displaying ");
+           }
+           blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -3163,8 +3183,7 @@ public class AppointmentsPage extends BasePage {
     public boolean VerifyAppointmentIsForDropdownDetailsisnotDisplayed(List<String> strFamilyMember) {
         boolean blResult = false;
         try {
-
-//            List<String>strdata=TestDataUtil.getListOfValue(strFamilyMember);
+            //            List<String>strdata=TestDataUtil.getListOfValue(strFamilyMember);
             System.out.println(">>>>>>>strdata"+TestDataUtil.getValue(strFamilyMember.get(0)));
             System.out.println(">>>>>>>strdata1"+TestDataUtil.getValue(strFamilyMember.get(1)));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -3181,13 +3200,9 @@ public class AppointmentsPage extends BasePage {
             }
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsClick(elmntFamilyMemberCenter);
-            WebElement elmntSelectFamilyMember2 = waitForElementFewSeconds(By.xpath(elmntFamilyMember.replace("<<REPLACEMENT>>", strFamilyMember.get(1))));
-            if (!verifyElement(elmntSelectFamilyMember2)){
-                waitForElement(elmntSelectFamilyMember2);
-                jsClick(elmntSelectFamilyMember2);
-                System.out.println("Succcessfully Verified Family/Friends ");
+            if (!verifyElement(By.xpath(elmntFamilyMember.replace("<<REPLACEMENT>>", strFamilyMember.get(1))))){
+                System.out.println("Succcessfully Verified Family/Friends option is not showing");
             }
-
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntAppointmentPanel);
             blResult = verifyElement(elmntAppointmentPanel);

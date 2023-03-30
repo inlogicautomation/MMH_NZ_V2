@@ -3,18 +3,22 @@ package Happy_Path_Provider_Web.pages;
 import cap.common.BasePage;
 import cap.helpers.Constants;
 import cap.utilities.TestDataUtil;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class ProviderHomePage extends BasePage {
+    public static String strAppVersion;
 
+    public static String strBrowserName;
+    public static String strBrowserVersion;
+    public static String strSystemName;
     public ProviderHomePage(WebDriver driver) {
         super(driver);
     }
@@ -64,6 +68,14 @@ public class ProviderHomePage extends BasePage {
     protected WebElement elmntDashboard;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'SIGN OUT')]")
+    protected WebElement btnExitApp;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Provider Login']")
+    protected WebElement txtProviderPortal;
+
+    @FindBy(how = How.XPATH, using = "(//img[@alt='ManageMyHealth'])[1]")
+    protected WebElement elmntMMHLogo;
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'SIGN OUT')]")
     protected WebElement elmntLogOut;
 
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='exit_to_app']")
@@ -79,6 +91,24 @@ public class ProviderHomePage extends BasePage {
 
     @FindBy(xpath = "//h3[contains(text(),'RRP Script Instructions Settings')]")
     protected WebElement txtRRPScriptInstructionsSettings;
+
+    @FindBy(how = How.XPATH, using = "//input[@data-placeholder='Email Address' or @data-placeholder='Email address']")
+    protected WebElement txtBoxEmail;
+
+    @FindBy(how = How.XPATH, using = "//input[@data-placeholder='Password']")
+    protected WebElement txtBoxPassword;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Login']")
+    protected WebElement betaLoginBtn;
+    @FindBy(how = How.XPATH, using = "//span[text()='Sign in']")
+    protected WebElement SignInBtn;
+
+    @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome,') or contains(text(),'Start managing your health, today')])[1]")
+    protected WebElement elmntVerifyHomePage;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='appVersion']/small")
+    protected WebElement txtAppVersion;
+
 
     @FindBy(xpath = "//h3[contains(text(),'RRP Script Instructions Settings')]")
     protected WebElement txtMobileRRPScriptInstructionsSettings;
@@ -119,6 +149,91 @@ public class ProviderHomePage extends BasePage {
         }
         return blResult;
     }
+
+    public void enterEmailForBeta(String strEmail) {
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(3);
+        if (verifyElement(txtBoxEmail)) {
+            waitForSeconds(3);
+            waitForElementClickable(txtBoxEmail);
+            enterValue(txtBoxEmail, strEmail);
+        }
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForSeconds(3);
+        if (!verifyElement(txtBoxEmail)) {
+            System.out.println("User here in home page");
+        }
+
+    }
+
+    public void enterPasswordForBeta(String strPassword) {
+        if (verifyElement(txtBoxPassword)) {
+            waitForElementClickable(txtBoxPassword);
+            enterValue(txtBoxPassword, strPassword);
+        }
+        if (!verifyElement(txtBoxPassword)) {
+            System.out.println("User here in home page");
+        }
+
+    }
+    public void Providervisit() {
+        int WindowsCount = driver.getWindowHandles().size();
+        System.out.println("===============>WindowsCount::" + WindowsCount);
+        if (WindowsCount == 2) {
+            focusWindow(1);
+            visit(TestDataUtil.getValue("&URL&"));
+        }
+
+    }
+    public boolean clickproviderLoginButton() {
+        boolean blResult = false;
+        try {
+            int WindowsCount = driver.getWindowHandles().size();
+            System.out.println("===============>WindowsCount::" + WindowsCount);
+            if (WindowsCount == 2) {
+                focusWindow(1);
+                waitForElement(betaLoginBtn);
+                click(betaLoginBtn);
+                blResult = true;
+            }
+        } catch (Exception e) {
+
+        }
+        return blResult;
+    }
+
+    public void clickSignInButton() {
+        waitForSeconds(3);
+        if (verifyElement(SignInBtn)) {
+//            waitForElement(SignInBtn);
+            waitForSeconds(3);
+            jsClick(SignInBtn);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        } else if (!verifyElement(SignInBtn)) {
+            System.out.println("user already in the home page");
+        }
+    }
+
+    public boolean verifyHomePageOfMMHPortal() {
+        waitForSeconds(5);
+        waitForElement(elmntVerifyHomePage);
+        if (verifyElement(txtAppVersion)) {
+            strAppVersion = txtAppVersion.getText();
+            System.out.printf("TxtAPPVersion"+strAppVersion);
+        }
+        Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+        strBrowserName = cap.getBrowserName();
+        strBrowserVersion = cap.getVersion();
+        try {
+            strSystemName = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        takeScreenshot(driver);
+        return verifyElement(elmntVerifyHomePage);
+    }
+
+
 
     public boolean navigateToMobileRepeatScriptFeeMessageSettings(String strName) {
         boolean blResult = false;
@@ -706,6 +821,37 @@ public class ProviderHomePage extends BasePage {
             e.printStackTrace();
         }
         return blResult;
+    }
+
+    public boolean clickProviderLogoutButton() {
+        boolean isVerified = false;
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            jsScrollIntoView(elmntDashboard);
+            waitForElement(elmntDashboard);
+            jsClick(elmntDashboard);
+            waitForElement(elmntDashboard);
+            click(elmntDashboard);
+            waitForSeconds(3);
+            jsClick(btnExitApp);
+            waitForElement(txtProviderPortal);
+            isVerified = verifyElement(txtProviderPortal);
+        }
+
+        return isVerified;
+    }
+
+    public boolean clickMMHLogo() {
+        boolean isVerified = false;
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            takeScreenshot(driver);
+            waitForElement(elmntMMHLogo);
+            click(elmntMMHLogo);
+            waitForElement(txtProviderPortal);
+            isVerified = verifyElement(txtProviderPortal);
+        }
+
+
+        return isVerified;
     }
 
 
