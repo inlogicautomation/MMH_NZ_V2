@@ -996,7 +996,8 @@ public class ProviderWebSteps {
     public void iNavigateToTurnOffOnlineAppointmentsAndEnableTurnOffOnlineAppointmentsCheckboxClickSaveButtonThenISeeTurnedOffMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickTurnoffAppointments());
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
-        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickTurnOffOnlineAppointmentsCheckBoxUnchecked());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickTurnOffOnlineAppointmentsCheckBoxchecked());
+
 //        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
 
     }
@@ -1006,7 +1007,7 @@ public class ProviderWebSteps {
     public void iLogOutFromProviderAndSearchForHealthCentreVerifyOnlineAppointmentIsNotDisplayedForEasyBookingAnd(String LocationData, String ProviderLoginData) {
         List<String> strdata=TestDataUtil.getListOfValue(ProviderLoginData);
         Assert.assertTrue(providerPageContainer.providerHomePage.clickProviderLogoutButton());
-        Assert.assertTrue(providerPageContainer.appointmentSettingPage.EnterValueinSearchBox(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.EnterValueinSearchBoxVerifyAppointmentsSlotIsNotDisplayed(LocationData));
         Assert.assertTrue(providerPageContainer.providerHomePage.clickMMHLogo());
         providerPageContainer.providerHomePage.Providervisit();
         Assert.assertTrue(providerPageContainer.providerHomePage.clickproviderLoginButton());
@@ -1015,5 +1016,40 @@ public class ProviderWebSteps {
         providerPageContainer.providerHomePage.clickSignInButton();
         Assert.assertTrue(providerPageContainer.providerHomePage.verifyHomePageOfMMHPortal());
 
+    }
+
+    @And("I navigate to Turn On Online Appointments {string} and Enable turn-on online appointments checkbox click save button then I see turned-off Message")
+    public void iNavigateToTurnOnOnlineAppointmentsAndEnableTurnOnOnlineAppointmentsCheckboxClickSaveButtonThenISeeTurnedOffMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickTurnoffAppointments());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickTurnOnOnlineAppointmentsCheckBoxUnchecked());
+
+    }
+
+    @And("I Log Out from Provider and Search for Health Centre Verify Online Appointment Slot is displayed for Easy booking{string}and{string}")
+    public void iLogOutFromProviderAndSearchForHealthCentreVerifyOnlineAppointmentSlotIsDisplayedForEasyBookingAnd(String LocationData, String ProviderLoginData) {
+        List<String> strdata=TestDataUtil.getListOfValue(ProviderLoginData);
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickProviderLogoutButton());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.EnterValueinSearchBoxVerifyAppointmentsSlotIsNotDisplayed(LocationData));
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickMMHLogo());
+        providerPageContainer.providerHomePage.Providervisit();
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickproviderLoginButton());
+        providerPageContainer.providerHomePage.enterEmailForBeta(TestDataUtil.getValue(strdata.get(0)));
+        providerPageContainer.providerHomePage.enterPasswordForBeta(TestDataUtil.getValue(strdata.get(1)));
+        providerPageContainer.providerHomePage.clickSignInButton();
+        Assert.assertTrue(providerPageContainer.providerHomePage.verifyHomePageOfMMHPortal());
+    }
+
+    @When("I navigate to Turn Off Appointment Audit page")
+    public void iNavigateToTurnOffAppointmentAuditPage() {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickTurnOffAppointmentsAudit());
+
+    }
+
+
+    @Then("I Should see Turn Off Appointments audit details displayed grid view {string}")
+    public void iShouldSeeTurnOffAppointmentsAuditDetailsDisplayedGridView(String LocationData) {
+
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.verifyAppointmentsAuditDetailsGridView(LocationData));
     }
 }

@@ -255,7 +255,7 @@ Feature: Appointment Setting
       | VM03Location | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
   Scenario Template:S14-Provider Turn Off Online Appointments verify No Available appointment slot Text is displayed in Appointment Page
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -266,3 +266,29 @@ Feature: Appointment Setting
     Examples:
       | Location     | Provider_Login           | Appointment_Details      | Appointment      |
       | VM03Location | &PROVIDER_LOGIN_DETAILS& | &BOOK_VISIT_APPOINTMENT& | Book Appointment |
+
+
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  Scenario Template:S15-Provider Turn on Online Appointments verify Available appointment slot Text is displayed in Appointment Page
+
+    Given As a Provider I am on HomePage and navigate to Appointment Setting page
+    And I navigate to Turn On Online Appointments "<Location>" and Enable turn-on online appointments checkbox click save button then I see turned-off Message
+    And I Log Out from Provider and Search for Health Centre Verify Online Appointment Slot is displayed for Easy booking"<Location>"and"<Provider_Login>"
+    When As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
+    And I navigate to Book Appointment then I enter the visit appointment details "<Appointment>" and "<Appointment_Details>"
+    Examples:
+      | Location     | Provider_Login           | Appointment_Details      | Appointment      |
+      | VM03Location | &PROVIDER_LOGIN_DETAILS& | &BOOK_VISIT_APPOINTMENT& | Book Appointment |
+
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
+  Scenario Template:S16-Provider View Turn Off Appointments Audit verify Check Turn Off Appointments audit grid displayed
+
+    Given As a Provider I am on HomePage and navigate to Appointment Setting page
+    And I navigate to Turn Off Online Appointments "<Location>" and Enable turn-off online appointments checkbox click save button then I see turned-off Message
+    When I navigate to Turn Off Appointment Audit page
+    Then I Should see Turn Off Appointments audit details displayed grid view "<Appointments_Audit_Details>"
+
+    Examples:
+      | Location     | Appointments_Audit_Details |
+      | VM03Location | &APPOINTMENT_AUDIT_DATA&   |
+

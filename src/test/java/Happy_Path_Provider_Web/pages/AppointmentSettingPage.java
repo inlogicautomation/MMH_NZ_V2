@@ -8,11 +8,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.util.List;
+
+import static cap.utilities.DateUtil.getCurrentDate;
+
 public class AppointmentSettingPage extends BasePage {
     public AppointmentSettingPage(WebDriver driver) {
         super(driver);
 
     }
+
+    public static String strTime;
 
     @FindBy(how = How.XPATH, using = "//span[text()='Appointment Settings']")
     protected WebElement elmntAppointmentSetting;
@@ -30,8 +36,26 @@ public class AppointmentSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[text()='Turn-Off Appointments']")
     protected WebElement elmntTurnOffAppointments;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Turn-Off Appointments Audit')]")
+    protected WebElement elmntTurnOffAppointmentsAudit;
+
+
     @FindBy(how = How.XPATH, using = "//h1[text()='Turn-Off Appointments']")
     protected WebElement elmntTurnOffAppointmentsHeader;
+
+    @FindBy(how = How.XPATH, using = " //h1[contains(text(),'Turn-Off Appointments Audit')]")
+    protected WebElement elmntTurnOffAppointmentsAuditHeader;
+
+    protected String strAppointmentAudit = new StringBuilder()
+            .append("//td[text()='")
+            .append("<<REPLACEMENT1>>").append("']//following::td[contains(text(),'")
+            .append("<<REPLACEMENT2>>").append("')]//following::td[contains(text(),'")
+            .append("<<REPLACEMENT3>>").append("')]//following::td[contains(text(),'")
+            .append("<<REPLACEMENT4>>").append("')]//following-sibling::td[text()='")
+            .append("<<REPLACEMENT5>>").append("']").toString();
+
+//td[text()='VM03Location']//following::td[contains(text(),'Tim')]//following::td[contains(text(),'04 Apr 2023')]//following::td[contains(text(),'07:48 AM')]//following-sibling::td[text()='Turned On']
+
 
     @FindBy(how = How.XPATH, using = "//span[text()=' Edit ']")
     protected WebElement elmntEditButton;
@@ -52,6 +76,10 @@ public class AppointmentSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h2[text()='VM03Location']//following::a[text()='Book now'])[1]")
     protected WebElement clickVM03LocationBookNowButton;
 
+    @FindBy(how = How.XPATH, using = "//div[@class='slot-start-time']")
+    protected WebElement elmntSlotTimes;
+
+
 
     @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Use this form to request non urgent appointments')]")
     protected WebElement AppointmentTimeSlotsisNotDisplaying;
@@ -60,7 +88,7 @@ public class AppointmentSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@aria-checked='true']")
     protected WebElement elmntTurnOffOnlineAppointmentsCheckBoxChecked;
     @FindBy(how = How.XPATH, using = "//input[@aria-checked='false']")
-    protected WebElement elmntTurnOffOnlineAppointmentsCheckBoxUnchecked;
+    protected WebElement elmntTurnOnOnlineAppointmentsCheckBoxUnchecked;
 
 
     //mat-checkbox[@formcontrolname='turnOffOnlinechecked']//input
@@ -454,7 +482,9 @@ public class AppointmentSettingPage extends BasePage {
         return blresult;
     }
 
-    public boolean clickTurnOffOnlineAppointmentsCheckBoxUnchecked() {
+
+
+    public boolean clickTurnOffOnlineAppointmentsCheckBoxchecked() {
         boolean blresult = false;
         try {
             System.out.println("Entry Turn Off Online Appointments");
@@ -463,8 +493,8 @@ click(elmntEditButton);
            if (isElementDisplayed(elmntTurnOffOnlineAppointmentsCheckBoxChecked)) {
                System.out.println("Turn Off Online Appointments CheckBox Already checked");
            }
-           if (isElementDisplayed(elmntTurnOffOnlineAppointmentsCheckBoxUnchecked)){
-               jsClick(elmntTurnOffOnlineAppointmentsCheckBoxUnchecked);
+           if (isElementDisplayed(elmntTurnOnOnlineAppointmentsCheckBoxUnchecked)){
+               jsClick(elmntTurnOnOnlineAppointmentsCheckBoxUnchecked);
                takeScreenshot(driver);
                verifyElement(elmntTurnOffOnlineAppointmentsCheckBoxChecked);
            }
@@ -473,15 +503,44 @@ click(elmntEditButton);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
             takeScreenshot(driver);
-//            waitForElement(elmntTurnOffSuccessfullyPopup);
-            blresult =true;
+            waitForElement(elmntTurnOffSuccessfullyPopup);
+            blresult =verifyElement(elmntTurnOffSuccessfullyPopup);
+            strTime = getCurrentDate("h:mm");
+            System.out.println(strTime);
         } catch (Exception e) {
             System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
         }
         return blresult;
     }
 
-    public boolean EnterValueinSearchBox(String Strdata) {
+    public boolean clickTurnOnOnlineAppointmentsCheckBoxUnchecked() {
+        boolean blresult = false;
+        try {
+            System.out.println("Entry Turn Off Online Appointments");
+            waitForElement(elmntEditButton);
+            click(elmntEditButton);
+            if (isElementDisplayed(elmntTurnOnOnlineAppointmentsCheckBoxUnchecked)) {
+                System.out.println("Turn Off Online Appointments CheckBox Already Unchecked");
+            }
+            if (isElementDisplayed(elmntTurnOffOnlineAppointmentsCheckBoxChecked)){
+                jsClick(elmntTurnOffOnlineAppointmentsCheckBoxChecked);
+                takeScreenshot(driver);
+                verifyElement(elmntTurnOnOnlineAppointmentsCheckBoxUnchecked);
+            }
+            waitForElement(elmntTurnOffAppointmentsHeader);
+            verifyElement(elmntTurnOffAppointmentsHeader);
+            waitForElement(elmntSaveButton);
+            click(elmntSaveButton);
+            takeScreenshot(driver);
+            waitForElement(elmntTurnOffSuccessfullyPopup);
+            blresult =verifyElement(elmntTurnOffSuccessfullyPopup);
+        } catch (Exception e) {
+            System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
+        }
+        return blresult;
+    }
+
+    public boolean EnterValueinSearchBoxVerifyAppointmentsSlotIsNotDisplayed(String Strdata) {
         boolean blresult = false;
         try {
             waitForElement(elmntSearchBox);
@@ -490,8 +549,66 @@ click(elmntEditButton);
             click(clicksearchicon);
             waitForElement(clickVM03LocationBookNowButton);
             click(clickVM03LocationBookNowButton);
-waitForElement(AppointmentTimeSlotsisNotDisplaying);
-blresult =verifyElement(AppointmentTimeSlotsisNotDisplaying);
+waitForElement(elmntSlotTimes);
+blresult =verifyElement(elmntSlotTimes);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return blresult;
+
+    }
+
+    public boolean EnterValueinSearchBoxVerifyAppointmentsSlotIsDisplayed(String Strdata) {
+        boolean blresult = false;
+        try {
+            waitForElement(elmntSearchBox);
+            elmntSearchBox.sendKeys(Strdata);
+            waitForElement(clicksearchicon);
+            click(clicksearchicon);
+            waitForElement(clickVM03LocationBookNowButton);
+            click(clickVM03LocationBookNowButton);
+            waitForElement(AppointmentTimeSlotsisNotDisplaying);
+            blresult =verifyElement(AppointmentTimeSlotsisNotDisplaying);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return blresult;
+
+    }
+
+    public boolean clickTurnOffAppointmentsAudit() {
+        boolean blresult = false;
+        try {
+            waitForElement(elmntTurnOffAppointmentsAudit);
+            takeScreenshot(driver);
+            jsClick(elmntTurnOffAppointmentsAudit);
+            waitForElement(elmntTurnOffAppointmentsAuditHeader);
+            blresult = verifyElement(elmntTurnOffAppointmentsAuditHeader);
+        } catch (Exception e) {
+            System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
+        }
+        return blresult;
+    }
+
+    public boolean verifyAppointmentsAuditDetailsGridView(String Strdata) {
+        boolean blresult = false;
+        try {
+            List<String>lstDetails=TestDataUtil.getListOfValue(Strdata);
+            String currentDate = getCurrentDate("dd MMM yyyy");
+            System.out.println(">>>getCurrentDate::"+currentDate);
+//            String strTime = getCurrentDate("h:mm aaa");
+            System.out.println(">>>strTime::"+strTime);
+            WebElement elmntAppointmentsAudit = waitForElement(By.xpath(strAppointmentAudit
+                            .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
+                            .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
+                            .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(currentDate))
+                            .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(strTime))
+                            .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(2)))));
+            System.out.println(">>>>elmntAppointmentsAudit"+elmntAppointmentsAudit);
+                    waitForElement(elmntAppointmentsAudit);
+                    blresult =verifyElement(elmntAppointmentsAudit);
         } catch (Exception e) {
             e.printStackTrace();
 

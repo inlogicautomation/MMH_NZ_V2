@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
+import java.time.LocalTime;
+import java.time.ZoneId;
 
 
 
@@ -26,9 +28,19 @@ public class DateUtil {
 
     public static void main(String[] args) {
         String currentDate = getCurrentDate("dd MMM yyyy");
-        System.out.println(currentDate);
+        String currentDat = getCurrentTime();
+//        System.out.println(currentDat);
 
+        String strTime = getCurrentDate("h:mm aaa");
+        System.out.println(strTime);
     }
+
+    public static String getCurrentTime() {
+        String strDateAndTime = "";
+        strDateAndTime = getCurrentDate("h:mm");
+        return strDateAndTime;
+    }
+
 
     /**
      * @return
