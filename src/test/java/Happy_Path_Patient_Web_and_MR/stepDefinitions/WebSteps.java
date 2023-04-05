@@ -4149,6 +4149,18 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.appointmentsPage.VerifyAvialableSlotDateTimeIsNotDisplayed(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
         }
     }
+
+
+
+    @And("I navigate to Block Appointments for Provider and enter the all details{string} click save button then i see Setting saved successfully message")
+    public void iNavigateToBlockAppointmentsForProviderAndEnterTheAllDetailsClickSaveButtonThenISeeSettingSavedSuccessfullyMessage(String strHealthCenter) {
+        List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
+        Assert.assertTrue(demoPageContainer.appointmentsPage.clickBlockAppointmentsForProvider());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+        Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
+        Assert.assertTrue(demoPageContainer.appointmentsPage.selectStaff(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
+
+    }
 }
 
 

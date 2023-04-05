@@ -1052,4 +1052,16 @@ public class ProviderWebSteps {
 
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.verifyAppointmentsAuditDetailsGridView(LocationData));
     }
+
+    @And("I navigate to Turn On Online Appointments {string} and Enable turn-On online appointments checkbox click save button then I see turned-On Message")
+    public void iNavigateToTurnOnOnlineAppointmentsAndEnableTurnOnOnlineAppointmentsCheckboxClickSaveButtonThenISeeTurnedOnMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickTurnoffAppointments());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickTurnOnOnlineAppointmentsCheckBoxchecked());
+    }
+
+    @Then("I Should see Turn On Appointments audit details displayed grid view {string}")
+    public void iShouldSeeTurnOnAppointmentsAuditDetailsDisplayedGridView(String LocationData) {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.verifyTurnOnAppointmentsAuditDetailsGridView(LocationData));
+    }
 }

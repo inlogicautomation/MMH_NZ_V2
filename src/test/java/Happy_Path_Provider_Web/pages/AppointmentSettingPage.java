@@ -46,6 +46,9 @@ public class AppointmentSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = " //h1[contains(text(),'Turn-Off Appointments Audit')]")
     protected WebElement elmntTurnOffAppointmentsAuditHeader;
 
+    @FindBy(how = How.XPATH, using = "(//td)[4]")
+    protected WebElement getTextTurnOffAppointmentsAuditTime;
+
     protected String strAppointmentAudit = new StringBuilder()
             .append("//td[text()='")
             .append("<<REPLACEMENT1>>").append("']//following::td[contains(text(),'")
@@ -487,8 +490,7 @@ public class AppointmentSettingPage extends BasePage {
     public boolean clickTurnOffOnlineAppointmentsCheckBoxchecked() {
         boolean blresult = false;
         try {
-            System.out.println("Entry Turn Off Online Appointments");
-waitForElement(elmntEditButton);
+            waitForElement(elmntEditButton);
 click(elmntEditButton);
            if (isElementDisplayed(elmntTurnOffOnlineAppointmentsCheckBoxChecked)) {
                System.out.println("Turn Off Online Appointments CheckBox Already checked");
@@ -506,7 +508,35 @@ click(elmntEditButton);
             waitForElement(elmntTurnOffSuccessfullyPopup);
             blresult =verifyElement(elmntTurnOffSuccessfullyPopup);
             strTime = getCurrentDate("h:mm");
-            System.out.println(strTime);
+            System.out.println(">>>>>strTime"+strTime);
+        } catch (Exception e) {
+            System.out.println("Cannot verify the Online Appointment booking has been turned-off'] ");
+        }
+        return blresult;
+    }
+
+    public boolean clickTurnOnOnlineAppointmentsCheckBoxchecked() {
+        boolean blresult = false;
+        try {
+            waitForElement(elmntEditButton);
+            click(elmntEditButton);
+            if (isElementDisplayed(elmntTurnOnOnlineAppointmentsCheckBoxUnchecked)) {
+                System.out.println("Turn Off Online Appointments CheckBox Already Unchecked");
+            }
+            if (isElementDisplayed(elmntTurnOffOnlineAppointmentsCheckBoxChecked)){
+                jsClick(elmntTurnOffOnlineAppointmentsCheckBoxChecked);
+                takeScreenshot(driver);
+                verifyElement(elmntTurnOnOnlineAppointmentsCheckBoxUnchecked);
+            }
+            waitForElement(elmntTurnOffAppointmentsHeader);
+            verifyElement(elmntTurnOffAppointmentsHeader);
+            waitForElement(elmntSaveButton);
+            click(elmntSaveButton);
+            takeScreenshot(driver);
+            waitForElement(elmntTurnOnSuccessfullyPopup);
+            blresult =verifyElement(elmntTurnOnSuccessfullyPopup);
+            strTime = getCurrentDate("h:mm");
+            System.out.println(">>>>>strTime"+strTime);
         } catch (Exception e) {
             System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
         }
@@ -532,10 +562,10 @@ click(elmntEditButton);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
             takeScreenshot(driver);
-            waitForElement(elmntTurnOffSuccessfullyPopup);
-            blresult =verifyElement(elmntTurnOffSuccessfullyPopup);
+            waitForElement(elmntTurnOnSuccessfullyPopup);
+            blresult =verifyElement(elmntTurnOnSuccessfullyPopup);
         } catch (Exception e) {
-            System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
+            System.out.println("Cannot verify the Online Appointment booking has been turned-on'] ");
         }
         return blresult;
     }
@@ -600,15 +630,44 @@ blresult =verifyElement(elmntSlotTimes);
             System.out.println(">>>getCurrentDate::"+currentDate);
 //            String strTime = getCurrentDate("h:mm aaa");
             System.out.println(">>>strTime::"+strTime);
+            String time=getTextTurnOffAppointmentsAuditTime.getText();
+            System.out.println(">>>GetTexttime::"+time);
             WebElement elmntAppointmentsAudit = waitForElement(By.xpath(strAppointmentAudit
                             .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
                             .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
                             .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(currentDate))
-                            .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(strTime))
+                            .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(time))
                             .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(2)))));
             System.out.println(">>>>elmntAppointmentsAudit"+elmntAppointmentsAudit);
                     waitForElement(elmntAppointmentsAudit);
                     blresult =verifyElement(elmntAppointmentsAudit);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return blresult;
+
+    }
+
+    public boolean verifyTurnOnAppointmentsAuditDetailsGridView(String Strdata) {
+        boolean blresult = false;
+        try {
+            List<String>lstDetails=TestDataUtil.getListOfValue(Strdata);
+            String currentDate = getCurrentDate("dd MMM yyyy");
+            System.out.println(">>>getCurrentDate::"+currentDate);
+//            String strTime = getCurrentDate("h:mm aaa");
+            System.out.println(">>>strTime::"+strTime);
+            String time=getTextTurnOffAppointmentsAuditTime.getText();
+            System.out.println(">>>GetTexttime::"+time);
+            WebElement elmntAppointmentsAudit = waitForElement(By.xpath(strAppointmentAudit
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
+                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(currentDate))
+                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(time))
+                    .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(3)))));
+            System.out.println(">>>>elmntAppointmentsAudit"+elmntAppointmentsAudit);
+            waitForElement(elmntAppointmentsAudit);
+            blresult =verifyElement(elmntAppointmentsAudit);
         } catch (Exception e) {
             e.printStackTrace();
 

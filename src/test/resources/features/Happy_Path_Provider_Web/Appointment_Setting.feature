@@ -280,7 +280,7 @@ Feature: Appointment Setting
       | Location     | Provider_Login           | Appointment_Details      | Appointment      |
       | VM03Location | &PROVIDER_LOGIN_DETAILS& | &BOOK_VISIT_APPOINTMENT& | Book Appointment |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
   Scenario Template:S16-Provider View Turn Off Appointments Audit verify Check Turn Off Appointments audit grid displayed
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -292,3 +292,26 @@ Feature: Appointment Setting
       | Location     | Appointments_Audit_Details |
       | VM03Location | &APPOINTMENT_AUDIT_DATA&   |
 
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
+  Scenario Template:S17-Provider View Turn On Appointments Audit verify Check Turn On Appointments audit grid view displayed
+
+    Given As a Provider I am on HomePage and navigate to Appointment Setting page
+    And I navigate to Turn On Online Appointments "<Location>" and Enable turn-On online appointments checkbox click save button then I see turned-On Message
+    When I navigate to Turn Off Appointment Audit page
+    Then I Should see Turn On Appointments audit details displayed grid view "<Appointments_Audit_Details>"
+    Examples:
+      | Location     | Appointments_Audit_Details |
+      | VM03Location | &APPOINTMENT_AUDIT_DATA&   |
+
+
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
+  Scenario Template:S17-Provider Block Appointments doctor Name verify Check Turn On Appointments audit grid displayed
+
+    Given As a Provider I am on HomePage and navigate to Appointment Setting page
+    And I navigate to Block Appointments for Provider and enter the all details"<Appointment_Details>" click save button then i see Setting saved successfully message
+
+
+
+    Examples:
+      | Appointment_Details |
+      | &BLOCK_APPOINTMENT& |

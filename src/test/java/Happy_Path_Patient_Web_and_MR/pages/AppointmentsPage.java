@@ -49,6 +49,13 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'page-content')]")
     protected WebElement elmntAppointmentPanel;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Block Appointments For Provider')]")
+    protected WebElement elmntBlockAppointmentsForProvider;
+
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Block Online Appointments for Provider')]")
+    protected WebElement elmntBlockAppointmentsForProviderHeader;
+
+
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT')]/i")
     protected WebElement elmntBookAppointment;
 
@@ -98,6 +105,9 @@ public class AppointmentsPage extends BasePage {
     protected String elmntLocation = new StringBuilder().append("//h6[text()='")
             .append("<<REPLACEMENT>>").append("']").toString();
 
+    protected String elmntStaffName = new StringBuilder().append("//h6[text()='")
+            .append("<<REPLACEMENT>>").append("']").toString();
+
     protected String elmntProviderNames = new StringBuilder().append("//p[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
@@ -107,6 +117,8 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationCenter']")
     protected WebElement elmntLocationCenter;
 
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='provider']")
+    protected WebElement elmntProviderStaff;
     @FindBy(how = How.XPATH, using = "//mat-chip[@class='mat-chip mat-focus-indicator mat-primary mat-standard-chip ng-star-inserted']")
     protected WebElement getDefaultLocationDoctorName;
 
@@ -3209,6 +3221,39 @@ public class AppointmentsPage extends BasePage {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Cannot Verify the Appointment the appointment is For DropDown");
+        }
+        return blResult;
+    }
+
+    public boolean clickBlockAppointmentsForProvider() {
+        boolean blresult = false;
+        try {
+            waitForElement(elmntBlockAppointmentsForProvider);
+
+            jsClick(elmntBlockAppointmentsForProvider);
+            takeScreenshot(driver);
+            waitForElement(elmntBlockAppointmentsForProviderHeader);
+            verifyElement(elmntBlockAppointmentsForProviderHeader);
+            blresult =true;
+        } catch (Exception e) {
+            System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
+        }
+        return blresult;
+    }
+
+    public boolean selectStaff(String strLocation) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(elmntProviderStaff);
+            click(elmntLocationCenter);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>", strLocation)));
+            jsClick(elmntSelectLocation);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return blResult;
     }
