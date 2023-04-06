@@ -1064,4 +1064,6 @@ public class ProviderWebSteps {
     public void iShouldSeeTurnOnAppointmentsAuditDetailsDisplayedGridView(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.verifyTurnOnAppointmentsAuditDetailsGridView(LocationData));
     }
+
+
 }

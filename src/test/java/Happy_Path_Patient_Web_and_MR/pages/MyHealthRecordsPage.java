@@ -151,7 +151,14 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[contains(text(),' Sign Out ')]")
     protected WebElement elmntSignout;
 
+    @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator mat-icon-button mat-button-base'])[1]")
+    protected WebElement elmntBlockAppointmentsforProviderstartdate;
 
+    @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator mat-icon-button mat-button-base'])[2]")
+    protected WebElement elmntBlockAppointmentsforProviderEnddate;
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='startTime']")
+    protected WebElement elmntBlockOnlineAppointmentsStartTime;
     protected String strClinicalNotesIconLocator = new StringBuilder()
             .append("//td[text()='")
             .append("<<REPLACEMENT1>>").append("']/following-sibling::td[text()='")
@@ -161,6 +168,9 @@ public class MyHealthRecordsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//span[text()='Allergies']")
     protected WebElement elmntAllergies;
+
+    protected String elmntBlockAppointment = new StringBuilder().append(" //span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]").toString();
 
     protected String strAllergiesNotesIconLocator = new StringBuilder()
             .append("//td[text()='")
@@ -4104,6 +4114,50 @@ jsScrollIntoView(elmntClinicianNotes);
         jsClick(elmntSignout);
 
 
+    }
+
+    public void enterBlockAppointmentsforProviderStartDate() {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForElement(elmntBlockAppointmentsforProviderstartdate);
+            click(elmntBlockAppointmentsforProviderstartdate);
+            String strDateFormat = "d";
+            String strDay = "TOMORROW";
+            String strDate = DateUtil.getDate(strDay, strDateFormat);
+            System.out.println("Current Day ::>>" + strDate);
+            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
+            click(elmntDayAfterDate);
+        }
+
+    }
+    public void enterBlockAppointmentsforProviderEndDate() {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForElement(elmntBlockAppointmentsforProviderEnddate);
+            click(elmntBlockAppointmentsforProviderEnddate);
+            String strDateFormat = "d";
+            String strDay = "TOMORROW";
+            String strDate = DateUtil.getDate(strDay, strDateFormat);
+            System.out.println("Current Day ::>>" + strDate);
+            WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));
+            click(elmntDayAfterDate);
+        }
+
+    }
+
+    public boolean selectStartTime(String strLocation) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(elmntBlockOnlineAppointmentsStartTime);
+            click(elmntBlockOnlineAppointmentsStartTime);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntBlockAppointment.replace("<<REPLACEMENT>>", strLocation)));
+            jsClick(elmntSelectLocation);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
     }
 }
 

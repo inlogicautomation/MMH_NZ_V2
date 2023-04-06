@@ -119,6 +119,16 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='provider']")
     protected WebElement elmntProviderStaff;
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='startTime']")
+    protected WebElement elmntBlockOnlineAppointmentsStartTime;
+
+    protected String elmntBlockAppointment = new StringBuilder().append(" //span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]").toString();
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='endTime']")
+    protected WebElement elmntBlockOnlineAppointmentsEndTime;
+
     @FindBy(how = How.XPATH, using = "//mat-chip[@class='mat-chip mat-focus-indicator mat-primary mat-standard-chip ng-star-inserted']")
     protected WebElement getDefaultLocationDoctorName;
 
@@ -3249,6 +3259,57 @@ public class AppointmentsPage extends BasePage {
             click(elmntLocationCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>", strLocation)));
+            jsClick(elmntSelectLocation);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectStartTime(String strLocation) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(elmntBlockOnlineAppointmentsStartTime);
+            click(elmntBlockOnlineAppointmentsStartTime);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntBlockAppointment.replace("<<REPLACEMENT>>", strLocation)));
+            jsClick(elmntSelectLocation);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectEndTime(String strLocation) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(elmntBlockOnlineAppointmentsEndTime);
+            click(elmntBlockOnlineAppointmentsEndTime);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntBlockAppointment.replace("<<REPLACEMENT>>", strLocation)));
+            jsClick(elmntSelectLocation);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectSaveButton(String strLocation) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(elmntBlockOnlineAppointmentsEndTime);
+            click(elmntBlockOnlineAppointmentsEndTime);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntBlockAppointment.replace("<<REPLACEMENT>>", strLocation)));
             jsClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
