@@ -22,9 +22,6 @@ Feature: Dashboard
       | &EMAIL FOR DASHBOARD& | &PASSWORD FOR DASHBOARD& |
 
 
-
-
-
 #  9	Dashboard	Login as Existing patient & click on Dashboard
 #  11	Dashboard	Navigate to book appointment page by clicking Book appointment Option(text) in Upcoming appointments card in dash board
 #  20	Dashboard	Navigate to My Health Indicators page by clicking View all Indicators option (text) in My Health Indicators card

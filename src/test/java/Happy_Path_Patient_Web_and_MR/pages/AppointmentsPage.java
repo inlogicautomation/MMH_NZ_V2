@@ -475,7 +475,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//textarea[@formcontrolname='reason']")
     protected WebElement txtReasonForCancelAppointment;
 
-    @FindBy(how = How.XPATH, using = "(//h3[contains(text(),'Future Appointments')])[1]")
+    @FindBy(how = How.XPATH, using = "(//h3[contains(text(),' Upcoming Appointments')])[2]")
     protected WebElement elmntFutureAppointment;
 
     @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment'])[1]")

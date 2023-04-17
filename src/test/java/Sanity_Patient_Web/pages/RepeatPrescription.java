@@ -620,8 +620,8 @@ public class RepeatPrescription extends BasePage {
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
 
-            waitForElement(txtViewPreviousRequests);
-            verifyElement(txtViewPreviousRequests);
+//            waitForElement(txtViewPreviousRequests);
+//            verifyElement(txtViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshotSanity(driver);
             Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));

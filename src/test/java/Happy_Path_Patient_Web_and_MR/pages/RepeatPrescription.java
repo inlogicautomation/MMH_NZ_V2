@@ -299,7 +299,7 @@ public class RepeatPrescription extends BasePage {
 
     protected String txtRRPSuccessPopUp1 = "//h4 [contains(text(),'Success!')]/following::p[contains(text(),'Your request has been sent successfully. Once the request has been processed, you will get an email confirmation.')]/parent::div";
 
-    @FindBy(how = How.XPATH, using = "//span[text()=' Back to RRP ']")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Next')]")
     protected WebElement btnBackToRRP;
 
     @FindBy(how = How.XPATH, using = "//input[@id='Account2Account' or @value='Account2Account']/parent::div")
@@ -2133,9 +2133,10 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
 //            verifyElement(elmntOnlineCardSuccessPopUp);
 //            waitForSeconds(4);
             takeScreenshot(driver);
+
+            waitForElementClickable(btnBackToRRP);
+            click(btnBackToRRP);
             driver.switchTo().defaultContent();
-//            waitForElementClickable(btnBackToRRP);
-//            click(btnBackToRRP);
             waitForElementToAppear(driver, By.xpath(btnBackPaymentConfirmation1));
             jsScrollIntoView(btnBackPaymentConfirmation);
             waitForElementClickable(btnBackPaymentConfirmation);
