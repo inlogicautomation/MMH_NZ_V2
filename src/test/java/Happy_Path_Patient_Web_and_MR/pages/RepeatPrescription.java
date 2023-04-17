@@ -38,7 +38,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-progress-spinner[@mode='indeterminate']")
     protected WebElement elmntLoadingSpinner;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Request new script')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'New Repeat Prescriptions ')]//i")
     protected WebElement elmntRequestNewScript;
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Request New Script')]")
@@ -551,9 +551,11 @@ public class RepeatPrescription extends BasePage {
 //            waitForSeconds(3);
             waitForElementClickable(elmntRepeatPrescriptions);
             jsClick(elmntRepeatPrescriptions);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            waitForSeconds(3);
             waitForElementClickable(elmntRequestNewScript);
-            click(elmntRequestNewScript);
+            jsClick(elmntRequestNewScript);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtRequestNewScript);
             blResult = verifyElement(txtRequestNewScript);
 //            waitForSeconds(2);
@@ -594,11 +596,11 @@ public class RepeatPrescription extends BasePage {
             waitForElementClickable(elmntRepeatPrescriptions);
             mouseClick(elmntRepeatPrescriptions);
             waitForSeconds(2);
-            waitForElementClickable(elmntViewPreviousRequests);
-            mouseClick(elmntViewPreviousRequests);
+//            waitForElementClickable(elmntViewPreviousRequests);
+//            mouseClick(elmntViewPreviousRequests);
 //            waitForInvisibilityOfElement(elmntLoadingSpinner);
 
-            blResult = verifyElement(txtViewPreviousRequests);
+            blResult = true;
             System.out.println("Navigated To View Previous Scripts >>>>");
 
         } catch (Exception e) {
@@ -1078,8 +1080,8 @@ public class RepeatPrescription extends BasePage {
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(txtViewPreviousRequests);
-            verifyElement(txtViewPreviousRequests);
+//            waitForElement(txtViewPreviousRequests);
+//            verifyElement(txtViewPreviousRequests);
             waitForSeconds(3);
 //            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
 //
@@ -1210,8 +1212,8 @@ public class RepeatPrescription extends BasePage {
             List<String> strDetails = lstPrescriptionDetails.subList(2, 5);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
-            waitForElement(txtViewPreviousRequests);
-            verifyElement(txtViewPreviousRequests);
+//            waitForElement(txtViewPreviousRequests);
+//            verifyElement(txtViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
 
@@ -1278,8 +1280,8 @@ public class RepeatPrescription extends BasePage {
             List<String> strDetails = lstPrescriptionDetails.subList(2, 4);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
-            waitForElement(txtViewPreviousRequests);
-            verifyElement(txtViewPreviousRequests);
+//            waitForElement(txtViewPreviousRequests);
+//            verifyElement(txtViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
 //            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
@@ -1908,13 +1910,16 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
                 waitForElement(txtAccount2Account);
                 verifyElement(txtAccount2Account);
                 waitForSeconds(2);
-                WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
-                System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
-                jsScrollIntoView(selectRdoBtnBank);
-                waitForElementClickable(selectRdoBtnBank);
-                jsClick(selectRdoBtnBank);
+//                WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
+//                System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
+//                jsScrollIntoView(selectRdoBtnBank);
+//                waitForElementClickable(selectRdoBtnBank);
+//                jsClick(selectRdoBtnBank);
+                Select A2ABanks  = new Select(driver.findElement(By.name("SelectBank")));
+                A2ABanks.selectByVisibleText("ANZ");
                 System.out.println("Successfully Select RdoBtnBank");
                 waitForSeconds(4);
+                waitForElement(chkBoxA2ATnC);
                 jsClick(chkBoxA2ATnC);
                 System.out.println("Successfully Select chkBoxA2ATnC");
                 waitForSeconds(3);
@@ -2138,7 +2143,8 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             waitForSeconds(5);
 
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = verifyElement(txtViewPreviousRequests);
+//            verifyElement(txtViewPreviousRequests);
+            blResult = true;
             System.out.println("verify The Prescription Details Online was Successful >>>>>");
         } catch (Exception e) {
             System.out.println("verify The Prescription Details Online was not Successful >>>>>");

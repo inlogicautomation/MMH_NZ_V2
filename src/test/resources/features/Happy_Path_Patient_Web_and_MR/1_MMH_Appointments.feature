@@ -29,7 +29,7 @@ Feature: Appointments
 
     Examples:
       | Appointment         |
-      | Future Appointments |
+      | Upcoming Appointments |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S5 - Patient Booking Appointment - Using Card Payment
@@ -96,7 +96,7 @@ Feature: Appointments
 
     Examples:
       | Appointment         | Appointment_Cancel_Button        | Appointment_After_Cancel              |
-      | Future Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+      | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S2 - Patient Booking Appointment - Video Appointment
@@ -136,7 +136,7 @@ Feature: Appointments
 
     Examples:
       | Appointment         | Join_Consultation                                 | All_Icons     |
-      | Future Appointments | &APPOINTMENT_DETAILS_FOR_JOIN_VIDEO_CONSULTATION& | &VIDEO_ICONS& |
+      | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_JOIN_VIDEO_CONSULTATION& | &VIDEO_ICONS& |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S3 - Patient Booking Appointment - Visit in video slot Appointment
@@ -178,8 +178,8 @@ Feature: Appointments
     Then I should see all the future date appointments in card view
 
     Examples:
-      | Appointments        |
-      | Future appointments |
+      | Appointments          |
+      | Upcoming Appointments |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S7 - Patient can view all the future date booked appointments in grid view
@@ -189,8 +189,8 @@ Feature: Appointments
     Then I should see all the future date appointments in grid view
 
     Examples:
-      | Tab                 |
-      | Future Appointments |
+      | Tab                   |
+      | Upcoming Appointments |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S8 - Patient can view all the past date booked appointments in card view

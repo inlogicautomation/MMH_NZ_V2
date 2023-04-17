@@ -108,7 +108,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[contains(@class,'header')]/span[text()='Messages']//following-sibling::mat-icon")
     protected WebElement btnMessagesExpand;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Future Appointments')]")
+    @FindBy(how = How.XPATH, using = "(//h3[contains(text(),' Upcoming Appointments')])[1]")
     protected WebElement elmntFutureAppointment;
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Future Appointments')]")
@@ -468,12 +468,13 @@ public class HomePage extends BasePage {
     public boolean clickDashBoard() {
         boolean isVerified = false;
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            waitForElementToAppear(driver,By.xpath(elmntSpinner));
+//            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(3);
             waitForElement(elmntDashboard);
             jsScrollIntoView(elmntDashboard);
             waitForElement(elmntDashboard);
-            click(elmntDashboard);
+            jsClick(elmntDashboard);
             takeScreenshot(driver);
 //            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));

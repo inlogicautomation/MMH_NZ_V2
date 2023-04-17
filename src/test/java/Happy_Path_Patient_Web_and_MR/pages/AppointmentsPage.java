@@ -59,12 +59,12 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT')]/i")
     protected WebElement elmntBookAppointment;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Future appointments')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Upcoming Appointments')]")
     protected WebElement elmntWebFutureAppointment;
     @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Let’s book your appointment.')]")
     protected WebElement VerflyMobileBookAppointmentPage;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),' Future Appointments')]")
+    @FindBy(how = How.XPATH, using = "(//h3[contains(text(),'Upcoming Appointments')])[1]")
     protected WebElement VerflyWebFutureAppointmentPage;
 
 
@@ -331,7 +331,7 @@ public class AppointmentsPage extends BasePage {
             .append("<<REPLACEMENT2>>")
             .append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Future Appointments')]")
+    @FindBy(how = How.XPATH, using = "(//h3[contains(text(),'Upcoming Appointments')])[1]")
     protected WebElement elmntFutureAppointmentTab;
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Future Appointments')]")

@@ -36,7 +36,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Prescriptions')]")
     protected WebElement elmntPrescriptions;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Clinician Notes')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Clinician Notes')]")
     protected WebElement elmntClinicianNotes;
 
     @FindBy(how = How.XPATH, using = "(//h3[text()='Prescriptions'])[1]")
@@ -87,8 +87,12 @@ public class MyHealthRecordsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//mat-option//child::span[normalize-space(text())='My Entries']")
     protected WebElement elmntFilterdropMyEntries;
-    protected String elmntFilterbyDrop = new StringBuilder().append(" //div[contains(text(),'")
+    protected String elmntFilterbyDrop = new StringBuilder().append(" (//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[2]").toString();
+
+    protected String elmntFilterbyAllergiesDrop = new StringBuilder().append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
+
 
     //div[contains(text(),'Prescriptions')]
     @FindBy(how = How.XPATH, using = "//span[text()='Conditions']")
@@ -200,7 +204,7 @@ public class MyHealthRecordsPage extends BasePage {
             .append("<<REPLACEMENT2>>").append("']/following-sibling::td[text()='")
             .append("<<REPLACEMENT3>>").append("']/following-sibling::td[text()='")
             .append("<<REPLACEMENT4>>").append("']/following-sibling::td//following-sibling::span[@class=\"mat-ripple mat-button-ripple\"]").toString();
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Lab Results')]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Lab Results')])[1]")
     protected WebElement elmntLabResults;
 
 
@@ -237,7 +241,7 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement elmntDownArrow1;
 
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Recalls')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Recalls')]")
     protected WebElement elmntRecalls;
 
 
@@ -1013,7 +1017,7 @@ public class MyHealthRecordsPage extends BasePage {
             click(btnMyHealthRecordsExpand);
 //            waitForElementClickable(elmntConditions);
 //            jsClick(elmntConditions);
-            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strdata)));
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyAllergiesDrop.replace("<<REPLACEMENT>>", strdata)));
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
@@ -1147,7 +1151,7 @@ public class MyHealthRecordsPage extends BasePage {
 //            jsClick(elmntClinicalNotes);
             waitForSeconds(3);
 jsScrollIntoView(elmntClinicianNotes);
-            WebElement elmntEntriesFromHealthCentre = waitForElementClickable(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strdata)));
+            WebElement elmntEntriesFromHealthCentre = waitForElementClickable(By.xpath(elmntFilterbyAllergiesDrop.replace("<<REPLACEMENT>>", strdata)));
             jsScrollIntoView(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -1324,7 +1328,7 @@ jsScrollIntoView(elmntClinicianNotes);
             click(btnMyHealthRecordsExpand);
 //            waitForElementClickable(elmntAllergies);
 //            jsClick(elmntAllergies);
-            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strdata)));
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyAllergiesDrop.replace("<<REPLACEMENT>>", strdata)));
             jsClick(elmntEntriesFromHealthCentre);
 
         }
@@ -1362,7 +1366,7 @@ jsScrollIntoView(elmntClinicianNotes);
             click(btnMyHealthRecordsExpand);
 //            waitForElementClickable(elmntImmunisations);
 //            jsClick(elmntImmunisations);
-            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strdata)));
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyAllergiesDrop.replace("<<REPLACEMENT>>", strdata)));
             jsClick(elmntEntriesFromHealthCentre);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
