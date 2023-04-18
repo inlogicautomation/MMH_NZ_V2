@@ -205,6 +205,7 @@ public class HomePage extends BasePage {
     }
 
     public void enterPasswordForBeta(String strPassword) {
+        System.out.println(">>>>>Password"+strPassword);
         if (verifyElement(txtBoxPassword)) {
             waitForElementClickable(txtBoxPassword);
             enterValue(txtBoxPassword, strPassword);

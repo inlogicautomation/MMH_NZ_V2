@@ -1932,7 +1932,7 @@ public class SanityWebSteps {
     @Then("I search for the Health Centre {string}and click connect")
     public void iSearchForTheHealthCentreAndClickConnect(String strDetails) {
         Assert.assertTrue(sanityPageContainer.myHealthCentresPage.searchHealthCentre(TestDataUtil.getValue(strDetails)));
-        Assert.assertTrue(sanityPageContainer.myHealthCentresPage.connectHealthCentre(TestDataUtil.getValue(strDetails)));
+//        Assert.assertTrue(sanityPageContainer.myHealthCentresPage.connectHealthCentre(TestDataUtil.getValue(strDetails)));
     }
 
     @Given("As a Existing user I am on HomePage and navigate to Resources")

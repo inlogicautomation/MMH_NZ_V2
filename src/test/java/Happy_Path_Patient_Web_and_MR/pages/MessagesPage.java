@@ -821,8 +821,13 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//a[@class='download-file mail-download-file'])[2]")
     protected WebElement btnMobileInboxAttachButton;
 
-    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Timprefer!')]")
-    protected WebElement txtWelcome;
+
+
+    @FindAll({
+            @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Timprefer!')]"),
+            @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Steve!')]")
+    })
+protected WebElement txtWelcome;
 
     @FindBy(xpath = "//a[@class='navbar-brand']")
     protected WebElement elmtMMHLogo;

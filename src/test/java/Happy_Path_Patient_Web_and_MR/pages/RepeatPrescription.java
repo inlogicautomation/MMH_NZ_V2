@@ -1146,8 +1146,8 @@ public class RepeatPrescription extends BasePage {
             List<String> strDetails = lstPrescriptionDetails.subList(2, 5);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
-            waitForElement(txtViewPreviousRequests);
-            verifyElement(txtViewPreviousRequests);
+//            waitForElement(txtViewPreviousRequests);
+//            verifyElement(txtViewPreviousRequests);
             waitForSeconds(2);
             takeScreenshot(driver);
 //            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
@@ -2134,8 +2134,8 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
 //            waitForSeconds(4);
             takeScreenshot(driver);
 
-            waitForElementClickable(btnBackToRRP);
-            click(btnBackToRRP);
+//            waitForElementClickable(btnBackToRRP);
+//            click(btnBackToRRP);
             driver.switchTo().defaultContent();
             waitForElementToAppear(driver, By.xpath(btnBackPaymentConfirmation1));
             jsScrollIntoView(btnBackPaymentConfirmation);

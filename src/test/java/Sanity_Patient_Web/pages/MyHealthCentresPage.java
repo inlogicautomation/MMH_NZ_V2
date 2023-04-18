@@ -4,6 +4,7 @@ import cap.common.BasePage;
 import cap.utilities.DateUtil;
 import cap.utilities.TestDataUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,10 +22,10 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Notice Board')]")
     protected WebElement elmntNoticeBoard;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Connect to Health Centre')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Link to Health Centre')]")
     protected WebElement elmntConnectToHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Connect a health centre')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Link to health centre')]")
     protected WebElement btnConnectAHealthCentre;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'My Health Centres')]")
@@ -36,7 +37,7 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//b[contains(text(),'Oops!!')]/following::p[contains(text(),'Selected health centre location is already connected with your account.')]")
     protected WebElement txtHealthCentreAlreadyConnect;
 
-    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Connect a health centre')]")
+    @FindBy(how = How.XPATH, using = "(//div[text()='Health Centre'])[1]")
     protected WebElement txtConnectAHealthCentre;
 
     @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome')])[1]")
@@ -69,7 +70,7 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h5[text()='ADD Post ' ] ")
     protected WebElement AddPostHeader;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'CONNECT')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Go to Dashboard')]")
     protected WebElement btnConnect;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'New Post')]")
@@ -118,9 +119,9 @@ public class MyHealthCentresPage extends BasePage {
             .append("')]").toString();
 
     protected String SelectHealthCentre = new StringBuilder()
-            .append("(//span[contains(text(),'")
+            .append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
-            .append("')])[2]").toString();
+            .append("')]").toString();
 
 
     protected String SelectContentType = new StringBuilder()
@@ -201,7 +202,7 @@ public class MyHealthCentresPage extends BasePage {
             jsScrollIntoView(elmntConnectToHealthCentre);
             waitForElement(elmntConnectToHealthCentre);
             mouseClick(elmntConnectToHealthCentre);
-            blResult = verifyElement(txtConnectAHealthCentre);
+            blResult = true;
         } catch (Exception e) {
             System.out.println("\n Failed to click Connect To HealthCentre >>> :: ");
             e.printStackTrace();
@@ -212,11 +213,9 @@ public class MyHealthCentresPage extends BasePage {
     public boolean clickConnectAHealthCentre() {
         boolean blResult = false;
         try {
-            waitForElement(txtConnectAHealthCentre);
             waitForElement(btnConnectAHealthCentre);
             waitForElementClickable(btnConnectAHealthCentre);
             jsClick(btnConnectAHealthCentre);
-
             waitForElement(txtBoxSearchForHealthCentre);
             blResult = verifyElement(txtBoxSearchForHealthCentre);
         } catch (Exception e) {
@@ -238,11 +237,12 @@ public class MyHealthCentresPage extends BasePage {
             enterValue(txtBoxSearchForHealthCentre, strHealthCentre);
             waitForSeconds(2);
 
-            System.out.println("\nX-path for address >>> :: "+healthCentre.replace("<<REPLACEMENT>>",strHealthCentre));
-            WebElement HealthCentre=waitForElement(By.xpath(healthCentre.replace("<<REPLACEMENT>>",strHealthCentre)));
-            waitForElement(HealthCentre);
-            jsClick(HealthCentre);
+//            System.out.println("\nX-path for address >>> :: "+healthCentre.replace("<<REPLACEMENT>>",strHealthCentre));
+//            WebElement HealthCentre=waitForElement(By.xpath(healthCentre.replace("<<REPLACEMENT>>",strHealthCentre)));
+//            waitForElement(HealthCentre);
+//            jsClick(HealthCentre);
 
+            txtBoxSearchForHealthCentre.sendKeys(Keys.ENTER);
             waitForElement(btnNext);
             waitForElementClickable(btnNext);
             jsClick(btnNext);

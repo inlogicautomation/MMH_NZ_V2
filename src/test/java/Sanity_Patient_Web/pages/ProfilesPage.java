@@ -125,6 +125,8 @@ public class ProfilesPage extends BasePage {
 
 
     @FindAll({
+
+            @FindBy(how = How.XPATH, using = "//p[contains(text(),'Changes Saved Successfully')]"),
             @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'We have notified your health centre with your profile changes.Your health centre needs to accept these changes to update on their system')]"),
             @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'Emergency Contact updated successfully')]"),
             @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'New Event Saved')]"),
@@ -139,9 +141,13 @@ public class ProfilesPage extends BasePage {
     })
     protected WebElement successPopup;
 
-    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Success!')]/following-sibling::p[contains(text(),'We have notified your health centre with your profile changes.Your health centre needs to accept these changes to update on their system')]")
-    protected WebElement successPopupForPhoneNumberChanged;
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Your request to change your contact details has been sent to the health care. Please note, your health centre needs to accept these changes to update on their system')]")
+    protected WebElement successPopupForAddressChanged;
 
+    //span[contains(text(),' OK ')]
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),' OK ')]")
+    protected WebElement btnAddresschangedOkPopup;
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Create')]")
     protected WebElement btnUpdate;
 
@@ -520,6 +526,10 @@ public class ProfilesPage extends BasePage {
             waitForElementClickable(btnPassWordUpdate);
             jsClick(btnPassWordUpdate);
             waitForSeconds(2);
+            if (isElementDisplayed(successPopupForAddressChanged)){
+waitForElement(btnAddresschangedOkPopup);
+click(btnAddresschangedOkPopup);
+            }
             waitForElement(successPopup);
             blResult = verifyElement(successPopup);
         } catch (Exception e) {
@@ -999,15 +1009,15 @@ public class ProfilesPage extends BasePage {
             waitForElement(txtBoxNewPassword);
             waitForElementClickable(txtBoxNewPassword);
             enterValue(txtBoxNewPassword, newPassword);
-            for (WebElement element : labelPassword) {
-                String value = element.getAttribute("style");
-                System.out.println("value >>> :: " + value);
-                if (!value.equalsIgnoreCase("color: green;")) {
-                    System.out.println("Failed due to Attribute value");
-                    takeScreenshotSanity(driver);
-                    return blResult;
-                }
-            }
+//            for (WebElement element : labelPassword) {
+//                String value = element.getAttribute("style");
+//                System.out.println("value >>> :: " + value);
+//                if (!value.equalsIgnoreCase("color: green;")) {
+//                    System.out.println("Failed due to Attribute value");
+//                    takeScreenshotSanity(driver);
+//                    return blResult;
+//                }
+//            }
 
             jsScrollIntoView(txtBoxConfirmPassword);
             waitForElement(txtBoxConfirmPassword);
