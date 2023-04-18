@@ -113,7 +113,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'breadcrumbs')]/descendant::span[contains(text(),'Inbox')]")
     protected WebElement txtInbox;
 
-    @FindBy(how = How.XPATH, using = "//a[text()=' Sent']")
+    @FindBy(how = How.XPATH, using = "//a[text()=' Sent Messages']")
     protected WebElement txtSent;
 
     @FindBy(how = How.XPATH, using = "(//h1[text()=' Compose Email ']//i)[1]")
@@ -1245,10 +1245,10 @@ public class MessagesPage extends BasePage {
 //            click(elmntSentDoctor);
 
             waitForElement(txtComposeBackButton);
-            jsClick(txtComposeBackButton);
+            click(txtComposeBackButton);
             waitForSeconds(3);
             waitForElement(txtSent);
-            jsClick(txtSent);
+            click(txtSent);
             waitForSeconds(3);
             waitForElement(txtSent);
             blResult = verifyElement(txtSent);
