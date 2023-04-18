@@ -315,3 +315,16 @@ Feature: Appointment Setting
     Examples:
       | Appointment_Details | Appointment      | Appointment_Details      |
       | &BLOCK_APPOINTMENT& | Book Appointment | &BOOK_VISIT_APPOINTMENT& |
+
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  Scenario Template:S18-Provider Block Appointments doctor Name verify Check Turn On Appointments audit grid displayed
+
+    Given As a Provider I am on HomePage and navigate to Appointment Setting page
+    And I navigate to Block Appointments for Provider and enter the all details"<Appointment_Details>" click save button then i see Setting saved successfully message
+    When As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
+    And Navigate to Appointment in the left menu and click Book Appointments "<Appointment>"
+    Then I Should see Check Blocked provider is not displayed for Online Appointment "<Appointment_Details>"
+    Examples:
+      | Appointment_Details | Appointment      | Appointment_Details      |
+      | &BLOCK_APPOINTMENT& | Book Appointment | &BOOK_VISIT_APPOINTMENT& |
+

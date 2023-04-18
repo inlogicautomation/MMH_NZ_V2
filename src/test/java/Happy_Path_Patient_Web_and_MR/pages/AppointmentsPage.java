@@ -102,6 +102,9 @@ public class AppointmentsPage extends BasePage {
     protected String elmntHealthCenter = new StringBuilder().append("//h6[text()='")
             .append("<<REPLACEMENT>>").append("']").toString();
 
+    protected String ProviderHealthCenter = new StringBuilder().append("//span[text()='")
+            .append("<<REPLACEMENT>>").append("']").toString();
+
     protected String elmntLocation = new StringBuilder().append("//h6[text()='")
             .append("<<REPLACEMENT>>").append("']").toString();
 
@@ -626,7 +629,7 @@ public class AppointmentsPage extends BasePage {
             click(elmntHealtCenter);
 //            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectHealthCenter = waitForElementFewSeconds(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", strHealthCenter)));
+            WebElement elmntSelectHealthCenter = waitForElementFewSeconds(By.xpath(ProviderHealthCenter.replace("<<REPLACEMENT>>", strHealthCenter)));
             mouseClick(elmntSelectHealthCenter);
             waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -648,7 +651,7 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(2);
             jsClick(elmntLocationCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>", strLocation)));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(ProviderHealthCenter.replace("<<REPLACEMENT>>", strLocation)));
             jsClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            waitForElement(elmntCovidPreScreeningPopup);
@@ -3258,7 +3261,7 @@ public class AppointmentsPage extends BasePage {
             waitForElementClickable(elmntProviderStaff);
             click(elmntLocationCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>", strLocation)));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(ProviderHealthCenter.replace("<<REPLACEMENT>>", strLocation)));
             jsClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
