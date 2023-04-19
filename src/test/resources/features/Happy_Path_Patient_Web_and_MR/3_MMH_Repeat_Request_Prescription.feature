@@ -71,7 +71,7 @@ Feature: Repeat Request Prescription
       | Medication Details                   | Verification Medication Details                   | More info details                              |
       | &DATA FOR DELIVERY MEDS BY PHARMACY& | &VERIFICATION DATA FOR DELIVERY MEDS BY PHARMACY& | &MORE INFO DATA FOR DELIVERY MEDS BY PHARMACY& |
 
-  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @POPUPTEST
+  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S6- Request Repeat Prescription - Pay Online (Card)
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription

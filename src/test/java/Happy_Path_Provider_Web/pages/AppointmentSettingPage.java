@@ -60,6 +60,21 @@ public class AppointmentSettingPage extends BasePage {
 //td[text()='VM03Location']//following::td[contains(text(),'Tim')]//following::td[contains(text(),'04 Apr 2023')]//following::td[contains(text(),'07:48 AM')]//following-sibling::td[text()='Turned On']
 
 
+    protected String strBlockAppoinmentdetails = new StringBuilder()
+            .append("//td[text()='")
+            .append("<<REPLACEMENT1>>").append("']//following-sibling::td[contains(text(),'")
+            .append("<<REPLACEMENT2>>").append("')]//following-sibling::td[contains(text(),'")
+            .append("<<REPLACEMENT3>>").append("')]//following-sibling::td[contains(text(),'")
+            .append("<<REPLACEMENT4>>").append("')]//following::td[contains(text(),'")
+            .append("<<REPLACEMENT5>>").append("')]//following::td[contains(text(),'")
+            .append("<<REPLACEMENT6>>").append("')]//following::td[contains(text(),'")
+            .append("<<REPLACEMENT7>>").append("')]//following::td[contains(text(),'")
+            .append("<<REPLACEMENT8>>").append("')]//preceding::td[text()='")
+            .append("<<REPLACEMENT9>>").append("']//following-sibling::td//p[contains(text(),'")
+            .append("<<REPLACEMENT10>>").append("')]").toString();
+
+
+
     @FindBy(how = How.XPATH, using = "//span[text()=' Edit ']")
     protected WebElement elmntEditButton;
 
@@ -675,6 +690,35 @@ blresult =verifyElement(elmntSlotTimes);
         return blresult;
 
     }
+
+    public boolean VerifyPrescriptionsTableData(List<String> lstDetails) {
+        boolean blResult = false;
+        try {
+            String strTime = getCurrentDate("h:mm aaa");
+
+            WebElement elmntPrescriptionTableData = waitForElement(By.xpath(strBlockAppoinmentdetails
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
+                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
+                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
+                    .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))
+                    .replace("<<REPLACEMENT6>>", TestDataUtil.getValue(lstDetails.get(5)))
+                    .replace("<<REPLACEMENT7>>", TestDataUtil.getValue(lstDetails.get(6)))
+                    .replace("<<REPLACEMENT8>>", TestDataUtil.getValue(lstDetails.get(7)))
+                    .replace("<<REPLACEMENT9>>", TestDataUtil.getValue(lstDetails.get(8)))
+                    .replace("<<REPLACEMENT10>>", TestDataUtil.getValue(lstDetails.get(9)))));
+            waitForElement(elmntPrescriptionTableData);
+            verifyElement(elmntPrescriptionTableData);
+            waitForSeconds(3);
+            blResult =true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+
+
 }
 
 

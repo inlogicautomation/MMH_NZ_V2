@@ -4156,14 +4156,14 @@ public class WebSteps {
     public void iNavigateToBlockAppointmentsForProviderAndEnterTheAllDetailsClickSaveButtonThenISeeSettingSavedSuccessfullyMessage(String strHealthCenter) {
         List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
         Assert.assertTrue(demoPageContainer.appointmentsPage.clickBlockAppointmentsForProvider());
-        Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
-        Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
+        Assert.assertTrue(demoPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+        Assert.assertTrue(demoPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
         Assert.assertTrue(demoPageContainer.appointmentsPage.selectStaff(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
         demoPageContainer.myHealthRecordsPage.enterBlockAppointmentsforProviderStartDate();
         Assert.assertTrue(demoPageContainer.appointmentsPage.selectStartTime(TestDataUtil.getValue(lstAppointmentDetails.get(3))));
         demoPageContainer.myHealthRecordsPage.enterBlockAppointmentsforProviderEndDate();
         Assert.assertTrue(demoPageContainer.appointmentsPage.selectEndTime(TestDataUtil.getValue(lstAppointmentDetails.get(4))));
-        Assert.assertTrue(demoPageContainer.appointmentsPage.selectSaveButton(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
+        Assert.assertTrue(demoPageContainer.appointmentsPage.selectSaveButton());
     }
 
 
@@ -4185,9 +4185,8 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectReasonForBooking(TestDataUtil.getValue(lstAppointmentDetails.get(3))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectTypeOfAppointment(TestDataUtil.getValue(lstAppointmentDetails.get(4))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.selectProvider(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.selectFutureDateOnCalender(TestDataUtil.getValue(lstAppointmentDetails.get(7))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.VerifyAvialableSlotDateTimeIsNotDisplayed(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.VerifyBlockAppointmentProviderNamesPatientSide(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
+
         }
     }
 }

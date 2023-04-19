@@ -27,12 +27,14 @@ public class DateUtil {
     }
 
     public static void main(String[] args) {
-        String currentDate = getCurrentDate("dd MMM yyyy");
-        String currentDat = getCurrentTime();
-//        System.out.println(currentDat);
 
-        String strTime = getCurrentDate("h:mm aaa");
-        System.out.println(strTime);
+        String currentDate = getCurrentDate("dd MMM yyyy");
+//        String currentDate = getCurrentDate();
+        String currentDat = getDate("TOMORROW","dd MMM yyyy");
+        System.out.println(currentDat);
+//
+//        String strTime = getCurrentDate("h:mm aaa");
+//        System.out.println(strTime);
     }
 
     public static String getCurrentTime() {

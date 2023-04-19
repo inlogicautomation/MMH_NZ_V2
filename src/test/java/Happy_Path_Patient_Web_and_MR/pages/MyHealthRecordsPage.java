@@ -4138,7 +4138,7 @@ jsScrollIntoView(elmntClinicianNotes);
             waitForElement(elmntBlockAppointmentsforProviderEnddate);
             click(elmntBlockAppointmentsforProviderEnddate);
             String strDateFormat = "d";
-            String strDay = "TOMORROW";
+            String strDay = "DAYAFTERTOMORROW";
             String strDate = DateUtil.getDate(strDay, strDateFormat);
             System.out.println("Current Day ::>>" + strDate);
             WebElement elmntDayAfterDate = waitForElement(By.xpath(strDayAfterDate.replace("<<REPLACEMENT>>", strDate)));

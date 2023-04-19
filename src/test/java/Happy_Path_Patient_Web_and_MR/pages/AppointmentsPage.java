@@ -102,8 +102,13 @@ public class AppointmentsPage extends BasePage {
     protected String elmntHealthCenter = new StringBuilder().append("//h6[text()='")
             .append("<<REPLACEMENT>>").append("']").toString();
 
-    protected String ProviderHealthCenter = new StringBuilder().append("//span[text()='")
-            .append("<<REPLACEMENT>>").append("']").toString();
+    protected String ProviderHealthCenter = new StringBuilder().append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]").toString();
+
+    protected String ProviderLocation = new StringBuilder().append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[1]").toString();
+    //span[contains(text(),' VM03Location')]
+    //span[contains(text(),' VM03Location')]
 
     protected String elmntLocation = new StringBuilder().append("//h6[text()='")
             .append("<<REPLACEMENT>>").append("']").toString();
@@ -117,8 +122,11 @@ public class AppointmentsPage extends BasePage {
     //p[contains(text(),'Dr.Stephen')]
 
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationCenter']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontolname='locations']")
     protected WebElement elmntLocationCenter;
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationCenter']")
+    protected WebElement elmntPatientLocationCenter;
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='provider']")
     protected WebElement elmntProviderStaff;
@@ -128,6 +136,9 @@ public class AppointmentsPage extends BasePage {
 
     protected String elmntBlockAppointment = new StringBuilder().append(" //span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
+
+    protected String elmntBlockAppointmentStartTime = new StringBuilder().append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[3]").toString();
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='endTime']")
     protected WebElement elmntBlockOnlineAppointmentsEndTime;
@@ -270,6 +281,16 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//div[@class='payment-profile']")
     protected WebElement elmntPaymentProfile;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Save')]")
+    protected WebElement ProviderBlockAppointmentSaveButton;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Save')]")
+    protected WebElement ProviderBlockAppointmentSettingSavedPopup;
+
+    //p[contains(text(),'Settings Saved Successfully')]
+
+    //span[contains(text(),'Save')]
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),' I accept the ')]//preceding::input[@class='mat-checkbox-input cdk-visually-hidden']")
     protected WebElement chkAcceptandTerms;
@@ -617,21 +638,16 @@ public class AppointmentsPage extends BasePage {
         return blResult;
     }
 
-    public boolean selectHealthCenter(String strHealthCenter) {
+    public boolean ProviderselectHealthCenter(String strHealthCenter) {
         boolean blResult = false;
         try {
-//            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntHealtCenter);
-//          jsScrollIntoView(elmntSlotTimes);
-//            jsScrollIntoView(elmntAppointmentPanel);
-//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             click(elmntHealtCenter);
-//            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectHealthCenter = waitForElementFewSeconds(By.xpath(ProviderHealthCenter.replace("<<REPLACEMENT>>", strHealthCenter)));
             mouseClick(elmntSelectHealthCenter);
-            waitForElementToAppear(driver,By.xpath(elmntSpinner));
+//            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(elmntLocationCenter);
         } catch (Exception e) {
@@ -640,21 +656,53 @@ public class AppointmentsPage extends BasePage {
 
         return blResult;
     }
+    public boolean selectHealthCenter(String strHealthCenter) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntHealtCenter);
+            click(elmntHealtCenter);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            WebElement elmntSelectHealthCenter = waitForElementFewSeconds(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", strHealthCenter)));
+            mouseClick(elmntSelectHealthCenter);
+//            waitForElementToAppear(driver,By.xpath(elmntSpinner));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = verifyElement(elmntPatientLocationCenter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        return blResult;
+    }
+
+    public boolean ProviderselectLocation(String strLocation) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(elmntLocationCenter);
+            click(elmntLocationCenter);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(ProviderLocation.replace("<<REPLACEMENT>>", strLocation)));
+            System.out.println(">>>>>>>>>>>>>>"+elmntSelectLocation);
+            mouseClick(elmntSelectLocation);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
     public boolean selectLocation(String strLocation) {
         boolean blResult = false;
         try {
-            waitForSeconds(4);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            jsScrollIntoView(elmntLocationCenter);
-            waitForElementClickable(elmntLocationCenter);
-            waitForSeconds(2);
-            jsClick(elmntLocationCenter);
+            waitForElementClickable(elmntPatientLocationCenter);
+            click(elmntPatientLocationCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectLocation = waitForElement(By.xpath(ProviderHealthCenter.replace("<<REPLACEMENT>>", strLocation)));
-            jsClick(elmntSelectLocation);
+            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", strLocation)));
+            System.out.println(">>>>>>>>>>>>>>"+elmntSelectLocation);
+            mouseClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-//            waitForElement(elmntCovidPreScreeningPopup);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -3259,9 +3307,10 @@ public class AppointmentsPage extends BasePage {
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntProviderStaff);
-            click(elmntLocationCenter);
+            click(elmntProviderStaff);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectLocation = waitForElement(By.xpath(ProviderHealthCenter.replace("<<REPLACEMENT>>", strLocation)));
+            jsScrollIntoView(elmntSelectLocation);
             jsClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
@@ -3278,7 +3327,7 @@ public class AppointmentsPage extends BasePage {
             waitForElementClickable(elmntBlockOnlineAppointmentsStartTime);
             click(elmntBlockOnlineAppointmentsStartTime);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntBlockAppointment.replace("<<REPLACEMENT>>", strLocation)));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntBlockAppointmentStartTime.replace("<<REPLACEMENT>>", strLocation)));
             jsClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
@@ -3305,16 +3354,34 @@ public class AppointmentsPage extends BasePage {
         return blResult;
     }
 
-    public boolean selectSaveButton(String strLocation) {
+    public boolean selectSaveButton() {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElementClickable(elmntBlockOnlineAppointmentsEndTime);
-            click(elmntBlockOnlineAppointmentsEndTime);
+            waitForElementClickable(ProviderBlockAppointmentSaveButton);
+            click(ProviderBlockAppointmentSaveButton);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntBlockAppointment.replace("<<REPLACEMENT>>", strLocation)));
-            jsClick(elmntSelectLocation);
+            waitForElement(ProviderBlockAppointmentSettingSavedPopup);
+            blResult = verifyElement(ProviderBlockAppointmentSettingSavedPopup);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean VerifyBlockAppointmentProviderNamesPatientSide(String strProvider) {
+        boolean blResult = false;
+        try {
+         String DoctorName=TestDataUtil.getValue(strProvider);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            for (WebElement ele : elmntsAppointmentDatesIn) {
+                    String GetTextData = ele.getText();
+                    if (GetTextData.equals(DoctorName)) {
+                        System.out.println(">>>>>>>>DoctorName"+DoctorName);
+                        System.out.println(">>>>>>>>GetTextData"+GetTextData);
+                        System.out.println("Block Appointment Doctor Displayed In Patient Side");
+                    }
+            }
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
