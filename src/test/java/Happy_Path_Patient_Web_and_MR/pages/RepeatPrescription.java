@@ -2127,7 +2127,6 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
         boolean blResult = false;
         try {
 //            driver.switchTo().defaultContent();
-            System.out.println("Successfully Switch to Default Page");
             waitForSeconds(2);
 //            waitForElement(elmntOnlineCardSuccessPopUp);
 //            verifyElement(elmntOnlineCardSuccessPopUp);
@@ -2137,6 +2136,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
 //            waitForElementClickable(btnBackToRRP);
 //            click(btnBackToRRP);
             driver.switchTo().defaultContent();
+            System.out.println("Successfully Switch to Default Page");
             waitForElementToAppear(driver, By.xpath(btnBackPaymentConfirmation1));
             jsScrollIntoView(btnBackPaymentConfirmation);
             waitForElementClickable(btnBackPaymentConfirmation);

@@ -143,7 +143,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Clinician Notes']")
     protected WebElement elmntClinicalNotes;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Export']")
+    @FindBy(how = How.XPATH, using = "//span[text()='Summary']")
     protected WebElement elmntSummary;
     @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-file-export-files']/following::span[text()='Export']")
     protected WebElement elmntExport;
@@ -1194,8 +1194,8 @@ jsScrollIntoView(elmntClinicianNotes);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-//            waitForElementClickable(elmntSummary);
-//            jsClick(elmntSummary);
+            waitForElementClickable(elmntSummary);
+            jsClick(elmntSummary);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         }

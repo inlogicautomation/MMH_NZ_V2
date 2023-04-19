@@ -148,7 +148,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h1[text()='Inbox'])[1]")
     protected WebElement txtInbox;
 
-    @FindBy(how = How.XPATH, using = "(//h1[text()='Sent'])[1]")
+    @FindBy(how = How.XPATH, using = "(//h1[text()='Sent Messages'])[1]")
     protected WebElement txtSent;
 
     @FindBy(how = How.XPATH, using = "(//h1[text()=' Compose Email '])[1]")
