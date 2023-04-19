@@ -1066,4 +1066,11 @@ public class ProviderWebSteps {
     }
 
 
+    @And("Click Block link under status column in Blocked Appointments Grid {string}")
+    public void clickBlockLinkUnderStatusColumnInBlockedAppointmentsGrid(String BlockAppointmentData) {
+        List<String> data=TestDataUtil.getListOfValue(BlockAppointmentData);
+        Assert.assertTrue(providerPageContainer.appointmentsPage.clickBlockAppointmentsForProvider());
+        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(data.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.VerifyBlockAppointmentTableData(TestDataUtil.getListOfValue(BlockAppointmentData)));
+    }
 }

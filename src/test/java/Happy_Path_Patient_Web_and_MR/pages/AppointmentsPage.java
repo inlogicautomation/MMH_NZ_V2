@@ -23,6 +23,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import static cap.utilities.DateUtil.getCurrentDate;
+
 public class AppointmentsPage extends BasePage {
 
     public AppointmentsPage(WebDriver driver) {
@@ -30,6 +32,7 @@ public class AppointmentsPage extends BasePage {
     }
 
     public static String strSlotDate;
+    public static String strTime;
 
     public LinkedList<String> listAllAppoinmentDatesInGrid;
 
@@ -137,8 +140,8 @@ public class AppointmentsPage extends BasePage {
     protected String elmntBlockAppointment = new StringBuilder().append(" //span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
-    protected String elmntBlockAppointmentStartTime = new StringBuilder().append("(//span[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')])[3]").toString();
+//    protected String elmntBlockAppointmentStartTime = new StringBuilder().append("//span[contains(text(),'")
+//            .append("<<REPLACEMENT>>").append("')]").toString();
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='endTime']")
     protected WebElement elmntBlockOnlineAppointmentsEndTime;
@@ -3327,7 +3330,9 @@ public class AppointmentsPage extends BasePage {
             waitForElementClickable(elmntBlockOnlineAppointmentsStartTime);
             click(elmntBlockOnlineAppointmentsStartTime);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntBlockAppointmentStartTime.replace("<<REPLACEMENT>>", strLocation)));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntBlockAppointment.replace("<<REPLACEMENT>>", strLocation)));
+            jsScrollIntoView(elmntSelectLocation);
+            waitForElement(elmntSelectLocation);
             jsClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
@@ -3345,6 +3350,8 @@ public class AppointmentsPage extends BasePage {
             click(elmntBlockOnlineAppointmentsEndTime);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectLocation = waitForElement(By.xpath(elmntBlockAppointment.replace("<<REPLACEMENT>>", strLocation)));
+            jsScrollIntoView(elmntSelectLocation);
+            waitForElement(elmntSelectLocation);
             jsClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
@@ -3363,6 +3370,8 @@ public class AppointmentsPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(ProviderBlockAppointmentSettingSavedPopup);
             blResult = verifyElement(ProviderBlockAppointmentSettingSavedPopup);
+             strTime = getCurrentDate("h:mm aaa");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -3381,7 +3390,13 @@ public class AppointmentsPage extends BasePage {
                         System.out.println(">>>>>>>>GetTextData"+GetTextData);
                         System.out.println("Block Appointment Doctor Displayed In Patient Side");
                     }
+                if (!GetTextData.equals(DoctorName)) {
+                    System.out.println(">>>>>>>>DoctorName"+DoctorName);
+                    System.out.println(">>>>>>>>GetTextData"+GetTextData);
+                    System.out.println("Block Appointment Doctor Not Displayed In Patient Side");
+                }
             }
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();

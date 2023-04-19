@@ -10,7 +10,7 @@ import org.openqa.selenium.support.How;
 
 import java.util.List;
 
-import static cap.utilities.DateUtil.getCurrentDate;
+import static cap.utilities.DateUtil.*;
 
 public class AppointmentSettingPage extends BasePage {
     public AppointmentSettingPage(WebDriver driver) {
@@ -77,6 +77,18 @@ public class AppointmentSettingPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//span[text()=' Edit ']")
     protected WebElement elmntEditButton;
+
+    @FindBy(how = How.XPATH, using = "(//td)[10]")
+    protected WebElement elmntTabledata;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Yes')] ")
+    protected WebElement elmntBlockAppointment;
+
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Appointment unblocked successfully')]")
+    protected WebElement elmntAppointmentunblockedPopup;
+
+
+
 
     @FindBy(how = How.XPATH, using = "//p[text()='Online Appointment booking has been turned-on']")
     protected WebElement elmntTurnOnSuccessfullyPopup;
@@ -691,26 +703,34 @@ blresult =verifyElement(elmntSlotTimes);
 
     }
 
-    public boolean VerifyPrescriptionsTableData(List<String> lstDetails) {
+    public boolean VerifyBlockAppointmentTableData(List<String> lstDetails) {
         boolean blResult = false;
         try {
-            String strTime = getCurrentDate("h:mm aaa");
-
-            WebElement elmntPrescriptionTableData = waitForElement(By.xpath(strBlockAppoinmentdetails
+            System.out.println(">>>>>>>>>lstDetails"+lstDetails);
+            String AfterThreeDaysDate = getDate("AFTER_THREE_DAYS","dd MMM yyyy");
+            String AfterFourDaysDate = getDate("AFTER_FOUR_DAYS","dd MMM yyyy");
+            System.out.println(strTime);
+            String currentDate = getCurrentDate("dd MMM yyyy");
+            String time=elmntTabledata.getText();
+            WebElement elmntBlockAppointmentTableData = waitForElement(By.xpath(strBlockAppoinmentdetails
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))
-                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(1)))
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(AfterThreeDaysDate))
                     .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
-                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
-                    .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))
+                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(AfterFourDaysDate))
+                    .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(3)))
                     .replace("<<REPLACEMENT6>>", TestDataUtil.getValue(lstDetails.get(5)))
-                    .replace("<<REPLACEMENT7>>", TestDataUtil.getValue(lstDetails.get(6)))
-                    .replace("<<REPLACEMENT8>>", TestDataUtil.getValue(lstDetails.get(7)))
-                    .replace("<<REPLACEMENT9>>", TestDataUtil.getValue(lstDetails.get(8)))
-                    .replace("<<REPLACEMENT10>>", TestDataUtil.getValue(lstDetails.get(9)))));
-            waitForElement(elmntPrescriptionTableData);
-            verifyElement(elmntPrescriptionTableData);
-            waitForSeconds(3);
-            blResult =true;
+                    .replace("<<REPLACEMENT7>>", TestDataUtil.getValue(currentDate))
+                    .replace("<<REPLACEMENT8>>", TestDataUtil.getValue(time))
+                    .replace("<<REPLACEMENT9>>", TestDataUtil.getValue(lstDetails.get(1)))
+                    .replace("<<REPLACEMENT10>>", TestDataUtil.getValue(lstDetails.get(4)))));
+            System.out.println(">>>>>>>>>>>>elmntBlockAppointmentTableData"+elmntBlockAppointmentTableData);
+            waitForElement(elmntBlockAppointmentTableData);
+            verifyElement(elmntBlockAppointmentTableData);
+            click(elmntBlockAppointmentTableData);
+           waitForElement(elmntBlockAppointment);
+           click(elmntBlockAppointment);
+           waitForElement(elmntAppointmentunblockedPopup);
+            blResult =verifyElement(elmntAppointmentunblockedPopup);
         } catch (Exception e) {
             e.printStackTrace();
         }

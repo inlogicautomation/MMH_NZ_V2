@@ -28,13 +28,20 @@ public class DateUtil {
 
     public static void main(String[] args) {
 
-        String currentDate = getCurrentDate("dd MMM yyyy");
-//        String currentDate = getCurrentDate();
-        String currentDat = getDate("TOMORROW","dd MMM yyyy");
-        System.out.println(currentDat);
-//
-//        String strTime = getCurrentDate("h:mm aaa");
-//        System.out.println(strTime);
+//        String currentDate = getCurrentDate("dd MMM yyyy");
+//        System.out.println(currentDate);
+//        String TomorrowDate = getDate("TOMORROW","dd MMM yyyy");
+//        System.out.println(currentDate);
+        String Date = getDate("AFTER_THREE_DAYS","dd MMM yyyy");
+//        System.out.println(Date);
+
+
+
+
+        String strTime = getCurrentDate("h:mm aaa");
+        System.out.println(strTime);
+        String DAYAFTERTOMORROW = getDayAfterTommorrowDate("dd MMM yyyy");
+//        System.out.println(DAYAFTERTOMORROW);
     }
 
     public static String getCurrentTime() {
@@ -147,12 +154,12 @@ public class DateUtil {
 
             case "AFTER_FOUR_DAYS":
                 date = new Date(today.getTime() + 4 * (1000 * 60 * 60 * 24));
-                System.out.println("AFTER_THREE_DAYS" + date);
+                System.out.println("AFTER_FOUR_DAYS" + date);
                 break;
 
             case "AFTER_FIVE_DAYS":
                 date = new Date(today.getTime() + 5 * (1000 * 60 * 60 * 24));
-                System.out.println("AFTER_THREE_DAYS" + date);
+                System.out.println("AFTER_FIVE_DAYS" + date);
                 break;
 
             default:

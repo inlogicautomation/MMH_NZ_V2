@@ -31,6 +31,8 @@ public class ProviderPageContainer {
 
     public HomePage homePage;
 
+    public PhoneAppointmentSettingPage phoneAppointmentSettingPage;
+
 
 
 
