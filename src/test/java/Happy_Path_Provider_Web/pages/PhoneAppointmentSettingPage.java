@@ -49,8 +49,14 @@ public class PhoneAppointmentSettingPage extends BasePage {
     protected WebElement verifyPhoneAppointmentVM03Location2;
     @FindBy(how = How.XPATH, using = "(//span[text()=' VM03Location']//following::input[@name='rules0'])[1]")
     protected WebElement clickVM03LocationRule1;
+
+    @FindBy(how = How.XPATH, using = "(//span[text()=' VM03Location']//following::input[@name='rules0'])[2]")
+    protected WebElement clickVM03LocationRule2;
     @FindBy(how = How.XPATH, using = "(//span[text()=' VM03Location2']//following::input[@name='rules1'])[1]")
     protected WebElement clickVM03Location2Rule1;
+
+    @FindBy(how = How.XPATH, using = "(//span[text()=' VM03Location2']//following::input[@name='rules1'])[1]")
+    protected WebElement clickVM03Location2Rule2;
     @FindBy(how = How.XPATH, using = "(//span[text()=' VM03Location']//following::textarea)[1]")
     protected WebElement EnterVM03LocationTextValue;
     @FindBy(how = How.XPATH, using = "//span[text()=' VM03Location2']//following::textarea")
@@ -210,12 +216,39 @@ public class PhoneAppointmentSettingPage extends BasePage {
         return blresult;
     }
 
+    public boolean clickVM03LocationRule2RadioButton() {
+        boolean blresult = false;
+        try {
+            waitForElement(clickVM03LocationRule2);
+            jsClick(clickVM03LocationRule2);
+            blresult=true;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return blresult;
+    }
+
 
     public boolean clickVM03Location2Rule1RadioButton() {
         boolean blresult = false;
         try {
             waitForElement(clickVM03Location2Rule1);
             jsClick(clickVM03Location2Rule1);
+            blresult=true;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return blresult;
+
+    }
+
+    public boolean clickVM03Location2Rule2RadioButton() {
+        boolean blresult = false;
+        try {
+            waitForElement(clickVM03Location2Rule2);
+            jsClick(clickVM03Location2Rule2);
             blresult=true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -257,8 +290,8 @@ public class PhoneAppointmentSettingPage extends BasePage {
         boolean blresult = false;
         try {
             waitForElement(EnterVM03Location2TextValue);
+enterValue(EnterVM03Location2TextValue,textboxdata);
 
-            EnterVM03Location2TextValue.sendKeys(textboxdata);
             blresult=true;
         } catch (Exception e) {
             e.printStackTrace();

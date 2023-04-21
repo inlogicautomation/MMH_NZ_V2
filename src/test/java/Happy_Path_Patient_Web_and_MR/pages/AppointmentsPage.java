@@ -33,7 +33,13 @@ public class AppointmentsPage extends BasePage {
 
     public static String strSlotDate;
     public static String strTime;
+    public static int AppointmentslotTimecount;
 
+    public static int visitslotTimeslotCount;
+
+    public static int PhoneslotTimeslotCount;
+
+    public static int Rule2PhoneslotTimeslotCount;
     public LinkedList<String> listAllAppoinmentDatesInGrid;
 
     public LinkedList<String> listAllAppoinmentDatesInCard;
@@ -254,6 +260,32 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'No visit slots are available for the selected provider and date.')]")
     protected WebElement elmntSlotTimesIsNotAvailable;
+
+
+
+    @FindBy(how = How.XPATH, using = "//mat-chip-list[@class='mat-chip-list ng-star-inserted']//mat-chip")
+    protected List<WebElement> veriflyVisitSlotTimesIsAvailable;
+
+    @FindBy(how = How.XPATH, using = "//mat-chip-list[@class='mat-chip-list ng-star-inserted']//mat-chip")
+    protected List<WebElement> veriflyPhoneSlotTimesIsAvailable;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'No visit slots are available for the selected provider and date.')]")
+    protected WebElement veriflySlotTimesIsNotAvailable;
+
+    @FindBy(xpath = "(//span[contains(text(),'Systems Menu')]//following::mat-icon)[1]")
+    protected WebElement elmtSystemsMenuExpandIcon;
+
+    @FindBy(xpath = "//span[text()='Dashboard']")
+    protected WebElement elmtclickDashboard;
+
+
+
+    @FindBy(xpath = "(//img[@alt='Manage My Health'])[3]")
+    protected WebElement ProviderManageMyHealthLogo;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Visit']")
+    protected WebElement clickVisitIcon;
+
 
 
 
@@ -920,6 +952,160 @@ public class AppointmentsPage extends BasePage {
         }
         return blResult;
     }
+
+    public boolean veriflyPhoneAvialableSlotTime(String strSlotsTime) {
+        boolean blResult = false;
+        try {
+            if (!verifyElement(veriflySlotTimesIsNotAvailable)) {
+                System.out.println("Appointment Phone TimeSlot is Displayed");
+                takeScreenshot(driver);
+                PhoneslotTimeslotCount = veriflyPhoneSlotTimesIsAvailable.size();
+                System.out.println(">>>>>PhoneTimeslotCount" + PhoneslotTimeslotCount);
+                waitForElement(clickVisitIcon);
+                click(clickVisitIcon);
+            }
+            if (verifyElement(veriflySlotTimesIsNotAvailable)){
+                System.out.println("Appointment PhoneTimeSlot is Not Displayed");
+                takeScreenshot(driver);
+            }
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean veriflyRule2PhoneAvialableSlotTime(String strSlotsTime) {
+        boolean blResult = false;
+        try {
+            if (!verifyElement(veriflySlotTimesIsNotAvailable)) {
+                System.out.println("Appointment Phone TimeSlot is Displayed");
+                takeScreenshot(driver);
+                Rule2PhoneslotTimeslotCount = veriflyPhoneSlotTimesIsAvailable.size();
+                System.out.println(">>>>>Rule2PhoneslotTimeslotCount" + Rule2PhoneslotTimeslotCount);
+                waitForElement(clickVisitIcon);
+                click(clickVisitIcon);
+            }
+            if (verifyElement(veriflySlotTimesIsNotAvailable)){
+                System.out.println("Appointment PhoneTimeSlot is Not Displayed");
+                takeScreenshot(driver);
+            }
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean veriflyVisitAvialableSlotTime(String strSlotsTime) {
+        boolean blResult = false;
+        try {
+            if (!verifyElement(veriflySlotTimesIsNotAvailable)) {
+                System.out.println("Appointment TimeSlot is Displayed");
+                takeScreenshot(driver);
+                visitslotTimeslotCount = veriflyVisitSlotTimesIsAvailable.size();
+                System.out.println(">>>>>VisitTimeslotCount" + visitslotTimeslotCount);
+
+            }
+            if (verifyElement(veriflySlotTimesIsNotAvailable)){
+                System.out.println("Appointment TimeSlot is Not Displayed");
+                takeScreenshot(driver);
+            }
+            AppointmentslotTimecount = visitslotTimeslotCount + PhoneslotTimeslotCount;
+            System.out.println(">>>>>TotaltimeslotCount" + AppointmentslotTimecount);
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean clickDashboard() {
+        boolean blResult = false;
+        try {
+            jsScrollIntoView(elmtclickDashboard);
+           waitForElement(elmtclickDashboard);
+           click(elmtclickDashboard);
+            blResult = true;
+        } catch (Exception e) {
+            System.out.println("Failed to click Provider ManageMyHealth Logo >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean clickSystemMenuExpandIcon() {
+        boolean blResult = false;
+        try {
+            if (verifyElement(elmtSystemsMenuExpandIcon)) {
+                jsScrollIntoView(elmtSystemsMenuExpandIcon);
+                waitForElement(elmtSystemsMenuExpandIcon);
+                waitForElementClickable(elmtSystemsMenuExpandIcon);
+                click(elmtSystemsMenuExpandIcon);
+                jsScrollIntoView(ProviderManageMyHealthLogo);
+                waitForElement(ProviderManageMyHealthLogo);
+                click(ProviderManageMyHealthLogo);
+                blResult = verifyElement(ProviderManageMyHealthLogo);
+            }
+            if (!verifyElement(elmtSystemsMenuExpandIcon)) {
+                focusWindow(1);
+                jsScrollIntoView(elmtSystemsMenuExpandIcon);
+                waitForElement(elmtSystemsMenuExpandIcon);
+                waitForElementClickable(elmtSystemsMenuExpandIcon);
+                click(elmtSystemsMenuExpandIcon);
+                jsScrollIntoView(ProviderManageMyHealthLogo);
+                waitForElement(ProviderManageMyHealthLogo);
+                jsClick(ProviderManageMyHealthLogo);
+                blResult = verifyElement(ProviderManageMyHealthLogo);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Failed to click Provider ManageMyHealth Logo >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+
+    public boolean veriflyRule2VisitAvialableSlotTime(String strSlotsTime) {
+        boolean blResult = false;
+        try {
+            if (!verifyElement(veriflySlotTimesIsNotAvailable)) {
+                System.out.println("Appointment TimeSlot is Displayed");
+                takeScreenshot(driver);
+                visitslotTimeslotCount = veriflyVisitSlotTimesIsAvailable.size();
+                System.out.println(">>>>>VisitTimeslotCount" + visitslotTimeslotCount);
+            }
+            if (verifyElement(veriflySlotTimesIsNotAvailable)){
+                System.out.println("Appointment TimeSlot is Not Displayed");
+                takeScreenshot(driver);
+            }
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean veriflyVisitTimeShowedPhoneSlotTime() {
+        boolean blResult = false;
+        try {
+            System.out.println(">>>Rule2PhoneslotTimeslotCount"+Rule2PhoneslotTimeslotCount);
+            System.out.println(">>>AppointmentslotTimecount"+AppointmentslotTimecount);
+            if (Rule2PhoneslotTimeslotCount==AppointmentslotTimecount){
+                System.out.println("The BLANK Rule Succesfully Verified");
+                blResult = true;
+            }
+
+        } catch (Exception e) {
+            System.out.println("The BLANK Rule is not Succesfully Verified");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+
+
 
     public boolean VerifyAvialableSlotDateTimeIsNotDisplayed(String strSlotsTime) {
         boolean blResult = false;
