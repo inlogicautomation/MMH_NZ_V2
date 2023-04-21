@@ -26,11 +26,8 @@ public class ProviderPageContainer {
     public AppointmentMessagePage appointmentMessagePage;
     public AppointmentsPage appointmentsPage;
     public ProviderMessagesPage providerMessagesPage;
-
     public AppointmentSettingPage appointmentSettingPage;
-
     public HomePage homePage;
-
     public PhoneAppointmentSettingPage phoneAppointmentSettingPage;
 
 
@@ -69,6 +66,7 @@ public class ProviderPageContainer {
         appointmentsPage = new AppointmentsPage(driver);
         providerMessagesPage = new ProviderMessagesPage(driver);
         appointmentSettingPage = new AppointmentSettingPage(driver);
+        phoneAppointmentSettingPage = new PhoneAppointmentSettingPage(driver);
     }
 
     @After("@WEB")

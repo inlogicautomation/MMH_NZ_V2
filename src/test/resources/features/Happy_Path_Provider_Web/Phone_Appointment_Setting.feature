@@ -9,11 +9,16 @@ Feature: Phone Appointment Setting
     And I enter "&PATIENT_USER_LOGIN&" and "&PASSWORD&" For Beta
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
+  @WEB @PROVIDER_HAPPY_PATH @PHONE_APPOINTMENTS_SETTING
+  Scenario Template:S1-Provider Enable Phone Appointment Settings - Rule 1 and verify Patient side
 
-
-  @WEB @PROVIDER_HAPPY_PATH @PHONE_APPOINTMENTS_MESSAGE
-  Scenario Template:S1-As a User I have to enable Patient Portal(Web) Banner Message to No in Appointment Message page
-
-    Given As a Provider I am on HomePage and navigate to Appointment Message page
+    Given As a Provider I am on HomePage and navigate to Phone Appointment Setting page
+    And I click edit button select the Phone Appointment Rule "<Phone_Appointment_setting_data>"
+    When I select the phone call initiated by radio button and click the save button "<Phone_Appointment_setting_data>"
+    And As a user I am on HomePage and navigate to Book Appointment Page in Appointments
+    And I navigate to Appointments Menu and I click the Book Appointment
+    Then I enter the phone appointment details "<Phone_Appointments_Data>"
 
     Examples:
+      | Phone_Appointment_setting_data      | Phone_Appointments_Data  |
+      | &PHONE_APPOINTMENT_SETTING_DETAILS& | &BOOK_PHONE_APPOINTMENT& |
