@@ -66,6 +66,15 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='Location']")
     protected WebElement drpdownLocation;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'The selected provider is out of office. There may be a delay in getting your repeat prescriptions.')]")
+    protected WebElement VeriflyOutOfOfficePopup;
+
+    @FindBy(how = How.XPATH, using = " //span[contains(text(),'OK')]")
+    protected WebElement ClickOutOfOfficePopupOkButton;
+
+    //span[contains(text(),'OK')]
+
+
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Request New Script')]")
     protected WebElement getTxtRequestNewScript;
 
@@ -693,6 +702,9 @@ public class RepeatPrescription extends BasePage {
     public boolean selectHealthCentreLocation(String strLocation) {
         boolean blResult = false;
         try {
+            if (verifyElement(VeriflyOutOfOfficePopup)){
+                click(ClickOutOfOfficePopupOkButton);
+            }
 //            refreshPage();
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            waitForSeconds(10);
@@ -705,6 +717,9 @@ public class RepeatPrescription extends BasePage {
             waitForElementClickable(ddlLocation);
             waitForSeconds(2);
             mouseClick(ddlLocation);
+            if (verifyElement(VeriflyOutOfOfficePopup)){
+                click(ClickOutOfOfficePopupOkButton);
+            }
             System.out.println("Location was selected in the Request Medication >>> ::");
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
@@ -732,6 +747,9 @@ public class RepeatPrescription extends BasePage {
             waitForSeconds(4);
             jsClick(ddlDoctor);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            if (verifyElement(VeriflyOutOfOfficePopup)){
+                click(ClickOutOfOfficePopupOkButton);
+            }
             takeScreenshot(driver);
             blResult = true;
 

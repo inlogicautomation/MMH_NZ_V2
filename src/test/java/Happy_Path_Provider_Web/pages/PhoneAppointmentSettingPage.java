@@ -5,6 +5,7 @@ import cap.utilities.TestDataUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -16,8 +17,17 @@ public class PhoneAppointmentSettingPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]")
+//    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]")
+//    protected WebElement txtWelcome;
+
+    //h1[contains(text(),'Welcome,')]//span[contains(text(),'Steve!')]
+
+        @FindAll({
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"), //Desktop View
+            @FindBy(how = How.XPATH, using = " //h1[contains(text(),'Welcome,')]//span[contains(text(),'Steve!')]"),
+    })
     protected WebElement txtWelcome;
+
     @FindBy(xpath = "//a[@class='navbar-brand']")
     protected WebElement elmtMMHLogo;
     @FindBy(xpath = "//span[contains(text(),'Appointment Settings')]")
@@ -79,7 +89,7 @@ public class PhoneAppointmentSettingPage extends BasePage {
     public boolean  navigateToProviderHomepage() {
         boolean blResult = false;
         try{
-            System.out.println("sucessfully emter");
+
             if (isElementDisplayed(txtWelcome)) {
                 verifyElement(txtWelcome);
                 waitForSeconds(3);
@@ -337,8 +347,8 @@ enterValue(EnterVM03Location2TextValue,textboxdata);
     public boolean clickVM03LocationPatientRadioButton() {
         boolean blresult = false;
         try {
-            waitForElement(clickVM03LocationPraticeRadioButton);
-            jsClick(clickVM03LocationPraticeRadioButton);
+            waitForElement(clickVM03LocationPatientRadioButton);
+            jsClick(clickVM03LocationPatientRadioButton);
             blresult=true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -351,7 +361,7 @@ enterValue(EnterVM03Location2TextValue,textboxdata);
     public boolean clickVM03Location2PatientRadioButton() {
         boolean blresult = false;
         try {
-            waitForElement(clickVM03Location2PraticeRadioButton);
+            waitForElement(clickVM03Location2PatientRadioButton);
             jsClick(clickVM03Location2PatientRadioButton);
             blresult=true;
         } catch (Exception e) {
