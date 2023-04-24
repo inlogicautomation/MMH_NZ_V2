@@ -171,8 +171,7 @@ public class HomePage extends BasePage {
     public void clickSignInButton() {
         waitForSeconds(3);
         if (verifyElement(SignInBtn)) {
-//            waitForElement(SignInBtn);
-            waitForSeconds(3);
+            waitForElement(SignInBtn);
             jsClick(SignInBtn);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
         } else if (!verifyElement(SignInBtn)) {

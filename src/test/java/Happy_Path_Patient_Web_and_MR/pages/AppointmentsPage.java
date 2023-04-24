@@ -575,6 +575,7 @@ public class AppointmentsPage extends BasePage {
         try {
 //            waitForElement(elmntWelcomeMessage);
             WebElement elmntBookAppointment = waitForElement(By.xpath(strAppointments.replace("<<REPLACEMENT>>", strAppointment)));
+            System.out.println(">>>>>>>>>>>>>>>>>"+elmntBookAppointment);
             click(elmntBookAppointment);
 //            waitForElement(elmntAppointmentPanel);
 //            waitForElement(elmntBookAppointment);
@@ -795,7 +796,8 @@ public class AppointmentsPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElementClickable(elmntReason);
-            waitAndClick(elmntReason);
+            jsClick(elmntReason);
+            waitForSeconds(2);
             elmntReason.sendKeys(strReason);
 
 //

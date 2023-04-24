@@ -69,6 +69,12 @@ public class PhoneAppointmentSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Practice')]//preceding::input[@name='phnecallInitiation1'])[1]")
     protected WebElement clickVM03Location2PraticeRadioButton;
 
+    @FindBy(how = How.XPATH, using = " (//div[contains(text(),'Patient')]//preceding::input[@name='phnecallInitiation0'])[2]")
+    protected WebElement clickVM03LocationPatientRadioButton;
+
+    @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Patient')]//preceding::input[@name='phnecallInitiation1'])[2]")
+    protected WebElement clickVM03Location2PatientRadioButton;
+
 
     public boolean  navigateToProviderHomepage() {
         boolean blResult = false;
@@ -319,6 +325,34 @@ enterValue(EnterVM03Location2TextValue,textboxdata);
         try {
             waitForElement(clickVM03Location2PraticeRadioButton);
             jsClick(clickVM03Location2PraticeRadioButton);
+            blresult=true;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return blresult;
+
+    }
+
+    public boolean clickVM03LocationPatientRadioButton() {
+        boolean blresult = false;
+        try {
+            waitForElement(clickVM03LocationPraticeRadioButton);
+            jsClick(clickVM03LocationPraticeRadioButton);
+            blresult=true;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return blresult;
+
+    }
+
+    public boolean clickVM03Location2PatientRadioButton() {
+        boolean blresult = false;
+        try {
+            waitForElement(clickVM03Location2PraticeRadioButton);
+            jsClick(clickVM03Location2PatientRadioButton);
             blresult=true;
         } catch (Exception e) {
             e.printStackTrace();
