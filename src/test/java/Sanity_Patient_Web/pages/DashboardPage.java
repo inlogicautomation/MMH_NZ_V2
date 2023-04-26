@@ -278,15 +278,19 @@ public class DashboardPage extends BasePage {
     public boolean declineCovidPreScreeningPopup() {
         boolean blResult = false;
         try {
-            waitForSeconds(3);
+            waitForSeconds(2);
+//            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(elmntCovidPreScreeningPopup);
+            if (isElementDisplayed(elmntCovidPreScreeningPopup)) {
+                System.out.println("Covid Prescreening popup is displayed");
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForElementClickable(elmntDeclineCovidPreScreening);
+                click(elmntDeclineCovidPreScreening);
+            }
+            if (!isElementDisplayed(elmntCovidPreScreeningPopup)){
+                System.out.println("Covid Prescreening popup is not displayed");
+            }
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(elmntDeclineCovidPreScreening);
-//            waitForElementClickable(elmntDeclineCovidPreScreening);
-            jsClick(elmntDeclineCovidPreScreening);
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(4);
             blResult = verifyElement(elmntAppointmentPanel);
         } catch (Exception e) {
             e.printStackTrace();

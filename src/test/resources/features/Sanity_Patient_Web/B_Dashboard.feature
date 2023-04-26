@@ -130,7 +130,7 @@ Feature: Dashboard
 
 
 
-  @WEB @DASHBOARD1 @SANITY_PATH @DASHBOARD_MESSAGES
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
   Scenario Template: S3- User successfully login into Doctor Portal
 
     Given As a user Launch the "<V1 Portal>"
@@ -142,7 +142,7 @@ Feature: Dashboard
       | V1 Portal | Email Address      | Password              |
       | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
-  @WEB @DASHBOARD1 @SANITY_PATH @DASHBOARD_MESSAGES
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
   Scenario: S3- Preparation for Received Message
 
     Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module
@@ -158,7 +158,7 @@ Feature: Dashboard
     And I log out from Doctor Portal
 
 
-  @WEB @DASHBOARD1 @SANITY_PATH @DASHBOARD_MESSAGES
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
   Scenario Template: S1- User Successfully logs in to the V2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -175,7 +175,7 @@ Feature: Dashboard
 #  14	Dashboard	Check Unread message count in New Messages Card
 
 
-  @WEB @DASHBOARD1 @SANITY_PATH @DASHBOARD_MESSAGES
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
   Scenario: View latest three New messages received in new message card
 
     Given As a Existing user I am on HomePage and I click Dashboard
@@ -187,10 +187,7 @@ Feature: Dashboard
     And Navigate to Inbox bar by clicking View Message from text dashboard
 
 
-
-
-
-  @WEB @DASHBOARD1 @SANITY_PATH @DASHBOARD_HEALTH-RECORDS
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_HEALTH-RECORDS
   Scenario: View patient Health Records
 
     Given As a Existing user I am on HomePage and I click Dashboard
@@ -265,8 +262,8 @@ Feature: Dashboard
     And I canceling all the available appointments
 
     Examples:
-      | Appointment         |
-      | Future Appointments |
+      | Appointment           |
+      | Upcoming Appointments |
 
   @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS @App
   Scenario Template: S1 Patient Booking Appointment - Visit Appointment
@@ -315,8 +312,8 @@ Feature: Dashboard
     Then I should see Appointment cancelled message "<Appointment_After_Cancel>"
 
     Examples:
-      | Appointment         | Appointment_Cancel_Button        | Appointment_After_Cancel              |
-      | Future Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+      | Appointment           | Appointment_Cancel_Button        | Appointment_After_Cancel              |
+      | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
   @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS @App
   Scenario Template: S2 - Patient Booking Appointment - Video Appointment

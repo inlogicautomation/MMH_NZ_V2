@@ -2615,9 +2615,10 @@ protected WebElement txtWelcome;
         try {
             System.out.println("Member " + strFamilyMember);
             waitForSeconds(2);
+            waitForElement(btnRole);
             waitForElementClickable(btnRole);
             waitForSeconds(2);
-            jsClick(btnRole);
+            click(btnRole);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntRole.replace("<<REPLACEMENT>>", strFamilyMember)));
             waitForSeconds(3);

@@ -119,14 +119,18 @@ public class MyHealthRecordsPage extends BasePage {
             .append("<<REPLACEMENT4>>").append("']/following-sibling::td[text()='")
             .append("<<REPLACEMENT5>>").append("']/following-sibling::td//following-sibling::span[@class=\"mat-ripple mat-button-ripple\"]").toString();
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Clinician Notes')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Clinician Notes')]")
     protected WebElement elmntClinicalNotes;
+
     @FindBy(how = How.XPATH, using = " //span[text()='Summary']")
     protected WebElement elmntSummary;
+
     @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-file-export-files']/following::span[text()='Export']")
     protected WebElement elmntExport;
+
     @FindBy(how = How.XPATH, using = "//img[@class='profile-pic img-fluid']")
     protected WebElement elmntProfile;
+
     @FindBy(how = How.XPATH, using = "//button[contains(text(),' Sign Out ')]")
     protected WebElement elmntSignout;
     protected String strClinicalNotesIconLocator = new StringBuilder()

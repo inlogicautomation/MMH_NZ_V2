@@ -119,9 +119,9 @@ public class MyHealthCentresPage extends BasePage {
             .append("')]").toString();
 
     protected String SelectHealthCentre = new StringBuilder()
-            .append("//span[contains(text(),'")
+            .append("(//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
-            .append("')]").toString();
+            .append("')])[2]").toString();
 
 
     protected String SelectContentType = new StringBuilder()
@@ -235,7 +235,7 @@ public class MyHealthCentresPage extends BasePage {
             waitForElement(txtBoxSearchForHealthCentre);
             waitForElementClickable(txtBoxSearchForHealthCentre);
             enterValue(txtBoxSearchForHealthCentre, strHealthCentre);
-            waitForSeconds(2);
+            waitForSeconds(7);
 
 //            System.out.println("\nX-path for address >>> :: "+healthCentre.replace("<<REPLACEMENT>>",strHealthCentre));
 //            WebElement HealthCentre=waitForElement(By.xpath(healthCentre.replace("<<REPLACEMENT>>",strHealthCentre)));
@@ -469,7 +469,7 @@ public class MyHealthCentresPage extends BasePage {
         waitForSeconds(2);
         waitForElement(elmntNewPost);
         waitForElementClickable(elmntNewPost);
-        waitAndClick(elmntNewPost);
+        click(elmntNewPost);
         waitForSeconds(2);
         jsScrollIntoView(AddPostHeader);
         waitForElement(AddPostHeader);
