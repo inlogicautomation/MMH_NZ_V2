@@ -812,7 +812,6 @@ public class ProviderWebSteps {
         List<String> lstStrMessage = TestDataUtil.getListOfValue(strMessage);
         System.out.println("lstStrMessage >>> :: " + lstStrMessage);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-
             Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToProviderHomepage());
             Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToDoctorMessageSetting());
             Assert.assertTrue(providerPageContainer.providerMessagesPage.selectProviderOutOfOfficeSetting());
@@ -1059,12 +1058,10 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickTurnOnOnlineAppointmentsCheckBoxchecked());
     }
-
     @Then("I Should see Turn On Appointments audit details displayed grid view {string}")
     public void iShouldSeeTurnOnAppointmentsAuditDetailsDisplayedGridView(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.verifyTurnOnAppointmentsAuditDetailsGridView(LocationData));
     }
-
 
     @And("Click Block link under status column in Blocked Appointments Grid {string}")
     public void clickBlockLinkUnderStatusColumnInBlockedAppointmentsGrid(String BlockAppointmentData) {
@@ -1073,24 +1070,12 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(data.get(0))));
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.VerifyBlockAppointmentTableData(TestDataUtil.getListOfValue(BlockAppointmentData)));
     }
-
     @Given("As a Provider I am on HomePage and navigate to Phone Appointment Setting page")
     public void asAProviderIAmOnHomePageAndNavigateToPhoneAppointmentSettingPage() {
         Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.navigateToProviderHomepage());
         Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickSystemMenu());
         Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickPhoneAppointmentSetting());
     }
-
-    @When("I select the phone call initiated by radio button and click the save button {string}")
-    public void iSelectThePhoneCallInitiatedByRadioButtonAndClickTheSaveButton(String strdata) {
-        List<String>InstructionstoPatientData=TestDataUtil.getListOfValue(strdata);
-        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickVM03LocationPraticeRadioButton());
-        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickVM03Location2PraticeRadioButton());
-        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.EnterVM03Locationtextbox(TestDataUtil.getValue(InstructionstoPatientData.get(1))));
-        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.EnterVM03Location2textbox(TestDataUtil.getValue(InstructionstoPatientData.get(2))));
-        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickSaveButton());
-    }
-
 
     @And("I click edit button select the Phone Appointment Rule MMHPA {string}")
     public void iClickEditButtonSelectThePhoneAppointmentRuleMMHPA(String HealthcentreData) {
@@ -1100,7 +1085,6 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickVM03LocationRule1RadioButton());
         Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickVM03Location2Rule1RadioButton());
     }
-
     @And("I click edit button select the Phone Appointment Rule BLANK{string}")
     public void iClickEditButtonSelectThePhoneAppointmentRuleBLANK(String HealthcentreData) {
         Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickPhoneAppointmentSettingHealthCenter(TestDataUtil.getListOfValue(HealthcentreData)));
@@ -1108,5 +1092,48 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickPhoneAppointmentSettingVM03Location2checkbox());
         Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickVM03LocationRule2RadioButton());
         Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickVM03Location2Rule2RadioButton());
+    }
+    @When("I select the phone call initiated by Practice radio button and click the save button {string}")
+    public void iSelectThePhoneCallInitiatedByPracticeRadioButtonAndClickTheSaveButton(String strdata) {
+        List<String>InstructionstoPatientData=TestDataUtil.getListOfValue(strdata);
+        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickVM03LocationPraticeRadioButton());
+        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickVM03Location2PraticeRadioButton());
+        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.EnterVM03Locationtextbox(TestDataUtil.getValue(InstructionstoPatientData.get(1))));
+        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.EnterVM03Location2textbox(TestDataUtil.getValue(InstructionstoPatientData.get(2))));
+        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickSaveButton());
+    }
+    @When("I select the phone call initiated by Patient radio button and click the save button {string}")
+    public void iSelectThePhoneCallInitiatedByPatientRadioButtonAndClickTheSaveButton(String strdata) {
+        List<String>InstructionstoPatientData=TestDataUtil.getListOfValue(strdata);
+        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickVM03LocationPatientRadioButton());
+        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickVM03Location2PatientRadioButton());
+        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.EnterVM03Locationtextbox(TestDataUtil.getValue(InstructionstoPatientData.get(1))));
+        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.EnterVM03Location2textbox(TestDataUtil.getValue(InstructionstoPatientData.get(2))));
+        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickSaveButton());
+    }
+    @Given("As a Provider I am on HomePage and navigate to Recall Setting page")
+    public void asAProviderIAmOnHomePageAndNavigateToRecallSettingPage() {
+        Assert.assertTrue(providerPageContainer.recallSettingPage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.recallSettingPage.clickSystemMenu());
+        Assert.assertTrue(providerPageContainer.recallSettingPage.clickRecallSetting());
+    }
+    @And("I click edit button select the Recall Setting Health centre {string}")
+    public void iClickEditButtonSelectTheRecallSettingHealthCentre(String LocationData) {
+        Assert.assertTrue(providerPageContainer.recallSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.recallSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.recallSettingPage.clickRecallRemindersYesRadioButton());
+    }
+    @When("I enter the number of days recall reminder text box and click save button {string}")
+    public void iEnterTheNumberOfDaysRecallReminderTextBoxAndClickSaveButton(String LocationData) {
+        Assert.assertTrue(providerPageContainer.recallSettingPage.EnterRecallReminderValue(LocationData));
+        Assert.assertTrue(providerPageContainer.recallSettingPage.clickSaveButton());
+    }
+
+    @And("I click edit button select the Recall Setting Health centre {string} Disable Recalls Remainder No button")
+    public void iClickEditButtonSelectTheRecallSettingHealthCentreDisableRecallsRemainderNoButton(String LocationData) {
+        Assert.assertTrue(providerPageContainer.recallSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.recallSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.recallSettingPage.clickRecallRemindersNoRadioButton());
+
     }
 }

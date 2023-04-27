@@ -4209,7 +4209,7 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectFutureDateOnCalender(TestDataUtil.getValue(lstAppointmentDetails.get(9))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.veriflyVisitAvialableSlotTime(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.clickDashboard());
-            Assert.assertTrue(demoPageContainer.appointmentsPage.clickSystemMenuExpandIcon());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.clickSystemMenuExpandIcon());
 //            Assert.assertTrue(demoPageContainer.appointmentsPage.selectPhoneCode(TestDataUtil.getValue(lstAppointmentDetails.get(7))));
 //            Assert.assertTrue(demoPageContainer.appointmentsPage.enterPhoneNumber(TestDataUtil.getValue(lstAppointmentDetails.get(8))));
 
@@ -4242,6 +4242,20 @@ public class WebSteps {
 
 
     }
+
+    @And("I should see booked appointment displayed under the Upcoming tab {string} {string} {string}")
+    public void iShouldSeeBookedAppointmentDisplayedUnderTheUpcomingTab(String strAppointmentDetails, String strFutureDate, String strAppointmentSummary) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentDetails);
+        List<String> lstDetails1 = TestDataUtil.getListOfValue(strAppointmentSummary);
+        Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmButton());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyDetailsOfCreatedAppointment(lstDetails, (strFutureDate)));
+        Assert.assertTrue(demoPageContainer.appointmentsPage.acceptTermsAndConditionsForAppointment());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmYourBookingButton());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyCreatedAppointmentInFutureAppointmentTab(lstDetails1));
+
+
+    }
+
 }
 
 

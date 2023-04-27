@@ -17,11 +17,6 @@ public class PhoneAppointmentSettingPage extends BasePage {
         super(driver);
     }
 
-//    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]")
-//    protected WebElement txtWelcome;
-
-    //h1[contains(text(),'Welcome,')]//span[contains(text(),'Steve!')]
-
         @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"), //Desktop View
             @FindBy(how = How.XPATH, using = " //h1[contains(text(),'Welcome,')]//span[contains(text(),'Steve!')]"),

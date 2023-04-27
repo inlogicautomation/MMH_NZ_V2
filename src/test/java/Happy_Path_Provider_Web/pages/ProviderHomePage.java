@@ -375,6 +375,7 @@ public class ProviderHomePage extends BasePage {
     public boolean  navigateToProviderHomepage() {
         boolean blResult = false;
         try{
+            System.out.println("Success Enter");
         if (isElementDisplayed(txtWelcome)) {
             verifyElement(txtWelcome);
             waitForSeconds(3);
