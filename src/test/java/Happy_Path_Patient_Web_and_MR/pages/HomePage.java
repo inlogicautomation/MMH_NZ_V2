@@ -111,7 +111,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h3[contains(text(),' Upcoming Appointments')])[1]")
     protected WebElement elmntFutureAppointment;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Future Appointments')]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Upcoming Appointments')]")
     protected WebElement elmntMobileFutureAppointment;
 
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'hamburger')]")

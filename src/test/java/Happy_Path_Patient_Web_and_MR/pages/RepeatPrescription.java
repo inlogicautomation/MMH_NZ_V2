@@ -588,6 +588,7 @@ public class RepeatPrescription extends BasePage {
             jsClick(elmntMobileRequestNewScript);
             waitForElement(txtRequestNewScript);
             blResult = verifyElement(txtRequestNewScript);
+
 //            waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("Navigated To Request Medication >>>>");

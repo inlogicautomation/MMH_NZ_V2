@@ -60,25 +60,25 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Entries From Health Centre(s)')]//preceding::input[@class='mat-radio-input cdk-visually-hidden'])[2]")
     protected WebElement elmntEntriesfromhealthcentreRadioButton;
 
-    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Prescriptions')]")
+    @FindBy(how = How.XPATH, using = "//span[text()='Prescriptions']")
     protected WebElement elmntMobilePrescription;
 
-    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Allergies')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Allergies')]")
     protected WebElement elmntMobileAllergies;
 
-    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Immunisations')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Immunisations')]")
     protected WebElement elmntMobileImmunisation;
 
-    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Conditions')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Conditions')]")
     protected WebElement elmntMobileCondition;
 
-    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Lab Results')]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Lab Results')])[1]")
     protected WebElement elmntMobileLabresults;
 
-    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Clinician Notes')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Clinician Notes')]")
     protected WebElement elmntMobileClinicianNotes;
 
-    @FindBy(how = How.XPATH, using = "//mat-card-title[contains(text(),'Recalls')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Recalls')]")
     protected WebElement elmntMobileRecalls;
 
 

@@ -65,7 +65,7 @@ public class AppointmentsPage extends BasePage {
     protected WebElement elmntBlockAppointmentsForProviderHeader;
 
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT')]/i")
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Appointments')]//following::i")
     protected WebElement elmntBookAppointment;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Upcoming Appointments')]")
