@@ -1136,4 +1136,24 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.recallSettingPage.clickRecallRemindersNoRadioButton());
 
     }
+
+    @Given("As a Provider I am on HomePage and navigate to My Appointment page")
+    public void asAProviderIAmOnHomePageAndNavigateToMyAppointmentPage() {
+        Assert.assertTrue(providerPageContainer.myAppointmentPage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.myAppointmentPage.clickAppointmentButton());
+
+    }
+
+
+    @Then("I should see View Appointments details in My appointments grid based on the search {string}")
+    public void iShouldSeeViewAppointmentsDetailsInMyAppointmentsGridBasedOnTheSearch(String strHealthCentre) {
+        List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(stsdata.get(1))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(2))));
+
+
+
+
+    }
 }

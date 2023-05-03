@@ -28,7 +28,7 @@ Feature: Appointments
     And I canceling all the available appointments
 
     Examples:
-      | Appointment         |
+      | Appointment           |
       | Upcoming Appointments |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
@@ -95,7 +95,7 @@ Feature: Appointments
     Then I should see Appointment cancelled message "<Appointment_After_Cancel>"
 
     Examples:
-      | Appointment         | Appointment_Cancel_Button        | Appointment_After_Cancel              |
+      | Appointment           | Appointment_Cancel_Button        | Appointment_After_Cancel              |
       | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
@@ -135,7 +135,7 @@ Feature: Appointments
 #   Then I should see video consultation window with icons "<All_Icons>"
 
     Examples:
-      | Appointment         | Join_Consultation                                 | All_Icons     |
+      | Appointment           | Join_Consultation                                 | All_Icons     |
       | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_JOIN_VIDEO_CONSULTATION& | &VIDEO_ICONS& |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE

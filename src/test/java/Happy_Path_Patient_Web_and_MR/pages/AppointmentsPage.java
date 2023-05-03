@@ -131,7 +131,7 @@ public class AppointmentsPage extends BasePage {
     //p[contains(text(),'Dr.Stephen')]
 
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@formcontolname='locations']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='location']")
     protected WebElement elmntLocationCenter;
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationCenter']")
@@ -3588,6 +3588,74 @@ public class AppointmentsPage extends BasePage {
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean verifyAppointmentStatusApproved(List<String> lstDetails) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(elmntFutureAppointmentTab);
+            String strDatePattern1 = "dd MMM yyyy";
+            String strDate = TestDataUtil.getValue(lstDetails.get(2));
+            String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+            System.out.println("DATE : " + strDateValue);
+
+            String strDateMonth = strDateValue;
+            String strTime = strSlotDate;
+            System.out.println("CANCEL TIME : " + strTime);
+            String strConvertedTime = strTime;
+//            strConvertedTime = "0" + strConvertedTime;
+            String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
+            System.out.println(strFinalOutDateTime);
+            WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
+            verifyElement(elmntAppointmentDetails);
+            jsScrollIntoView(elmntAppointmentDetails);
+
+            System.out.println("TEST" + lstDetails.get(1));
+            WebElement elmntReservationDetails = waitForElement(By.xpath(btnCancelForCreatedAppointment
+                    .replace("<<REPLACEMENT1>>", strFinalOutDateTime)
+                    .replace("<<REPLACEMENT2>>", lstDetails.get(0))
+                    .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
+            System.out.println("TEST" + lstDetails.get(1));
+            verifyElement(elmntReservationDetails);
+            takeScreenshot(driver);
+//            click(elmntReservationDetails);
+            waitForSeconds(3);
+            blResult = true;
+
+        } catch (Exception e) {
+            try {
+                waitForSeconds(2);
+                waitForElement(elmntFutureAppointmentTab);
+                String strDatePattern1 = "dd MMM yyyy";
+                String strDate = TestDataUtil.getValue(lstDetails.get(2));
+                String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+                System.out.println("DATE" + strDateValue);
+                String strDateMonth = strDateValue;
+                String strTime = strSlotDate;
+                String strFinalOutDateTime = strDateMonth + " " + strTime;
+                System.out.println(strFinalOutDateTime);
+                WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
+                verifyElement(elmntAppointmentDetails);
+                jsScrollIntoView(elmntAppointmentDetails);
+
+                System.out.println("TEST" + lstDetails.get(1));
+                WebElement elmntReservationDetails = waitForElement(By.xpath(btnCancelForCreatedAppointment
+                        .replace("<<REPLACEMENT1>>", strFinalOutDateTime)
+                        .replace("<<REPLACEMENT2>>", lstDetails.get(0))
+                        .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
+                System.out.println("TEST" + lstDetails.get(1));
+                verifyElement(elmntReservationDetails);
+                takeScreenshot(driver);
+//                click(elmntReservationDetails);
+                waitForSeconds(3);
+                blResult = true;
+            } catch (Exception d) {
+                e.printStackTrace();
+            }
+
         }
         return blResult;
     }

@@ -4255,6 +4255,17 @@ public class WebSteps {
 
     }
 
+    @And("I navigate to the {string} Future Appointments page verify the appointment status Approved {string}")
+    public void iNavigateToTheFutureAppointmentsPageVerifyTheAppointmentStatusApproved(String strAppointments, String strAppointmentCancel) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentCancel);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToWebFutureAppointmentPage(strAppointments));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAppointmentStatusApproved(lstDetails));
+
+        }
+
+    }
 }
 
 
