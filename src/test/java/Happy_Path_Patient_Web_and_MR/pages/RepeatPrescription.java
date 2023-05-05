@@ -69,7 +69,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'The selected provider is out of office. There may be a delay in getting your repeat prescriptions.')]")
     protected WebElement VeriflyOutOfOfficePopup;
 
-    @FindBy(how = How.XPATH, using = " //span[contains(text(),'OK')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'OK')]")
     protected WebElement ClickOutOfOfficePopupOkButton;
 
     //span[contains(text(),'OK')]
@@ -300,8 +300,11 @@ public class RepeatPrescription extends BasePage {
     protected String btnBackPaymentConfirmation1 = "//h1[contains(text(),'Payment Confirmation')]/i";
 
 
-    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'View Previous Requests')]")
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Repeat Prescriptions')]")
     protected WebElement txtViewPreviousRequests;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'View Previous Requests')]")
+    protected WebElement txtMobileViewPreviousRequests;
 
     @FindBy(how = How.XPATH, using = "//h4 [contains(text(),'Success!')]/following::p[contains(text(),'Your request has been sent successfully. Once the request has been processed, you will get an email confirmation.')]/parent::div")
     protected WebElement txtRRPSuccessPopUp;
@@ -703,8 +706,8 @@ public class RepeatPrescription extends BasePage {
     public boolean selectHealthCentreLocation(String strLocation) {
         boolean blResult = false;
         try {
-            if (verifyElement(VeriflyOutOfOfficePopup)){
-                click(ClickOutOfOfficePopupOkButton);
+            if (isElementDisplayed(VeriflyOutOfOfficePopup)){
+                jsClick(ClickOutOfOfficePopupOkButton);
             }
 //            refreshPage();
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -718,8 +721,8 @@ public class RepeatPrescription extends BasePage {
             waitForElementClickable(ddlLocation);
             waitForSeconds(2);
             mouseClick(ddlLocation);
-            if (verifyElement(VeriflyOutOfOfficePopup)){
-                click(ClickOutOfOfficePopupOkButton);
+            if (isElementDisplayed(VeriflyOutOfOfficePopup)){
+                jsClick(ClickOutOfOfficePopupOkButton);
             }
             System.out.println("Location was selected in the Request Medication >>> ::");
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -1029,9 +1032,9 @@ public class RepeatPrescription extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-//         waitForElementToAppear(driver,By.xpath(txtRRPSuccessPopUp1));
-//            waitForElement(txtRRPSuccessPopUp);
-//            verifyElement(txtRRPSuccessPopUp);
+         waitForElementToAppear(driver,By.xpath(txtRRPSuccessPopUp1));
+            waitForElement(txtRRPSuccessPopUp);
+            verifyElement(txtRRPSuccessPopUp);
             waitForSeconds(5);
 
             blResult = true;
@@ -1363,7 +1366,12 @@ public class RepeatPrescription extends BasePage {
             List<String> strDetails = lstPrescriptionDetails.subList(2, 4);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
-
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+waitForElement(txtMobileViewPreviousRequests);
+click(txtMobileViewPreviousRequests);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            }
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            waitForElement(txtViewPreviousRequests);
 //            verifyElement(txtViewPreviousRequests);
             waitForSeconds(2);
@@ -1976,11 +1984,13 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
                 waitForElement(txtAccount2Account);
                 verifyElement(txtAccount2Account);
                 waitForSeconds(2);
-                WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
-                System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
-                jsScrollIntoView(selectRdoBtnBank);
-                waitForElementClickable(selectRdoBtnBank);
-                jsClick(selectRdoBtnBank);
+//                WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
+//                System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
+//                jsScrollIntoView(selectRdoBtnBank);
+//                waitForElementClickable(selectRdoBtnBank);
+//                jsClick(selectRdoBtnBank);
+                Select A2ABanks  = new Select(driver.findElement(By.name("SelectBank")));
+                A2ABanks.selectByVisibleText("ANZ");
                 System.out.println("Successfully Select RdoBtnBank");
                 waitForSeconds(4);
                 DesiredCapabilities capabilities = new DesiredCapabilities();

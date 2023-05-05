@@ -107,9 +107,9 @@ public class MyHealthRecordsPage extends BasePage {
             .append("<<REPLACEMENT5>>").append("']/following-sibling::td//following-sibling::span[@class=\"mat-ripple mat-button-ripple\"]").toString();
 
     protected String strMobilePrescriptionsIconContentLocator = new StringBuilder()
-            .append("(//h2[text()='")
-            .append("<<REPLACEMENT1>>").append("']//following::p[text()='")
-            .append("<<REPLACEMENT2>>").append("'])[1]").toString();
+            .append("//h2[contains(text(),'")
+            .append("<<REPLACEMENT1>>").append("')]//following::p[text()='")
+            .append("<<REPLACEMENT2>>").append("']").toString();
 
     protected String strMobilePrescriptionsDetails = new StringBuilder()
             .append("//mat-expansion-panel-header[@aria-expanded='true']//following::div[contains(@style,'visibility: visible')]//p[normalize-space(text())='")
@@ -1205,9 +1205,9 @@ jsScrollIntoView(elmntClinicianNotes);
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-//            jsScrollIntoView(elmntSummary);
-//            waitForElementClickable(elmntSummary);
-//            jsClick(elmntSummary);
+            jsScrollIntoView(elmntSummary);
+            waitForElementClickable(elmntSummary);
+            jsClick(elmntSummary);
 //            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
