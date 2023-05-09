@@ -9,7 +9,7 @@ Feature: Recall Setting
     And I enter "&PATIENT_USER_LOGIN&" and "&PASSWORD&" For Beta
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
-  @WEB @PROVIDER_HAPPY_PATH @RECALL_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @RECALL_SETTING
   Scenario Template:S1-Provider Enable Recall Remainder
 
     Given As a Provider I am on HomePage and navigate to Recall Setting page

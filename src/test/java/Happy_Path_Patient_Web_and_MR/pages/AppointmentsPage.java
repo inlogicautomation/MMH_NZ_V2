@@ -23,7 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import static cap.utilities.DateUtil.getCurrentDate;
+import static cap.utilities.DateUtil.*;
 
 public class AppointmentsPage extends BasePage {
 
@@ -65,7 +65,7 @@ public class AppointmentsPage extends BasePage {
     protected WebElement elmntBlockAppointmentsForProviderHeader;
 
 
-    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Appointments')]//following::i")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT')]//i")
     protected WebElement elmntBookAppointment;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Upcoming Appointments')]")
@@ -116,6 +116,10 @@ public class AppointmentsPage extends BasePage {
 
     protected String ProviderLocation = new StringBuilder().append("(//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')])[1]").toString();
+
+
+    protected String MyAppointmentProviderLocation = new StringBuilder().append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[2]").toString();
     //span[contains(text(),' VM03Location')]
     //span[contains(text(),' VM03Location')]
 
@@ -131,8 +135,23 @@ public class AppointmentsPage extends BasePage {
     //p[contains(text(),'Dr.Stephen')]
 
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='location']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationCenter']")
     protected WebElement elmntLocationCenter;
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='provider']")
+    protected WebElement elmntSelectProviderdropdown;
+
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Search')])[6]")
+    protected WebElement elmntSearchButton;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Clear')]")
+    protected WebElement elmntclearButton;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'There are no records available.')]")
+    protected WebElement elmntVerfied;
+
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='searchValue']")
+    protected WebElement elmntSearchTextBox;
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationCenter']")
     protected WebElement elmntPatientLocationCenter;
@@ -249,6 +268,12 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-calendar[@class='mat-calendar']")
     protected WebElement elmntAppointmentCalendar;
 
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='fromDate']//following::button)[1]")
+    protected WebElement elmntMyAppointmentFromDateCalendar;
+
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='toDate']//following::button)[1]")
+    protected WebElement elmntMyAppointmentToDateCalendar;
+
     @FindBy(how = How.XPATH, using = "//button[@aria-label='Next month']")
     protected WebElement elmntCalendarNavNext;
 
@@ -260,7 +285,6 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'No visit slots are available for the selected provider and date.')]")
     protected WebElement elmntSlotTimesIsNotAvailable;
-
 
 
     @FindBy(how = How.XPATH, using = "//mat-chip-list[@class='mat-chip-list ng-star-inserted']//mat-chip")
@@ -298,7 +322,7 @@ public class AppointmentsPage extends BasePage {
 //    })
 //    protected WebElement btnConfirm;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(@class,'desktop-view')]//span[contains(text(),'Confirm')]/parent::button")
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'desktop-view')]//span[contains(text(),'Confirm')]")
     protected WebElement btnConfirmDesktop;
 
     @FindBy(how = How.XPATH, using = "(//h3[@class='pay-button ng-star-inserted'])[2]")
@@ -534,7 +558,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//textarea[@formcontrolname='reason']")
     protected WebElement txtReasonForCancelAppointment;
 
-    @FindBy(how = How.XPATH, using = "(//h3[contains(text(),' Upcoming Appointments')])[2]")
+    @FindBy(how = How.XPATH, using = "(//h3[contains(text(),' Upcoming Appointments')])[1]")
     protected WebElement elmntFutureAppointment;
 
     @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment'])[1]")
@@ -551,6 +575,19 @@ public class AppointmentsPage extends BasePage {
 
     protected String strIcon = new StringBuilder().append("//img[contains(@title,'")
             .append("<<REPLACEMENT>>").append("')]").toString();
+
+
+    protected String strMyAppointmentContentLocator = new StringBuilder()
+            .append("//td[contains(text(),'")
+            .append("<<REPLACEMENT1>>").append("')]//following::td[contains(text(),'")
+            .append("<<REPLACEMENT2>>").append("')]//following::td[contains(text(),'")
+            .append("<<REPLACEMENT3>>").append("')]//following::td/p[contains(text(),'")
+            .append("<<REPLACEMENT4>>").append("')]//following::td[contains(text(),'")
+            .append("<<REPLACEMENT5>>").append("')]//following::td//following::td[contains(text(),'")
+            .append("<<REPLACEMENT6>>").append("')]//following::td[contains(text(),'")
+            .append("<<REPLACEMENT7>>").append("')]").toString();
+
+
 
 
     public boolean navigateToBookAppointmentPage(String strAppointment) {
@@ -681,8 +718,8 @@ public class AppointmentsPage extends BasePage {
             waitForElement(elmntHealtCenter);
             click(elmntHealtCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectHealthCenter = waitForElementFewSeconds(By.xpath(ProviderHealthCenter.replace("<<REPLACEMENT>>", strHealthCenter)));
-            mouseClick(elmntSelectHealthCenter);
+            WebElement elmntSelectHealthCenter = waitForElement(By.xpath(ProviderLocation.replace("<<REPLACEMENT>>", strHealthCenter)));
+            jsClick(elmntSelectHealthCenter);
 //            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(elmntLocationCenter);
@@ -716,11 +753,11 @@ public class AppointmentsPage extends BasePage {
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntLocationCenter);
-            click(elmntLocationCenter);
+            jsClick(elmntLocationCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectLocation = waitForElement(By.xpath(ProviderLocation.replace("<<REPLACEMENT>>", strLocation)));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(MyAppointmentProviderLocation.replace("<<REPLACEMENT>>", strLocation)));
             System.out.println(">>>>>>>>>>>>>>"+elmntSelectLocation);
-            mouseClick(elmntSelectLocation);
+            jsClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
@@ -1136,11 +1173,11 @@ public class AppointmentsPage extends BasePage {
             System.out.println(">>>>Value>>>>>>>>>"+Value);
             if (AmountValue.equals("Fee : $0.00 (Incl. GST)")){
                 System.out.println("Appointment Booked For Zero Payments");
-                click(VerifyConfirmButton);
+//                click(VerifyConfirmButton);
             }
             if (!AmountValue.equals("Fee : $0.00 (Incl. GST)")){
                 System.out.println("Appointment Booked For Payments");
-                click(VerifyConfirmButton);
+//                click(VerifyConfirmButton);
 
             }
             blresult = true;
@@ -1204,6 +1241,7 @@ public class AppointmentsPage extends BasePage {
             waitForElement(elmntPhoneAppointmentIcon);
             click(elmntPhoneAppointmentIcon);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            jsScrollIntoView(elmntLocationCenter);
             waitForElement(elmntLocationCenter);
             jsClick(elmntLocationCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -3656,6 +3694,193 @@ public class AppointmentsPage extends BasePage {
                 e.printStackTrace();
             }
 
+        }
+        return blResult;
+    }
+    public boolean selectMyAppointmentsFutureDateOnCalender(String strFutureDate) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(5);
+            String strDatePattern1 = "d";
+            String strDate = strFutureDate;
+
+            String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+            System.out.println("DATE" + strDateValue);
+
+//            jsScrollIntoView(elmntMyAppointmentFromDateCalendar);
+            waitForElement(elmntMyAppointmentFromDateCalendar);
+            verifyElement(elmntMyAppointmentFromDateCalendar);
+            jsClick(elmntMyAppointmentFromDateCalendar);
+            try {
+                WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
+                verifyElement(elmntDate);
+                waitForElementClickable(elmntDate);
+                waitForSeconds(3);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                jsClick(elmntDate);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(2);
+            } catch (Exception e) {
+                verifyElement(elmntCalendarNavNext);
+                jsClick(elmntCalendarNavNext);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(3);
+                WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
+                verifyElement(elmntDate);
+                waitForElementClickable(elmntDate);
+                waitForSeconds(3);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                jsClick(elmntDate);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(2);
+            }
+
+            blResult = verifyElement(elmntMyAppointmentFromDateCalendar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectMyAppointmenteToDateOnCalender(String strFutureDate) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(5);
+            String strDatePattern1 = "d";
+            String strDate = strFutureDate;
+
+            String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+            System.out.println("DATE" + strDateValue);
+
+//            jsScrollIntoView(elmntMyAppointmentToDateCalendar);
+            waitForElement(elmntMyAppointmentToDateCalendar);
+            verifyElement(elmntMyAppointmentToDateCalendar);
+            jsClick(elmntMyAppointmentToDateCalendar);
+            try {
+                WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
+                verifyElement(elmntDate);
+                waitForElementClickable(elmntDate);
+                waitForSeconds(3);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                jsClick(elmntDate);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(2);
+            } catch (Exception e) {
+                verifyElement(elmntCalendarNavNext);
+                jsClick(elmntCalendarNavNext);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(3);
+                WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
+                verifyElement(elmntDate);
+                waitForElementClickable(elmntDate);
+                waitForSeconds(3);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                jsClick(elmntDate);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(2);
+            }
+            blResult = verifyElement(elmntMyAppointmentToDateCalendar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean VerifyMyAppointmentTableData(List<String> lstDetails) {
+        boolean blResult = false;
+        try {
+System.out.println(">>>>>>>>>>>>>VerifyMyAppointmentTableDatalstDetails"+lstDetails);
+            String AfterFourDaysDate = getDate("AFTER_THREE_DAYS","dd MMM yyyy");
+            WebElement elmntMyAppointmentTableData = waitForElementFewSeconds(By.xpath(strMyAppointmentContentLocator
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(AfterFourDaysDate))
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(strSlotDate))
+                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
+                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
+                    .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))
+                    .replace("<<REPLACEMENT6>>", TestDataUtil.getValue(lstDetails.get(5)))
+                    .replace("<<REPLACEMENT7>>", TestDataUtil.getValue(lstDetails.get(6)))));
+            waitForElement(elmntMyAppointmentTableData);
+            verifyElement(elmntMyAppointmentTableData);
+            waitForSeconds(15);
+            blResult =true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+
+    public boolean selectProviderName(String strLocation) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(elmntSelectProviderdropdown);
+            click(elmntSelectProviderdropdown);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(ProviderLocation.replace("<<REPLACEMENT>>", strLocation)));
+            System.out.println(">>>>>>>>>>>>>>"+elmntSelectLocation);
+            mouseClick(elmntSelectLocation);
+            waitForSeconds(10);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectSearch() {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+         waitForElement(elmntSearchButton);
+         jsClick(elmntSearchButton);
+         waitForSeconds(5);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectSearchTextBox(String strdata) {
+        boolean blResult = false;
+        try {
+            System.out.println(">>>>>>>>>>>>>>>>>>strdata"+strdata);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            enterValue(elmntSearchTextBox,strdata);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectViewClear() {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntclearButton);
+            jsClick(elmntclearButton);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean VeriflyElements() {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntVerfied);
+            blResult =   verifyElement(elmntVerfied);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return blResult;
     }

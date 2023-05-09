@@ -33,6 +33,8 @@ public class ProviderPageContainer {
 
     public MyAppointmentPage myAppointmentPage;
 
+    public OnlinePaymentSettingsPage onlinePaymentsSettingPage;
+
 
 
     public ProviderPageContainer() {
@@ -71,6 +73,7 @@ public class ProviderPageContainer {
         phoneAppointmentSettingPage = new PhoneAppointmentSettingPage(driver);
         recallSettingPage = new RecallSettingPage(driver);
         myAppointmentPage = new MyAppointmentPage(driver);
+        onlinePaymentsSettingPage = new OnlinePaymentSettingsPage(driver);
     }
 
     @After("@WEB")

@@ -4051,6 +4051,7 @@ public class WebSteps {
     public void iShouldSeeDetailsOfCreatedAppointmentAndIShouldSeeBookedAppointmentDisplayedUnderTheFutureTab(String strAppointmentDetails, String strFutureDate, String strAppointmentSummary) {
         List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentDetails);
         List<String> lstDetail = TestDataUtil.getListOfValue(strAppointmentSummary);
+        Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmButton());
         Assert.assertTrue(demoPageContainer.appointmentsPage.verifyDetailsOfCreatedAppointment(lstDetails, (strFutureDate)));
         Assert.assertTrue(demoPageContainer.appointmentsPage.acceptTermsAndConditionsForAppointment());
         Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmYourBookingButton());

@@ -1148,12 +1148,69 @@ public class ProviderWebSteps {
     @Then("I should see View Appointments details in My appointments grid based on the search {string}")
     public void iShouldSeeViewAppointmentsDetailsInMyAppointmentsGridBasedOnTheSearch(String strHealthCentre) {
         List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
         Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(stsdata.get(0))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(stsdata.get(1))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(2))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(7))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(1))));
+//        Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(4))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearchTextBox(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearch());
+        Assert.assertTrue(providerPageContainer.appointmentsPage.VerifyMyAppointmentTableData(TestDataUtil.getListOfValue(strHealthCentre)));
 
 
 
+    }
+
+    @Then("I should see View Appointments details in My appointments grid based on the select provider name {string}")
+    public void iShouldSeeViewAppointmentsDetailsInMyAppointmentsGridBasedOnTheSelectProviderName(String strHealthCentre) {
+        List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
+        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(7))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(1))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(4))));
+//        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearchTextBox(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearch());
+        Assert.assertTrue(providerPageContainer.appointmentsPage.VerifyMyAppointmentTableData(TestDataUtil.getListOfValue(strHealthCentre)));
+
+    }
+
+    @Then("I should see View Appointments details in My appointments grid based on the search and Enter Patient Name {string}")
+    public void iShouldSeeViewAppointmentsDetailsInMyAppointmentsGridBasedOnTheSearchAndEnterPatientName(String strHealthCentre) {
+        List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
+        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(7))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(1))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(4))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearchTextBox(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearch());
+        Assert.assertTrue(providerPageContainer.appointmentsPage.VerifyMyAppointmentTableData(TestDataUtil.getListOfValue(strHealthCentre)));
+    }
+
+    @Then("I should see View Appointments details in My appointments grid based on the View clear search {string}")
+    public void iShouldSeeViewAppointmentsDetailsInMyAppointmentsGridBasedOnTheViewClearSearch(String strHealthCentre) {
+        List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
+        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(7))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(1))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(4))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearchTextBox(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectViewClear());
+        Assert.assertTrue(providerPageContainer.appointmentsPage.VeriflyElements());
+
+    }
+
+    @Given("As a Provider I am on HomePage and navigate to online payments setting page")
+    public void asAProviderIAmOnHomePageAndNavigateToOnlinePaymentsSettingPage() {
+        Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickSystemMenu());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickAppointmentMessage());
 
     }
 }

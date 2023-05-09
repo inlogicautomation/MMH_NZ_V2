@@ -9,7 +9,7 @@ Feature: Phone Appointment Setting
     And I enter "&PATIENT_USER_LOGIN&" and "&PASSWORD&" For Beta
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
-  @WEB @PROVIDER_HAPPY_PATH @PHONE_APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @PHONE_APPOINTMENTS_SETTING
   Scenario Template:S1-Provider Enable Phone Appointment Settings - Rule 1 and verify Patient side
 
     Given As a Provider I am on HomePage and navigate to Phone Appointment Setting page
@@ -24,7 +24,7 @@ Feature: Phone Appointment Setting
       | &PHONE_APPOINTMENT_SETTING_DETAILS& | &BOOK_PHONE_APPOINTMENT& |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @PHONE_APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @PHONE_APPOINTMENTS_SETTING
   Scenario Template:S2-Provider Enable Phone Appointment Settings - Rule 2 and verify Patient side
 
     Given As a Provider I am on HomePage and navigate to Phone Appointment Setting page
@@ -52,7 +52,7 @@ Feature: Phone Appointment Setting
       | Phone_Appointment_setting_data      | Phone_Appointments_Data  | Details_For_Appointment     | Future_Date   | Appointment_Summary         |
       | &PHONE_APPOINTMENT_SETTING_DETAILS& | &BOOK_PHONE_APPOINTMENT& | &PHONE_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &PHONE_APPOINTMENT_SUMMARY& |
 
-  @WEB @PROVIDER_HAPPY_PATH @PHONE_APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @PHONE_APPOINTMENTS_SETTING
   Scenario Template:S4-Phone Appointment Settings - Phone Call initiated by Provider/Practice - Phone Call initiated by Patient and Booked Phone Appointment verify Status must be approved
 
     Given As a Provider I am on HomePage and navigate to Phone Appointment Setting page

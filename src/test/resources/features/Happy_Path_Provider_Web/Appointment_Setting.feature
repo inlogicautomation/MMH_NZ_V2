@@ -9,7 +9,7 @@ Feature: Appointment Setting
     And I enter "&PATIENT_USER_LOGIN&" and "&PASSWORD&" For Beta
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S0-Provider Enable Rule A verify Patient Booked (Payment) Visit Appointment based on Rule A (Any Location with Any Provider) and Verify the Appointments Booking Status
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -26,7 +26,7 @@ Feature: Appointment Setting
       | Any_Location_with_Any_Provider_Appointment_Details      | Location     | VM03Location_Doctor_Name    | VM03Location2_Doctor_Name    | Details_For_Appointment            | Future_Date          | Appointment_Summary                | Patient_User_Login | Password           | Appointment         | Appointment_Cancel_Button               | Appointment_After_Cancel                     |
       | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | VM03Location | &VM03LOCATION_DOCTOR_NAMES& | &VM03LOCATION2_DOCTOR_NAMES& | &VMO3L2_VISIT_APPOINTMENT_DETAILS& | &VM03L2_FUTURE_DATE& | &VM03L2_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Future Appointments | &VM03L2_APPOINTMENT_DETAILS_FOR_CANCEL& | &VM03L2_APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S1-Provider Enable Rule A verify Patient Book Visit Appointment based on Rule A (Any Location with Any Provider) & (Default Location with Default Provider) & (Default Location with Any Provider)
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -44,7 +44,7 @@ Feature: Appointment Setting
       | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | VM03Location | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | &VM03LOCATION_DOCTOR_NAMES& | &VM03LOCATION2_DOCTOR_NAMES& |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S2-Provider Enable Rule A verify Patient Book Phone Appointment based on Rule A (Any Location with Any Provider) & (Default Location with Default Provider) & (Default Location with Any Provider)
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -61,7 +61,7 @@ Feature: Appointment Setting
       | Any_Location_with_Any_Provider_Appointment_Details      | Location     | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | VM03Location_Doctor_Name    | VM03Location2_Doctor_Name    |
       | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_PHONE_APPOINTMENT& | VM03Location | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_PHONE_APPOINTMENT& | &VM03LOCATION_DOCTOR_NAMES& | &VM03LOCATION2_DOCTOR_NAMES& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S3-Provider Enable Rule A verify Patient Book Video Appointment based on Rule A (Any Location with Any Provider) & (Default Location with Default Provider) & (Default Location with Any Provider)
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -78,7 +78,7 @@ Feature: Appointment Setting
       | Any_Location_with_Any_Provider_Appointment_Details      | Location     | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | VM03Location_Doctor_Name    | VM03Location2_Doctor_Name    |
       | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VIDEO_APPOINTMENT& | VM03Location | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_VIDEO_APPOINTMENT& | &VM03LOCATION_DOCTOR_NAMES& | &VM03LOCATION2_DOCTOR_NAMES& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S4-Provider Enable Rule B verify Patient Book Visit Appointment based on Rule B (Default Location with Default Provider) & (Default Location with Any Provider)
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -93,7 +93,7 @@ Feature: Appointment Setting
       | Location     | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | VM03Location_Doctor_Name    |
       | VM03Location | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | &VM03LOCATION_DOCTOR_NAMES& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S5-Provider Enable Rule B verify Patient Book Phone Appointment based on Rule B (Default Location with Default Provider) & (Default Location with Any Provider)
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -108,7 +108,7 @@ Feature: Appointment Setting
       | Location     | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | VM03Location_Doctor_Name    |
       | VM03Location | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_PHONE_APPOINTMENT& | &VM03LOCATION_DOCTOR_NAMES& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S6-Provider Enable Rule B verify Patient Book Video Appointment based on Rule B (Default Location with Default Provider) & (Default Location with Any Provider)
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -123,7 +123,7 @@ Feature: Appointment Setting
       | Location     | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | VM03Location_Doctor_Name    |
       | VM03Location | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_VIDEO_APPOINTMENT& | &VM03LOCATION_DOCTOR_NAMES& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S7-Provider Enable Rule C verify Patient Book Visit,Phone and video Appointment based on Rule C (Default Location with Default Provider)
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -140,7 +140,7 @@ Feature: Appointment Setting
       | VM03Location | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  | &VM03LOCATION_DOCTOR_NAMES& |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S8-Provider Enable Rule D verify Patient Book Visit,Phone and video Appointment based on Rule D (Default Location with Default Provider) & (Income Provider)
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -156,7 +156,7 @@ Feature: Appointment Setting
       | Location     | Default_Location_with_Default_Provider_Appointment_Details             | Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C | Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c | VM03Location_Doctor_Name    |
       | VM03Location | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  | &VM03LOCATION_DOCTOR_NAMES& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S9-Provider Enable Rule E verify Patient Book Visit Appointment based on Rule E Check Restricted provider are not displayed
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -171,7 +171,7 @@ Feature: Appointment Setting
       | Location     | Restrict_Provider_Details | Default_Location_with_Default_Provider_Appointment_Details             | VM03Location_Doctor_Name    |
       | VM03Location | &RESTRICT_PROVIDER_DATA&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &VM03LOCATION_DOCTOR_NAMES& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S10-Provider Enable Rule E verify Patient Book Phone and video Appointment based on Rule E Check Restricted provider are not displayed
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -189,7 +189,7 @@ Feature: Appointment Setting
       | VM03Location | &RESTRICT_PROVIDER_DATA&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &VM03LOCATION_DOCTOR_NAMES& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S11-Provider Enable Rule E verify Patient Book Visit Appointment based on Rule E Check Not Restricted provider are displayed
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -205,7 +205,7 @@ Feature: Appointment Setting
       | VM03Location | &NON_RESTRICT_PROVIDER_DATA& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &VM03LOCATION_DOCTOR_NAMES& |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S12-Provider Enable Rule E verify Patient Book Phone and video Appointment based on Rule E Check Not Restricted provider are displayed
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -223,7 +223,7 @@ Feature: Appointment Setting
       | VM03Location | &NON_RESTRICT_PROVIDER_DATA& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &VM03LOCATION_DOCTOR_NAMES& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S13-Provider Allow to book for family / friends verify Friends and Family option is displayed in Appointment is for dropdown
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -241,7 +241,7 @@ Feature: Appointment Setting
       | Location     | Appointment_Reason | Appointment_Is_For_Details    | Appointment_Details                         | Details_For_Appointment                        | Future_Date                      | Appointment_Summary                            | Patient_User_Login | Password           | Appointment         | Appointment_Cancel_Button                           | Appointment_After_Cancel                                 |
       | VM03Location | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& | &FRIENDS_AND_FAMILY_BOOK_VISIT_APPOINTMENT& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_DETAILS& | &FRIENDS_AND_FAMILY_FUTURE_DATE& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Future Appointments | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_FOR_CANCEL& | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S13-Provider Allow to book for family / friends verify Friends and Family option is displayed in Appointment is for dropdown
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -255,7 +255,7 @@ Feature: Appointment Setting
       | VM03Location | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING11
   Scenario Template:S14-Provider Turn Off Online Appointments verify No Available appointment slot Text is displayed in Appointment Page
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -268,7 +268,7 @@ Feature: Appointment Setting
       | VM03Location | &PROVIDER_LOGIN_DETAILS& | &BOOK_VISIT_APPOINTMENT& | Book Appointment |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S15-Provider Turn on Online Appointments verify Available appointment slot Text is displayed in Appointment Page
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -280,7 +280,7 @@ Feature: Appointment Setting
       | Location     | Provider_Login           | Appointment_Details      | Appointment      |
       | VM03Location | &PROVIDER_LOGIN_DETAILS& | &BOOK_VISIT_APPOINTMENT& | Book Appointment |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S16-Provider View Turn Off Appointments Audit verify Check Turn Off Appointments audit grid displayed
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -292,7 +292,7 @@ Feature: Appointment Setting
       | Location     | Appointments_Audit_Details |
       | VM03Location | &APPOINTMENT_AUDIT_DATA&   |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S17-Provider View Turn On Appointments Audit verify Check Turn On Appointments audit grid view displayed
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page

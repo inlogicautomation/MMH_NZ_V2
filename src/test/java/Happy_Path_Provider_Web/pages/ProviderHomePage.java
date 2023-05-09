@@ -419,6 +419,8 @@ public class ProviderHomePage extends BasePage {
                 System.out.println(">>>>>>>>>WindowsCount : :" + WindowsCount);
                 if (WindowsCount == 2) {
                     focusWindow(2);
+                    waitForElement(elmntDashboard);
+                    click(elmntDashboard);
                     verifyElement(verifyPatientHomePage);
                     System.out.println("user here in patient portal homepage");
                 } else {
