@@ -3556,7 +3556,9 @@ jsScrollIntoView(elmntClinicianNotes);
             waitForSeconds(3);
             strVisitedName = strCreatedRecord;
             WebElement btnEdit = waitForElement(By.xpath(elmntCovidEdit.replace("<<REPLACEMENT>>", strCreatedRecord)));
-            click(btnEdit);
+            waitForElement(btnEdit);
+            System.out.println(">>>>>>btnEdit"+btnEdit);
+            jsClick(btnEdit);
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {

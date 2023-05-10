@@ -255,7 +255,7 @@ Feature: Appointment Setting
       | VM03Location | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING11
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S14-Provider Turn Off Online Appointments verify No Available appointment slot Text is displayed in Appointment Page
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page

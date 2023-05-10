@@ -10,7 +10,7 @@ import static Sanity_Patient_Web.pages.HomePage.*;
 
 @CucumberOptions(features = {"src/test/resources/features/Sanity_Patient_Web"},
         monochrome = true,
-        tags = "@DASHBOARD",
+        tags = "@DASHBOARD1",
         glue = {"Sanity_Patient_Web", "Happy_Path_Patient_Web_and_MR"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

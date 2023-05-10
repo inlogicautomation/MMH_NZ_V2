@@ -97,7 +97,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
     protected WebElement elmntHealtCenter;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Future appointments')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Upcoming Appointments')]")
     protected WebElement elmntfuturetab;
 
     @FindBy(how = How.XPATH, using = "(//div[@class='toast toast-warning'])[1]")

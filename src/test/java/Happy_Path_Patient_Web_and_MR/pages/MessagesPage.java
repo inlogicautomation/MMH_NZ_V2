@@ -170,8 +170,17 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
     protected WebElement drpDownLocation;
 
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='location']")
+    protected WebElement ProviderLocation;
+
     protected String elmntbyDrop = new StringBuilder().append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
+
+    protected String ProviderHealthCentre = new StringBuilder().append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[3]").toString();
+
+
+
 
     protected String elmntProviderGroupMessageFromDrop = new StringBuilder().append("(//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')])[1]").toString();
@@ -825,7 +834,8 @@ public class MessagesPage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Timprefer!')]"),
-            @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Steve!')]")
+            @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Steve!')]"),
+            @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Gp1!')]")
     })
 protected WebElement txtWelcome;
 
@@ -2396,11 +2406,11 @@ protected WebElement txtWelcome;
         try {
             waitForSeconds(2);
             waitForElement(txtCompose);
-            waitForElementClickable(drpDownLocation);
+            waitForElementClickable(ProviderLocation);
 //            Select healthCentre = new Select(driver.findElement(By.xpath("//mat-select[@formcontrolname='healthCenter']")));
 //            healthCentre.selectByVisibleText(strHealthCenterLocation);
-            jsClick(drpDownLocation);
-            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyDrop.replace("<<REPLACEMENT>>", strHealthCenterLocation)));
+            jsClick(ProviderLocation);
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(ProviderHealthCentre.replace("<<REPLACEMENT>>", strHealthCenterLocation)));
             jsClick(elmntEntriesFromHealthCentre);
 
             blResult = true;
@@ -2411,6 +2421,28 @@ protected WebElement txtWelcome;
         }
         return blResult;
     }
+
+    public boolean ProviderHealthCenter(String strHealthCenterLocation) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtCompose);
+            waitForElementClickable(drpDownLocation);
+//            Select healthCentre = new Select(driver.findElement(By.xpath("//mat-select[@formcontrolname='healthCenter']")));
+//            healthCentre.selectByVisibleText(strHealthCenterLocation);
+            jsClick(drpDownLocation);
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(ProviderHealthCentre.replace("<<REPLACEMENT>>", strHealthCenterLocation)));
+            jsClick(elmntEntriesFromHealthCentre);
+
+            blResult = true;
+            System.out.println("\nSuccessfully selected the health centre Location >>> :: ");
+        } catch (Exception e) {
+            System.out.println("\nFailed to select the health centre Location >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
 
 
     public void clickMessagesExpandIcon() {

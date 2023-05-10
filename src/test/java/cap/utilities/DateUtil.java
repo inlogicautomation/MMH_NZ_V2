@@ -33,7 +33,7 @@ public class DateUtil {
 //        String TomorrowDate = getDate("TOMORROW","dd MMM yyyy");
 //        System.out.println(currentDate);
         String Date = getDate("AFTER_THREE_DAYS","dd MMM yyyy");
-//        System.out.println(Date);
+        System.out.println(Date);
 
 
 

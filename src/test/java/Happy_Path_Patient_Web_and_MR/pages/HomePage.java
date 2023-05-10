@@ -71,7 +71,8 @@ public class HomePage extends BasePage {
         @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Harry Harry!']"),
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Christopher Michael!']"),
-                @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Ben!']")
+                @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Ben!']"),
+                @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Auto Pat1!']")
 
     })
     protected WebElement txtWelcome;

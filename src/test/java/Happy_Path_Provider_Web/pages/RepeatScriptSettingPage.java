@@ -411,9 +411,9 @@ public class RepeatScriptSettingPage extends BasePage {
 
     //span[contains(text(),'VM04Practice')]
     protected String selectedDrpDownOption = new StringBuilder()
-            .append("//span[contains(text(),'")
+            .append("(//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
-            .append("')]").toString();
+            .append("')])[2]").toString();
 
     //div[contains(text(),'No')]/preceding-sibling::div/input
     protected String selectedRdoBtnValue = new StringBuilder()

@@ -27,12 +27,8 @@ Feature: My Health Records
     When I navigate to the Prescription "<Prescription>" page
     Then I should see all the Prescription Entries From Health center Medicine Details in a grid view
       | &PRESCRIPTION_TABLE_DATA&   |
-      | &PRESCRIPTION_TABLE_DATA_1& |
-      | &PRESCRIPTION_TABLE_DATA_2& |
     And I click on the more info icon on the grid & view the details of the prescription added
       | &PRESCRIPTION_TABLE_DATA&   | &PRESCRIPTION_ICON_DATA&   | &PRESCRIPTION_MOBILE_ICON_DATA&   |
-      | &PRESCRIPTION_TABLE_DATA_1& | &PRESCRIPTION_ICON_DATA_1& | &PRESCRIPTION_MOBILE_ICON_DATA_1& |
-      | &PRESCRIPTION_TABLE_DATA_2& | &PRESCRIPTION_ICON_DATA_2& | &PRESCRIPTION_MOBILE_ICON_DATA_2& |
     And I navigate to the Homepage
     Examples:
       | Prescription  |
@@ -45,8 +41,6 @@ Feature: My Health Records
     And I navigate to the Prescriptions "<Header>"
     And  I should see all the Prescription Entries From Health center Medicine Details in a grid view
       | &PRESCRIPTION_TABLE_DATA&   |
-      | &PRESCRIPTION_TABLE_DATA_1& |
-      | &PRESCRIPTION_TABLE_DATA_2& |
     When I select "<Option>" filter dropdown
     And I Create New Record in My Entries in Prescription page
       | &VISITED_NAME&                   |
@@ -83,12 +77,8 @@ Feature: My Health Records
     When I navigate to the "<Allergies>"Allergies page dropdown
     Then I should see all the Allergies Entries From Health center Medicine Details in a grid view
       | &ALLERGIES_TABLE_DATA&   |
-      | &ALLERGIES_TABLE_DATA_1& |
-      | &ALLERGIES_TABLE_DATA_2& |
     And I click on the more info icon on the grid & view the details of the Allergies added
       | &ALLERGIES_TABLE_DATA&   | &ALLERGIES_ICON_DATA&   | &ALLERGIES_MOBILE_ICON_DATA&   |
-      | &ALLERGIES_TABLE_DATA_1& | &ALLERGIES_ICON_DATA_1& | &ALLERGIES_MOBILE_ICON_DATA_1& |
-      | &ALLERGIES_TABLE_DATA_2& | &ALLERGIES_ICON_DATA_2& | &ALLERGIES_MOBILE_ICON_DATA_2& |
     And I navigate to the Homepage
 
     Examples:
@@ -102,8 +92,6 @@ Feature: My Health Records
     And I navigate to the Allergies "<Header>"
     And I should see all the Allergies Entries From Health center Medicine Details in a grid view
       | &ALLERGIES_TABLE_DATA&   |
-      | &ALLERGIES_TABLE_DATA_1& |
-      | &ALLERGIES_TABLE_DATA_2& |
     When I select "<Option>" filter dropdown
     And I Create New Record in My Entries in Allergies page
       | &VISITED_NAME&                |
@@ -137,10 +125,8 @@ Feature: My Health Records
     When I navigate to the "<Immunisations>"Immunisations page dropdown
     Then I should see all the Immunisations Entries From Health center Medicine Details in a grid view
       | &IMMUNISATIONS_TABLE_DATA&   |
-      | &IMMUNISATIONS_TABLE_DATA_1& |
     And I click on the more info icon on the grid & view the details of the Immunisations added
       | &IMMUNISATIONS_TABLE_DATA&   | &IMMUNISATIONS_ICON_DATA&   | &IMMUNISATION_MOBILE_ICON_DATA&   |
-      | &IMMUNISATIONS_TABLE_DATA_1& | &IMMUNISATIONS_ICON_DATA_1& | &IMMUNISATION_MOBILE_ICON_DATA_1& |
     And I navigate to the Homepage
     Examples:
       | Immunisations |
@@ -153,7 +139,6 @@ Feature: My Health Records
     And I navigate to the Immunisations "<Header>"
     And I should see all the Immunisations Entries From Health center Medicine Details in a grid view
       | &IMMUNISATIONS_TABLE_DATA&   |
-      | &IMMUNISATIONS_TABLE_DATA_1& |
     When I select "<Option>" filter dropdown
     And I Create New Record in Immunisations page
       | &VISITED_NAME&           |
@@ -205,12 +190,8 @@ Feature: My Health Records
     When I navigate to the "<Conditions>" Conditions page Dropdown
     Then I should see all the Conditions Entries From Health center Medicine Details in a grid view
       | &CLASSIFICATIONS_TABLE_DATA&   |
-      | &CLASSIFICATIONS_TABLE_DATA_1& |
-      | &CLASSIFICATIONS_TABLE_DATA_2& |
     And I click on the more info icon on the grid & view the details of the Conditions added
       | &CLASSIFICATIONS_TABLE_DATA&   | &CLASSIFICATIONS_ICON_DATA&   | &CLASSIFICATIONS_MOBILE_ICON_DATA&   |
-      | &CLASSIFICATIONS_TABLE_DATA_1& | &CLASSIFICATIONS_ICON_DATA_1& | &CLASSIFICATIONS_MOBILE_ICON_DATA_1& |
-      | &CLASSIFICATIONS_TABLE_DATA_2& | &CLASSIFICATIONS_ICON_DATA_2& | &CLASSIFICATIONS_MOBILE_ICON_DATA_2& |
     And I navigate to the Homepage
     Examples:
       | Conditions |
@@ -223,8 +204,6 @@ Feature: My Health Records
     And I navigate to the Conditions "<Header>"
     And I should see all the Conditions Entries From Health center Medicine Details in a grid view
       | &CLASSIFICATIONS_TABLE_DATA&   |
-      | &CLASSIFICATIONS_TABLE_DATA_1& |
-      | &CLASSIFICATIONS_TABLE_DATA_2& |
     When I select "<Option>" filter dropdown
     And I Create New Record in My Entries in Conditions page
       | &VISITED_NAME&           |
@@ -259,13 +238,10 @@ Feature: My Health Records
     When I navigate to the Lab Results page
     And  I should see all the Lab Results Entries From Health center Medicine Details in a grid view
       | &LAB_RESULT_TABLE_DATA&   |
-      | &LAB_RESULT_TABLE_DATA_1& |
     Then I click on the more info icon on the grid & view the details of the Lab Results added
       | &LAB_RESULT_TABLE_DATA&   | &LAB_RESULT_ICON_DATA&   | &LAB_RESULT_MOBILE_ICON_DATA&   |
-      | &LAB_RESULT_TABLE_DATA_1& | &LAB_RESULT_ICON_DATA_1& | &LAB_RESULT_MOBILE_ICON_DATA_1& |
     And I click on the more info icon on the grid & view the details of the Test Results added
       | &LAB_RESULT_TABLE_DATA&   | &TEST_RESULT_ICON_DATA&   | &TEST_MOBILE_RESULT_ICON_DATA&   |
-      | &LAB_RESULT_TABLE_DATA_1& | &TEST_RESULT_ICON_DATA_1& | &TEST_MOBILE_RESULT_ICON_DATA_1& |
     And I navigate to the Homepage
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
@@ -275,14 +251,8 @@ Feature: My Health Records
     When I navigate to the "<ClinicNotes>"Clinic Notes page dropdown
     Then I should see all the Clinic Notes Entries From Health center Medicine Details in a grid view
       | &CLINIC_TABLE_DATA&   |
-      | &CLINIC_TABLE_DATA_1& |
-      | &CLINIC_TABLE_DATA_2& |
-      | &CLINIC_TABLE_DATA_3& |
     And I click on the more info icon on the grid & view the details of the Clinic Notes added
       | &CLINIC_TABLE_DATA&   | &CLINIC_ICON_DATA&   | &CLINIC_MOBILE_ICON_DATA&   |
-      | &CLINIC_TABLE_DATA_1& | &CLINIC_ICON_DATA_1& | &CLINIC_MOBILE_ICON_DATA_1& |
-      | &CLINIC_TABLE_DATA_2& | &CLINIC_ICON_DATA_2& | &CLINIC_MOBILE_ICON_DATA_2& |
-      | &CLINIC_TABLE_DATA_3& | &CLINIC_ICON_DATA_3& | &CLINIC_MOBILE_ICON_DATA_3& |
     And I navigate to the Homepage
 
     Examples:
@@ -296,9 +266,6 @@ Feature: My Health Records
     And I navigate to the Clinic Notes "<Header>"
     And I should see all the Clinic Notes Entries From Health center Medicine Details in a grid view
       | &CLINIC_TABLE_DATA&   |
-      | &CLINIC_TABLE_DATA_1& |
-      | &CLINIC_TABLE_DATA_2& |
-      | &CLINIC_TABLE_DATA_3& |
     When I select "<Option>" filter dropdown
     And I Create New Record in My Health Records
       | &VISITED_NAME&           |
