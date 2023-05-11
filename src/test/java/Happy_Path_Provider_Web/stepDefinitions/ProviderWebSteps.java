@@ -268,7 +268,7 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectHealthCentreLocation(lstDetails.get(0)));
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectServiceName(lstDetails.get(1)));
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectOtherReqDataToRestrictNameAndLocation());
-        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqData(lstDetails.get(2)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqData(TestDataUtil.getListOfValue(strDetail)));
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }

@@ -318,12 +318,16 @@ public class HomePage extends BasePage {
     public boolean navigateToHomePage() {
         boolean blResult = false;
         try {
+            verifyElement(elmntDashboard);
+            waitForElement(elmntDashboard);
+            click(elmntDashboard);
 //            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            if (isElementDisplayed(txtWelcome)) {
+            if (verifyElement(txtWelcome)) {
                 verifyElement(elmntDashboard);
                 waitForElementClickable(elmntDashboard);
                 jsClick(elmntDashboard);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                refreshPage();
                 waitForElement(txtWelcome);
                 blResult = verifyElement(txtWelcome);
             }else {
