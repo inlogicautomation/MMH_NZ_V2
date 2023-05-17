@@ -18,8 +18,8 @@ Feature: Repeat Script Setting
     Then I should verify disabled RRP Script Instructions Settings "<Details>"
 
     Examples:
-      | System_Menu    | Details                            |
-      | RRP Script Fee | &RRP_SCRIPT_INSTRUCTIONS_SETTINGS& |
+      | System_Menu             | Details                            |
+      | RRP Script fee Settings | &RRP_SCRIPT_INSTRUCTIONS_SETTINGS& |
 
   @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING
   Scenario Outline: S2- RRP Script Settings Default Provider - Rule A
@@ -78,8 +78,8 @@ Feature: Repeat Script Setting
     When I navigate to patient portal and verify the change
     Then I should see the changes based on Send Script by Post"<Script_Instructions>","<Script_Urgencies>","<Medication Details>" and "<Location Details>"
     Examples:
-      | System_Menu            | Details               | Script_Instructions   | Script_Urgencies   | Medication Details                            | Location Details              |
-      | Repeat Script Settings | &SEND_SCRIPT_BY_POST& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &REPEAT_SCRIPT_SETTINGS_DATA& |
+      | System_Menu            | Details               | Script_Instructions   | Script_Urgencies   | Medication Details             | Location Details              |
+      | Repeat Script Settings | &SEND_SCRIPT_BY_POST& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR SENT SCRIPT BY POST& | &REPEAT_SCRIPT_SETTINGS_DATA& |
 
   @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING
   Scenario Outline: S8- RRP Script Settings - Send Script to Pharmacy
@@ -88,8 +88,8 @@ Feature: Repeat Script Setting
     When I navigate to patient portal and verify the change
     Then I should see the changes based on Send Script to Pharmacy"<Script_Instructions>","<Script_Urgencies>","<Medication Details>" and "<Location Details>"
     Examples:
-      | System_Menu            | Details                   | Script_Instructions   | Script_Urgencies   | Medication Details                            | Location Details              |
-      | Repeat Script Settings | &SEND_SCRIPT_TO_PHARMACY& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &REPEAT_SCRIPT_SETTINGS_DATA& |
+      | System_Menu            | Details                   | Script_Instructions   | Script_Urgencies   | Medication Details                                 | Location Details              |
+      | Repeat Script Settings | &SEND_SCRIPT_TO_PHARMACY& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR PRESCRIPTION BY SENT SCRIPT TO PHARMACY& | &REPEAT_SCRIPT_SETTINGS_DATA& |
 
   @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING
   Scenario Outline: S9- RRP Script Settings - Deliver Meds by Pharmacy
@@ -98,8 +98,8 @@ Feature: Repeat Script Setting
     When I navigate to patient portal and verify the change
     Then I should see the changes based on Deliver Meds By Pharmacy"<Script_Instructions>","<Script_Urgencies>","<Medication Details>" and "<Location Details>"
     Examples:
-      | System_Menu            | Details                    | Script_Instructions   | Script_Urgencies   | Medication Details                            | Location Details              |
-      | Repeat Script Settings | &DELIVER_MEDS_BY_PHARMACY& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &REPEAT_SCRIPT_SETTINGS_DATA& |
+      | System_Menu            | Details                    | Script_Instructions   | Script_Urgencies   | Medication Details                   | Location Details              |
+      | Repeat Script Settings | &DELIVER_MEDS_BY_PHARMACY& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR DELIVERY MEDS BY PHARMACY& | &REPEAT_SCRIPT_SETTINGS_DATA& |
 
 
   @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING

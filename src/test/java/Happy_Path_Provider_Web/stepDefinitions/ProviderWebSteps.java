@@ -38,8 +38,18 @@ public class ProviderWebSteps {
 
     @And("I navigate to RRP Script Instructions Settings and click edit button")
     public void iNavigateToRRPScriptInstructionsSettingsAndClickEditButton() {
-        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickRRPScriptInstructionSetting());
-        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickRRPScriptInstructionSettingEditButton());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickRRPScriptInstructionSetting());
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickRRPScriptInstructionSettingEditButton());
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickMobileRRPScriptInstructionSetting());
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickRRPScriptInstructionSettingEditButton());
+
+
+        }
+
     }
 
     @When("I disable the RRP Script Instructions Settings {string}")

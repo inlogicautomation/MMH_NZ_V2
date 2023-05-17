@@ -12,7 +12,7 @@ import static Happy_Path_Patient_Web_and_MR.pages.HomePage.strSystemName;
 
 @CucumberOptions(features = {"src/test/resources/features/Happy_Path_Provider_Web"},
         monochrome = true,
-        tags = "@TEST",
+        tags = "@REPEAT_SCRIPT_SETTING1",
         glue = {"Happy_Path_Provider_Web", "Happy_Path_Patient_Web_and_MR"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
@@ -27,9 +27,9 @@ public class ProviderMobileWebCukes extends AbstractTestNGCucumberTests {
     public void Rerun(){
         System.setProperty("app", "Happy_Path_Provider_Web");
         System.setProperty("execution_type","mobile");
-        System.setProperty("runner","ProviderWebCukes");
+        System.setProperty("runner","ProviderMobileWebCukes");
         System.setProperty("browser_name","chrome");
-        System.setProperty("env","PROD");
+        System.setProperty("env","QA");
 
     }
     @AfterClass
@@ -48,4 +48,4 @@ public class ProviderMobileWebCukes extends AbstractTestNGCucumberTests {
 
 }
 
-//    clean test -Dapp=Happy_Path_Provider_Web -Drunner=ProviderMobileWebCukes -Dexecution_type=mobile -Dconfig=local_android_Galaxy_A13_Chrome -Denv=PROD -Dbrowser_name=chrome "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/RealDeviceMobile-QAResults.html -Dsysteminfo.AppName=Demo-QA"
+//    clean test -Dapp=Happy_Path_Provider_Web -Drunner=ProviderMobileWebCukes -Dexecution_type=mobile -Dconfig=local_android_Galaxy_A13_Chrome -Denv=QA -Dbrowser_name=chrome "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/RealDeviceMobile-QAResults.html -Dsysteminfo.AppName=Demo-QA"

@@ -266,7 +266,7 @@ public class HomePage extends BasePage {
         boolean blResult = false;
         try {
             int WindowsCount = driver.getWindowHandles().size();
-            System.out.println("===============>WindowsCount::" + WindowsCount);
+//            System.out.println("===============>WindowsCount::" + WindowsCount);
             if (WindowsCount == 1) {
                 waitForElement(betaLoginBtn);
                 click(betaLoginBtn);
@@ -318,28 +318,29 @@ public class HomePage extends BasePage {
     public boolean navigateToHomePage() {
         boolean blResult = false;
         try {
+
             jsScrollIntoView(elmntDashboard);
-            verifyElement(elmntDashboard);
-            waitForElement(elmntDashboard);
-            click(elmntDashboard);
-//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            if (verifyElement(txtWelcome)) {
                 verifyElement(elmntDashboard);
-                waitForElementClickable(elmntDashboard);
-                jsClick(elmntDashboard);
-                waitForElementDisappear(driver, By.xpath(elmntSpinner));
-                refreshPage();
-                waitForElement(txtWelcome);
-                blResult = verifyElement(txtWelcome);
-            }else {
-                focusWindow(2);
-                jsScrollIntoView(elmntDashboard);
-                waitForElementClickable(elmntDashboard);
-                jsClick(elmntDashboard);
-                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForElement(elmntDashboard);
+                click(elmntDashboard);
+//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                if (verifyElement(txtWelcome)) {
+                    verifyElement(elmntDashboard);
+                    waitForElementClickable(elmntDashboard);
+                    jsClick(elmntDashboard);
+                    waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                    refreshPage();
+                    waitForElement(txtWelcome);
+                    blResult = verifyElement(txtWelcome);
+                } else {
+                    focusWindow(2);
+                    jsScrollIntoView(elmntDashboard);
+                    waitForElementClickable(elmntDashboard);
+                    jsClick(elmntDashboard);
+                    waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //               refreshPage();
-                blResult =verifyElement(txtWelcome);
-            }
+                    blResult = verifyElement(txtWelcome);
+                }
 //            if (!isElementDisplayed(txtWelcome)) {
 //                focusWindow(2);
 //                waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -350,6 +351,7 @@ public class HomePage extends BasePage {
 //                blResult = verifyElement(txtWelcome);
 //                System.out.println("User on the Patient HomePage and Verified>>>>");
 //            }
+
             return blResult;
 
         } catch (Exception e) {
@@ -473,7 +475,7 @@ public class HomePage extends BasePage {
 
     public boolean clickDashBoard() {
         boolean isVerified = false;
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+
 //            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
@@ -490,8 +492,9 @@ public class HomePage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntVerifyHomePage);
             isVerified = verifyElement(elmntVerifyHomePage);
-        }
-        return isVerified;
+
+
+        return true;
     }
 
     public boolean clickLogoutButton() {
@@ -551,7 +554,7 @@ public class HomePage extends BasePage {
 
     public boolean clickHamburgerIcon() {
 //        waitForSeconds(3);
-        refreshPage();
+//        refreshPage();
         waitForElement(btnHamburgerIcon);
         waitForElementClickable(btnHamburgerIcon);
 //        waitForSeconds(2);

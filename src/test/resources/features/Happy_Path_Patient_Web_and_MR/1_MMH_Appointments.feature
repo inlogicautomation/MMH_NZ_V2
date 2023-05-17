@@ -202,7 +202,7 @@ Feature: Appointments
 
     Examples:
       | Appointments      |
-      | Past appointments |
+      | Past Appointments |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S8 - Patient can view all the past date booked appointments in card view
@@ -226,4 +226,4 @@ Feature: Appointments
 
     Examples:
       | Appointments      | All_Icons     |
-      | Video invitations | &VIDEO_ICONS& |
+      | Video Invitations | &VIDEO_ICONS& |

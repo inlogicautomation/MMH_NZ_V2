@@ -95,8 +95,11 @@ public class ProviderHomePage extends BasePage {
     @FindBy(xpath = "//h1[contains(text(),'Repeat Script Settings')]")
     protected WebElement txtRepeatScriptSettings;
 
-    @FindBy(xpath = "//h3[contains(text(),'RRP Script Instructions Settings')]")
+    @FindBy(xpath = "(//h3[contains(text(),'RRP Script Instructions Settings')])[2]")
     protected WebElement txtRRPScriptInstructionsSettings;
+
+    @FindBy(xpath = "//a[contains(text(),'RRP Script Instructions Settings')]")
+    protected WebElement txtRRPScriptInstructionsSettingsheader;
 
     @FindBy(how = How.XPATH, using = "//input[@data-placeholder='Email Address' or @data-placeholder='Email address']")
     protected WebElement txtBoxEmail;
@@ -247,11 +250,15 @@ public class ProviderHomePage extends BasePage {
             jsScrollIntoView(elmtRepeatScriptSettings);
             waitForElement(elmtRepeatScriptSettings);
             jsClick(elmtRepeatScriptSettings);
+
             WebElement element = driver.findElement(By.xpath(MobileelmntModule.replace("<<NAME>>",strName)));
+            System.out.println(">>>>>>>>>element"+element);
             jsScrollIntoView(element);
             waitForElement(element);
 //            waitForElementClickable(element);
             click(element);
+//waitForElement(txtRRPScriptInstructionsSettingsheader);
+//           click(txtRRPScriptInstructionsSettingsheader);
             waitForElement(txtRRPScriptInstructionsSettings);
             takeScreenshot(driver);
             blResult =verifyElement(txtRRPScriptInstructionsSettings);
@@ -438,6 +445,8 @@ public class ProviderHomePage extends BasePage {
                     driver.switchTo().window(tabs.get(1));
                     visit(TestDataUtil.getValue("&PATIENT_URL&"));
                     waitForSeconds(4);
+                    int WindowsCounts = driver.getWindowHandles().size();
+                    System.out.println("===============>WindowsCount::" + WindowsCounts);
                     waitForElementClickable(elmntLogOut);
                     jsClick(elmntLogOut);
                     waitForSeconds(2);
@@ -449,10 +458,11 @@ public class ProviderHomePage extends BasePage {
                 System.out.println(">>>>>>>>>WindowsCount : :" + WindowsCount);
                 if (WindowsCount == 2) {
                     focusWindow(2);
-                    verifyElement(verifyPatientHomePage);
-                    System.out.println("user here in patient portal homepage");
-                } else {
-                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    if (verifyElement(verifyPatientHomePage)) {
+                        System.out.println("user here in patient portal homepage");
+                    } else {
+                        visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    }
                 }
                 if (WindowsCount == 1) {
                     ((JavascriptExecutor) driver).executeScript("window.open()");
@@ -460,6 +470,8 @@ public class ProviderHomePage extends BasePage {
                     driver.switchTo().window(tabs.get(1));
                     visit(TestDataUtil.getValue("&PATIENT_URL&"));
                     waitForSeconds(4);
+                    int WindowsCounts = driver.getWindowHandles().size();
+                    System.out.println("===============>WindowsCount::" + WindowsCounts);
                     waitForElementClickable(elmntMobileLogOut);
                     jsClick(elmntMobileLogOut);
                     waitForSeconds(2);

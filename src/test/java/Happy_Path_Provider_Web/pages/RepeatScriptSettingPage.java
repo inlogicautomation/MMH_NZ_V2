@@ -19,11 +19,17 @@ public class RepeatScriptSettingPage extends BasePage {
     @FindBy(xpath = "//div[contains(text(),'RRP Script Instructions Settings')]")
     protected WebElement elmntRRPScriptInstructionsSettings;
 
+    @FindBy(xpath = "//a[contains(text(),'RRP Script Instructions Settings')]")
+    protected WebElement elmntMobileRRPScriptInstructionsSettings;
+
     @FindBy(xpath = "//div[contains(text(),'RRP Script Instructions Fee Setup')]")
     protected WebElement elmntRRPScriptInstructionsFeeSetup;
 
     @FindBy(xpath = "//h3[contains(text(),'RRP Script Instructions Settings')]")
     protected WebElement txtRRPScriptInstructionsSettings;
+
+    @FindBy(xpath = "(//h3[contains(text(),'RRP Script Instructions Settings')])[2]")
+    protected WebElement txtMobileRRPScriptInstructionsSettings;
 
     @FindBy(xpath = "//h3[contains(text(),'RRP Script Instructions Fee Setup')]")
     protected WebElement txtRRPScriptInstructionsFeeSetup;
@@ -464,6 +470,15 @@ public class RepeatScriptSettingPage extends BasePage {
         waitAndClick(elmntRRPScriptInstructionsSettings);
         waitForElement(txtRRPScriptInstructionsSettings);
         isVerified = verifyElement(txtRRPScriptInstructionsSettings);
+        return isVerified;
+    }
+
+    public boolean clickMobileRRPScriptInstructionSetting() {
+        boolean isVerified = false;
+        waitForElement(elmntMobileRRPScriptInstructionsSettings);
+        waitAndClick(elmntMobileRRPScriptInstructionsSettings);
+        waitForElement(txtMobileRRPScriptInstructionsSettings);
+        isVerified = verifyElement(txtMobileRRPScriptInstructionsSettings);
         return isVerified;
     }
 

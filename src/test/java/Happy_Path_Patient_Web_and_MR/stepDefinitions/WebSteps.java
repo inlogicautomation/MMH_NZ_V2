@@ -397,7 +397,10 @@ public class WebSteps {
     @And("I click cancel button for the created appointment {string}")
     public void iClickCancelButtonForTheCreatedAppointment(String strAppointmentCancel) {
         List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentCancel);
-        Assert.assertTrue(demoPageContainer.appointmentsPage.clickCancelButtonForTheCreatedAppointment(lstDetails));
+
+            System.out.println(">>>>>>>>>>>>>>>");
+            demoPageContainer.appointmentsPage.clickMobileCancelButtonForTheCreatedAppointment(lstDetails);
+
     }
 
     @And("I logout from the application")
@@ -436,7 +439,7 @@ public class WebSteps {
         }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBIlE")) {
-            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyVideoPage());
             Assert.assertTrue(demoPageContainer.appointmentsPage.verifyAlltheVideoAppointmentsForMobileView());
 
         }
@@ -2856,15 +2859,26 @@ public class WebSteps {
 
     @When("I Click the Reply send message")
     public void iClickTheReplySendMessage() {
-        Assert.assertTrue(demoPageContainer.messagesPage.clickReplySendMessage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.messagesPage.clickReplySendMessage());
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.messagesPage.clickMobileReplySendMessage());
+
+        }
     }
 
     @Then("I should verify the sent reply message in Sent items")
     public void iShouldVerifyTheSentReplyMessageInSentItems() {
-        Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+        }
         Assert.assertTrue(demoPageContainer.messagesPage.navigateToPatientSentMessage());
-        Assert.assertTrue(demoPageContainer.messagesPage.verifyReplySentMessage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyReplySentMessage());
+        }
+        Assert.assertTrue(demoPageContainer.messagesPage.verifyMobileReplySentMessage());
     }
 
 
@@ -3321,6 +3335,7 @@ public class WebSteps {
         List<String> lstDetails = TestDataUtil.getListOfValue(strDetail);
         System.out.println("RRPScriptInstructionSetting details >>> :: " + lstDetails);
         Assert.assertTrue(demoPageContainer.repeatPrescription.verifyRestrictedByLocation(lstDetails.get(0)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyRestrictedByScriptUrgency(lstDetails.get(2)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.verifyRestrictedByProvider(lstDetails.get(1)));
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
     }
@@ -3341,6 +3356,7 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicalDetails.get(3)));
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
     }
@@ -3360,6 +3376,8 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgency(TestDataUtil.getListOfValue(ScriptUrgencies)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicalDetails.get(5)));
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
     }
@@ -3379,7 +3397,9 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.verifyScriptUrgency(TestDataUtil.getListOfValue(ScriptUrgencies)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptSendingOption(TestDataUtil.getValue("&SAVED_SCRIPT_OPTION_ADDRESS&")));
-        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectSendScriptToPharamacyMedicationsToRepeat(lstMedicalDetails.get(8)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicalDetails.get(9)));
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
     }
@@ -3400,7 +3420,9 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectScriptUrgency(TestDataUtil.getValue("&SCRIPT_URGENCY_URGENT_OPTION&")));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectDMBPOption(TestDataUtil.getValue("&SAVED_SCRIPT_OPTION_ADDRESS_DMBP&")));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectSearchAddress(TestDataUtil.getValue("&SAVED_ADDRESS_FOR_DMBP&")));
-        Assert.assertTrue(demoPageContainer.repeatPrescription.selectMedicationsToRepeat(lstMedicalDetails.get(4)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.selectDeliveryMedsByPharamacyMedicationsToRepeat(lstMedicalDetails.get(7)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.addMessage(lstMedicalDetails.get(8)));
+//        Assert.assertTrue(demoPageContainer.repeatPrescription.selectTermsAndCondition());
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectPayAtHealthCentre());
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
     }

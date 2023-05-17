@@ -1216,10 +1216,10 @@ jsScrollIntoView(elmntClinicianNotes);
             jsClick(btnMobileMenu);
             waitForElement(btnMyHealthRecordsExpand);
             click(btnMyHealthRecordsExpand);
-//            jsScrollIntoView(elmntSummary);
-//            waitForElementClickable(elmntSummary);
-//            jsClick(elmntSummary);
-//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            jsScrollIntoView(elmntSummary);
+            waitForElementClickable(elmntSummary);
+            jsClick(elmntSummary);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
     }
     public void clickExportButton() {

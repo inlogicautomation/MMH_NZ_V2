@@ -118,6 +118,10 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Sent')])[1]")
     protected WebElement txtSentPatient;
 
+    @FindBy(how = How.XPATH, using = "(//h1[contains(text(),'Sent')])[2]")
+    protected WebElement txtMobileSentPatient;
+
+
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'User settings updated successfully')]")
     protected WebElement txtSettingSuccessPopUp;
 
@@ -290,6 +294,13 @@ public class MessagesPage extends BasePage {
             .append("<<REPLACEMENT>>")
             .append("')]")
             .toString();
+
+    protected String MobilesentMessageSubject = new StringBuilder()
+            .append("(//mat-card-title[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')])[2]")
+            .toString();
+
 
     protected String elmntInnerSubject = new StringBuilder()
             .append("//div[contains(text(),'")
@@ -545,17 +556,27 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='Subject'])[1]")
     protected WebElement txtBoxReplySubject;
 
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='Subject'])[2]")
+    protected WebElement txtMobileBoxReplySubject;
+
     @FindBy(how = How.XPATH, using = "//mat-checkbox[not(contains(@class,'mat-checkbox-checked'))][@formcontrolname='termsconditions']/label/div")
     protected WebElement btnCheckBox;
 
     @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']")
     protected WebElement btnWriteMessage;
 
+    @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror'])[2]")
+    protected WebElement btnMobileWriteMessage;
+
     @AndroidFindBy(xpath = "(//android.widget.TextView[@text='Write your message']/following::android.widget.EditText)[1]")
     protected WebElement txtMessage;
 
     @AndroidFindBy(xpath = "(//android.widget.Button[@text='Signature Settings - Click here to update the signature on your outgoing E-mails']/following::android.widget.EditText)[1]")
     protected WebElement txtSignatureSettingMessage;
+
+
+    @AndroidFindBy(xpath = "(//android.widget.Button[@text='Out of Office Settings - Click here to enable and add a message for your out of office E-mails']/following::android.widget.EditText)[1]")
+    protected WebElement txtOutofOfficeSettingMessage;
 
     @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror']//p)[2]")
     protected WebElement btnReplyWriteMessage;
@@ -619,6 +640,9 @@ public class MessagesPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Send message')]//parent::span[@class='mat-button-wrapper'])[1]")
     protected WebElement btnReplySendMessage;
+
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Send message')]//parent::span[@class='mat-button-wrapper'])[2]")
+    protected WebElement btnMobileReplySendMessage;
 
     @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='Subject'])[1]")
     protected WebElement btnReplySendMessageSubject;
@@ -872,8 +896,12 @@ protected WebElement txtWelcome;
             waitForElementClickable(elmntMessages);
             click(elmntMessages);
             waitForSeconds(1);
+            jsScrollIntoView(elmntMobileMessagesSettings);
+            waitForSeconds(3);
+            jsScrollIntoView(elmntMobileMessagesSettings);
+            waitForSeconds(3);
             waitForElementClickable(elmntMobileMessagesSettings);
-            click(elmntMobileMessagesSettings);
+            jsClick(elmntMobileMessagesSettings);
             waitForSeconds(1);
             waitForElement(btnSave);
             blResult = verifyElement(btnSave);
@@ -895,9 +923,12 @@ protected WebElement txtWelcome;
             click(elmntMessages);
             waitForSeconds(1);
             jsScrollIntoView(elmntMobileMessagesSettings);
-            waitForElementClickable(elmntMobileMessagesSettings);
-            click(elmntMobileMessagesSettings);
-            waitForSeconds(1);
+            waitForSeconds(2);
+            jsScrollIntoView(elmntMobileMessagesSettings);
+            waitForSeconds(3);
+            waitForElement(elmntMobileMessagesSettings);
+            jsClick(elmntMobileMessagesSettings);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(btnSave);
             blResult = verifyElement(btnSave);
             System.out.println("Successfully navigated to messages settings >>>>> :: ");
@@ -940,9 +971,11 @@ protected WebElement txtWelcome;
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(elmntMessages);
-            waitForElementClickable(elmntMessages);
-            jsClick(elmntMessages);
+            if (verifyElement(elmntMessages)) {
+                waitForElement(elmntMessages);
+                waitForElementClickable(elmntMessages);
+                jsClick(elmntMessages);
+            }
             waitForSeconds(1);
             jsScrollIntoView(elmntSentPatient);
             waitForElement(elmntSentPatient);
@@ -1242,10 +1275,10 @@ protected WebElement txtWelcome;
             waitForElement(btnMobileReply);
             waitForElementClickable(btnMobileReply);
             jsClick(btnMobileReply);
-            waitForElement(txtBoxReplySubject);
-            waitForElementClickable(txtBoxReplySubject);
-            txtBoxReplySubject.clear();
-            txtBoxReplySubject.sendKeys(strRandomSubjectMessage);
+            waitForElement(txtMobileBoxReplySubject);
+            waitForElementClickable(txtMobileBoxReplySubject);
+            txtMobileBoxReplySubject.clear();
+            txtMobileBoxReplySubject.sendKeys(strRandomSubjectMessage);
             waitForSeconds(2);
             jsScrollDown();
 //            jsScrollIntoView(btnReplySendMessage);
@@ -1263,11 +1296,11 @@ protected WebElement txtWelcome;
 //            waitForSeconds(7);
 //            System.out.println(" switch to default frame::: " + driver.switchTo().defaultContent());
             waitForSeconds(2);
-            btnWriteMessage.click();
+            btnMobileWriteMessage.click();
             waitForSeconds(2);
             driver.switchTo().activeElement().clear();
             waitForSeconds(2);
-            btnWriteMessage.click();
+            btnMobileWriteMessage.click();
             waitForSeconds(2);
             driver.switchTo().activeElement().sendKeys(strMessage);
             waitForSeconds(2);
@@ -1345,6 +1378,27 @@ protected WebElement txtWelcome;
         return blResult;
     }
 
+
+    public boolean clickMobileReplySendMessage() {
+        boolean blResult = false;
+        try {
+            jsClick(btnReplySendMessageSubject);
+            waitForSeconds(2);
+            jsScrollDown();
+            jsScrollIntoView(btnMobileReplySendMessage);
+            waitForElement(btnMobileReplySendMessage);
+            jsClick(btnMobileReplySendMessage);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementToAppear(driver,By.xpath(btnSentSuccessfullyPopup1));
+            waitForElement(btnSentSuccessfullyPopup);
+            blResult = verifyElement(btnSentSuccessfullyPopup);
+
+        } catch (Exception e) {
+            System.out.println("Failed to select Out of Office Setting >>> ::");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
     public boolean selectAutomaticRepliesSetting() {
         boolean blResult = false;
         try {
@@ -1459,9 +1513,9 @@ protected WebElement txtWelcome;
                 System.out.println("Success Switch Native App");
                 capabilities.setCapability("autoGrantPermissions", "true");
                 swipeUpOutOfSetting();
-                waitForElement(txtSignatureSettingMessage);
+                waitForElement(txtOutofOfficeSettingMessage);
                 waitForSeconds(2);
-                enterValueRealDevice(txtSignatureSettingMessage, strMessage);
+                enterValueRealDevice(txtOutofOfficeSettingMessage, strMessage);
                 Set<String> contextNames1 = appiumDriver.getContextHandles();
                 for (String strContextName : contextNames1) {
                     if (strContextName.contains("CHROMIUM")) {
@@ -2009,6 +2063,29 @@ protected WebElement txtWelcome;
             click(sentSubject);
 
             blResult = verifyElement(txtSentPatient);
+            System.out.println("\nSuccessfully verified reply sent Message");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("\nFailed to verify reply sent message >>> :: ");
+        }
+        return blResult;
+    }
+
+    public boolean verifyMobileReplySentMessage() {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(txtMobileSentPatient);
+            System.out.println("strRandomSubjectMessage >>> :: " + strRandomSubjectMessage);
+            System.out.println("X Path-inboxSubject >>> :: " + MobilesentMessageSubject.replace("<<REPLACEMENT>>", strRandomSubjectMessage));
+            WebElement sentSubject = waitForElement(By.xpath(MobilesentMessageSubject.replace("<<REPLACEMENT>>", strRandomSubjectMessage)));
+            waitForElement(sentSubject);
+            takeScreenshot(driver);
+            waitForElementClickable(sentSubject);
+            click(sentSubject);
+
+            blResult = verifyElement(txtMobileSentPatient);
             System.out.println("\nSuccessfully verified reply sent Message");
 
         } catch (Exception e) {

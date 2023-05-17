@@ -12,7 +12,7 @@ import static Happy_Path_Patient_Web_and_MR.pages.HomePage.strSystemName;
 
 @CucumberOptions(features = {"@target/failedrerun.txt"},
         monochrome = true,
-        tags = "@REPEAT_SCRIPT_SETTING1",
+        tags = "@REPEAT_SCRIPT_SETTING",
         glue = {"Happy_Path_Provider_Web", "Happy_Path_Patient_Web_and_MR"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

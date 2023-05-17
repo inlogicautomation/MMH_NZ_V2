@@ -46,6 +46,8 @@ public class AppointmentsPage extends BasePage {
 
     protected String strActiveHeader = new StringBuilder().append("//h3[contains(text(),'").append("<<TAB>>").append("')]").toString();
 
+    protected String strMobileActiveHeader = new StringBuilder().append("(//h3[contains(text(),'").append("<<TAB>>").append("')])[2]").toString();
+
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]")
     protected WebElement elmntWelcomeMessage;
 
@@ -417,7 +419,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h3[contains(text(),'Upcoming Appointments')])[1]")
     protected WebElement elmntFutureAppointmentTab;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Future Appointments')]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Upcoming Appointments')]")
     protected WebElement clickMobileFutureAppointmentTab;
 
     @FindBy(how = How.XPATH, using = "//span[text()=' OK ']/parent::button")
@@ -560,6 +562,12 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//h3[contains(text(),' Upcoming Appointments')])[1]")
     protected WebElement elmntFutureAppointment;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Upcoming Appointments')]")
+    protected WebElement elmntMobileUpcomingAppointments;
+
+    @FindBy(how = How.XPATH, using = "(//h3[contains(text(),' Upcoming Appointments')])[2]")
+    protected WebElement elmntMobileUpComingAppointmentHeader;
 
     @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment'])[1]")
     protected WebElement elmntCancelAppointments;
@@ -1596,10 +1604,14 @@ public class AppointmentsPage extends BasePage {
     public boolean verifyMobileCreatedAppointmentInFutureAppointmentTab(List<String> lstDetails) {
         boolean blResult = false;
         try {
-            waitForElement(clickMobileFutureAppointmentTab);
-            click(clickMobileFutureAppointmentTab);
+            if (verifyElement(clickMobileFutureAppointmentTab)) {
+                waitForElement(clickMobileFutureAppointmentTab);
+                click(clickMobileFutureAppointmentTab);
+            }else{
+                System.out.println("User Already Upcomming Appointments Page");
+            }
             waitForSeconds(2);
-            waitForElement(elmntFutureAppointmentTab);
+            waitForElement(elmntMobileUpComingAppointmentHeader);
             String strDatePattern1 = "dd MMM yyyy";
             String strDate = TestDataUtil.getValue(lstDetails.get(2));
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
@@ -1610,7 +1622,7 @@ public class AppointmentsPage extends BasePage {
 
             String strConvertedTime = strTime;
 
-//            strConvertedTime = "0" + strConvertedTime;
+            strConvertedTime = "0" + strConvertedTime;
 
             String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
 
@@ -1633,9 +1645,9 @@ public class AppointmentsPage extends BasePage {
             try {
                 waitForSeconds(2);
                 System.out.println("Catch Block 1 executed");
-                waitForElement(clickMobileFutureAppointmentTab);
-                click(clickMobileFutureAppointmentTab);
-                waitForElement(elmntFutureAppointmentTab);
+//                waitForElement(clickMobileFutureAppointmentTab);
+//                click(clickMobileFutureAppointmentTab);
+                waitForElement(elmntMobileUpComingAppointmentHeader);
                 String strDatePattern1 = "dd MMM yyyy";
                 String strDate = TestDataUtil.getValue(lstDetails.get(2));
                 String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
@@ -1911,9 +1923,17 @@ public class AppointmentsPage extends BasePage {
     }
 
     public boolean verifyHeader(String strHeader) {
-        WebElement elmntActiveHeader = waitForElement(By.xpath(strActiveHeader.replace("<<TAB>>", strHeader)));
-        waitForElement(elmntActiveHeader);
-        return verifyElement(elmntActiveHeader);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            WebElement elmntActiveHeader = waitForElement(By.xpath(strActiveHeader.replace("<<TAB>>", strHeader)));
+            waitForElement(elmntActiveHeader);
+            return verifyElement(elmntActiveHeader);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            WebElement elmntActiveHeader = waitForElement(By.xpath(strMobileActiveHeader.replace("<<TAB>>", strHeader)));
+            waitForElement(elmntActiveHeader);
+            return verifyElement(elmntActiveHeader);
+        }
+        return true;
     }
 
     public void clickCardView() {
@@ -2501,9 +2521,80 @@ public class AppointmentsPage extends BasePage {
 
     public boolean clickCancelButtonForTheCreatedAppointment(List<String> lstDetails) {
         boolean blResult = false;
+
+            try {
+
+                waitForSeconds(2);
+                waitForElement(elmntFutureAppointmentTab);
+                String strDatePattern1 = "dd MMM yyyy";
+                String strDate = TestDataUtil.getValue(lstDetails.get(2));
+                String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+                System.out.println("DATE : " + strDateValue);
+
+                String strDateMonth = strDateValue;
+                String strTime = strSlotDate;
+                System.out.println("CANCEL TIME : " + strTime);
+                String strConvertedTime = strTime;
+                strConvertedTime = "0" + strConvertedTime;
+                String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
+                System.out.println(strFinalOutDateTime);
+                WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
+                verifyElement(elmntAppointmentDetails);
+                jsScrollIntoView(elmntAppointmentDetails);
+
+                System.out.println("TEST" + lstDetails.get(1));
+                WebElement elmntReservationDetails = waitForElement(By.xpath(btnCancelForCreatedAppointment
+                        .replace("<<REPLACEMENT1>>", strFinalOutDateTime)
+                        .replace("<<REPLACEMENT2>>", lstDetails.get(0))
+                        .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
+                System.out.println("TEST" + lstDetails.get(1));
+                verifyElement(elmntReservationDetails);
+                takeScreenshot(driver);
+                click(elmntReservationDetails);
+                waitForSeconds(3);
+                blResult = true;
+
+            } catch (Exception e) {
+                try {
+                    waitForSeconds(2);
+                    waitForElement(elmntFutureAppointmentTab);
+                    String strDatePattern1 = "dd MMM yyyy";
+                    String strDate = TestDataUtil.getValue(lstDetails.get(2));
+                    String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+                    System.out.println("DATE" + strDateValue);
+                    String strDateMonth = strDateValue;
+                    String strTime = strSlotDate;
+                    String strFinalOutDateTime = strDateMonth + " " + strTime;
+                    System.out.println(strFinalOutDateTime);
+                    WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
+                    verifyElement(elmntAppointmentDetails);
+                    jsScrollIntoView(elmntAppointmentDetails);
+
+                    System.out.println("TEST" + lstDetails.get(1));
+                    WebElement elmntReservationDetails = waitForElement(By.xpath(btnCancelForCreatedAppointment
+                            .replace("<<REPLACEMENT1>>", strFinalOutDateTime)
+                            .replace("<<REPLACEMENT2>>", lstDetails.get(0))
+                            .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
+                    System.out.println("TEST" + lstDetails.get(1));
+                    verifyElement(elmntReservationDetails);
+                    takeScreenshot(driver);
+                    click(elmntReservationDetails);
+                    waitForSeconds(3);
+                    blResult = true;
+                } catch (Exception d) {
+                    e.printStackTrace();
+                }
+
+            }
+            return blResult;
+        }
+
+    public boolean clickMobileCancelButtonForTheCreatedAppointment(List<String> lstDetails) {
+        boolean blResult = false;
+
         try {
             waitForSeconds(2);
-            waitForElement(elmntFutureAppointmentTab);
+//            waitForElement(elmntMobileUpComingAppointmentHeader);
             String strDatePattern1 = "dd MMM yyyy";
             String strDate = TestDataUtil.getValue(lstDetails.get(2));
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
@@ -2513,7 +2604,7 @@ public class AppointmentsPage extends BasePage {
             String strTime = strSlotDate;
             System.out.println("CANCEL TIME : " + strTime);
             String strConvertedTime = strTime;
-//            strConvertedTime = "0" + strConvertedTime;
+            strConvertedTime = "0" + strConvertedTime;
             String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
             System.out.println(strFinalOutDateTime);
             WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
@@ -2535,7 +2626,7 @@ public class AppointmentsPage extends BasePage {
         } catch (Exception e) {
             try {
                 waitForSeconds(2);
-                waitForElement(elmntFutureAppointmentTab);
+//                waitForElement(elmntMobileUpComingAppointmentHeader);
                 String strDatePattern1 = "dd MMM yyyy";
                 String strDate = TestDataUtil.getValue(lstDetails.get(2));
                 String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
@@ -2566,6 +2657,7 @@ public class AppointmentsPage extends BasePage {
         }
         return blResult;
     }
+
 
     public boolean entereasonForCancelAppointment() {
         boolean blResult = false;
@@ -2599,10 +2691,14 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(elmntfuturetab);
-            jsClick(elmntfuturetab);
+            if (verifyElement(clickMobileFutureAppointmentTab)) {
+                waitForElement(clickMobileFutureAppointmentTab);
+                jsClick(clickMobileFutureAppointmentTab);
+            }else {
+                System.out.println("User already upcomming Appoinments page");
+            }
             waitForSeconds(2);
-            waitForElement(elmntFutureAppointmentTab);
+//            waitForElement(elmntFutureAppointmentTab);
             String strDatePattern1 = "dd MMM yyyy";
             String strDate = TestDataUtil.getValue(lstDetails.get(2));
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
@@ -2638,10 +2734,14 @@ public class AppointmentsPage extends BasePage {
 
         } catch (Exception e) {
             try {
-                waitForElement(elmntfuturetab);
-                jsClick(elmntfuturetab);
+                if (verifyElement(clickMobileFutureAppointmentTab)) {
+                    waitForElement(clickMobileFutureAppointmentTab);
+                    jsClick(clickMobileFutureAppointmentTab);
+                }else {
+                    System.out.println("User already upcomming Appoinments page");
+                }
                 waitForSeconds(2);
-                waitForElement(elmntFutureAppointmentTab);
+//                waitForElement(elmntFutureAppointmentTab);
                 String strDatePattern1 = "dd MMM yyyy";
                 String strDate = TestDataUtil.getValue(lstDetails.get(2));
                 String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
@@ -2691,9 +2791,13 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(clickMobileFutureAppointmentTab);
-            click(clickMobileFutureAppointmentTab);
-            waitForElement(elmntFutureAppointmentTab);
+            if (verifyElement(clickMobileFutureAppointmentTab)) {
+                waitForElement(clickMobileFutureAppointmentTab);
+                click(clickMobileFutureAppointmentTab);
+            }else{
+                System.out.println("User Already Upcomming Appointments Page");
+            }
+//            waitForElement(elmntFutureAppointmentTab);
             String strDatePattern1 = "dd MMM yyyy";
             String strDate = TestDataUtil.getValue(lstDetails.get(2));
             String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
@@ -2730,9 +2834,9 @@ public class AppointmentsPage extends BasePage {
         } catch (Exception e) {
             try {
                 waitForSeconds(2);
-                waitForElement(clickMobileFutureAppointmentTab);
-                click(clickMobileFutureAppointmentTab);
-                waitForElement(elmntFutureAppointmentTab);
+//                waitForElement(clickMobileFutureAppointmentTab);
+//                click(clickMobileFutureAppointmentTab);
+//                waitForElement(elmntFutureAppointmentTab);
                 String strDatePattern1 = "dd MMM yyyy";
                 String strDate = TestDataUtil.getValue(lstDetails.get(2));
                 String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
@@ -2932,48 +3036,104 @@ public class AppointmentsPage extends BasePage {
     public boolean cencelingAlltheAppointments() {
         boolean isVerified = false;
         try {
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
 //            waitForElementToAppear(driver,By.xpath(elmntSpinner));
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(5);    //wait until 'loader'  loading
-            if (verifyElement(elmntCancelAppointments)) {
-                List<WebElement> btnCancel = driver.findElements(By.xpath("//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment']"));
-                if (btnCancel.size() > 0) {
-                    System.out.println("btnCancel exists and size=>" + btnCancel.size());
-                    int page_no = btnCancel.size();
-                    for (int i = 1; i <= btnCancel.size(); i++) {
-                        if (verifyElement(elmntfuturetab)){
-                            click(elmntfuturetab);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(5);    //wait until 'loader'  loading
+                if (verifyElement(elmntCancelAppointments)) {
+                    List<WebElement> btnCancel = driver.findElements(By.xpath("//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment']"));
+                    if (btnCancel.size() > 0) {
+                        System.out.println("btnCancel exists and size=>" + btnCancel.size());
+                        int page_no = btnCancel.size();
+                        for (int i = 1; i <= btnCancel.size(); i++) {
+                            if (verifyElement(elmntfuturetab)) {
+                                click(elmntfuturetab);
 
-                        }else {
-                            System.out.println("Already user in Future Appointments page");
+                            } else {
+                                System.out.println("Already user in Future Appointments page");
+                            }
+                            System.out.println("TEST");
+                            waitForSeconds(5); //wait until 'loader'  loading
+                            waitForElement(elmntFutureAppointment);
+                            WebElement cancelButton = driver.findElement(By.xpath("(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment'])[1]"));
+                            waitForElement(cancelButton);
+                            jsScrollIntoView(cancelButton);
+                            waitForElement(cancelButton);
+                            jsClick(cancelButton);
+                            System.out.println("Button No" + i);
+                            waitForElement(txtReasonForCancelAppointment);
+                            verifyElement(txtReasonForCancelAppointment);
+                            enterValue(txtReasonForCancelAppointment, "Cancelling My Appointment due to Unavailability");
+                            waitForSeconds(2);
+                            verifyElement(btnConfirmCancellAppointment);
+                            click(btnConfirmCancellAppointment);
+                            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                            verifyElement(elmntAppoinmentCancelMessage);
+                            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                            waitForSeconds(5);
+                            isVerified = true;
                         }
-                        System.out.println("TEST");
-                        waitForSeconds(5); //wait until 'loader'  loading
-                        waitForElement(elmntFutureAppointment);
-                       WebElement cancelButton=driver.findElement(By.xpath("(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment'])[1]"));
-                        waitForElement(cancelButton);
-                       jsScrollIntoView(cancelButton);
-                        waitForElement(cancelButton);
-                       jsClick(cancelButton);
-                        System.out.println("Button No" + i);
-                        waitForElement(txtReasonForCancelAppointment);
-                        verifyElement(txtReasonForCancelAppointment);
-                        enterValue(txtReasonForCancelAppointment, "Cancelling My Appointment due to Unavailability");
-                        waitForSeconds(2);
-                        verifyElement(btnConfirmCancellAppointment);
-                        click(btnConfirmCancellAppointment);
-                        waitForElementDisappear(driver, By.xpath(elmntSpinner));
-                        verifyElement(elmntAppoinmentCancelMessage);
-                        waitForElementDisappear(driver, By.xpath(elmntSpinner));
-                        waitForSeconds(5);
-                        isVerified = true;
                     }
+
+                } else {
+                    System.out.println("Into Else");
+                    waitForSeconds(3);
+                    isVerified = true;
                 }
-            } else {
-                System.out.println("Into Else");
-                waitForSeconds(3);
-                isVerified = true;
             }
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+
+//            waitForElementToAppear(driver,By.xpath(elmntSpinner));
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(5);    //wait until 'loader'  loading
+                if (verifyElement(elmntCancelAppointments)) {
+                    List<WebElement> btnCancel = driver.findElements(By.xpath("//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment']"));
+                    if (btnCancel.size() > 0) {
+                        System.out.println("btnCancel exists and size=>" + btnCancel.size());
+                        int page_no = btnCancel.size();
+                        for (int i = 1; i <= btnCancel.size(); i++) {
+                            if (verifyElement(elmntMobileUpcomingAppointments)){
+                                waitForElement(elmntMobileUpcomingAppointments);
+                                click(elmntMobileUpcomingAppointments);
+                            }else {
+                                System.out.println("Already user in Future Appointments page");
+                            }
+                            if (verifyElement(elmntfuturetab)) {
+                                click(elmntfuturetab);
+
+                            } else {
+                                System.out.println("Already user in Future Appointments page");
+                            }
+                            System.out.println("TEST");
+                            waitForSeconds(5); //wait until 'loader'  loading
+                            waitForElement(elmntMobileUpComingAppointmentHeader);
+                            WebElement cancelButton = driver.findElement(By.xpath("(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment'])[1]"));
+                            waitForElement(cancelButton);
+                            jsScrollIntoView(cancelButton);
+                            waitForElement(cancelButton);
+                            jsClick(cancelButton);
+                            System.out.println("Button No" + i);
+                            waitForElement(txtReasonForCancelAppointment);
+                            verifyElement(txtReasonForCancelAppointment);
+                            enterValue(txtReasonForCancelAppointment, "Cancelling My Appointment due to Unavailability");
+                            waitForSeconds(2);
+                            verifyElement(btnConfirmCancellAppointment);
+                            click(btnConfirmCancellAppointment);
+                            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                            verifyElement(elmntAppoinmentCancelMessage);
+                            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                            waitForSeconds(5);
+                            isVerified = true;
+                        }
+                    }
+
+                } else {
+                    System.out.println("Into Else");
+                    waitForSeconds(3);
+                    isVerified = true;
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

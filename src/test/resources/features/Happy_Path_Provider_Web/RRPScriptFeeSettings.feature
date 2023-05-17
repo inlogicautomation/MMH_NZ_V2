@@ -18,7 +18,7 @@ Feature: RRP_Script_Fee_Settings
     And  I Navigate to Provider Home Page
     Examples:
       | System_Menu             | Details                   |
-      | RRP Script Fee Settings | &RRP_SCRIPT_INSTRUCTIONS& |
+      | RRP Script fee Settings | &RRP_SCRIPT_INSTRUCTIONS& |
 
   @WEB @PROVIDER_RRP_SCRIPT_FEE_SETTING @PROVIDER_HAPPY_PATH
   Scenario Template: S2-create Provider RRP Script Instructions Fees(Patient to Collect Script Fees) Setup & verify it in Patient Portal
