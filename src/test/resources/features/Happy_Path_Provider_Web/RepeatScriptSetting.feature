@@ -4,7 +4,7 @@ Feature: Repeat Script Setting
 
     Given As a user I am on Provider Portal login Page
     And I enter "&EMAIL&" and "&PASSWORD&" For Beta
-    And I click SignIn button then I should see user successfully logs in to the MMH portal
+    And I click SignIn button then I should see user successfully logs in to the MMH Provider portal
     When As a user I am on Patient Portal login Page
     And I enter "&EMAIL_FOR_PATIENT&" and "&PASSWORD&" For Beta
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
@@ -21,7 +21,7 @@ Feature: Repeat Script Setting
       | System_Menu             | Details                            |
       | RRP Script fee Settings | &RRP_SCRIPT_INSTRUCTIONS_SETTINGS& |
 
-  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING
+  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING1
   Scenario Outline: S2- RRP Script Settings Default Provider - Rule A
     Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
     And I click the edit button and changing the data as per Rule A"<Details>"

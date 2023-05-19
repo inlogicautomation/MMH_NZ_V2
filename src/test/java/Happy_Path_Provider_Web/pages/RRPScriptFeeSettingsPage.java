@@ -86,7 +86,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     protected WebElement elmntUrgentSamedayServiceoption;
     //mat-checkbox[@class='mat-checkbox mat-accent ng-valid ng-dirty ng-touched']//child::input
 
-    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[1]")
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='STD'])[1]")
     protected WebElement getElmntUrgentSamedayFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[2]")
@@ -95,7 +95,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Next Day'])[1]")
     protected WebElement elmntNextDayServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[2]")
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='STD'])[2]")
     protected WebElement elmntNextDayFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[3]")
@@ -112,7 +112,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
 
 
 
-    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[3]")
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='STD'])[3]")
     protected WebElement elmnt48HoursFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[4]")
@@ -121,7 +121,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='72 Hours'])[1]")
     protected WebElement elmnt72HoursServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='Fee'])[4]")
+    @FindBy(xpath = "(//b[contains(text(),'Patient to Collect Script')]//following::input[@data-placeholder='STD'])[4]")
     protected WebElement elmnt72HoursFee;
 
     @FindBy(xpath = "(//b[contains(text(),'Send Script by Post')]//following::input[@data-placeholder='Fee'])[4]")

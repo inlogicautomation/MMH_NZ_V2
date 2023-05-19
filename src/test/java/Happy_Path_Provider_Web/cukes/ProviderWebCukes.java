@@ -12,7 +12,7 @@ import static Happy_Path_Patient_Web_and_MR.pages.HomePage.strSystemName;
 
 @CucumberOptions(features = {"src/test/resources/features/Happy_Path_Provider_Web"},
         monochrome = true,
-        tags = "@REPEAT_SCRIPT_SETTING",
+        tags = "@ONLINE_PAYMENTS_SETTING1",
         glue = {"Happy_Path_Provider_Web", "Happy_Path_Patient_Web_and_MR"},
         plugin = {
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
@@ -47,4 +47,4 @@ public class ProviderWebCukes extends AbstractTestNGCucumberTests {
     }
 }
 
-//clean test -Dapp=Happy_Path_Provider_Web -Dexecution_type=browser -Drunner=ProviderWebCukes -Dbrowser_name=chrome -Denv=PROD "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/WebApp-QAResults.html -Dsysteminfo.AppName=Demo-QA"
+//clean test -Dapp=Happy_Path_Provider_Web -Dexecution_type=browser -Drunner=ProviderWebCukes -Dbrowser_name=chrome -Denv=QA "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/WebApp-QAResults.html -Dsysteminfo.AppName=Demo-QA"

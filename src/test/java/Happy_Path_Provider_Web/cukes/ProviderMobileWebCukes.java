@@ -26,7 +26,7 @@ public class ProviderMobileWebCukes extends AbstractTestNGCucumberTests {
     @BeforeClass
     public void Rerun(){
         System.setProperty("app", "Happy_Path_Provider_Web");
-        System.setProperty("execution_type","mobile");
+        System.setProperty("execution_type","mobileview");
         System.setProperty("runner","ProviderMobileWebCukes");
         System.setProperty("browser_name","chrome");
         System.setProperty("env","QA");

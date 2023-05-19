@@ -9,7 +9,7 @@ Feature: RRP_Script_Fee_Settings
     And I enter "&EMAIL_FOR_PATIENT&" and "&PASSWORD&" For Beta
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
-  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_RRP_SCRIPT_FEE_SETTING
+  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_RRP_SCRIPT_FEE_SETTING1
   Scenario Template: S1- RRP Script Instructions Settings - Enable.
     Given As a Provider I am on HomePage and navigate to RRP Script Instructions in "<System_Menu>"
     And I navigate to RRP Script Instructions Settings and click edit button
@@ -20,7 +20,7 @@ Feature: RRP_Script_Fee_Settings
       | System_Menu             | Details                   |
       | RRP Script fee Settings | &RRP_SCRIPT_INSTRUCTIONS& |
 
-  @WEB @PROVIDER_RRP_SCRIPT_FEE_SETTING @PROVIDER_HAPPY_PATH
+  @WEB @PROVIDER_RRP_SCRIPT_FEE_SETTING1 @PROVIDER_HAPPY_PATH
   Scenario Template: S2-create Provider RRP Script Instructions Fees(Patient to Collect Script Fees) Setup & verify it in Patient Portal
 
     Given As a Provider I am on HomePage and navigate to RRP Script Instructions in "<System_Menu>"
@@ -34,8 +34,8 @@ Feature: RRP_Script_Fee_Settings
     And I should see the successful message and I navigate to view history of the Prescription
     And I see the status for Patient to collect the Prescription"<Verification Medication Details>"
     Examples:
-      | System_Menu             | Health_Centre | Medication Details                            | Verification Medication Details                         | Patient to Collect Script DropDown Details   |
-      | RRP Script Fee Settings | VM04Practice  | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
+      | System_Menu             | Health_Centre             | Medication Details                            | Verification Medication Details                         | Patient to Collect Script DropDown Details   |
+      | RRP Script Fee Settings | Automation_Practice1_Loc1 | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
 
 
   @WEB @PROVIDER_RRP_SCRIPT_FEE_SETTING @PROVIDER_HAPPY_PATH

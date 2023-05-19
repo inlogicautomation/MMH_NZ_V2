@@ -33,6 +33,12 @@ public class ProviderWebSteps {
             Assert.assertTrue(providerPageContainer.providerHomePage.navigateToMobileRepeatScriptFeeMessageSettings(strName));
 
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+            Assert.assertTrue(providerPageContainer.providerHomePage.clickMobileSystemMenu());
+            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToMobileRepeatScriptFeeMessageSettings(strName));
+
+        }
 
     }
 
@@ -43,6 +49,12 @@ public class ProviderWebSteps {
             Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickRRPScriptInstructionSettingEditButton());
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickMobileRRPScriptInstructionSetting());
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickRRPScriptInstructionSettingEditButton());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
 
             Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickMobileRRPScriptInstructionSetting());
             Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickRRPScriptInstructionSettingEditButton());
@@ -226,22 +238,58 @@ public class ProviderWebSteps {
 
     @Given("As a Provider I am on HomePage and navigate to Repeat Script Settings in {string}")
     public void AsAProviderIAmOnHomePageAndNavigateToRepeatScriptSettingsIn(String strName) {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
         Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
         Assert.assertTrue(providerPageContainer.providerHomePage.clickSystemMenu());
         Assert.assertTrue(providerPageContainer.providerHomePage.navigateToRepeatScriptSettings(strName));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+            Assert.assertTrue(providerPageContainer.providerHomePage.clickMobileSystemMenu());
+            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToMobileRepeatScriptSettings(strName));
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+            Assert.assertTrue(providerPageContainer.providerHomePage.clickMobileSystemMenu());
+            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToMobileRepeatScriptSettings(strName));
+
+        }
     }
 
     @And("I click the edit button and changing the data as per Rule A{string}")
     public void iClickTheEditButtonAndChangingTheDataAsPerRuleA(String strDetail) {
         List<String> lstDetails = TestDataUtil.getListOfValue(strDetail);
         System.out.println("RRPScriptSetting details >>> :: " + lstDetails);
-        providerPageContainer.providerHomePage.clickEditButton();
-        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectHealthCentreLocation(lstDetails.get(0)));
-        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectServiceName(lstDetails.get(1)));
-        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectOtherReqData());
-        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqDataRuleA());
-        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
-        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            providerPageContainer.providerHomePage.clickEditButton();
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectHealthCentreLocation(lstDetails.get(0)));
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectServiceName(lstDetails.get(1)));
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectOtherReqData());
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqDataRuleA());
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            providerPageContainer.providerHomePage.clickEditButton();
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectHealthCentreLocation(lstDetails.get(0)));
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectServiceName(lstDetails.get(1)));
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectOtherReqData());
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqDataRuleA());
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            providerPageContainer.providerHomePage.clickEditButton();
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectHealthCentreLocation(lstDetails.get(0)));
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectServiceName(lstDetails.get(1)));
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectOtherReqData());
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqDataRuleA());
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
+            Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+
+        }
+
     }
 
     @And("I click the edit button and changing the data as per Rule B{string}")
@@ -1177,7 +1225,7 @@ public class ProviderWebSteps {
         List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
         System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
         Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(stsdata.get(0))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(stsdata.get(1))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(7))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(1))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(4))));
@@ -1220,7 +1268,52 @@ public class ProviderWebSteps {
     public void asAProviderIAmOnHomePageAndNavigateToOnlinePaymentsSettingPage() {
         Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
         Assert.assertTrue(providerPageContainer.providerHomePage.clickSystemMenu());
-        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickAppointmentMessage());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickPaymentSetting());
 
+    }
+
+    @And("I Enable Online Payments for Appointments by clicking Yes button and click the save button {string}")
+    public void iEnableOnlinePaymentsForAppointmentsByClickingYesButtonAndClickTheSaveButton(String LocationData) {
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.EnableOnlinePaymentsforAppointments());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.ClickSaveButton());
+    }
+
+    @And("I navigate to Appointment setting page verify the Payonline or Payhealthcentre options displayed")
+    public void iNavigateToAppointmentSettingPageVerifyThePayonlineOrPayhealthcentreOptionsDisplayed() {
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickAppointmentSetting());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickAppoitmentSettingEditButton());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.veriflyInpersonAppoitmentPaymentSettings());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.veriflyPhoneAppoitmentPaymentSettings());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.veriflyVideoAppoitmentPaymentSettings());
+
+
+    }
+
+    @And("I navigate to Appointment setting page verify the Payonline or Payhealthcentre options Not displayed")
+    public void iNavigateToAppointmentSettingPageVerifyThePayonlineOrPayhealthcentreOptionsNotDisplayed() {
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickAppointmentSetting());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickAppoitmentSettingEditButton());
+        Assert.assertFalse(providerPageContainer.onlinePaymentsSettingPage.veriflyInpersonAppoitmentPaymentSettings());
+        Assert.assertFalse(providerPageContainer.onlinePaymentsSettingPage.veriflyPhoneAppoitmentPaymentSettings());
+        Assert.assertFalse(providerPageContainer.onlinePaymentsSettingPage.veriflyVideoAppoitmentPaymentSettings());
+    }
+
+    @And("I Enable Online Payments for RRP by clicking Yes button and click the save button {string}")
+    public void iEnableOnlinePaymentsForRRPByClickingYesButtonAndClickTheSaveButton(String LocationData) {
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.EnableYesOnlinePaymentsforRRP());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.ClickSaveButton());
+
+    }
+
+    @And("I Enable Online Payments for Appointments by clicking No button and click the save button {string}")
+    public void iEnableOnlinePaymentsForAppointmentsByClickingNoButtonAndClickTheSaveButton(String LocationData) {
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.EnableNoOnlinePaymentsforAppointments());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.ClickSaveButton());
     }
 }

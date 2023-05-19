@@ -30,9 +30,7 @@ public class ProviderPageContainer {
     public HomePage homePage;
     public PhoneAppointmentSettingPage phoneAppointmentSettingPage;
     public RecallSettingPage recallSettingPage;
-
     public MyAppointmentPage myAppointmentPage;
-
     public OnlinePaymentSettingsPage onlinePaymentsSettingPage;
 
 

@@ -859,12 +859,16 @@ public class WebSteps {
         demoPageContainer.homePage.clickBetaLoginButton();
 
 
+
     }
 
     @Given("As a user I am on Provider Portal login Page")
     public void asAUserIAmOnProviderPortalLoginPage() {
         demoPageContainer.homePage.visit();
-        demoPageContainer.homePage.clickBetaLoginButton();
+        demoPageContainer.homePage.clickPatientandProviderLoginButton();
+
+
+
 
     }
 
@@ -3304,8 +3308,22 @@ public class WebSteps {
 
     @When("I navigate to patient portal and verify the change")
     public void iNavigateToPatientPortalAndVerifyTheChange() {
-        Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
-        Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToRequestNewScript());
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+            Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToRequestNewScript());
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+            Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToMobileRequestNewScript());
+
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+            Assert.assertTrue(demoPageContainer.repeatPrescription.navigateToMobileRequestNewScript());
+        }
+
     }
 
     @Then("I should see the changes based on Rule A")
@@ -4314,6 +4332,14 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetails());
         Assert.assertTrue(demoPageContainer.homePage.navigateToDashboard());
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
+    }
+
+    @And("I click SignIn button then I should see user successfully logs in to the MMH Provider portal")
+    public void iClickSignInButtonThenIShouldSeeUserSuccessfullyLogsInToTheMMHProviderPortal() {
+        demoPageContainer.homePage.clickSignInButton();
+        Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfProviderPortal());
+
+
     }
 }
 

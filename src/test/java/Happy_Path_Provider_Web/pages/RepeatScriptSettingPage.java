@@ -518,26 +518,29 @@ public class RepeatScriptSettingPage extends BasePage {
     public boolean selectHealthCentreLocation(String strLocation) {
         boolean blResult = false;
         try {
-            if (verifyElement(By.xpath(VeriflyselectedDrpDownOption.replace("<<REPLACEMENT>>", strLocation)))) {
-                blResult = true;
-            } else {
+//            jsScrollUp();
+//            if (verifyElement(By.xpath(VeriflyselectedDrpDownOption.replace("<<REPLACEMENT>>", strLocation)))) {
+//                blResult = true;
+//            } else {
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                jsScrollIntoView(drpDownLocation);
                 waitForElement(drpDownLocation);
-                waitForElementClickable(drpDownLocation);
-                click(drpDownLocation);
+                jsClick(drpDownLocation);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(3);
                 WebElement ddlLocation = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
                 System.out.println(" select Location Locator ::" + ddlLocation);
+                jsScrollIntoView(ddlLocation);
                 waitForElementClickable(ddlLocation);
                 click(ddlLocation);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 WebElement selectedOption = waitForElement(By.xpath(VeriflyselectedDrpDownOption.replace("<<REPLACEMENT>>", strLocation)));
                 System.out.println(" selected DrpDownOption Locator >>> :: " + selectedOption);
+                jsScrollIntoView(selectedOption);
                 waitForElement(selectedOption);
                 blResult = verifyElement(selectedOption);
                 System.out.println("Location selected >>> :: " + strLocation);
-            }
+//            }
         } catch (Exception e) {
             System.out.println("Location not selected >>> :: ");
             e.printStackTrace();
@@ -548,22 +551,22 @@ public class RepeatScriptSettingPage extends BasePage {
     public boolean selectServiceName(String strServiceName) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
-            if (verifyElement(By.xpath(VeriflyselectedDrpDownOption.replace("<<REPLACEMENT>>", strServiceName)))) {
-                blResult = true;
-            }
+//            waitForSeconds(2);
+//            if (verifyElement(By.xpath(VeriflyselectedDrpDownOption.replace("<<REPLACEMENT>>", strServiceName)))) {
+//                blResult = true;
+//            }
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(drpDownServiceName);
-            waitForElementClickable(drpDownServiceName);
             jsScrollIntoView(drpDownServiceName);
-            click(drpDownServiceName);
+            waitForElement(drpDownServiceName);
+            jsClick(drpDownServiceName);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForPresenceOfElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strServiceName)));
             WebElement ddlServiceName = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strServiceName)));
             System.out.println(" select Service Name :: " + ddlServiceName);
+            jsScrollIntoView(ddlServiceName);
             waitForElementClickable(ddlServiceName);
-            click(ddlServiceName);
+            jsClick(ddlServiceName);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
             System.out.println("Service Name was selected >>> :: " + strServiceName);
@@ -604,13 +607,16 @@ public class RepeatScriptSettingPage extends BasePage {
     public boolean selectOtherReqData() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             if (verifyElement(selectedRRPRequest)) {
                 blResult = verifyElement(selectedRRPRequest);
                 System.out.println("RRP Settings in default selected");
             } else {
                 waitForSeconds(2);
+                jsScrollIntoView(RRP1stOption);
                 waitForElementClickable(RRP1stOption);
-                blResult = click(RRP1stOption);
+                jsClick(RRP1stOption);
+                blResult =true;
                 System.out.println("RRP Settings is now selected");
             }
         } catch (Exception e) {
@@ -641,12 +647,11 @@ public class RepeatScriptSettingPage extends BasePage {
     public boolean selectSendReqDataRuleA() {
         boolean blResult = false;
         try {
-            waitForSeconds(4);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             if (!verifyElement(selectedRuleARequest)) {
                 waitForElementClickable(optionRuleARequest);
                 blResult = click(optionRuleARequest);
                 System.out.println("Rule A option is not selected and now it is selected >>> :: ");
-//                waitForElementToAppear(driver, By.xpath("//mat-radio-button[@class='mat-radio-button mat-accent mat-radio-checked']//*[contains(text(),'Rule A : No Restrictions')]"));
             } else {
                 blResult = verifyElement(selectedRuleARequest);
                 System.out.println("Rule A is already selected");

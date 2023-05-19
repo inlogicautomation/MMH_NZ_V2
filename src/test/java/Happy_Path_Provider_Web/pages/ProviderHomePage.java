@@ -34,7 +34,9 @@ public class ProviderHomePage extends BasePage {
             .append("<<NAME>>")
             .append("')]").toString();
 
-    public String MobileelmntModule = new StringBuilder()
+
+
+    public String MobilelmntModule = new StringBuilder()
             .append("//a[contains(text(),'")
             .append("<<NAME>>")
             .append("')]").toString();
@@ -65,9 +67,15 @@ public class ProviderHomePage extends BasePage {
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp1!')]")
     })
-    protected WebElement txtWelcome;
+    protected WebElement txtProviderPortalWelcomePage;
 
-    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Harry Harry!')]")
+//    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Harry Harry!')]")
+//    protected WebElement txtHarryHarryWelcome;
+
+    @FindAll({
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Harry Harry!')]"),
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Pat1!')]")
+    })
     protected WebElement txtHarryHarryWelcome;
 
     @FindBy(how = How.XPATH, using = "//a/span[contains(text(),'Dashboard')]")
@@ -84,6 +92,8 @@ public class ProviderHomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'SIGN OUT')]")
     protected WebElement elmntLogOut;
 
+
+
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='exit_to_app']")
     protected WebElement elmntMobileLogOut;
     @FindBy(xpath = "//span[contains(text(),'Repeat Script Settings')]")
@@ -95,7 +105,7 @@ public class ProviderHomePage extends BasePage {
     @FindBy(xpath = "//h1[contains(text(),'Repeat Script Settings')]")
     protected WebElement txtRepeatScriptSettings;
 
-    @FindBy(xpath = "(//h3[contains(text(),'RRP Script Instructions Settings')])[2]")
+    @FindBy(xpath = "//a[contains(text(),'RRP Script Instructions Settings')]")
     protected WebElement txtRRPScriptInstructionsSettings;
 
     @FindBy(xpath = "//a[contains(text(),'RRP Script Instructions Settings')]")
@@ -251,7 +261,7 @@ public class ProviderHomePage extends BasePage {
             waitForElement(elmtRepeatScriptSettings);
             jsClick(elmtRepeatScriptSettings);
 
-            WebElement element = driver.findElement(By.xpath(MobileelmntModule.replace("<<NAME>>",strName)));
+            WebElement element = driver.findElement(By.xpath(MobilelmntModule.replace("<<NAME>>",strName)));
             System.out.println(">>>>>>>>>element"+element);
             jsScrollIntoView(element);
             waitForElement(element);
@@ -359,6 +369,25 @@ public class ProviderHomePage extends BasePage {
         return blResult;
     }
 
+    public boolean navigateToMobileRepeatScriptSettings(String strName) {
+        boolean blResult = false;
+        try {
+            waitForElement(elmtRepeatScriptSettings);
+            click(elmtRepeatScriptSettings);
+            WebElement element = driver.findElement(By.xpath(MobilelmntModule.replace("<<NAME>>", strName)));
+            System.out.printf(">>>>>element"+element);
+            jsScrollIntoView(element);
+            waitForElement(element);
+            jsClick(element);
+            waitForElement(txtRepeatScriptSettings);
+            takeScreenshot(driver);
+            blResult = verifyElement(txtRepeatScriptSettings);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
     public void clickEditButton() {
         waitForElement(btnEditInRRPSettings);
         jsScrollIntoView(btnEditInRRPSettings);
@@ -388,25 +417,23 @@ public class ProviderHomePage extends BasePage {
     public boolean  navigateToProviderHomepage() {
         boolean blResult = false;
         try{
-            System.out.println("Success Enter");
-        if (isElementDisplayed(txtWelcome)) {
-            verifyElement(txtWelcome);
+        if (isElementDisplayed(txtProviderPortalWelcomePage)) {
+            verifyElement(txtProviderPortalWelcomePage);
             waitForSeconds(3);
             waitForElement(elmtMMHLogo);
             waitForElementClickable(elmtMMHLogo);
             jsClick(elmtMMHLogo);
             waitForSeconds(3);
-            blResult = verifyElement(txtWelcome);
+            blResult = verifyElement(txtProviderPortalWelcomePage);
         }
-            if (!isElementDisplayed(txtWelcome)){
+            if (!isElementDisplayed(txtProviderPortalWelcomePage)){
                 focusWindow(1);
                 System.out.println("Successfully switch to doctor portal");
                 waitForElement(elmtMMHLogo);
                 waitForElementClickable(elmtMMHLogo);
                 jsClick(elmtMMHLogo);
-                System.out.println("Successfully click Logo");
                 waitForSeconds(3);
-                blResult=verifyElement(txtWelcome);
+                blResult=verifyElement(txtProviderPortalWelcomePage);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -427,42 +454,19 @@ public class ProviderHomePage extends BasePage {
     public boolean launchPatientUrl() {
         boolean blresult = false;
         try {
-            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-                int WindowsCount = driver.getWindowHandles().size();
-                System.out.println(">>>>>>>>>WindowsCount : :" + WindowsCount);
-                if (WindowsCount == 2) {
-                    focusWindow(2);
-                    waitForElement(elmntDashboard);
-                    click(elmntDashboard);
-                    verifyElement(verifyPatientHomePage);
-                    System.out.println("user here in patient portal homepage");
-                } else {
-                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
-                }
-                if (WindowsCount == 1) {
-                    ((JavascriptExecutor) driver).executeScript("window.open()");
-                    ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-                    driver.switchTo().window(tabs.get(1));
-                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
-                    waitForSeconds(4);
-                    int WindowsCounts = driver.getWindowHandles().size();
-                    System.out.println("===============>WindowsCount::" + WindowsCounts);
-                    waitForElementClickable(elmntLogOut);
-                    jsClick(elmntLogOut);
-                    waitForSeconds(2);
-                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
-                }
-            }
-            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+
                 int WindowsCount = driver.getWindowHandles().size();
                 System.out.println(">>>>>>>>>WindowsCount : :" + WindowsCount);
                 if (WindowsCount == 2) {
                     focusWindow(2);
                     if (verifyElement(verifyPatientHomePage)) {
+                        waitForElement(elmntDashboard);
+                        click(elmntDashboard);
                         System.out.println("user here in patient portal homepage");
                     } else {
                         visit(TestDataUtil.getValue("&PATIENT_URL&"));
                     }
+
                 }
                 if (WindowsCount == 1) {
                     ((JavascriptExecutor) driver).executeScript("window.open()");
@@ -472,13 +476,37 @@ public class ProviderHomePage extends BasePage {
                     waitForSeconds(4);
                     int WindowsCounts = driver.getWindowHandles().size();
                     System.out.println("===============>WindowsCount::" + WindowsCounts);
-                    waitForElementClickable(elmntMobileLogOut);
-                    jsClick(elmntMobileLogOut);
-                    waitForSeconds(2);
-                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                        if (verifyElement(txtProviderPortalWelcomePage)) {
+                            waitForElement(elmntLogOut);
+                            click(elmntLogOut);
+                            waitForSeconds(2);
+                            visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                        }
+
+                    }
+                    if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                        if (verifyElement(txtProviderPortalWelcomePage)) {
+                            waitForElementClickable(elmntMobileLogOut);
+                            jsClick(elmntMobileLogOut);
+                            waitForSeconds(2);
+                            visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                        }
+
+                    }
+                    if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+                        if (verifyElement(txtProviderPortalWelcomePage)) {
+                            waitForElementClickable(elmntMobileLogOut);
+                            jsClick(elmntMobileLogOut);
+                            waitForSeconds(2);
+                            visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                        }
+                    }
+
+
                 }
 
-            }
+
 
             blresult = true;
         } catch (Exception e) {
@@ -493,7 +521,6 @@ public class ProviderHomePage extends BasePage {
             if (verifyElement(elmntloginbtn)) {
                 waitForSeconds(3);
                 jsClick(elmntloginbtn);
-                System.out.println(" sucessfully clicked login ");
                 refreshPage();
                 blresult = true;
             }
@@ -769,20 +796,20 @@ public class ProviderHomePage extends BasePage {
         boolean blResult = false;
         try {
 //            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            if (isElementDisplayed(txtWelcome)) {
+            if (isElementDisplayed(txtProviderPortalWelcomePage)) {
                 verifyElement(elmntDashboard);
                 waitForElementClickable(elmntDashboard);
                 jsClick(elmntDashboard);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
-                waitForElement(txtWelcome);
-                blResult = verifyElement(txtWelcome);
+                waitForElement(txtProviderPortalWelcomePage);
+                blResult = verifyElement(txtProviderPortalWelcomePage);
             }else {
                 jsScrollIntoView(elmntDashboard);
                 waitForElementClickable(elmntDashboard);
                 jsClick(elmntDashboard);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 refreshPage();
-                blResult =verifyElement(txtWelcome);
+                blResult =verifyElement(txtProviderPortalWelcomePage);
             }
 //            if (!isElementDisplayed(txtWelcome)) {
 //                focusWindow(2);
