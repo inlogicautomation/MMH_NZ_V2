@@ -137,13 +137,13 @@ public class AppointmentsPage extends BasePage {
     //p[contains(text(),'Dr.Stephen')]
 
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationCenter']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='location']")
     protected WebElement elmntLocationCenter;
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='provider']")
     protected WebElement elmntSelectProviderdropdown;
 
-    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Search')])[6]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Search')])[2]")
     protected WebElement elmntSearchButton;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Clear')]")
@@ -727,7 +727,7 @@ public class AppointmentsPage extends BasePage {
             click(elmntHealtCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectHealthCenter = waitForElement(By.xpath(ProviderLocation.replace("<<REPLACEMENT>>", strHealthCenter)));
-            jsClick(elmntSelectHealthCenter);
+            mouseClick(elmntSelectHealthCenter);
 //            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(elmntLocationCenter);
@@ -765,9 +765,9 @@ public class AppointmentsPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectLocation = waitForElement(By.xpath(MyAppointmentProviderLocation.replace("<<REPLACEMENT>>", strLocation)));
             System.out.println(">>>>>>>>>>>>>>"+elmntSelectLocation);
-            jsClick(elmntSelectLocation);
+            mouseClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = true;
+            blResult = verifyElement(elmntLocationCenter);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -3955,11 +3955,11 @@ System.out.println(">>>>>>>>>>>>>VerifyMyAppointmentTableDatalstDetails"+lstDeta
             WebElement elmntMyAppointmentTableData = waitForElementFewSeconds(By.xpath(strMyAppointmentContentLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(AfterFourDaysDate))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(strSlotDate))
-                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(2)))
-                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(3)))
-                    .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(4)))
-                    .replace("<<REPLACEMENT6>>", TestDataUtil.getValue(lstDetails.get(5)))
-                    .replace("<<REPLACEMENT7>>", TestDataUtil.getValue(lstDetails.get(6)))));
+                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(3)))
+                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(4)))
+                    .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(5)))
+                    .replace("<<REPLACEMENT6>>", TestDataUtil.getValue(lstDetails.get(6)))
+                    .replace("<<REPLACEMENT7>>", TestDataUtil.getValue(lstDetails.get(7)))));
             waitForElement(elmntMyAppointmentTableData);
             verifyElement(elmntMyAppointmentTableData);
             waitForSeconds(15);

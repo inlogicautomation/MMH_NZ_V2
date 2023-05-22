@@ -1209,10 +1209,10 @@ public class ProviderWebSteps {
         System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
         Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(stsdata.get(0))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(stsdata.get(0))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(7))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(1))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(8))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(2))));
 //        Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(4))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearchTextBox(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearchTextBox(TestDataUtil.getValue(stsdata.get(4))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearch());
         Assert.assertTrue(providerPageContainer.appointmentsPage.VerifyMyAppointmentTableData(TestDataUtil.getListOfValue(strHealthCentre)));
 
@@ -1226,9 +1226,9 @@ public class ProviderWebSteps {
         System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
         Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(stsdata.get(0))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(stsdata.get(1))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(7))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(1))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(4))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(8))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(2))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(5))));
 //        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearchTextBox(TestDataUtil.getValue(stsdata.get(3))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearch());
         Assert.assertTrue(providerPageContainer.appointmentsPage.VerifyMyAppointmentTableData(TestDataUtil.getListOfValue(strHealthCentre)));
@@ -1241,10 +1241,10 @@ public class ProviderWebSteps {
         System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
         Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(stsdata.get(0))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(stsdata.get(0))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(7))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(1))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(4))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearchTextBox(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(8))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(2))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(5))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearchTextBox(TestDataUtil.getValue(stsdata.get(4))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearch());
         Assert.assertTrue(providerPageContainer.appointmentsPage.VerifyMyAppointmentTableData(TestDataUtil.getListOfValue(strHealthCentre)));
     }
@@ -1255,10 +1255,10 @@ public class ProviderWebSteps {
         System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
         Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(stsdata.get(0))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectLocation(TestDataUtil.getValue(stsdata.get(0))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(7))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(1))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(4))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearchTextBox(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(8))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectMyAppointmenteToDateOnCalender(TestDataUtil.getValue(stsdata.get(2))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(5))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearchTextBox(TestDataUtil.getValue(stsdata.get(4))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectViewClear());
         Assert.assertTrue(providerPageContainer.appointmentsPage.VeriflyElements());
 
@@ -1314,6 +1314,29 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickEditButton());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickHealthCenterLocation(LocationData));
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.EnableNoOnlinePaymentsforAppointments());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.ClickSaveButton());
+    }
+
+
+    @And("I navigate to RRP setting page verify the Payonline or Payhealthcentre options displayed")
+    public void iNavigateToRRPSettingPageVerifyThePayonlineOrPayhealthcentreOptionsDisplayed() {
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickRepeatScriptSetting());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickRepeatScriptSettingEditButton());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.veriflyRRPPaymentSetting());
+    }
+
+    @And("I navigate to RRP setting page verify the only show Payhealthcentre options displayed")
+    public void iNavigateToRRPSettingPageVerifyTheOnlyShowPayhealthcentreOptionsDisplayed() {
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickRepeatScriptSetting());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickRepeatScriptSettingEditButton());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.veriflyOnlyShowPayHealthCentreOptions());
+    }
+
+    @And("I Enable Online Payments for RRP by clicking No button and click the save button {string}")
+    public void iEnableOnlinePaymentsForRRPByClickingNoButtonAndClickTheSaveButton(String LocationData) {
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.EnableNoOnlinePaymentsforRRP());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.ClickSaveButton());
     }
 }

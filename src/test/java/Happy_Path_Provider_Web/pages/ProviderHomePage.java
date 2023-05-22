@@ -108,7 +108,7 @@ public class ProviderHomePage extends BasePage {
     @FindBy(xpath = "//a[contains(text(),'RRP Script Instructions Settings')]")
     protected WebElement txtRRPScriptInstructionsSettings;
 
-    @FindBy(xpath = "//a[contains(text(),'RRP Script Instructions Settings')]")
+    @FindBy(xpath = "//h3[contains(text(),'RRP Script Instructions Settings')]")
     protected WebElement txtRRPScriptInstructionsSettingsheader;
 
     @FindBy(how = How.XPATH, using = "//input[@data-placeholder='Email Address' or @data-placeholder='Email address']")
@@ -159,9 +159,9 @@ public class ProviderHomePage extends BasePage {
             waitForElement(element);
 //            waitForElementClickable(element);
             click(element);
-            waitForElement(txtRRPScriptInstructionsSettings);
+            waitForElement(txtRRPScriptInstructionsSettingsheader);
             takeScreenshot(driver);
-            blResult =verifyElement(txtRRPScriptInstructionsSettings);
+            blResult =verifyElement(txtRRPScriptInstructionsSettingsheader);
 
         } catch (Exception e) {
             e.printStackTrace();

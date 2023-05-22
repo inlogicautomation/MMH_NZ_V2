@@ -168,7 +168,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Urgent/Same day'])[1]")
     protected WebElement getElmntSendScripttoPharmacyUrgentSameday;
 
-    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Fee'])[1]")
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='STD'])[1]")
     protected WebElement getElmntSendScripttoPharmacyUrgentSamedayFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[10]")
@@ -177,7 +177,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Next Day'])[1]")
     protected WebElement elmntSendScriptToPharmacyNextDayServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Fee'])[2]")
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='STD'])[2]")
     protected WebElement elmntSendScriptToPharmacyNextDayFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[11]")
@@ -186,7 +186,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='48 Hours'])[1]")
     protected WebElement elmntSendScriptToPharmacy48HoursServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Fee'])[3]")
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='STD'])[3]")
     protected WebElement elmntSendScriptToPharmacy48HoursFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[12]")
@@ -195,7 +195,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='72 Hours'])[1]")
     protected WebElement elmntSendScriptToPharmacy72HoursServiceoption;
 
-    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='Fee'])[4]")
+    @FindBy(xpath = "(//b[contains(text(),'Send Script to Pharmacy')]//following::input[@data-placeholder='STD'])[4]")
     protected WebElement elmntSendScriptToPhamacy72HoursFee;
 
     @FindBy(xpath = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[13]")

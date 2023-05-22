@@ -27,8 +27,8 @@ public class OnlinePaymentSettingsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
     protected WebElement clickHealthCentre;
 
-    protected String elmntHealthCentreDrop = new StringBuilder().append("//span[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')]").toString();
+    protected String elmntHealthCentreDrop = new StringBuilder().append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[2]").toString();
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
@@ -40,6 +40,9 @@ public class OnlinePaymentSettingsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Enable Online Payments for Request Repeat Prescriptions')]//following::input)[1]")
     protected WebElement elmntEnableOnlinePaymentsForRRP;
+
+    @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Enable Online Payments for Request Repeat Prescriptions')]//following::input)[2]")
+    protected WebElement elmntDisableOnlinePaymentsForRRP;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Save')] ")
     protected WebElement elmntSaveButton;
@@ -82,6 +85,26 @@ public class OnlinePaymentSettingsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Video Appointment ')]//preceding::input[@aria-checked='false'])[2]")
     protected WebElement verifyVideoAppointmentsCheckboxUnchecked;
 
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Repeat Script Settings')]")
+    protected WebElement elmntRepeatScriptSetting;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Repeat Script Settings')]")
+    protected WebElement clickRepeatScriptSettingHeader;
+
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Repeat Script Settings')]")
+    protected WebElement elmntRepeatScriptSettingHeader;
+
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Pay at Health Centre Only')]")
+    protected WebElement elmntRRPPayAtHealthCentreOnly;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Pay Online Only')]")
+    protected WebElement elmntRRPPayOnlineOnly;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Pay at Health Centre or Pay Online')]")
+    protected WebElement elmntRRPPayatHealthCentreorPayOnline;
+
+    //div[contains(text(),'Pay Online Only')]
 
 
     public boolean clickPaymentSetting() {
@@ -118,11 +141,12 @@ jsScrollIntoView(elmntEditButton);
     public boolean clickHealthCenterLocation(String Strdata) {
         boolean blresult = false;
         try {
+            jsScrollIntoView(clickHealthCentre);
             waitForElement(clickHealthCentre);
             click(clickHealthCentre);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntHealthCentreDrop.replace("<<REPLACEMENT>>", Strdata)));
             System.out.printf("elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
-            mouseClick(elmntEntriesFromHealthCentre);
+            jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult = verifyElement(elmntOnlinePaymentSettingHeader);
         } catch (Exception e) {
@@ -136,9 +160,11 @@ jsScrollIntoView(elmntEditButton);
     public boolean EnableOnlinePaymentsforAppointments() {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(elmntEnableOnlinePaymentsForAppointments);
             waitForElement(elmntEnableOnlinePaymentsForAppointments);
             click(elmntEnableOnlinePaymentsForAppointments);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntOnlinePaymentSettingHeader);
             blresult = verifyElement(elmntOnlinePaymentSettingHeader);
         } catch (Exception e) {
@@ -150,9 +176,11 @@ jsScrollIntoView(elmntEditButton);
     public boolean EnableNoOnlinePaymentsforAppointments() {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(elmntEnableNoOnlinePaymentsForAppointments);
             waitForElement(elmntEnableNoOnlinePaymentsForAppointments);
-            click(elmntEnableNoOnlinePaymentsForAppointments);
+            jsClick(elmntEnableNoOnlinePaymentsForAppointments);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntOnlinePaymentSettingHeader);
             blresult = verifyElement(elmntOnlinePaymentSettingHeader);
         } catch (Exception e) {
@@ -168,6 +196,7 @@ jsScrollIntoView(elmntEditButton);
             jsScrollIntoView(elmntSaveButton);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(veriflyPopup);
             blresult = verifyElement(veriflyPopup);
         } catch (Exception e) {
@@ -309,6 +338,83 @@ jsScrollIntoView(elmntEditButton);
         return blresult;
     }
 
+    public boolean clickRepeatScriptSetting() {
+        boolean blresult = false;
+        try {
+            jsScrollIntoView(elmntRepeatScriptSetting);
+            waitForElement(elmntRepeatScriptSetting);
+            jsClick(elmntRepeatScriptSetting);
+            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElement(clickRepeatScriptSettingHeader);
+            click(clickRepeatScriptSettingHeader);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntRepeatScriptSettingHeader);
+            blresult = verifyElement(elmntRepeatScriptSettingHeader);
+        } catch (Exception e) {
 
+        }
+        return blresult;
+    }
+
+    public boolean clickRepeatScriptSettingEditButton() {
+        boolean blresult = false;
+        try {
+            jsScrollIntoView(elmntEditButton);
+            waitForElement(elmntEditButton);
+            click(elmntEditButton);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntRepeatScriptSettingHeader);
+            blresult = verifyElement(elmntRepeatScriptSettingHeader);
+        } catch (Exception e) {
+
+        }
+        return blresult;
+    }
+
+    public boolean veriflyRRPPaymentSetting() {
+        boolean blresult = false;
+        try {
+            waitForElement(elmntRRPPayAtHealthCentreOnly);
+          verifyElement(elmntRRPPayAtHealthCentreOnly);
+          waitForElement(elmntRRPPayOnlineOnly);
+          verifyElement(elmntRRPPayOnlineOnly);
+          waitForElement(elmntRRPPayatHealthCentreorPayOnline);
+          verifyElement(elmntRRPPayatHealthCentreorPayOnline);
+          blresult = verifyElement(elmntRRPPayatHealthCentreorPayOnline);
+        } catch (Exception e) {
+
+        }
+        return blresult;
+    }
+
+    public boolean EnableNoOnlinePaymentsforRRP() {
+        boolean blresult = false;
+        try {
+            jsScrollIntoView(elmntDisableOnlinePaymentsForRRP);
+            waitForElement(elmntDisableOnlinePaymentsForRRP);
+            jsClick(elmntDisableOnlinePaymentsForRRP);
+            waitForElement(elmntOnlinePaymentSettingHeader);
+            blresult = verifyElement(elmntOnlinePaymentSettingHeader);
+        } catch (Exception e) {
+
+        }
+        return blresult;
+    }
+
+    public boolean veriflyOnlyShowPayHealthCentreOptions() {
+        boolean blresult = false;
+        boolean PayOnline = false;
+        boolean PayOnlineAndPayhealthCenter = false;
+        try {
+            jsScrollIntoView(elmntRRPPayAtHealthCentreOnly);
+            PayOnline=!verifyElement(elmntRRPPayOnlineOnly);
+            PayOnlineAndPayhealthCenter=!verifyElement(elmntRRPPayatHealthCentreorPayOnline);
+            waitForElement(elmntRRPPayAtHealthCentreOnly);
+            blresult =verifyElement(elmntRRPPayAtHealthCentreOnly);
+        } catch (Exception e) {
+
+        }
+        return blresult&&PayOnline&&PayOnlineAndPayhealthCenter;
+    }
 
 }

@@ -245,6 +245,9 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//textarea[@formcontrolname='MessageBody']")
     protected WebElement ReasonForNewScript;
 
+    @FindBy(how = How.XPATH, using = "(//mat-select[@formcontrolname='PharmacyName'])[1]")
+    protected WebElement SelectPhar;
+
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'mat-form-field')]/child::textarea[contains(@class,'mat-form-field')][@formcontrolname='MessageBody']")
     protected WebElement txaMessage;
 
@@ -521,9 +524,9 @@ public class RepeatPrescription extends BasePage {
             .append("'])[1]").toString();
 
     protected String elmntDoctorName = new StringBuilder()
-            .append("//mat-card-content/div/p[contains(text(),'")
+            .append("(//div[contains(text(),'")
             .append("<<REPLACEMENT>>")
-            .append("')]").toString();
+            .append("')])[1]").toString();
 
 
     protected String ddlSelectAddress = new StringBuilder()

@@ -66,6 +66,12 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a/span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashboard;
 
+    @FindAll({
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Harry Harry!')]"),
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Pat1!')]")
+    })
+    protected WebElement txtPatientWelcomePage;
+
     @FindBy(how = How.XPATH, using = "(//img[@alt='ManageMyHealth'])[1]")
     protected WebElement elmntMMHLogo;
 
@@ -589,26 +595,35 @@ public class HomePage extends BasePage {
 
     public boolean clickDashBoard() {
         boolean isVerified = false;
+if (verifyElement(txtPatientWelcomePage)) {
+    waitForElementDisappear(driver, By.xpath(elmntSpinner));
+    jsScrollIntoView(elmntDashboard);
+    waitForElement(elmntDashboard);
+    jsClick(elmntDashboard);
+    takeScreenshot(driver);
+    waitForElementDisappear(driver, By.xpath(elmntSpinner));
+    driver.navigate().refresh();
+    waitForElementDisappear(driver, By.xpath(elmntSpinner));
+    waitForElement(elmntVerifyHomePage);
+    isVerified = verifyElement(elmntVerifyHomePage);
+}
+if(!verifyElement(txtPatientWelcomePage)){
+    focusWindow(2);
+    waitForElementDisappear(driver, By.xpath(elmntSpinner));
+    jsScrollIntoView(elmntDashboard);
+    waitForElement(elmntDashboard);
+    jsClick(elmntDashboard);
+    takeScreenshot(driver);
+    waitForElementDisappear(driver, By.xpath(elmntSpinner));
+    driver.navigate().refresh();
+    waitForElementDisappear(driver, By.xpath(elmntSpinner));
+    waitForElement(elmntVerifyHomePage);
+    isVerified = verifyElement(elmntVerifyHomePage);
 
-//            waitForElementToAppear(driver,By.xpath(elmntSpinner));
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(3);
-            waitForElement(elmntDashboard);
-            jsScrollIntoView(elmntDashboard);
-            waitForElement(elmntDashboard);
-            jsClick(elmntDashboard);
-            takeScreenshot(driver);
-//            waitForElementToAppear(driver,By.xpath(elmntSpinner));
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(3);
-            driver.navigate().refresh();
-//            waitForElementToAppear(driver,By.xpath(elmntSpinner));
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(elmntVerifyHomePage);
-            isVerified = verifyElement(elmntVerifyHomePage);
+}
 
 
-        return true;
+        return isVerified;
     }
 
     public boolean clickLogoutButton() {

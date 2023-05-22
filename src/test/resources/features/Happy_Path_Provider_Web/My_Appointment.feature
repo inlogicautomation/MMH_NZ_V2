@@ -20,7 +20,7 @@ Feature: My Appointment Page
       | Appointment           |
       | Upcoming Appointments |
 
-  @WEB @PROVIDER_HAPPY_PATH @MY_APPOINTMENT_PAGE
+  @WEB @PROVIDER_HAPPY_PATH @MY_APPOINTMENT_PAGE1
   Scenario Template:S1-Provider My Appointments & Provider  Search Booked Appointments
 
     Given As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
@@ -70,7 +70,7 @@ Feature: My Appointment Page
       | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &MY_APPOINTMENT_DETAILS& |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @MY_APPOINTMENT_PAGE
+  @WEB @PROVIDER_HAPPY_PATH @MY_APPOINTMENT_PAGE1
   Scenario Template: Prep- Canceling all the appointments
 
     Given As a user I am on HomePage
@@ -82,7 +82,7 @@ Feature: My Appointment Page
       | Upcoming Appointments |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @MY_APPOINTMENT_PAGE1
+  @WEB @PROVIDER_HAPPY_PATH @MY_APPOINTMENT_PAGE
   Scenario Template:S4-Provider View clear Search
 
     Given As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
