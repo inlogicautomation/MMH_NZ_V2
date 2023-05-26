@@ -3710,7 +3710,7 @@ protected WebElement txtWelcome;
             waitForSeconds(1);
             jsScrollIntoView(elmntGroupMessagePatient);
             waitForElement(elmntGroupMessagePatient);
-            waitForElementClickable(elmntGroupMessagePatient);
+
             jsClick(elmntGroupMessagePatient);
             waitForSeconds(5);
 

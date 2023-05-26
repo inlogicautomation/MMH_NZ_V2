@@ -36,7 +36,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@id='Login']")
     protected WebElement btnLogin;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Sign in']")
+    @FindBy(how = How.XPATH, using = "//span[text()='Login']")
     protected WebElement elmntLoginBtn;
 
     @FindBy(how = How.XPATH, using = "//span[text()='Login']")
@@ -68,7 +68,9 @@ public class HomePage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Harry Harry!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Pat1!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Pat1!')]"),
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Christopher Michael!')]")
+
     })
     protected WebElement txtPatientWelcomePage;
 
@@ -290,7 +292,8 @@ public class HomePage extends BasePage {
 
                 if (WindowsCount == 1) {
                     waitForElement(elmntLoginBtn);
-                    blResult = verifyElement(elmntLoginBtn);
+                    click(elmntLoginBtn);
+                    blResult =true;
                 }
                 if (WindowsCount == 2) {
                     focusWindow(1);
@@ -595,6 +598,9 @@ public class HomePage extends BasePage {
 
     public boolean clickDashBoard() {
         boolean isVerified = false;
+        jsScrollIntoView(elmntDashboard);
+        waitForElement(elmntDashboard);
+        jsClick(elmntDashboard);
 if (verifyElement(txtPatientWelcomePage)) {
     waitForElementDisappear(driver, By.xpath(elmntSpinner));
     jsScrollIntoView(elmntDashboard);

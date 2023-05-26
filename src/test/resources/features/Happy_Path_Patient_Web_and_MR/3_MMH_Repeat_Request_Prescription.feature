@@ -1,6 +1,6 @@
 Feature: Repeat Request Prescription
 
-  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @RRP1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature: Repeat Request Prescription
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @RRP1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -84,7 +84,7 @@ Feature: Repeat Request Prescription
       | Medication Details                   | Payment Details       | Prescription Verification Details            |
       | &DATA MEDS PAY BY USING ONLINE CARD& | &CREDIT CARD DETAILS& | &VERIFICATION MEDS PAY BY USING ONLINE CARD& |
 
-  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @RRP1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S7- Request Repeat Prescription - Pay Online (A2A)
 
     Given As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription

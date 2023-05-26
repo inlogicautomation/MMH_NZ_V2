@@ -1683,16 +1683,20 @@ public class AppointmentsPage extends BasePage {
     public boolean selectTypeOfVideoAppointment(String strTypeOfVideoAppointment) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            if (verifyElement(elmntVideoBookingTypeOkButton)) {
+                waitForSeconds(2);
 //            waitForElement(elmntBookingTypeContainer);
-            WebElement elmntTypeOfVideoAppointment = waitForElement(By.xpath(elmntVideoBookingType.replace("<<REPLACEMENT>>", strTypeOfVideoAppointment)));
-            waitForSeconds(2);
-            jsClick(elmntTypeOfVideoAppointment);
-            waitForSeconds(3);
-            waitForElement(elmntVideoBookingTypeOkButton);
-            jsClick(elmntVideoBookingTypeOkButton);
-            takeScreenshot(driver);
-            blResult = true;
+                WebElement elmntTypeOfVideoAppointment = waitForElement(By.xpath(elmntVideoBookingType.replace("<<REPLACEMENT>>", strTypeOfVideoAppointment)));
+                waitForSeconds(2);
+                jsClick(elmntTypeOfVideoAppointment);
+                waitForSeconds(3);
+                waitForElement(elmntVideoBookingTypeOkButton);
+                jsClick(elmntVideoBookingTypeOkButton);
+                takeScreenshot(driver);
+                blResult = true;
+            }else{
+               System.out.println("Video Popup is not displayed");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -460,8 +460,8 @@ public class ProviderHomePage extends BasePage {
                 if (WindowsCount == 2) {
                     focusWindow(2);
                     if (verifyElement(verifyPatientHomePage)) {
-                        waitForElement(elmntDashboard);
-                        click(elmntDashboard);
+//                        waitForElement(elmntDashboard);
+//                        click(elmntDashboard);
                         System.out.println("user here in patient portal homepage");
                     } else {
                         visit(TestDataUtil.getValue("&PATIENT_URL&"));
