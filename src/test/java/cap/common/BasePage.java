@@ -754,4 +754,19 @@ public class BasePage {
         }
     }
 
+    public void swipeRight() {
+        waitForSeconds(1);
+        Dimension size = driver.manage().window().getSize();
+
+        int startY = (int) (size.height / 2);
+        int startX = (int) (size.width * 0.05);
+        int endX = (int) (size.width * 0.90);
+        new TouchAction((PerformsTouchActions) driver)
+                .press(PointOption.point(startX, startY))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+                .moveTo(PointOption.point(endX, startY))
+                .release()
+                .perform();
+    }
+
 }

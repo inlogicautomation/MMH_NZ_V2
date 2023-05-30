@@ -60,6 +60,14 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'page-content')]")
     protected WebElement elmntAppointmentPanel;
 
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Past Appointments')]")
+    protected WebElement elmntMobilePastAppointmentPanel;
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Video Invitations')]")
+    protected WebElement elmntMobileVideoInvationAppointmentPanel;
+
+    //a[contains(text(),'Past Appointments')]
+
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Block Appointments For Provider')]")
     protected WebElement elmntBlockAppointmentsForProvider;
 
@@ -707,10 +715,29 @@ public class AppointmentsPage extends BasePage {
     public boolean navigateToMobileFutureAppointmentPage(String strAppointment) {
         boolean blResult = false;
         try {
-//            waitForElement(elmntWelcomeMessage);
-            WebElement elmntBookAppointment = waitForElement(By.xpath(strMobileAppointments.replace("<<REPLACEMENT>>", strAppointment)));
-            System.out.println(">>>>>>>>>>>>>"+elmntBookAppointment);
-            jsClick(elmntBookAppointment);
+////            waitForElement(elmntWelcomeMessage);
+//            WebElement elmntBookAppointment = waitForElement(By.xpath(strMobileAppointments.replace("<<REPLACEMENT>>", strAppointment)));
+//            System.out.println(">>>>>>>>>>>>>"+elmntBookAppointment);
+//            jsClick(elmntBookAppointment);
+            waitForElement(elmntMobilePastAppointmentPanel);
+            click(elmntMobilePastAppointmentPanel);
+            waitForElement(elmntAppointmentPanel);
+            blResult =  verifyElement(elmntAppointmentPanel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean navigateToMobileVideoInvationAppointmentPage(String strAppointment) {
+        boolean blResult = false;
+        try {
+////            waitForElement(elmntWelcomeMessage);
+//            WebElement elmntBookAppointment = waitForElement(By.xpath(strMobileAppointments.replace("<<REPLACEMENT>>", strAppointment)));
+//            System.out.println(">>>>>>>>>>>>>"+elmntBookAppointment);
+//            jsClick(elmntBookAppointment);
+            waitForElement(elmntMobileVideoInvationAppointmentPanel);
+            click(elmntMobileVideoInvationAppointmentPanel);
             waitForElement(elmntAppointmentPanel);
             blResult =  verifyElement(elmntAppointmentPanel);
         } catch (Exception e) {

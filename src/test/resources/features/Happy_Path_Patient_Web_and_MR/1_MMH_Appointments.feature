@@ -219,7 +219,7 @@ Feature: Appointments
   Scenario Template: S9 - Patient can view all the video appointments invites sent from PMS/Provider in grid view
 
     Given As a user I am on HomePage
-    When I navigate to the "<Appointments>" page Card View
+    When I navigate to the Video "<Appointments>" page Card View
     Then I should see all the all the video appointments invites sent from PMS Provider in grid view
 #   And I join Video Consultation by clicking Join now Icon in Video invitations Gid "<All_Icons>"
     And I should see Appointment is not for today popup

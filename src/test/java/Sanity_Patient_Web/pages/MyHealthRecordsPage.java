@@ -418,7 +418,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Add Record')]//parent::button")
     protected WebElement btnAddRecord;
 
-    @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-add-plus-add icon-white']")
+    @FindBy(how = How.XPATH, using = "//div[@class='mobile-view']//img")
     protected WebElement btnMobileAddRecord;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),' Add COVID Immunisation ')]//parent::button")

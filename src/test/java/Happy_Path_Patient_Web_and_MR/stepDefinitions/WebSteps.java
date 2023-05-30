@@ -4390,6 +4390,24 @@ public class WebSteps {
 
         }
     }
+
+    @When("I navigate to the Video {string} page Card View")
+    public void iNavigateToTheVideoPageCardView(String strAppointments) {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+            Assert.assertTrue(demoPageContainer.homePage.clickMobileAppointmentsExpandIcon());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToMobileVideoInvationAppointmentPage(strAppointments));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+            Assert.assertTrue(demoPageContainer.homePage.clickMobileAppointmentsExpandIcon());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToMobileVideoInvationAppointmentPage(strAppointments));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToPastAppointmentPage(strAppointments));
+        }
+    }
 }
 
 

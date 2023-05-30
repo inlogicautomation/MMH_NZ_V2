@@ -5,13 +5,18 @@ import cap.helpers.Constants;
 import cap.utilities.DateUtil;
 import cap.utilities.TestDataUtil;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
@@ -510,7 +515,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'mb-flo-wrpi mobile-view')]//span//child::img")
     protected WebElement btnMobileImmunisationAddRecord;
 
-    @FindBy(how = How.XPATH, using = "//i[contains(@class,'icon-cent-add-plus-add icon-white')]")
+    @FindBy(how = How.XPATH, using = "//div[@class='mobile-view']//img")
     protected WebElement btnMobileAddRecord;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),' Add COVID Immunisation ')]//parent::button")
@@ -1225,7 +1230,12 @@ jsScrollIntoView(elmntClinicianNotes);
     public void clickExportButton() {
         waitForElement(elmntExport);
         click(elmntExport);
+//        driver.navigate().back();
+        swipeRight();
+
     }
+
+
 
 
     public void DeleteFile() {
