@@ -3611,12 +3611,12 @@ public class WebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
             Assert.assertTrue(demoPageContainer.homePage.clickMobileAppointmentsExpandIcon());
-            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToMobileFutureAppointmentPage(strAppointments));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToMobilePastAppointmentPage(strAppointments));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
             Assert.assertTrue(demoPageContainer.homePage.clickMobileAppointmentsExpandIcon());
-            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToMobileFutureAppointmentPage(strAppointments));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToMobilePastAppointmentPage(strAppointments));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
@@ -4407,6 +4407,26 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
             Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToPastAppointmentPage(strAppointments));
         }
+    }
+
+    @And("I navigate to the Future Appointments page {string} page Card View")
+    public void iNavigateToTheFutureAppointmentsPagePageCardView(String strAppointments) {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+            Assert.assertTrue(demoPageContainer.homePage.clickMobileAppointmentsExpandIcon());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToMobileFutureAppointmentPage(strAppointments));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
+            Assert.assertTrue(demoPageContainer.homePage.clickMobileAppointmentsExpandIcon());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToMobileFutureAppointmentPage(strAppointments));
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToPastAppointmentPage(strAppointments));
+        }
+
+
     }
 }
 

@@ -1,6 +1,6 @@
 Feature: Repeat Request Prescription
 
-  @WEB @Mobile @RRP1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"

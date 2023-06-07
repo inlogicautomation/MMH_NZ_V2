@@ -318,7 +318,7 @@ Feature: My Health Records
       | &RECALLS_REMAINDER_TABLE_DATA& | &RECALLS_REMAINDER_ICON_DATA& | &MOBILE_RECALLS_REMAINDER_ICON_DATA& |
     And I navigate to the Homepage
 
-  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH1 @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario: S13-Patient to View Summary
 
     Given As a user I am on HomePage

@@ -173,7 +173,7 @@ Feature: Appointments
   Scenario Template: S7 - Patient can view all the future date booked appointments in card view
 
     Given As a user I am on HomePage
-    And I navigate to the "<Appointments>" page Card View
+    And I navigate to the Future Appointments page "<Appointments>" page Card View
     When I switch to card view in future appointments page
     Then I should see all the future date appointments in card view
 

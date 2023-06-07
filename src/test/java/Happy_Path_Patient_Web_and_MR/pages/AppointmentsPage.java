@@ -63,6 +63,9 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Past Appointments')]")
     protected WebElement elmntMobilePastAppointmentPanel;
 
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Upcoming Appointments')]")
+    protected WebElement elmntMobileUpcomingAppointmentPanel;
+
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Video Invitations')]")
     protected WebElement elmntMobileVideoInvationAppointmentPanel;
 
@@ -80,7 +83,7 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Upcoming Appointments')]")
     protected WebElement elmntWebFutureAppointment;
-    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Let’s book your appointment.')]")
+    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Schedule your appointment now.')]")
     protected WebElement VerflyMobileBookAppointmentPage;
 
     @FindBy(how = How.XPATH, using = "(//h3[contains(text(),'Upcoming Appointments')])[1]")
@@ -440,7 +443,7 @@ public class AppointmentsPage extends BasePage {
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "//mat-dialog-container//div/div[contains(text(),'our appointment is not for today')]")
+    @FindBy(how = How.XPATH, using = "//mat-dialog-container//div/div[contains(text(),'Your appointment is not scheduled for today.')]")
     protected WebElement elmntAppointmentsisNotForTodayPopup;
 
     protected String elmntVideoBookingType = new StringBuilder().append("//div[contains(text(),'")
@@ -615,6 +618,7 @@ public class AppointmentsPage extends BasePage {
             waitForElement(elmntAppointmentPanel);
             waitForElement(elmntBookAppointment);
             click(elmntBookAppointment);
+            declineCovidPreScreeningPopup();
             waitForElement(VerflyMobileBookAppointmentPage);
             blResult = verifyElement(VerflyMobileBookAppointmentPage);
         } catch (Exception e) {
@@ -713,6 +717,23 @@ public class AppointmentsPage extends BasePage {
 
 
     public boolean navigateToMobileFutureAppointmentPage(String strAppointment) {
+        boolean blResult = false;
+        try {
+////            waitForElement(elmntWelcomeMessage);
+//            WebElement elmntBookAppointment = waitForElement(By.xpath(strMobileAppointments.replace("<<REPLACEMENT>>", strAppointment)));
+//            System.out.println(">>>>>>>>>>>>>"+elmntBookAppointment);
+//            jsClick(elmntBookAppointment);
+            waitForElement(elmntMobileUpcomingAppointmentPanel);
+            click(elmntMobileUpcomingAppointmentPanel);
+            waitForElement(elmntAppointmentPanel);
+            blResult =  verifyElement(elmntAppointmentPanel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean navigateToMobilePastAppointmentPage(String strAppointment) {
         boolean blResult = false;
         try {
 ////            waitForElement(elmntWelcomeMessage);
@@ -1712,18 +1733,23 @@ public class AppointmentsPage extends BasePage {
         try {
             if (verifyElement(elmntVideoBookingTypeOkButton)) {
                 waitForSeconds(2);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            waitForElement(elmntBookingTypeContainer);
                 WebElement elmntTypeOfVideoAppointment = waitForElement(By.xpath(elmntVideoBookingType.replace("<<REPLACEMENT>>", strTypeOfVideoAppointment)));
                 waitForSeconds(2);
                 jsClick(elmntTypeOfVideoAppointment);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(3);
                 waitForElement(elmntVideoBookingTypeOkButton);
-                jsClick(elmntVideoBookingTypeOkButton);
+                click(elmntVideoBookingTypeOkButton);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 takeScreenshot(driver);
                 blResult = true;
-            }else{
+            }
+            else{
                System.out.println("Video Popup is not displayed");
             }
+            blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
         }

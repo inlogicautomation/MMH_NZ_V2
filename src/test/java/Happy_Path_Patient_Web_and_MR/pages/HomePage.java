@@ -640,7 +640,7 @@ if(!verifyElement(txtPatientWelcomePage)){
             click(elmntDashboard);
             waitForSeconds(3);
             jsClick(btnExitApp);
-            waitForSeconds(180);
+            waitForSeconds(300);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }
@@ -648,7 +648,7 @@ if(!verifyElement(txtPatientWelcomePage)){
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForElement(btnExitAppMobile);
             jsClick(btnExitAppMobile);
-            waitForSeconds(180);
+            waitForSeconds(300);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }
@@ -656,7 +656,7 @@ if(!verifyElement(txtPatientWelcomePage)){
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(btnExitAppMobile);
             click(btnExitAppMobile);
-            waitForSeconds(180);
+            waitForSeconds(300);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }

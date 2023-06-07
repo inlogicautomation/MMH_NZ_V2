@@ -38,7 +38,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-progress-spinner[@mode='indeterminate']")
     protected WebElement elmntLoadingSpinner;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'New Repeat Prescriptions ')]//i")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),' New Repeat Prescription ')]//i")
     protected WebElement elmntRequestNewScript;
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Request New Script')]")
@@ -524,7 +524,7 @@ public class RepeatPrescription extends BasePage {
             .append("'])[1]").toString();
 
     protected String elmntDoctorName = new StringBuilder()
-            .append("(//div[contains(text(),'")
+            .append("(//p[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')])[1]").toString();
 
@@ -1140,6 +1140,11 @@ waitForElement(ReasonForNewScript);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
 
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                waitForElement(txtMobileViewPreviousRequests);
+                click(txtMobileViewPreviousRequests);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            }
 //            waitForElement(txtViewPreviousRequests);
 //            verifyElement(txtViewPreviousRequests);
             waitForSeconds(3);
@@ -1205,6 +1210,11 @@ waitForElement(ReasonForNewScript);
             System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
             List<String> strDetails = lstPrescriptionDetails.subList(2, 5);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                waitForElement(txtMobileViewPreviousRequests);
+                click(txtMobileViewPreviousRequests);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            }
 
 //            waitForElement(txtViewPreviousRequests);
 //            verifyElement(txtViewPreviousRequests);
@@ -1269,8 +1279,13 @@ waitForElement(ReasonForNewScript);
             System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
 
 
-            List<String> strDetails = lstPrescriptionDetails.subList(2, 5);
+            List<String> strDetails = lstPrescriptionDetails.subList(2, 4);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                waitForElement(txtMobileViewPreviousRequests);
+                click(txtMobileViewPreviousRequests);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            }
 
 //            waitForElement(txtViewPreviousRequests);
 //            verifyElement(txtViewPreviousRequests);
@@ -1308,9 +1323,9 @@ waitForElement(ReasonForNewScript);
                     System.out.println("\n verified medicineField >>> :: " + verifyElement(medicineField));
 
                 }
-                WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(5))));
+                WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(4))));
                 waitForSeconds(2);
-                System.out.println("Xpath for doctorName Field >>>>> : " + elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(5)));
+                System.out.println("Xpath for doctorName Field >>>>> : " + elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(4)));
                 waitForElement(doctorName);
                 verifyElement(doctorName);
 
@@ -1339,6 +1354,11 @@ waitForElement(ReasonForNewScript);
 
             List<String> strDetails = lstPrescriptionDetails.subList(2, 4);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                waitForElement(txtMobileViewPreviousRequests);
+                click(txtMobileViewPreviousRequests);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            }
 
 //            waitForElement(txtViewPreviousRequests);
 //            verifyElement(txtViewPreviousRequests);
