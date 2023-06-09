@@ -5,13 +5,18 @@ import cap.helpers.Constants;
 import cap.utilities.DateUtil;
 import cap.utilities.TestDataUtil;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
@@ -507,16 +512,16 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Add Record')]//parent::button")
     protected WebElement btnAddRecord;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(@class,'mb-flo-wrpi mobile-view')]//span//child::img")
+    @FindBy(how = How.XPATH, using = "(//div[@class='mobile-view']//img)[1]")
     protected WebElement btnMobileImmunisationAddRecord;
 
-    @FindBy(how = How.XPATH, using = "//i[contains(@class,'icon-cent-add-plus-add icon-white')]")
+    @FindBy(how = How.XPATH, using = "(//div[@class='mobile-view']//img)[1]")
     protected WebElement btnMobileAddRecord;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),' Add COVID Immunisation ')]//parent::button")
     protected WebElement btnCovidAddRecord;
 
-    @FindBy(how = How.XPATH, using = "(//div[contains(@class,'mobile-view')]//span//child::img)[2]")
+    @FindBy(how = How.XPATH, using = "(//div[contains(@class,'mobile-view')]//img)[2]")
     protected WebElement btnMobileCovidAddRecord;
 
     @FindBy(how = How.XPATH, using = "//mat-dialog-actions//span[text()='Save']")
@@ -993,10 +998,11 @@ public class MyHealthRecordsPage extends BasePage {
     }
 
     public void clickDashboardFromMenu() {
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         jsScrollIntoView(elmntdashboard);
-        waitForElementClickable(elmntdashboard);
         waitForElement(elmntdashboard);
         jsClick(elmntdashboard);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
     }
 
@@ -1123,9 +1129,12 @@ public class MyHealthRecordsPage extends BasePage {
             WebElement elmntMobileAllergiesIconData = waitForElement(By.xpath(strMobileAllergiesIconContentLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(1)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(5)))));
+            System.out.println(">>>>>>>>>>>>>>>elmntMobileAllergiesIconData"+elmntMobileAllergiesIconData);
             jsScrollIntoView(elmntMobileAllergiesIconData);
+            waitForSeconds(3);
             waitForElementClickable(elmntMobileAllergiesIconData);
             jsClick(elmntMobileAllergiesIconData);
+
             for (String str : lstDetails1) {
                 WebElement elmntPaitientDetails = waitForElement(By.xpath(strMobilePrescriptionsDetails.replace("<<REPLACEMENT>>", str)));
                 verifyElement(elmntPaitientDetails);
@@ -1225,9 +1234,22 @@ jsScrollIntoView(elmntClinicianNotes);
     public void clickExportButton() {
         waitForElement(elmntExport);
         click(elmntExport);
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("browser.helperApps.neverAsk.saveToDisk", "application/pdf");
+//        driver.navigate().back();
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            waitForSeconds(5);
+            swipeRight();
+            waitForSeconds(5);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+            waitForSeconds(5);
+            swipeRight();
+            waitForSeconds(5);
+        }
+
     }
+
+
 
 
     public void DeleteFile() {
@@ -2037,9 +2059,10 @@ jsScrollIntoView(elmntClinicianNotes);
             WebElement elmntMobilePrescriptionMyEntiresData = waitForElement(By.xpath(strMobilePrescriptionsMyEntitesIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0).concat(strExecutionID)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(currentDate))));
+            waitForSeconds(3);
             waitForElement(elmntMobilePrescriptionMyEntiresData);
-            waitForElementClickable(elmntMobilePrescriptionMyEntiresData);
             jsClick(elmntMobilePrescriptionMyEntiresData);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             for (String str : lstDetails1) {
                 WebElement elmntMyEntries = waitForElement(By.xpath(strMobilePrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
                 verifyElement(elmntMyEntries);
@@ -3038,7 +3061,7 @@ jsScrollIntoView(elmntClinicianNotes);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
 
-//            waitForSeconds(3);
+            waitForSeconds(3);
             waitForElementClickable(btnMobileCovidAddRecord);
             jsClick(btnMobileCovidAddRecord);
         }

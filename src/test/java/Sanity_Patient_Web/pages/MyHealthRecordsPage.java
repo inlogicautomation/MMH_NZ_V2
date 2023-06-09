@@ -418,13 +418,13 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Add Record')]//parent::button")
     protected WebElement btnAddRecord;
 
-    @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-add-plus-add icon-white']")
+    @FindBy(how = How.XPATH, using = "//div[@class='mobile-view']//img")
     protected WebElement btnMobileAddRecord;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),' Add COVID Immunisation ')]//parent::button")
     protected WebElement btnCovidAddRecord;
 
-    @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-calendar-plus-date icon-white']")
+    @FindBy(how = How.XPATH, using = "(//div[@class='mobile-view']//img)[2]")
     protected WebElement btnMobileCovidAddRecord;
 
     @FindBy(how = How.XPATH, using = "//mat-dialog-actions//span[text()='Save']")
@@ -1914,6 +1914,13 @@ public class MyHealthRecordsPage extends BasePage {
             isVerified = verifyElement(btnCovidAddRecord);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
+
+            waitForSeconds(3);
+            waitForElementClickable(btnMobileCovidAddRecord);
+            jsClick(btnMobileCovidAddRecord);
+            isVerified = verifyElement(btnCovidAddRecord);
+        }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
 
             waitForSeconds(3);
             waitForElementClickable(btnMobileCovidAddRecord);
