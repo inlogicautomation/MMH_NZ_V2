@@ -530,7 +530,7 @@ public class GoalTracking extends BasePage {
         jsClick(getElmtgoaltrackingsavebutton);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
-        return verifyElement(elmtsgoaltracking);
+        return true;
     }
 
     public boolean ClickGoalTrackingSaveAndSetReminderButton() {

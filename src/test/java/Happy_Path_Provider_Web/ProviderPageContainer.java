@@ -35,6 +35,8 @@ public class ProviderPageContainer {
 
     public VideoConsultationsPage videoConsultationsPage;
 
+    public SetupServicesPage setupServicesPage;
+
 
 
     public ProviderPageContainer() {
@@ -75,6 +77,7 @@ public class ProviderPageContainer {
         myAppointmentPage = new MyAppointmentPage(driver);
         onlinePaymentsSettingPage = new OnlinePaymentSettingsPage(driver);
         videoConsultationsPage = new VideoConsultationsPage(driver);
+        setupServicesPage = new SetupServicesPage(driver);
     }
 
     @After("@WEB")

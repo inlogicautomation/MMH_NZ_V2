@@ -137,7 +137,10 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='healthCenter']")
     protected WebElement drpDownLocation;
 
-    protected String elmntbyDrop = new StringBuilder().append("//span[contains(text(),'")
+    protected String elmntbyDrop = new StringBuilder().append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[3]").toString();
+
+    protected String elmntbyServiceName = new StringBuilder().append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='serviceName']")
@@ -188,7 +191,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//body/br[2]")
     protected WebElement txtgroupmessage;
 
-    @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']")
+    @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']//p")
     protected WebElement txtBoxMessageBody;
 
     @FindBy(how = How.XPATH, using = "//span[text()=' Send message']")
@@ -954,15 +957,16 @@ public class MessagesPage extends BasePage {
     public boolean verifyPatientReceivedGroupMessage(String strSubjectMessage, String strBody) {
         boolean blResult = false;
         try {
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtGroupMessagesPatient);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("X Path-inboxSubject >>> :: " + inboxMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage)));
             WebElement inboxSubject = waitForElement(By.xpath(inboxMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage))));
-            jsScrollIntoView(inboxSubject);
-            waitForElement(inboxSubject);
+//            jsScrollIntoView(inboxSubject);
+//            waitForElement(inboxSubject);
             takeScreenshotSanity(driver);
-            waitForElementClickable(inboxSubject);
             jsClick(inboxSubject);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("X Path-inboxMessageSubject >>> :: " + receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage)));
             WebElement inboxReceivedSubject = waitForElement(By.xpath(receivedMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage))));
             waitForElement(inboxReceivedSubject);
@@ -1333,7 +1337,7 @@ public class MessagesPage extends BasePage {
             waitForSeconds(1);
 //            Select healthCentre = new Select(driver.findElement(By.xpath("//mat-select[@formcontrolname='serviceName']")));
 //            healthCentre.selectByVisibleText(strServiceName);
-            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyDrop.replace("<<REPLACEMENT>>", strServiceName)));
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyServiceName.replace("<<REPLACEMENT>>", strServiceName)));
             System.out.println(">>>>>>>elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
             jsScrollIntoView(elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
@@ -1478,11 +1482,12 @@ public class MessagesPage extends BasePage {
     public boolean enterBodyMessage(String strBodyMessage) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+
             waitForElement(txtCompose);
 //            driver.switchTo().frame(frameComposeForDoctor);
             waitForSeconds(2);
             jsScrollUp();
+            waitForSeconds(2);
             waitForElementClickable(txtBoxMessageBody);
             txtBoxMessageBody.click();
             waitForSeconds(2);
@@ -1514,6 +1519,7 @@ public class MessagesPage extends BasePage {
 //            healthCentre.selectByVisibleText(strHealthCenterLocation);
             jsClick(drpDownLocation);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyDrop.replace("<<REPLACEMENT>>", strHealthCenterLocation)));
+            System.out.println(">>>>>>>>elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
 
             blResult = true;
@@ -1676,7 +1682,7 @@ public class MessagesPage extends BasePage {
            waitForElement(elmntMessagesSuccessfullyPopup1);
          waitForElementToAppear(driver,By.xpath(elmntMessagesSuccessfullyPopup));
          verifyElement(elmntMessagesSuccessfullyPopup1);
-
+            waitForSeconds(4);
          waitForElementClickable(elmntComposeDoctor);
             jsClick(elmntComposeDoctor);
             waitForSeconds(2);

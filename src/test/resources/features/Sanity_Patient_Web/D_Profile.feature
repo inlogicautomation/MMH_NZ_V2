@@ -179,8 +179,8 @@ Feature: Patient Profile
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
-      | V1 Portal       | Email Address      | Password              |
-      | &V1 URL& | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+      | V1 Portal | Email Address      | Password              |
+      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
   @WEB @PROFILE @SANITY_PATH
   Scenario Template: S3- Preparation for Profile Access
@@ -203,8 +203,8 @@ Feature: Patient Profile
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address   | Password           |
-      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+      | Email Address       | Password           |
+      | &EMAIL FOR MESSAGE& | &PASSWORD FOR RRP& |
 
 
   @WEB @PROFILE @SANITY_PATH

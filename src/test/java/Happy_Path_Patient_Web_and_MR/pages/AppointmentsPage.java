@@ -72,7 +72,7 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Upcoming Appointments')]")
     protected WebElement elmntWebFutureAppointment;
-    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Let’s book your appointment.')]")
+    @FindBy(how = How.XPATH, using = " //h4[contains(text(),'Schedule your appointment now.')]")
     protected WebElement VerflyMobileBookAppointmentPage;
 
     @FindBy(how = How.XPATH, using = "(//h3[contains(text(),'Upcoming Appointments')])[1]")
@@ -137,14 +137,21 @@ public class AppointmentsPage extends BasePage {
     //p[contains(text(),'Dr.Stephen')]
 
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='location']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationCenter']")
     protected WebElement elmntLocationCenter;
+
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationCenter']")
+    protected WebElement elmntPatientLocationCenter;
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='provider']")
     protected WebElement elmntSelectProviderdropdown;
 
     @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Search')])[2]")
     protected WebElement elmntSearchButton;
+
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'search')])[1]")
+    protected WebElement elmntVideoConsultationSearchButton;
+
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Clear')]")
     protected WebElement elmntclearButton;
@@ -155,8 +162,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='searchValue']")
     protected WebElement elmntSearchTextBox;
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationCenter']")
-    protected WebElement elmntPatientLocationCenter;
+
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='provider']")
     protected WebElement elmntProviderStaff;
@@ -272,6 +278,10 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='fromDate']//following::button)[1]")
     protected WebElement elmntMyAppointmentFromDateCalendar;
+
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='date']//following::button)[1]")
+    protected WebElement elmntVideoConsultationsFromDateCalendar;
+
 
     @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='toDate']//following::button)[1]")
     protected WebElement elmntMyAppointmentToDateCalendar;
@@ -432,7 +442,7 @@ public class AppointmentsPage extends BasePage {
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "//mat-dialog-container//div/div[contains(text(),'our appointment is not for today')]")
+    @FindBy(how = How.XPATH, using = "//mat-dialog-container//div/div[contains(text(),'Your appointment is not scheduled for today.')]")
     protected WebElement elmntAppointmentsisNotForTodayPopup;
 
     protected String elmntVideoBookingType = new StringBuilder().append("//div[contains(text(),'")
@@ -595,6 +605,18 @@ public class AppointmentsPage extends BasePage {
             .append("<<REPLACEMENT6>>").append("')]//following::td[contains(text(),'")
             .append("<<REPLACEMENT7>>").append("')]").toString();
 
+    protected String strVideoConsultationsContentLocator = new StringBuilder()
+            .append("//td[contains(text(),'")
+            .append("<<REPLACEMENT1>>").append("')]//following::td/p[contains(text(),'")
+            .append("<<REPLACEMENT2>>").append("')]//following::td//mat-icon[contains(text(),'")
+            .append("<<REPLACEMENT3>>").append("')]//following::td//following::td[contains(text(),'")
+            .append("<<REPLACEMENT4>>").append("')]//following::td[contains(text(),'")
+            .append("<<REPLACEMENT5>>").append("')]").toString();
+
+    //td[contains(text(),'26 May 2023, 12:00 AM')]//following::td/p[contains(text(),'Auto Pat1')]//following::td//mat-icon[contains(text(),'videocam')]//following::td//following::td[contains(text(),'GP1')]//following::td[contains(text(),'Appointment')]
+
+
+
 
 
 
@@ -730,7 +752,7 @@ public class AppointmentsPage extends BasePage {
             mouseClick(elmntSelectHealthCenter);
 //            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = verifyElement(elmntLocationCenter);
+            blResult = verifyElement(elmntHealtCenter);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -748,7 +770,7 @@ public class AppointmentsPage extends BasePage {
             mouseClick(elmntSelectHealthCenter);
 //            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = verifyElement(elmntPatientLocationCenter);
+            blResult = verifyElement(elmntHealtCenter);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -3966,7 +3988,30 @@ System.out.println(">>>>>>>>>>>>>VerifyMyAppointmentTableDatalstDetails"+lstDeta
                     .replace("<<REPLACEMENT7>>", TestDataUtil.getValue(lstDetails.get(7)))));
             waitForElement(elmntMyAppointmentTableData);
             verifyElement(elmntMyAppointmentTableData);
-            waitForSeconds(15);
+            blResult =true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return blResult;
+    }
+
+    public boolean VerifyVideoConsultationsTableData(List<String> lstDetails) {
+        boolean blResult = false;
+        try {
+            System.out.println(">>>>>>>>>>>>>VerifyMyAppointmentTableDatalstDetails"+lstDetails);
+            String AfterFourDaysDate = getDate("AFTER_THREE_DAYS","dd MMM yyyy");
+            String strdatetime=AfterFourDaysDate+", "+strSlotDate;
+            System.out.println(">>>>>>>>strdatetime"+strdatetime);
+            WebElement elmntVideoConsultationsTableData = waitForElementFewSeconds(By.xpath(strVideoConsultationsContentLocator
+                    .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(strdatetime))
+                    .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(lstDetails.get(10)))
+                    .replace("<<REPLACEMENT3>>", TestDataUtil.getValue(lstDetails.get(12)))
+                    .replace("<<REPLACEMENT4>>", TestDataUtil.getValue(lstDetails.get(5)))
+                    .replace("<<REPLACEMENT5>>", TestDataUtil.getValue(lstDetails.get(11)))));
+            System.out.println(">>>>>>>>>>>elmntVideoConsultationsTableData"+elmntVideoConsultationsTableData);
+            waitForElement(elmntVideoConsultationsTableData);
+            verifyElement(elmntVideoConsultationsTableData);
             blResult =true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -4009,6 +4054,21 @@ System.out.println(">>>>>>>>>>>>>VerifyMyAppointmentTableDatalstDetails"+lstDeta
         return blResult;
     }
 
+    public boolean selectVideoConsultationsSearch() {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntVideoConsultationSearchButton);
+            jsClick(elmntVideoConsultationSearchButton);
+            waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
     public boolean selectSearchTextBox(String strdata) {
         boolean blResult = false;
         try {
@@ -4043,6 +4103,52 @@ System.out.println(">>>>>>>>>>>>>VerifyMyAppointmentTableDatalstDetails"+lstDeta
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntVerfied);
             blResult =   verifyElement(elmntVerfied);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean selectVideoAppointmentsFutureDateOnCalender(String strFutureDate) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(5);
+            String strDatePattern1 = "d";
+            String strDate = strFutureDate;
+
+            String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+            System.out.println("DATE" + strDateValue);
+
+//            jsScrollIntoView(elmntMyAppointmentFromDateCalendar);
+            waitForElement(elmntVideoConsultationsFromDateCalendar);
+            verifyElement(elmntVideoConsultationsFromDateCalendar);
+            jsClick(elmntVideoConsultationsFromDateCalendar);
+            try {
+                WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
+                verifyElement(elmntDate);
+                waitForElementClickable(elmntDate);
+                waitForSeconds(3);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                jsClick(elmntDate);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(2);
+            } catch (Exception e) {
+                verifyElement(elmntCalendarNavNext);
+                jsClick(elmntCalendarNavNext);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(3);
+                WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
+                verifyElement(elmntDate);
+                waitForElementClickable(elmntDate);
+                waitForSeconds(3);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                jsClick(elmntDate);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(2);
+            }
+
+            blResult = verifyElement(elmntVideoConsultationsFromDateCalendar);
         } catch (Exception e) {
             e.printStackTrace();
         }

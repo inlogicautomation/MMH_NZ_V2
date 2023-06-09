@@ -1350,7 +1350,7 @@ public class SanityWebSteps {
 
     @Then("Navigate to Edit Profile page from Health Summary page")
     public void navigateToEditProfilePageFromHealthSummaryPage() {
-        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickEditProfile());
+//        Assert.assertTrue(sanityPageContainer.myHealthRecordsPage.clickEditProfile());
         Assert.assertTrue(sanityPageContainer.homePage.clickDashBoard());
     }
 

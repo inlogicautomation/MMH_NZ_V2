@@ -17,8 +17,8 @@ Feature: Appointments
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address | Password   |
-      | &EMAIL&       | &PASSWORD& |
+      | Email Address        | Password   |
+      | &EMAIL_APPOINTMENTS& | &PASSWORD& |
 
 
   @WEB @SANITY_PATH @SANITY_PATH_APPOINTMENTS
@@ -29,8 +29,8 @@ Feature: Appointments
     And I canceling all the available appointments
 
     Examples:
-      | Appointment         |
-      | Future Appointments |
+      | Appointment           |
+      | Upcoming Appointments |
 
 #    Note: {
 #    25:Login as Existing patient & view/click on Appointments
@@ -71,8 +71,8 @@ Feature: Appointments
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address | Password   |
-      | &EMAIL&       | &PASSWORD& |
+      | Email Address        | Password   |
+      | &EMAIL_APPOINTMENTS& | &PASSWORD& |
 
   @WEB @SANITY_PATH @SANITY_PATH_APPOINTMENTS
   Scenario Template: S1 - Patient Cancel Appointment
@@ -84,8 +84,8 @@ Feature: Appointments
     Then I should see Appointment cancelled message "<Appointment_After_Cancel>"
 
     Examples:
-      | Appointment         | Appointment_Cancel_Button        | Appointment_After_Cancel              |
-      | Future Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+      | Appointment           | Appointment_Cancel_Button        | Appointment_After_Cancel              |
+      | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
 
 #    Note: {
@@ -100,8 +100,8 @@ Feature: Appointments
     When I switch to card view in future appointments page
     Then I should see all the future date appointments in card view
     Examples:
-      | Appointments        |
-      | Future Appointments |
+      | Appointment           |
+      | Upcoming Appointments |
 
 
 #    Note: {
@@ -115,8 +115,8 @@ Feature: Appointments
     When I switch to grid view in future appointments page
     Then I should see all the future date appointments in grid view
     Examples:
-      | Tab                 |
-      | Future Appointments |
+      | Tab                   |
+      | Upcoming Appointments |
 
 
 #    Note: {
@@ -148,8 +148,8 @@ Feature: Appointments
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address | Password   |
-      | &EMAIL&       | &PASSWORD& |
+      | Email Address        | Password   |
+      | &EMAIL_APPOINTMENTS& | &PASSWORD& |
 
 #    Note: {
 #    40:Click on video invitations & view grid details of Video invite appointments
@@ -164,8 +164,8 @@ Feature: Appointments
 #    Then I should see video consultation window with icons "<All_Icons>"
 
     Examples:
-      | Appointment         | Join_Consultation                                 | All_Icons     |
-      | Future Appointments | &APPOINTMENT_DETAILS_FOR_JOIN_VIDEO_CONSULTATION& | &VIDEO_ICONS& |
+      | Appointment           | Join_Consultation                                 | All_Icons     |
+      | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_JOIN_VIDEO_CONSULTATION& | &VIDEO_ICONS& |
 
 
 #    Note: {
@@ -181,7 +181,7 @@ Feature: Appointments
     Then I should see all the past date appointments in card view
     Examples:
       | Appointments      |
-      | Past Appointments |
+      | Past appointments |
 
 #    Note: {
 #    39:Click on past appointments & view grid details of past date appointments
@@ -208,4 +208,4 @@ Feature: Appointments
 
     Examples:
       | Appointments      | All_Icons     |
-      | Video Invitations | &VIDEO_ICONS& |
+      | Video invitations | &VIDEO_ICONS& |

@@ -387,7 +387,7 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//p[text()='Do you know the period of your allergy?']/following::input[@formcontrolname='startDate'])[1]")
     protected WebElement elmntAllergiesStartDate;
 
-    @FindBy(how = How.XPATH, using = "//p[text()='How often?']//following::div[49]")
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='dateTaken'])[1]")
     protected WebElement elmntPrescriptionDateToken;
 
     @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='dateTaken'])[2]")

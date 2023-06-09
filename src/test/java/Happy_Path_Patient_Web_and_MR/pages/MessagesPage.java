@@ -187,7 +187,7 @@ public class MessagesPage extends BasePage {
 
 
     protected String elmntProviderGroupMessageFromDrop = new StringBuilder().append("(//span[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')])[1]").toString();
+            .append("<<REPLACEMENT>>").append("')])[2]").toString();
 
 
     protected String elmntProviderDrop = new StringBuilder().append("(//span[contains(text(),'")
@@ -246,7 +246,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']")
     protected WebElement txtgroupmessage;
 
-    @FindBy(how = How.XPATH, using = "//kendo-editor[@formcontrolname='MessageBody']")
+    @FindBy(how = How.XPATH, using = "//kendo-editor[@formcontrolname='MessageBody']//p")
     protected WebElement txtgroupWritemessage;
 
     //kendo-editor[@formcontrolname="MessageBody"]
@@ -2594,7 +2594,7 @@ protected WebElement txtWelcome;
 //            healthCentre.selectByVisibleText(strFamilyMember);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntProviderGroupMessageFromDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             System.out.println(">>>>>>>>>>>>>>>elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
-            mouseClick(elmntEntriesFromHealthCentre);
+            jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
             blResult = true;

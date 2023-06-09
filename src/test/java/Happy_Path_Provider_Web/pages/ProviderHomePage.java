@@ -34,6 +34,11 @@ public class ProviderHomePage extends BasePage {
             .append("<<NAME>>")
             .append("')]").toString();
 
+    public String elmntSecureMessages = new StringBuilder()
+            .append("//span[contains(text(),'")
+            .append("<<NAME>>")
+            .append("')]").toString();
+
 
 
     public String MobilelmntModule = new StringBuilder()
@@ -44,6 +49,10 @@ public class ProviderHomePage extends BasePage {
 
     @FindBy(xpath = "//span[contains(text(),'Systems Menu')]/following::mat-icon[contains(@class,'mat-icon notranslate dd')]")
     protected WebElement elmtSystemsMenu;
+
+    @FindBy(xpath = "//span[contains(text(),'Setup Modules')]")
+    protected WebElement elmtSecureMessaging;
+
 
     @FindBy(xpath = "//mat-icon[text()='menu']")
     protected WebElement elmtMobileMenu;
@@ -96,7 +105,7 @@ public class ProviderHomePage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='exit_to_app']")
     protected WebElement elmntMobileLogOut;
-    @FindBy(xpath = "//span[contains(text(),'Repeat Script Settings')]")
+    @FindBy(xpath = "//span[contains(text(),'Repeat Prescriptions')]")
     protected WebElement elmtRepeatScriptSettings;
 
     @FindBy(xpath = "//button//span[contains(text(),'Edit')]")
@@ -110,6 +119,9 @@ public class ProviderHomePage extends BasePage {
 
     @FindBy(xpath = "//h3[contains(text(),'RRP Script Instructions Settings')]")
     protected WebElement txtRRPScriptInstructionsSettingsheader;
+
+    @FindBy(xpath = "//h1[contains(text(),'Setup Services')]")
+    protected WebElement txtSetupServicesheader;
 
     @FindBy(how = How.XPATH, using = "//input[@data-placeholder='Email Address' or @data-placeholder='Email address']")
     protected WebElement txtBoxEmail;
@@ -900,6 +912,45 @@ public class ProviderHomePage extends BasePage {
 
 
         return isVerified;
+    }
+
+    public boolean clickSecureMessaging() {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            jsScrollIntoView(elmtSecureMessaging);
+            waitForSeconds(2);
+            waitForElementClickable(elmtSecureMessaging);
+            System.out.println("Systems Menu is available to click");
+            jsClick(elmtSecureMessaging);
+            jsScrollIntoView(elmtRepeatScriptSettings);
+            System.out.println("scrolled ");
+            if (!verifyElement(elmtRepeatScriptSettings)){
+                click(elmtSecureMessaging);
+            }
+            jsScrollIntoView(elmtRepeatScriptSettings);
+            blResult = verifyElement(elmtRepeatScriptSettings);
+        } catch (Exception e) {
+            System.out.println("Failed to click System Menu >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean navigateToSecureMessages(String strName) {
+        boolean blResult = false;
+        try {
+            WebElement element = driver.findElement(By.xpath(elmntSecureMessages.replace("<<NAME>>",strName)));
+            jsScrollIntoView(element);
+            waitForElement(element);
+            click(element);
+            waitForElement(txtSetupServicesheader);
+            takeScreenshot(driver);
+            blResult =verifyElement(txtSetupServicesheader);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
     }
 
 

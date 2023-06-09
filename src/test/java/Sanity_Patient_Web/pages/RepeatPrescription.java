@@ -340,9 +340,9 @@ public class RepeatPrescription extends BasePage {
             .append("')])[1]").toString();
 
     protected String elmntDoctorName = new StringBuilder()
-            .append("//mat-card-content/div/p[contains(text(),'")
+            .append("(//mat-card-content/div/p[contains(text(),'")
             .append("<<REPLACEMENT>>")
-            .append("')]").toString();
+            .append("')])[1]").toString();
 
 
     protected String ddlSelectAddress = new StringBuilder()

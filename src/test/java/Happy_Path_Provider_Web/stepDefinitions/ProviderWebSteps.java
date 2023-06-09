@@ -1339,4 +1339,34 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.EnableNoOnlinePaymentsforRRP());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.ClickSaveButton());
     }
+
+    @And("As a Provider I am on HomePage and navigate to Video Consultations page")
+    public void asAProviderIAmOnHomePageAndNavigateToVideoConsultationsPage() {
+        Assert.assertTrue(providerPageContainer.videoConsultationsPage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.videoConsultationsPage.clickAppointmentButton());
+        Assert.assertTrue(providerPageContainer.videoConsultationsPage.clickVideoConsultationsButton());
+    }
+
+    @Then("I should see Video consultations details in My appointments grid based on the select provider name {string}")
+    public void iShouldSeeVideoConsultationsDetailsInMyAppointmentsGridBasedOnTheSelectProviderName(String strHealthCentre) {
+        List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
+        Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(5))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectVideoAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(9))));
+        Assert.assertTrue(providerPageContainer.appointmentsPage.selectVideoConsultationsSearch());
+        Assert.assertTrue(providerPageContainer.appointmentsPage.VerifyVideoConsultationsTableData(TestDataUtil.getListOfValue(strHealthCentre)));
+
+    }
+
+    @Given("As a Provider I am on HomePage and navigate to Setup services in {string}")
+    public void asAProviderIAmOnHomePageAndNavigateToSetupServicesIn(String strName) {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+            Assert.assertTrue(providerPageContainer.providerHomePage.clickSecureMessaging());
+            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToSecureMessages(strName));
+        }
+
+
+    }
 }

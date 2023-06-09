@@ -8,8 +8,8 @@ Feature: My Health Documents
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address                 | Password                         |
-      | &EMAIL_FOR_MY_HEALTH_RECORDS& | &PASSWORD_FOR_MY_HEALTH_RECORDS& |
+      | Email Address       | Password                         |
+      | &EMAIL FOR MESSAGE& | &PASSWORD_FOR_MY_HEALTH_RECORDS& |
 
 
 

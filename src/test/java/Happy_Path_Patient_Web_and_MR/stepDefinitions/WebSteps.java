@@ -2926,7 +2926,7 @@ public class WebSteps {
         demoPageContainer.messagesPage.selecGroupTo(list.get(3));
         Assert.assertTrue(demoPageContainer.messagesPage.enterGroupSubject(TestDataUtil.getValue(list.get(4))));
         Assert.assertTrue(demoPageContainer.messagesPage.enterGroupMessage(TestDataUtil.getValue(list.get(5))));
-        demoPageContainer.messagesPage.selecGroupTo(list.get(3));
+//        demoPageContainer.messagesPage.selecGroupTo(list.get(3));
     }
 
     @And("I send the group message to the patient users")
@@ -4389,6 +4389,19 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.repeatPrescription.clickMobilePayAtHealthCentre());
 
         }
+    }
+
+    @And("I navigate to the {string} Future Appointments page verify the Video appointment status {string}")
+    public void iNavigateToTheFutureAppointmentsPageVerifyTheVideoAppointmentStatus(String strAppointmentCancel, String strAppointments) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strAppointments);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.homePage.clickAppointmentsExpandIcon());
+            Assert.assertTrue(demoPageContainer.appointmentsPage.navigateToWebFutureAppointmentPage(strAppointmentCancel));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.clickJoinVideoConsultingForTheCreatedAppointment(lstDetails));
+
+        }
+
+
     }
 }
 

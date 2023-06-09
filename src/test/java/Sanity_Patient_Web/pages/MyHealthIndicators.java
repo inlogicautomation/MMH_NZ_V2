@@ -1374,6 +1374,7 @@ public class MyHealthIndicators extends BasePage {
             waitForSeconds(3);
             jsClick(elmntBloodPressureTableData);
             blResult = verifyElement(elmntWeightCard);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1991,16 +1992,15 @@ public class MyHealthIndicators extends BasePage {
     public boolean EditBMIheightMedicationName(String strConditionName) {
         boolean isVerified = false;
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(4);
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>"+strConditionName);
             waitForElementClickable(elmntEditSystolicMedicationName);
             enterValue(elmntEditSystolicMedicationName, strConditionName);
             isVerified = verifyElement(elmntEditSystolicMedicationName);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
 
-
-        }
         return isVerified;
     }
 
@@ -3099,9 +3099,11 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickWeightEditSaveButton() {
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         waitForElementClickable(btnEditBloodPressureSave);
         jsClick(btnEditBloodPressureSave);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElement(elmntWeightCard);
         return verifyElement(elmntWeightCard);
     }

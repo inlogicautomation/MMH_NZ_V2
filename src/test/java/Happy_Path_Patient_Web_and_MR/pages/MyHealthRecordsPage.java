@@ -1225,6 +1225,8 @@ jsScrollIntoView(elmntClinicianNotes);
     public void clickExportButton() {
         waitForElement(elmntExport);
         click(elmntExport);
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("browser.helperApps.neverAsk.saveToDisk", "application/pdf");
     }
 
 
@@ -3558,7 +3560,7 @@ jsScrollIntoView(elmntClinicianNotes);
             WebElement btnEdit = waitForElement(By.xpath(elmntCovidEdit.replace("<<REPLACEMENT>>", strCreatedRecord)));
             waitForElement(btnEdit);
             System.out.println(">>>>>>btnEdit"+btnEdit);
-            jsClick(btnEdit);
+            click(btnEdit);
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {

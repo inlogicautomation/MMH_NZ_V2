@@ -8,8 +8,8 @@ Feature: My Health Centre
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address                 | Password                         |
-      | &EMAIL_FOR_MY_HEALTH_RECORDS& | &PASSWORD_FOR_MY_HEALTH_RECORDS& |
+      | Email Address       | Password                         |
+      | &EMAIL FOR MESSAGE& | &PASSWORD_FOR_MY_HEALTH_RECORDS& |
 
 #    Note: {
 #    412:Login into ManageMyHealth as a Patient
@@ -22,7 +22,7 @@ Feature: My Health Centre
   @WEB @MY_HEALTH_CENTRE @SANITY_PATH
   Scenario Template: S2- Existing Patient view the My Health Centre details.
 
-    Given As a Existing user I am on HomePage and I click to Practice "<Name>" under the My health menu
+    Given As a Existing user I am on HomePage and I click to Practice "<Names>" under the My health menu
     And I am on HomePage and I click Notice board under the My health menu
     And I am on HomePage and I click connect health centre under the My health menu
     When I click Connect a health centre
@@ -30,8 +30,8 @@ Feature: My Health Centre
     And I log out from Patient Portal
 
     Examples:
-      | Name                 |
-      | &HEALTH_CENTRE_NAME& |
+      | Name                 | Names          |
+      | &HEALTH_CENTRE_NAME& | Automation_Pra |
 
   @WEB @MY_HEALTH_CENTRE @SANITY_PATH
   Scenario Template: S3- User successfully login into Doctor Portal
@@ -64,8 +64,8 @@ Feature: My Health Centre
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address                 | Password                         |
-      | &EMAIL_FOR_MY_HEALTH_RECORDS& | &PASSWORD_FOR_MY_HEALTH_RECORDS& |
+      | Email Address       | Password                         |
+      | &EMAIL FOR MESSAGE& | &PASSWORD_FOR_MY_HEALTH_RECORDS& |
 
 
   @WEB @MY_HEALTH_CENTRE @SANITY_PATH

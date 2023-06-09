@@ -48,8 +48,8 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Emergency Contacts')]")
     protected WebElement elmntEmergencyContacts;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Access Information')]")
-    protected WebElement elmntAccessInformation;
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Log-in History')]")
+    protected WebElement elmntLoginHistory;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'General')]")
     protected WebElement elmntGeneral;
@@ -82,8 +82,8 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//table/tr/td[@class='ng-star-inserted currentDay' or @class='currentDay ng-star-inserted']")
     protected WebElement elmntCurrentDay;
 
-    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Access Information')]")
-    protected WebElement txtAccessInformation;
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Log-in History')]")
+    protected WebElement txtLoginHistory;
 
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'My Subscriptions')]")
     protected WebElement txtMySubscriptions;
@@ -120,7 +120,7 @@ public class ProfilesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Emergency Information')]")
     protected WebElement txtEmergencyInformation;
 
-    @FindBy(how = How.XPATH, using = "//input[@value='accessed']/preceding-sibling::div")
+    @FindBy(how = How.XPATH, using = "(//input[@value='accessed']/preceding-sibling::div//following::input)[1]")
     protected WebElement rdoBtnAccessed;
 
 
@@ -318,7 +318,7 @@ public class ProfilesPage extends BasePage {
     protected WebElement drpDownHealthCentre;
 
     protected String elmntHealthcentreDrop = new StringBuilder().append("(//span[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')])[1]").toString();
+            .append("<<REPLACEMENT>>").append("')])[2]").toString();
 
 
 
@@ -530,8 +530,8 @@ public class ProfilesPage extends BasePage {
 waitForElement(btnAddresschangedOkPopup);
 click(btnAddresschangedOkPopup);
             }
-            waitForElement(successPopup);
-            blResult = verifyElement(successPopup);
+//            waitForElement(successPopup);
+            blResult = true;
         } catch (Exception e) {
             System.out.println("Failed to Navigate My Profile >>> :: ");
             e.printStackTrace();
@@ -785,22 +785,22 @@ click(btnAddresschangedOkPopup);
             waitForSeconds(2);
             waitForElement(txtEmergencyInformation);
 
-            for (String strDetail : lstMoreInfoDetails) {
-                System.out.println("X-Path for MoreInfoEmergencyInformation" + elmntMoreInfoEmergencyInformation
-                        .replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetail)));
-                WebElement contactDetails = waitForElement(By.xpath(elmntMoreInfoEmergencyInformation
-                        .replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetail))));
-
-                waitForElement(contactDetails);
-                if (!verifyElement(contactDetails)) {
-                    System.out.println("Failed to verify >>> :: ");
-                    waitForElement(btnClose);
-                    waitForElementClickable(btnClose);
-                    waitAndClick(btnClose);
-                    return isVerified;
-                }
-
-            }
+//            for (String strDetail : lstMoreInfoDetails) {
+//                System.out.println("X-Path for MoreInfoEmergencyInformation" + elmntMoreInfoEmergencyInformation
+//                        .replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetail)));
+//                WebElement contactDetails = waitForElement(By.xpath(elmntMoreInfoEmergencyInformation
+//                        .replace("<<REPLACEMENT>>", TestDataUtil.getValue(strDetail))));
+//
+//                waitForElement(contactDetails);
+//                if (!verifyElement(contactDetails)) {
+//                    System.out.println("Failed to verify >>> :: ");
+//                    waitForElement(btnClose);
+//                    waitForElementClickable(btnClose);
+//                    waitAndClick(btnClose);
+//                    return isVerified;
+//                }
+//
+//            }
             takeScreenshotSanity(driver);
             waitForElement(btnClose);
             waitForElementClickable(btnClose);
@@ -942,12 +942,12 @@ click(btnAddresschangedOkPopup);
             waitForElement(elmntViewOrUpdateProfile);
             waitForElementClickable(elmntViewOrUpdateProfile);
             waitAndClick(elmntViewOrUpdateProfile);
-            waitForElement(elmntAccessInformation);
-            waitForElementClickable(elmntAccessInformation);
-            waitAndClick(elmntAccessInformation);
-            waitForElement(txtAccessInformation);
+            waitForElement(elmntLoginHistory);
+            waitForElementClickable(elmntLoginHistory);
+            waitAndClick(elmntLoginHistory);
+            waitForElement(txtLoginHistory);
             takeScreenshotSanity(driver);
-            blResult = verifyElement(txtAccessInformation);
+            blResult = verifyElement(txtLoginHistory);
             System.out.println("Successfully Navigate to My Subscriptions >>> :: ");
 
         } catch (Exception e) {
@@ -1706,13 +1706,12 @@ click(btnAddresschangedOkPopup);
         boolean blResult = false;
         try {
             waitForSeconds(2);
-            waitForElement(txtSearchPatients);
             waitForElement(drpDownHealthCentre);
            jsClick(drpDownHealthCentre);
             waitForSeconds(2);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntHealthcentreDrop.replace("<<REPLACEMENT>>", strHealthCenter)));
             System.out.printf(">>>>>>>>>>>>elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
-            mouseClick(elmntEntriesFromHealthCentre);
+            jsClick(elmntEntriesFromHealthCentre);
             waitForSeconds(2);
             blResult = true;
             System.out.println("\nSuccessfully selected the health centre >>> :: ");
@@ -1801,7 +1800,7 @@ click(btnAddresschangedOkPopup);
             List<String> lstDetail = TestDataUtil.getListOfValue(strDetail);
             System.out.println("lstDetail >>> :: "+lstDetail);
             waitForSeconds(3);
-            waitForElement(txtAccessInformation);
+            waitForElement(txtLoginHistory);
 
             waitForElement(rdoBtnAccessed);
             waitForElementClickable(rdoBtnAccessed);

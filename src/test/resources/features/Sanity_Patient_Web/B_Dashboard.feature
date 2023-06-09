@@ -58,18 +58,17 @@ Feature: Dashboard
 
 #    =========================================================================================
 
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_RRP
-  Scenario Template: User Successfully logs in to the MMH Portal.
+  @WEB @DASHBOARD @SANITY_PATH
+  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
     And I enter "<Email Address>" and "<Password>" For Beta
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
-
     Examples:
-      | Email Address   | Password           |
-      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+      | Email Address         | Password                 |
+      | &EMAIL FOR DASHBOARD& | &PASSWORD FOR DASHBOARD& |
+
 
   @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_RRP
   Scenario Outline: S2- Patient to collect the Prescription
@@ -130,7 +129,7 @@ Feature: Dashboard
 
 
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
+  @WEB @MESSAGES @SANITY_PATH @DASHBOARD
   Scenario Template: S3- User successfully login into Doctor Portal
 
     Given As a user Launch the "<V1 Portal>"
@@ -157,17 +156,17 @@ Feature: Dashboard
       | &SENT_MESSAGE_DETAILS_FOR_DASHBOARD_3& |
     And I log out from Doctor Portal
 
-
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_MESSAGES
-  Scenario Template: S1- User Successfully logs in to the V2 Portal.
+  @WEB @DASHBOARD @SANITY_PATH
+  Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
     And I enter "<Email Address>" and "<Password>" For Beta
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address       | Password               |
-      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
+      | Email Address         | Password                 |
+      | &EMAIL FOR DASHBOARD& | &PASSWORD FOR DASHBOARD& |
+
 
 
 #  12	Dashboard	View latest 3 New messages received in new message card
@@ -207,7 +206,7 @@ Feature: Dashboard
 #    These test Case Covered The Scenario NO: S3
 #  }
 
-  @WEB @DASHBOARD @SANITY_PATH12
+  @WEB @DASHBOARD1 @SANITY_PATH12
   Scenario: S2-Existing Patient Verify Medicine details and validate Add, edit, delete, change status, set reminder in My entries Alcohol Details
 
     Given As a Existing user I am on HomePage and I click the My Health Indicators
@@ -251,8 +250,8 @@ Feature: Dashboard
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address | Password   |
-      | &EMAIL&       | &PASSWORD& |
+      | Email Address         | Password   |
+      | &EMAIL FOR DASHBOARD& | &PASSWORD& |
 
   @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS @App
   Scenario Template: Prep- Canceling all the appointments
@@ -299,8 +298,8 @@ Feature: Dashboard
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address | Password   |
-      | &EMAIL&       | &PASSWORD& |
+      | Email Address       | Password   |
+      | &EMAIL FOR MESSAGE& | &PASSWORD& |
 
   @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS @App
   Scenario Template: S6 - Patient Cancel Appointment
@@ -346,8 +345,8 @@ Feature: Dashboard
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address | Password   |
-      | &EMAIL&       | &PASSWORD& |
+      | Email Address         | Password   |
+      | &EMAIL FOR DASHBOARD& | &PASSWORD& |
 
   @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS @App
   Scenario Template: S3 - Patient Booking Appointment - Visit in video slot Appointment

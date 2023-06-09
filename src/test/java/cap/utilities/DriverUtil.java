@@ -561,6 +561,10 @@ public class DriverUtil {
         chromePrefs.put("safebrowsing.enabled", "true");
         //Disable infobar in chrome instance
         options.addArguments("disable-infobars");
+        options.addArguments("--disable-extensions");
+        options.setExperimentalOption("profile.default_content_settings.popups", 0);
+        options.setExperimentalOption("download.prompt_for_download", "false");
+        options.setExperimentalOption("download.default_directory", "/tmp");
         options.setExperimentalOption("useAutomationExtension", false);
         options.setExperimentalOption("excludeSwitches",
                 Collections.singletonList("enable-automation"));

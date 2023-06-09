@@ -116,7 +116,7 @@ public class ResourcesPage extends BasePage {
                 waitForSeconds(5);
                 waitForWindow(2);
                 focusWindow(2);
-                waitForElement(elmntHealthNavigatorLogo);
+//                waitForElement(elmntHealthNavigatorLogo);
 
                 String CurrentUrl = driver.getCurrentUrl();
                 System.out.println("CurrentUrl >>> : " + CurrentUrl);

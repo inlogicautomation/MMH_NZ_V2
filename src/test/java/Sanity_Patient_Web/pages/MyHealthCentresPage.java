@@ -28,7 +28,7 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Link to health centre')]")
     protected WebElement btnConnectAHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'My Health Centres')]")
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'My Health Centres')])[1]")
     protected WebElement elmntMyHealthCentres;
 
     @FindBy(how = How.XPATH, using = "//h5[contains(text(),'Notice Board')]")
@@ -55,9 +55,13 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//div[contains(text(),'GP')]//preceding-sibling::div/div[@class='mat-radio-outer-circle'])[1]")
     protected WebElement rdoBtnGP;
 
+    @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Health Centre')]//preceding-sibling::div/div[@class='mat-radio-outer-circle'])[1]")
+    protected WebElement rdoBtnHealthCentre;
+
     @FindBy(how = How.XPATH, using = "//input[@placeholder='Search for Health Centre']")
     protected WebElement txtBoxSearchForHealthCentre;
 
+    protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Overview')]")
     protected WebElement elmntOverview;
 
@@ -230,12 +234,14 @@ public class MyHealthCentresPage extends BasePage {
         try {
             waitForSeconds(3);
 //            clickGP();
-            jsClick(rdoBtnGP);
+//            jsClick(rdoBtnGP);
+            jsClick(rdoBtnHealthCentre);
             System.out.println("strHealthCentre >>> "+strHealthCentre);
             waitForElement(txtBoxSearchForHealthCentre);
             waitForElementClickable(txtBoxSearchForHealthCentre);
             enterValue(txtBoxSearchForHealthCentre, strHealthCentre);
-            waitForSeconds(7);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(5);
 
 //            System.out.println("\nX-path for address >>> :: "+healthCentre.replace("<<REPLACEMENT>>",strHealthCentre));
 //            WebElement HealthCentre=waitForElement(By.xpath(healthCentre.replace("<<REPLACEMENT>>",strHealthCentre)));

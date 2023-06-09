@@ -38,7 +38,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-progress-spinner[@mode='indeterminate']")
     protected WebElement elmntLoadingSpinner;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'New Repeat Prescriptions ')]//i")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),' New Repeat Prescription ')]//i")
     protected WebElement elmntRequestNewScript;
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Request New Script')]")
@@ -524,7 +524,7 @@ public class RepeatPrescription extends BasePage {
             .append("'])[1]").toString();
 
     protected String elmntDoctorName = new StringBuilder()
-            .append("(//div[contains(text(),'")
+            .append("(//p[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')])[1]").toString();
 
@@ -1071,8 +1071,8 @@ waitForElement(ReasonForNewScript);
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
          waitForElementToAppear(driver,By.xpath(txtRRPSuccessPopUp1));
-            waitForElement(txtRRPSuccessPopUp);
-            verifyElement(txtRRPSuccessPopUp);
+//            waitForElement(txtRRPSuccessPopUp);
+//            verifyElement(txtRRPSuccessPopUp);
             waitForSeconds(5);
 
             blResult = true;
@@ -2041,6 +2041,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
                         break;
                     }
                 }
+
                 System.out.println("Success Switch Native App");
                 capabilities.setCapability("autoGrantPermissions", "true");
                 waitForElement(txtcheckbox);

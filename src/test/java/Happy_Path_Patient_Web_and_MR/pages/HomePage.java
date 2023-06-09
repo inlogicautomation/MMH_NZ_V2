@@ -213,15 +213,23 @@ public class HomePage extends BasePage {
         System.out.println("===============>WindowsCount::" + WindowsCount);
         if (WindowsCount == 2) {
             focusWindow(1);
-            if (verifyElement(txtProviderPortalWelcomePage)){
+            if (verifyElement(txtPatientWelcomePage)){
                 System.out.println("User here in Provider home page");
             }else{
+                driver.manage().deleteAllCookies();
                 visit(TestDataUtil.getValue("&URL&"));
             }
         }
         if (WindowsCount == 1) {
-            visit(TestDataUtil.getValue("&URL&"));
-            takeScreenshot(driver);
+            if (verifyElement(txtPatientWelcomePage)) {
+                System.out.println("User here in Provider home page");
+                takeScreenshot(driver);
+            }
+            else{
+                driver.manage().deleteAllCookies();
+                visit(TestDataUtil.getValue("&URL&"));
+                driver.manage().deleteAllCookies();
+            }
 
         }
     }
@@ -291,15 +299,18 @@ public class HomePage extends BasePage {
 //            System.out.println("===============>WindowsCount::" + WindowsCount);
 
                 if (WindowsCount == 1) {
+                    driver.manage().deleteAllCookies();
+                    waitForSeconds(10);
                     waitForElement(elmntLoginBtn);
                     click(elmntLoginBtn);
+                    driver.manage().deleteAllCookies();
                     blResult =true;
                 }
                 if (WindowsCount == 2) {
                     focusWindow(1);
                     System.out.println("user in Provider Home Page");
                 }
-//            System.out.println("Try Block 1 executed");
+            System.out.println("Try Block 1 executed");
             } catch (Exception e) {
                 try {
                     waitForElementClickable(elmntProfile);
@@ -566,7 +577,7 @@ public class HomePage extends BasePage {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElement(elmntDashboard);
         waitForElement(btnAppointmentExpand);
-        jsClick(btnAppointmentExpand);
+        click(btnAppointmentExpand);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElement(elmntFutureAppointment);
         return verifyElement(elmntFutureAppointment);
@@ -640,7 +651,7 @@ if(!verifyElement(txtPatientWelcomePage)){
             click(elmntDashboard);
             waitForSeconds(3);
             jsClick(btnExitApp);
-            waitForSeconds(180);
+            waitForSeconds(300);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }
@@ -648,7 +659,7 @@ if(!verifyElement(txtPatientWelcomePage)){
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForElement(btnExitAppMobile);
             jsClick(btnExitAppMobile);
-            waitForSeconds(180);
+            waitForSeconds(300);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }
@@ -656,7 +667,7 @@ if(!verifyElement(txtPatientWelcomePage)){
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(btnExitAppMobile);
             click(btnExitAppMobile);
-            waitForSeconds(180);
+            waitForSeconds(300);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }

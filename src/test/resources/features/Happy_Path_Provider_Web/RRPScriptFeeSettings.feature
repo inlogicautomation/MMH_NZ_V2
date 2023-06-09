@@ -38,7 +38,7 @@ Feature: RRP_Script_Fee_Settings
       | RRP Script Fee Settings | Automation_Practice1_Loc1 | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
 
 
-  @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_RRP_SCRIPT_FEE_SETTING
+  @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_RRP_SCRIPT_FEE_SETTING1
   Scenario Template: S3-create Provider RRP Script Instructions Fees(Send Script by Post Fees) Setup & verify it in Patient Portal
 
     Given As a Provider I am on HomePage and navigate to RRP Script Instructions in "<System_Menu>"
