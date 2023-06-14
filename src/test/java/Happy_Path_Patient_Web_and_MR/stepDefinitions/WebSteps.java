@@ -2885,6 +2885,9 @@ public class WebSteps {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyMobileReplySentMessage());
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+            demoPageContainer.messagesPage.clickInboxCloseButton();
+        }
     }
 
 

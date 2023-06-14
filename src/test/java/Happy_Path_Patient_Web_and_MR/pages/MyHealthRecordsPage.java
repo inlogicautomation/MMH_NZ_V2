@@ -150,7 +150,7 @@ public class MyHealthRecordsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//span[text()='Summary']")
     protected WebElement elmntSummary;
-    @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-file-export-files']/following::span[text()='Export']")
+    @FindBy(how = How.XPATH, using = "//i[@class='icon-cent-file-export-files']/following::span[text()='Export to PDF']")
     protected WebElement elmntExport;
 
 
@@ -1001,15 +1001,16 @@ public class MyHealthRecordsPage extends BasePage {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         jsScrollIntoView(elmntdashboard);
         waitForElement(elmntdashboard);
-        jsClick(elmntdashboard);
+        click(elmntdashboard);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
     }
 
     public void clickMobileMyHealthRecordsOptionMenu() {
+        jsScrollIntoView(btnMobileMenu);
         waitForElement(btnMobileMenu);
 //        waitForSeconds(2);
-        click(btnMobileMenu);
+        jsClick(btnMobileMenu);
 //        waitForSeconds(2);
 //        jsScrollIntoView(btnMyHealthRecordsExpand);
 //        waitForElementClickable(btnMyHealthRecordsExpand);

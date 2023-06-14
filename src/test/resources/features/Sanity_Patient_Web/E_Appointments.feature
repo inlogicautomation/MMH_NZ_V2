@@ -17,8 +17,8 @@ Feature: Appointments
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address        | Password   |
-      | &EMAIL_APPOINTMENTS& | &PASSWORD& |
+      | Email Address            | Password   |
+      | &EMAIL FOR APPOINTMENTS& | &PASSWORD& |
 
 
   @WEB @SANITY_PATH @SANITY_PATH_APPOINTMENTS
@@ -71,8 +71,8 @@ Feature: Appointments
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address        | Password   |
-      | &EMAIL_APPOINTMENTS& | &PASSWORD& |
+      | Email Address            | Password   |
+      | &EMAIL FOR APPOINTMENTS& | &PASSWORD& |
 
   @WEB @SANITY_PATH @SANITY_PATH_APPOINTMENTS
   Scenario Template: S1 - Patient Cancel Appointment
@@ -148,8 +148,8 @@ Feature: Appointments
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address        | Password   |
-      | &EMAIL_APPOINTMENTS& | &PASSWORD& |
+      | Email Address            | Password   |
+      | &EMAIL FOR APPOINTMENTS& | &PASSWORD& |
 
 #    Note: {
 #    40:Click on video invitations & view grid details of Video invite appointments

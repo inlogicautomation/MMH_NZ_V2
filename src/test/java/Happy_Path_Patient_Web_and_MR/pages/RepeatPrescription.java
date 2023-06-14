@@ -340,10 +340,13 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@id='PxPayAccount2AccountAuth_Logo' and @data-name='PxPayAccount2AccountAuth_Logo']")
     protected WebElement txtAccount2Account;
 
+    @AndroidFindBy(xpath = "(//android.view.View[@text='Available Banks: required'])[2]")
+    protected WebElement txtAvailableBankDropDown;
     @AndroidFindBy(xpath = "//android.widget.CheckBox")
     protected WebElement txtcheckbox;
 
-
+    @AndroidFindBy(xpath = "//android.widget.CheckedTextView[@text='ANZ']")
+    protected WebElement txtAvailableBank;
     @FindBy(how = How.XPATH, using = "//span[text()='Please enter the A2A test credentials:']")
     protected WebElement txtA2ACredentials;
 
@@ -2041,16 +2044,17 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
                 waitForSeconds(2);
                 waitForElement(txtAccount2Account);
                 verifyElement(txtAccount2Account);
-                waitForSeconds(2);
+                waitForSeconds(5);
 //                WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
 //                System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
 //                jsScrollIntoView(selectRdoBtnBank);
 //                waitForElementClickable(selectRdoBtnBank);
 //                jsClick(selectRdoBtnBank);
-                Select A2ABanks  = new Select(driver.findElement(By.name("SelectBank")));
-                A2ABanks.selectByVisibleText("ANZ");
-                System.out.println("Successfully Select RdoBtnBank");
-                waitForSeconds(4);
+//                Select A2ABanks  = new Select(driver.findElement(By.name("SelectBank")));
+//                A2ABanks.selectByVisibleText("ANZ");
+//                System.out.println("Successfully Select RdoBtnBank");
+//                waitForSeconds(4);
+//                jsScrollUp();
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.setCapability("autoGrantPermissions", "true");
                 AppiumDriver appiumDriver = (AppiumDriver) driver;
@@ -2063,7 +2067,18 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
                 }
 
                 System.out.println("Success Switch Native App");
-                capabilities.setCapability("autoGrantPermissions", "true");
+                swipeUp();
+                waitForSeconds(3);
+                swipeUp();
+                waitForSeconds(3);
+                swipeUp();
+                waitForElement(txtAvailableBankDropDown);
+                click(txtAvailableBankDropDown);
+                waitForSeconds(2);
+                waitForElement(txtAvailableBank);
+                click(txtAvailableBank);
+                System.out.println("Successfully Select RdoBtnBank");
+                waitForSeconds(2);
                 waitForElement(txtcheckbox);
                 click(txtcheckbox);
                 System.out.println("Success Select check box");

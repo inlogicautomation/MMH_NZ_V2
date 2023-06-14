@@ -9,7 +9,7 @@ Feature: Repeat Request Prescription
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @RRP1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page

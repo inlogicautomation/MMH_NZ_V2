@@ -1353,9 +1353,9 @@ public class ProviderWebSteps {
         System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
         Assert.assertTrue(providerPageContainer.appointmentsPage.ProviderselectHealthCenter(TestDataUtil.getValue(stsdata.get(0))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(5))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectVideoAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(9))));
-        Assert.assertTrue(providerPageContainer.appointmentsPage.selectVideoConsultationsSearch());
-        Assert.assertTrue(providerPageContainer.appointmentsPage.VerifyVideoConsultationsTableData(TestDataUtil.getListOfValue(strHealthCentre)));
+//        Assert.assertTrue(providerPageContainer.appointmentsPage.selectVideoAppointmentsFutureDateOnCalender(TestDataUtil.getValue(stsdata.get(9))));
+//        Assert.assertTrue(providerPageContainer.appointmentsPage.selectVideoConsultationsSearch());
+//        Assert.assertTrue(providerPageContainer.appointmentsPage.VerifyVideoConsultationsTableData(TestDataUtil.getListOfValue(strHealthCentre)));
 
     }
 

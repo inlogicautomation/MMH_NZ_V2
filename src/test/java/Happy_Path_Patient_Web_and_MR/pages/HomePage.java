@@ -595,11 +595,13 @@ public class HomePage extends BasePage {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(2);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        waitForElementClickable(btnMobileMenu);
+//        waitForElementClickable(btnMobileMenu);
+        waitForElement(btnMobileMenu);
         jsClick(btnMobileMenu);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        jsScrollIntoView(elmntDashboard);
         waitForElement(elmntDashboard);
-        click(elmntDashboard);
+        jsClick(elmntDashboard);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         driver.navigate().refresh();

@@ -781,7 +781,7 @@ public class MessagesPage extends BasePage {
     protected String draftSubjectForMobile = new StringBuilder()
             .append("(//mat-card-title[contains(text(),'")
             .append("<<REPLACEMENT>>")
-            .append("')])[3]")
+            .append("')])[2]")
             .toString();
 
 

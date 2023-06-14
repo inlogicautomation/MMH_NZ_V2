@@ -16,8 +16,8 @@ Feature:MyHealth_Indicators
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address                   | Password           |
-      | &EMAIL FOR MY HEALTH INDICATOR& | &PASSWORD FOR RRP& |
+      | Email Address | Password           |
+      | &EMAIL_MMH&   | &PASSWORD FOR RRP& |
       #Note:{#142:Login as Existing patient & view/click on My Health Indicators
   #143:By default All tab is selected to view Active & Inactive indicators in card
   #144:Click on Active to view all active indicators in card view

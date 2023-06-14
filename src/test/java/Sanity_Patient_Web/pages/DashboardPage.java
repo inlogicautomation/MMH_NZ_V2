@@ -110,6 +110,9 @@ public class DashboardPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Link to health centre')]")
     protected WebElement txtConnectAHealthCentre;
 
+    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Link to health centre')]")
+    protected WebElement txtMyHealthCentresHeader;
+
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashBoard;
 
@@ -334,8 +337,8 @@ click(elmntMyHealthCentre);
             waitForElement(elmntConnectHealthCentre);
             jsClick(elmntConnectHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(txtConnectAHealthCentre);
-            blResult = verifyElement(txtConnectAHealthCentre);
+            waitForElement(txtMyHealthCentresHeader);
+            blResult = verifyElement(txtMyHealthCentresHeader);
             takeScreenshotSanity(driver);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
