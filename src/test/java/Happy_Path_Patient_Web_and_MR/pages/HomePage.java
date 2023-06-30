@@ -216,8 +216,10 @@ public class HomePage extends BasePage {
             if (verifyElement(txtPatientWelcomePage)){
                 System.out.println("User here in Provider home page");
             }else{
+                System.out.println("Else Part ::::::Window Count 2");
                 driver.manage().deleteAllCookies();
                 visit(TestDataUtil.getValue("&URL&"));
+                driver.manage().deleteAllCookies();
             }
         }
         if (WindowsCount == 1) {

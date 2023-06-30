@@ -135,8 +135,8 @@ Feature: Appointments
 #   Then I should see video consultation window with icons "<All_Icons>"
 
     Examples:
-      | Appointment           | Join_Consultation                                 | All_Icons     |
-      | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_JOIN_VIDEO_CONSULTATION& | &VIDEO_ICONS& |
+      | Appointment           | Join_Consultation                | All_Icons     |
+      | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &VIDEO_ICONS& |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S3 - Patient Booking Appointment - Visit in video slot Appointment

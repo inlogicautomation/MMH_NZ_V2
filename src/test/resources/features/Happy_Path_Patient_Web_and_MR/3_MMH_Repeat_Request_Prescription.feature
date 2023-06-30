@@ -18,8 +18,8 @@ Feature: Repeat Request Prescription
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
-      | Email Address   | Password           |
-      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
   @WEB @Mobile @RRP @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Outline: S2- Patient to collect the Prescription

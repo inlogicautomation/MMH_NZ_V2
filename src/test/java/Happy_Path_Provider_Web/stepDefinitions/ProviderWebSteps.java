@@ -24,18 +24,12 @@ public class ProviderWebSteps {
     public void asAProviderIAmOnHomePageAndNavigateToRRPScriptInstructionsIn(String strName) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
-            Assert.assertTrue(providerPageContainer.providerHomePage.clickSystemMenu());
+            Assert.assertTrue(providerPageContainer.providerHomePage.clickSecureMessaging());
             Assert.assertTrue(providerPageContainer.providerHomePage.navigateToRepeatScriptFeeMessageSettings(strName));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
-            Assert.assertTrue(providerPageContainer.providerHomePage.clickMobileSystemMenu());
-            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToMobileRepeatScriptFeeMessageSettings(strName));
-
-        }
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
-            Assert.assertTrue(providerPageContainer.providerHomePage.clickMobileSystemMenu());
+            Assert.assertTrue(providerPageContainer.providerHomePage.clickSecureMessaging());
             Assert.assertTrue(providerPageContainer.providerHomePage.navigateToMobileRepeatScriptFeeMessageSettings(strName));
 
         }
@@ -240,7 +234,7 @@ public class ProviderWebSteps {
     public void AsAProviderIAmOnHomePageAndNavigateToRepeatScriptSettingsIn(String strName) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
         Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
-        Assert.assertTrue(providerPageContainer.providerHomePage.clickSystemMenu());
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickSecureMessaging());
         Assert.assertTrue(providerPageContainer.providerHomePage.navigateToRepeatScriptSettings(strName));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
@@ -1366,6 +1360,173 @@ public class ProviderWebSteps {
             Assert.assertTrue(providerPageContainer.providerHomePage.clickSecureMessaging());
             Assert.assertTrue(providerPageContainer.providerHomePage.navigateToSecureMessages(strName));
         }
+
+
+    }
+
+    @And("I click the Add new Button then select the setup services all details {string}")
+    public void iClickTheAddNewButtonThenSelectTheSetupServicesAllDetails(String strHealthCentre) {
+        List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
+        Assert.assertTrue(providerPageContainer.setupServicesPage.AddNewServices());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectHealthCentre(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCategory(TestDataUtil.getValue(stsdata.get(1))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceName(TestDataUtil.getValue(stsdata.get(2))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCode(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceInitiatedByClinicalRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAppliesToStaffRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRecipientLocation());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRestricttoPatientdefaultlocationNoRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAllowreplyfrompatientsYesRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterDescriptionValue(TestDataUtil.getValue(stsdata.get(4))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectIsChargeablaRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterTeamsandconditionsValue(TestDataUtil.getValue(stsdata.get(5))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectSaveButton());
+    }
+
+
+    @And("I click the Add new Button then select the setup services Staff radio button {string}")
+    public void iClickTheAddNewButtonThenSelectTheSetupServicesStaffRadioButton(String strHealthCentre) {
+        List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
+        Assert.assertTrue(providerPageContainer.setupServicesPage.AddNewServices());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectHealthCentre(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCategory(TestDataUtil.getValue(stsdata.get(1))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceName(TestDataUtil.getValue(stsdata.get(2))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCode(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceInitiatedByClinicalRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAppliesToPatientRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRecipientLocation());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRestricttoPatientdefaultlocationNoRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAllowreplyfrompatientsYesRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterDescriptionValue(TestDataUtil.getValue(stsdata.get(4))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectIsChargeablaRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterTeamsandconditionsValue(TestDataUtil.getValue(stsdata.get(5))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectSaveButton());
+    }
+
+    @And("I navigate to provider portal and verify the Patient message {string}")
+    public void iNavigateToProviderPortalAndVerifyThePatientMessage(String lstMessageDetails) {
+        List<String> lstMessage = TestDataUtil.getListOfValue(lstMessageDetails);
+        System.out.println(">>>>>>>>>>>>>>>>>>>"+lstMessage);
+        Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToInboxMessageForDoctor());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyProvidersetupServiceInboxMessages(TestDataUtil.getValue(lstMessage.get(0))));
+
+    }
+
+    @And("I click the Add new Button then select the setup services Non Clinical {string}")
+    public void iClickTheAddNewButtonThenSelectTheSetupServicesNonClinical(String strHealthCentre) {
+        List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
+        Assert.assertTrue(providerPageContainer.setupServicesPage.AddNewServices());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectHealthCentre(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCategory(TestDataUtil.getValue(stsdata.get(1))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceName(TestDataUtil.getValue(stsdata.get(2))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCode(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceInitiatedByNonClinicalRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAppliesToPatientRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRecipientLocation());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRestricttoPatientdefaultlocationNoRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAllowreplyfrompatientsYesRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterDescriptionValue(TestDataUtil.getValue(stsdata.get(4))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectIsChargeablaRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterTeamsandconditionsValue(TestDataUtil.getValue(stsdata.get(5))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectSaveButton());
+
+
+    }
+
+    @And("I click the Add new Button then select the setup services Patient radio button {string}")
+    public void iClickTheAddNewButtonThenSelectTheSetupServicesPatientRadioButton(String strHealthCentre) {
+        List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
+        Assert.assertTrue(providerPageContainer.setupServicesPage.AddNewServices());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectHealthCentre(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCategory(TestDataUtil.getValue(stsdata.get(1))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceName(TestDataUtil.getValue(stsdata.get(2))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCode(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceInitiatedByClinicalRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAppliesToPatientRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRecipientLocation());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRestricttoPatientdefaultlocationNoRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAllowreplyfrompatientsYesRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterDescriptionValue(TestDataUtil.getValue(stsdata.get(4))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectIsChargeablaRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterTeamsandconditionsValue(TestDataUtil.getValue(stsdata.get(5))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectSaveButton());
+    }
+
+    @And("I click the Add new Button then select the setup services Non Clinical to Patient Staff {string}")
+    public void iClickTheAddNewButtonThenSelectTheSetupServicesNonClinicalToPatientStaff(String strHealthCentre) {
+        List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
+        Assert.assertTrue(providerPageContainer.setupServicesPage.AddNewServices());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectHealthCentre(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCategory(TestDataUtil.getValue(stsdata.get(1))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceName(TestDataUtil.getValue(stsdata.get(2))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCode(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceInitiatedByNonClinicalRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAppliesToStaffRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAppliesToStaffRadioButtonClickClinicalstaff());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRecipientLocation());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRestricttoPatientdefaultlocationNoRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAllowreplyfrompatientsYesRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterDescriptionValue(TestDataUtil.getValue(stsdata.get(4))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectIsChargeablaRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterTeamsandconditionsValue(TestDataUtil.getValue(stsdata.get(5))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectSaveButton());
+    }
+
+    @And("As a user I am on Doctor portal homepage and Navigate to Provider inbox {string}")
+    public void asAUserIAmOnDoctorPortalHomepageAndNavigateToProviderInbox(String strHealthCentre) {
+        List<String>lstMessageDetails=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+lstMessageDetails);
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.navigateToInboxMessageForDoctor());
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyInboxMessages(TestDataUtil.getValue(lstMessageDetails.get(5))));
+
+    }
+
+    @And("I click the Add new Button then select the setup services Do Not Allow to patient to Reply  {string}")
+    public void iClickTheAddNewButtonThenSelectTheSetupServicesDoNotAllowToPatientToReply(String strHealthCentre) {
+        List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
+        Assert.assertTrue(providerPageContainer.setupServicesPage.AddNewServices());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectHealthCentre(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCategory(TestDataUtil.getValue(stsdata.get(1))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceName(TestDataUtil.getValue(stsdata.get(2))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCode(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceInitiatedByClinicalRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAppliesToStaffRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRecipientLocation());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRestricttoPatientdefaultlocationNoRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAllowreplyfrompatientsNoRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterDescriptionValue(TestDataUtil.getValue(stsdata.get(4))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectIsChargeablaRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterTeamsandconditionsValue(TestDataUtil.getValue(stsdata.get(5))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectSaveButton());
+
+    }
+
+    @And("I click the Add new Button then select the setup services Restrict to patient default location {string}")
+    public void iClickTheAddNewButtonThenSelectTheSetupServicesRestrictToPatientDefaultLocation(String strHealthCentre) {
+        List<String>stsdata=TestDataUtil.getListOfValue(strHealthCentre);
+        System.out.println(">>>>>>>>>>>>stsdata"+stsdata);
+        Assert.assertTrue(providerPageContainer.setupServicesPage.AddNewServices());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectHealthCentre(TestDataUtil.getValue(stsdata.get(0))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCategory(TestDataUtil.getValue(stsdata.get(1))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceName(TestDataUtil.getValue(stsdata.get(2))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceCode(TestDataUtil.getValue(stsdata.get(3))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectServiceInitiatedByClinicalRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAppliesToPatientRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRecipientLocation());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectRestricttoPatientdefaultlocationNoRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectAllowreplyfrompatientsNoRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterDescriptionValue(TestDataUtil.getValue(stsdata.get(4))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectIsChargeablaRadioButton());
+        Assert.assertTrue(providerPageContainer.setupServicesPage.EnterTeamsandconditionsValue(TestDataUtil.getValue(stsdata.get(5))));
+        Assert.assertTrue(providerPageContainer.setupServicesPage.SelectSaveButton());
 
 
     }

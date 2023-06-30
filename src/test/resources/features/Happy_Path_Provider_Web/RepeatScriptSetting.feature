@@ -21,7 +21,7 @@ Feature: Repeat Script Setting
       | System_Menu             | Details                            |
       | RRP Script Fee Settings | &RRP_SCRIPT_INSTRUCTIONS_SETTINGS& |
 
-  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING1
+  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING
   Scenario Outline: S2- RRP Script Settings Default Provider - Rule A
     Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
     And I click the edit button and changing the data as per Rule A"<Details>"
@@ -31,7 +31,7 @@ Feature: Repeat Script Setting
       | System_Menu            | Details                       |
       | Repeat Script Settings | &REPEAT_SCRIPT_SETTINGS_DATA& |
 
-  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING1
+  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING
   Scenario Outline: S3- RRP Script Settings Default Provider - Rule B
     Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
     And I click the edit button and changing the data as per Rule B"<Details>"

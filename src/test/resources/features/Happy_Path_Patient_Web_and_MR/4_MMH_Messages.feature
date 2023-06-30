@@ -18,8 +18,8 @@ Feature: Messages
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
-      | Email Address       | Password               |
-      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
   @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: S1- Patient Sending Message
@@ -57,7 +57,7 @@ Feature: Messages
 
     Examples:
       | V1 Portal | Email Address      | Password              |
-      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+      | &URL&     | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
   @WEB @MESSAGES @HAPPY_PATH
   Scenario Template: S3- Preparation for Received Message, Sending a EMail to the Patient from provider login
@@ -116,7 +116,7 @@ Feature: Messages
 
     Examples:
       | V1 Portal | Email Address      | Password              |
-      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+      | &URL&     | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
   @WEB @MESSAGES @HAPPY_PATH
   Scenario Template: S5- Preparation for Group Message, Sending a Group of E-Mail's to the Patient from provider login
@@ -139,8 +139,8 @@ Feature: Messages
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
-      | Email Address       | Password               |
-      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
   @WEB @MESSAGES @HAPPY_PATH
   Scenario Template: S5-  User verifies the Patient Group Message
@@ -208,7 +208,7 @@ Feature: Messages
 
     Examples:
       | V1 Portal | Email Address      | Password              |
-      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+      | &URL&     | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
   @WEB @HAPPY_PATH @MESSAGES
   Scenario Template: S10- Patient verifies the Automatic Reply Messages.
@@ -232,8 +232,8 @@ Feature: Messages
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
-      | Email Address       | Password               |
-      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
   @WEB @MESSAGES @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Outline: S9- Patient Out Of Office Settings
@@ -292,8 +292,8 @@ Feature: Messages
     Then I should see user successfully logs in to the MMH portal
 
     Examples:
-      | Email Address       | Password               |
-      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 
   @WEB @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE

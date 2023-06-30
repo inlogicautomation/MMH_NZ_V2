@@ -84,7 +84,7 @@ public class RepeatScriptSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'Restrict to Named Provider in each Location')]")
     protected WebElement radioBtnRestrictToNamedProviderOption;
 
-    @FindBy(how = How.XPATH, using = "//mat-radio-button[@class='mat-radio-button mat-accent mat-radio-checked']//*[normalize-space(text())='Restrict to Named Provider in each Location']")
+    @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Restrict to Named Provider in each Location')]//preceding::input)[3]")
     protected WebElement selectedRadioBtnRestrictToNamedProviderOption;
 
     @FindBy(how = How.XPATH, using = "//mat-radio-button[@class='mat-radio-button mat-radio-checked mat-accent']//*[contains(text(),'Rule A : No Restrictions')]")
@@ -629,14 +629,11 @@ public class RepeatScriptSettingPage extends BasePage {
     public boolean selectOtherReqDataToRestrictNameAndLocation() {
         boolean blResult = false;
         try {
-            if (verifyElement(selectedRadioBtnRestrictToNamedProviderOption)) {
-                blResult = verifyElement(selectedRadioBtnRestrictToNamedProviderOption);
-                System.out.println("Selected the option Restrict to Named Provider in each Location from IF Statment");
-            } else {
-                waitForElementClickable(radioBtnRestrictToNamedProviderOption);
-                blResult = click(radioBtnRestrictToNamedProviderOption);
+                waitForElementClickable(selectedRadioBtnRestrictToNamedProviderOption);
+                 jsClick(selectedRadioBtnRestrictToNamedProviderOption);
+                 blResult=true;
                 System.out.println("Selected the option Restrict to Named Provider in each Location ");
-            }
+
         } catch (Exception e) {
             System.out.println("sending RRP Requests default option is not selected >>> :: ");
             e.printStackTrace();
@@ -1786,7 +1783,7 @@ public class RepeatScriptSettingPage extends BasePage {
 //            waitForPresenceOfElement(By.xpath("//div[@role='listbox']"));
             WebElement ddlProvider = waitForElement(By.xpath(selectProvider.replace("<<REPLACEMENT>>", strProvider.get(2))));
             click(ddlProvider);
-            String providerName = dropdownProvider.getText();
+//            String providerName = dropdownProvider.getText();
 //            if (providerName.equals(strProvider)) {
 //                System.out.println("Both provider names are Same");
 //            }
@@ -1795,7 +1792,7 @@ public class RepeatScriptSettingPage extends BasePage {
 //            waitForPresenceOfElement(By.xpath("//div[@role='listbox']"));
             WebElement ddlProvider2 = waitForElement(By.xpath(selectProvider.replace("<<REPLACEMENT>>", strProvider.get(3))));
             click(ddlProvider2);
-            String providerName2 = dropdownProvider2.getText();
+//            String providerName2 = dropdownProvider2.getText();
 //            if (providerName2.equals(strProvider)) {
 //                System.out.println("Both provider names are Same");
 //            }

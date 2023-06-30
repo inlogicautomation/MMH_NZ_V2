@@ -59,7 +59,7 @@ public class ProviderHomePage extends BasePage {
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
-    @FindBy(xpath = "(//span[contains(text(),'Systems Menu')]//following::mat-icon)[1]")
+    @FindBy(xpath = "(//span[contains(text(),'Setup Modules')]//following::mat-icon)[1]")
     protected WebElement elmtSystemsMenuExpandIcon;
 
     @FindBy(xpath = "(//img[@alt='Manage My Health'])[3]")
@@ -476,7 +476,10 @@ public class ProviderHomePage extends BasePage {
 //                        click(elmntDashboard);
                         System.out.println("user here in patient portal homepage");
                     } else {
+                        System.out.println("Else Part ::::::Window Count 2");
+                        driver.manage().deleteAllCookies();
                         visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                        driver.manage().deleteAllCookies();
                     }
 
                 }
@@ -925,13 +928,14 @@ public class ProviderHomePage extends BasePage {
             jsClick(elmtSecureMessaging);
             jsScrollIntoView(elmtRepeatScriptSettings);
             System.out.println("scrolled ");
+            takeScreenshot(driver);
             if (!verifyElement(elmtRepeatScriptSettings)){
                 click(elmtSecureMessaging);
             }
             jsScrollIntoView(elmtRepeatScriptSettings);
             blResult = verifyElement(elmtRepeatScriptSettings);
         } catch (Exception e) {
-            System.out.println("Failed to click System Menu >>> :: ");
+            System.out.println("Failed to click Secure Messages >>> :: ");
             e.printStackTrace();
         }
         return blResult;

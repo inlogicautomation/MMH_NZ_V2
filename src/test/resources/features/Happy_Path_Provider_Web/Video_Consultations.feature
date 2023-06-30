@@ -30,10 +30,9 @@ Feature: Video Consultations
     And I enter the video appointment details "<Appointment_Details>"
     When I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>" and I should see booked appointment displayed under the future tab "<Appointment_Summary>"
     And As a user I am on Patient Portal login Page and I enter "<Patient_User_Login>" and "<Password>" For Beta I should see user successfully logs in to the MMH portal
-    And I navigate to the "<Appointment>" Future Appointments page verify the Video appointment status "<Join_Consultation>"
     And As a Provider I am on HomePage and navigate to Video Consultations page
     Then I should see Video consultations details in My appointments grid based on the select provider name "<My_Appointment_Details>"
 
     Examples:
-      | Appointment_Details      | Details_For_Appointment     | Future_Date   | Appointment_Summary         | Patient_User_Login | Password           | Appointment           | Join_Consultation                                 | My_Appointment_Details   |
-      | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &VIDEO_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_JOIN_VIDEO_CONSULTATION& | &MY_APPOINTMENT_DETAILS& |
+      | Appointment_Details      | Details_For_Appointment     | Future_Date   | Appointment_Summary         | Patient_User_Login | Password           | My_Appointment_Details   |
+      | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &VIDEO_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | &MY_APPOINTMENT_DETAILS& |

@@ -17,8 +17,8 @@ Feature: My Health Records
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address      | Password              |
-      | &EMAIL_FOR_HEALTH& | &PASSWORD_FOR_HEALTH& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template:S1-Patient to View Health Records & Verify the Prescription Entries from Health Centre Medicine Details
@@ -26,9 +26,9 @@ Feature: My Health Records
     Given As a user I am on HomePage
     When I navigate to the Prescription "<Prescription>" page
     Then I should see all the Prescription Entries From Health center Medicine Details in a grid view
-      | &PRESCRIPTION_TABLE_DATA&   |
+      | &PRESCRIPTION_TABLE_DATA& |
     And I click on the more info icon on the grid & view the details of the prescription added
-      | &PRESCRIPTION_TABLE_DATA&   | &PRESCRIPTION_ICON_DATA&   | &PRESCRIPTION_MOBILE_ICON_DATA&   |
+      | &PRESCRIPTION_TABLE_DATA& | &PRESCRIPTION_ICON_DATA& | &PRESCRIPTION_MOBILE_ICON_DATA& |
     And I navigate to the Homepage
     Examples:
       | Prescription  |
@@ -40,7 +40,7 @@ Feature: My Health Records
     Given As a user I am on HomePage
     And I navigate to the Prescriptions "<Header>"
     And  I should see all the Prescription Entries From Health center Medicine Details in a grid view
-      | &PRESCRIPTION_TABLE_DATA&   |
+      | &PRESCRIPTION_TABLE_DATA& |
     When I select "<Option>" filter dropdown
     And I Create New Record in My Entries in Prescription page
       | &VISITED_NAME&                   |
@@ -76,9 +76,9 @@ Feature: My Health Records
     Given As a user I am on HomePage
     When I navigate to the "<Allergies>"Allergies page dropdown
     Then I should see all the Allergies Entries From Health center Medicine Details in a grid view
-      | &ALLERGIES_TABLE_DATA&   |
+      | &ALLERGIES_TABLE_DATA& |
     And I click on the more info icon on the grid & view the details of the Allergies added
-      | &ALLERGIES_TABLE_DATA&   | &ALLERGIES_ICON_DATA&   | &ALLERGIES_MOBILE_ICON_DATA&   |
+      | &ALLERGIES_TABLE_DATA& | &ALLERGIES_ICON_DATA& | &ALLERGIES_MOBILE_ICON_DATA& |
     And I navigate to the Homepage
 
     Examples:
@@ -91,13 +91,13 @@ Feature: My Health Records
     Given As a user I am on HomePage
     And I navigate to the Allergies "<Header>"
     And I should see all the Allergies Entries From Health center Medicine Details in a grid view
-      | &ALLERGIES_TABLE_DATA&   |
+      | &ALLERGIES_TABLE_DATA& |
     When I select "<Option>" filter dropdown
     And I Create New Record in My Entries in Allergies page
-      | &VISITED_NAME&                |
-      | &VISITED_ALLERGIES_DROPDOWN&  |
-      | &VISITED_ALLERGIES_DROPDOWN1& |
-      | &ADDITIONAL_INFORMATION&      |
+      | &ALLERGIES_NAME&                   |
+      | &VISITED_ALLERGIES_DROPDOWN&       |
+      | &VISITED_ALLERGIES_DROPDOWN1&      |
+      | &ALLERGIES_ADDITIONAL_INFORMATION& |
     Then I should see all the Allergies My Entries Medicine details in more info
       | &MY_ENTRIES_ALLERGIES_DATA& | &ALLERGIES_INFO_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_ALLERGIES& |
     Examples:
@@ -115,8 +115,8 @@ Feature: My Health Records
     Then I should see Patient Record is deleted
     And I navigate to the Homepage
     Examples:
-      | Tab       | Record         | SeverityDrop |
-      | Allergies | &VISITED_NAME& | Low          |
+      | Tab       | Record           | SeverityDrop |
+      | Allergies | &ALLERGIES_NAME& | Low          |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S5-Patient to View Health Records & Verify the Immunisations Entries from Health Centre Medicine Details
@@ -124,9 +124,9 @@ Feature: My Health Records
     Given As a user I am on HomePage
     When I navigate to the "<Immunisations>"Immunisations page dropdown
     Then I should see all the Immunisations Entries From Health center Medicine Details in a grid view
-      | &IMMUNISATIONS_TABLE_DATA&   |
+      | &IMMUNISATIONS_TABLE_DATA& |
     And I click on the more info icon on the grid & view the details of the Immunisations added
-      | &IMMUNISATIONS_TABLE_DATA&   | &IMMUNISATIONS_ICON_DATA&   | &IMMUNISATION_MOBILE_ICON_DATA&   |
+      | &IMMUNISATIONS_TABLE_DATA& | &IMMUNISATIONS_ICON_DATA& | &IMMUNISATION_MOBILE_ICON_DATA& |
     And I navigate to the Homepage
     Examples:
       | Immunisations |
@@ -138,11 +138,11 @@ Feature: My Health Records
     Given As a user I am on HomePage
     And I navigate to the Immunisations "<Header>"
     And I should see all the Immunisations Entries From Health center Medicine Details in a grid view
-      | &IMMUNISATIONS_TABLE_DATA&   |
+      | &IMMUNISATIONS_TABLE_DATA& |
     When I select "<Option>" filter dropdown
     And I Create New Record in Immunisations page
-      | &VISITED_NAME&           |
-      | &ADDITIONAL_INFORMATION& |
+      | &IMMUNISATION_VACCINE_NAME&           |
+      | &IMMUNISATION_ADDITIONAL_INFORMATION& |
     Then I should see all the Immunisations My Entries Medicine details in more info
       | &MY_ENTRIES_IMMUNISATIONS_DATA& | &IMMUNISATION_INFO_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_IMMUNISATIONS& |
     Examples:
@@ -159,8 +159,8 @@ Feature: My Health Records
     And I delete Created "<Record>" in Immunisations page
     Then I should see Patient Record is deleted
     Examples:
-      | Tab           | Record         | AdditionalName    |
-      | Immunisations | &VISITED_NAME& | &EDIT_ADDITIONAL& |
+      | Tab           | Record                      | AdditionalName    |
+      | Immunisations | &IMMUNISATION_VACCINE_NAME& | &EDIT_ADDITIONAL& |
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @test
   Scenario Template: S6-Patient validate edit and delete in My entries COVID Immunisation Details
@@ -189,9 +189,9 @@ Feature: My Health Records
     Given As a user I am on HomePage
     When I navigate to the "<Conditions>" Conditions page Dropdown
     Then I should see all the Conditions Entries From Health center Medicine Details in a grid view
-      | &CLASSIFICATIONS_TABLE_DATA&   |
+      | &CONDITIONS_TABLE_DATA& |
     And I click on the more info icon on the grid & view the details of the Conditions added
-      | &CLASSIFICATIONS_TABLE_DATA&   | &CLASSIFICATIONS_ICON_DATA&   | &CLASSIFICATIONS_MOBILE_ICON_DATA&   |
+      | &CONDITIONS_TABLE_DATA& | &CONDITIONS_ICON_DATA& | &CONDITIONS_MOBILE_ICON_DATA& |
     And I navigate to the Homepage
     Examples:
       | Conditions |
@@ -203,14 +203,14 @@ Feature: My Health Records
     Given As a user I am on HomePage
     And I navigate to the Conditions "<Header>"
     And I should see all the Conditions Entries From Health center Medicine Details in a grid view
-      | &CLASSIFICATIONS_TABLE_DATA&   |
+      | &CONDITIONS_TABLE_DATA& |
     When I select "<Option>" filter dropdown
     And I Create New Record in My Entries in Conditions page
-      | &VISITED_NAME&           |
-      | &VISITED_DROPDOWN&       |
-      | &ADDITIONAL_INFORMATION& |
+      | &CONDITIONS_NAME&                   |
+      | &CONDITIONS_STATUS&                 |
+      | &CONDITIONS_ADDITIONAL_INFORMATION& |
     Then I should see all the Conditions My Entries Medicine details in more info
-      | &DATA_MY_ENTRIES_CLASSIFICATIONS& | &CLASSIFICATIONS_INFO_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLASSIFICATION& |
+      | &MY_ENTRIES_CONDITIONS& | &CONDITIONS_INFO_ICON_DATA& | &MOBILE_MY_ENTRIES_INSIDE_CONDITIONS& |
     Examples:
       | Header     |
       | Conditions |
@@ -227,8 +227,8 @@ Feature: My Health Records
     And I navigate to the Homepage
 
     Examples:
-      | Tab        | Record         | StatusDrop |
-      | Conditions | &VISITED_NAME& | Long Term  |
+      | Tab        | Record            | StatusDrop |
+      | Conditions | &CONDITIONS_NAME& | Long Term  |
 
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
@@ -237,11 +237,11 @@ Feature: My Health Records
     Given As a user I am on HomePage
     When I navigate to the Lab Results page
     And  I should see all the Lab Results Entries From Health center Medicine Details in a grid view
-      | &LAB_RESULT_TABLE_DATA&   |
+      | &LAB_RESULT_TABLE_DATA& |
     Then I click on the more info icon on the grid & view the details of the Lab Results added
-      | &LAB_RESULT_TABLE_DATA&   | &LAB_RESULT_ICON_DATA&   | &LAB_RESULT_MOBILE_ICON_DATA&   |
+      | &LAB_RESULT_TABLE_DATA& | &LAB_RESULT_ICON_DATA& | &LAB_RESULT_MOBILE_ICON_DATA& |
     And I click on the more info icon on the grid & view the details of the Test Results added
-      | &LAB_RESULT_TABLE_DATA&   | &TEST_RESULT_ICON_DATA&   | &TEST_MOBILE_RESULT_ICON_DATA&   |
+      | &LAB_RESULT_TABLE_DATA& | &TEST_RESULT_ICON_DATA& | &TEST_MOBILE_RESULT_ICON_DATA& |
     And I navigate to the Homepage
 
   @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
@@ -250,9 +250,9 @@ Feature: My Health Records
     Given As a user I am on HomePage
     When I navigate to the "<ClinicNotes>"Clinic Notes page dropdown
     Then I should see all the Clinic Notes Entries From Health center Medicine Details in a grid view
-      | &CLINIC_TABLE_DATA&   |
+      | &CLINIC_TABLE_DATA& |
     And I click on the more info icon on the grid & view the details of the Clinic Notes added
-      | &CLINIC_TABLE_DATA&   | &CLINIC_ICON_DATA&   | &CLINIC_MOBILE_ICON_DATA&   |
+      | &CLINIC_TABLE_DATA& | &CLINIC_ICON_DATA& | &CLINIC_MOBILE_ICON_DATA& |
     And I navigate to the Homepage
 
     Examples:
@@ -265,14 +265,14 @@ Feature: My Health Records
     Given As a user I am on HomePage
     And I navigate to the Clinic Notes "<Header>"
     And I should see all the Clinic Notes Entries From Health center Medicine Details in a grid view
-      | &CLINIC_TABLE_DATA&   |
+      | &CLINIC_TABLE_DATA& |
     When I select "<Option>" filter dropdown
     And I Create New Record in My Health Records
-      | &VISITED_NAME&           |
-      | &VISITED_LOCATION&       |
-      | &ADDITIONAL_INFORMATION& |
+      | &CLINIC_NAME&                   |
+      | &CLINIC_LOCATION&               |
+      | &CLINIC_ADDITIONAL_INFORMATION& |
     Then I should see all the Clinic Notes My Entries Medicine details in more info
-      | &DATA_MY_ENTRIES_CLINIC_NOTES_1& | &CLINIC_NOTES_INFO_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLINIC_NOTES_1& |
+      | &DATA_MY_ENTRIES_CLINIC_NOTES& | &CLINIC_NOTES_INFO_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLINIC_NOTES_1& |
 
     Examples:
       | Header          |
@@ -289,8 +289,8 @@ Feature: My Health Records
     Then I should see Patient Record is deleted
     And I navigate to the Homepage
     Examples:
-      | Tab             | Record         | Location        |
-      | Clinician Notes | &VISITED_NAME& | &EDIT_LOCATION& |
+      | Tab             | Record        | Location        |
+      | Clinician Notes | &CLINIC_NAME& | &EDIT_LOCATION& |
 
 #  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
 #  Scenario Template: User Successfully logs in to the MMH Portal.

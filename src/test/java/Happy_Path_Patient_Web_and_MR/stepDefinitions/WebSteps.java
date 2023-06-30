@@ -855,24 +855,16 @@ public class WebSteps {
 
     @Given("As a user I am on beta MMH login Page")
     public void asAUserIAmOnBetaMMHLoginPage() {
-
         demoPageContainer.homePage.visit();
         demoPageContainer.homePage.clickBetaLoginButton();
-
-
-
     }
 
     @Given("As a user I am on Provider Portal login Page")
     public void asAUserIAmOnProviderPortalLoginPage() {
         demoPageContainer.homePage.visit();
-        demoPageContainer.homePage.clickPatientandProviderLoginButton();
-
-
-
+        demoPageContainer.homePage.clickLogin();
 
     }
-
 
     @Then("I should see the Prescription status for Request by card {string}")
     public void iShouldSeeThePrescriptionStatusForRequestByCard(String strMedicationDetails) {
@@ -3359,8 +3351,8 @@ public class WebSteps {
         List<String> lstDetails = TestDataUtil.getListOfValue(strDetail);
         System.out.println("RRPScriptInstructionSetting details >>> :: " + lstDetails);
         Assert.assertTrue(demoPageContainer.repeatPrescription.verifyRestrictedByLocation(lstDetails.get(0)));
-        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyRestrictedByScriptUrgency(lstDetails.get(2)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.verifyRestrictedByProvider(lstDetails.get(1)));
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyRestrictedByScriptUrgency(lstDetails.get(2)));
         Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
     }
 
@@ -4432,10 +4424,73 @@ public class WebSteps {
 
 
     }
+
+    @And("I click Provider Inbox Button then create a compose message to patient {string}")
+    public void iClickProviderInboxButtonThenCreateAComposeMessageToPatient(String strMessageDetails) {
+        Assert.assertTrue(demoPageContainer.messagesPage.navigateToComposeMessageForDoctor());
+        List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
+        System.out.println("List Message Details >>> :: " + lstMessageDetails);
+//       Assert.assertTrue(demoPageContainer.messagesPage.selectHealthCenter(TestDataUtil.getValue(lstMessageDetails.get(0))));
+        Assert.assertTrue(demoPageContainer.messagesPage.ProviderHealthCenter(TestDataUtil.getValue(lstMessageDetails.get(1))));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectHealthCenterLocation(TestDataUtil.getValue(lstMessageDetails.get(1))));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectServiceName(TestDataUtil.getValue(lstMessageDetails.get(2))));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectRole(TestDataUtil.getValue(lstMessageDetails.get(3))));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectTo(TestDataUtil.getValue(lstMessageDetails.get(4))));
+        Assert.assertTrue(demoPageContainer.messagesPage.enterSubjectDoctor(TestDataUtil.getValue(lstMessageDetails.get(5))));
+        Assert.assertTrue(demoPageContainer.messagesPage.enableTermAndConditions());
+        Assert.assertTrue(demoPageContainer.messagesPage.enterBodyMessage(TestDataUtil.getValue(lstMessageDetails.get(6))));
+        Assert.assertTrue(demoPageContainer.messagesPage.attachTheFile(TestDataUtil.getValue(lstMessageDetails.get(7))));
+        Assert.assertTrue(demoPageContainer.messagesPage.clickSendMessageAndNavigateToHomePage());
+
+
+    }
+
+    @Then("I verify received Message {string} in the Patient Inbox")
+    public void iVerifyReceivedMessageInThePatientInbox(String strMessageDetails) {
+        List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
+        System.out.println("List Message Details >>> :: " + lstMessageDetails);
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedMessage(TestDataUtil.getValue(lstMessageDetails.get(0))));
+        }
+
+
+    }
+
+
+    @And("I Click Reply button and Send Reply message to provider {string}")
+    public void iClickReplyButtonAndSendReplyMessageToProvider(String strReplyMessage) {
+        List<String> lstReplyMessage = TestDataUtil.getListOfValue(strReplyMessage);
+        System.out.println("lstReplyMessage >>> :: " + lstReplyMessage);
+        demoPageContainer.messagesPage.clickInboxAttachButton();
+        demoPageContainer.messagesPage.VerifyAttachdowloadSuccessfully();
+        demoPageContainer.messagesPage.DeleteFile();
+        Assert.assertTrue(demoPageContainer.messagesPage.replyToPatientReceivedMessage(lstReplyMessage.get(5), lstReplyMessage.get(6)));
+        Assert.assertTrue(demoPageContainer.messagesPage.clickReplySendMessage());
+    }
+
+    @And("I Click Reply button and verify Excepted Message Displayed")
+    public void iClickReplyButtonAndVerifyExceptedMessageDisplayed() {
+        demoPageContainer.messagesPage.clickInboxAttachButton();
+        demoPageContainer.messagesPage.VerifyAttachdowloadSuccessfully();
+        demoPageContainer.messagesPage.DeleteFile();
+        demoPageContainer.messagesPage.veriflyExceptedPopup();
+    }
+
+    @And("I see the status for Deliver Meds by Pharmacy {string}")
+    public void iSeeTheStatusForDeliverMedsByPharmacy(String strMedicationDetails) {
+        System.out.println("MedicationDetails >>> :" + strMedicationDetails);
+        List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
+        System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+        System.out.println("Size Of lstMedicationDetails >>> " + lstMedicationDetails.size());
+
+        Assert.assertTrue(demoPageContainer.repeatPrescription.verifyThePrescriptionDetailsForDeliverMedsByInCardView(strMedicationDetails));
+
+    }
 }
 
 
   
+
 
 
 

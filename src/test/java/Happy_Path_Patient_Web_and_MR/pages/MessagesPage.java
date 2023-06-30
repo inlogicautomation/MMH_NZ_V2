@@ -127,6 +127,12 @@ public class MessagesPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Inbox')]")
     protected WebElement elmntInboxDoctor;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'This Health Centre is not configured to get message replies. Please contact Health Centre directly')]")
+    protected WebElement elmntDoNotAllowPatientTOReply;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'OK')]")
+    protected WebElement elmntDoNotAllowPatientOkButton;
     @FindBy(how = How.XPATH, using = "//a[contains(text(),' Settings')]")
     protected WebElement elmntDoctorMessageSetting;
 
@@ -278,9 +284,9 @@ public class MessagesPage extends BasePage {
             .toString();
 
     protected String inboxMessageSubject = new StringBuilder()
-            .append("//*[contains(text(),'")
+            .append("(//*[contains(text(),'")
             .append("<<REPLACEMENT>>")
-            .append("')]")
+            .append("')])[1]")
             .toString();
 
     protected String inboxMessageSubjectForMobile = new StringBuilder()
@@ -1218,8 +1224,8 @@ protected WebElement txtWelcome;
     public boolean replyToPatientReceivedMessage(String strSubject, String strMessage) {
         boolean blResult = false;
         try {
-            strRandomSubjectMessage = strSubject.concat(" - ").concat(getRandomString());
-            System.out.println("strRandomSubjectMessage >>> :: " + strRandomSubjectMessage);
+//            strRandomSubjectMessage = strSubject.concat(" - ").concat(getRandomString());
+//            System.out.println("strRandomSubjectMessage >>> :: " + strRandomSubjectMessage);
 //            waitForElement(txtInboxPatient);
 //            waitForElement(btnReply);
 //            waitForElementClickable(btnReply);
@@ -1228,7 +1234,7 @@ protected WebElement txtWelcome;
             waitForElement(txtBoxReplySubject);
             waitForElementClickable(txtBoxReplySubject);
             txtBoxReplySubject.clear();
-            txtBoxReplySubject.sendKeys(strRandomSubjectMessage);
+            txtBoxReplySubject.sendKeys(strSubject);
             waitForSeconds(2);
             jsScrollDown();
 //            jsScrollIntoView(btnReplySendMessage);
@@ -2223,6 +2229,9 @@ protected WebElement txtWelcome;
     public boolean navigateToComposeMessageForDoctor() {
         boolean blResult = false;
         try {
+            jsScrollIntoView(elmntdashboard);
+            waitForElement(elmntdashboard);
+            click(elmntdashboard);
             waitForSeconds(3);
             waitForElement(txtMyHomePage);
 //            waitForElement(elmntsMenu);
@@ -2718,10 +2727,10 @@ protected WebElement txtWelcome;
             jsClick(btnServiceName);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntServiceName.replace("<<REPLACEMENT>>", strFamilyMember)));
-            waitForSeconds(3);
+//            waitForSeconds(3);
             jsScrollIntoView(elmntEntriesFromHealthCentre);
-            waitForElementClickable(elmntEntriesFromHealthCentre);
-            jsClick(elmntEntriesFromHealthCentre);
+            waitForElement(elmntEntriesFromHealthCentre);
+            mouseClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
@@ -3957,6 +3966,25 @@ protected WebElement txtWelcome;
             waitForSeconds(1);
             waitForElement(txtDoctorMessageSetting);
             blResult = verifyElement(txtDoctorMessageSetting);
+            System.out.println("Successfully navigated to messages settings >>>>> :: ");
+        } catch (Exception e) {
+            System.out.println("Failed navigate to messages settings >>>>> :: ");
+            e.printStackTrace();
+
+        }
+        return blResult;
+    }
+
+    public boolean veriflyExceptedPopup() {
+        boolean blResult = false;
+        try {  waitForSeconds(3);
+            jsClick(btnReply);
+            waitForSeconds(2);
+            waitForElement(elmntDoNotAllowPatientTOReply);
+           verifyElement(elmntDoNotAllowPatientTOReply);
+waitForElement(elmntDoNotAllowPatientOkButton);
+click(elmntDoNotAllowPatientOkButton);
+            blResult = verifyElement(txtInboxPage);
             System.out.println("Successfully navigated to messages settings >>>>> :: ");
         } catch (Exception e) {
             System.out.println("Failed navigate to messages settings >>>>> :: ");

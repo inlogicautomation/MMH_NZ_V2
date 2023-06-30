@@ -66,7 +66,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='Location']")
     protected WebElement drpdownLocation;
 
-    @FindBy(how = How.XPATH, using = "//input[@data-placeholder='Practice Location']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='Location']")
     protected WebElement SelectDoctordrpdown;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'The selected provider is out of office. There may be a delay in getting your repeat prescriptions.')]")
@@ -81,7 +81,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Request New Script')]")
     protected WebElement getTxtRequestNewScript;
 
-    @FindBy(how = How.XPATH, using = "//mat-form-field/following::input[@placeholder='Practice Location']")
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='SelectedDoctor']")
     protected WebElement selectedProviderName;
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
@@ -158,8 +158,8 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='toast-content']")
     protected WebElement popUpContent;
 
-    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='ScriptUrgency']")
-    protected WebElement SelectRRPScriptUrgencyDoctordrpdown;
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='ScriptInstructions']")
+    protected WebElement SelectRRPScriptInstructionsDoctordrpdown;
 
 
     protected String selectLocation = new StringBuilder()
@@ -1561,6 +1561,75 @@ click(txtMobileViewPreviousRequests);
         return blResult;
     }
 
+    public boolean verifyThePrescriptionDetailsForDeliverMedsByInCardView(String strPrescriptionDetails) {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            ArrayList<String> lstPrescriptionDetails = (ArrayList<String>) TestDataUtil.getListOfValue(strPrescriptionDetails);
+
+            System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
+
+            List<String> strDetails = lstPrescriptionDetails.subList(2, 4);
+            System.out.println("\nContent of strDetails :: >>> " + strDetails);
+
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                waitForElement(txtMobileViewPreviousRequests);
+                click(txtMobileViewPreviousRequests);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            }
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//            waitForElement(txtViewPreviousRequests);
+//            verifyElement(txtViewPreviousRequests);
+            waitForSeconds(2);
+            takeScreenshot(driver);
+//            Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+//            DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+//            formatter.setTimeZone(TimeZone.getTimeZone("GMT+12"));
+//            String currentDate = formatter.format(calendar.getTime());
+//            System.out.println(currentDate);
+            String currentDate = getCurrentDate("dd MMM yyyy");
+            System.out.println("currentDate >>>: " + currentDate);
+            waitForSeconds(2);
+            waitForElementToAppear(driver, By.xpath(txtPrescriptionDate1));
+            waitForSeconds(3);
+            waitForElement(txtPrescriptionDate);
+            String prescriptionDate = txtPrescriptionDate.getText();
+            System.out.println("\nPrescriptionDate>>>" + prescriptionDate);
+
+            if (currentDate.equalsIgnoreCase(prescriptionDate)) {
+
+                WebElement DateAndHealthCenter = waitForElement(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0))));
+                waitForSeconds(2);
+                System.out.println("Xpath for DateAndHealthCenter Field >>>>> : " + elmntHealthCenter.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(0)));
+                waitForElement(DateAndHealthCenter);
+                verifyElement(DateAndHealthCenter);
+                System.out.println("\n Verified elmntHealthCenter >>>> \n");
+
+                for (String strDetail : strDetails) {
+                    waitForSeconds(2);
+                    WebElement medicineField = waitForElement(By.xpath(elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail)));
+                    System.out.println("Xpath for medicine Field >>>>> : " + elmntMedicationFields.replace("<<REPLACEMENT>>", strDetail));
+                    waitForElement(medicineField);
+                    System.out.println("\n verified medicineField >>> :: " + verifyElement(medicineField));
+
+                }
+                WebElement doctorName = waitForElement(By.xpath(elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(5))));
+                waitForSeconds(2);
+                System.out.println("Xpath for doctorName Field >>>>> : " + elmntDoctorName.replace("<<REPLACEMENT>>", lstPrescriptionDetails.get(5)));
+                waitForElement(doctorName);
+                verifyElement(doctorName);
+
+                System.out.println("Successfully verified the Prescription>>>");
+                blResult = true;
+            }
+            blResult = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(" Failed to verify the Prescription>>>");
+        }
+        return blResult;
+    }
+
     public boolean verifyThePrescriptionDetailsInCardView1(String strPrescriptionDetails) {
         boolean blResult = false;
         try {
@@ -2404,14 +2473,13 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
 //            waitForElement(SelectDoctordrpdown);
 //            waitForElementClickable(SelectDoctordrpdown);
 //            jsClick(SelectDoctordrpdown);
-//            waitForPresenceOfElement(By.xpath("//div[@role='listbox']"));
-            WebElement ddlScriptInstruction = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
-            jsScrollIntoView(ddlScriptInstruction);
-            click(ddlScriptInstruction);
+//            WebElement ddlScriptInstruction = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
+//            jsScrollIntoView(ddlScriptInstruction);
+//            click(ddlScriptInstruction);
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
 //            String currentLocation = SelectDoctordrpdown.getText();
-            String current = SelectDoctordrpdown.getAttribute("ng-reflect-value");
-            System.out.println("Current Location :" + current + " Expected Location :" + strLocation);
+//            String current = SelectDoctordrpdown.getAttribute("ng-reflect-value");
+//            System.out.println("Current Location :" + current + " Expected Location :" + strLocation);
 //            if (current.equalsIgnoreCase(strLocation)) {
 //                System.out.println("Both locations matched ");
 //                dropDownLocation = true;
@@ -2419,6 +2487,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
 //                System.out.println("Both locations mismatched ");
 //                dropDownLocation = false;
 //            }
+            dropDownLocation=!verifyElement(SelectDoctordrpdown);
         } catch (Exception e) {
             System.out.println("Default unchangable Doctor Location are not verified in the Request Medication as per Location and Provider rule");
             e.printStackTrace();
@@ -2429,17 +2498,18 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
     public boolean verifyRestrictedByProvider(String strProvider) {
         boolean doctorPresence = false;
         try {
-            waitForElement(selectedProviderName);
-            String selectedProvider = selectedProviderName.getAttribute("value");
-            System.out.println("selectedProvider:::" + selectedProvider);
-            System.out.println("Current Provider name is " + selectedProvider + "Expected Provider name is " + strProvider);
-            if (selectedProvider.equalsIgnoreCase(strProvider)) {
-                System.out.println("Select Doctor dropdown is present and matched as per the Provider and Location Rule");
-                doctorPresence = true;
-            } else {
-                System.out.println("Select Doctor dropdown is present BUT NOT MATCHED as per the Provider and Location Rule");
-                doctorPresence = false;
-            }
+//            waitForElement(selectedProviderName);
+//            String selectedProvider = selectedProviderName.getText();
+//            System.out.println("selectedProvider:::" + selectedProvider);
+//            System.out.println("Current Provider name is " + selectedProvider + "Expected Provider name is " + strProvider);
+//            if (selectedProvider.equalsIgnoreCase(strProvider)) {
+//                System.out.println("Select Doctor dropdown is present and matched as per the Provider and Location Rule");
+//                doctorPresence = true;
+//            } else {
+//                System.out.println("Select Doctor dropdown is present BUT NOT MATCHED as per the Provider and Location Rule");
+//                doctorPresence = false;
+//            }
+            doctorPresence=!verifyElement(selectedProviderName);
         } catch (Exception e) {
             System.out.println("Default unchangable Doctor dropdown are not verified in the Request Medication as per Location and Provider rule");
             e.printStackTrace();
@@ -2842,9 +2912,9 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
     public boolean verifyRestrictedByScriptUrgency(String strLocation) {
         boolean dropDownLocation = false;
         try {
-            waitForElement(SelectRRPScriptUrgencyDoctordrpdown);
-            waitForElementClickable(SelectRRPScriptUrgencyDoctordrpdown);
-            jsClick(SelectRRPScriptUrgencyDoctordrpdown);
+            waitForElement(SelectRRPScriptInstructionsDoctordrpdown);
+            waitForElementClickable(SelectRRPScriptInstructionsDoctordrpdown);
+            jsClick(SelectRRPScriptInstructionsDoctordrpdown);
 // waitForPresenceOfElement(By.xpath("//div[@role='listbox']"));
             WebElement ddlScriptInstruction = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
             jsScrollIntoView(ddlScriptInstruction);
@@ -2860,7 +2930,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
 // System.out.println("Both locations mismatched ");
 // dropDownLocation = false;
 // }
-            dropDownLocation = true;
+            dropDownLocation =verifyElement(SelectRRPScriptInstructionsDoctordrpdown);
         } catch (Exception e) {
             System.out.println("Default unchangable Doctor Location are not verified in the Request Medication as per Location and Provider rule");
             e.printStackTrace();

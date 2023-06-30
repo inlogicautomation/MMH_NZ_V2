@@ -5,6 +5,7 @@ import cap.utilities.TestDataUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -68,9 +69,11 @@ public class ProviderMessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h1[text()='Sent'])[1]")
     protected WebElement txtSent;
 
-    @FindBy(xpath = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Timprefer!')]")
-    protected WebElement txtWelcome;
-
+    @FindAll({
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp1!')]")
+    })
+    protected WebElement txtProviderPortalWelcomePage;
     @FindBy(xpath = "//a[@class='navbar-brand']")
     protected WebElement elmtMMHLogo;
 
@@ -103,6 +106,18 @@ public class ProviderMessagesPage extends BasePage {
             .append("')])[1]")
             .toString();
 
+    protected String elmntDoctorInboxSubject = new StringBuilder()
+            .append("(//b[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')])[1]")
+            .toString();
+
+    protected String InboxMessageSubject = new StringBuilder()
+            .append("//div[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]")
+            .toString();
+
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'draft saved successfully')]")
     protected WebElement txtDraftSavedSuccessMessagePopup;
 
@@ -121,7 +136,7 @@ public class ProviderMessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome')])[1]")
     protected WebElement txtMyHomePage;
 
-    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Inbox')])[2]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Inbox')]")
     protected WebElement elmntInboxDoctor;
 
     @FindBy(how = How.XPATH, using = "//span[text()='Compose']")
@@ -303,6 +318,29 @@ public class ProviderMessagesPage extends BasePage {
         return blResult;
     }
 
+    public boolean verifyProvidersetupServiceInboxMessages(String strMessage) {
+        boolean blResult = false;
+        try {
+            System.out.println(">>>>>>>>>>>>>"+strMessage);
+            waitForElement(txtInboxPage);
+            System.out.println(elmntDoctorInboxSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
+            WebElement Subject = waitForElement(By.xpath(elmntDoctorInboxSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
+            waitForElement(Subject);
+            jsClick(Subject);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            System.out.println("X Path-inboxSubject 2 >>> :: " + InboxMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
+            WebElement inboxReceivedSubject = waitForElement(By.xpath(InboxMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
+            waitForElement(inboxReceivedSubject);
+            takeScreenshot(driver);
+            blResult = verifyElement(inboxReceivedSubject);
+            System.out.println("Successfully verified sent Message");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to verify sent Message");
+        }
+        return blResult;
+    }
+
     public boolean clickAttachButtonInboxMessages() {
         boolean blResult = false;
         try {
@@ -379,8 +417,9 @@ public class ProviderMessagesPage extends BasePage {
         boolean blResult = false;
         try {
 //            waitForSeconds(3);
-            waitForElement(txtSent);
-            waitForSeconds(3);
+//            waitForElement(txtSent);
+//            waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println(elmntDoctorSentSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
             WebElement Subject = waitForElement(By.xpath(elmntDoctorSentSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             waitForElement(Subject);
@@ -396,16 +435,16 @@ public class ProviderMessagesPage extends BasePage {
     public boolean  navigateToProviderHomepage() {
         boolean blResult = false;
         try{
-            if (isElementDisplayed(txtWelcome)) {
-                verifyElement(txtWelcome);
+            if (isElementDisplayed(txtProviderPortalWelcomePage)) {
+                verifyElement(txtProviderPortalWelcomePage);
                 waitForSeconds(3);
                 waitForElement(elmtMMHLogo);
                 waitForElementClickable(elmtMMHLogo);
                 jsClick(elmtMMHLogo);
                 waitForSeconds(3);
-                blResult = verifyElement(txtWelcome);
+                blResult = verifyElement(txtProviderPortalWelcomePage);
             }
-            if (!isElementDisplayed(txtWelcome)){
+            if (!isElementDisplayed(txtProviderPortalWelcomePage)){
                 focusWindow(1);
                 System.out.println("Successfully switch to doctor portal");
                 waitForElement(elmtMMHLogo);
@@ -413,7 +452,7 @@ public class ProviderMessagesPage extends BasePage {
                 jsClick(elmtMMHLogo);
                 System.out.println("Successfully click Logo");
                 waitForSeconds(3);
-                blResult=verifyElement(txtWelcome);
+                blResult=verifyElement(txtProviderPortalWelcomePage);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -535,4 +574,25 @@ public class ProviderMessagesPage extends BasePage {
         }
         return blResult;
     }
+
+    public boolean verifyInboxMessages(String strMessage) {
+        boolean blResult = false;
+        try {
+//            waitForSeconds(3);
+//            waitForElement(txtSent);
+//            waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            System.out.println(elmntDoctorInboxSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
+            WebElement Subject = waitForElement(By.xpath(elmntDoctorInboxSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
+            waitForElement(Subject);
+            blResult = verifyElement(Subject);
+            System.out.println("Successfully verified sent Message");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to verify sent Message");
+        }
+        return blResult;
+    }
+
+
 }

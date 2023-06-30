@@ -38,7 +38,7 @@ Feature: RRP_Script_Fee_Settings
       | RRP Script Fee Settings | Automation_Practice1_Loc1 | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
 
 
-  @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_RRP_SCRIPT_FEE_SETTING1
+  @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_RRP_SCRIPT_FEE_SETTING
   Scenario Template: S3-create Provider RRP Script Instructions Fees(Send Script by Post Fees) Setup & verify it in Patient Portal
 
     Given As a Provider I am on HomePage and navigate to RRP Script Instructions in "<System_Menu>"
@@ -85,7 +85,7 @@ Feature: RRP_Script_Fee_Settings
     And As a user I am on HomePage and navigate to Repeat Medication Page in Repeat Prescription
     Then I select the Deliver Meds by Pharmacy Medication details"<Medication Details>" "<Patient to Collect Script DropDown Details>"
     And I should see the successful message and I navigate to view history of the Prescription
-    And I see the status for Patient to collect the Prescription"<Verification Medication Details>"
+    And I see the status for Deliver Meds by Pharmacy "<Verification Medication Details>"
     Examples:
       | System_Menu             | Health_Centre             | Medication Details                   | Verification Medication Details                   | Patient to Collect Script DropDown Details   |
       | RRP Script Fee Settings | Automation_Practice1_Loc1 | &DATA FOR DELIVERY MEDS BY PHARMACY& | &VERIFICATION DATA FOR DELIVERY MEDS BY PHARMACY& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
