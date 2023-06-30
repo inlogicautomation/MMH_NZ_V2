@@ -415,8 +415,9 @@ public class HomePage extends BasePage {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
                 jsScrollIntoView(elmntDashboard);
                 verifyElement(elmntDashboard);
+                waitForSeconds(3);
                 waitForElement(elmntDashboard);
-                click(elmntDashboard);
+                jsClick(elmntDashboard);
 //            waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 if (verifyElement(txtWelcome)) {
                     verifyElement(elmntDashboard);
@@ -593,7 +594,7 @@ public class HomePage extends BasePage {
 
     public boolean clickDashBoardForMobile() {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        waitForSeconds(2);
+        waitForSeconds(5);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //        waitForElementClickable(btnMobileMenu);
         waitForElement(btnMobileMenu);

@@ -357,17 +357,18 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'Moved to archive list successfully')]/parent::div/h4[text()='Success!']")
     protected WebElement txtSuccessForArchive;
 
-    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Moved to inbox successfully')]/parent::div/h4[text()='Success!']")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Moved to Inbox successfully')]/parent::div/h4[text()='Success!']")
     protected WebElement txtSuccessForMoveToSentFromArchive;
 
-    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Draft(s) Deleted successfully')]/parent::div/h4[text()='Success!']")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Draft(s) deleted successfully')]/parent::div/h4[text()='Success!']")
     protected WebElement txtSuccessForDraftDelete;
 
     @FindBy(how = How.XPATH, using = "//span[text()='YES']")
     protected WebElement btnYesForDeleteDraftMessage;
 
-    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Moved to inbox successfully')]/parent::div/h4[text()='Success!']")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Moved to Inbox successfully')]/parent::div/h4[text()='Success!']")
     protected WebElement txtSuccessForUndoArchive;
+
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Compose Message')]/ancestor::div/h3[contains(text(),'Start talking with doctors')]")
     protected WebElement verifyInboxEmpty;

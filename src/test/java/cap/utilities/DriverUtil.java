@@ -478,6 +478,17 @@ public class DriverUtil {
         options.setExperimentalOption("excludeSwitches",
                 Collections.singletonList("enable-automation"));
         options.setExperimentalOption("prefs", chromePrefs);
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("platformName", "Android");
+        capabilities.setCapability("deviceName", "Galaxy M53");
+        capabilities.setCapability("browser", "Chrome");
+        capabilities.setCapability("real_mobile", "true");
+        capabilities.setCapability("autoGrantPermissions", "true");
+        capabilities.setCapability("disable-popup-blocking", "true");
+        capabilities.setCapability("autoDismissAlerts", true);
+        capabilities.setCapability("unicodeKeyboard", true);
+        capabilities.setCapability("resetKeyboard", true);
+
 
         DesiredCapabilities cap = DesiredCapabilities.chrome();
         cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);

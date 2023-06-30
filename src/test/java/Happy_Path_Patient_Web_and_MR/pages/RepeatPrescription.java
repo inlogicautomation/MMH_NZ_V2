@@ -320,6 +320,11 @@ public class RepeatPrescription extends BasePage {
     protected String btnBackPaymentConfirmation1 = "//h1[contains(text(),'Payment Confirmation')]/i";
 
 
+    @AndroidFindBy(xpath = "(//android.view.View[@text='Available Banks: required'])[2]")
+    protected WebElement txtAvailableBankDropDown;
+
+    @AndroidFindBy(xpath = ".//android.widget.Button[@text='Save']")
+    protected WebElement txtCardPopup;
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Repeat Prescriptions')]")
     protected WebElement txtViewPreviousRequests;
 
@@ -340,8 +345,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@id='PxPayAccount2AccountAuth_Logo' and @data-name='PxPayAccount2AccountAuth_Logo']")
     protected WebElement txtAccount2Account;
 
-    @AndroidFindBy(xpath = "(//android.view.View[@text='Available Banks: required'])[2]")
-    protected WebElement txtAvailableBankDropDown;
+
     @AndroidFindBy(xpath = "//android.widget.CheckBox")
     protected WebElement txtcheckbox;
 
@@ -732,6 +736,42 @@ public class RepeatPrescription extends BasePage {
     public boolean selectHealthCentreLocation(String strLocation) {
         boolean blResult = false;
         try {
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("autoGrantPermissions", "true");
+                capabilities.setCapability("platformName", "Android");
+                capabilities.setCapability("deviceName", "Galaxy M53");
+                capabilities.setCapability("browser", "Chrome");
+                capabilities.setCapability("real_mobile", "true");
+                capabilities.setCapability("autoGrantPermissions", "true");
+                capabilities.setCapability("disable-popup-blocking", "true");
+                capabilities.setCapability("autoDismissAlerts", true);
+                capabilities.setCapability("unicodeKeyboard", true);
+                capabilities.setCapability("resetKeyboard", true);
+                AppiumDriver appiumDriver = (AppiumDriver) driver;
+                Set<String> contextNames = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames) {
+                    if (strContextName.contains("NATIVE_APP")) {
+                        appiumDriver.context("NATIVE_APP");
+                        break;
+                    }
+                }
+
+                if (verifyElement(txtCardPopup)) {
+                    waitForElement(txtCardPopup);
+                    click(txtCardPopup);
+                }
+
+                System.out.println("Success Select SAVE Button");
+                Set<String> contextNames1 = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames1) {
+                    if (strContextName.contains("CHROMIUM")) {
+                        appiumDriver.context("CHROMIUM");
+                        break;
+                    }
+                }
+
+            }
             if (isElementDisplayed(VeriflyOutOfOfficePopup)){
                 jsClick(ClickOutOfOfficePopupOkButton);
             }
@@ -1213,6 +1253,42 @@ waitForElement(ReasonForNewScript);
             System.out.println("Contents of list >>>::" + lstPrescriptionDetails);
             List<String> strDetails = lstPrescriptionDetails.subList(2, 5);
             System.out.println("\nContent of strDetails :: >>> " + strDetails);
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("autoGrantPermissions", "true");
+                capabilities.setCapability("platformName", "Android");
+                capabilities.setCapability("deviceName", "Galaxy M53");
+                capabilities.setCapability("browser", "Chrome");
+                capabilities.setCapability("real_mobile", "true");
+                capabilities.setCapability("autoGrantPermissions", "true");
+                capabilities.setCapability("disable-popup-blocking", "true");
+                capabilities.setCapability("autoDismissAlerts", true);
+                capabilities.setCapability("unicodeKeyboard", true);
+                capabilities.setCapability("resetKeyboard", true);
+                AppiumDriver appiumDriver = (AppiumDriver) driver;
+                Set<String> contextNames = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames) {
+                    if (strContextName.contains("NATIVE_APP")) {
+                        appiumDriver.context("NATIVE_APP");
+                        break;
+                    }
+                }
+
+                if (verifyElement(txtCardPopup)) {
+                    waitForElement(txtCardPopup);
+                    click(txtCardPopup);
+                }
+
+                System.out.println("Success Select SAVE Button");
+                Set<String> contextNames1 = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames1) {
+                    if (strContextName.contains("CHROMIUM")) {
+                        appiumDriver.context("CHROMIUM");
+                        break;
+                    }
+                }
+
+            }
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
                 waitForElement(txtMobileViewPreviousRequests);
                 click(txtMobileViewPreviousRequests);
@@ -2044,6 +2120,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
                 waitForSeconds(2);
                 waitForElement(txtAccount2Account);
                 verifyElement(txtAccount2Account);
+                jsScrollIntoView(btnNextA2A);
                 waitForSeconds(5);
 //                WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
 //                System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
@@ -2081,6 +2158,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
                 waitForSeconds(2);
                 waitForElement(txtcheckbox);
                 click(txtcheckbox);
+
                 System.out.println("Success Select check box");
                 Set<String> contextNames1 = appiumDriver.getContextHandles();
                 for (String strContextName : contextNames1) {
@@ -2236,6 +2314,8 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
 //            waitForSeconds(4);
             takeScreenshot(driver);
 
+//            WebElement card=driver.findElement(By.xpath(".//android.widget.Button[@text='Save']"));
+//            click(card);
 //            waitForElementClickable(btnBackToRRP);
 //            click(btnBackToRRP);
             driver.switchTo().defaultContent();
@@ -2245,7 +2325,12 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             waitForElementClickable(btnBackPaymentConfirmation);
             jsClick(btnBackPaymentConfirmation);
             waitForSeconds(5);
-
+//            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+//                if (verifyElement(txtCardPopup)) {
+//                    waitForElement(txtCardPopup);
+//                    click(txtCardPopup);
+//                }
+//            }
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            verifyElement(txtViewPreviousRequests);
             blResult = true;

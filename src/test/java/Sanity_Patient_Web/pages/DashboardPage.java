@@ -110,7 +110,7 @@ public class DashboardPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Link to health centre')]")
     protected WebElement txtConnectAHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Link to health centre')]")
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'My Health Centres')]")
     protected WebElement txtMyHealthCentresHeader;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Dashboard')]")

@@ -133,13 +133,13 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Message Settings')]")
     protected WebElement txtDoctorMessageSetting;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Practice Menu']")
+    @FindBy(how = How.XPATH, using = "//span[text()='Communications']")
     protected WebElement elmntPraticeMenuDoctor;
 
 
     //span[text()='Practice Menu']
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Group Message')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Group Message - Email')]")
     protected WebElement elmntGroupMessageDoctor;
 
 
@@ -688,10 +688,10 @@ public class MessagesPage extends BasePage {
 
     protected String btnSentSuccessfullyPopup1 = "//p[contains(text(),'Message sent successfully')]";
 
-    @FindBy(how = How.XPATH, using = "//p[contains(text(),'draft saved successfully')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Draft saved successfully')]")
     protected WebElement btnDraftSuccessfullyPopup;
 
-    protected String btnDraftSuccessfullyPopup1 = "//p[contains(text(),'draft saved successfully')]";
+    protected String btnDraftSuccessfullyPopup1 = "//p[contains(text(),'Draft saved successfully')]";
 
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'File downloaded successfully')]")
     protected WebElement btnAttachdowloadSuccessfullyPopup;
@@ -1515,6 +1515,8 @@ protected WebElement txtWelcome;
                 swipeUpOutOfSetting();
                 waitForElement(txtOutofOfficeSettingMessage);
                 waitForSeconds(2);
+                txtOutofOfficeSettingMessage.click();
+                waitForElement(txtOutofOfficeSettingMessage);
                 enterValueRealDevice(txtOutofOfficeSettingMessage, strMessage);
                 Set<String> contextNames1 = appiumDriver.getContextHandles();
                 for (String strContextName : contextNames1) {
@@ -1624,8 +1626,15 @@ protected WebElement txtWelcome;
                 System.out.println("Success Switch Native App");
                 capabilities.setCapability("autoGrantPermissions", "true");
                 swipeUp();
+                waitForSeconds(4);
                 waitForElement(txtSignatureSettingMessage);
+                txtSignatureSettingMessage.click();
                 waitForSeconds(2);
+//                driver.switchTo().activeElement().clear();
+//                waitForSeconds(2);
+//                txtSignatureSettingMessage.click();
+//                waitForSeconds(2);
+//                driver.switchTo().activeElement().sendKeys(strMessage);
                 enterValueRealDevice(txtSignatureSettingMessage, strMessage);
                 Set<String> contextNames1 = appiumDriver.getContextHandles();
                 for (String strContextName : contextNames1) {
@@ -1634,6 +1643,7 @@ protected WebElement txtWelcome;
                         break;
                     }
                 }
+//                takeScreenshot(driver);
                 blResult = true;
             }
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
@@ -1666,7 +1676,7 @@ protected WebElement txtWelcome;
                 driver.switchTo().activeElement().sendKeys(strMessage);
                 waitForSeconds(2);
                 takeScreenshot(driver);
-                waitForSeconds(2);
+
                 System.out.println("Automatic reply Message was Entered successfully >>> ::");
                 blResult = true;
                 driver.switchTo().parentFrame();
@@ -1779,6 +1789,7 @@ protected WebElement txtWelcome;
                 System.out.println("Success Switch Native App");
                 capabilities.setCapability("autoGrantPermissions", "true");
                 swipeUp();
+                waitForSeconds(4);
                 waitForElement(txtSignatureSettingMessage);
                 waitForSeconds(2);
                 enterValueRealDevice(txtSignatureSettingMessage, strMessage);
@@ -2803,6 +2814,8 @@ protected WebElement txtWelcome;
 //            waitForElement(txtMessage);
 //            waitForSeconds(2);
             click(txtMessage);
+            waitForSeconds(3);
+            txtMessage.clear();
             waitForSeconds(2);
             enterValueRealDevice(txtMessage, strConditionName);
             Set<String> contextNames1 = appiumDriver.getContextHandles();

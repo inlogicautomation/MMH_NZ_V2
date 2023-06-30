@@ -384,6 +384,9 @@ public class AppointmentsPage extends BasePage {
     protected String elmntAppointmentDetail = new StringBuilder().append("//p[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
 
+    @AndroidFindBy(xpath = ".//android.widget.Button[@text='Save']")
+    protected WebElement txtCardPopup;
+
     protected String elmntAppointmentDetailInFutureAppoinments = new StringBuilder().append("//mat-card//following-sibling::div//mat-card-title[contains(text(),'")
             .append("<<REPLACEMENT1>>")
             .append("')]/ancestor::mat-card//child::mat-card-actions//p[contains(text(),'")
@@ -580,7 +583,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h3[contains(text(),' Upcoming Appointments')])[2]")
     protected WebElement elmntMobileUpComingAppointmentHeader;
 
-    @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment'])[1]")
+    @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()=' Cancel Appointment'])[1]")
     protected WebElement elmntCancelAppointments;
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Next')]")
@@ -928,6 +931,7 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(2);
             waitForElementClickable(elmntBookingTypeContainer);
             WebElement elmntTypeOfAppointment = waitForElement(By.xpath(elmntBookingType.replace("<<REPLACEMENT>>", strBookingType)));
+            System.out.println(">>>>>>>"+elmntTypeOfAppointment);
             click(elmntTypeOfAppointment);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
@@ -1433,6 +1437,42 @@ public class AppointmentsPage extends BasePage {
     public boolean verifyDetailsOfCreatedAppointment(List<String> lstDetails, String strFutureDate) {
         boolean blResult = false;
         try {
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("autoGrantPermissions", "true");
+                capabilities.setCapability("platformName", "Android");
+                capabilities.setCapability("deviceName", "Galaxy M53");
+                capabilities.setCapability("browser", "Chrome");
+                capabilities.setCapability("real_mobile", "true");
+                capabilities.setCapability("autoGrantPermissions", "true");
+                capabilities.setCapability("disable-popup-blocking", "true");
+                capabilities.setCapability("autoDismissAlerts", true);
+                capabilities.setCapability("unicodeKeyboard", true);
+                capabilities.setCapability("resetKeyboard", true);
+                AppiumDriver appiumDriver = (AppiumDriver) driver;
+                Set<String> contextNames = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames) {
+                    if (strContextName.contains("NATIVE_APP")) {
+                        appiumDriver.context("NATIVE_APP");
+                        break;
+                    }
+                }
+
+                if (verifyElement(txtCardPopup)) {
+                    waitForElement(txtCardPopup);
+                    click(txtCardPopup);
+                }
+
+                System.out.println("Success Select SAVE Button");
+                Set<String> contextNames1 = appiumDriver.getContextHandles();
+                for (String strContextName : contextNames1) {
+                    if (strContextName.contains("CHROMIUM")) {
+                        appiumDriver.context("CHROMIUM");
+                        break;
+                    }
+                }
+
+            }
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
 //            waitForElement(elmntPaymentProfile);
@@ -3098,7 +3138,7 @@ public class AppointmentsPage extends BasePage {
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(5);    //wait until 'loader'  loading
                 if (verifyElement(elmntCancelAppointments)) {
-                    List<WebElement> btnCancel = driver.findElements(By.xpath("//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment']"));
+                    List<WebElement> btnCancel = driver.findElements(By.xpath("//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()=' Cancel Appointment']"));
                     if (btnCancel.size() > 0) {
                         System.out.println("btnCancel exists and size=>" + btnCancel.size());
                         int page_no = btnCancel.size();
@@ -3112,7 +3152,7 @@ public class AppointmentsPage extends BasePage {
                             System.out.println("TEST");
                             waitForSeconds(5); //wait until 'loader'  loading
                             waitForElement(elmntFutureAppointment);
-                            WebElement cancelButton = driver.findElement(By.xpath("(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment'])[1]"));
+                            WebElement cancelButton = driver.findElement(By.xpath("(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()=' Cancel Appointment'])[1]"));
                             waitForElement(cancelButton);
                             jsScrollIntoView(cancelButton);
                             waitForElement(cancelButton);
@@ -3144,7 +3184,7 @@ public class AppointmentsPage extends BasePage {
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(5);    //wait until 'loader'  loading
                 if (verifyElement(elmntCancelAppointments)) {
-                    List<WebElement> btnCancel = driver.findElements(By.xpath("//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment']"));
+                    List<WebElement> btnCancel = driver.findElements(By.xpath("//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()=' Cancel Appointment']"));
                     if (btnCancel.size() > 0) {
                         System.out.println("btnCancel exists and size=>" + btnCancel.size());
                         int page_no = btnCancel.size();
@@ -3164,7 +3204,7 @@ public class AppointmentsPage extends BasePage {
                             System.out.println("TEST");
                             waitForSeconds(5); //wait until 'loader'  loading
                             waitForElement(elmntMobileUpComingAppointmentHeader);
-                            WebElement cancelButton = driver.findElement(By.xpath("(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()='Cancel Appointment'])[1]"));
+                            WebElement cancelButton = driver.findElement(By.xpath("(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()=' Cancel Appointment'])[1]"));
                             waitForElement(cancelButton);
                             jsScrollIntoView(cancelButton);
                             waitForElement(cancelButton);

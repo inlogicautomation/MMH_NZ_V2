@@ -25,7 +25,7 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Link to Health Centre')]")
     protected WebElement elmntConnectToHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Link to health centre')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Link to Health Centre')]")
     protected WebElement btnConnectAHealthCentre;
 
     @FindBy(how = How.XPATH, using = "(//span[contains(text(),'My Health Centres')])[1]")
@@ -43,7 +43,7 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome')])[1]")
     protected WebElement txtMyHomePage;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Practice Menu')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Communications')]")
     protected WebElement elmntsMenu;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Search Patients')]/ancestor::div[contains(@class,'breadcrumbs')]")
@@ -58,7 +58,7 @@ public class MyHealthCentresPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Health Centre')]//preceding-sibling::div/div[@class='mat-radio-outer-circle'])[1]")
     protected WebElement rdoBtnHealthCentre;
 
-    @FindBy(how = How.XPATH, using = "//input[@placeholder='Search for Health Centre']")
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'My Health Centres')]")
     protected WebElement txtBoxSearchForHealthCentre;
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";

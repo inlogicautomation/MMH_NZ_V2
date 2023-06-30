@@ -384,7 +384,7 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement elmntMobileStartDate;
 
 
-    @FindBy(how = How.XPATH, using = "(//p[text()='Do you know the period of your allergy?']/following::input[@formcontrolname='startDate'])[1]")
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='startDate'])[2]")
     protected WebElement elmntAllergiesStartDate;
 
     @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='dateTaken'])[1]")
@@ -406,7 +406,7 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement elmntMobileEndDate;
 
 
-    @FindBy(how = How.XPATH, using = "(//p[text()='Do you know the period of your allergy?']/following::input[@formcontrolname='endDate'])[1]")
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='endDate'])[2]")
     protected WebElement elmntAllergiesEndDate;
 
     @FindBy(how = How.XPATH, using = "//p[text()='How often?']//following::div[81]")

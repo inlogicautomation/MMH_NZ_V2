@@ -286,6 +286,12 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Close']")
     protected WebElement elmntlabIcon;
 
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'added successfully')]")
+    protected WebElement elmntAddedSuccessfullyPopup;
+
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'COVID Immunisation Details Saved Successfully.')]")
+    protected WebElement elmntCovidImmunisationSuccessfullyPopup;
+
     protected String strRecallsDetails = new StringBuilder()
             .append("//div[@class='tbl-row']//div[contains(@class,'tbl-td')][contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
@@ -478,7 +484,7 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement elmntMobileStartDate;
 
 
-    @FindBy(how = How.XPATH, using = "(//p[text()='Do you know the period of your allergy?']/following::input[@formcontrolname='startDate'])[1]")
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='startDate'])[2]")
     protected WebElement elmntAllergiesStartDate;
 
     @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='dateTaken'])[1]")
@@ -500,7 +506,7 @@ public class MyHealthRecordsPage extends BasePage {
     protected WebElement elmntMobileEndDate;
 
 
-    @FindBy(how = How.XPATH, using = "(//p[text()='Do you know the period of your allergy?']/following::input[@formcontrolname='endDate'])[1]")
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='endDate'])[2]")
     protected WebElement elmntAllergiesEndDate;
 
     @FindBy(how = How.XPATH, using = "//p[text()='How often?']//following::div[81]")
@@ -644,10 +650,10 @@ public class MyHealthRecordsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='immunisationDateGiven'])[2]")
     protected WebElement elmntMobileImmunisationDate;
 
-    @FindBy(how = How.XPATH, using = "(//p[text()='Do you know the period of your allergy?']/following::input[@formcontrolname='endDate'])[4]")
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='endDate'])[5]")
     protected WebElement elmntMobileAllergiesEndDate;
 
-    @FindBy(how = How.XPATH, using = "(//p[text()='Do you know the period of your allergy?']/following::input[@formcontrolname='startDate'])[4]")
+    @FindBy(how = How.XPATH, using = "(//input[@formcontrolname='startDate'])[5]")
     protected WebElement elmntMobileAllergiesStartDate;
 
     protected String elmntEdit = new StringBuilder().append("//td[contains(text(),'")
@@ -714,7 +720,7 @@ public class MyHealthRecordsPage extends BasePage {
 
 
     protected String elmntCovidImmunisationsDrop = new StringBuilder().append("(//span[text()='")
-            .append("<<REPLACEMENT>>").append("'])[1]").toString();
+            .append("<<REPLACEMENT>>").append("'])[2]").toString();
 
     protected String elmntAddAllergicDrop = new StringBuilder().append("//span[@class='mat-option-text'][contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]").toString();
@@ -1236,6 +1242,12 @@ jsScrollIntoView(elmntClinicianNotes);
         waitForElement(elmntExport);
         click(elmntExport);
 //        driver.navigate().back();
+
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            waitForSeconds(5);
+            swipeRight();
+            waitForSeconds(5);
+        }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(5);
@@ -2060,10 +2072,12 @@ jsScrollIntoView(elmntClinicianNotes);
             WebElement elmntMobilePrescriptionMyEntiresData = waitForElement(By.xpath(strMobilePrescriptionsMyEntitesIconLocator
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0).concat(strExecutionID)))
                     .replace("<<REPLACEMENT2>>", TestDataUtil.getValue(currentDate))));
-            waitForSeconds(3);
+            waitForSeconds(5);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntMobilePrescriptionMyEntiresData);
             jsClick(elmntMobilePrescriptionMyEntiresData);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+
             for (String str : lstDetails1) {
                 WebElement elmntMyEntries = waitForElement(By.xpath(strMobilePrescriptionsMyEntriesInfoDetails.replace("<<REPLACEMENT>>", str)));
                 verifyElement(elmntMyEntries);
@@ -3091,6 +3105,10 @@ jsScrollIntoView(elmntClinicianNotes);
         waitForSeconds(3);
         waitForElementClickable(btnCovidSave);
         jsClick(btnCovidSave);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
+        waitForElement(elmntCovidImmunisationSuccessfullyPopup);
+        verifyElement(elmntCovidImmunisationSuccessfullyPopup);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
     }
 
@@ -3255,17 +3273,28 @@ jsScrollIntoView(elmntClinicianNotes);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(elmntSave);
             click(elmntSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForElement(elmntMobileSave);
             click(elmntMobileSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(elmntMobileSave);
             click(elmntMobileSave);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
     }
 
@@ -3341,15 +3370,27 @@ jsScrollIntoView(elmntClinicianNotes);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(elmntAllergiesSave);
             click(elmntAllergiesSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForElement(elmntMobileAllergiesSave);
             click(elmntMobileAllergiesSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(3);
             waitForElement(elmntMobileAllergiesSave);
             jsClick(elmntMobileAllergiesSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
     }
 
@@ -3357,14 +3398,26 @@ jsScrollIntoView(elmntClinicianNotes);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(elmntImmuSave);
             click(elmntImmuSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForElement(elmntMobileImmunisationSave);
             click(elmntMobileImmunisationSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(elmntMobileImmunisationSave);
             click(elmntMobileImmunisationSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
     }
 
@@ -3372,15 +3425,27 @@ jsScrollIntoView(elmntClinicianNotes);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(elmntPrescriptionSave);
             click(elmntPrescriptionSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForElement(elmntMobilePrescriptionSave);
             click(elmntMobilePrescriptionSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(elmntMobilePrescriptionSave);
             click(elmntMobilePrescriptionSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
         }
     }
@@ -3389,14 +3454,26 @@ jsScrollIntoView(elmntClinicianNotes);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(elmntClassificationsSave);
             click(elmntClassificationsSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForElement(elmntMobileClassificationsSave);
             click(elmntMobileClassificationsSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(elmntMobileClassificationsSave);
             click(elmntMobileClassificationsSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntAddedSuccessfullyPopup);
+            verifyElement(elmntAddedSuccessfullyPopup);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
 
     }

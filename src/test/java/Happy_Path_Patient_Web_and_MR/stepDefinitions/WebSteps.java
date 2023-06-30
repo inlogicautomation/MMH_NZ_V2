@@ -724,6 +724,7 @@ public class WebSteps {
         System.out.println("MedicationDetails >>> :" + strMedicationDetails);
         List<String> lstMedicationDetails = TestDataUtil.getListOfValue(strMedicationDetails);
         System.out.println("lstMedicationDetails >>> " + lstMedicationDetails);
+
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectHealthCentreLocation(lstMedicationDetails.get(0)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectDoctor(lstMedicationDetails.get(1)));
         Assert.assertTrue(demoPageContainer.repeatPrescription.selectInstructions(lstMedicationDetails.get(2)));
