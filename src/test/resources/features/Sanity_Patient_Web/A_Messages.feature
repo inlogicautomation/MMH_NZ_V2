@@ -19,8 +19,8 @@ Feature: Messages
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address       | Password               |
-      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 
 
@@ -46,8 +46,8 @@ Feature: Messages
     And I log out from Patient Portal
 
     Examples:
-      | Compose Details   |   Message           |
-      | &COMPOSE_MESSAGE& |   &COMPOSE_MESSAGE& |
+      | Compose Details   | Message           |
+      | &COMPOSE_MESSAGE& | &COMPOSE_MESSAGE& |
 
 
 #    Note: {
@@ -64,7 +64,7 @@ Feature: Messages
 
     Examples:
       | V1 Portal | Email Address      | Password              |
-      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+      | &URL&     | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
 
   @WEB @MESSAGES @SANITY_PATH
@@ -88,8 +88,8 @@ Feature: Messages
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address       | Password               |
-      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 #    Note: {
 #    49:Received messages must be displayed under Inbox
@@ -175,8 +175,7 @@ Feature: Messages
     Then I should see user successfully logs in to the MMH portal
     Examples:
       | V1 Portal | Email Address      | Password              |
-      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
-
+      | &URL&     | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
 
   @WEB @MESSAGES @SANITY_PATH
@@ -257,7 +256,7 @@ Feature: Messages
 
     Examples:
       | V1 Portal | Email Address      | Password              |
-      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+      | &URL&     | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
 
 #    Note: {
@@ -284,8 +283,8 @@ Feature: Messages
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address       | Password               |
-      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 #    Note: {
 #    67:Click on Out of Office settings & Enable Out of office & Set the from & to dates & enter details that need to be sent to sender when out of office is enabled

@@ -7,8 +7,8 @@ Feature: View_Journal
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address       | Password           |
-      | &EMAIL FOR MESSAGE& | &PASSWORD FOR RRP& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 #Note:{333:Click on view Journal - Add Journal enter subject, category, notes, start date, end date, schedule even, privacy settings & click save
     #334:Added journal must be displayed in the grid

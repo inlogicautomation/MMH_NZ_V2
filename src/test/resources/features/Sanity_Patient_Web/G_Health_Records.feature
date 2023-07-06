@@ -16,8 +16,8 @@ Feature: Health_Records
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address   | Password           |
-      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 #Note: {80:Login as Existing patient & view/click on Health Records
     #81:Click on Prescription
@@ -144,18 +144,18 @@ Feature: Health_Records
     Given As a Existing user I am on HomePage and I click the Health Records
     And I select My Entries "<My Entries>" Allergies Page
     And I click on add record & Enter the Allergies Medicine Details
-      | &VISITED_NAME&                |
-      | &VISITED_ALLERGIES_DROPDOWN&  |
-      | &VISITED_ALLERGIES_DROPDOWN1& |
-      | &ADDITIONAL_INFORMATION&      |
+      | &ALLERGIES_NAME&                   |
+      | &VISITED_ALLERGIES_DROPDOWN&       |
+      | &VISITED_ALLERGIES_DROPDOWN1&      |
+      | &ALLERGIES_ADDITIONAL_INFORMATION& |
     And I click on Allergies Confirm & Save Button
     When I click on "<Edit Icon>"edit icon & I Edit Allergies of My Entries records "<Records>"
     Then I should see all the  Allergies My Entries Medicine details in more info
       | &MY_ENTRIES_ALLERGIES_DATA& | &SHARE_WITH_DOCTOR_ALLERGIES_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_ALLERGIES& |
     And I click on Delete Icon "<Edit Icon>"& I verify the  Allergies My Entries Record is deleted
     Examples:
-      | My Entries | Edit Icon      | Records |
-      | Allergies  | &VISITED_NAME& | Low     |
+      | My Entries | Edit Icon        | Records |
+      | Allergies  | &ALLERGIES_NAME& | Low     |
 
 #  @WEB  @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
@@ -175,18 +175,18 @@ Feature: Health_Records
     Given As a Existing user I am on HomePage and I click the Health Records
     And I select My Entries "<My Entries>" Allergies Page
     And I click on Add record & Enter the Allergies Medicine Details
-      | &VISITED_NAME&                |
-      | &VISITED_ALLERGIES_DROPDOWN&  |
-      | &VISITED_ALLERGIES_DROPDOWN1& |
-      | &ADDITIONAL_INFORMATION&      |
+      | &ALLERGIES_NAME&                   |
+      | &VISITED_ALLERGIES_DROPDOWN&       |
+      | &VISITED_ALLERGIES_DROPDOWN1&      |
+      | &ALLERGIES_ADDITIONAL_INFORMATION& |
     And I click on Allergies Confirm & Save Button
     When I click on "<Edit Icon>"edit icon & I Edit Allergies of My Entries records "<Records>"
     Then I should see all the  Allergies My Entries Medicine details in more info
       | &MY_ENTRIES_ALLERGIES_DATA& | &SHARE_WITH_OUT_DOCTOR_ALLERGIES_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_ALLERGIES& |
     And I click on Delete Icon "<Edit Icon>"& I verify the  Allergies My Entries Record is deleted
     Examples:
-      | My Entries | Edit Icon      | Records |
-      | Allergies  | &VISITED_NAME& | Low     |
+      | My Entries | Edit Icon        | Records |
+      | Allergies  | &ALLERGIES_NAME& | Low     |
 #Note:{#101:Click on Immunisation
   #102:Health centre entries displays all the Immunisation/vaccine name given by provider/updated from pms
   #103:View all the details in grid & click on more info icon for specific vaccine name details in immunisation tab
@@ -227,16 +227,16 @@ Feature: Health_Records
     Given As a Existing user I am on HomePage and I click the Health Records
     And I select My Entries "<My Entries>"Immunisations Page
     And I click on add record & Enter the Immunisations Medicine Details
-      | &VISITED_NAME&           |
-      | &ADDITIONAL_INFORMATION& |
+      | &IMMUNISATION_VACCINE_NAME&           |
+      | &IMMUNISATION_ADDITIONAL_INFORMATION& |
     And I click on Immunisations Confirm & Save Button
     When I click on "<Edit Icon>"edit icon & I Edit Immunisations of My Entries records "<AdditionalName>"
     Then I should see all the  Immunisations My Entries Medicine details in more info
       | &MY_ENTRIES_IMMUNISATIONS_DATA& | &SHARE_WITH_DOCTOR_IMMUNISATION_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_IMMUNISATIONS& |
     And I click on Delete Icon "<Edit Icon>"& I verify the Immunisations My Entries Record is deleted
     Examples:
-      | My Entries    | Edit Icon      | AdditionalName    |
-      | Immunisations | &VISITED_NAME& | &EDIT_ADDITIONAL& |
+      | My Entries    | Edit Icon                   | AdditionalName    |
+      | Immunisations | &IMMUNISATION_VACCINE_NAME& | &EDIT_ADDITIONAL& |
 #Note:{#108:If share with doctor is uncheck then the records is not shared to health centre/provider & kept private in immunisation tab
    #These tests Case Covered The Scenario NO: S9
   #}
@@ -247,16 +247,16 @@ Feature: Health_Records
     Given As a Existing user I am on HomePage and I click the Health Records
     And I select My Entries "<My Entries>"Immunisations Page
     And I click on Add record & Enter the Immunisations Medicine Details
-      | &VISITED_NAME&           |
-      | &ADDITIONAL_INFORMATION& |
+      | &IMMUNISATION_VACCINE_NAME&           |
+      | &IMMUNISATION_ADDITIONAL_INFORMATION& |
     And I click on Immunisations Confirm & Save Button
     When I click on "<Edit Icon>"edit icon & I Edit Immunisations of My Entries records "<AdditionalName>"
     Then I should see all the  Immunisations My Entries Medicine details in more info
       | &MY_ENTRIES_IMMUNISATIONS_DATA& | &SHARE_WITH_OUT_DOCTOR_IMMUNISATION_ICON_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_IMMUNISATIONS& |
     And I click on Delete Icon "<Edit Icon>"& I verify the Immunisations My Entries Record is deleted
     Examples:
-      | My Entries    | Edit Icon      | AdditionalName    |
-      | Immunisations | &VISITED_NAME& | &EDIT_ADDITIONAL& |
+      | My Entries    | Edit Icon                   | AdditionalName    |
+      | Immunisations | &IMMUNISATION_VACCINE_NAME& | &EDIT_ADDITIONAL& |
 #
 #  @WEB  @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
@@ -275,10 +275,10 @@ Feature: Health_Records
     Given As a Existing user I am on HomePage and I click the Health Records
     And I select My Entries "<My Entries>"Immunisations Page
     And I click on add record & Enter the COVIDImmunisations Medicine Details
-      | &VACCINE_NAME&           |
-      | &BATCH_NO&               |
-      | &ADDITIONAL_INFORMATION& |
-      | &FILE_UPLOAD&            |
+      | &VACCINE_NAME&                              |
+      | &BATCH_NO&                                  |
+      | &COVID_IMMUNISATION_ADDITIONAL_INFORMATION& |
+      | &FILE_UPLOAD&                               |
     And I click on COVIDImmunisations Confirm & Save Button
     When I click on edit icon & I Edit COVIDImmunisations of My Entries records "<AdditionalName>"
     Then I should see all the COVIDImmunisations My Entries Medicine details in more info
@@ -294,10 +294,10 @@ Feature: Health_Records
     Given As a Existing user I am on HomePage and I click the Health Records
     And I select My Entries "<My Entries>"Immunisations Page
     And I click on Add record & Enter the COVIDImmunisations Medicine Details
-      | &VACCINE_NAME&           |
-      | &BATCH_NO&               |
-      | &ADDITIONAL_INFORMATION& |
-      | &FILE_UPLOAD&            |
+      | &VACCINE_NAME&                              |
+      | &BATCH_NO&                                  |
+      | &COVID_IMMUNISATION_ADDITIONAL_INFORMATION& |
+      | &FILE_UPLOAD&                               |
     And I click on COVIDImmunisations Confirm & Save Button
     When I click on edit icon & I Edit COVIDImmunisations of My Entries records "<AdditionalName>"
     Then I should see all the COVIDImmunisations My Entries Medicine details in more info
@@ -331,9 +331,9 @@ Feature: Health_Records
     Given As a Existing user I am on HomePage and I click the Health Records
     When I click on "<Classifications>" Classifications Page
     Then I should see all the Conditions Entries From Health center Medicine Details in a grid view
-      | &CLASSIFICATIONS_TABLE_DATA& |
+      | &CONDITIONS_TABLE_DATA& |
     And I click on the more info icon to see all the Classifications Entries From the Health center Medicine details
-      | &CLASSIFICATIONS_TABLE_DATA& | &CLASSIFICATIONS_ICON_DATA& | &CLASSIFICATIONS_MOBILE_ICON_DATA& |
+      | &CONDITIONS_TABLE_DATA& | &CONDITIONS_ICON_DATA& | &CONDITIONS_MOBILE_ICON_DATA& |
     Examples:
       | Classifications |
       | Conditions      |
@@ -352,17 +352,17 @@ Feature: Health_Records
     Given As a Existing user I am on HomePage and I click the Health Records
     And I select My Entries "<My Entries>" Classifications Page
     And I click on add record & Enter the  Classifications Medicine Details
-      | &VISITED_NAME&           |
-      | &VISITED_DROPDOWN&       |
-      | &ADDITIONAL_INFORMATION& |
+      | &CONDITIONS_NAME&                   |
+      | &CONDITIONS_STATUS&                 |
+      | &CONDITIONS_ADDITIONAL_INFORMATION& |
     And I click on Classifications Confirm & Save Button
     When I click on "<Edit Icon>"edit icon & I Edit  Classifications of My Entries records "<Records>"
     Then I should see all the  Classifications My Entries Medicine details in more info
-      | &DATA_MY_ENTRIES_CLASSIFICATIONS& | &SHARE_WITH_DOCTOR_CLASSIFICATIONS_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLASSIFICATION& |
+      | &MY_ENTRIES_CONDITIONS& | &SHARE_WITH_DOCTOR_CLASSIFICATIONS_DATA& | &MOBILE_MY_ENTRIES_INSIDE_CONDITIONS& |
     And I click on Delete Icon "<Edit Icon>"& I verify the  Classifications My Entries Record is deleted
     Examples:
-      | My Entries | Edit Icon      | Records   |
-      | Conditions | &VISITED_NAME& | Long Term |
+      | My Entries | Edit Icon         | Records   |
+      | Conditions | &CONDITIONS_NAME& | Long Term |
 
 #  @WEB  @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
@@ -381,17 +381,17 @@ Feature: Health_Records
     Given As a Existing user I am on HomePage and I click the Health Records
     And I select My Entries "<My Entries>" Classifications Page
     And I click on Add record & Enter the  Classifications Medicine Details
-      | &VISITED_NAME&           |
-      | &VISITED_DROPDOWN&       |
-      | &ADDITIONAL_INFORMATION& |
+      | &CONDITIONS_NAME&                   |
+      | &CONDITIONS_STATUS&                 |
+      | &CONDITIONS_ADDITIONAL_INFORMATION& |
     And I click on Classifications Confirm & Save Button
     When I click on "<Edit Icon>"edit icon & I Edit  Classifications of My Entries records "<Records>"
     Then I should see all the  Classifications My Entries Medicine details in more info
-      | &DATA_MY_ENTRIES_CLASSIFICATIONS& | &SHARE_WITH_OUT_DOCTOR_CLASSIFICATIONS_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLASSIFICATION& |
+      | &MY_ENTRIES_CONDITIONS& | &SHARE_WITH_OUT_DOCTOR_CLASSIFICATIONS_DATA& | &MOBILE_MY_ENTRIES_INSIDE_CONDITIONS& |
     And I click on Delete Icon "<Edit Icon>"& I verify the  Classifications My Entries Record is deleted
     Examples:
-      | My Entries | Edit Icon      | Records   |
-      | Conditions | &VISITED_NAME& | Long Term |
+      | My Entries | Edit Icon         | Records   |
+      | Conditions | &CONDITIONS_NAME& | Long Term |
 
 #  @WEB  @SANITY_PATH  @HEALTH_RECORDS
 #  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
@@ -464,9 +464,9 @@ Feature: Health_Records
     Given As a Existing user I am on HomePage and I click the Health Records
     And I select My Entries "<My Entries>" Clinic Notes Page
     And I click on add record & Enter the Clinic Notes Medicine Details
-      | &VISITED_NAME&           |
-      | &VISITED_LOCATION&       |
-      | &ADDITIONAL_INFORMATION& |
+      | &CLINIC_NAME&                   |
+      | &CLINIC_LOCATION&               |
+      | &CLINIC_ADDITIONAL_INFORMATION& |
     And I click on Clinic Notes Confirm & Save Button
     When I click on "<Edit Icon>"edit icon & I Edit  Clinic Notes of My Entries records "<Records>"
     Then I should see all the  Clinic Notes My Entries Medicine details in more info
@@ -493,9 +493,9 @@ Feature: Health_Records
     Given As a Existing user I am on HomePage and I click the Health Records
     And I select My Entries "<My Entries>" Clinic Notes Page
     And I click on Add record & Enter the Clinic Notes Medicine Details
-      | &VISITED_NAME&           |
-      | &VISITED_LOCATION&       |
-      | &ADDITIONAL_INFORMATION& |
+      | &CLINIC_NAME&                   |
+      | &CLINIC_LOCATION&               |
+      | &CLINIC_ADDITIONAL_INFORMATION& |
     And I click on Clinic Notes Confirm & Save Button
     When I click on "<Edit Icon>"edit icon & I Edit  Clinic Notes of My Entries records "<Records>"
     Then I should see all the  Clinic Notes My Entries Medicine details in more info

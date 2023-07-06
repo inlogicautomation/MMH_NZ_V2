@@ -17,8 +17,8 @@ Feature: Appointments
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address            | Password   |
-      | &EMAIL FOR APPOINTMENTS& | &PASSWORD& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 
   @WEB @SANITY_PATH @SANITY_PATH_APPOINTMENTS
@@ -148,8 +148,8 @@ Feature: Appointments
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address            | Password   |
-      | &EMAIL FOR APPOINTMENTS& | &PASSWORD& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 #    Note: {
 #    40:Click on video invitations & view grid details of Video invite appointments
@@ -164,8 +164,8 @@ Feature: Appointments
 #    Then I should see video consultation window with icons "<All_Icons>"
 
     Examples:
-      | Appointment           | Join_Consultation                                 | All_Icons     |
-      | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_JOIN_VIDEO_CONSULTATION& | &VIDEO_ICONS& |
+      | Appointment           | Join_Consultation                | All_Icons     |
+      | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &VIDEO_ICONS& |
 
 
 #    Note: {

@@ -8,8 +8,8 @@ Feature: My Health Centre
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address       | Password                         |
-      | &EMAIL FOR MESSAGE& | &PASSWORD_FOR_MY_HEALTH_RECORDS& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 #    Note: {
 #    412:Login into ManageMyHealth as a Patient
@@ -43,7 +43,7 @@ Feature: My Health Centre
 
     Examples:
       | V1 Portal | Email Address      | Password              |
-      | &V1 URL&  | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
+      | &URL&     | &EMAIL FOR DOCTOR& | &PASSWORD FOR DOCTOR& |
 
   @WEB @MY_HEALTH_CENTRE @SANITY_PATH
   Scenario Template: S3- Preparation for Patient Notice.
@@ -64,8 +64,8 @@ Feature: My Health Centre
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address       | Password                         |
-      | &EMAIL FOR MESSAGE& | &PASSWORD_FOR_MY_HEALTH_RECORDS& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 
   @WEB @MY_HEALTH_CENTRE @SANITY_PATH

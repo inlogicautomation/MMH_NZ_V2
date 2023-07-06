@@ -8,8 +8,8 @@ Feature: Repeat Request Prescription
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address   | Password           |
-      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 #    Note: {
 #    70:Login as Existing patient & view/click on Repeat Prescription

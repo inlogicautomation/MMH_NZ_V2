@@ -16,8 +16,8 @@ Feature:MyHealth_Indicators
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address | Password           |
-      | &EMAIL_MMH&   | &PASSWORD FOR RRP& |
+      | Email Address | Password   |
+      | &EMAIL_MMH&   | &PASSWORD& |
       #Note:{#142:Login as Existing patient & view/click on My Health Indicators
   #143:By default All tab is selected to view Active & Inactive indicators in card
   #144:Click on Active to view all active indicators in card view
@@ -121,24 +121,6 @@ Feature:MyHealth_Indicators
     Then I should see all the Blood Pressure Entries From Health center Medicine Details in a grid view
       | &BLOOD_PRESSURE_TABLE_DATA& |
 
-#  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
-#  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
-#    Given As a user I am on beta MMH login Page
-#    And I enter "<Email Address>" and "<Password>" For Beta
-#    When I click SignIn button
-#    Then I should see user successfully logs in to the MMH portal
-#    Examples:
-#      | Email Address   | Password           |
-#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
-#
-#  @WEB @MY_HEALTH_INDICATORS @SANITY_PATH
-#  Scenario Template: Changing machines timezone
-#
-#    Given I change Windows "<TimeZone>"
-#
-#    Examples:
-#      | TimeZone                  |
-#      | New Zealand Standard Time |
    #Note:{ #150:Navigate to Blood Pressure indicator & view graph based on time period & All/My entries/Health Centre values in grid & click on Add value
            # 185:Click on menu in Blood Pressure card & add new value & added value must be displayed in My entries
            #186:Click on menu in Blood Pressure card & set reminder
@@ -171,14 +153,7 @@ Feature:MyHealth_Indicators
       | Edit Icon                             | Records                 |
       | &EDIT_BLOOD_PRESSURE_MY_ENTRIES_DATA& | &EDIT_SYSTOLIC_DETAILS& |
 
-#  @WEB @MY_HEALTH_INDICATORS @SANITY_PATH
-#  Scenario Template: Changing machines timezone
-#
-#    Given I change Windows "<TimeZone>"
-#
-#    Examples:
-#      | TimeZone                  |
-#      | New Zealand Standard Time |
+
 
       #Note:{ #153:Navigate to Blood Sugar indicator & view graph based on time period & All/My entries/Health Centre values in grid & click on Add value
            # 194:Click on menu in Blood Sugar card & add new value & added value must be displayed in My entries
@@ -213,25 +188,8 @@ Feature:MyHealth_Indicators
     Examples:
       | Edit Icon                          | Records                    |
       | &EDIT_BLOOD_SUGAR_MY_ENTRIES_DATA& | &EDIT_BLOOD_SUGAR_DETAILS& |
-#
-#  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
-#  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
-#    Given As a user I am on beta MMH login Page
-#    And I enter "<Email Address>" and "<Password>" For Beta
-#    When I click SignIn button
-#    Then I should see user successfully logs in to the MMH portal
-#    Examples:
-#      | Email Address   | Password           |
-#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
-#
-#  @WEB @MY_HEALTH_INDICATORS @SANITY_PATH
-#  Scenario Template: Changing machines timezone
-#
-#    Given I change Windows "<TimeZone>"
-#
-#    Examples:
-#      | TimeZone                  |
-#      | New Zealand Standard Time |
+
+
 #Note:{#154:Navigate to BMI indicator & view graph based on time period & All/My entries/Health Centre values in grid & click on Add value
            #211:Click on Health Centre to view entries added by provider in grid
            # These tests Case Covered The Scenario NO: S7
@@ -280,14 +238,6 @@ Feature:MyHealth_Indicators
       | Edit Icon                         | Records                   |
       | &EDIT_DEPRESSION_MY_ENTRIES_DATA& | &EDIT_DEPRESSION_DETAILS& |
 
-#  @WEB  @MY_HEALTH_INDICATORS @SANITY_PATH
-#  Scenario Template: Changing machines timezone
-#
-#    Given I change Windows "<TimeZone>"
-#
-#    Examples:
-#      | TimeZone                  |
-#      | New Zealand Standard Time |
 
  #Note:{ #156:Navigate to Drinking Survey & view graph based on time period & All/My entries/Health Centre values in grid & click on Add value
            # 221:Click on menu in  Drinking Survey & add new value & added value must be displayed in My entries
@@ -335,24 +285,7 @@ Feature:MyHealth_Indicators
     Then I should see all the HBAC Entries From Health center Medicine Details in a grid view
       | &HBA1C_TABLE_DATA& |
 
-#  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
-#  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
-#    Given As a user I am on beta MMH login Page
-#    And I enter "<Email Address>" and "<Password>" For Beta
-#    When I click SignIn button
-#    Then I should see user successfully logs in to the MMH portal
-#    Examples:
-#      | Email Address   | Password           |
-#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
-#
-#  @WEB  @MY_HEALTH_INDICATORS @SANITY_PATH
-#  Scenario Template: Changing machines timezone
-#
-#    Given I change Windows "<TimeZone>"
-#
-#    Examples:
-#      | TimeZone                  |
-#      | New Zealand Standard Time |
+
       #Note:{ #157:Navigate to HBA1C indicator & view graph based on time period & All/My entries/Health Centre values in grid & click on Add value
            # 230:Click on menu in HBA1C card & add new value & added value must be displayed in My entries
            #231:Click on menu in HBA1C card & set reminder
@@ -417,14 +350,7 @@ Feature:MyHealth_Indicators
       | Edit Icon                  | Records            |
       | &EDIT_HDL_MY_ENTRIES_DATA& | &EDIT_HDL_DETAILS& |
 
-#  @WEB  @MY_HEALTH_INDICATORS @SANITY_PATH
-#  Scenario Template: Changing machines timezone
-#
-#    Given I change Windows "<TimeZone>"
-#
-#    Examples:
-#      | TimeZone                  |
-#      | New Zealand Standard Time |
+
     #Note:{#160:Navigate to LDL indicator & view graph based on time period & All/My entries/Health Centre values in grid & click on Add value
            #265:Click on Health Centre to view entries added by provider in grid
            # These tests Case Covered The Scenario NO: S13
@@ -470,24 +396,7 @@ Feature:MyHealth_Indicators
       | Edit Icon                  | Records            |
       | &EDIT_LDL_MY_ENTRIES_DATA& | &EDIT_LDL_DETAILS& |
 
-#  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
-#  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
-#    Given As a user I am on beta MMH login Page
-#    And I enter "<Email Address>" and "<Password>" For Beta
-#    When I click SignIn button
-#    Then I should see user successfully logs in to the MMH portal
-#    Examples:
-#      | Email Address   | Password           |
-#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
-#
-#  @WEB  @MY_HEALTH_INDICATORS @SANITY_PATH
-#  Scenario Template: Changing machines timezone
-#
-#    Given I change Windows "<TimeZone>"
-#
-#    Examples:
-#      | TimeZone                  |
-#      | New Zealand Standard Time |
+
        #Note:{ #161:Navigate to Peak Flow indicator & view graph based on time period & All/My entries/Health Centre values in grid & click on Add value
            # 266:Click on menu in Peak Flow card & add new value & added value must be displayed in My entries
            #267:Click on menu in Peak Flow card & set reminder
@@ -521,14 +430,6 @@ Feature:MyHealth_Indicators
       | Edit Icon                        | Records                  |
       | &EDIT_PEAK_FLOW_MY_ENTRIES_DATA& | &EDIT_PEAK_FLOW_DETAILS& |
 
-#  @WEB  @MY_HEALTH_INDICATORS @SANITY_PATH
-#  Scenario Template: Changing machines timezone
-#
-#    Given I change Windows "<TimeZone>"
-#
-#    Examples:
-#      | TimeZone                  |
-#      | New Zealand Standard Time |
 
       #Note:{ #162:Navigate to Smoking  indicator & view graph based on time period & All/My entries/Health Centre values in grid & click on Add value
            # 275:Click on menu in Smoking  card & add new value & added value must be displayed in My entries
@@ -562,23 +463,6 @@ Feature:MyHealth_Indicators
     Examples:
       | Edit Icon                      | Records                |
       | &EDIT_SMOKING_MY_ENTRIES_DATA& | &EDIT_SMOKING_DETAILS& |
-#  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
-#  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
-#    Given As a user I am on beta MMH login Page
-#    And I enter "<Email Address>" and "<Password>" For Beta
-#    When I click SignIn button
-#    Then I should see user successfully logs in to the MMH portal
-#    Examples:
-#      | Email Address   | Password           |
-#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
-#  @WEB  @MY_HEALTH_INDICATORS @SANITY_PATH
-#  Scenario Template: Changing machines timezone
-#
-#    Given I change Windows "<TimeZone>"
-#
-#    Examples:
-#      | TimeZone                  |
-#      | New Zealand Standard Time |
 
         #Note:{ #163:Navigate to Total Cholesterol  indicator & view graph based on time period & All/My entries/Health Centre values in grid & click on Add value
            # 284:Click on menu in Total Cholesterol  card & add new value & added value must be displayed in My entries
@@ -647,24 +531,7 @@ Feature:MyHealth_Indicators
     Examples:
       | Edit Icon                            | Records                      |
       | &EDIT_TRIGLYCERIDES_MY_ENTRIES_DATA& | &EDIT_TRIGLYCERIDES_DETAILS& |
-#  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
-#  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
-#    Given As a user I am on beta MMH login Page
-#    And I enter "<Email Address>" and "<Password>" For Beta
-#    When I click SignIn button
-#    Then I should see user successfully logs in to the MMH portal
-#    Examples:
-#      | Email Address   | Password           |
-#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
-#
-#  @WEB  @MY_HEALTH_INDICATORS @SANITY_PATH
-#  Scenario Template: Changing machines timezone
-#
-#    Given I change Windows "<TimeZone>"
-#
-#    Examples:
-#      | TimeZone                  |
-#      | New Zealand Standard Time |
+
 
          #Note:{ #165:Navigate to Waist Size indicator & view graph based on time period & All/My entries/Health Centre values in grid & click on Add value
            # 302:Click on menu inWaist Size card & add new value & added value must be displayed in My entries
@@ -731,24 +598,6 @@ Feature:MyHealth_Indicators
     Examples:
       | Edit Icon                  | Records                   |
       | &EDIT_BMI_MY_ENTRIES_DATA& | &EDIT_BMI_HEIGHT_DETAILS& |
-#  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
-#  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
-#    Given As a user I am on beta MMH login Page
-#    And I enter "<Email Address>" and "<Password>" For Beta
-#    When I click SignIn button
-#    Then I should see user successfully logs in to the MMH portal
-#    Examples:
-#      | Email Address   | Password           |
-#      | &EMAIL FOR RRP& | &PASSWORD FOR RRP& |
-#
-#  @WEB @MY_HEALTH_INDICATORS @SANITY_PATH
-#  Scenario Template: Changing machines timezone
-#
-#    Given I change Windows "<TimeZone>"
-#
-#    Examples:
-#      | TimeZone                  |
-#      | New Zealand Standard Time |
 
       #Note:{ #159:Navigate to Height indicator & view graph based on time period & All/My entries/Health Centre values in grid & click on Add value
            # 248:Click on menu in Height card & add new value & added value must be displayed in My entries

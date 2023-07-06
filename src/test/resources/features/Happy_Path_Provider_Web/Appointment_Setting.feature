@@ -23,8 +23,8 @@ Feature: Appointment Setting
     And I click cancel your appointment button Very the Appointment cancelled message "<Appointment_After_Cancel>"
 
     Examples:
-      | Any_Location_with_Any_Provider_Appointment_Details      | Location                  | VM03Location_Doctor_Name            | VM03Location2_Doctor_Name                | Details_For_Appointment            | Future_Date          | Appointment_Summary                | Patient_User_Login | Password           | Appointment           | Appointment_Cancel_Button               | Appointment_After_Cancel                     |
-      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | Automation_Practice1_Loc2 | &AUTOMATION_PRACTICE1_DOCTOR_NAMES& | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& | &VMO3L2_VISIT_APPOINTMENT_DETAILS& | &VM03L2_FUTURE_DATE& | &VM03L2_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Upcoming Appointments | &VM03L2_APPOINTMENT_DETAILS_FOR_CANCEL& | &VM03L2_APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+      | Any_Location_with_Any_Provider_Appointment_Details      | Location                  | VM03Location_Doctor_Name            | VM03Location2_Doctor_Name                | Details_For_Appointment     | Future_Date   | Appointment_Summary         | Patient_User_Login | Password           | Appointment           | Appointment_Cancel_Button        | Appointment_After_Cancel              |
+      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | Automation_Practice1_Loc2 | &AUTOMATION_PRACTICE1_DOCTOR_NAMES& | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& | &VISIT_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S1-Provider Enable Rule A verify Patient Book Visit Appointment based on Rule A (Any Location with Any Provider) & (Default Location with Default Provider) & (Default Location with Any Provider)
