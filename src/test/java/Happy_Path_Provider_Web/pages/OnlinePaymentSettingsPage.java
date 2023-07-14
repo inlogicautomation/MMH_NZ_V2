@@ -12,13 +12,13 @@ public class OnlinePaymentSettingsPage extends BasePage {
         super(driver);
 
     }
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Payment Settings')]")
-    protected WebElement elmntPaymentSetting;
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Payments')])[2]")
+    protected WebElement elmntPayments;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Online Payment Settings')]")
     protected WebElement elmntOnlinePaymentSetting;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Online Payment Settings')]")
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Online Payment Settings')]")
     protected WebElement elmntOnlinePaymentSettingHeader;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Edit')]")
@@ -31,6 +31,12 @@ public class OnlinePaymentSettingsPage extends BasePage {
             .append("<<REPLACEMENT>>").append("')])[2]").toString();
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
+
+    @FindBy(xpath = "//span[contains(text(),'Setup Modules')]")
+    protected WebElement elmtSecureMessaging;
+
+    @FindBy(xpath = "//span[contains(text(),'Repeat Prescriptions')]")
+    protected WebElement elmtRepeatScriptSettings;
 
     @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Enable Online Payments for Appointments')]//following::input)[1]")
     protected WebElement elmntEnableOnlinePaymentsForAppointments;
@@ -50,8 +56,13 @@ public class OnlinePaymentSettingsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'Changes saved successfully')]")
     protected WebElement veriflyPopup;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Appointment Settings')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Appointment Settings')]")
     protected WebElement elmntAppointmentSetting;
+
+
+
+    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Appointments')])[2]")
+    protected WebElement elmntAppointments;
 
     @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Appointment Settings')])[1]")
     protected WebElement clickAppointmentSettingHeader;
@@ -67,26 +78,29 @@ public class OnlinePaymentSettingsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Pay at Health Centre or Pay Online')]")
     protected WebElement verifyPayatHealthCentreorPayOnline;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'In-person Appointment')]//ancestor::mat-checkbox[@ng-reflect-checked='true']")
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='paymentMode']//input)[3]")
     protected WebElement verifyInPersonAppointmentsCheckbox;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'In-person Appointment')]//preceding::input[@aria-checked='false']")
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='paymentMode']//input)[3]")
     protected WebElement verifyInPersonAppointmentsCheckboxUnchecked;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Phone Appointment ')]//preceding::input[@aria-checked='false']")
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='paymentModePhone']//input)[3]")
     protected WebElement verifyPhoneAppointmentsCheckboxUnchecked;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'In-person Appointment')]//ancestor::mat-checkbox[@ng-reflect-checked='true']")
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='paymentModePhone']//input)[3]")
     protected WebElement verifyPhoneAppointmentsCheckbox;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Video Appointment')]//ancestor::mat-checkbox[@ng-reflect-checked='true']")
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='paymentModeVideo']//input)[3]")
     protected WebElement verifyVideoAppointmentsCheckbox;
 
-    @FindBy(how = How.XPATH, using = "(//span[contains(text(),'Video Appointment ')]//preceding::input[@aria-checked='false'])[2]")
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='paymentModeVideo']//input)[3]")
     protected WebElement verifyVideoAppointmentsCheckboxUnchecked;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Repeat Script Settings')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Repeat Script Settings')]")
     protected WebElement elmntRepeatScriptSetting;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Repeat Prescriptions')]")
+    protected WebElement elmntRepeatPrescription;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Repeat Script Settings')]")
     protected WebElement clickRepeatScriptSettingHeader;
@@ -110,12 +124,12 @@ public class OnlinePaymentSettingsPage extends BasePage {
     public boolean clickPaymentSetting() {
         boolean blresult = false;
         try {
-            jsScrollIntoView(elmntPaymentSetting);
-            waitForElement(elmntPaymentSetting);
-            jsClick(elmntPaymentSetting);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElement(elmntPayments);
+            jsClick(elmntPayments);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
           waitForElement(elmntOnlinePaymentSetting);
-          click(elmntOnlinePaymentSetting);
+          jsClick(elmntOnlinePaymentSetting);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
           waitForElement(elmntOnlinePaymentSettingHeader);
             blresult = verifyElement(elmntOnlinePaymentSettingHeader);
         } catch (Exception e) {
@@ -163,7 +177,7 @@ jsScrollIntoView(elmntEditButton);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(elmntEnableOnlinePaymentsForAppointments);
             waitForElement(elmntEnableOnlinePaymentsForAppointments);
-            click(elmntEnableOnlinePaymentsForAppointments);
+            jsClick(elmntEnableOnlinePaymentsForAppointments);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntOnlinePaymentSettingHeader);
             blresult = verifyElement(elmntOnlinePaymentSettingHeader);
@@ -208,10 +222,12 @@ jsScrollIntoView(elmntEditButton);
     public boolean clickAppointmentSetting() {
         boolean blresult = false;
         try {
+            waitForElement(elmntAppointments);
+            click(elmntAppointments);
             jsScrollIntoView(elmntAppointmentSetting);
             waitForElement(elmntAppointmentSetting);
             jsClick(elmntAppointmentSetting);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(clickAppointmentSettingHeader);
             click(clickAppointmentSettingHeader);
             waitForElement(elmntAppointmentSettingHeader);
@@ -240,6 +256,7 @@ jsScrollIntoView(elmntEditButton);
         boolean blresult = false;
         try {
             if (verifyElement(verifyInPersonAppointmentsCheckbox)){
+                jsClick(verifyInPersonAppointmentsCheckbox);
                 System.out.println("Sucessfully verified In Person Appointments Checkbox Cheacked");
             }
             else {
@@ -269,6 +286,7 @@ jsScrollIntoView(elmntEditButton);
         boolean blresult = false;
         try {
             if (verifyElement(verifyPhoneAppointmentsCheckbox)){
+                jsClick(verifyPhoneAppointmentsCheckbox);
                 System.out.println("Sucessfully verified In Person Appointments Checkbox Cheacked");
             }
             else {
@@ -298,6 +316,7 @@ jsScrollIntoView(elmntEditButton);
         boolean blresult = false;
         try {
             if (verifyElement(verifyVideoAppointmentsCheckbox)){
+                jsClick(verifyVideoAppointmentsCheckbox);
                 System.out.println("Sucessfully verified In Person Appointments Checkbox Cheacked");
             }
             else {
@@ -329,7 +348,7 @@ jsScrollIntoView(elmntEditButton);
         try {
             jsScrollIntoView(elmntEnableOnlinePaymentsForRRP);
             waitForElement(elmntEnableOnlinePaymentsForRRP);
-            click(elmntEnableOnlinePaymentsForRRP);
+            jsClick(elmntEnableOnlinePaymentsForRRP);
             waitForElement(elmntOnlinePaymentSettingHeader);
             blresult = verifyElement(elmntOnlinePaymentSettingHeader);
         } catch (Exception e) {
@@ -341,10 +360,13 @@ jsScrollIntoView(elmntEditButton);
     public boolean clickRepeatScriptSetting() {
         boolean blresult = false;
         try {
+            waitForElement(elmntRepeatPrescription);
+            click(elmntRepeatPrescription);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(elmntRepeatScriptSetting);
             waitForElement(elmntRepeatScriptSetting);
             jsClick(elmntRepeatScriptSetting);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(clickRepeatScriptSettingHeader);
             click(clickRepeatScriptSettingHeader);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -380,6 +402,7 @@ jsScrollIntoView(elmntEditButton);
           verifyElement(elmntRRPPayOnlineOnly);
           waitForElement(elmntRRPPayatHealthCentreorPayOnline);
           verifyElement(elmntRRPPayatHealthCentreorPayOnline);
+          jsClick(elmntRRPPayatHealthCentreorPayOnline);
           blresult = verifyElement(elmntRRPPayatHealthCentreorPayOnline);
         } catch (Exception e) {
 
@@ -415,6 +438,30 @@ jsScrollIntoView(elmntEditButton);
 
         }
         return blresult&&PayOnline&&PayOnlineAndPayhealthCenter;
+    }
+
+    public boolean clickSecureMessaging() {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            jsScrollIntoView(elmtSecureMessaging);
+            waitForSeconds(2);
+            waitForElementClickable(elmtSecureMessaging);
+            System.out.println("Systems Menu is available to click");
+            jsClick(elmtSecureMessaging);
+            jsScrollIntoView(elmtRepeatScriptSettings);
+            System.out.println("scrolled ");
+            takeScreenshot(driver);
+            if (!verifyElement(elmtRepeatScriptSettings)){
+                click(elmtSecureMessaging);
+            }
+            jsScrollIntoView(elmtRepeatScriptSettings);
+            blResult = verifyElement(elmtRepeatScriptSettings);
+        } catch (Exception e) {
+            System.out.println("Failed to click Secure Messages >>> :: ");
+            e.printStackTrace();
+        }
+        return blResult;
     }
 
 }

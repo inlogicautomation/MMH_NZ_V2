@@ -216,7 +216,7 @@ public class HomePage extends BasePage {
             if (verifyElement(txtPatientWelcomePage)){
                 System.out.println("User here in Provider home page");
             }else{
-                System.out.println("Else Part ::::::Window Count 2");
+//                System.out.println("Else Part ::::::Window Count 2");
                 driver.manage().deleteAllCookies();
                 visit(TestDataUtil.getValue("&URL&"));
                 driver.manage().deleteAllCookies();
@@ -656,7 +656,7 @@ if(!verifyElement(txtPatientWelcomePage)){
             click(elmntDashboard);
             waitForSeconds(3);
             jsClick(btnExitApp);
-            waitForSeconds(300);
+            waitForSeconds(180);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }
@@ -664,7 +664,7 @@ if(!verifyElement(txtPatientWelcomePage)){
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             waitForElement(btnExitAppMobile);
             jsClick(btnExitAppMobile);
-            waitForSeconds(300);
+            waitForSeconds(180);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }
@@ -672,7 +672,7 @@ if(!verifyElement(txtPatientWelcomePage)){
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForElement(btnExitAppMobile);
             click(btnExitAppMobile);
-            waitForSeconds(300);
+            waitForSeconds(180);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }

@@ -20,8 +20,8 @@ Feature: RRP_Pre-Screening Settings
 
 
     Examples:
-      | Health_Centre                 | Location                     |
-      | &PRE_SCREENING_HEALTH_CENTRE& | &PRE_SCREENING_LOCATION_VM3& |
+      | Health_Centre                 | Location                 |
+      | &PRE_SCREENING_HEALTH_CENTRE& | &PRE_SCREENING_LOCATION& |
 
   @WEB @PROVIDER_HAPPY_PATH @PRE_SCREENING_SETTINGS
   Scenario Template:S2-Disable Pre-Screening Covid PopUp Settings in Provider
@@ -34,7 +34,7 @@ Feature: RRP_Pre-Screening Settings
     Then I select "<Health_Centre>" and "<Location>" and verify the Covid Pre-Screening popup is Undisplayed
 
     Examples:
-      | Health_Centre                 | Location                     |
-      | &PRE_SCREENING_HEALTH_CENTRE& | &PRE_SCREENING_LOCATION_VM3& |
+      | Health_Centre                 | Location                 |
+      | &PRE_SCREENING_HEALTH_CENTRE& | &PRE_SCREENING_LOCATION& |
 
 

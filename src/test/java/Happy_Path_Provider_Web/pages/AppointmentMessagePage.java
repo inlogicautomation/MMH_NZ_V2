@@ -11,6 +11,8 @@ import org.openqa.selenium.support.How;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+import static cap.utilities.SharedDriver.strExecutionID;
+
 public class AppointmentMessagePage extends BasePage {
 
     public AppointmentMessagePage(WebDriver driver) {
@@ -21,13 +23,9 @@ public class AppointmentMessagePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h1[text()=' Appointment Message ']")
     protected WebElement elmntAppointmentMssgHeading;
 
-    @FindBy(how = How.XPATH, using = "//div[.='keyboard_arrow_down']")
-    protected WebElement elmntSelectHealthCentre;
-
     @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='easyBookingBanner']//following::input)[1]")
     protected WebElement elmntEnableBannerMssg;
 
-//    (//mat-radio-group[@formcontrolname='easyBookingBanner']//following::mat-radio-button[@class='mat-radio-button mat-accent mat-radio-checked']//input)[1]
 
     @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='easyBookingBanner']//following::input)[2]")
     protected WebElement elmntDisableBannerMssg;
@@ -41,7 +39,8 @@ public class AppointmentMessagePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='WebAppointmentBannerHeading']")
     protected WebElement elmntWebBannerHeading;
 
-
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='easyBookingBanner']//following::input)[5]")
+    protected WebElement elmntDisableWebBannerMessage;
 
     @FindBy(how = How.XPATH, using = "(//iframe[@class='k-iframe'])[1]")
     protected WebElement frameBannerMessage;
@@ -58,7 +57,7 @@ public class AppointmentMessagePage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror']//p)[1]")
     protected WebElement elmntWriteBannerMessage;
 
-    @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror']//p)[2]")
+    @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror']//p)[1]")
     protected WebElement elmntWriteWebBannerMessage;
 
     @FindBy(how = How.XPATH, using = "//button[.=' Edit ']")
@@ -79,7 +78,7 @@ public class AppointmentMessagePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@placeholder='Enter search keyword here']")
     protected WebElement elmntSearchBox;
 
-    @FindBy(how = How.XPATH, using = "(//h2[.='VM03Location'])[1]")
+    @FindBy(how = How.XPATH, using = "//h2[.='Automation_Practice1_Loc1']")
     protected WebElement elmntLocation;
 
     @FindBy(how = How.XPATH, using = "//button[.='SEARCH']")
@@ -94,49 +93,38 @@ public class AppointmentMessagePage extends BasePage {
     @FindBy (how = How.XPATH, using = "//span[normalize-space(text())='Close']")
     protected WebElement btnCloseAppointmentMssg;
 
-
-    protected String elmntBannerMessageText = new StringBuilder()
-            .append("//div//p[text()='").append("<<REPLACEMENT>>").append("']").toString();
-
-
     protected String elmntFindHealthCenterLocation = new StringBuilder()
             .append("(//h2[.='").append("<<REPLACEMENT>>").append("'])[1]").toString();
 
 
     protected String elmntBookNowOption = new StringBuilder()
-            .append("(//h2[.='").append("<<REPLACEMENT>>").append("']/parent::div/following-sibling::div/child::div/a[text()='Book now'])[2]").toString();
+            .append("//h2[.='").append("<<REPLACEMENT>>").append("']/parent::div/following-sibling::div/child::div/a[text()='More info']").toString();
 
 
     protected String elmntVerifyBannerHeading = new StringBuilder()
             .append("//h4/b[text()='").append("<<REPLACEMENT>>").append(":']").toString();
 
     protected String elmntVerifyWebBannerHeading = new StringBuilder()
-            .append("//p[text()='").append("<<REPLACEMENT>>").append("']").toString();
+            .append("//div[text()='").append("<<REPLACEMENT>>").append("']").toString();
 
+    protected String elmntVerifyWebBannerMessage = new StringBuilder()
+            .append("//p[text()='").append("<<REPLACEMENT>>").append("']").toString();
     protected String elmntVerifyBannerMessage = new StringBuilder()
             .append("//h4/p[text()='").append("<<REPLACEMENT>>").append("']").toString();
 
+    protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
-    public boolean verifyAppointmentHeading() {
+
+    public boolean clickBannerMessageYesRadioButton() {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            waitForElement(elmntAppointmentMssgHeading);
-            blresult = verifyElement(elmntAppointmentMssgHeading);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return blresult;
-    }
-
-    public boolean clickBannerMssgYesRadiobtn() {
-        boolean blresult = false;
-        try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(elmntEnableBannerMssg);
             jsClick(elmntEnableBannerMssg);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed to click BannerMessage Yes Radio Button >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -146,11 +134,13 @@ public class AppointmentMessagePage extends BasePage {
     public boolean clickBannerMessageNoRadioBtn() {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(elmntDisableBannerMssg);
             jsClick(elmntDisableBannerMssg);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed to click BannerMessage No Radio Button >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -160,28 +150,29 @@ public class AppointmentMessagePage extends BasePage {
     public boolean enterBannerHeading(String strHeading) {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(elmntBannerHeading);
             jsClick(elmntBannerHeading);
             waitForSeconds(2);
             elmntBannerHeading.clear();
             waitForSeconds(2);
-            elmntBannerHeading.sendKeys(strHeading);
+            elmntBannerHeading.sendKeys(strHeading.concat(strExecutionID));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed to Enter Banner Heading Text Box >>> :: ");
             e.printStackTrace();
         }
         return blresult;
     }
 
 
-    public boolean enterBannerMessage(String strBannerMssg) {
+    public boolean enterBannerMessage(String strBannerMessage) {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntBannerMessage);
             waitForElement(elmntBannerMessage);
-//            elmntBannerMessage.click();
             driver.switchTo().frame(frameBannerMessage);
             waitForSeconds(2);
             click(elmntWriteBannerMessage);
@@ -190,28 +181,29 @@ public class AppointmentMessagePage extends BasePage {
             waitForSeconds(2);
             elmntWriteBannerMessage.click();
             waitForSeconds(2);
-            driver.switchTo().activeElement().sendKeys(strBannerMssg);
+            driver.switchTo().activeElement().sendKeys(strBannerMessage);
             waitForSeconds(2);
             driver.switchTo().defaultContent();
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed to Enter Banner Message Text Box >>> :: ");
             e.printStackTrace();
         }
         return blresult;
     }
 
 
-    public boolean clickEditbtn() {
+    public boolean clickEditButton() {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntEditbtn);
-            waitForElementClickable(elmntEditbtn);
-            waitForSeconds(2);
-            click(elmntEditbtn);
-            System.out.println("Successfully click Edit Button");
+            waitForElement(elmntEditbtn);
+            jsClick(elmntEditbtn);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed click Edit Button >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -221,77 +213,53 @@ public class AppointmentMessagePage extends BasePage {
     public boolean closeSuccessPopUp() {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             verifyElement(elmntAppointmentMssgHeading);
             jsScrollIntoView(elmntCloseSuccessLogin);
             click(elmntCloseSuccessLogin);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed click close Success PopUp >>> :: ");
             e.printStackTrace();
         }
         return blresult;
     }
 
 
-    public boolean VerifyBannerMessage(String strBannerMessage) {
-        boolean blresult = false;
-        try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            WebElement elmntBannerText = waitForElement(By.xpath(elmntBannerMessageText.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strBannerMessage))));
-            blresult = verifyElement(elmntBannerText);
-            ;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return blresult;
-    }
 
 
-    public boolean clickDropDownHealthCenter() {
-        boolean blresult = false;
-        try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            waitForElement(elmntSelectHealthCentre);
-            if (verifyElement(elmntSelectHealthCentre)) {
-                waitForElementClickable(elmntSelectHealthCentre);
-                click(elmntSelectHealthCentre);
-            } else {
-                jsClick(elmntSelectHealthCentre);
-            }
 
-            blresult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return blresult;
-    }
 
     public boolean clickSignOut() {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             click(elmntSignOutBtn);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed click close Sign Out >>> :: ");
             e.printStackTrace();
         }
         return blresult;
     }
 
 
-    public boolean clickAllRadioBtn() {
+    public boolean clickAllRadioButton() {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             boolean radioBtn = elmntAllRadioBtn.isSelected();
             if (radioBtn == true) {
                 verifyElement(elmntAll);
             } else {
                 click(elmntAllRadioBtn);
+                waitForElementDisappear(driver,By.xpath(elmntSpinner));
             }
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed click close All Radio Button >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -301,12 +269,14 @@ public class AppointmentMessagePage extends BasePage {
     public boolean enterLocationInSearchBox(String strLocation) {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             enterValue(elmntSearchBox, strLocation);
             waitForElement(btnSearch);
             click(btnSearch);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed To Enter Location In Search Box >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -315,19 +285,23 @@ public class AppointmentMessagePage extends BasePage {
     public boolean verifyHealthCenterLocation(String strLocation) {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             By bookedAppointment = By.xpath(elmntFindHealthCenterLocation.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation)));
+            System.out.println(">>>>>>>>>>>>bookedAppointment"+bookedAppointment);
             if (verifyElement(bookedAppointment)){
-                WebElement elmntLocation = waitForElement(By.xpath(elmntFindHealthCenterLocation.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));
+                WebElement elmntLocation = waitForElement(By.xpath(elmntFindHealthCenterLocation.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));   System.out.println(">>>>>>>>>>>>bookedAppointment"+bookedAppointment);
+                System.out.println(">>>>>>>>>>>>elmntLocation"+elmntLocation);
                 verifyElement(elmntLocation);
             }else {
                 refreshPage();
-                waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+                waitForElementDisappear(driver,By.xpath(elmntSpinner));
                 WebElement elmntLocation = waitForElement(By.xpath(elmntFindHealthCenterLocation.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));
+                System.out.println(">>>>>>>>>>>>elmntLocation"+elmntLocation);
                 verifyElement(elmntLocation);
             }
             blresult = verifyElement(elmntLocation);
         } catch (Exception e) {
+            System.out.println("Failed To verify Health Center Location >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -337,11 +311,14 @@ public class AppointmentMessagePage extends BasePage {
     public boolean clickBookNow(String strLocation) {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             WebElement btnBookNow = waitForElement(By.xpath(elmntBookNowOption.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));
-            click(btnBookNow);
+            System.out.println(">>>>>>>>>>>>>"+btnBookNow);
+            jsClick(btnBookNow);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed To click Book Now >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -351,10 +328,12 @@ public class AppointmentMessagePage extends BasePage {
     public boolean verifyBannerHeading(String strHeading) {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyBannerHeading.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strHeading))));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyBannerHeading.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strHeading.concat(strExecutionID)))));
             blresult = verifyElement(elmntBannerHeading);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
         } catch (Exception e) {
+            System.out.println("Failed To  verify Banner Heading >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -364,53 +343,29 @@ public class AppointmentMessagePage extends BasePage {
     public boolean verifyBannerMessage(String strMessage) {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             WebElement elmntBannerMessage = waitForElement(By.xpath(elmntVerifyBannerMessage.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             blresult = verifyElement(elmntBannerMessage);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
         } catch (Exception e) {
+            System.out.println("Failed To  verify Banner Message >>> :: ");
             e.printStackTrace();
         }
         return blresult;
     }
 
-
-    public boolean clickMMHLogo() {
-        boolean blresult = false;
-        try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            click(MMHLogo);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            waitForElement(MMHParentPageLogo);
-            blresult = verifyElement(MMHParentPageLogo);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return blresult;
-    }
-
-
-    public boolean closeAppointmentMssgPage() {
-        boolean blresult = false;
-        try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            jsScrollIntoView(btnCloseAppointmentMssg);
-            waitForElementClickable(btnCloseAppointmentMssg);
-            click(btnCloseAppointmentMssg);
-            blresult = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return blresult;
-    }
 
     public boolean clickPatientWebBannerMessageYesRadioBtn() {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(elmntEnableWebBannerMessage);
             jsClick(elmntEnableWebBannerMessage);
+            takeScreenshot(driver);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed To click Patient Web Banner Message Yes Radio Button >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -419,16 +374,17 @@ public class AppointmentMessagePage extends BasePage {
     public boolean enterWebBannerHeading(String strHeading) {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            jsScrollIntoView(elmntWebBannerHeading);
             waitForElement(elmntWebBannerHeading);
-            jsClick(elmntWebBannerHeading);
+            click(elmntWebBannerHeading);
             waitForElement(elmntWebBannerHeading);
-//            waitForSeconds(2);
             elmntWebBannerHeading.clear();
-//            waitForSeconds(2);
-            elmntWebBannerHeading.sendKeys(strHeading);
+            elmntWebBannerHeading.sendKeys(strHeading.concat(strExecutionID));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed To Enter Web Banner Heading Text Box >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -437,10 +393,9 @@ public class AppointmentMessagePage extends BasePage {
     public boolean enterWebBannerMessage(String strBannerMssg) {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntWebBannerMessage);
             waitForElement(elmntWebBannerMessage);
-//            elmntBannerMessage.click();
             driver.switchTo().frame(frameWebBannerMessage);
             waitForSeconds(2);
             click(elmntWriteWebBannerMessage);
@@ -449,11 +404,12 @@ public class AppointmentMessagePage extends BasePage {
             waitForSeconds(2);
             elmntWriteWebBannerMessage.click();
             waitForSeconds(2);
-            driver.switchTo().activeElement().sendKeys(strBannerMssg);
+            driver.switchTo().activeElement().sendKeys(strBannerMssg.concat(strExecutionID));
             waitForSeconds(2);
             driver.switchTo().defaultContent();
             blresult = true;
         } catch (Exception e) {
+            System.out.println("Failed To Enter Web Banner Heading Text Box >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -462,19 +418,90 @@ public class AppointmentMessagePage extends BasePage {
     public boolean verifyWebBannerHeading(String strHeading) {
         boolean blresult = false;
         try {
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyWebBannerHeading.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strHeading))));
+            String strdata=TestDataUtil.getValue(strHeading).concat(strExecutionID);
+            System.out.println("strdata ::::: "+strdata);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyWebBannerHeading.replaceAll("<<REPLACEMENT>>", strdata)));
             blresult = verifyElement(elmntBannerHeading);
         } catch (Exception e) {
+            System.out.println("Failed To verify Web Banner Heading >>> :: ");
             e.printStackTrace();
         }
         return blresult;
     }
 
+    public boolean verifyWebBannerMessage(String strHeading) {
+        boolean blresult = false;
+        try {
+            String strdata=TestDataUtil.getValue(strHeading).concat(strExecutionID);
+            System.out.println("strdata ::::: "+strdata);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyWebBannerMessage.replaceAll("<<REPLACEMENT>>", strdata)));
+            blresult = verifyElement(elmntBannerHeading);
+        } catch (Exception e) {
+            System.out.println("Failed To verify Web Banner Heading >>> :: ");
+            e.printStackTrace();
+        }
+        return blresult;
+    }
 
+    public boolean verifyWebBannerMessageNotDisplayed(String strHeading) {
+        boolean blresult = false;
+        try {
+            String strdata=TestDataUtil.getValue(strHeading).concat(strExecutionID);
+            System.out.println("strdata ::::: "+strdata);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyWebBannerMessage.replaceAll("<<REPLACEMENT>>", strdata)));
+            System.out.println(">>>>>>>>>elmntBannerHeading"+elmntBannerHeading);
+            if (!verifyElement(elmntBannerHeading)){
+                blresult=true;
+            }else {
+                verifyElement(elmntBannerHeading);
+                blresult=false;
+            }
+        } catch (Exception e) {
+            System.out.println("Failed To verify Web Banner Heading >>> :: ");
+            e.printStackTrace();
+        }
+        return blresult;
+    }
 
+    public boolean verifyWebBannerMessageDisplayed(String strHeading) {
+        boolean blresult = false;
+        try {
+            String strdata=TestDataUtil.getValue(strHeading).concat(strExecutionID);
+            System.out.println("strdata ::::: "+strdata);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyWebBannerMessage.replaceAll("<<REPLACEMENT>>", strdata)));
+            System.out.println(">>>>>>>>>elmntBannerHeading"+elmntBannerHeading);
+            if (isElementDisplayed(elmntBannerHeading)){
+                blresult=true;
+            }else {
+                verifyElement(elmntBannerHeading);
+                blresult=false;
+            }
+        } catch (Exception e) {
+            System.out.println("Failed To verify Web Banner Heading >>> :: ");
+            e.printStackTrace();
+        }
+        return blresult;
+    }
 
-
+    public boolean clickPatientWebBannerMessageNoRadioBtn() {
+        boolean blresult = false;
+        try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            waitForElement(elmntDisableWebBannerMessage);
+            jsClick(elmntDisableWebBannerMessage);
+            takeScreenshot(driver);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            blresult = true;
+        } catch (Exception e) {
+            System.out.println("Failed To click Patient Web Banner Message Yes Radio Button >>> :: ");
+            e.printStackTrace();
+        }
+        return blresult;
+    }
 
 
 }

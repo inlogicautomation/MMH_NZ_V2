@@ -53,6 +53,8 @@ public class ProviderHomePage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'Setup Modules')]")
     protected WebElement elmtSecureMessaging;
 
+    @FindBy(xpath = "//span[contains(text(),'Setup Online Payments')]")
+    protected WebElement elmtSetupOnlinePayments;
 
     @FindBy(xpath = "//mat-icon[text()='menu']")
     protected WebElement elmtMobileMenu;
@@ -100,13 +102,13 @@ public class ProviderHomePage extends BasePage {
     protected WebElement elmntMMHLogo;
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'SIGN OUT')]")
     protected WebElement elmntLogOut;
-
-
-
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='exit_to_app']")
     protected WebElement elmntMobileLogOut;
     @FindBy(xpath = "//span[contains(text(),'Repeat Prescriptions')]")
     protected WebElement elmtRepeatScriptSettings;
+
+    @FindBy(xpath = "//span[contains(text(),'SMS Credit Facility')]")
+    protected WebElement elmtSMSCreditFacility;
 
     @FindBy(xpath = "//button//span[contains(text(),'Edit')]")
     protected WebElement btnEditInRRPSettings;
@@ -448,6 +450,7 @@ public class ProviderHomePage extends BasePage {
                 blResult=verifyElement(txtProviderPortalWelcomePage);
             }
         } catch (Exception e) {
+            System.out.println("Cannot Successfully switch to doctor portal");
             e.printStackTrace();
         }
         return blResult;
@@ -471,12 +474,12 @@ public class ProviderHomePage extends BasePage {
                 System.out.println(">>>>>>>>>WindowsCount : :" + WindowsCount);
                 if (WindowsCount == 2) {
                     focusWindow(2);
-                    if (verifyElement(verifyPatientHomePage)) {
+                    if (verifyElement(txtProviderPortalWelcomePage)) {
 //                        waitForElement(elmntDashboard);
 //                        click(elmntDashboard);
                         System.out.println("user here in patient portal homepage");
                     } else {
-                        System.out.println("Else Part ::::::Window Count 2");
+//                        System.out.println("Else Part ::::::Window Count 2");
                         driver.manage().deleteAllCookies();
                         visit(TestDataUtil.getValue("&PATIENT_URL&"));
                         driver.manage().deleteAllCookies();
@@ -610,6 +613,9 @@ public class ProviderHomePage extends BasePage {
     @FindBy (how = How.XPATH, using = "//span[text()='Appointment Settings']")
     protected WebElement elmntAppointmentSetting;
 
+    @FindBy (how = How.XPATH, using = "//span[text()='Appointments']")
+    protected WebElement elmntAppointments;
+
     @FindBy (how = How.XPATH, using = "//h1[contains(text(),'Appointment Message')]")
     protected WebElement elmntAppoitmentMssgHeading;
 
@@ -711,10 +717,11 @@ public class ProviderHomePage extends BasePage {
     public boolean clickPreScreeningSettings(){
         boolean blresult = false;
         try{
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(elmntAppointmentSettings);
             waitForElement(elmntAppointmentSettings);
             click(elmntAppointmentSettings);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult = true;
         }catch (Exception e){
             e.printStackTrace();
@@ -726,17 +733,18 @@ public class ProviderHomePage extends BasePage {
     public boolean clickAppointmentMessage(){
         boolean blresult = false;
         try{
-//            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            jsScrollIntoView(elmntAppointmentSetting);
-            waitForElement(elmntAppointmentSetting);
-            jsClick(elmntAppointmentSetting);
+            jsScrollIntoView(elmntAppointments);
+            waitForElement(elmntAppointments);
+
+            jsClick(elmntAppointments);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(elmntAppointmentMessage);
             waitForElementClickable(elmntAppointmentMessage);
             jsClick(elmntAppointmentMessage);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult = verifyElement(elmntAppoitmentMssgHeading);
         }catch (Exception e){
-
+            System.out.println("Failed to click Appointment Messages >>> :: ");
         }
         return  blresult;
     }
@@ -745,11 +753,12 @@ public class ProviderHomePage extends BasePage {
     public boolean verifyPatientHomePage(){
         boolean blresult = false;
         try{
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(verifyPatientHomePage);
             blresult = verifyElement(verifyPatientHomePage);
             takeScreenshot(driver);
         }catch (Exception e){
+            System.out.println("Failed to Verify Patient HomePage >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -759,11 +768,13 @@ public class ProviderHomePage extends BasePage {
     public boolean clickAppointmentMenu(){
         boolean blresult = false;
         try{
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntAppointment);
             jsClick(elmntAppointment);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult = true;
         }catch (Exception e){
+            System.out.println("Failed to Click Appointment Menu >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -772,13 +783,16 @@ public class ProviderHomePage extends BasePage {
     public boolean clickPatientBookAppointment(){
         boolean blresult = false;
         try{
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntAppointment);
             jsClick(elmntAppointment);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntPatientBookAppointment);
             click(elmntPatientBookAppointment);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult = true;
         }catch (Exception e){
+            System.out.println("Failed to Click Patient Book Appointment >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -789,19 +803,21 @@ public class ProviderHomePage extends BasePage {
         boolean blresult = false;
         try{
             if(verifyElement(elmntBookAppointment)){
-//                waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
                 waitForElementClickable(elmntBookAppointment);
                 jsClick(elmntBookAppointment);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
             }else {
                 waitForElementClickable(elmntAppointment);
                 click(elmntAppointment);
-//                waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForElementClickable(elmntBookAppointment);
                 click(elmntBookAppointment);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
             }
 
             blresult = true;
         }catch (Exception e){
+            System.out.println("Failed to Click Book Appointment >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -810,7 +826,7 @@ public class ProviderHomePage extends BasePage {
     public boolean navigateToHomePage() {
         boolean blResult = false;
         try {
-//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             if (isElementDisplayed(txtProviderPortalWelcomePage)) {
                 verifyElement(elmntDashboard);
                 waitForElementClickable(elmntDashboard);
@@ -826,17 +842,6 @@ public class ProviderHomePage extends BasePage {
                 refreshPage();
                 blResult =verifyElement(txtProviderPortalWelcomePage);
             }
-//            if (!isElementDisplayed(txtWelcome)) {
-//                focusWindow(2);
-//                waitForElementDisappear(driver, By.xpath(elmntSpinner));
-//                waitForElement(elmntDashboard);
-//                waitForElementClickable(elmntDashboard);
-//                click(elmntDashboard);
-//                waitForElementDisappear(driver, By.xpath(elmntSpinner));
-//                blResult = verifyElement(txtWelcome);
-//                System.out.println("User on the Patient HomePage and Verified>>>>");
-//            }
-            return blResult;
 
         } catch (Exception e) {
             System.out.println("User not Navigated to Patient Portal");
@@ -849,7 +854,7 @@ public class ProviderHomePage extends BasePage {
     public boolean navigateToHarryHarryHomePage() {
         boolean blResult = false;
         try {
-//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             if (verifyElement(txtHarryHarryWelcome)) {
                 verifyElement(elmntDashboard);
                 waitForElementClickable(elmntDashboard);
@@ -864,23 +869,12 @@ public class ProviderHomePage extends BasePage {
                 jsClick(elmntDashboard);
                 waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 refreshPage();
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 blResult =verifyElement(txtHarryHarryWelcome);
             }
-//            if (!isElementDisplayed(txtWelcome)) {
-//                focusWindow(2);
-//                waitForElementDisappear(driver, By.xpath(elmntSpinner));
-//                waitForElement(elmntDashboard);
-//                waitForElementClickable(elmntDashboard);
-//                click(elmntDashboard);
-//                waitForElementDisappear(driver, By.xpath(elmntSpinner));
-//                blResult = verifyElement(txtWelcome);
-//                System.out.println("User on the Patient HomePage and Verified>>>>");
-//            }
-            return blResult;
 
         } catch (Exception e) {
             System.out.println("User not Navigated to Patient Portal");
-
             e.printStackTrace();
         }
         return blResult;
@@ -892,14 +886,14 @@ public class ProviderHomePage extends BasePage {
             jsScrollIntoView(elmntDashboard);
             waitForElement(elmntDashboard);
             jsClick(elmntDashboard);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntDashboard);
             click(elmntDashboard);
-            waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsClick(btnExitApp);
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }
-
         return isVerified;
     }
 
@@ -909,10 +903,10 @@ public class ProviderHomePage extends BasePage {
             takeScreenshot(driver);
             waitForElement(elmntMMHLogo);
             click(elmntMMHLogo);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtProviderPortal);
             isVerified = verifyElement(txtProviderPortal);
         }
-
 
         return isVerified;
     }
@@ -952,6 +946,29 @@ public class ProviderHomePage extends BasePage {
             blResult =verifyElement(txtSetupServicesheader);
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+    public boolean clickSetupOnlinePayments() {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            jsScrollIntoView(elmtSetupOnlinePayments);
+            waitForSeconds(2);
+            waitForElementClickable(elmtSetupOnlinePayments);
+            System.out.println("Systems Menu is available to click");
+            jsClick(elmtSetupOnlinePayments);
+            jsScrollIntoView(elmtSMSCreditFacility);
+            System.out.println("scrolled ");
+            takeScreenshot(driver);
+            if (!verifyElement(elmtSMSCreditFacility)){
+                click(elmtSetupOnlinePayments);
+            }
+            jsScrollIntoView(elmtSMSCreditFacility);
+            blResult = verifyElement(elmtSMSCreditFacility);
+        } catch (Exception e) {
+            System.out.println("Failed to click Secure Messages >>> :: ");
             e.printStackTrace();
         }
         return blResult;

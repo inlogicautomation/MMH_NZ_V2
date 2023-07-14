@@ -126,9 +126,8 @@ public class ProviderWebSteps {
 
     @And("I click Systems Menu and I navigating to Pre-Screening Settings page")
     public void iClickSystemsMenuAndINavigatingToPreScreeningSettingsPage() {
-
-
-        Assert.assertTrue(providerPageContainer.providerHomePage.clickPreScreeningSettings());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickAppointmentMessage());
+//        Assert.assertTrue(providerPageContainer.providerHomePage.clickPreScreeningSettings());
 
     }
 
@@ -227,7 +226,7 @@ public class ProviderWebSteps {
     @Given("As a Provider I am on HomePage and navigate to  Pre-Screening Settings")
     public void asAProviderIAmOnHomePageAndNavigateToPreScreeningSettings() {
         Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
-        Assert.assertTrue(providerPageContainer.providerHomePage.clickSystemMenu());
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickSecureMessaging());
     }
 
     @Given("As a Provider I am on HomePage and navigate to Repeat Script Settings in {string}")
@@ -548,10 +547,10 @@ public class ProviderWebSteps {
     @And("I select Health Center {string} and I enable Banner Message to Yes")
     public void iSelectHealthCenterAndIEnableBannerMessageToYes(String strHealthCentre) {
 
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickEditbtn());
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickEditButton());
         Assert.assertTrue(providerPageContainer.preScreeningPage.clickHealthCentreDropDown());
         Assert.assertTrue(providerPageContainer.preScreeningPage.selectHealthCentre(strHealthCentre));
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickBannerMssgYesRadiobtn());
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickBannerMessageYesRadioButton());
     }
 
     @And("I fill Banner Heading {string} and Banner Message fields {string}")
@@ -583,14 +582,15 @@ public class ProviderWebSteps {
 
     @And("I Enter the Location in search box and I verify the created Appointment {string}")
     public void iEnterTheLocationInSearchBoxAndIVerifyTheCreatedAppointment(String strLocation) {
-
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.enterLocationInSearchBox(TestDataUtil.getValue(strLocation)));
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyHealthCenterLocation(strLocation));
+List<String>data=TestDataUtil.getListOfValue(strLocation);
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.enterLocationInSearchBox(TestDataUtil.getValue(data.get(0))));
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyHealthCenterLocation(TestDataUtil.getValue(data.get(1))));
     }
 
     @When("I click the Book Now button {string}")
     public void iClickTheBookNowButton(String strLocation) {
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickBookNow(strLocation));
+        List<String>data=TestDataUtil.getListOfValue(strLocation);
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickBookNow(data.get(1)));
     }
 
     @Then("I should verify the Banner heading {string} and Banner Messages {string} are saved")
@@ -603,7 +603,7 @@ public class ProviderWebSteps {
     @And("I select Health Center {string} and I enable Banner Message to No")
     public void iSelectHealthCenterAndIEnableBannerMessageToNo(String strHealthCentre) {
 
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickEditbtn());
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickEditButton());
         Assert.assertTrue(providerPageContainer.preScreeningPage.clickHealthCentreDropDown());
         Assert.assertTrue(providerPageContainer.preScreeningPage.selectHealthCentre(strHealthCentre));
         Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickBannerMessageNoRadioBtn());
@@ -620,7 +620,7 @@ public class ProviderWebSteps {
     @Given("As a Provider I am on HomePage and navigate to Appointment Message page")
     public void asAProviderIAmOnHomePageAndNavigateToAppointmentMessagePage() {
         Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
-        Assert.assertTrue(providerPageContainer.providerHomePage.clickSystemMenu());
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickSecureMessaging());
         Assert.assertTrue(providerPageContainer.providerHomePage.clickAppointmentMessage());
 //        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyAppointmentHeading());
     }
@@ -630,16 +630,16 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.providerHomePage.switchToPatientTab());
         Assert.assertTrue(providerPageContainer.providerHomePage.verifyPatientHomePage());
         Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickSignOut());
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickAllRadioBtn());
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickAllRadioButton());
     }
 
 
     @And("I select Health Center {string} and I enable Patient Portal Web Banner Message to No")
     public void iSelectHealthCenterAndIEnablePatientPortalWebBannerMessageToNo(String strHealthCentre) {
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickEditbtn());
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickEditButton());
         Assert.assertTrue(providerPageContainer.preScreeningPage.clickHealthCentreDropDown());
         Assert.assertTrue(providerPageContainer.preScreeningPage.selectHealthCentre(strHealthCentre));
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickPatientWebBannerMessageYesRadioBtn());
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickPatientWebBannerMessageNoRadioBtn());
 
     }
 
@@ -652,13 +652,14 @@ public class ProviderWebSteps {
 
     @Then("I should verify the Patient Portal Web Banner heading {string} and Banner Messages {string} are not displayed")
     public void iShouldVerifyThePatientPortalWebBannerHeadingAndBannerMessagesAreNotDisplayed(String strBannerHeading, String strBannerMessage) {
+        Assert.assertTrue(providerPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
         Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerHeading(strBannerHeading));
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerHeading(strBannerMessage));
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerMessageNotDisplayed(strBannerMessage));
     }
 
     @And("I select Health Center {string} and I enable Patient Portal Web Banner Message to yes")
     public void iSelectHealthCenterAndIEnablePatientPortalWebBannerMessageToYes(String strHealthCentre) {
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickEditbtn());
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickEditButton());
         Assert.assertTrue(providerPageContainer.preScreeningPage.clickHealthCentreDropDown());
         Assert.assertTrue(providerPageContainer.preScreeningPage.selectHealthCentre(strHealthCentre));
         Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickPatientWebBannerMessageYesRadioBtn());
@@ -873,7 +874,7 @@ public class ProviderWebSteps {
     @Given("As a Provider I am on HomePage and navigate to Appointment Setting page")
     public void asAProviderIAmOnHomePageAndNavigateToAppointmentSettingPage() {
         Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
-        Assert.assertTrue(providerPageContainer.providerHomePage.clickSystemMenu());
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickSecureMessaging());
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickAppointmentMessage());
     }
 
@@ -914,7 +915,7 @@ public class ProviderWebSteps {
     @And("I click Edit button to select {string} and {string} and Disable Appointment Pre-Screening Popup")
     public void iClickEditButtonToSelectAndAndDisableAppointmentPreScreeningPopup(String strHealthCentre, String strLocation) {
         List<String>strtestdata=TestDataUtil.getListOfValue(strLocation);
-        Assert.assertTrue(providerPageContainer.preScreeningPage.clickPreScreeningEdit());
+//        Assert.assertTrue(providerPageContainer.preScreeningPage.clickPreScreeningEdit());
         Assert.assertTrue(providerPageContainer.preScreeningPage.clickHealthCentreDropDown());
         Assert.assertTrue(providerPageContainer.preScreeningPage.selectHealthCentre(strHealthCentre));
         for (String strdata:strtestdata) {
@@ -931,7 +932,7 @@ public class ProviderWebSteps {
     public void iClickEditButtonToSelectAndAndEnableAppointmentPreScreeningPopup(String strHealthCentre, String strLocation) {
         List<String>strtestdata=TestDataUtil.getListOfValue(strLocation);
         System.out.println(">>>>>>>strtestdata :: "+strtestdata);
-        Assert.assertTrue(providerPageContainer.preScreeningPage.clickPreScreeningEdit());
+//        Assert.assertTrue(providerPageContainer.preScreeningPage.clickPreScreeningEdit());
         Assert.assertTrue(providerPageContainer.preScreeningPage.clickHealthCentreDropDown());
         Assert.assertTrue(providerPageContainer.preScreeningPage.selectHealthCentre(strHealthCentre));
         for (String strdata:strtestdata) {
@@ -1254,14 +1255,14 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectProviderName(TestDataUtil.getValue(stsdata.get(5))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectSearchTextBox(TestDataUtil.getValue(stsdata.get(4))));
         Assert.assertTrue(providerPageContainer.appointmentsPage.selectViewClear());
-        Assert.assertTrue(providerPageContainer.appointmentsPage.VeriflyElements());
+        Assert.assertTrue(providerPageContainer.appointmentsPage.VerifyElements());
 
     }
 
     @Given("As a Provider I am on HomePage and navigate to online payments setting page")
     public void asAProviderIAmOnHomePageAndNavigateToOnlinePaymentsSettingPage() {
         Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
-        Assert.assertTrue(providerPageContainer.providerHomePage.clickSystemMenu());
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickSetupOnlinePayments());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickPaymentSetting());
 
     }
@@ -1276,6 +1277,7 @@ public class ProviderWebSteps {
 
     @And("I navigate to Appointment setting page verify the Payonline or Payhealthcentre options displayed")
     public void iNavigateToAppointmentSettingPageVerifyThePayonlineOrPayhealthcentreOptionsDisplayed() {
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickSecureMessaging());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickAppointmentSetting());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickAppoitmentSettingEditButton());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.veriflyInpersonAppoitmentPaymentSettings());
@@ -1287,6 +1289,7 @@ public class ProviderWebSteps {
 
     @And("I navigate to Appointment setting page verify the Payonline or Payhealthcentre options Not displayed")
     public void iNavigateToAppointmentSettingPageVerifyThePayonlineOrPayhealthcentreOptionsNotDisplayed() {
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickSecureMessaging());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickAppointmentSetting());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickAppoitmentSettingEditButton());
         Assert.assertFalse(providerPageContainer.onlinePaymentsSettingPage.veriflyInpersonAppoitmentPaymentSettings());
@@ -1314,6 +1317,7 @@ public class ProviderWebSteps {
 
     @And("I navigate to RRP setting page verify the Payonline or Payhealthcentre options displayed")
     public void iNavigateToRRPSettingPageVerifyThePayonlineOrPayhealthcentreOptionsDisplayed() {
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickSecureMessaging());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickRepeatScriptSetting());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickRepeatScriptSettingEditButton());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.veriflyRRPPaymentSetting());
@@ -1321,6 +1325,7 @@ public class ProviderWebSteps {
 
     @And("I navigate to RRP setting page verify the only show Payhealthcentre options displayed")
     public void iNavigateToRRPSettingPageVerifyTheOnlyShowPayhealthcentreOptionsDisplayed() {
+        Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickSecureMessaging());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickRepeatScriptSetting());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.clickRepeatScriptSettingEditButton());
         Assert.assertTrue(providerPageContainer.onlinePaymentsSettingPage.veriflyOnlyShowPayHealthCentreOptions());
@@ -1529,5 +1534,12 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.setupServicesPage.SelectSaveButton());
 
 
+    }
+
+    @Then("I should verify the Patient Portal Web Banner heading {string} and Banner Messages {string} are displayed")
+    public void iShouldVerifyThePatientPortalWebBannerHeadingAndBannerMessagesAreDisplayed(String strBannerHeading, String strBannerMessage) {
+        Assert.assertTrue(providerPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerHeading(strBannerHeading));
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerMessageDisplayed(strBannerMessage));
     }
 }

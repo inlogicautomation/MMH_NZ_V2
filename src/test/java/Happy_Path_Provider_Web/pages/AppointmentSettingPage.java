@@ -20,10 +20,14 @@ public class AppointmentSettingPage extends BasePage {
 
     public static String strTime;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Appointment Settings']")
+    @FindBy(how = How.XPATH, using = "//div[text()='Appointment Settings']")
     protected WebElement elmntAppointmentSetting;
 
+    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Appointment Settings')]")
+    protected WebElement elmntAppointmentSettingHeader;
 
+    @FindBy(how = How.XPATH, using = "//span[text()='Appointments']")
+    protected WebElement elmntAppointments;
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Edit')]")
     protected WebElement elmntAppointmentSettingEditButton;
 
@@ -103,7 +107,7 @@ public class AppointmentSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[text()='SEARCH']")
     protected WebElement clicksearchicon;
 
-    @FindBy(how = How.XPATH, using = "(//h2[text()='VM03Location']//following::a[text()='Book now'])[1]")
+    @FindBy(how = How.XPATH, using = "(//h2[text()='Automation_Practice1_Loc2']//following::a[text()='More info'])[1]")
     protected WebElement clickVM03LocationBookNowButton;
 
     @FindBy(how = How.XPATH, using = "//div[@class='slot-start-time']")
@@ -176,10 +180,10 @@ public class AppointmentSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Appointment settings Rule E')]")
     protected WebElement txtAppointmentsettingsRuleEHeader;
 
-    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Changes saved successfully.')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Changes Saved Successfully')]")
     protected WebElement txtSuccessfullyMessagePopup;
 
-    @FindBy(how = How.XPATH, using = "//p[text()='Changes Saved Successfully']")
+    @FindBy(how = How.XPATH, using = "//p[text()='Changes saved successfully.']")
     protected WebElement txtChangesSavedSuccessfullyMessagePopup;
 
     //p[text()='Changes Saved Successfully']
@@ -189,17 +193,26 @@ public class AppointmentSettingPage extends BasePage {
     public boolean clickAppointmentMessage() {
         boolean blresult = false;
         try {
+            jsScrollIntoView(elmntAppointments);
+            waitForElement(elmntAppointments);
+            click(elmntAppointments);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntAppointmentSetting);
             waitForElement(elmntAppointmentSetting);
             jsClick(elmntAppointmentSetting);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            waitForElement(elmntAppointmentSettingHeader);
+            verifyElement(elmntAppointmentSettingHeader);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntAppointmentSettingEditButton);
             waitForElementClickable(elmntAppointmentSettingEditButton);
             jsClick(elmntAppointmentSettingEditButton);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            System.out.println("Successfull see the Appointment Setting");
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            System.out.println("Successfully see the Appointment Setting");
             blresult = verifyElement(txtAppointmentSettingHeader);
         } catch (Exception e) {
-
+            e.printStackTrace();
+            System.out.println("Failed to click Appointment Message >>> :: ");
         }
         return blresult;
     }
@@ -207,21 +220,23 @@ public class AppointmentSettingPage extends BasePage {
     public boolean clickRuleAButton() {
         boolean blresult = false;
         try {
-//            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntRuleARadioButton);
             waitForElement(elmntRuleARadioButton);
             takeScreenshot(driver);
             jsClick(elmntRuleARadioButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             System.out.println("Successfully Click RuleA Radio Button");
             jsScrollIntoView(elmntSaveButton);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             takeScreenshot(driver);
-//            waitForElement(txtSuccessfullyMessagePopup);
-            blresult =true;
+            waitForElement(txtSuccessfullyMessagePopup);
+            blresult =verifyElement(txtSuccessfullyMessagePopup);
             System.out.println("Verify Changes saved successfully. Popup");
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Cannot Verify Changes saved successfully. Popup");
 
         }
@@ -231,20 +246,22 @@ public class AppointmentSettingPage extends BasePage {
     public boolean clickRuleBButton() {
         boolean blresult = false;
         try {
-//            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntRuleBRadioButton);
             waitForElement(elmntRuleBRadioButton);
             takeScreenshot(driver);
             jsClick(elmntRuleBRadioButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             System.out.println("Successfully Click RuleB Radio Button");
             jsScrollIntoView(elmntSaveButton);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(txtSuccessfullyMessagePopup);
             blresult = verifyElement(txtSuccessfullyMessagePopup);
         } catch (Exception e) {
-
+            System.out.println("Failed to click RuleB Button >>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -256,15 +273,17 @@ public class AppointmentSettingPage extends BasePage {
             waitForElement(elmntRuleCRadioButton);
             takeScreenshot(driver);
             jsClick(elmntRuleCRadioButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             System.out.println("Successfully Click RuleC Radio Button");
             jsScrollIntoView(elmntSaveButton);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(txtSuccessfullyMessagePopup);
             blresult = verifyElement(txtSuccessfullyMessagePopup);
         } catch (Exception e) {
-
+            System.out.println("Failed to click RuleC Button >>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -272,19 +291,22 @@ public class AppointmentSettingPage extends BasePage {
     public boolean clickRuleDButton() {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntRuleDRadioButton);
             waitForElement(elmntRuleDRadioButton);
             takeScreenshot(driver);
             jsClick(elmntRuleDRadioButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             System.out.println("Successfully Click RuleD Radio Button");
             jsScrollIntoView(elmntSaveButton);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(txtSuccessfullyMessagePopup);
             blresult = verifyElement(txtSuccessfullyMessagePopup);
         } catch (Exception e) {
-
+            System.out.println("Failed to click RuleD Button >>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -292,19 +314,22 @@ public class AppointmentSettingPage extends BasePage {
     public boolean clickRuleEButton() {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntRuleERadioButton);
             waitForElement(elmntRuleERadioButton);
             takeScreenshot(driver);
             jsClick(elmntRuleERadioButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             System.out.println("Successfully Click Rule E Radio Button");
             jsScrollIntoView(elmntSaveButton);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(txtAppointmentsettingsRuleEHeader);
             blresult = verifyElement(txtAppointmentsettingsRuleEHeader);
         } catch (Exception e) {
-
+            System.out.println("Failed to click RuleE Button >>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -312,14 +337,16 @@ public class AppointmentSettingPage extends BasePage {
     public boolean clickAppointmentsettingsRuleESaveButton() {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntSaveButton);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
-            waitForElementToAppear(driver,By.xpath("//p[contains(text(),'Changes saved successfully.')]"));
-            waitForElement(txtSuccessfullyMessagePopup);
-            blresult = verifyElement(txtSuccessfullyMessagePopup);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            waitForElementToAppear(driver,By.xpath("//p[contains(text(),'Changes saved successfully')]"));
+            waitForElement(txtChangesSavedSuccessfullyMessagePopup);
+            blresult = verifyElement(txtChangesSavedSuccessfullyMessagePopup);
         } catch (Exception e) {
+            System.out.println("Failed to click Appointment settings RuleE Save Button >>> :: ");
             e.printStackTrace();
         }
         return blresult;
@@ -331,12 +358,14 @@ public class AppointmentSettingPage extends BasePage {
         try {
             waitForElement(elmntHealthCentre);
             click(elmntHealthCentre);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntHealthCentreDrop.replace("<<REPLACEMENT>>", Strdata)));
             System.out.printf("elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
             mouseClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult = verifyElement(elmntHealthCentre);
         } catch (Exception e) {
+            System.out.println("Failed to click Health Center Location >>> :: ");
             e.printStackTrace();
 
         }
@@ -357,6 +386,7 @@ public class AppointmentSettingPage extends BasePage {
                 System.out.println(">>>>>>>>>>>>elmntHealthCentreLocation2"+ elmntHealthCentreLocation2);
                 waitForElement(elmntHealthCentreLocation2);
                 jsClick(elmntHealthCentreLocation2);
+                waitForElementDisappear(driver,By.xpath(elmntSpinner));
                 verifyElement(By.xpath(selectCovidPreScreeningPopup.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))));
                 takeScreenshot(driver);
                 System.out.println("Appointment  Restrict Provider CheckBox Checked::");
@@ -366,7 +396,7 @@ public class AppointmentSettingPage extends BasePage {
         }
         catch (Exception e) {
 
-            System.out.println("Cannot Successfully clicked Appointment Restrict Provider CheckBox");
+            System.out.println("Failed To clicked Appointment Restrict Provider CheckBox");
             e.printStackTrace();
         }
         return blresult;
@@ -386,6 +416,7 @@ public class AppointmentSettingPage extends BasePage {
                 System.out.println(">>>>>>>>>>>>elmntHealthCentreLocation2"+ elmntHealthCentreLocation2);
                 waitForElement(elmntHealthCentreLocation2);
                 jsClick(elmntHealthCentreLocation2);
+                waitForElementDisappear(driver,By.xpath(elmntSpinner));
                 verifyElement(By.xpath(deselectCovidPreScreeningPopup.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))));
 
                 System.out.println("Appointment  Restrict Provider CheckBox UnChecked::");
@@ -395,7 +426,7 @@ public class AppointmentSettingPage extends BasePage {
         }
         catch (Exception e) {
 
-            System.out.println("Cannot Successfully clicked Appointment Restrict Provider CheckBox");
+            System.out.println("Failed To clicked Appointment Restrict Provider CheckBox");
             e.printStackTrace();
         }
         return blresult;
@@ -406,10 +437,12 @@ public class AppointmentSettingPage extends BasePage {
             jsScrollIntoView(elmntVisitAppointmentIcon);
             waitForElement(elmntVisitAppointmentIcon);
             click(elmntVisitAppointmentIcon);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             System.out.println("Successfully Click Visit Appointment Icon");
             blresult = verifyElement(elmntVisitAppointmentIcon);
         } catch (Exception e) {
-
+            System.out.println("Failed to click Visit Icon Check Restricted Provider are Not displayed >>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -425,7 +458,8 @@ public class AppointmentSettingPage extends BasePage {
             System.out.println("Successfully Click Phone Appointment Icon");
             blresult = verifyElement(elmntPhoneAppointmentIcon);
         } catch (Exception e) {
-
+            System.out.println("Failed to click Phone Icon Check Restricted Provider are Not displayed >>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -439,7 +473,8 @@ public class AppointmentSettingPage extends BasePage {
             System.out.println("Successfully Click Video Appointment Icon");
             blresult = verifyElement(elmntVideoAppointmentIcon);
         } catch (Exception e) {
-
+            System.out.println("Failed to click Video Icon Check Restricted Provider are Not displayed >>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -452,21 +487,23 @@ public class AppointmentSettingPage extends BasePage {
             waitForElement(elmntRuleARadioButton);
             takeScreenshot(driver);
             jsClick(elmntRuleARadioButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntAllowToBookFriendsYesButton);
             waitForElement(elmntAllowToBookFriendsYesButton);
             takeScreenshot(driver);
             jsClick(elmntAllowToBookFriendsYesButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             System.out.println("Successfully Click Allow To Book Friends Yes Radio Button");
             jsScrollIntoView(elmntSaveButton);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             takeScreenshot(driver);
-//            waitForElement(txtChangesSavedSuccessfullyMessagePopup);
             blresult =true;
 
         } catch (Exception e) {
-        System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
+            System.out.println("Failed to click Allow to Book For Family Yes Button >>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -478,21 +515,23 @@ public class AppointmentSettingPage extends BasePage {
             waitForElement(elmntRuleARadioButton);
             takeScreenshot(driver);
             jsClick(elmntRuleARadioButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntAllowToBookFriendsNoButton);
             waitForElement(elmntAllowToBookFriendsNoButton);
             takeScreenshot(driver);
             jsClick(elmntAllowToBookFriendsNoButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             System.out.println("Successfully Click Allow To Book Friends Yes Radio Button");
             jsScrollIntoView(elmntSaveButton);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
-            waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             takeScreenshot(driver);
-//            waitForElement(txtChangesSavedSuccessfullyMessagePopup);
             blresult =true;
 
         } catch (Exception e) {
-            System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
+            System.out.println("Failed to click Allow to Book For Family No Button >>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -503,11 +542,13 @@ public class AppointmentSettingPage extends BasePage {
             waitForElement(elmntTurnOffAppointments);
             takeScreenshot(driver);
             jsClick(elmntTurnOffAppointments);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(elmntTurnOffAppointmentsHeader);
            verifyElement(elmntTurnOffAppointmentsHeader);
             blresult =true;
         } catch (Exception e) {
-            System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
+            System.out.println("Failed to click Turn off Appointments >>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -518,12 +559,14 @@ public class AppointmentSettingPage extends BasePage {
         boolean blresult = false;
         try {
             waitForElement(elmntEditButton);
-click(elmntEditButton);
+             click(elmntEditButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
            if (isElementDisplayed(elmntTurnOffOnlineAppointmentsCheckBoxChecked)) {
                System.out.println("Turn Off Online Appointments CheckBox Already checked");
            }
            if (isElementDisplayed(elmntTurnOnOnlineAppointmentsCheckBoxUnchecked)){
                jsClick(elmntTurnOnOnlineAppointmentsCheckBoxUnchecked);
+               waitForElementDisappear(driver,By.xpath(elmntSpinner));
                takeScreenshot(driver);
                verifyElement(elmntTurnOffOnlineAppointmentsCheckBoxChecked);
            }
@@ -531,13 +574,15 @@ click(elmntEditButton);
             verifyElement(elmntTurnOffAppointmentsHeader);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             takeScreenshot(driver);
             waitForElement(elmntTurnOffSuccessfullyPopup);
             blresult =verifyElement(elmntTurnOffSuccessfullyPopup);
             strTime = getCurrentDate("h:mm");
             System.out.println(">>>>>strTime"+strTime);
         } catch (Exception e) {
-            System.out.println("Cannot verify the Online Appointment booking has been turned-off'] ");
+            System.out.println("Failed to click Turn Off Online Appointments Check Box checked >>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -559,13 +604,15 @@ click(elmntEditButton);
             verifyElement(elmntTurnOffAppointmentsHeader);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             takeScreenshot(driver);
             waitForElement(elmntTurnOnSuccessfullyPopup);
             blresult =verifyElement(elmntTurnOnSuccessfullyPopup);
             strTime = getCurrentDate("h:mm");
             System.out.println(">>>>>strTime"+strTime);
         } catch (Exception e) {
-            System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
+            System.out.println("Failed to click Turn On Online Appointments Check Box checked>>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -576,6 +623,7 @@ click(elmntEditButton);
             System.out.println("Entry Turn Off Online Appointments");
             waitForElement(elmntEditButton);
             click(elmntEditButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             if (isElementDisplayed(elmntTurnOnOnlineAppointmentsCheckBoxUnchecked)) {
                 System.out.println("Turn Off Online Appointments CheckBox Already Unchecked");
             }
@@ -588,11 +636,13 @@ click(elmntEditButton);
             verifyElement(elmntTurnOffAppointmentsHeader);
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             takeScreenshot(driver);
             waitForElement(elmntTurnOnSuccessfullyPopup);
             blresult =verifyElement(elmntTurnOnSuccessfullyPopup);
         } catch (Exception e) {
-            System.out.println("Cannot verify the Online Appointment booking has been turned-on'] ");
+            System.out.println("Failed to click Turn On Online Appointments Check Box Unchecked>>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -604,11 +654,14 @@ click(elmntEditButton);
             elmntSearchBox.sendKeys(Strdata);
             waitForElement(clicksearchicon);
             click(clicksearchicon);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(clickVM03LocationBookNowButton);
             click(clickVM03LocationBookNowButton);
-waitForElement(elmntSlotTimes);
-blresult =verifyElement(elmntSlotTimes);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            waitForElement(elmntSlotTimes);
+            blresult =verifyElement(elmntSlotTimes);
         } catch (Exception e) {
+            System.out.println("Failed to Enter Value in Search Box Verify Appointments Slot Is Not Displayed>>> :: ");
             e.printStackTrace();
 
         }
@@ -616,24 +669,6 @@ blresult =verifyElement(elmntSlotTimes);
 
     }
 
-    public boolean EnterValueinSearchBoxVerifyAppointmentsSlotIsDisplayed(String Strdata) {
-        boolean blresult = false;
-        try {
-            waitForElement(elmntSearchBox);
-            elmntSearchBox.sendKeys(Strdata);
-            waitForElement(clicksearchicon);
-            click(clicksearchicon);
-            waitForElement(clickVM03LocationBookNowButton);
-            click(clickVM03LocationBookNowButton);
-            waitForElement(AppointmentTimeSlotsisNotDisplaying);
-            blresult =verifyElement(AppointmentTimeSlotsisNotDisplaying);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return blresult;
-
-    }
 
     public boolean clickTurnOffAppointmentsAudit() {
         boolean blresult = false;
@@ -641,10 +676,12 @@ blresult =verifyElement(elmntSlotTimes);
             waitForElement(elmntTurnOffAppointmentsAudit);
             takeScreenshot(driver);
             jsClick(elmntTurnOffAppointmentsAudit);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(elmntTurnOffAppointmentsAuditHeader);
             blresult = verifyElement(elmntTurnOffAppointmentsAuditHeader);
         } catch (Exception e) {
-            System.out.println("Cannot verify the Changes Saved Successfully MessagePopup ");
+            System.out.println("Failed to click Turn Off Appointments Audit >>> :: ");
+            e.printStackTrace();
         }
         return blresult;
     }
@@ -669,6 +706,7 @@ blresult =verifyElement(elmntSlotTimes);
                     waitForElement(elmntAppointmentsAudit);
                     blresult =verifyElement(elmntAppointmentsAudit);
         } catch (Exception e) {
+            System.out.println("Failed to verify Appointments Audit Details Grid View >>> :: ");
             e.printStackTrace();
 
         }
@@ -696,6 +734,7 @@ blresult =verifyElement(elmntSlotTimes);
             waitForElement(elmntAppointmentsAudit);
             blresult =verifyElement(elmntAppointmentsAudit);
         } catch (Exception e) {
+            System.out.println("Failed to verify Turn On Appointments Audit Details Grid View >>> :: ");
             e.printStackTrace();
 
         }
@@ -727,12 +766,16 @@ blresult =verifyElement(elmntSlotTimes);
             waitForElement(elmntBlockAppointmentTableData);
             verifyElement(elmntBlockAppointmentTableData);
             click(elmntBlockAppointmentTableData);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
            waitForElement(elmntBlockAppointment);
            click(elmntBlockAppointment);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
            waitForElement(elmntAppointmentunblockedPopup);
             blResult =verifyElement(elmntAppointmentunblockedPopup);
         } catch (Exception e) {
+            System.out.println("Failed to Verify Block Appointment Table Data >>> :: ");
             e.printStackTrace();
+
         }
 
         return blResult;
