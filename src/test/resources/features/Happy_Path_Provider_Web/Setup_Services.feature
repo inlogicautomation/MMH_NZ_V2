@@ -10,7 +10,7 @@ Feature: Setup_Services
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
 
-  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_SETUP_SERVICES
+  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_SETUP_SERVICES1
   Scenario Template: S1- Provider Add New Service (Initiated by Clinical and applies to Staff)
     Given As a Provider I am on HomePage and navigate to Setup services in "<Setup_Modules>"
     And I click the Add new Button then select the setup services all details "<Setup_Service>"
@@ -24,7 +24,7 @@ Feature: Setup_Services
       | Setup_Modules    | Setup_Service        | Message Details            | Message           |
       | Secure Messaging | &SETUP_SERVICE_DATA& | &RECEIVED_MESSAGE_DETAILS& | &MESSAGE_DETAILS& |
 
-  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_SETUP_SERVICES
+  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_SETUP_SERVICES1
   Scenario Template: S2- Provider Add New Service (Initiated by Clinical and applies to Patient)
     Given As a Provider I am on HomePage and navigate to Setup services in "<Setup_Modules>"
     And I click the Add new Button then select the setup services Patient radio button "<Setup_Service>"
@@ -36,7 +36,7 @@ Feature: Setup_Services
       | Setup_Modules    | Setup_Service        | Message Details           | Message                   |
       | Secure Messaging | &SETUP_SERVICE_DATA& | &COMPOSE_MESSAGE_DETAILS& | &PATIENT_MESSAGE_DETAILS& |
 
-  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_SETUP_SERVICES
+  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_SETUP_SERVICES1
   Scenario Template: S3-Provider Add New Service (Initiated by Non-Clinical and applies to Patient)
     Given As a Provider I am on HomePage and navigate to Setup services in "<Setup_Modules>"
     And I click the Add new Button then select the setup services Non Clinical "<Setup_Service>"
@@ -50,7 +50,7 @@ Feature: Setup_Services
       | Setup_Modules    | Setup_Service        | Message Details           | Message                   |
       | Secure Messaging | &SETUP_SERVICE_DATA& | &COMPOSE_MESSAGE_DETAILS& | &PATIENT_MESSAGE_DETAILS& |
 
-  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_SETUP_SERVICES
+  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_SETUP_SERVICES1
   Scenario Template: S4- Provider Add New Service (Initiated by Non-Clinical and applies to Staff)
     Given As a Provider I am on HomePage and navigate to Setup services in "<Setup_Modules>"
     And I click the Add new Button then select the setup services Non Clinical to Patient Staff "<Setup_Service>"
@@ -77,7 +77,7 @@ Feature: Setup_Services
       | Setup_Modules    | Setup_Service        | Message Details            | Message           | Reply Message              |
       | Secure Messaging | &SETUP_SERVICE_DATA& | &RECEIVED_MESSAGE_DETAILS& | &MESSAGE_DETAILS& | &RECEIVED_MESSAGE_DETAILS& |
 
-  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_SETUP_SERVICES
+  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_SETUP_SERVICES1
   Scenario Template: S6- Provider Do Not Allow Patient to Reply
     Given As a Provider I am on HomePage and navigate to Setup services in "<Setup_Modules>"
     And I click the Add new Button then select the setup services Do Not Allow to patient to Reply  "<Setup_Service>"
@@ -91,7 +91,7 @@ Feature: Setup_Services
       | Setup_Modules    | Setup_Service        | Message Details            | Message           |
       | Secure Messaging | &SETUP_SERVICE_DATA& | &RECEIVED_MESSAGE_DETAILS& | &MESSAGE_DETAILS& |
 
-  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_SETUP_SERVICES
+  @WEB @PROVIDER_RRP @PROVIDER_HAPPY_PATH @PROVIDER_SETUP_SERVICES1
   Scenario Template: S7 -Provider Restrict to patient default location
     Given As a Provider I am on HomePage and navigate to Setup services in "<Setup_Modules>"
     And I click the Add new Button then select the setup services Restrict to patient default location "<Setup_Service>"

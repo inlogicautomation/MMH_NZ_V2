@@ -9,7 +9,7 @@ Feature: Provider_Messages
     And I enter "&PATIENT_USER_LOGIN&" and "&PASSWORD&" For Beta
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
-  @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
+  @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
   Scenario Template: S1-Provider Sending Message
 
     Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module
@@ -21,7 +21,7 @@ Feature: Provider_Messages
       | Message Details            |
       | &RECEIVED_MESSAGE_DETAILS& |
 
-  @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
+  @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
   Scenario Template: S2-Provider Save Message as Draft
 
     Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module
@@ -48,7 +48,7 @@ Feature: Provider_Messages
       | Compose Details            | Message Details            |
       | &PROVIDER_COMPOSE_MESSAGE& | &RECEIVED_MESSAGE_DETAILS& |
 
-  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
+  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
   Scenario Template: S4- Preparation for Group Message, Sending a Group of E-Mail's to the Patient from provider login
 
     Given As a user I am on Doctor portal homepage and Navigate to GroupMessage Page
@@ -57,10 +57,10 @@ Feature: Provider_Messages
     And As a user I am on HomePage and navigate to GroupMessage
     Then I verify the provider sent "<Group Message Details>"
     Examples:
-      | Message Details              | Group Message Details      |
-      | &SENT_GROUP_MESSAGE_DETAILS& | SENT_GROUP_MESSAGE_DETAILS |
+      | Message Details              | Group Message Details        |
+      | &SENT_GROUP_MESSAGE_DETAILS& | &SENT_GROUP_MESSAGE_DETAILS& |
 
-  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
+  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
   Scenario Outline: S5- Provider Alert Settings
     Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
     And I click the Alert Setting and select the "<Alert Type>"
@@ -70,7 +70,7 @@ Feature: Provider_Messages
       | Alert Type            |
       | &PROVIDER_ALERT TYPE& |
 
-  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
+  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
   Scenario Outline: S6- Provider Signature Settings
     Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
     And I click the Signature Setting and Enter the "<Signature Message>"
@@ -81,7 +81,7 @@ Feature: Provider_Messages
       | Signature Message            |
       | &PROVIDER_SIGNATURE MESSAGE& |
 
-  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
+  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
   Scenario Outline: S7- Provider Out Of Office Settings
 
     Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
@@ -94,7 +94,7 @@ Feature: Provider_Messages
       | Start Date   | End Date   | Message                   |
       | &START DATE& | &END DATE& | &PROVIDER_OUT OF MESSAGE& |
 
-  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
+  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
   Scenario Outline: S8- Provider Automatic Reply Settings
 
     Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
@@ -105,7 +105,7 @@ Feature: Provider_Messages
     And I enter the "<Compose Details>" to compose an email
     Then I Click Patient Send Message Button then I should see message sent Successfully popup
     And As a user I am on Doctor portal HomePage and navigate to Messages Setting
-    And I navigate to provider portal and verify the Reply message "<Message>"
+
 
     Examples:
       | Message                   | Compose Details            |

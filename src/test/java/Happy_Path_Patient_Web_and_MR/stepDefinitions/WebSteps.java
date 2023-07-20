@@ -2952,7 +2952,7 @@ public class WebSteps {
     public void iVerifyTheProviderSent(String strGroupMessage) {
         List<String> listGroupMessage = TestDataUtil.getListOfValue(strGroupMessage);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(4)), listGroupMessage.get(5)));
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(0)), listGroupMessage.get(1)));
         }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
@@ -4044,6 +4044,7 @@ public class WebSteps {
         List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentDetails);
         List<String> lstDetail = TestDataUtil.getListOfValue(strAppointmentSummary);
         Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmButton());
+
         Assert.assertTrue(demoPageContainer.appointmentsPage.verifyDetailsOfCreatedAppointment(lstDetails, (strFutureDate)));
         Assert.assertTrue(demoPageContainer.appointmentsPage.acceptTermsAndConditionsForAppointment());
         Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmYourBookingButton());
@@ -4492,6 +4493,19 @@ public class WebSteps {
         }
     }
 
+    @When("I should see details of created appointment {string} {string} and I should see booked appointment displayed under the future tab {string} {string}")
+    public void iShouldSeeDetailsOfCreatedAppointmentAndIShouldSeeBookedAppointmentDisplayedUnderTheFutureTab(String strAppointmentDetails, String strFutureDate, String strAppointmentSummary, String strVideoAppointmentDetails) {
+        List<String> lstDetails = TestDataUtil.getListOfValue(strAppointmentDetails);
+        List<String> lstDetail = TestDataUtil.getListOfValue(strAppointmentSummary);
+        List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strVideoAppointmentDetails);
+        Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmButton());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.selectTypeOfVideoAppointment(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyDetailsOfCreatedAppointment(lstDetails, (strFutureDate)));
+        Assert.assertTrue(demoPageContainer.appointmentsPage.acceptTermsAndConditionsForAppointment());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmYourBookingButton());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.verifyCreatedAppointmentInFutureAppointmentTab(lstDetail));
+        Assert.assertTrue(demoPageContainer.homePage.clickLogoutButton());
+    }
 }
 
 

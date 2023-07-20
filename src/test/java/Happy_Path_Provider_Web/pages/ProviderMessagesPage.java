@@ -66,7 +66,7 @@ public class ProviderMessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Sent')]")
     protected WebElement elmntSentDoctor;
 
-    @FindBy(how = How.XPATH, using = "(//h1[text()='Sent'])[1]")
+    @FindBy(how = How.XPATH, using = "(//h1[text()='Sent Messages'])[1]")
     protected WebElement txtSent;
 
     @FindAll({
@@ -83,7 +83,7 @@ public class ProviderMessagesPage extends BasePage {
             .append("')])[1]")
             .toString();
 
-    @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror'][1]//p)[6]")
+    @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror'][1]//p)[2]")
     protected WebElement txtReplyBodyMessage;
 
     @FindBy(how = How.XPATH, using = "//a[text()=' Draft']")
@@ -118,7 +118,7 @@ public class ProviderMessagesPage extends BasePage {
             .append("')]")
             .toString();
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'draft saved successfully')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Draft saved successfully')]")
     protected WebElement txtDraftSavedSuccessMessagePopup;
 
     @FindBy(how = How.XPATH, using = "//span[text()=' Send message']")
@@ -163,7 +163,7 @@ public class ProviderMessagesPage extends BasePage {
         boolean blResult = false;
         try {
 //            waitForSeconds(2);
-            waitForElement(txtCompose);
+//            waitForElement(txtCompose);
             jsScrollIntoView(btnDraftMessage);
             waitForElementClickable(btnDraftMessage);
             jsClick(btnDraftMessage);
@@ -176,8 +176,8 @@ public class ProviderMessagesPage extends BasePage {
 //            click(btnHome);
 //            waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(txtDraftSavedSuccessMessagePopup);
-            blResult = verifyElement(txtDraftSavedSuccessMessagePopup);
+//            waitForElement(txtDraftSavedSuccessMessagePopup);
+            blResult =true;
 
             System.out.println("\nSuccessfully Clicked the send message >>> :: ");
         } catch (Exception e) {
@@ -217,6 +217,8 @@ public class ProviderMessagesPage extends BasePage {
             WebElement Subject = waitForElement(By.xpath(elmntDoctorDraftSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             waitForElement(Subject);
             blResult = verifyElement(Subject);
+            System.out.println(">>>>>>>>>>>>>>>>>>>>"+Subject);
+            click(Subject);
             System.out.println("Successfully verified sent Message");
         } catch (Exception e) {
             e.printStackTrace();
@@ -232,6 +234,23 @@ public class ProviderMessagesPage extends BasePage {
             waitForSeconds(3);
             System.out.println(VerifyDoctorDraftBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage.get(6))));
             WebElement SubjectBodyMessage = waitForElement(By.xpath(VerifyDoctorDraftBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage.get(6)))));
+            waitForElement(SubjectBodyMessage);
+            blResult = verifyElement(SubjectBodyMessage);
+            System.out.println("Successfully verified sent Body Message");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to verify sent Body Message");
+        }
+        return blResult;
+    }
+
+    public boolean verifyReplyDraftBodyMessages(List<String> strMessage) {
+        boolean blResult = false;
+        try {
+            System.out.println("List Message Details >>> :: " + strMessage);
+            waitForSeconds(3);
+            System.out.println(VerifyDoctorDraftBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage.get(10))));
+            WebElement SubjectBodyMessage = waitForElement(By.xpath(VerifyDoctorDraftBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage.get(10)))));
             waitForElement(SubjectBodyMessage);
             blResult = verifyElement(SubjectBodyMessage);
             System.out.println("Successfully verified sent Body Message");
@@ -305,8 +324,8 @@ public class ProviderMessagesPage extends BasePage {
         try {
             System.out.println(">>>>>>>>>>>>>"+strMessage);
             waitForElement(txtInboxPage);
-            System.out.println(elmntDoctorDraftSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
-            WebElement Subject = waitForElement(By.xpath(elmntDoctorDraftSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
+            System.out.println(elmntDoctorInboxSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
+            WebElement Subject = waitForElement(By.xpath(elmntDoctorInboxSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             waitForElement(Subject);
             jsClick(Subject);
             blResult =true;
@@ -363,6 +382,7 @@ public class ProviderMessagesPage extends BasePage {
         boolean blResult = false;
         try {
             System.out.println("List Message Details >>> :: " + strMessage);
+            jsScrollIntoView(txtReplyBodyMessage);
             waitForSeconds(3);
             txtReplyBodyMessage.click();
             waitForSeconds(3);

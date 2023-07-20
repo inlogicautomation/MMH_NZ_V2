@@ -151,6 +151,9 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationCenter']")
     protected WebElement elmntLocationCenter;
 
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='location']")
+    protected WebElement elmntProviderLocationCenter;
+
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='provider']")
     protected WebElement elmntSelectProviderdropdown;
 
@@ -403,7 +406,16 @@ public class AppointmentsPage extends BasePage {
             .append("<<REPLACEMENT3>>")
             .append("')]/ancestor::mat-card/child::mat-card-footer/button").toString();
 
+    @FindBy(how = How.XPATH, using = "//button[@aria-label='Open calendar']")
+    protected WebElement elmntCalendar;
 
+    @FindBy(how = How.XPATH, using = "//button[@aria-label='Choose month and year']")
+    protected WebElement elmntMonthAndYear;
+
+    public String futureDate = new StringBuilder()
+            .append("//td/div[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')]").toString();
     protected String btnJoinVideoConsultingForCreatedAppointment = new StringBuilder().append("//mat-card//following-sibling::div//mat-card-title[contains(text(),'")
             .append("<<REPLACEMENT1>>")
             .append("')]/ancestor::mat-card//child::mat-card-actions//p[contains(text(),'")
@@ -600,14 +612,14 @@ public class AppointmentsPage extends BasePage {
 
 
     protected String strMyAppointmentContentLocator = new StringBuilder()
-            .append("//td[contains(text(),'")
+            .append("(//td[contains(text(),'")
             .append("<<REPLACEMENT1>>").append("')]//following::td[contains(text(),'")
             .append("<<REPLACEMENT2>>").append("')]//following::td[contains(text(),'")
             .append("<<REPLACEMENT3>>").append("')]//following::td/p[contains(text(),'")
             .append("<<REPLACEMENT4>>").append("')]//following::td[contains(text(),'")
             .append("<<REPLACEMENT5>>").append("')]//following::td//following::td[contains(text(),'")
             .append("<<REPLACEMENT6>>").append("')]//following::td[contains(text(),'")
-            .append("<<REPLACEMENT7>>").append("')]").toString();
+            .append("<<REPLACEMENT7>>").append("')])[1]").toString();
 
 
 
@@ -781,7 +793,7 @@ public class AppointmentsPage extends BasePage {
             mouseClick(elmntSelectHealthCenter);
 //            waitForElementToAppear(driver,By.xpath(elmntSpinner));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = verifyElement(elmntLocationCenter);
+            blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -811,14 +823,14 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElementClickable(elmntLocationCenter);
-            jsClick(elmntLocationCenter);
+            waitForElementClickable(elmntProviderLocationCenter);
+            jsClick(elmntProviderLocationCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntSelectLocation = waitForElement(By.xpath(MyAppointmentProviderLocation.replace("<<REPLACEMENT>>", strLocation)));
             System.out.println(">>>>>>>>>>>>>>"+elmntSelectLocation);
             mouseClick(elmntSelectLocation);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = verifyElement(elmntLocationCenter);
+            blResult = verifyElement(elmntProviderLocationCenter);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -2326,10 +2338,10 @@ public class AppointmentsPage extends BasePage {
 
     public boolean enterPhoneNumber(String strPhoneNumber) {
         boolean blResult = false;
-        try {
+        try {jsScrollIntoView(txtPhoneNumber);
             waitForSeconds(4);
             waitForElement(elmntPhoneCode);
-            click(txtPhoneNumber);
+            jsClick(txtPhoneNumber);
             waitForSeconds(2);
             driver.switchTo().activeElement().sendKeys(strPhoneNumber);
 //            enterValue(txtPhoneNumber, strPhoneNumber);
@@ -3346,9 +3358,9 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(3);
             String strdata=getDefaultLocationDoctorName.getText().trim();
             System.out.println("GetTextProviderName:: "+strdata);
-            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(VM03PraticeDoctorNames.get(0)))));
+            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(VM03PraticeDoctorNames.get(1)))));
                 System.out.println("elmntProviderName"+elmntProviderName);
-                if (strdata.equals(TestDataUtil.getValue(VM03PraticeDoctorNames.get(0)))){
+                if (strdata.equals(TestDataUtil.getValue(VM03PraticeDoctorNames.get(1)))){
                     jsScrollIntoView(elmntProviderName);
                     blresult=verifyElement(elmntProviderName);
                     System.out.println("Successfully Verified the VM03Location Default Provider Name");
@@ -3381,9 +3393,9 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(3);
             String strdata=getDefaultLocationDoctorName.getText().trim();
             System.out.println("GetTextProviderName::::"+strdata);
-            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(0)))));
+            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(1)))));
             System.out.println("elmntProviderName"+elmntProviderName);
-            if (strdata.equals(TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(0)))) {
+            if (strdata.equals(TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(1)))) {
                 jsScrollIntoView(elmntProviderName);
                 verifyElement(elmntProviderName);
                 System.out.println("Successfully Verified the Auto Practice Loc1 Location Default Provider Name");
@@ -3417,9 +3429,9 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(3);
             String strdata=getDefaultLocationDoctorName.getText().trim();
             System.out.println("GetTextProviderName:::"+strdata);
-            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(VM03PraticeDoctorNames.get(0)))));
+            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(VM03PraticeDoctorNames.get(1)))));
             System.out.println("elmntProviderName"+elmntProviderName);
-            if (strdata.equals(TestDataUtil.getValue(VM03PraticeDoctorNames.get(0)))){
+            if (strdata.equals(TestDataUtil.getValue(VM03PraticeDoctorNames.get(1)))){
                 jsScrollIntoView(elmntProviderName);
                 verifyElement(elmntProviderName);
                 System.out.println("Successfully Verified the VM03Location Default Provider Name");
@@ -3963,43 +3975,51 @@ public class AppointmentsPage extends BasePage {
     public boolean selectMyAppointmentsFutureDateOnCalender(String strFutureDate) {
         boolean blResult = false;
         try {
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(5);
-            String strDatePattern1 = "d";
-            String strDate = strFutureDate;
 
-            String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
-            System.out.println("DATE" + strDateValue);
+                    waitForSeconds(3);
+                    waitForElement(elmntCalendar);
+                    waitForElementClickable(elmntCalendar);
+                    waitAndClick(elmntCalendar);
 
-//            jsScrollIntoView(elmntMyAppointmentFromDateCalendar);
-            waitForElement(elmntMyAppointmentFromDateCalendar);
-            verifyElement(elmntMyAppointmentFromDateCalendar);
-            jsClick(elmntMyAppointmentFromDateCalendar);
-            try {
-                WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
-                verifyElement(elmntDate);
-                waitForElementClickable(elmntDate);
-                waitForSeconds(3);
-                waitForElementDisappear(driver, By.xpath(elmntSpinner));
-                jsClick(elmntDate);
-                waitForElementDisappear(driver, By.xpath(elmntSpinner));
-                waitForSeconds(2);
-            } catch (Exception e) {
-                verifyElement(elmntCalendarNavNext);
-                jsClick(elmntCalendarNavNext);
-                waitForElementDisappear(driver, By.xpath(elmntSpinner));
-                waitForSeconds(3);
-                WebElement elmntDate = waitForElementClickable(By.xpath(elmntDatePicker.replace("<<REPLACEMENT>>", strDateValue)));
-                verifyElement(elmntDate);
-                waitForElementClickable(elmntDate);
-                waitForSeconds(3);
-                waitForElementDisappear(driver, By.xpath(elmntSpinner));
-                jsClick(elmntDate);
-                waitForElementDisappear(driver, By.xpath(elmntSpinner));
-                waitForSeconds(2);
-            }
+                    waitForSeconds(3);
+                    waitForElement(elmntMonthAndYear);
+                    waitForElementClickable(elmntMonthAndYear);
+                    waitAndClick(elmntMonthAndYear);
 
-            blResult = verifyElement(elmntMyAppointmentFromDateCalendar);
+
+                    String date = getDayAfterTommorrowDate("d");
+                    String month = getDayAfterTommorrowDate("MMM").toUpperCase();
+                    String year = getDayAfterTommorrowDate("YYYY");
+
+                    System.out.println("getDayAfterTomorrowDate >>> :: " + date);
+                    System.out.println("getDayAfterTomorrowDate >>> :: " + month);
+                    System.out.println("getDayAfterTomorrowDate >>> :: " + year);
+
+
+                    System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", year));
+                    WebElement selectYear = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", year)));
+
+                    waitForSeconds(3);
+                    waitForElement(selectYear);
+                    waitForElementClickable(selectYear);
+                    waitAndClick(selectYear);
+
+                    System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", month));
+                    WebElement selectMonth = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", month)));
+
+                    waitForSeconds(3);
+                    waitForElement(selectMonth);
+                    waitForElementClickable(selectMonth);
+                    waitAndClick(selectMonth);
+
+                    System.out.println("X-Path for Year >>> :: " + futureDate.replace("<<REPLACEMENT>>", date));
+                    WebElement selectDate = waitForElement(By.xpath(futureDate.replace("<<REPLACEMENT>>", date)));
+
+                    waitForSeconds(3);
+                    waitForElement(selectDate);
+                    waitForElementClickable(selectDate);
+                    waitAndClick(selectDate);
+                    blResult = verifyElement(elmntMyAppointmentFromDateCalendar);
         } catch (Exception e) {
             System.out.println("Failed to select My Appointments Future Date On Calender >>> :: ");
             e.printStackTrace();

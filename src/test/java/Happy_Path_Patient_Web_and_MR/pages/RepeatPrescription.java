@@ -2470,12 +2470,13 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
     public boolean verifyRestrictedByLocation(String strLocation) {
         boolean dropDownLocation = false;
         try {
-//            waitForElement(SelectDoctordrpdown);
-//            waitForElementClickable(SelectDoctordrpdown);
-//            jsClick(SelectDoctordrpdown);
-//            WebElement ddlScriptInstruction = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
-//            jsScrollIntoView(ddlScriptInstruction);
-//            click(ddlScriptInstruction);
+            waitForElement(SelectDoctordrpdown);
+            waitForElementClickable(SelectDoctordrpdown);
+            jsClick(SelectDoctordrpdown);
+            WebElement ddlScriptInstruction = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
+            jsScrollIntoView(ddlScriptInstruction);
+            verifyElement(ddlScriptInstruction);
+            click(ddlScriptInstruction);
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
 //            String currentLocation = SelectDoctordrpdown.getText();
 //            String current = SelectDoctordrpdown.getAttribute("ng-reflect-value");
@@ -2487,7 +2488,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
 //                System.out.println("Both locations mismatched ");
 //                dropDownLocation = false;
 //            }
-            dropDownLocation=!verifyElement(SelectDoctordrpdown);
+            dropDownLocation=verifyElement(SelectDoctordrpdown);
         } catch (Exception e) {
             System.out.println("Default unchangable Doctor Location are not verified in the Request Medication as per Location and Provider rule");
             e.printStackTrace();
@@ -2498,18 +2499,18 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
     public boolean verifyRestrictedByProvider(String strProvider) {
         boolean doctorPresence = false;
         try {
-//            waitForElement(selectedProviderName);
-//            String selectedProvider = selectedProviderName.getText();
-//            System.out.println("selectedProvider:::" + selectedProvider);
-//            System.out.println("Current Provider name is " + selectedProvider + "Expected Provider name is " + strProvider);
-//            if (selectedProvider.equalsIgnoreCase(strProvider)) {
-//                System.out.println("Select Doctor dropdown is present and matched as per the Provider and Location Rule");
-//                doctorPresence = true;
-//            } else {
-//                System.out.println("Select Doctor dropdown is present BUT NOT MATCHED as per the Provider and Location Rule");
-//                doctorPresence = false;
-//            }
-            doctorPresence=!verifyElement(selectedProviderName);
+            waitForElement(selectedProviderName);
+            String selectedProvider = selectedProviderName.getText();
+            System.out.println("selectedProvider:::" + selectedProvider);
+            System.out.println("Current Provider name is " + selectedProvider + "Expected Provider name is " + strProvider);
+            if (selectedProvider.equalsIgnoreCase(strProvider)) {
+                System.out.println("Select Doctor dropdown is present and matched as per the Provider and Location Rule");
+                doctorPresence = true;
+            } else {
+                System.out.println("Select Doctor dropdown is present BUT NOT MATCHED as per the Provider and Location Rule");
+                doctorPresence = false;
+            }
+            doctorPresence=verifyElement(selectedProviderName);
         } catch (Exception e) {
             System.out.println("Default unchangable Doctor dropdown are not verified in the Request Medication as per Location and Provider rule");
             e.printStackTrace();
@@ -2660,7 +2661,8 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
                 for (int i = 0; i < ScriptUrgencies.size(); i++) {
                     System.out.println("Entered into the For Loop");
                     waitForSeconds(2);
-                    if (ScriptUrgencies.get(i).equals(lstActualScriptUrgencies.get(i))) {
+                    System.out.println("Expected::::" + ScriptUrgencies.get(i) + "Actual::::" + lstActualScriptUrgencies.get(i));
+                    if (ScriptUrgencies.get(i).equalsIgnoreCase(lstActualScriptUrgencies.get(i))) {
                         System.out.println("Expected::::" + ScriptUrgencies.get(i) + "Actual::::" + lstActualScriptUrgencies.get(i));
                         System.out.println("Matched");
                         verifyScriptUrgency = true;
@@ -2918,6 +2920,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
 // waitForPresenceOfElement(By.xpath("//div[@role='listbox']"));
             WebElement ddlScriptInstruction = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));
             jsScrollIntoView(ddlScriptInstruction);
+            verifyElement(ddlScriptInstruction);
             click(ddlScriptInstruction);
             waitForElementDisappear(driver, By.xpath("//mat-progress-spinner[@role='progressbar']"));
 // String currentLocation = SelectDoctordrpdown.getText();

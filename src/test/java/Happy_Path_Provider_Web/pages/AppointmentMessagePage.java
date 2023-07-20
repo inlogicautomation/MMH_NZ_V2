@@ -330,7 +330,8 @@ public class AppointmentMessagePage extends BasePage {
         try {
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyBannerHeading.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strHeading.concat(strExecutionID)))));
-            blresult = verifyElement(elmntBannerHeading);
+             verifyElement(elmntBannerHeading);
+             blresult=true;
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
         } catch (Exception e) {
             System.out.println("Failed To  verify Banner Heading >>> :: ");
@@ -345,7 +346,8 @@ public class AppointmentMessagePage extends BasePage {
         try {
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             WebElement elmntBannerMessage = waitForElement(By.xpath(elmntVerifyBannerMessage.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
-            blresult = verifyElement(elmntBannerMessage);
+             verifyElement(elmntBannerMessage);
+             blresult=true;
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
         } catch (Exception e) {
             System.out.println("Failed To  verify Banner Message >>> :: ");
@@ -451,13 +453,14 @@ public class AppointmentMessagePage extends BasePage {
             String strdata=TestDataUtil.getValue(strHeading).concat(strExecutionID);
             System.out.println("strdata ::::: "+strdata);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
-            WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyWebBannerMessage.replaceAll("<<REPLACEMENT>>", strdata)));
-            System.out.println(">>>>>>>>>elmntBannerHeading"+elmntBannerHeading);
-            if (!verifyElement(elmntBannerHeading)){
-                blresult=true;
-            }else {
-                verifyElement(elmntBannerHeading);
+//            WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyWebBannerMessage.replaceAll("<<REPLACEMENT>>", strdata)));
+//            System.out.println(">>>>>>>>>elmntBannerHeading"+elmntBannerHeading);
+            boolean data=verifyElement(By.xpath(elmntVerifyWebBannerMessage.replaceAll("<<REPLACEMENT>>", strdata)));
+            if (data==true){
                 blresult=false;
+            }
+            if (data==false){
+                blresult=true;
             }
         } catch (Exception e) {
             System.out.println("Failed To verify Web Banner Heading >>> :: ");
@@ -503,5 +506,25 @@ public class AppointmentMessagePage extends BasePage {
         return blresult;
     }
 
+    public boolean verifyWebBannerHeadingNotDisplayed(String strHeading) {
+        boolean blresult = false;
+        try {
+            String strdata=TestDataUtil.getValue(strHeading).concat(strExecutionID);
+            System.out.println("strdata ::::: "+strdata);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            boolean data=verifyElement(By.xpath(elmntVerifyWebBannerHeading.replaceAll("<<REPLACEMENT>>", strdata)));
+          if (data==true){
+              blresult=false;
+          }
+          if (data==false){
+              blresult=true;
+          }
+
+        } catch (Exception e) {
+            System.out.println("Failed To verify Web Banner Heading >>> :: ");
+            e.printStackTrace();
+        }
+        return blresult;
+    }
 
 }

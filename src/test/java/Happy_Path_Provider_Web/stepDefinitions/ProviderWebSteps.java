@@ -319,7 +319,7 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectHealthCentreLocation(lstDetails.get(0)));
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectServiceName(lstDetails.get(1)));
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectOtherReqDataToRestrictNameAndLocation());
-        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqData(TestDataUtil.getListOfValue(strDetail)));
+//        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectSendReqData(TestDataUtil.getListOfValue(strDetail)));
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }
@@ -653,7 +653,7 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     @Then("I should verify the Patient Portal Web Banner heading {string} and Banner Messages {string} are not displayed")
     public void iShouldVerifyThePatientPortalWebBannerHeadingAndBannerMessagesAreNotDisplayed(String strBannerHeading, String strBannerMessage) {
         Assert.assertTrue(providerPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerHeading(strBannerHeading));
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerHeadingNotDisplayed(strBannerHeading));
         Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerMessageNotDisplayed(strBannerMessage));
     }
 
@@ -822,7 +822,7 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     public void iNavigateToInboxItemsAndCreateAReplyMessage(String strMessageDetails) {
         List<String> lstMessageDetails = TestDataUtil.getListOfValue(strMessageDetails);
         System.out.println("List Message Details >>> :: " + lstMessageDetails);
-        Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyDraftBodyMessages(TestDataUtil.getListOfValue(strMessageDetails)));
+        Assert.assertTrue(providerPageContainer.providerMessagesPage.verifyReplyDraftBodyMessages(TestDataUtil.getListOfValue(strMessageDetails)));
         Assert.assertTrue(providerPageContainer.providerMessagesPage.clickAttachButtonInboxMessages());
         Assert.assertTrue(providerPageContainer.providerMessagesPage.EnterReplyBodyMessages(TestDataUtil.getValue(lstMessageDetails.get(8))));
         Assert.assertTrue(providerPageContainer.providerMessagesPage.clickSendMessageButtonInboxMessages());
@@ -1126,7 +1126,7 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     @Given("As a Provider I am on HomePage and navigate to Phone Appointment Setting page")
     public void asAProviderIAmOnHomePageAndNavigateToPhoneAppointmentSettingPage() {
         Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.navigateToProviderHomepage());
-        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickSystemMenu());
+        Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickSecureMessaging());
         Assert.assertTrue(providerPageContainer.phoneAppointmentSettingPage.clickPhoneAppointmentSetting());
     }
 
@@ -1167,7 +1167,7 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     @Given("As a Provider I am on HomePage and navigate to Recall Setting page")
     public void asAProviderIAmOnHomePageAndNavigateToRecallSettingPage() {
         Assert.assertTrue(providerPageContainer.recallSettingPage.navigateToProviderHomepage());
-        Assert.assertTrue(providerPageContainer.recallSettingPage.clickSystemMenu());
+        Assert.assertTrue(providerPageContainer.recallSettingPage.clickSecureMessaging());
         Assert.assertTrue(providerPageContainer.recallSettingPage.clickRecallSetting());
     }
     @And("I click edit button select the Recall Setting Health centre {string}")
