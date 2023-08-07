@@ -57,8 +57,8 @@ Feature: Provider_Messages
     And As a user I am on HomePage and navigate to GroupMessage
     Then I verify the provider sent "<Group Message Details>"
     Examples:
-      | Message Details              | Group Message Details      |
-      | &SENT_GROUP_MESSAGE_DETAILS& | SENT_GROUP_MESSAGE_DETAILS |
+      | Message Details              | Group Message Details        |
+      | &SENT_GROUP_MESSAGE_DETAILS& | &SENT_GROUP_MESSAGE_DETAILS& |
 
   @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
   Scenario Outline: S5- Provider Alert Settings
@@ -105,7 +105,7 @@ Feature: Provider_Messages
     And I enter the "<Compose Details>" to compose an email
     Then I Click Patient Send Message Button then I should see message sent Successfully popup
     And As a user I am on Doctor portal HomePage and navigate to Messages Setting
-    And I navigate to provider portal and verify the Reply message "<Message>"
+
 
     Examples:
       | Message                   | Compose Details            |

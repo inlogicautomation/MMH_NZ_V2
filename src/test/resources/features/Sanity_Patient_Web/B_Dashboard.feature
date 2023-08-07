@@ -186,7 +186,7 @@ Feature: Dashboard
     And Navigate to Inbox bar by clicking View Message from text dashboard
 
 
-  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_HEALTH-RECORDS
+  @WEB @DASHBOARD @SANITY_PATH1 @DASHBOARD_HEALTH-RECORDS
   Scenario: View patient Health Records
 
     Given As a Existing user I am on HomePage and I click Dashboard

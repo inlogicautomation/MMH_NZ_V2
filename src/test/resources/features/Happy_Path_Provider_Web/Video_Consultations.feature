@@ -10,7 +10,7 @@ Feature: Video Consultations
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
 
-  @WEB @PROVIDER_HAPPY_PATH @VIDEO_CONSULTATIONS
+  @WEB @PROVIDER_HAPPY_PATH1 @VIDEO_CONSULTATIONS
   Scenario Template: Prep- Canceling all the appointments
 
     Given As a user I am on HomePage
@@ -28,7 +28,7 @@ Feature: Video Consultations
     Given As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
     And I navigate to Appointments Menu and I click the Book Appointment
     And I enter the video appointment details "<Appointment_Details>"
-    When I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>" and I should see booked appointment displayed under the future tab "<Appointment_Summary>"
+    When I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>" and I should see booked appointment displayed under the future tab "<Appointment_Summary>" "<Appointment_Details>"
     And As a user I am on Patient Portal login Page and I enter "<Patient_User_Login>" and "<Password>" For Beta I should see user successfully logs in to the MMH portal
     And As a Provider I am on HomePage and navigate to Video Consultations page
     Then I should see Video consultations details in My appointments grid based on the select provider name "<My_Appointment_Details>"

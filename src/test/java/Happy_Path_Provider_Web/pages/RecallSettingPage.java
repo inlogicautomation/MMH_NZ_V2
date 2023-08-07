@@ -13,17 +13,28 @@ public class RecallSettingPage extends BasePage {
         super(driver);
     }
 
+//    @FindAll({
+//            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"), //Desktop View
+//            @FindBy(how = How.XPATH, using = " //h1[contains(text(),'Welcome,')]//span[contains(text(),'Steve!')]"),
+//    })
+//    protected WebElement txtWelcome;
+
     @FindAll({
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"), //Desktop View
-            @FindBy(how = How.XPATH, using = " //h1[contains(text(),'Welcome,')]//span[contains(text(),'Steve!')]"),
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp1!')]")
     })
-    protected WebElement txtWelcome;
+    protected WebElement txtProviderPortalWelcomePage;
 
     @FindBy(xpath = "//a[@class='navbar-brand']")
     protected WebElement elmtMMHLogo;
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
+    @FindBy(xpath = "//span[contains(text(),'Setup Modules')]")
+    protected WebElement elmtSecureMessaging;
+
+    @FindBy(xpath = "//span[contains(text(),'Repeat Prescriptions')]")
+    protected WebElement elmtRepeatScriptSettings;
     @FindBy(xpath = "//span[contains(text(),'Systems Menu')]/following::mat-icon[contains(@class,'mat-icon notranslate dd')]")
     protected WebElement elmtSystemsMenu;
 
@@ -33,7 +44,7 @@ public class RecallSettingPage extends BasePage {
     @FindBy (how = How.XPATH, using = "//span[text()='Systems Menu']")
     protected WebElement elmntSystemMenu;
 
-    @FindBy (how = How.XPATH, using = "//span[contains(text(),'Recall Settings')]")
+    @FindBy (how = How.XPATH, using = "//span[contains(text(),'Recalls')]")
     protected WebElement elmntRecallSetting;
 
     @FindBy (how = How.XPATH, using = "//h1[contains(text(),'Recall Settings')]")
@@ -68,16 +79,16 @@ public class RecallSettingPage extends BasePage {
         boolean blResult = false;
         try{
 
-            if (isElementDisplayed(txtWelcome)) {
-                verifyElement(txtWelcome);
+            if (isElementDisplayed(txtProviderPortalWelcomePage)) {
+                verifyElement(txtProviderPortalWelcomePage);
                 waitForSeconds(3);
                 waitForElement(elmtMMHLogo);
                 waitForElementClickable(elmtMMHLogo);
                 jsClick(elmtMMHLogo);
                 waitForSeconds(3);
-                blResult = verifyElement(txtWelcome);
+                blResult = verifyElement(txtProviderPortalWelcomePage);
             }
-            if (!isElementDisplayed(txtWelcome)){
+            if (!isElementDisplayed(txtProviderPortalWelcomePage)){
                 focusWindow(1);
                 System.out.println("Successfully switch to doctor portal");
                 waitForElement(elmtMMHLogo);
@@ -85,9 +96,33 @@ public class RecallSettingPage extends BasePage {
                 jsClick(elmtMMHLogo);
                 System.out.println("Successfully click Logo");
                 waitForSeconds(3);
-                blResult=verifyElement(txtWelcome);
+                blResult=verifyElement(txtProviderPortalWelcomePage);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean clickSecureMessaging() {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            jsScrollIntoView(elmtSecureMessaging);
+            waitForSeconds(2);
+            waitForElementClickable(elmtSecureMessaging);
+            System.out.println("Systems Menu is available to click");
+            jsClick(elmtSecureMessaging);
+            jsScrollIntoView(elmtRepeatScriptSettings);
+            System.out.println("scrolled ");
+            takeScreenshot(driver);
+            if (!verifyElement(elmtRepeatScriptSettings)){
+                click(elmtSecureMessaging);
+            }
+            jsScrollIntoView(elmtRepeatScriptSettings);
+            blResult = verifyElement(elmtRepeatScriptSettings);
+        } catch (Exception e) {
+            System.out.println("Failed to click Secure Messages >>> :: ");
             e.printStackTrace();
         }
         return blResult;

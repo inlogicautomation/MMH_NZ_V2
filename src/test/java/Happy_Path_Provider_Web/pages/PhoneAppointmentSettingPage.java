@@ -17,17 +17,24 @@ public class PhoneAppointmentSettingPage extends BasePage {
         super(driver);
     }
 
-        @FindAll({
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"), //Desktop View
-            @FindBy(how = How.XPATH, using = " //h1[contains(text(),'Welcome,')]//span[contains(text(),'Steve!')]"),
+//        @FindAll({
+//            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"), //Desktop View
+//            @FindBy(how = How.XPATH, using = " //h1[contains(text(),'Welcome,')]//span[contains(text(),'Steve!')]"),
+//    })
+//    protected WebElement txtWelcome;
+
+    @FindAll({
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp1!')]")
     })
-    protected WebElement txtWelcome;
+    protected WebElement txtProviderPortalWelcomePage;
 
     @FindBy(xpath = "//a[@class='navbar-brand']")
     protected WebElement elmtMMHLogo;
     @FindBy(xpath = "//span[contains(text(),'Appointment Settings')]")
     protected WebElement elmtAppointmentSettings;
-
+    @FindBy(xpath = "(//span[contains(text(),'Appointments')])[2]")
+    protected WebElement elmtAppointments;
     @FindBy (how = How.XPATH, using = "//span[text()='Systems Menu']")
     protected WebElement elmntSystemMenu;
     @FindBy(xpath = "//span[contains(text(),'Systems Menu')]/following::mat-icon[contains(@class,'mat-icon notranslate dd')]")
@@ -44,27 +51,27 @@ public class PhoneAppointmentSettingPage extends BasePage {
             .append("<<REPLACEMENT>>").append("')])[1]").toString();
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
-    @FindBy(how = How.XPATH, using = "//span[text()=' VM03Location']//preceding::input[@aria-checked='true']")
+    @FindBy(how = How.XPATH, using = "//span[text()=' Automation_Practice1_Loc1']//preceding::input[@aria-checked='true']")
     protected WebElement elmntPhoneAppointmentVM03Location;
-    @FindBy(how = How.XPATH, using = "//span[text()=' VM03Location']//preceding::input[@aria-checked='false']")
+    @FindBy(how = How.XPATH, using = "//span[text()=' Automation_Practice1_Loc1']//preceding::input[@aria-checked='false']")
     protected WebElement verifyPhoneAppointmentVM03Location;
-    @FindBy(how = How.XPATH, using = "(//span[text()=' VM03Location2']//preceding::input[@aria-checked='true'])[2]")
+    @FindBy(how = How.XPATH, using = "(//span[text()=' Automation_Practice1_Loc2']//preceding::input[@aria-checked='true'])[2]")
     protected WebElement elmntPhoneAppointmentVM03Location2;
-    @FindBy(how = How.XPATH, using = "//span[text()=' VM03Location2']//preceding::input[@aria-checked='false']")
+    @FindBy(how = How.XPATH, using = "//span[text()=' Automation_Practice1_Loc2']//preceding::input[@aria-checked='false']")
     protected WebElement verifyPhoneAppointmentVM03Location2;
-    @FindBy(how = How.XPATH, using = "(//span[text()=' VM03Location']//following::input[@name='rules0'])[1]")
+    @FindBy(how = How.XPATH, using = "(//span[text()=' Automation_Practice1_Loc1']//following::input[@name='rules0'])[1]")
     protected WebElement clickVM03LocationRule1;
 
-    @FindBy(how = How.XPATH, using = "(//span[text()=' VM03Location']//following::input[@name='rules0'])[2]")
+    @FindBy(how = How.XPATH, using = "(//span[text()=' Automation_Practice1_Loc1']//following::input[@name='rules0'])[2]")
     protected WebElement clickVM03LocationRule2;
-    @FindBy(how = How.XPATH, using = "(//span[text()=' VM03Location2']//following::input[@name='rules1'])[1]")
+    @FindBy(how = How.XPATH, using = "(//span[text()=' Automation_Practice1_Loc2']//following::input[@name='rules1'])[1]")
     protected WebElement clickVM03Location2Rule1;
 
-    @FindBy(how = How.XPATH, using = "(//span[text()=' VM03Location2']//following::input[@name='rules1'])[1]")
+    @FindBy(how = How.XPATH, using = "(//span[text()=' Automation_Practice1_Loc2']//following::input[@name='rules1'])[1]")
     protected WebElement clickVM03Location2Rule2;
-    @FindBy(how = How.XPATH, using = "(//span[text()=' VM03Location']//following::textarea)[1]")
+    @FindBy(how = How.XPATH, using = "(//span[text()=' Automation_Practice1_Loc1']//following::textarea)[1]")
     protected WebElement EnterVM03LocationTextValue;
-    @FindBy(how = How.XPATH, using = "//span[text()=' VM03Location2']//following::textarea")
+    @FindBy(how = How.XPATH, using = "(//span[text()=' Automation_Practice1_Loc2']//following::textarea)[1]")
     protected WebElement EnterVM03Location2TextValue;
     @FindBy(how = How.XPATH, using = " //span[contains(text(),'Save')] ")
     protected WebElement ClickSaveButton;
@@ -80,21 +87,26 @@ public class PhoneAppointmentSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//div[contains(text(),'Patient')]//preceding::input[@name='phnecallInitiation1'])[2]")
     protected WebElement clickVM03Location2PatientRadioButton;
 
+    @FindBy(xpath = "//span[contains(text(),'Setup Modules')]")
+    protected WebElement elmtSecureMessaging;
+
+    @FindBy(xpath = "//span[contains(text(),'Repeat Prescriptions')]")
+    protected WebElement elmtRepeatScriptSettings;
 
     public boolean  navigateToProviderHomepage() {
         boolean blResult = false;
         try{
 
-            if (isElementDisplayed(txtWelcome)) {
-                verifyElement(txtWelcome);
+            if (isElementDisplayed(txtProviderPortalWelcomePage)) {
+                verifyElement(txtProviderPortalWelcomePage);
                 waitForSeconds(3);
                 waitForElement(elmtMMHLogo);
                 waitForElementClickable(elmtMMHLogo);
                 jsClick(elmtMMHLogo);
                 waitForSeconds(3);
-                blResult = verifyElement(txtWelcome);
+                blResult = verifyElement(txtProviderPortalWelcomePage);
             }
-            if (!isElementDisplayed(txtWelcome)){
+            if (!isElementDisplayed(txtProviderPortalWelcomePage)){
                 focusWindow(1);
                 System.out.println("Successfully switch to doctor portal");
                 waitForElement(elmtMMHLogo);
@@ -102,9 +114,33 @@ public class PhoneAppointmentSettingPage extends BasePage {
                 jsClick(elmtMMHLogo);
                 System.out.println("Successfully click Logo");
                 waitForSeconds(3);
-                blResult=verifyElement(txtWelcome);
+                blResult=verifyElement(txtProviderPortalWelcomePage);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean clickSecureMessaging() {
+        boolean blResult = false;
+        try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            jsScrollIntoView(elmtSecureMessaging);
+            waitForSeconds(2);
+            waitForElementClickable(elmtSecureMessaging);
+            System.out.println("Systems Menu is available to click");
+            jsClick(elmtSecureMessaging);
+            jsScrollIntoView(elmtRepeatScriptSettings);
+            System.out.println("scrolled ");
+            takeScreenshot(driver);
+            if (!verifyElement(elmtRepeatScriptSettings)){
+                click(elmtSecureMessaging);
+            }
+            jsScrollIntoView(elmtRepeatScriptSettings);
+            blResult = verifyElement(elmtRepeatScriptSettings);
+        } catch (Exception e) {
+            System.out.println("Failed to click Secure Messages >>> :: ");
             e.printStackTrace();
         }
         return blResult;
@@ -136,8 +172,9 @@ public class PhoneAppointmentSettingPage extends BasePage {
     public boolean clickPhoneAppointmentSetting() {
         boolean blresult = false;
         try {
-            waitForElement(elmtAppointmentSettings);
-            click(elmtAppointmentSettings);
+            jsScrollIntoView(elmtAppointments);
+            waitForElement(elmtAppointments);
+            click(elmtAppointments);
             jsScrollIntoView(elmntPhoneAppointmentSetting);
             waitForElement(elmntPhoneAppointmentSetting);
             click(elmntPhoneAppointmentSetting);
@@ -300,6 +337,7 @@ public class PhoneAppointmentSettingPage extends BasePage {
     public boolean EnterVM03Location2textbox(String textboxdata) {
         boolean blresult = false;
         try {
+            jsScrollIntoView(EnterVM03Location2TextValue);
             waitForElement(EnterVM03Location2TextValue);
 enterValue(EnterVM03Location2TextValue,textboxdata);
 

@@ -481,7 +481,7 @@ public class ProviderHomePage extends BasePage {
                     } else {
 //                        System.out.println("Else Part ::::::Window Count 2");
                         driver.manage().deleteAllCookies();
-                        visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                        visit(TestDataUtil.getValue("&URL&"));
                         driver.manage().deleteAllCookies();
                     }
 
@@ -490,7 +490,7 @@ public class ProviderHomePage extends BasePage {
                     ((JavascriptExecutor) driver).executeScript("window.open()");
                     ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
                     driver.switchTo().window(tabs.get(1));
-                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    visit(TestDataUtil.getValue("&URL&"));
                     waitForSeconds(4);
                     int WindowsCounts = driver.getWindowHandles().size();
                     System.out.println("===============>WindowsCount::" + WindowsCounts);
@@ -499,7 +499,7 @@ public class ProviderHomePage extends BasePage {
                             waitForElement(elmntLogOut);
                             click(elmntLogOut);
                             waitForSeconds(2);
-                            visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                            visit(TestDataUtil.getValue("&URL&"));
                         }
 
                     }
@@ -508,7 +508,7 @@ public class ProviderHomePage extends BasePage {
                             waitForElementClickable(elmntMobileLogOut);
                             jsClick(elmntMobileLogOut);
                             waitForSeconds(2);
-                            visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                            visit(TestDataUtil.getValue("&URL&"));
                         }
 
                     }
@@ -517,7 +517,7 @@ public class ProviderHomePage extends BasePage {
                             waitForElementClickable(elmntMobileLogOut);
                             jsClick(elmntMobileLogOut);
                             waitForSeconds(2);
-                            visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                            visit(TestDataUtil.getValue("&URL&"));
                         }
                     }
 
