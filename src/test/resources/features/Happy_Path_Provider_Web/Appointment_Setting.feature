@@ -35,8 +35,8 @@ Feature: Appointment Setting
     And I click cancel your appointment button Very the Appointment cancelled message "<Appointment_After_Cancel>"
 
     Examples:
-      | Any_Location_with_Any_Provider_Appointment_Details      | Location                  | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     | Details_For_Appointment                   | Future_Date   | Appointment_Summary                       | Patient_User_Login | Password           | Appointment           | Appointment_Cancel_Button                      | Appointment_After_Cancel              |
-      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | Automation_Practice1_Loc1 | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& | &AUTO_PRA_LOC2_VISIT_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &AUTO_PRA_LOC2_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Upcoming Appointments | &AUTO_PRA_LOC2_APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+      | Any_Location_with_Any_Provider_Appointment_Details      | Location         | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     | Details_For_Appointment                   | Future_Date   | Appointment_Summary                       | Patient_User_Login | Password           | Appointment           | Appointment_Cancel_Button                      | Appointment_After_Cancel              |
+      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | Automation1_Loc1 | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& | &AUTO_PRA_LOC2_VISIT_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &AUTO_PRA_LOC2_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Upcoming Appointments | &AUTO_PRA_LOC2_APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S1-Provider Enable Rule A verify Patient Book Visit Appointment based on Rule A (Any Location with Any Provider) & (Default Location with Default Provider) & (Default Location with Any Provider)
@@ -52,8 +52,8 @@ Feature: Appointment Setting
     And I enter the visit appointment details "<Default_Location_with_Any_Provider_Appointment_Details>" and Verify the Default Location Any ProviderName and payment "<Automation_Practice_Loc1_Doctor_Name>"
 
     Examples:
-      | Any_Location_with_Any_Provider_Appointment_Details      | Location                  | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     |
-      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | Automation_Practice1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& |
+      | Any_Location_with_Any_Provider_Appointment_Details      | Location         | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     |
+      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | Automation1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& |
 
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
@@ -70,8 +70,8 @@ Feature: Appointment Setting
     And I enter the phone appointment details "<Default_Location_with_Any_Provider_Appointment_Details>" and Verify the Default Location Any ProviderName and payment "<Automation_Practice_Loc1_Doctor_Name>" "<Automation_Practice_Loc2_Doctor_Name>"
 
     Examples:
-      | Any_Location_with_Any_Provider_Appointment_Details      | Location                  | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     |
-      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_PHONE_APPOINTMENT& | Automation_Practice1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_PHONE_APPOINTMENT& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& |
+      | Any_Location_with_Any_Provider_Appointment_Details      | Location         | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     |
+      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_PHONE_APPOINTMENT& | Automation1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_PHONE_APPOINTMENT& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S3-Provider Enable Rule A verify Patient Book Video Appointment based on Rule A (Any Location with Any Provider) & (Default Location with Default Provider) & (Default Location with Any Provider)
@@ -87,8 +87,8 @@ Feature: Appointment Setting
     And I enter the video appointment details "<Default_Location_with_Any_Provider_Appointment_Details>" and Verify the Default Location Any ProviderName and payment "<Automation_Practice_Loc1_Doctor_Name>" "<Automation_Practice_Loc2_Doctor_Name>"
 
     Examples:
-      | Any_Location_with_Any_Provider_Appointment_Details      | Location                  | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     |
-      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VIDEO_APPOINTMENT& | Automation_Practice1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_VIDEO_APPOINTMENT& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& |
+      | Any_Location_with_Any_Provider_Appointment_Details      | Location         | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     |
+      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VIDEO_APPOINTMENT& | Automation1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_VIDEO_APPOINTMENT& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S4-Provider Enable Rule B verify Patient Book Visit Appointment based on Rule B (Default Location with Default Provider) & (Default Location with Any Provider)
@@ -102,8 +102,8 @@ Feature: Appointment Setting
     And I enter the visit appointment details "<Default_Location_with_Any_Provider_Appointment_Details>" and Verify the Default Location Any ProviderName and payment "<Automation_Practice_Loc1_Doctor_Name>"
 
     Examples:
-      | Location                  | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | Automation_Practice_Loc1_Doctor_Name |
-      | Automation_Practice1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  |
+      | Location         | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | Automation_Practice_Loc1_Doctor_Name |
+      | Automation1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S5-Provider Enable Rule B verify Patient Book Phone Appointment based on Rule B (Default Location with Default Provider) & (Default Location with Any Provider)
@@ -117,8 +117,8 @@ Feature: Appointment Setting
     And I enter the phone appointment details "<Default_Location_with_Any_Provider_Appointment_Details>" and Verify the Default Location Any ProviderName and payment "<Automation_Practice_Loc1_Doctor_Name>" "<Automation_Practice_Loc2_Doctor_Name>"
 
     Examples:
-      | Location                  | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     |
-      | Automation_Practice1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_PHONE_APPOINTMENT& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& |
+      | Location         | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     |
+      | Automation1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_PHONE_APPOINTMENT& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S6-Provider Enable Rule B verify Patient Book Video Appointment based on Rule B (Default Location with Default Provider) & (Default Location with Any Provider)
@@ -132,8 +132,8 @@ Feature: Appointment Setting
     And I enter the video appointment details "<Default_Location_with_Any_Provider_Appointment_Details>" and Verify the Default Location Any ProviderName and payment "<Automation_Practice_Loc1_Doctor_Name>" "<Automation_Practice_Loc2_Doctor_Name>"
 
     Examples:
-      | Location                  | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     |
-      | Automation_Practice1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_VIDEO_APPOINTMENT& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& |
+      | Location         | Default_Location_with_Default_Provider_Appointment_Details      | Default_Location_with_Any_Provider_Appointment_Details      | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     |
+      | Automation1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT& | &DEFAULT_LOCATION_WITH_ANY_PROVIDER_BOOK_VIDEO_APPOINTMENT& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S7-Provider Enable Rule C verify Patient Book Visit,Phone and video Appointment based on Rule C (Default Location with Default Provider)
@@ -148,8 +148,8 @@ Feature: Appointment Setting
     And I navigate to Book Appointment select Default Location with Default Provider
     And I enter the video appointment details "<Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c>" and Verify the Default Location Default ProviderName and payment "<Automation_Practice_Loc1_Doctor_Name>"
     Examples:
-      | Location                  | Default_Location_with_Default_Provider_Appointment_Details             | Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C | Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c | Automation_Practice_Loc1_Doctor_Name |
-      | Automation_Practice1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  |
+      | Location         | Default_Location_with_Default_Provider_Appointment_Details             | Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C | Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c | Automation_Practice_Loc1_Doctor_Name |
+      | Automation1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  |
 
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
@@ -165,8 +165,8 @@ Feature: Appointment Setting
     And I navigate to Book Appointment select Default Location with Default Provider
     And I enter the video appointment details "<Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c>" and Verify the Default Location Default ProviderName and payment "<Automation_Practice_Loc1_Doctor_Name>"
     Examples:
-      | Location                  | Default_Location_with_Default_Provider_Appointment_Details             | Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C | Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c | Automation_Practice_Loc1_Doctor_Name |
-      | Automation_Practice1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  |
+      | Location         | Default_Location_with_Default_Provider_Appointment_Details             | Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C | Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c | Automation_Practice_Loc1_Doctor_Name |
+      | Automation1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S9-Provider Enable Rule E verify Patient Book Visit Appointment based on Rule E Check Restricted provider are not displayed
@@ -180,8 +180,8 @@ Feature: Appointment Setting
     And I enter the visit appointment details "<Default_Location_with_Default_Provider_Appointment_Details>" and Verify Restricted providers are not displayed Check Payments "<Automation_Practice_Loc1_Doctor_Name>"
 
     Examples:
-      | Location                  | Restrict_Provider_Details | Default_Location_with_Default_Provider_Appointment_Details             | Automation_Practice_Loc1_Doctor_Name |
-      | Automation_Practice1_Loc1 | &RESTRICT_PROVIDER_DATA&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  |
+      | Location         | Restrict_Provider_Details | Default_Location_with_Default_Provider_Appointment_Details             | Automation_Practice_Loc1_Doctor_Name |
+      | Automation1_Loc1 | &RESTRICT_PROVIDER_DATA&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S10-Provider Enable Rule E verify Patient Book Phone and video Appointment based on Rule E Check Restricted provider are not displayed
@@ -197,8 +197,8 @@ Feature: Appointment Setting
     And I enter the video appointment details "<Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c>" and Verify the Default Location Default ProviderName and payment "<Automation_Practice_Loc1_Doctor_Name>"
 
     Examples:
-      | Location                  | Restrict_Provider_Details | Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C | Automation_Practice_Loc1_Doctor_Name | Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c |
-      | Automation_Practice1_Loc1 | &RESTRICT_PROVIDER_DATA&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  |
+      | Location         | Restrict_Provider_Details | Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C | Automation_Practice_Loc1_Doctor_Name | Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c |
+      | Automation1_Loc1 | &RESTRICT_PROVIDER_DATA&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  |
 
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
@@ -213,8 +213,8 @@ Feature: Appointment Setting
     And I enter the visit appointment details "<Default_Location_with_Default_Provider_Appointment_Details>" and Verify Restricted providers are not displayed Check Payments "<Automation_Practice_Loc1_Doctor_Name>"
 
     Examples:
-      | Location                  | Restrict_Provider_Details    | Default_Location_with_Default_Provider_Appointment_Details             | Automation_Practice_Loc1_Doctor_Name |
-      | Automation_Practice1_Loc1 | &NON_RESTRICT_PROVIDER_DATA& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  |
+      | Location         | Restrict_Provider_Details    | Default_Location_with_Default_Provider_Appointment_Details             | Automation_Practice_Loc1_Doctor_Name |
+      | Automation1_Loc1 | &NON_RESTRICT_PROVIDER_DATA& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  |
 
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
@@ -231,8 +231,8 @@ Feature: Appointment Setting
     And I enter the video appointment details "<Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c>" and Verify the Default Location Default ProviderName and payment "<Automation_Practice_Loc1_Doctor_Name>"
 
     Examples:
-      | Location                  | Restrict_Provider_Details    | Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C | Automation_Practice_Loc1_Doctor_Name | Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c |
-      | Automation_Practice1_Loc1 | &NON_RESTRICT_PROVIDER_DATA& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  |
+      | Location         | Restrict_Provider_Details    | Default_Location_with_Default_Provider_Phone_Appointment_Details_Rule_C | Automation_Practice_Loc1_Doctor_Name | Default_Location_with_Default_Provider_Video_Appointment_Details_Rule_c |
+      | Automation1_Loc1 | &NON_RESTRICT_PROVIDER_DATA& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  |
 
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
@@ -250,8 +250,8 @@ Feature: Appointment Setting
     And I click cancel your appointment button Very the Appointment cancelled message "<Appointment_After_Cancel>"
 
     Examples:
-      | Location                  | Appointment_Reason | Appointment_Is_For_Details    | Appointment_Details                         | Details_For_Appointment                        | Future_Date                      | Appointment_Summary                            | Patient_User_Login | Password           | Appointment         | Appointment_Cancel_Button                           | Appointment_After_Cancel                                 |
-      | Automation_Practice1_Loc1 | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& | &FRIENDS_AND_FAMILY_BOOK_VISIT_APPOINTMENT& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_DETAILS& | &FRIENDS_AND_FAMILY_FUTURE_DATE& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Future Appointments | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_FOR_CANCEL& | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+      | Location         | Appointment_Reason | Appointment_Is_For_Details    | Appointment_Details                         | Details_For_Appointment                        | Future_Date                      | Appointment_Summary                            | Patient_User_Login | Password           | Appointment         | Appointment_Cancel_Button                           | Appointment_After_Cancel                                 |
+      | Automation1_Loc1 | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& | &FRIENDS_AND_FAMILY_BOOK_VISIT_APPOINTMENT& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_DETAILS& | &FRIENDS_AND_FAMILY_FUTURE_DATE& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Future Appointments | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_FOR_CANCEL& | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S13-Provider Allow to book for family / friends verify Friends and Family option is displayed in Appointment is for dropdown
@@ -263,8 +263,8 @@ Feature: Appointment Setting
     Then I verify Myself and Friends and Family option is Not displayed in Appointment is for dropdown"<Appointment_Is_For_Details>"
 
     Examples:
-      | Location                  | Appointment_Reason | Appointment_Is_For_Details    |
-      | Automation_Practice1_Loc1 | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& |
+      | Location         | Appointment_Reason | Appointment_Is_For_Details    |
+      | Automation1_Loc1 | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& |
 
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
@@ -276,8 +276,8 @@ Feature: Appointment Setting
     When As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
     And I navigate to Book Appointment then I enter the visit appointment details "<Appointment>" and "<Appointment_Details>"
     Examples:
-      | Location                  | Provider_Login           | Appointment_Details      | Appointment      | Location1  |
-      | Automation_Practice1_Loc1 | &PROVIDER_LOGIN_DETAILS& | &BOOK_VISIT_APPOINTMENT& | Book Appointment | Automation |
+      | Location         | Provider_Login           | Appointment_Details      | Appointment      | Location1  |
+      | Automation1_Loc1 | &PROVIDER_LOGIN_DETAILS& | &BOOK_VISIT_APPOINTMENT& | Book Appointment | Automation |
 
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
@@ -289,8 +289,8 @@ Feature: Appointment Setting
     When As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
     And I navigate to Book Appointment then I enter the visit appointment details "<Appointment>" and "<Appointment_Details>"
     Examples:
-      | Location                  | Provider_Login           | Appointment_Details      | Appointment      | Location1  |
-      | Automation_Practice1_Loc1 | &PROVIDER_LOGIN_DETAILS& | &BOOK_VISIT_APPOINTMENT& | Book Appointment | Automation |
+      | Location         | Provider_Login           | Appointment_Details      | Appointment      | Location1  |
+      | Automation1_Loc1 | &PROVIDER_LOGIN_DETAILS& | &BOOK_VISIT_APPOINTMENT& | Book Appointment | Automation |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S16-Provider View Turn Off Appointments Audit verify Check Turn Off Appointments audit grid displayed
@@ -301,8 +301,8 @@ Feature: Appointment Setting
     Then I Should see Turn Off Appointments audit details displayed grid view "<Appointments_Audit_Details>"
 
     Examples:
-      | Location                  | Appointments_Audit_Details |
-      | Automation_Practice1_Loc1 | &APPOINTMENT_AUDIT_DATA&   |
+      | Location         | Appointments_Audit_Details |
+      | Automation1_Loc1 | &APPOINTMENT_AUDIT_DATA&   |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S17-Provider View Turn On Appointments Audit verify Check Turn On Appointments audit grid view displayed
@@ -312,8 +312,8 @@ Feature: Appointment Setting
     When I navigate to Turn Off Appointment Audit page
     Then I Should see Turn On Appointments audit details displayed grid view "<Appointments_Audit_Details>"
     Examples:
-      | Location                  | Appointments_Audit_Details |
-      | Automation_Practice1_Loc1 | &APPOINTMENT_AUDIT_DATA&   |
+      | Location         | Appointments_Audit_Details |
+      | Automation1_Loc1 | &APPOINTMENT_AUDIT_DATA&   |
 
 #=================================== Block Online Appointments for Provider=================IS NOT Working====================
   @WEB @PROVIDER_HAPPY_PATH11 @APPOINTMENTS_SETTING11
