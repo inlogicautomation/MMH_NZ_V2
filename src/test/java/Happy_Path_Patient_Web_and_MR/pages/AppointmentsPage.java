@@ -121,6 +121,14 @@ public class AppointmentsPage extends BasePage {
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
+    @FindBy (how = How.XPATH, using = "//span[text()='Appointments']")
+    protected WebElement elmntAppointment;
+
+
+
+    @FindBy (how = How.XPATH, using = "//span[contains(text(),'BOOK APPOINTMENT')]")
+    protected WebElement elmntPatientBookAppointment;
+
     protected String elmntHealthCenter = new StringBuilder().append("//h6[text()='")
             .append("<<REPLACEMENT>>").append("']").toString();
 
@@ -875,6 +883,24 @@ public class AppointmentsPage extends BasePage {
             e.printStackTrace();
         }
         return blResult;
+    }
+
+    public boolean clickPatientBookAppointment(){
+        boolean blresult = false;
+        try{
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementClickable(elmntAppointment);
+            jsClick(elmntAppointment);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntPatientBookAppointment);
+            click(elmntPatientBookAppointment);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blresult = true;
+        }catch (Exception e){
+            System.out.println("Failed to Click Patient Book Appointment >>> :: ");
+            e.printStackTrace();
+        }
+        return blresult;
     }
 
 

@@ -1545,4 +1545,140 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
         Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerHeading(strBannerHeading));
         Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerMessageDisplayed(strBannerMessage));
     }
+
+    @Given("As a Provider I am on HomePage and navigate to Appointment Reminder Setting page")
+    public void asAProviderIAmOnHomePageAndNavigateToAppointmentReminderSettingPage() {
+        Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickSecureMessaging());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickAppointmentReminderSettingPage());
+
+    }
+
+    @And("I click on the edit button then i Enable First Appointment Remainder checkbox and hours {string}")
+    public void iClickOnTheEditButtonThenIEnableFirstAppointmentRemainderCheckboxAndHours(String AppointmentReminderData) {
+        List<String> strData= TestDataUtil.getListOfValue(AppointmentReminderData);
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickHealthCenterLocation(strData.get(0)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectNumberFirstAppointmentReminder(strData.get(1)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectHoursFirstAppointmentReminder(strData.get(2)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderEmailCheckBoxEnabled());
+
+
+    }
+
+
+    @When("I click the save Button then verify the Success message Popup should be displayed")
+    public void iClickTheSaveButtonThenVerifyTheSuccessMessagePopupShouldBeDisplayed() {
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickSaveButton());
+    }
+
+    @And("I click on the edit button then i Enable First Appointment Remainder checkbox and Days {string}")
+    public void iClickOnTheEditButtonThenIEnableFirstAppointmentRemainderCheckboxAndDays(String AppointmentReminderData) {
+        List<String> strData= TestDataUtil.getListOfValue(AppointmentReminderData);
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickHealthCenterLocation(strData.get(0)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectNumberFirstAppointmentReminder(strData.get(1)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectDaysFirstAppointmentReminder(strData.get(3)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderEmailCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectReminderTime(strData.get(4)));
+
+    }
+
+    @And("I click on the edit button then i Enable First and Second Appointment Remainder checkbox and hours {string}")
+    public void iClickOnTheEditButtonThenIEnableFirstAndSecondAppointmentRemainderCheckboxAndHours(String AppointmentReminderData) {
+        List<String> strData= TestDataUtil.getListOfValue(AppointmentReminderData);
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickHealthCenterLocation(strData.get(0)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectNumberFirstAppointmentReminder(strData.get(1)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectHoursFirstAppointmentReminder(strData.get(2)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderEmailCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifySecondAppoinmentReminderCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectNumberSecondAppointmentReminder(strData.get(5)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectHoursSecondAppoinmentReminder(strData.get(2)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifySecondAppointmentReminderEmailCheckBoxEnabled());
+
+    }
+
+    @And("I click on the edit button then i Enable First and Second Appointment Remainder checkbox and Days {string}")
+    public void iClickOnTheEditButtonThenIEnableFirstAndSecondAppointmentRemainderCheckboxAndDays(String AppointmentReminderData) {
+        List<String> strData= TestDataUtil.getListOfValue(AppointmentReminderData);
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickHealthCenterLocation(strData.get(0)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectNumberFirstAppointmentReminder(strData.get(1)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectDaysFirstAppointmentReminder(strData.get(3)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderEmailCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifySecondAppoinmentReminderCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectNumberSecondAppointmentReminder(strData.get(5)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectDaysSecondAppointmentReminder(strData.get(3)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifySecondAppointmentReminderEmailCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectReminderTime(strData.get(4)));
+
+    }
+
+    @And("I click on the edit button then i Enable First Appointment Remainder Enable Skip weekends {string}")
+    public void iClickOnTheEditButtonThenIEnableFirstAppointmentRemainderEnableSkipWeekends(String AppointmentReminderData) {
+        List<String> strData= TestDataUtil.getListOfValue(AppointmentReminderData);
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickHealthCenterLocation(strData.get(0)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectNumberFirstAppointmentReminder(strData.get(1)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectDaysFirstAppointmentReminder(strData.get(3)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderEmailCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectReminderTime(strData.get(4)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifySkipWeekendsCheckBoxEnabled());
+
+    }
+
+    @And("I click on the edit button then i Enable First Appointment Remainder Disable Skip weekends {string}")
+    public void iClickOnTheEditButtonThenIEnableFirstAppointmentRemainderDisableSkipWeekends(String AppointmentReminderData) {
+        List<String> strData= TestDataUtil.getListOfValue(AppointmentReminderData);
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.clickHealthCenterLocation(strData.get(0)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectNumberFirstAppointmentReminder(strData.get(1)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectDaysFirstAppointmentReminder(strData.get(3)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderEmailCheckBoxEnabled());
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectReminderTime(strData.get(4)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifySkipWeekendsCheckBoxDisabled());
+
+    }
+
+    @And("I select Minimum notice for Cancellation and I click save button then I see Saved Successfully message{string}")
+    public void iSelectMinimumNoticeForCancellationAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String strdata) {
+       Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickMinimumNoticeForCancellation(TestDataUtil.getValue(strdata)));
+
+    }
+
+    @Given("As a Provider I am on HomePage and navigate to Video Consultations Setting page")
+    public void asAProviderIAmOnHomePageAndNavigateToVideoConsultationsSettingPage() {
+        Assert.assertTrue(providerPageContainer.providerHomePage.navigateToProviderHomepage());
+        Assert.assertTrue(providerPageContainer.providerHomePage.clickSecureMessaging());
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickVideoConsultatonsSettingPage());
+    }
+
+    @And("I enable Video Consultations by clicking Yes button and I click save button then I see Saved Successfully message{string}")
+    public void iEnableVideoConsultationsByClickingYesButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue((providerPageContainer.videoConsultationsSettingPage.EnableVideoConsultationYesButton()));
+    }
+
+    @Then("I should see Video appointment slots are displayed in All tab")
+    public void iShouldSeeVideoAppointmentSlotsAreDisplayedInAllTab() {
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.verifyPatientVideoAppointmentDisplayedInAllTab());
+    }
+
+    @And("I enable Video Consultations by clicking No button and I click save button then I see Saved Successfully message{string}")
+    public void iEnableVideoConsultationsByClickingNoButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue((providerPageContainer.videoConsultationsSettingPage.EnableVideoConsultationNoButton()));
+    }
+
+    @Then("I should see Video appointment slots are Not displayed in All tab")
+    public void iShouldSeeVideoAppointmentSlotsAreNotDisplayedInAllTab() {
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.verifyPatientVideoAppointmentNotDisplayedInAllTab());
+    }
 }

@@ -36,6 +36,8 @@ public class VideoConsultationsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Video Consultations')]")
     protected WebElement verifyheaderVideoConsutationsPage;
 
+
+
     public boolean  navigateToProviderHomepage() {
         boolean blResult = false;
         try{

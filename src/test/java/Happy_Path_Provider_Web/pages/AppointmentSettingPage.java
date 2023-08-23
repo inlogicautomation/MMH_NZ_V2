@@ -190,6 +190,9 @@ public class AppointmentSettingPage extends BasePage {
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
+    @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname=\"minimumnoticeforcancellation\"]")
+    protected WebElement elmntMinimumNoticeForCancellation;
+
     public boolean clickAppointmentMessage() {
         boolean blresult = false;
         try {
@@ -783,10 +786,42 @@ public class AppointmentSettingPage extends BasePage {
         return blResult;
     }
 
+    public boolean clickMinimumNoticeForCancellation(String Strdata) {
+        boolean blresult = false;
+        try {
+            waitForElement(elmntMinimumNoticeForCancellation);
+            click(elmntMinimumNoticeForCancellation);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntHealthCentreDrop.replace("<<REPLACEMENT>>", Strdata)));
+            System.out.printf("elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
+            mouseClick(elmntEntriesFromHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blresult = verifyElement(elmntMinimumNoticeForCancellation);
+        } catch (Exception e) {
+            System.out.println("Failed to click Minimum Notice For Cancellation >>> :: ");
+            e.printStackTrace();
 
+        }
+        return blresult;
 
+    }
+    public boolean clickSaveButton() {
+        boolean blresult = false;
+        try {
+    jsScrollIntoView(elmntSaveButton);
+    waitForElement(elmntSaveButton);
+    click(elmntSaveButton);
+    waitForElementDisappear(driver,By.xpath(elmntSpinner));
+    waitForElement(txtSuccessfullyMessagePopup);
+    blresult = verifyElement(txtSuccessfullyMessagePopup);
+        } catch (Exception e) {
+            System.out.println("Failed to click Save Button >>> :: ");
+            e.printStackTrace();
 
+        }
+        return blresult;
 
+    }
 }
 
 
