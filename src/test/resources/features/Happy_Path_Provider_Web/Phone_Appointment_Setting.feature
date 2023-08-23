@@ -10,6 +10,18 @@ Feature: Phone Appointment Setting
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
   @WEB @PROVIDER_HAPPY_PATH @PHONE_APPOINTMENTS_SETTING
+  Scenario Template: Prep- Canceling all the appointments
+
+    Given As a user I am on HomePage
+    And I navigate to the "<Appointment>" Future Appointments page
+    And I canceling all the available appointments
+
+    Examples:
+      | Appointment           |
+      | Upcoming Appointments |
+
+
+  @WEB @PROVIDER_HAPPY_PATH @PHONE_APPOINTMENTS_SETTING
   Scenario Template:S1-Provider Enable Phone Appointment Settings - Rule 1 and verify Patient side
 
     Given As a Provider I am on HomePage and navigate to Phone Appointment Setting page
@@ -38,7 +50,7 @@ Feature: Phone Appointment Setting
       | Phone_Appointment_setting_data      | Phone_Appointments_Data  |
       | &PHONE_APPOINTMENT_SETTING_DETAILS& | &BOOK_PHONE_APPOINTMENT& |
 
-  @WEB @PROVIDER_HAPPY_PATH @PHONE_APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @PHONE_APPOINTMENTS_SETTING
   Scenario Template:S3-Provider Phone Appointment Settings - Enable Phone Call initiated by Patient and Booked Phone Appointment verify Status must be approved
 
     Given As a Provider I am on HomePage and navigate to Phone Appointment Setting page

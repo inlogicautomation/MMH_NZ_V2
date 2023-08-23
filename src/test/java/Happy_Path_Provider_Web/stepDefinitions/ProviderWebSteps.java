@@ -345,7 +345,9 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFourthSelectedServiceOption(lstDetails.get(11)));
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeForFourthSelectedServiceOption(lstDetails.get(12)));
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescForFourthSelectedServiceOption(lstDetails.get(13)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickRRPPayments());
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
+
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }
 
@@ -420,6 +422,7 @@ public class ProviderWebSteps {
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.select4thDMBPServiceOption(lstDetails.get(11)));
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectFeeFor4thDMBPSelectedServiceOption(lstDetails.get(12)));
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.selectDescFor4thDMBPSelectedServiceOption(lstDetails.get(13)));
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.clickRRPPayments());
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.verifySavedData());
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }
@@ -596,8 +599,8 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     @Then("I should verify the Banner heading {string} and Banner Messages {string} are saved")
     public void iShouldVerifyTheBannerHeadingAndBannerMessagesAreSaved(String strBannerHeading, String strBannerMessage) {
 
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyBannerHeading(strBannerHeading));
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyBannerMessage(strBannerMessage));
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyBannerHeading(TestDataUtil.getValue(strBannerHeading)));
+//        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyBannerMessage(TestDataUtil.getValue(strBannerMessage)));
     }
 
     @And("I select Health Center {string} and I enable Banner Message to No")

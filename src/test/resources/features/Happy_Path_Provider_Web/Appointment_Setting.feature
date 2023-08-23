@@ -35,8 +35,8 @@ Feature: Appointment Setting
     And I click cancel your appointment button Very the Appointment cancelled message "<Appointment_After_Cancel>"
 
     Examples:
-      | Any_Location_with_Any_Provider_Appointment_Details      | Location         | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     | Details_For_Appointment                   | Future_Date   | Appointment_Summary                       | Patient_User_Login | Password           | Appointment           | Appointment_Cancel_Button                      | Appointment_After_Cancel              |
-      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | Automation1_Loc1 | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& | &AUTO_PRA_LOC2_VISIT_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &AUTO_PRA_LOC2_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Upcoming Appointments | &AUTO_PRA_LOC2_APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+      | Any_Location_with_Any_Provider_Appointment_Details      | Location         | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     | Details_For_Appointment                   | Future_Date   | Appointment_Summary                       | Patient_User_Login   | Password   | Appointment           | Appointment_Cancel_Button                      | Appointment_After_Cancel              |
+      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | Automation1_Loc1 | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& | &AUTO_PRA_LOC2_VISIT_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &AUTO_PRA_LOC2_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_USER_LOGIN& | &PASSWORD& | Upcoming Appointments | &AUTO_PRA_LOC2_APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S1-Provider Enable Rule A verify Patient Book Visit Appointment based on Rule A (Any Location with Any Provider) & (Default Location with Default Provider) & (Default Location with Any Provider)
@@ -152,7 +152,7 @@ Feature: Appointment Setting
       | Automation1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S8-Provider Enable Rule D verify Patient Book Visit,Phone and video Appointment based on Rule D (Default Location with Default Provider) & (Income Provider)
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -267,7 +267,7 @@ Feature: Appointment Setting
       | Automation1_Loc1 | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING11
   Scenario Template:S14-Provider Turn Off Online Appointments verify No Available appointment slot Text is displayed in Appointment Page
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -316,7 +316,7 @@ Feature: Appointment Setting
       | Automation1_Loc1 | &APPOINTMENT_AUDIT_DATA&   |
 
 #=================================== Block Online Appointments for Provider=================IS NOT Working====================
-  @WEB @PROVIDER_HAPPY_PATH11 @APPOINTMENTS_SETTING11
+  @WEB @PROVIDER_HAPPY_PATH1 @APPOINTMENTS_SETTING1
   Scenario Template:S17-Provider Block & Unblock Appointments doctor Name verify Patient Side Block & Unblock Appointment Provider Name Is Displayed or Not Displayed
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page

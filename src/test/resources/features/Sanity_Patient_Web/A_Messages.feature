@@ -198,8 +198,8 @@ Feature: Messages
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address       | Password               |
-      | &EMAIL FOR MESSAGE& | &PASSWORD FOR MESSAGE& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 
 #    Note: {

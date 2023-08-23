@@ -98,7 +98,7 @@ public class AppointmentMessagePage extends BasePage {
 
 
     protected String elmntBookNowOption = new StringBuilder()
-            .append("//h2[.='").append("<<REPLACEMENT>>").append("']/parent::div/following-sibling::div/child::div/a[text()='More info']").toString();
+            .append("//h2[.='").append("<<REPLACEMENT>>").append("']/parent::div/following-sibling::div/child::div/a[text()='Book now']").toString();
 
 
     protected String elmntVerifyBannerHeading = new StringBuilder()
@@ -330,8 +330,7 @@ public class AppointmentMessagePage extends BasePage {
         try {
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyBannerHeading.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strHeading.concat(strExecutionID)))));
-             verifyElement(elmntBannerHeading);
-             blresult=true;
+            blresult=verifyElement(elmntBannerHeading);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
         } catch (Exception e) {
             System.out.println("Failed To  verify Banner Heading >>> :: ");
@@ -346,8 +345,8 @@ public class AppointmentMessagePage extends BasePage {
         try {
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             WebElement elmntBannerMessage = waitForElement(By.xpath(elmntVerifyBannerMessage.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
-             verifyElement(elmntBannerMessage);
-             blresult=true;
+
+            blresult= verifyElement(elmntBannerMessage);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
         } catch (Exception e) {
             System.out.println("Failed To  verify Banner Message >>> :: ");

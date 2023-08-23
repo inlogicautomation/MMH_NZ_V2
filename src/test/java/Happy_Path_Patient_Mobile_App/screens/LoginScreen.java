@@ -16,9 +16,13 @@ public class LoginScreen extends BaseScreen {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"main\"]/XCUIElementTypeOther[1]/XCUIElementTypeImage")
     protected WebElement logoMMH;
 
-    @AndroidFindBy(xpath = "//android.widget.Image[@text='person']/following-sibling::android.widget.EditText")
+//   (//android.view.View/following::android.widget.Image)[1]
+
+    @AndroidFindBy(xpath= "//android.widget.Image[@text='person']/following-sibling::android.widget.EditText")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name=\"person\"]/following::XCUIElementTypeTextField")
     protected WebElement txtUserName;
+
+
 
     @AndroidFindBy(xpath = "//android.widget.Image[@text='key']/following-sibling::android.widget.EditText")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name=\"person\"]/following::XCUIElementTypeSecureTextField[@value='Password']")
@@ -46,7 +50,8 @@ public class LoginScreen extends BaseScreen {
     }
 
     public void enterUserName(String strUserName) {
-        waitForElement(txtUserName);
+        takeScreenshot(driver);
+     waitForElement(txtUserName);
         enterValue(txtUserName, strUserName);
     }
 

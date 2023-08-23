@@ -1,6 +1,6 @@
 Feature: Repeat_Request_Prescription_Scenarios
 
-  @MOBILE @RELAUNCH @Mobile_RRP @HAPPY_PATH_MOBILE @TestRPP @Fix
+  @MOBILE @RELAUNCH @Mobile_RRP @HAPPY_PATH_MOBILE
   Scenario Outline: Pre-Req - User login with valid credential and verifies MMH Home screen
 
     Given I am on MMH Login screen
@@ -13,7 +13,7 @@ Feature: Repeat_Request_Prescription_Scenarios
       | &EMAIL&  | &PASSWORD& |
 
 
-  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE @TestRPP
+  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE
   Scenario Outline: S1 - Request Repeat Prescription - Patient to collect script
 
     Given I am on MMH Home screen
@@ -29,7 +29,7 @@ Feature: Repeat_Request_Prescription_Scenarios
       | &PATIENT_TO_COLLECT_SCRIPT_DETAILS& | &RPR_MESSAGE& | &RP_PATIENT_TO_COLLECT_SCRIPT_STATUS& |
 
 
-  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE @TestRPP
+  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE
   Scenario Outline: S2 - Request Repeat Prescription - Sent script by post
 
     Given I am on MMH Home screen
@@ -45,7 +45,7 @@ Feature: Repeat_Request_Prescription_Scenarios
       | &SEND_SCRIPT_BY_POST_DETAILS& | &RPR_MESSAGE& | &RP_SEND_SCRIPT_BY_POST_STATUS& |
 
 
-  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE @TestRPP
+  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE
   Scenario Outline: S3 - Request Repeat Prescription - Sent script to pharmacy
 
     Given I am on MMH Home screen
@@ -174,7 +174,7 @@ Feature: Repeat_Request_Prescription_Scenarios
       | Medication Details                             | Message       | Repeat Prescription Status                       | Pharmacy Details                            |
       | &DELIVER_VIA_ZOOM_PHARMACY_DETAILS_$0_PAYMENT& | &RPR_MESSAGE& | &RP_DELIVER_VIA_ZOOM_PHARMACY_STATUS_$0_PAYMENT& | &DELIVER_VIA_ZOOM_PHARMACY_ADDRESS_DETAILS& |
 
-  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE @Fix
+  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE
   Scenario Outline: S16 - Request Repeat Prescription - Pay Online (A2A) - Patient to collect script
     Given I am on MMH Home screen
     And I tap on "Repeat Prescriptions" option in home screen
@@ -186,7 +186,7 @@ Feature: Repeat_Request_Prescription_Scenarios
       | Medication Details                          | Message       |
       | &PATIENT_TO_COLLECT_SCRIPT_DETAILS_PAYMENT& | &RPR_MESSAGE& |
 
-  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE @Fix
+  @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE
   Scenario Outline: S16 -Request Repeat Prescription - Pay Online (A2A) - Patient to collect script
 
     Given I am on Payment Options screen

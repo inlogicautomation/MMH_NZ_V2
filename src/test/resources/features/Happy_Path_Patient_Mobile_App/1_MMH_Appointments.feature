@@ -1,6 +1,6 @@
     Feature: Mobile_Appointments_Scenarios
 
-  @MOBILE @RELAUNCH @Mobile_Appointment @HAPPY_PATH_MOBILE @Test1
+  @MOBILE @RELAUNCH @Mobile_Appointment @HAPPY_PATH_MOBILE
   Scenario Outline: S1 - User login with valid credential and verifies MMH Home screen
 
     Given I am on MMH Login screen
@@ -13,11 +13,11 @@
       | &EMAIL&  | &PASSWORD& |
 
 
-  @MOBILE @Mobile_Appointment @HAPPY_PATH_MOBILE @Test
+  @MOBILE @Mobile_Appointment @HAPPY_PATH_MOBILE
   Scenario Outline: S2 - Patient Send the Appointment Request [Mobile-Visit]
 
     Given I am on MMH Home screen
-    And I tap on "Book Appointment" option in home screen
+    And I tap on "Appointments" option in home screen
     And I tap Book Appointment under Future tab
     When I enter the "Visit" "<Appointment Details>"
     Then I should see Confirm Appointment details "<Details_For_Appointment>" "<Future_Date>"
@@ -28,7 +28,7 @@
       | &BOOK_VISIT_APPOINTMENT_USING_CARD_PAYMENT& | &VISIT_APPOINTMENT_DETAILS_USING_CARD_PAYMENT& | &FUTURE_DATE_PAYMENT_FOR_VISIT& |
 
 
-  @MOBILE @Mobile_Appointment @HAPPY_PATH_MOBILE @Test
+  @MOBILE @Mobile_Appointment @HAPPY_PATH_MOBILE
   Scenario Outline: S2 - Patient Booking Appointment - Visit Appointment Using Card Payment with $X amount [Mobile]
 
     Given I am on Payment Options screen
@@ -118,7 +118,7 @@
       | VISIT       | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &VISIT_APPOINTMENT_SUMMARY& |
 
 
-  @MOBILE @Mobile_Appointment @HAPPY_PATH_MOBILE @CHECK1
+  @MOBILE @Mobile_Appointment @HAPPY_PATH_MOBILE
   Scenario Outline: S6 - Patient Booking Appointment - Phone Appointment & Pay at Health centre [Mobile]
 
     Given I am on MMH Home screen

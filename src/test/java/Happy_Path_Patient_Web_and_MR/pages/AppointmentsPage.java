@@ -3358,14 +3358,14 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(3);
             String strdata=getDefaultLocationDoctorName.getText().trim();
             System.out.println("GetTextProviderName:: "+strdata);
-            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(VM03PraticeDoctorNames.get(1)))));
+            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(VM03PraticeDoctorNames.get(2)))));
                 System.out.println("elmntProviderName"+elmntProviderName);
-                if (strdata.equals(TestDataUtil.getValue(VM03PraticeDoctorNames.get(1)))){
+                if (strdata.equals(TestDataUtil.getValue(VM03PraticeDoctorNames.get(2)))){
                     jsScrollIntoView(elmntProviderName);
                     blresult=verifyElement(elmntProviderName);
                     System.out.println("Successfully Verified the VM03Location Default Provider Name");
                 }
-                blresult = true;
+
         }catch (Exception e){
             System.out.println("Cannot Verified the VM03Location Default Provider Name");
             e.printStackTrace();
@@ -3393,14 +3393,50 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(3);
             String strdata=getDefaultLocationDoctorName.getText().trim();
             System.out.println("GetTextProviderName::::"+strdata);
-            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(1)))));
+            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(0)))));
             System.out.println("elmntProviderName"+elmntProviderName);
-            if (strdata.equals(TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(1)))) {
+            if (strdata.equals(TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(0)))) {
                 jsScrollIntoView(elmntProviderName);
-                verifyElement(elmntProviderName);
+                blresult=verifyElement(elmntProviderName);
                 System.out.println("Successfully Verified the Auto Practice Loc1 Location Default Provider Name");
             }
-            blresult = true;
+
+        }catch (Exception e){
+            System.out.println("Cannot Verified the Auto Practice Loc1 Default Provider Name");
+            e.printStackTrace();
+        }
+        return blresult;
+    }
+
+    public boolean verifyNonRistrickDefaultLocationDoctorNames(List<String> strData,List<String> Auto_Pra_Loc1_DoctorNames){
+        boolean blresult = false;
+        try{
+            System.out.println(">>>Auto_Practice_Loc1_DoctorNames>>"+Auto_Pra_Loc1_DoctorNames);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            jsScrollIntoView(elmntLocationCenter);
+            waitForElement(elmntLocationCenter);
+            click(elmntLocationCenter);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(8)))));
+            System.out.println("elmntSelectLocation"+elmntSelectLocation);
+            waitForElement(elmntSelectLocation);
+            verifyElement(elmntSelectLocation);
+            click(elmntSelectLocation);
+            waitForSeconds(3);
+            declineCovidPreScreeningPopup();
+            waitForElement(elmntVisitAppointmentIcon);
+            click(elmntVisitAppointmentIcon);
+            waitForSeconds(3);
+            String strdata=getDefaultLocationDoctorName.getText().trim();
+            System.out.println("GetTextProviderName::::"+strdata);
+            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(2)))));
+            System.out.println("elmntProviderName"+elmntProviderName);
+            if (strdata.equals(TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(2)))) {
+                jsScrollIntoView(elmntProviderName);
+                blresult=verifyElement(elmntProviderName);
+                System.out.println("Successfully Verified the Auto Practice Loc1 Location Default Provider Name");
+            }
+
         }catch (Exception e){
             System.out.println("Cannot Verified the Auto Practice Loc1 Default Provider Name");
             e.printStackTrace();
@@ -3429,9 +3465,9 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(3);
             String strdata=getDefaultLocationDoctorName.getText().trim();
             System.out.println("GetTextProviderName:::"+strdata);
-            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(VM03PraticeDoctorNames.get(1)))));
+            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(VM03PraticeDoctorNames.get(2)))));
             System.out.println("elmntProviderName"+elmntProviderName);
-            if (strdata.equals(TestDataUtil.getValue(VM03PraticeDoctorNames.get(1)))){
+            if (strdata.equals(TestDataUtil.getValue(VM03PraticeDoctorNames.get(2)))){
                 jsScrollIntoView(elmntProviderName);
                 verifyElement(elmntProviderName);
                 System.out.println("Successfully Verified the VM03Location Default Provider Name");
@@ -3666,10 +3702,10 @@ public class AppointmentsPage extends BasePage {
 
                     }
                 }
-
+                blresult = true;
                 System.out.println("Successfully Verified All UnCheck Restricted provider are displayed for Online appointments(Visit / Phone / Video)");
             }
-            blresult = true;
+
         }catch (Exception e){
             System.out.println("Cannot Verify Check Restricted provider are not displayed for Online appointments(Visit / Phone / Video)");
             e.printStackTrace();
@@ -3918,7 +3954,7 @@ public class AppointmentsPage extends BasePage {
             String strTime = strSlotDate;
             System.out.println("CANCEL TIME : " + strTime);
             String strConvertedTime = strTime;
-            strConvertedTime = "0" + strConvertedTime;
+//            strConvertedTime = "0" + strConvertedTime;
             String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
             System.out.println(strFinalOutDateTime);
             WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
@@ -3947,7 +3983,9 @@ public class AppointmentsPage extends BasePage {
                 System.out.println("DATE" + strDateValue);
                 String strDateMonth = strDateValue;
                 String strTime = strSlotDate;
-                String strFinalOutDateTime = strDateMonth + " " + strTime;
+                String strConvertedTime = strTime;
+                strConvertedTime = "0" + strConvertedTime;
+                String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
                 System.out.println(strFinalOutDateTime);
                 WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
                 verifyElement(elmntAppointmentDetails);
@@ -4138,7 +4176,7 @@ System.out.println(">>>>>>>>>>>>>VerifyMyAppointmentTableDatalstDetails"+lstDeta
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             enterValue(elmntSearchTextBox,strdata);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = true;
+            blResult =verifyElement(elmntSearchTextBox);
         } catch (Exception e) {
             System.out.println("Failed to select Search TextBox >>> :: ");
             e.printStackTrace();
@@ -4151,9 +4189,9 @@ System.out.println(">>>>>>>>>>>>>VerifyMyAppointmentTableDatalstDetails"+lstDeta
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntclearButton);
-            jsClick(elmntclearButton);
+            mouseClick(elmntclearButton);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = true;
+            blResult = verifyElement(elmntclearButton);
         } catch (Exception e) {
             System.out.println("Failed to select View Clear Button >>> :: ");
             e.printStackTrace();

@@ -382,6 +382,8 @@ public class AppointmentSettingPage extends BasePage {
                 blresult = true;
             }
             if (!verifyElement(By.xpath(selectCovidPreScreeningPopup.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strLocation))))) {
+                waitForSeconds(3);
+                waitForElementDisappear(driver,By.xpath(elmntSpinner));
                 WebElement elmntHealthCentreLocation2 = waitForElementClickable(By.xpath(deselectCovidPreScreeningPopup.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))));
                 System.out.println(">>>>>>>>>>>>elmntHealthCentreLocation2"+ elmntHealthCentreLocation2);
                 waitForElement(elmntHealthCentreLocation2);

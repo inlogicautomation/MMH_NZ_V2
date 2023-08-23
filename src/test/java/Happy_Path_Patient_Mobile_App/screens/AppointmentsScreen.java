@@ -32,7 +32,7 @@ public class AppointmentsScreen extends BaseScreen {
     @iOSXCUITFindBy(id = "Past")
     protected WebElement elmntPast;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Book Appointment']")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Book an Appointment']")
     @iOSXCUITFindBy(id = "Book Appointment")
     protected WebElement btnBookAppointment;
 

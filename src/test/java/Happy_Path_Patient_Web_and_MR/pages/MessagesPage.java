@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static cap.utilities.SharedDriver.strExecutionID;
+
 public class MessagesPage extends BasePage {
 
     public MessagesPage(WebDriver driver) {
@@ -266,13 +268,13 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Your Message has been sent Successfully')]")
     protected WebElement txtComposeSuccessMessage;
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Home')]")
-    protected WebElement btnHome;
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Dashboard')]")
+    protected WebElement btnDashboard;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Message Sent Successfully.')]")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Message Sent Successfully.')]")
     protected WebElement elmntGroupMessageSuccessPopUp;
 
-    protected String elmntGroupMessageSuccessPopUp1 = "//div[contains(text(),'Message Sent Successfully.')]";
+    protected String elmntGroupMessageSuccessPopUp1 = "//p[contains(text(),'Message Sent Successfully.')]";
 
     @FindBy(how = How.XPATH, using = "//input[@value='Return to Inbox']")
     protected WebElement btnReturnToInbox;
@@ -288,6 +290,13 @@ public class MessagesPage extends BasePage {
             .append("<<REPLACEMENT>>")
             .append("')])[1]")
             .toString();
+
+    protected String GroupMessageSubject = new StringBuilder()
+            .append("(//*[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')])[2]")
+            .toString();
+
 
     protected String inboxMessageSubjectForMobile = new StringBuilder()
             .append("(//*[contains(text(),'")
@@ -345,17 +354,17 @@ public class MessagesPage extends BasePage {
             .append("')])[2]")
             .toString();
 
-    protected String groupMessageSubjectForMobile = new StringBuilder()
-            .append("(//p[contains(text(),'")
-            .append("<<REPLACEMENT>>")
-            .append("')])[2]")
-            .toString();
-
 //    protected String groupMessageSubjectForMobile = new StringBuilder()
-//            .append("(//div[contains(text(),'")
+//            .append("(//p[contains(text(),'")
 //            .append("<<REPLACEMENT>>")
-//            .append("')])[8]")
+//            .append("')])[2]")
 //            .toString();
+
+    protected String groupMessageSubjectForMobile = new StringBuilder()
+            .append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>")
+            .append("')])[6]")
+            .toString();
 
 
     protected String selectTo = new StringBuilder()
@@ -632,6 +641,9 @@ public class MessagesPage extends BasePage {
     @FindBy(xpath = "//android.widget.TextView[@text='Files']")
     protected WebElement FileIcon;
 
+    @AndroidFindBy(xpath = "(//android.widget.ImageView[@resource-id='android:id/icon'])[3]")
+    protected WebElement MediaIcon;
+
     @AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc='Show roots']")
     protected WebElement iconHamburger;
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Downloads' and @resource-id='android:id/title']")
@@ -865,7 +877,7 @@ public class MessagesPage extends BasePage {
     @FindAll({
             @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Timprefer!')]"),
             @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Steve!')]"),
-            @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Gp1!')]")
+            @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp2White!')]")
     })
 protected WebElement txtWelcome;
 
@@ -1172,8 +1184,8 @@ protected WebElement txtWelcome;
         boolean blResult = false;
         try {
             waitForElement(txtGroupMessagePatient);
-            System.out.println("X Path-inboxSubject >>> :: " + inboxMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage)));
-            WebElement inboxSubject = waitForElement(By.xpath(inboxMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage))));
+            System.out.println("X Path-inboxSubject >>> :: " + GroupMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage)));
+            WebElement inboxSubject = waitForElement(By.xpath(GroupMessageSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strSubjectMessage))));
             waitForElement(inboxSubject);
             takeScreenshot(driver);
             waitForElementClickable(inboxSubject);
@@ -1224,8 +1236,9 @@ protected WebElement txtWelcome;
     public boolean replyToPatientReceivedMessage(String strSubject, String strMessage) {
         boolean blResult = false;
         try {
+            strRandomSubjectMessage = strSubject.concat(strExecutionID);
 //            strRandomSubjectMessage = strSubject.concat(" - ").concat(getRandomString());
-//            System.out.println("strRandomSubjectMessage >>> :: " + strRandomSubjectMessage);
+            System.out.println("strRandomSubjectMessage >>> :: " + strRandomSubjectMessage);
 //            waitForElement(txtInboxPatient);
 //            waitForElement(btnReply);
 //            waitForElementClickable(btnReply);
@@ -1234,7 +1247,7 @@ protected WebElement txtWelcome;
             waitForElement(txtBoxReplySubject);
             waitForElementClickable(txtBoxReplySubject);
             txtBoxReplySubject.clear();
-            txtBoxReplySubject.sendKeys(strSubject);
+            txtBoxReplySubject.sendKeys(strSubject.concat(strExecutionID));
             waitForSeconds(2);
             jsScrollDown();
 //            jsScrollIntoView(btnReplySendMessage);
@@ -1274,7 +1287,9 @@ protected WebElement txtWelcome;
     public boolean replyToMobilePatientReceivedMessage(String strSubject, String strMessage) {
         boolean blResult = false;
         try {
-            strRandomSubjectMessage = strSubject.concat(" - ").concat(getRandomString());
+            System.out.println(">>>>>>>>>>"+TestDataUtil.getValue(strSubject));
+            System.out.println(">>>>>>>>>>"+TestDataUtil.getValue(strMessage));
+            strRandomSubjectMessage = strSubject.concat(strExecutionID);
             System.out.println("strRandomSubjectMessage >>> :: " + strRandomSubjectMessage);
 //            waitForElement(txtInboxPatient);
 //            waitForElement(btnReply);
@@ -1414,6 +1429,7 @@ protected WebElement txtWelcome;
             jsClick(drpDownAutomaticRepliesSetting);
             waitForSeconds(3);
             waitForElement(chkboxAutomaticReply);
+            jsClick(chkboxAutomaticReply);
             System.out.println("Automatic Replies Setting was selected >>> ::");
             blResult = verifyElement(chkboxAutomaticReply);
 
@@ -2305,14 +2321,12 @@ protected WebElement txtWelcome;
             jsClick(drpDownServiceName);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(1);
-//            Select healthCentre = new Select(driver.findElement(By.xpath("//mat-select[@formcontrolname='serviceName']")));
-//            healthCentre.selectByVisibleText(strServiceName);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyDrop.replace("<<REPLACEMENT>>", strServiceName)));
+            System.out.println(">>>>>>"+elmntEntriesFromHealthCentre);
             jsScrollIntoView(elmntEntriesFromHealthCentre);
-            jsClick(elmntEntriesFromHealthCentre);
+            mouseClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = true;
-            System.out.println("\nSuccessfully selected the Service Name >>> :: ");
+           blResult=verifyElement(drpDownServiceName);
         } catch (Exception e) {
             System.out.println("\nFailed to select the sService Name >>> :: ");
             e.printStackTrace();
@@ -2332,9 +2346,8 @@ protected WebElement txtWelcome;
 //            healthCentre.selectByVisibleText(strRole);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntRolebyDrop.replace("<<REPLACEMENT>>", strRole)));
             jsClick(elmntEntriesFromHealthCentre);
+            blResult = verifyElement(drpDownRole);
 
-            blResult = true;
-            System.out.println("\nSuccessfully selected the Role>>> :: ");
         } catch (Exception e) {
             System.out.println("\nFailed to select the Role >>> :: ");
             e.printStackTrace();
@@ -2384,6 +2397,7 @@ protected WebElement txtWelcome;
             waitForElement(txtBoxSubjectPatient);
             waitForElementClickable(txtBoxSubjectPatient);
             waitForSeconds(2);
+
             jsClick(txtBoxSubjectPatient);
             waitForSeconds(1);
             txtBoxSubjectPatient.clear();
@@ -2524,6 +2538,7 @@ protected WebElement txtWelcome;
         try {
             waitForSeconds(2);
             waitForElement(txtCompose);
+            jsScrollIntoView(drpDownLocation);
             waitForElementClickable(drpDownLocation);
 //            Select healthCentre = new Select(driver.findElement(By.xpath("//mat-select[@formcontrolname='healthCenter']")));
 //            healthCentre.selectByVisibleText(strHealthCenterLocation);
@@ -2616,9 +2631,8 @@ protected WebElement txtWelcome;
             System.out.println(">>>>>>>>>>>>>>>elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult =verifyElement(btnfrom);
 
-            blResult = true;
-            System.out.println("\nSuccessfully selected the health centre >>> :: ");
         } catch (Exception e) {
             System.out.println("\nFailed to select the health centre >>> :: ");
             e.printStackTrace();
@@ -2638,8 +2652,8 @@ protected WebElement txtWelcome;
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntProviderDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = true;
-            System.out.println("\nSuccessfully selected the health centre >>> :: ");
+            blResult = verifyElement(btnprovider);
+
         } catch (Exception e) {
             System.out.println("\nFailed to select the health centre >>> :: ");
             e.printStackTrace();
@@ -2659,9 +2673,8 @@ protected WebElement txtWelcome;
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntProviderDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blResult = verifyElement(btnGenderPrefernce);
 
-            blResult = true;
-            System.out.println("\nSuccessfully selected the health centre >>> :: ");
         } catch (Exception e) {
             System.out.println("\nFailed to select the health centre >>> :: ");
             e.printStackTrace();
@@ -2677,15 +2690,13 @@ protected WebElement txtWelcome;
 //            waitForElement(txtComposeNewMessage);
             waitForElementClickable(btnGroupTo);
             jsClick(btnGroupTo);
-
 //            Select healthCentre = new Select(driver.findElement(By.xpath("(//select[contains(@id,'GroupMessage1')])[4]")));
 //            healthCentre.selectByVisibleText(strFamilyMember);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
+            System.out.println(">>>>>>>>>>>>>>>"+elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(10);
-            blResult = true;
-            System.out.println("\nSuccessfully selected the health centre >>> :: ");
+            blResult = verifyElement(btnGroupTo);
         } catch (Exception e) {
             System.out.println("\nFailed to select the health centre >>> :: ");
             e.printStackTrace();
@@ -2933,7 +2944,7 @@ protected WebElement txtWelcome;
                     waitForSeconds(3);
                     click(WhileUsingTheAppForA13);
                     waitForSeconds(3);
-                    click(FileIcon);
+                    click(MediaIcon);
 
                 }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy M53")) {
@@ -2942,7 +2953,7 @@ protected WebElement txtWelcome;
                     waitForSeconds(3);
                     click(WhileUsingTheAppForA13);
                     waitForSeconds(3);
-                    click(FileIcon);
+                    click(MediaIcon);
 
                 }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Motorola One Fusion+")){
@@ -3663,8 +3674,8 @@ protected WebElement txtWelcome;
 //            waitForElementClickable(txtGroupBoxSubject);
             txtGroupBoxSubject.sendKeys(TestDataUtil.getValue(strSubject));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blResult = true;
-            System.out.println("\nSuccessfully Entered The Subject Message >>> :: ");
+            blResult = verifyElement(txtGroupBoxSubject);
+
         } catch (Exception e) {
             System.out.println("\nFailed to Enter the Subject Message >>> :: ");
             e.printStackTrace();
@@ -3688,8 +3699,7 @@ protected WebElement txtWelcome;
             waitForSeconds(2);
             driver.switchTo().activeElement().sendKeys(strBodyMessage);
             //            driver.switchTo().parentFrame();
-            blResult = true;
-            System.out.println("\nSuccessfully Entered The Subject Body Message >>> :: ");
+            blResult = verifyElement(txtgroupWritemessage);
         } catch (Exception e) {
             System.out.println("\nFailed to Enter the Subject Message >>> :: ");
             e.printStackTrace();
@@ -3702,19 +3712,9 @@ protected WebElement txtWelcome;
         try {
             waitForElementClickable(btnGroupMessage);
             jsClick(btnGroupMessage);
-            waitForSeconds(3);
-//            waitForElementToAppear(driver,By.xpath(elmntGroupMessageSuccessPopUp1));
-//            verifyElement(elmntGroupMessageSuccessPopUp);
-//            if (verifyElement(elmntGroupMessageSuccessPopUp)) {
-//                waitForElement(btnHome);
-//                waitForElementClickable(btnHome);
-//                click(btnHome);
-//                waitForSeconds(2);
-//                waitForElement(txtMyHomePage);
-//                blResult = verifyElement(txtMyHomePage);
-//            }
-            blResult=true;
-            System.out.println("\nSuccessfully Clicked the send message >>> :: ");
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementToAppear(driver,By.xpath(elmntGroupMessageSuccessPopUp1));
+            blResult=verifyElement(elmntGroupMessageSuccessPopUp);
         } catch (Exception e) {
             System.out.println("\nFailed to click the send message >>> :: ");
             e.printStackTrace();
@@ -3732,10 +3732,7 @@ protected WebElement txtWelcome;
             waitForSeconds(1);
             jsScrollIntoView(elmntGroupMessagePatient);
             waitForElement(elmntGroupMessagePatient);
-
             jsClick(elmntGroupMessagePatient);
-            waitForSeconds(5);
-
             String pageTitle = driver.getCurrentUrl();
             System.out.println("pageTitle >>> : " + pageTitle);
             if (pageTitle.contains("Groups")) {

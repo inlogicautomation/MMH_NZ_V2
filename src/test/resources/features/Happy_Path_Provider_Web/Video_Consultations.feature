@@ -34,5 +34,5 @@ Feature: Video Consultations
     Then I should see Video consultations details in My appointments grid based on the select provider name "<My_Appointment_Details>"
 
     Examples:
-      | Appointment_Details      | Details_For_Appointment     | Future_Date   | Appointment_Summary         | Patient_User_Login | Password           | My_Appointment_Details   |
-      | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &VIDEO_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | &MY_APPOINTMENT_DETAILS& |
+      | Appointment_Details      | Details_For_Appointment     | Future_Date   | Appointment_Summary         | Patient_User_Login | Password   | My_Appointment_Details   |
+      | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &VIDEO_APPOINTMENT_SUMMARY& | &EMAIL&            | &PASSWORD& | &MY_APPOINTMENT_DETAILS& |

@@ -76,7 +76,7 @@ public class ProviderHomePage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp1!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp2White!')]")
     })
     protected WebElement txtProviderPortalWelcomePage;
 
@@ -85,7 +85,7 @@ public class ProviderHomePage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Harry Harry!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Pat1!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Autochrisc1!')]")
     })
     protected WebElement txtHarryHarryWelcome;
 

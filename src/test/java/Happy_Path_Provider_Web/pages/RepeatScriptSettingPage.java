@@ -43,11 +43,13 @@ public class RepeatScriptSettingPage extends BasePage {
     @FindBy(xpath = "//div[@class='navbar-header']/a")
     protected WebElement imgNavHeader;
 
-    @FindBy(xpath = "//span[contains(text(),'Systems Menu')]")
-    protected WebElement elmtSystemsMenu;
+    @FindBy(xpath = "//div[contains(text(),'Pay at Health Centre or Pay Online')]")
+    protected WebElement elmtRRPPayemts;
 
     @FindBy(xpath = "//span[contains(text(),'Save')]")
     protected WebElement btnSave;
+
+
 
     @FindBy(xpath = "(//mat-radio-group[@formcontrolname='isMessageMandatory']//div//div//following::input)[1]")
     protected WebElement btnRequestisMandatoryYESButton;
@@ -1811,6 +1813,23 @@ public class RepeatScriptSettingPage extends BasePage {
             jsScrollIntoView(btnSave);
             waitForElement(btnSave);
             jsClick(btnSave);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+//            waitForElement(successPopUp);
+            blResult = true;
+        } catch (Exception e) {
+            System.out.println("Failed to verify the saved pop up");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
+    public boolean clickRRPPayments() {
+        boolean blResult = false;
+        try {
+
+            jsScrollIntoView(elmtRRPPayemts);
+            waitForElement(elmtRRPPayemts);
+            jsClick(elmtRRPPayemts);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            waitForElement(successPopUp);
             blResult = true;

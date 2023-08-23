@@ -34,8 +34,8 @@ Feature: RRP_Script_Fee_Settings
     And I should see the successful message and I navigate to view history of the Prescription
     And I see the status for Patient to collect the Prescription"<Verification Medication Details>"
     Examples:
-      | System_Menu             | Health_Centre             | Medication Details                            | Verification Medication Details                         | Patient to Collect Script DropDown Details   |
-      | RRP Script Fee Settings | Automation_Practice1_Loc1 | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
+      | System_Menu             | Health_Centre    | Medication Details                            | Verification Medication Details                         | Patient to Collect Script DropDown Details   |
+      | RRP Script Fee Settings | Automation1_Loc1 | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
 
 
   @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_RRP_SCRIPT_FEE_SETTING
@@ -52,8 +52,8 @@ Feature: RRP_Script_Fee_Settings
     And I should see the successful message and I navigate to view history of the Prescription
     And I see the status for Patient to collect the Prescription"<Verification Medication Details>"
     Examples:
-      | System_Menu             | Health_Centre             | Medication Details             | Verification Medication Details                         | Patient to Collect Script DropDown Details   |
-      | RRP Script Fee Settings | Automation_Practice1_Loc1 | &DATA FOR SENT SCRIPT BY POST& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
+      | System_Menu             | Health_Centre    | Medication Details             | Verification Medication Details             | Patient to Collect Script DropDown Details   |
+      | RRP Script Fee Settings | Automation1_Loc1 | &DATA FOR SENT SCRIPT BY POST& | &VERIFICATION DATA FOR SENT SCRIPT BY POST& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
 
 
   @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_RRP_SCRIPT_FEE_SETTING
@@ -70,8 +70,8 @@ Feature: RRP_Script_Fee_Settings
     And I should see the successful message and I navigate to view history of the Prescription
     And I see the status for Patient to collect the Prescription"<Verification Medication Details>"
     Examples:
-      | System_Menu             | Health_Centre             | Medication Details                                 | Verification Medication Details                         | Patient to Collect Script DropDown Details   |
-      | RRP Script Fee Settings | Automation_Practice1_Loc1 | &DATA FOR PRESCRIPTION BY SENT SCRIPT TO PHARMACY& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
+      | System_Menu             | Health_Centre    | Medication Details                                 | Verification Medication Details                 | Patient to Collect Script DropDown Details   |
+      | RRP Script Fee Settings | Automation1_Loc1 | &DATA FOR PRESCRIPTION BY SENT SCRIPT TO PHARMACY& | &VERIFICATION DATA FOR SENT SCRIPT TO PHARMACY& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
 
   @WEB @PROVIDER_RRP_SCRIPT_FEE_SETTING @PROVIDER_HAPPY_PATH
   Scenario Template: S5-create Provider RRP Script Instructions Fees(Deliver Meds by Pharmacy) Setup & verify it in Patient Portal
@@ -87,8 +87,8 @@ Feature: RRP_Script_Fee_Settings
     And I should see the successful message and I navigate to view history of the Prescription
     And I see the status for Deliver Meds by Pharmacy "<Verification Medication Details>"
     Examples:
-      | System_Menu             | Health_Centre             | Medication Details                   | Verification Medication Details                   | Patient to Collect Script DropDown Details   |
-      | RRP Script Fee Settings | Automation_Practice1_Loc1 | &DATA FOR DELIVERY MEDS BY PHARMACY& | &VERIFICATION DATA FOR DELIVERY MEDS BY PHARMACY& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
+      | System_Menu             | Health_Centre    | Medication Details                   | Verification Medication Details                   | Patient to Collect Script DropDown Details   |
+      | RRP Script Fee Settings | Automation1_Loc1 | &DATA FOR DELIVERY MEDS BY PHARMACY& | &VERIFICATION DATA FOR DELIVERY MEDS BY PHARMACY& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
 
 
   @WEB @PROVIDER_RRP_SCRIPT_FEE_SETTING @PROVIDER_HAPPY_PATH
@@ -105,6 +105,6 @@ Feature: RRP_Script_Fee_Settings
     And I should see the successful message and I navigate to view history of the Prescription
     And I see the status for Patient to collect the Prescription"<Verification Medication Details>"
     Examples:
-      | System_Menu             | Health_Centre             | Medication Details                    | Verification Medication Details                   | Patient to Collect Script DropDown Details   |
-      | RRP Script Fee Settings | Automation_Practice1_Loc1 | &DATA FOR DELIVERY VIA ZOOM PHARMACY& | &VERIFICATION DATA FOR DELIVER VIA ZOOM PHARMACY& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
+      | System_Menu             | Health_Centre    | Medication Details                    | Verification Medication Details                   | Patient to Collect Script DropDown Details   |
+      | RRP Script Fee Settings | Automation1_Loc1 | &DATA FOR DELIVERY VIA ZOOM PHARMACY& | &VERIFICATION DATA FOR DELIVER VIA ZOOM PHARMACY& | &PATIENT_TO_COLLECT_SCRIPT_DROPDOWN_DETAILS& |
 

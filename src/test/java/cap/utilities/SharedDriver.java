@@ -62,9 +62,13 @@ public class SharedDriver {
             //Launch WebDriver
             driver = DriverUtil.getDriver();
             System.out.println("<----------------------WebDriver is launched---------------------->");
+
             // Mobile Driver
             mobileDriver = DriverUtil.getMobileDriver();
             System.out.println("<----------------------Mobile Driver is launched---------------------->");
+
+
+
         } else if (strExecutionType.equalsIgnoreCase("API")) {
             System.out.println("<------------- API Suite started... ------------->");
         }

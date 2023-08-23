@@ -109,7 +109,7 @@ public class BaseScreen {
     public boolean verifyElement(WebElement element) {
 
         try {
-//            element.isDisplayed();
+            element.isDisplayed();
             waitForElement(element).isDisplayed();
             return true;
         } catch (Exception e) {

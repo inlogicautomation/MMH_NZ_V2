@@ -1,6 +1,6 @@
 Feature: Messages_Scenarios
 
-  @WEB @Mobile_Message @HAPPY_PATH_MOBILE
+  @WEB @Mobile_Message @HAPPY_PATH_MOBILE1
   Scenario Template: Pre-Req - Preparation for Group Message, Login as a Provider user
 
     Given As a user Launch the "<V1 Portal>"
@@ -13,7 +13,7 @@ Feature: Messages_Scenarios
       | &V1 URL&  | &DOCTOR_EMAIL& | &DOCTOR_PASSWORD& |
 
 
-  @WEB @Mobile_Message @HAPPY_PATH_MOBILE
+  @WEB @Mobile_Message1 @HAPPY_PATH_MOBILE1
   Scenario Template: Pre-Req - Preparation for Group Message, Sending a Group of E-Mail's to the Patient from provider login
 
     Given As a user I am on Doctor portal homepage and Navigate to GroupMessage
@@ -26,7 +26,7 @@ Feature: Messages_Scenarios
       | &SENT_GROUP_MESSAGE_DETAILS& |
 
 
-  @MOBILE @RELAUNCH @Mobile_Message @HAPPY_PATH_MOBILE
+  @MOBILE @RELAUNCH @Mobile_Message @HAPPY_PATH_MOBILE1
   Scenario Outline: Pre-Req - Doctor login with valid credential and verifies MMH Home screen
 
     Given I am on MMH Login screen
@@ -39,7 +39,7 @@ Feature: Messages_Scenarios
       | &DOCTOR_EMAIL& | &DOCTOR_PASSWORD& |
 
 
-  @MOBILE @Mobile_Message @HAPPY_PATH_MOBILE
+  @MOBILE @Mobile_Message1 @HAPPY_PATH_MOBILE1
   Scenario Outline: Pre-Req - Doctor Sending Message [Receive and Reply]
 
     Given I am on MMH Home screen
@@ -57,7 +57,7 @@ Feature: Messages_Scenarios
       | &REPLY_SEND_MESSAGE_DETAILS&  | &REPLY_SEND_MESSAGE&  | &REPLY_SENT_MESSAGE_DETAILS&  |
 
 
-  @MOBILE @Mobile_Message @HAPPY_PATH_MOBILE
+  @MOBILE @Mobile_Message @HAPPY_PATH_MOBILE1
   Scenario: Pre-Req - Doctor Sending Message
 
     Given I am on MMH Home screen

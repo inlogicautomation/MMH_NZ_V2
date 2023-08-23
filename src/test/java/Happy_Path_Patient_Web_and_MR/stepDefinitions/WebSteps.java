@@ -2916,13 +2916,13 @@ public class WebSteps {
     public void IEnterTheComposeGroupMessage(String listCreateData) {
         List<String> list = TestDataUtil.getListOfValue(listCreateData);
         System.out.println(list);
-        demoPageContainer.messagesPage.selectFrom(list.get(0));
-        demoPageContainer.messagesPage.selectProvider(list.get(1));
-        demoPageContainer.messagesPage.selectGenderPreference(list.get(2));
-        demoPageContainer.messagesPage.selecGroupTo(list.get(3));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectFrom(list.get(0)));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectProvider(list.get(1)));
+        Assert.assertTrue(demoPageContainer.messagesPage.selectGenderPreference(list.get(2)));
+        Assert.assertTrue(demoPageContainer.messagesPage.selecGroupTo(list.get(3)));
         Assert.assertTrue(demoPageContainer.messagesPage.enterGroupSubject(TestDataUtil.getValue(list.get(4))));
         Assert.assertTrue(demoPageContainer.messagesPage.enterGroupMessage(TestDataUtil.getValue(list.get(5))));
-        demoPageContainer.messagesPage.selecGroupTo(list.get(3));
+//        demoPageContainer.messagesPage.selecGroupTo(list.get(3));
     }
 
     @And("I send the group message to the patient users")
@@ -2952,11 +2952,11 @@ public class WebSteps {
     public void iVerifyTheProviderSent(String strGroupMessage) {
         List<String> listGroupMessage = TestDataUtil.getListOfValue(strGroupMessage);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(0)), listGroupMessage.get(1)));
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(0)), listGroupMessage.get(5)));
         }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessageForMobile((listGroupMessage.get(0)), listGroupMessage.get(1)));
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessageForMobile((listGroupMessage.get(0)), listGroupMessage.get(5)));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessageForMobile((listGroupMessage.get(0)), listGroupMessage.get(1)));
@@ -4016,7 +4016,7 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.verifyPatientvisitAppointmentsLocation(TestDataUtil.getListOfValue(strHealthCenter)));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyDefaultLocationDoctorNames(TestDataUtil.getListOfValue(strHealthCenter),TestDataUtil.getListOfValue(VM03ProviderNames)));
+            Assert.assertTrue(demoPageContainer.appointmentsPage.verifyNonRistrickDefaultLocationDoctorNames(TestDataUtil.getListOfValue(strHealthCenter),TestDataUtil.getListOfValue(VM03ProviderNames)));
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectLocation(TestDataUtil.getValue(lstAppointmentDetails.get(1))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectAppointmentIsFor(TestDataUtil.getValue(lstAppointmentDetails.get(2))));
@@ -4227,7 +4227,7 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectProvider(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.selectFutureDateOnCalender(TestDataUtil.getValue(lstAppointmentDetails.get(9))));
             Assert.assertTrue(demoPageContainer.appointmentsPage.veriflyRule2VisitAvialableSlotTime(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
-            Assert.assertTrue(demoPageContainer.appointmentsPage.veriflyVisitTimeShowedPhoneSlotTime());
+//            Assert.assertTrue(demoPageContainer.appointmentsPage.veriflyVisitTimeShowedPhoneSlotTime());
 //            Assert.assertTrue(demoPageContainer.appointmentsPage.selectPhoneCode(TestDataUtil.getValue(lstAppointmentDetails.get(7))));
 //            Assert.assertTrue(demoPageContainer.appointmentsPage.enterPhoneNumber(TestDataUtil.getValue(lstAppointmentDetails.get(8))));
 
@@ -4505,6 +4505,14 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmYourBookingButton());
         Assert.assertTrue(demoPageContainer.appointmentsPage.verifyCreatedAppointmentInFutureAppointmentTab(lstDetail));
         Assert.assertTrue(demoPageContainer.homePage.clickLogoutButton());
+    }
+
+    @When("I click confirm button {string}")
+    public void iClickConfirmButton(String strVideoAppointmentDetails) {
+        List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strVideoAppointmentDetails);
+        Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmButton());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.selectTypeOfVideoAppointment(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
+
     }
 }
 

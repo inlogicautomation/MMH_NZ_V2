@@ -120,7 +120,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='locationAddress']")
     protected WebElement drpdownSelectAddress;
 
-    @FindBy(how = How.XPATH, using = "//span[normalize-space()='1: 456, demo']")
+    @FindBy(how = How.XPATH, using = "//span[normalize-space()='1: 123, Auckland Central']")
     protected WebElement firstAddressOption;
 
     @FindBy(how = How.XPATH, using = "//div[@class='vis-yes']//mat-select[@formcontrolname='PharmacyName']")
@@ -137,7 +137,7 @@ public class RepeatPrescription extends BasePage {
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'Addington Pharmacy,348 Lincoln Road, Addington, Christchurch ,Phone:(03) 338 5805,Fax:(03) 338 5218')]")
     protected WebElement SendScripttoPharmacydrpOptionZoomAddress;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'1: 456, demo')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'1: 123, Auckland Central')]")
     protected WebElement SendDeliverViaZoomAddress;
 
     @FindBy(how = How.XPATH, using = "//textarea[@formcontrolname='bindDeliveryAddress']")
@@ -199,7 +199,7 @@ public class RepeatPrescription extends BasePage {
     protected WebElement drpdownDoctor;
 
     protected String selectDoctor = new StringBuilder()
-            .append("//mat-option/span[contains(text(),'")
+            .append("//span[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
@@ -349,13 +349,16 @@ public class RepeatPrescription extends BasePage {
     @AndroidFindBy(xpath = "//android.widget.CheckBox")
     protected WebElement txtcheckbox;
 
-    @AndroidFindBy(xpath = "//android.widget.CheckedTextView[@text='ANZ']")
+    @AndroidFindBy(xpath = "//android.widget.CheckedTextView[@text='ASB']")
     protected WebElement txtAvailableBank;
     @FindBy(how = How.XPATH, using = "//span[text()='Please enter the A2A test credentials:']")
     protected WebElement txtA2ACredentials;
 
     @FindBy(how = How.XPATH, using = "//h2[text()='Credit Card Payment']")
     protected WebElement txtCreditCardPayment;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(),'Credit Card')]")
+    protected WebElement SelectCreditCardPayment;
 
     @FindBy(how = How.XPATH, using = "//div[text()='Next']")
     protected WebElement btnNextA2A;
@@ -814,8 +817,7 @@ public class RepeatPrescription extends BasePage {
             WebElement ddlDoctor = waitForElement(By.xpath(selectDoctor.replace("<<REPLACEMENT>>", strDoctor)));
             selectDoctor.replace("<<REPLACEMENT>>", strDoctor);
             waitForElementClickable(ddlDoctor);
-            waitForSeconds(4);
-            jsClick(ddlDoctor);
+            mouseClick(ddlDoctor);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             if (verifyElement(VeriflyOutOfOfficePopup)){
                 click(ClickOutOfOfficePopupOkButton);
@@ -1073,7 +1075,7 @@ waitForElement(ReasonForNewScript);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(btnPayNow);
             waitForSeconds(4);
-            click(btnPayNow);
+            jsClick(btnPayNow);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(6);
             takeScreenshot(driver);
@@ -1995,7 +1997,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             waitForSeconds(2);
             waitForElement(drpDownAddress);
             waitForElementClickable(drpDownAddress);
-            click(drpDownAddress);
+            jsClick(drpDownAddress);
             WebElement selectDdlAddress = waitForElement(By.xpath(ddlSelectAddress.replace("<<REPLACEMENT>>", strSelectAddress)));
             System.out.println("ddlSelectAddress XPath >>>" + ddlSelectAddress.replace("<<REPLACEMENT>>", strSelectAddress));
             waitForSeconds(2);
@@ -2064,6 +2066,8 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
     public boolean enterCardDetails(String strCardNumber, String strNameOnCard, String strExpiryMonth, String strExpiryYear, String strCVC) {
         boolean blResult = false;
         try {
+            waitForElement(SelectCreditCardPayment);
+            click(SelectCreditCardPayment);
             waitForSeconds(2);
             waitForElement(txtCreditCardPayment);
             verifyElement(txtCreditCardPayment);
@@ -2142,16 +2146,16 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
                 waitForSeconds(2);
                 waitForElement(txtAccount2Account);
                 verifyElement(txtAccount2Account);
-                waitForSeconds(2);
+                waitForSeconds(3);
 //                WebElement selectRdoBtnBank = waitForElement(By.xpath(rdoBtnBank.replace("<<REPLACEMENT>>", strBank)));
 //                System.out.println("SelectRdoBtnBank Xpath >>>> " + rdoBtnBank.replace("<<REPLACEMENT>>", strBank));
 //                jsScrollIntoView(selectRdoBtnBank);
 //                waitForElementClickable(selectRdoBtnBank);
 //                jsClick(selectRdoBtnBank);
                 Select A2ABanks  = new Select(driver.findElement(By.name("SelectBank")));
-                A2ABanks.selectByVisibleText("ANZ");
+                A2ABanks.selectByVisibleText("ASB");
                 System.out.println("Successfully Select RdoBtnBank");
-                waitForSeconds(4);
+                waitForSeconds(3);
                 waitForElement(chkBoxA2ATnC);
                 jsClick(chkBoxA2ATnC);
                 System.out.println("Successfully Select chkBoxA2ATnC");
@@ -2798,15 +2802,16 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             click(firstAddressOption);
             waitForElement(addressBoxValue);
             String currentSelectedAddress = addressBoxValue.getAttribute("value");
+            System.out.println("Get Attribute addressBoxValue is " + currentSelectedAddress);
             System.out.println("Current addressBoxValue is " + selectAddress);
-            selectedAddress = true;
-//            if (currentSelectedAddress.equalsIgnoreCase(selectAddress)) {
-//                System.out.println("Both Address matched as expected");
-//                selectedAddress = true;
-//            } else {
-//                System.out.println("Both address are different");
-//                selectedAddress = false;
-//            }
+
+            if (currentSelectedAddress.equalsIgnoreCase(selectAddress)) {
+                System.out.println("Both Address matched as expected");
+                selectedAddress = true;
+            } else {
+                System.out.println("Both address are different");
+                selectedAddress = false;
+            }
         }catch (Exception e){
             System.out.println("Not able to match the selected address " + selectAddress);
         }

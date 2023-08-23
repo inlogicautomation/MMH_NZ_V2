@@ -59,7 +59,7 @@ public class HomePage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp1!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp2White!')]")
     })
     protected WebElement txtProviderPortalWelcomePage;
 
@@ -68,7 +68,7 @@ public class HomePage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Harry Harry!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Pat1!')]"),
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Autochrisc1!')]"),
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Christopher Michael!')]")
 
     })
@@ -89,7 +89,7 @@ public class HomePage extends BasePage {
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Harry Harry!']"),
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Christopher Michael!']"),
                 @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Ben!']"),
-                @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Auto Pat1!']")
+                @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Auto Autochrisc1!']")
 
     })
     protected WebElement txtWelcome;
@@ -214,6 +214,7 @@ public class HomePage extends BasePage {
         if (WindowsCount == 2) {
             focusWindow(1);
             if (verifyElement(txtPatientWelcomePage)){
+                driver.manage().deleteAllCookies();
                 System.out.println("User here in Provider home page");
             }else{
 //                System.out.println("Else Part ::::::Window Count 2");
@@ -224,11 +225,11 @@ public class HomePage extends BasePage {
         }
         if (WindowsCount == 1) {
             if (verifyElement(txtPatientWelcomePage)) {
+                driver.manage().deleteAllCookies();
                 System.out.println("User here in Provider home page");
                 takeScreenshot(driver);
             }
             else{
-                driver.manage().deleteAllCookies();
                 visit(TestDataUtil.getValue("&URL&"));
                 driver.manage().deleteAllCookies();
             }
@@ -580,7 +581,7 @@ public class HomePage extends BasePage {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElement(elmntDashboard);
         waitForElement(btnAppointmentExpand);
-        click(btnAppointmentExpand);
+        jsClick(btnAppointmentExpand);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElement(elmntFutureAppointment);
         return verifyElement(elmntFutureAppointment);
@@ -758,19 +759,19 @@ if(!verifyElement(txtPatientWelcomePage)){
                     if (verifyElement(verifyPatientHomePage)) {
                         System.out.println("user here in patient portal homepage");
                     } else {
-                        visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                        visit(TestDataUtil.getValue("&URL&"));
                     }
                 }
                 if (WindowsCount == 1) {
                     ((JavascriptExecutor) driver).executeScript("window.open()");
                     ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
                     driver.switchTo().window(tabs.get(1));
-                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    visit(TestDataUtil.getValue("&URL&"));
                     waitForSeconds(4);
                     waitForElementClickable(elmntLogOut);
                     jsClick(elmntLogOut);
                     waitForSeconds(2);
-                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    visit(TestDataUtil.getValue("&URL&"));
                 }
             }
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
@@ -781,18 +782,18 @@ if(!verifyElement(txtPatientWelcomePage)){
                     verifyElement(verifyPatientHomePage);
                     System.out.println("user here in patient portal homepage");
                 } else {
-                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    visit(TestDataUtil.getValue("&URL&"));
                 }
                 if (WindowsCount == 1) {
                     ((JavascriptExecutor) driver).executeScript("window.open()");
                     ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
                     driver.switchTo().window(tabs.get(1));
-                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    visit(TestDataUtil.getValue("&URL&"));
                     waitForSeconds(4);
                     waitForElementClickable(elmntMobileLogOut);
                     jsClick(elmntMobileLogOut);
                     waitForSeconds(2);
-                    visit(TestDataUtil.getValue("&PATIENT_URL&"));
+                    visit(TestDataUtil.getValue("&URL&"));
                 }
 
             }

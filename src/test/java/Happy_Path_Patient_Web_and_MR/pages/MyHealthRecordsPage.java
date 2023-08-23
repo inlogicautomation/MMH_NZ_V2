@@ -758,6 +758,11 @@ public class MyHealthRecordsPage extends BasePage {
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Files']")
     protected WebElement FileIcon;
 
+    @AndroidFindBy(xpath = "(//android.widget.ImageView[@resource-id='android:id/icon'])[3]")
+    protected WebElement MediaIcon;
+
+//
+
     @AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc='Show roots']")
     protected WebElement iconHamburger;
 
@@ -834,8 +839,10 @@ public class MyHealthRecordsPage extends BasePage {
 //            jsClick(elmntFilterdropPrescriptions);
 //            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
 //            jsClick(elmntEntriesFromHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntEntriesfromhealthcentreRadioButton);
             jsClick(elmntEntriesfromhealthcentreRadioButton);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
             blResult = true;
         } catch (Exception e) {
@@ -855,12 +862,13 @@ public class MyHealthRecordsPage extends BasePage {
 //            jsClick(elmntFilterdropPrescriptions);
 //            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
 //            jsClick(elmntEntriesFromHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntMobilePrescription);
             click(elmntMobilePrescription);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntEntriesfromhealthcentreRadioButton);
             jsClick(elmntEntriesfromhealthcentreRadioButton);
-
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1242,13 +1250,6 @@ jsScrollIntoView(elmntClinicianNotes);
         waitForElement(elmntExport);
         click(elmntExport);
 //        driver.navigate().back();
-
-        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            waitForSeconds(5);
-            swipeRight();
-            waitForSeconds(5);
-        }
-
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             waitForSeconds(5);
             swipeRight();
@@ -2959,8 +2960,7 @@ jsScrollIntoView(elmntClinicianNotes);
             waitForSeconds(2);
             jsClick(elmntMobilePrescriptiondrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntAddPrescriptionDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
-            jsClick(elmntEntriesFromHealthCentre);
-
+            mouseClick(elmntEntriesFromHealthCentre);
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -3090,11 +3090,11 @@ jsScrollIntoView(elmntClinicianNotes);
             waitForElementClickable(elmntCovidImmunisationsdrop);
 //            waitForSeconds(2);
             jsClick(elmntCovidImmunisationsdrop);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntCovidImmunisationsDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             System.out.println(">>>>>>>"+elmntEntriesFromHealthCentre);
-            waitForElement(elmntEntriesFromHealthCentre);
-            mouseClick(elmntEntriesFromHealthCentre);
-            blResult = true;
+            jsClick(elmntEntriesFromHealthCentre);
+            blResult = verifyElement(elmntCovidImmunisationsdrop);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -3219,7 +3219,7 @@ jsScrollIntoView(elmntClinicianNotes);
                     waitForSeconds(2);
                     click(WhileUsingTheAppForA13);
                     waitForSeconds(2);
-                    click(FileIcon);
+                    click(MediaIcon);
                 }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy M53")){
                     waitForSeconds(3);
@@ -3227,7 +3227,7 @@ jsScrollIntoView(elmntClinicianNotes);
                     waitForSeconds(2);
                     click(WhileUsingTheAppForA13);
                     waitForSeconds(2);
-                    click(FileIcon);
+                    click(MediaIcon);
                 }
                 if (System.getProperty("deviceName").equalsIgnoreCase("Motorola One Fusion+")){
                     waitForSeconds(3);

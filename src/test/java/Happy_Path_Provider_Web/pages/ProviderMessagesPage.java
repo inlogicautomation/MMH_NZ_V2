@@ -71,7 +71,7 @@ public class ProviderMessagesPage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp1!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Dr. Gp2White!')]")
     })
     protected WebElement txtProviderPortalWelcomePage;
     @FindBy(xpath = "//a[@class='navbar-brand']")

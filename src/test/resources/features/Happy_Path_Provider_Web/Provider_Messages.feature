@@ -13,24 +13,24 @@ Feature: Provider_Messages
   Scenario Template: S1-Provider Sending Message
 
     Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module
-    And As I enter the Compose "<Message Details>"
+    And As I enter the Compose "<Compose Details>"
     When I Click the send message and verify success pop up
-    Then I navigate to Sent items and verify the Sent "<Message Details>"
+    Then I navigate to Sent items and verify the Sent "<Compose Details>"
 
     Examples:
-      | Message Details            |
+      | Compose Details            |
       | &RECEIVED_MESSAGE_DETAILS& |
 
   @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
   Scenario Template: S2-Provider Save Message as Draft
 
     Given As a user I am on Doctor portal homepage and Navigate to Compose in Inbox module
-    And As I enter the Compose "<Message Details>"
+    And As I enter the Compose "<Compose Details>"
     When I Click the Draft message and verify success pop up
-    Then I navigate to Draft items and verify the Sent "<Message Details>"
+    Then I navigate to Draft items and verify the Sent "<Compose Details>"
 
     Examples:
-      | Message Details            |
+      | Compose Details            |
       | &RECEIVED_MESSAGE_DETAILS& |
 
   @WEB  @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES

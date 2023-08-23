@@ -9,7 +9,7 @@ Feature: Appointment Message
     And I enter "&PATIENT_USER_LOGIN&" and "&PASSWORD&" For Beta
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_MESSAGE1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_MESSAGE
   Scenario Template:S1-As a User I have to enable Easy Booking Banner Message to Yes in Appointment Message page
 
     Given As a Provider I am on HomePage and navigate to Appointment Message page
@@ -25,7 +25,7 @@ Feature: Appointment Message
       | Health_Centre                 | Banner_Heading   | Banner_Message   | Location                 |
       | &PRE_SCREENING_HEALTH_CENTRE& | &BANNER_HEADING& | &BANNER_MESSAGE& | &PRE_SCREENING_LOCATION& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_MESSAGE1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_MESSAGE
   Scenario Template:S2-As a User I have to enable Easy Booking Banner Message to No in Appointment Message page
 
     Given As a Provider I am on HomePage and navigate to Appointment Message page
@@ -41,7 +41,7 @@ Feature: Appointment Message
       | Health_Centre                 | Banner_Heading   | Banner_Message   | Location                 |
       | &PRE_SCREENING_HEALTH_CENTRE& | &BANNER_HEADING& | &BANNER_MESSAGE& | &PRE_SCREENING_LOCATION& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_MESSAGE1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_MESSAGE
   Scenario Template:S3-As a User I have to enable Patient Portal(Web) Banner Message to yes in Appointment Message page
 
     Given As a Provider I am on HomePage and navigate to Appointment Message page
