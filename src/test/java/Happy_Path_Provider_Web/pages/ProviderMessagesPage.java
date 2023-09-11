@@ -71,7 +71,7 @@ public class ProviderMessagesPage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Dr. Gp2White!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp2White!')]")
     })
     protected WebElement txtProviderPortalWelcomePage;
     @FindBy(xpath = "//a[@class='navbar-brand']")
@@ -124,10 +124,6 @@ public class ProviderMessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()=' Send message']")
     protected WebElement btnSendMessage;
 
-
-    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Your Message has been sent Successfully')]")
-    protected WebElement txtComposeSuccessMessage;
-
     @FindBy(how = How.XPATH, using = "//p[contains(text(),'Message sent successfully')]")
     protected WebElement btnSentSuccessfullyPopup;
 
@@ -154,14 +150,10 @@ public class ProviderMessagesPage extends BasePage {
 
 
 
-
-
-
-
-
     public boolean clickProviderDraftMessage() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            waitForSeconds(2);
 //            waitForElement(txtCompose);
             jsScrollIntoView(btnDraftMessage);
@@ -178,8 +170,6 @@ public class ProviderMessagesPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            waitForElement(txtDraftSavedSuccessMessagePopup);
             blResult =true;
-
-            System.out.println("\nSuccessfully Clicked the send message >>> :: ");
         } catch (Exception e) {
             System.out.println("\nFailed to click the send message >>> :: ");
             e.printStackTrace();
@@ -190,14 +180,13 @@ public class ProviderMessagesPage extends BasePage {
     public boolean navigateToDraftItems() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(ElementDraftPage);
             waitForElementClickable(ElementDraftPage);
             jsClick(ElementDraftPage);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtDraftPage);
             blResult = verifyElement(txtDraftPage);
-            System.out.println("Successfully navigated to the Sent Message Page");
-
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to navigate the Sent Message Page");
@@ -208,18 +197,17 @@ public class ProviderMessagesPage extends BasePage {
     public boolean verifyDraftMessages(String strMessage) {
         boolean blResult = false;
         try {
-//            waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtDraftPage);
             driver.navigate().refresh();
-            waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtDraftPage);
             System.out.println(elmntDoctorDraftSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
             WebElement Subject = waitForElement(By.xpath(elmntDoctorDraftSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             waitForElement(Subject);
             blResult = verifyElement(Subject);
-            System.out.println(">>>>>>>>>>>>>>>>>>>>"+Subject);
             click(Subject);
-            System.out.println("Successfully verified sent Message");
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to verify sent Message");
@@ -231,12 +219,12 @@ public class ProviderMessagesPage extends BasePage {
         boolean blResult = false;
         try {
             System.out.println("List Message Details >>> :: " + strMessage);
-            waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println(VerifyDoctorDraftBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage.get(6))));
             WebElement SubjectBodyMessage = waitForElement(By.xpath(VerifyDoctorDraftBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage.get(6)))));
             waitForElement(SubjectBodyMessage);
             blResult = verifyElement(SubjectBodyMessage);
-            System.out.println("Successfully verified sent Body Message");
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to verify sent Body Message");
@@ -247,8 +235,8 @@ public class ProviderMessagesPage extends BasePage {
     public boolean verifyReplyDraftBodyMessages(List<String> strMessage) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("List Message Details >>> :: " + strMessage);
-            waitForSeconds(3);
             System.out.println(VerifyDoctorDraftBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage.get(10))));
             WebElement SubjectBodyMessage = waitForElement(By.xpath(VerifyDoctorDraftBodyMessage.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage.get(10)))));
             waitForElement(SubjectBodyMessage);
@@ -266,9 +254,11 @@ public class ProviderMessagesPage extends BasePage {
         try {
 //            waitForSeconds(2);
 //            waitForElement(txtCompose);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(btnSendMessage);
             waitForElementClickable(btnSendMessage);
             jsClick(btnSendMessage);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            waitForSeconds(1);
             waitForElementToAppear(driver,By.xpath(btnSentSuccessfullyPopup1));
             waitForElement(btnSentSuccessfullyPopup);
@@ -280,8 +270,6 @@ public class ProviderMessagesPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtInboxPage);
             blResult = verifyElement(txtInboxPage);
-
-            System.out.println("\nSuccessfully Clicked the send message >>> :: ");
         } catch (Exception e) {
             System.out.println("\nFailed to click the send message >>> :: ");
             e.printStackTrace();
@@ -291,6 +279,7 @@ public class ProviderMessagesPage extends BasePage {
 
 
     public boolean verifySentSuccessfully() {
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElementToAppear(driver,By.xpath(btnSentSuccessfullyPopup1));
         waitForElement(btnSentSuccessfullyPopup);
         return verifyElement(btnSentSuccessfullyPopup);
@@ -299,16 +288,15 @@ public class ProviderMessagesPage extends BasePage {
     public boolean navigateToInboxMessageForDoctor() {
         boolean blResult = false;
         try {
-            waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtMyHomePage);
 //            waitForElement(elmntsMenu);
 //            waitForElement(elmntPraticeMenuDoctor);
 //            jsClick(elmntPraticeMenuDoctor);
-            waitForSeconds(3);
             jsScrollIntoView(elmntInboxDoctor);
             waitForElementClickable(elmntInboxDoctor);
             jsClick(elmntInboxDoctor);
-            waitForSeconds(1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtCompose);
             blResult = verifyElement(txtCompose);
             System.out.println("Successfully navigated to the compose");
@@ -322,12 +310,14 @@ public class ProviderMessagesPage extends BasePage {
     public boolean verifyProviderInboxMessages(String strMessage) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println(">>>>>>>>>>>>>"+strMessage);
             waitForElement(txtInboxPage);
             System.out.println(elmntDoctorInboxSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
             WebElement Subject = waitForElement(By.xpath(elmntDoctorInboxSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             waitForElement(Subject);
             jsClick(Subject);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult =true;
             System.out.println("Successfully verified sent Message");
         } catch (Exception e) {
@@ -340,6 +330,7 @@ public class ProviderMessagesPage extends BasePage {
     public boolean verifyProvidersetupServiceInboxMessages(String strMessage) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println(">>>>>>>>>>>>>"+strMessage);
             waitForElement(txtInboxPage);
             System.out.println(elmntDoctorInboxSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
@@ -352,7 +343,6 @@ public class ProviderMessagesPage extends BasePage {
             waitForElement(inboxReceivedSubject);
             takeScreenshot(driver);
             blResult = verifyElement(inboxReceivedSubject);
-            System.out.println("Successfully verified sent Message");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to verify sent Message");
@@ -363,14 +353,13 @@ public class ProviderMessagesPage extends BasePage {
     public boolean clickAttachButtonInboxMessages() {
         boolean blResult = false;
         try {
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtAttachFile);
             jsClick(txtAttachFile);
             waitForElement(txtReplyButton);
             jsClick(txtReplyButton);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult =true;
-            System.out.println("Successfully verified sent Message");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to verify sent Message");
@@ -381,6 +370,7 @@ public class ProviderMessagesPage extends BasePage {
     public boolean EnterReplyBodyMessages(String strMessage) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("List Message Details >>> :: " + strMessage);
             jsScrollIntoView(txtReplyBodyMessage);
             waitForSeconds(3);
@@ -389,9 +379,8 @@ public class ProviderMessagesPage extends BasePage {
             driver.switchTo().activeElement().clear();
             waitForSeconds(3);
             driver.switchTo().activeElement().sendKeys(strMessage);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
-            System.out.println("Successfully verified sent Body Message");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to verify sent Body Message");
@@ -402,11 +391,13 @@ public class ProviderMessagesPage extends BasePage {
     public boolean clickSendMessageButtonInboxMessages() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(txtReplySendMessageButton);
             waitForElement(txtReplySendMessageButton);
             jsClick(txtReplySendMessageButton);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult =true;
-            System.out.println("Successfully verified sent Message");
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to verify sent Message");
@@ -417,6 +408,7 @@ public class ProviderMessagesPage extends BasePage {
     public boolean navigateToSentItems() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtInboxPage);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntSentDoctor);
@@ -425,8 +417,6 @@ public class ProviderMessagesPage extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtSent);
             blResult = verifyElement(txtSent);
-            System.out.println("Successfully navigated to the inbox");
-
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to navigate the inbox");
@@ -444,7 +434,7 @@ public class ProviderMessagesPage extends BasePage {
             WebElement Subject = waitForElement(By.xpath(elmntDoctorSentSubject.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
             waitForElement(Subject);
             blResult = verifyElement(Subject);
-            System.out.println("Successfully verified sent Message");
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to verify sent Message");
@@ -455,13 +445,15 @@ public class ProviderMessagesPage extends BasePage {
     public boolean  navigateToProviderHomepage() {
         boolean blResult = false;
         try{
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             if (isElementDisplayed(txtProviderPortalWelcomePage)) {
+                waitForElement(txtProviderPortalWelcomePage);
                 verifyElement(txtProviderPortalWelcomePage);
-                waitForSeconds(3);
                 waitForElement(elmtMMHLogo);
                 waitForElementClickable(elmtMMHLogo);
                 jsClick(elmtMMHLogo);
-                waitForSeconds(3);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+              waitForElement(txtProviderPortalWelcomePage);
                 blResult = verifyElement(txtProviderPortalWelcomePage);
             }
             if (!isElementDisplayed(txtProviderPortalWelcomePage)){
@@ -470,8 +462,8 @@ public class ProviderMessagesPage extends BasePage {
                 waitForElement(elmtMMHLogo);
                 waitForElementClickable(elmtMMHLogo);
                 jsClick(elmtMMHLogo);
-                System.out.println("Successfully click Logo");
-                waitForSeconds(3);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(txtProviderPortalWelcomePage);
                 blResult=verifyElement(txtProviderPortalWelcomePage);
             }
         } catch (Exception e) {
@@ -482,17 +474,16 @@ public class ProviderMessagesPage extends BasePage {
     public boolean navigateToDoctorMessageSetting() {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
             waitForElement(elmntInboxDoctor);
             waitForElementClickable(elmntInboxDoctor);
             click(elmntInboxDoctor);
-            waitForSeconds(1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+         waitForElement(elmntDoctorMessageSetting);
             waitForElementClickable(elmntDoctorMessageSetting);
             click(elmntDoctorMessageSetting);
-            waitForSeconds(1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElement(txtDoctorMessageSetting);
             blResult = verifyElement(txtDoctorMessageSetting);
-            System.out.println("Successfully navigated to messages settings >>>>> :: ");
         } catch (Exception e) {
             System.out.println("Failed navigate to messages settings >>>>> :: ");
             e.printStackTrace();
@@ -508,11 +499,12 @@ public class ProviderMessagesPage extends BasePage {
             jsScrollIntoView(elmntInboxDoctor);
             waitForElement(elmntInboxDoctor);
             jsClick(elmntInboxDoctor);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntComposeDoctor);
             jsClick(elmntComposeDoctor);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtProviderComposeEmail);
             blResult = verifyElement(txtProviderComposeEmail);
-            System.out.println("Successfully navigated to the compose");
         } catch (Exception e) {
             System.out.println("Failed to navigate the compose");
             e.printStackTrace();
@@ -524,7 +516,7 @@ public class ProviderMessagesPage extends BasePage {
     public boolean verifyEnteredProviderSignatureMessage(String strMessage) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("SignatureMessage >>> :: " + TestDataUtil.getValue(strMessage));
             waitForElement(btnAttachFile);
 //            driver.switchTo().frame(frameCompose);
@@ -551,16 +543,12 @@ public class ProviderMessagesPage extends BasePage {
     public boolean selectProviderOutOfOfficeSetting() {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(btnSave);
             click(drpDownOutOfOfficeSettings);
-            waitForSeconds(1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(chkboxOutOfOfficeReply);
-
-
-            System.out.println("Out of Office Setting was selected >>> ::");
             blResult = verifyElement(chkboxOutOfOfficeReply);
-
         } catch (Exception e) {
             System.out.println("Failed to select Out of Office Setting >>> ::");
             e.printStackTrace();
@@ -571,7 +559,7 @@ public class ProviderMessagesPage extends BasePage {
     public boolean verifyEnteredProviderOutOfOfficeMessage(String strMessage) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(chkboxOutOfOfficeReply);
             driver.switchTo().frame(frameOutOfOffice);
             System.out.println("Xpath for Text Out Of Office >>>> :: " + messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));

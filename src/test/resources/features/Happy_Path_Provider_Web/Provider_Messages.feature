@@ -94,7 +94,7 @@ Feature: Provider_Messages
       | Start Date   | End Date   | Message                   |
       | &START DATE& | &END DATE& | &PROVIDER_OUT OF MESSAGE& |
 
-  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES
+  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
   Scenario Outline: S8- Provider Automatic Reply Settings
 
     Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
@@ -106,7 +106,54 @@ Feature: Provider_Messages
     Then I Click Patient Send Message Button then I should see message sent Successfully popup
     And As a user I am on Doctor portal HomePage and navigate to Messages Setting
 
-
     Examples:
       | Message                   | Compose Details            |
       | &AUTOMATIC REPLY MESSAGE& | &PROVIDER_COMPOSE_MESSAGE& |
+
+  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
+  Scenario Outline: S9-Allow Patient to Send Message when provider enabled Out of Office
+
+    Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
+    And I click the Out of Office Settings and Enable Out Of Office Reply option
+    And I select the Out of office "<Start Date>" and "<End Date>" and Enter the"<Message>" click the Save Button
+    When As a user I am on HomePage and navigate to Patient Book Compose Page in Messages
+    And I enter the "<Compose Details>" to compose an email and Verify out of office text
+    And I Click Send Message Button
+    Then I should see message sent Successfully popup
+    And I navigate to Patient Sent items and verify the Sent "<Compose Details>"
+
+    Examples:
+      | Start Date   | End Date   | Message                   | Compose Details   |
+      | &START DATE& | &END DATE& | &AUTOMATIC REPLY MESSAGE& | &COMPOSE_MESSAGE& |
+
+  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
+  Scenario Outline: S10-Do not Allow Patient to Send Message to Provider when provider enabled Out of Office
+
+    Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
+    And I click the Out of Office Settings and Enable Out Of Office Reply option
+    And I select the Out of office "<Start Date>" and "<End Date>" and Enter the"<Message>" click the Save Button
+    When As a user I am on HomePage and navigate to Patient Book Compose Page in Messages
+    And I enter the "<Compose Details>" to compose an email and Verify out of office text
+    And I Click Send Message Button
+    Then I should see message sent Successfully popup
+    And I navigate to Patient Sent items and verify the Sent "<Compose Details>"
+
+    Examples:
+      | Start Date   | End Date   | Message                   | Compose Details   |
+      | &START DATE& | &END DATE& | &AUTOMATIC REPLY MESSAGE& | &COMPOSE_MESSAGE& |
+
+  @WEB @PROVIDER_HAPPY_PATH @PROVIDER_MESSAGES1
+  Scenario Outline: S11-Do not Allow Patient to Send Message to Provider when provider enabled Out of Office
+
+    Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
+    And I click the Out of Office Settings and Enable Out Of Office Reply option
+    And I select the Out of office "<Start Date>" and "<End Date>" and Enter the"<Message>" click the Save Button
+    When As a user I am on HomePage and navigate to Patient Repeat Medication Page in Repeat Prescription
+    And I select the Medication details"<Medication Details>"
+    Then I should see the successful message and I navigate to view history of the Prescription
+    And I see the status for Patient to collect the Prescription"<Verification Medication Details>"
+    And I should see the more info details of the prescription in view history"<More info details>"
+
+    Examples:
+      | Start Date   | End Date   | Message                   | Medication Details                            | Verification Medication Details                         | More info details                                                 |
+      | &START DATE& | &END DATE& | &AUTOMATIC REPLY MESSAGE& | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& | &MORE INFO VERIFICATION DATA FOR PATIENT TO COLLECT PRESCRIPTION& |

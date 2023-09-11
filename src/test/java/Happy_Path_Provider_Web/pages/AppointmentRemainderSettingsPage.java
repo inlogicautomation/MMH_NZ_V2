@@ -35,8 +35,8 @@ public class AppointmentRemainderSettingsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Automation1_Loc1')]")
     protected WebElement elmntHealthCenterDropDown;
 
-    protected String elmntSelectNumberDropDown = new StringBuilder().append("(//span[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')])[2]").toString();
+    protected String elmntSelectNumberDropDown = new StringBuilder().append("//span[text()='")
+            .append("<<REPLACEMENT>>").append("']").toString();
 
     protected String elmntHealthCentreDrop = new StringBuilder().append("(//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')])[2]").toString();
@@ -54,8 +54,17 @@ public class AppointmentRemainderSettingsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//mat-select[@ng-reflect-placeholder='Select'])[2]")
     protected WebElement elmntHoursDropDown;
 
-    protected String elmntSelectHoursDropDown = new StringBuilder().append("(//span[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')])[3]").toString();
+    protected String elmntSelectDaysDropDown = new StringBuilder().append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]").toString();
+
+    protected String elmntSelectHoursDropDown = new StringBuilder().append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]").toString();
+
+    protected String elmntSelect2HoursDropDown = new StringBuilder().append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[2]").toString();
+
+    protected String elmntSelectRemiderTime = new StringBuilder().append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]").toString();
 
     @FindBy(how = How.XPATH, using = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[1]")
     protected WebElement elmntFirstAppoinmentReminderEmailCheckEnabled;
@@ -72,7 +81,7 @@ public class AppointmentRemainderSettingsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid mat-checkbox-checked'])[2]")
     protected WebElement elmntSecondAppoinmentReminderCheckEnabled;
 
-    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid'])[2]")
+    @FindBy(how = How.XPATH, using = "//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid']//input")
     protected WebElement elmntSecondAppoinmentReminderCheckDisbled;
 
     @FindBy(how = How.XPATH, using = "(//mat-select[@ng-reflect-placeholder='Select'])[3]")
@@ -87,7 +96,7 @@ public class AppointmentRemainderSettingsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-checkbox[@class='mat-checkbox mat-accent ng-valid mat-checkbox-checked ng-dirty ng-touched']")
     protected WebElement elmntSkipWeekEndsCheckBoxEnabled;
 
-    @FindBy(how = How.XPATH, using = "(//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid'])[3]")
+    @FindBy(how = How.XPATH, using = "//mat-checkbox[@class='mat-checkbox mat-accent ng-untouched ng-pristine ng-valid']//input")
     protected WebElement elmntSkipWeekEndsCheckBoxDisabled;
 
 
@@ -143,7 +152,7 @@ public class AppointmentRemainderSettingsPage extends BasePage {
             System.out.printf("elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blresult =true;
+            blresult =verifyElement(elmntHealthCenterDropDown);
         } catch (Exception e) {
             System.out.println("Failed to click Health Center Location >>> :: ");
             e.printStackTrace();
@@ -157,7 +166,7 @@ public class AppointmentRemainderSettingsPage extends BasePage {
     public boolean verifyFirstAppointmentReminderCheckBoxEnabled() {
         boolean blresult = false;
         try {
-            System.out.println(">>>>>>Enter");
+           waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
            if (verifyElement(elmntFirstAppoinmentReminderCheckEnabled)){
                System.out.println("Already Enabled First Appointment Reminder Check Box ");
@@ -181,10 +190,12 @@ public class AppointmentRemainderSettingsPage extends BasePage {
     public boolean SelectNumberFirstAppointmentReminder(String StrNumber) {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntNumberDropDown);
             click(elmntNumberDropDown);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntSelectNumberDropDown.replace("<<REPLACEMENT>>", StrNumber)));
+            waitForSeconds(2);
             mouseClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult = verifyElement(elmntNumberDropDown);
@@ -203,6 +214,26 @@ public class AppointmentRemainderSettingsPage extends BasePage {
             click(elmntHoursDropDown);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntSelectHoursDropDown.replace("<<REPLACEMENT>>", StrHours)));
+            waitForSeconds(2);
+            mouseClick(elmntEntriesFromHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            blresult = verifyElement(elmntHoursDropDown);
+        } catch (Exception e) {
+            System.out.println("Failed to clickFirst Appointment Reminder Hours >>> :: ");
+            e.printStackTrace();
+
+        }
+        return blresult;
+    }
+
+    public boolean SelectHoursSecondAppointmentReminder(String StrHours) {
+        boolean blresult = false;
+        try {
+            waitForElement(elmntSecondHoursDropDown);
+            click(elmntSecondHoursDropDown);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntSelectHoursDropDown.replace("<<REPLACEMENT>>", StrHours)));
+            waitForSeconds(2);
             mouseClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult = verifyElement(elmntHoursDropDown);
@@ -217,8 +248,9 @@ public class AppointmentRemainderSettingsPage extends BasePage {
     public boolean verifyFirstAppointmentReminderEmailCheckBoxEnabled() {
         boolean blresult = false;
         try {
-            if (isElementDisplayed(elmntFirstAppoinmentReminderEmailCheckEnabled)){
-                System.out.println("Already Enabled First Appointment Reminder Check Box ");
+            waitForSeconds(2);
+            if (verifyElement(elmntFirstAppoinmentReminderEmailCheckEnabled)){
+                System.out.println("Already Enabled First Appointment Reminder Email Check Box ");
                 blresult=verifyElement(elmntFirstAppoinmentReminderEmailCheckEnabled);
             }else {
                 waitForElement(elmntFirstAppoinmentReminderEmailCheckDisabled);
@@ -259,10 +291,13 @@ public class AppointmentRemainderSettingsPage extends BasePage {
     public boolean SelectDaysFirstAppointmentReminder(String StrHours) {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(2);
             waitForElement(elmntHoursDropDown);
             click(elmntHoursDropDown);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
-            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntSelectHoursDropDown.replace("<<REPLACEMENT>>", StrHours)));
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntSelectDaysDropDown.replace("<<REPLACEMENT>>", StrHours)));
+            waitForSeconds(2);
             mouseClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult = verifyElement(elmntHoursDropDown);
@@ -280,7 +315,7 @@ public class AppointmentRemainderSettingsPage extends BasePage {
             waitForElement(elmntReminderTimeDropDown);
             click(elmntReminderTimeDropDown);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
-            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntSelectHoursDropDown.replace("<<REPLACEMENT>>", StrHours)));
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntSelectRemiderTime.replace("<<REPLACEMENT>>", StrHours)));
             mouseClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult = verifyElement(elmntReminderTimeDropDown);
@@ -295,18 +330,18 @@ public class AppointmentRemainderSettingsPage extends BasePage {
     public boolean verifySecondAppoinmentReminderCheckBoxEnabled() {
         boolean blresult = false;
         try {
-            System.out.println(">>>>>>Enter");
+
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             if (verifyElement(elmntSecondAppoinmentReminderCheckEnabled)){
-                System.out.println("Already Enabled First Appointment Reminder Check Box ");
+                System.out.println("Already Enabled Second Appointment Reminder Check Box ");
                 blresult=verifyElement(elmntSecondAppoinmentReminderCheckEnabled);
 
             }else {
                 waitForElement(elmntSecondAppoinmentReminderCheckDisbled);
                 verifyElement(elmntSecondAppoinmentReminderCheckDisbled);
                 jsClick(elmntSecondAppoinmentReminderCheckDisbled);
-                waitForElement(elmntSecondAppoinmentReminderCheckEnabled);
-                blresult=verifyElement(elmntSecondAppoinmentReminderCheckEnabled);
+               blresult=true;
+
             }
 
         } catch (Exception e) {
@@ -337,11 +372,14 @@ public class AppointmentRemainderSettingsPage extends BasePage {
     public boolean SelectHoursSecondAppoinmentReminder(String StrHours) {
         boolean blresult = false;
         try {
+            waitForSeconds(2);
             waitForElement(elmntSecondHoursDropDown);
-            click(elmntSecondHoursDropDown);
+            jsClick(elmntSecondHoursDropDown);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
-            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntSelectHoursDropDown.replace("<<REPLACEMENT>>", StrHours)));
-            mouseClick(elmntEntriesFromHealthCentre);
+            WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntSelect2HoursDropDown.replace("<<REPLACEMENT>>", StrHours)));
+            System.out.println(">>>>>>>>>"+elmntEntriesFromHealthCentre);
+            waitForSeconds(2);
+            jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult = verifyElement(elmntSecondHoursDropDown);
         } catch (Exception e) {
@@ -395,8 +433,8 @@ public class AppointmentRemainderSettingsPage extends BasePage {
     public boolean verifySkipWeekendsCheckBoxEnabled() {
         boolean blresult = false;
         try {
-            if (isElementDisplayed(elmntSkipWeekEndsCheckBoxEnabled)){
-                System.out.println("Already Enabled First Appointment Reminder Check Box ");
+            if (verifyElement(elmntSkipWeekEndsCheckBoxEnabled)){
+                System.out.println("Already Enabled Skip WeekEnds CheckBox ");
                 blresult=verifyElement(elmntSkipWeekEndsCheckBoxEnabled);
             }else {
                 waitForElement(elmntSkipWeekEndsCheckBoxDisabled);

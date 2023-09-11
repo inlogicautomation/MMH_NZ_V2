@@ -10,6 +10,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import lombok.Getter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.RemoteWebElement;
@@ -32,20 +33,21 @@ import static cap.common.BaseWindow.waitForSeconds;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.PointOption.point;
 
-/**
- * Created by codoid-pc on 6/4/2018.
- */
+
 public class BaseScreen {
 
     protected final WebDriver driver;
     public AndroidDriver androidDriver;
     protected final WebDriverWait wait;
 
+    protected final WebDriverWait invisibleWait;
+
 /**   This method is used to connect the mobile class page to the base screen page.*/
     public BaseScreen(WebDriver driver) {
         PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(5)), this);
         this.driver = driver;
-        wait = new WebDriverWait(this.driver, Integer.parseInt("45"));
+        wait = new WebDriverWait(this.driver, Integer.parseInt("30"));
+        invisibleWait = new WebDriverWait(this.driver,Integer.parseInt("30"));
     }
 
 

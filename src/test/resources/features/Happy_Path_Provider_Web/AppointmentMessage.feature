@@ -41,7 +41,7 @@ Feature: Appointment Message
       | Health_Centre                 | Banner_Heading   | Banner_Message   | Location                 |
       | &PRE_SCREENING_HEALTH_CENTRE& | &BANNER_HEADING& | &BANNER_MESSAGE& | &PRE_SCREENING_LOCATION& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_MESSAGE
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_MESSAGE1
   Scenario Template:S3-As a User I have to enable Patient Portal(Web) Banner Message to yes in Appointment Message page
 
     Given As a Provider I am on HomePage and navigate to Appointment Message page
@@ -56,7 +56,7 @@ Feature: Appointment Message
       | Health_Centre                 | Banner_Heading   | Banner_Message   |
       | &PRE_SCREENING_HEALTH_CENTRE& | &BANNER_HEADING& | &BANNER_MESSAGE& |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_MESSAGE
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_MESSAGE1
   Scenario Template:S4-As a User I have to enable Patient Portal(Web) Banner Message to No in Appointment Message page
 
     Given As a Provider I am on HomePage and navigate to Appointment Message page

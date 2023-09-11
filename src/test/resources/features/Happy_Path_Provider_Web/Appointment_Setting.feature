@@ -35,8 +35,8 @@ Feature: Appointment Setting
     And I click cancel your appointment button Very the Appointment cancelled message "<Appointment_After_Cancel>"
 
     Examples:
-      | Any_Location_with_Any_Provider_Appointment_Details      | Location         | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     | Details_For_Appointment                   | Future_Date   | Appointment_Summary                       | Patient_User_Login | Password           | Appointment           | Appointment_Cancel_Button                      | Appointment_After_Cancel              |
-      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | Automation1_Loc1 | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& | &AUTO_PRA_LOC2_VISIT_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &AUTO_PRA_LOC2_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Upcoming Appointments | &AUTO_PRA_LOC2_APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+      | Any_Location_with_Any_Provider_Appointment_Details      | Location         | Automation_Practice_Loc1_Doctor_Name | Automation_Practice_Loc2_Doctor_Name     | Details_For_Appointment                   | Future_Date   | Appointment_Summary                       | Patient_User_Login   | Password   | Appointment           | Appointment_Cancel_Button                      | Appointment_After_Cancel              |
+      | &ANY_LOCATION_WITH_ANY_PROVIDER_BOOK_VISIT_APPOINTMENT& | Automation1_Loc1 | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  | &AUTOMATION_PRACTICE1_LOC2_DOCTOR_NAMES& | &AUTO_PRA_LOC2_VISIT_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &AUTO_PRA_LOC2_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_USER_LOGIN& | &PASSWORD& | Upcoming Appointments | &AUTO_PRA_LOC2_APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S1-Provider Enable Rule A verify Patient Book Visit Appointment based on Rule A (Any Location with Any Provider) & (Default Location with Default Provider) & (Default Location with Any Provider)
@@ -152,7 +152,7 @@ Feature: Appointment Setting
       | Automation1_Loc1 | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VISIT_APPOINTMENT_RULE_C& | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_PHONE_APPOINTMENT_RULE_C&  | &DEFAULT_LOCATION_WITH_DEFAULT_PROVIDER_BOOK_VIDEO_APPOINTMENT_RULE_C&  | &AUTOMATION_PRACTICE1_DOCTOR_NAMES&  |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
   Scenario Template:S8-Provider Enable Rule D verify Patient Book Visit,Phone and video Appointment based on Rule D (Default Location with Default Provider) & (Income Provider)
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
@@ -236,7 +236,25 @@ Feature: Appointment Setting
 
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
-  Scenario Template:S13-Provider Allow to book for family / friends verify Friends and Family option is displayed in Appointment is for dropdown
+  Scenario Template:S13-Set Minimum notice for Cancellation
+
+    Given As a Provider I am on HomePage and navigate to Appointment Setting page
+    And I select Minimum notice for Cancellation and I click save button then I see Saved Successfully message"<SET_MINIMUM_DATA>"
+    And As a user I am on HomePage and navigate to Patient Book Appointment Page in Appointments
+    When I navigate to Book Appointment select Default Location "<Location>"and"<Appointment_Reason>"
+    And I verify Myself and Friends and Family option is displayed in Appointment is for dropdown"<Appointment_Is_For_Details>"
+    And I select the friends and family dropdown enter the visit appointment details "<Appointment_Details>"
+    Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>" and I should see booked appointment displayed under the future tab "<Appointment_Summary>"
+    And As a user I am on Patient Portal login Page and I enter "<Patient_User_Login>" and "<Password>" For Beta I should see user successfully logs in to the MMH portal
+    And I navigate to the "<Appointment>" Future Appointments page click cancel button for the created appointment "<Appointment_Cancel_Button>"
+    And I click cancel your appointment button Very the Appointment cancelled message "<Appointment_After_Cancel>"
+    Examples:
+      | SET_MINIMUM_DATA               | Location         | Appointment_Reason | Appointment_Is_For_Details    | Appointment_Details                         | Details_For_Appointment                        | Future_Date                      | Appointment_Summary                            | Patient_User_Login   | Password   | Appointment         | Appointment_Cancel_Button                           | Appointment_After_Cancel                                 |
+      | &APPOINTMENT_SET_MINIMUM_DATA& | Automation1_Loc1 | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& | &FRIENDS_AND_FAMILY_BOOK_VISIT_APPOINTMENT& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_DETAILS& | &FRIENDS_AND_FAMILY_FUTURE_DATE& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_USER_LOGIN& | &PASSWORD& | Future Appointments | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_FOR_CANCEL& | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+
+
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
+  Scenario Template:S14-Provider Allow to book for family / friends verify Friends and Family option is displayed in Appointment is for dropdown
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
     And I enable allow to book friends yes radio button"<Location>" and click save button then I see Saved Successfully message
@@ -250,11 +268,11 @@ Feature: Appointment Setting
     And I click cancel your appointment button Very the Appointment cancelled message "<Appointment_After_Cancel>"
 
     Examples:
-      | Location         | Appointment_Reason | Appointment_Is_For_Details    | Appointment_Details                         | Details_For_Appointment                        | Future_Date                      | Appointment_Summary                            | Patient_User_Login | Password           | Appointment         | Appointment_Cancel_Button                           | Appointment_After_Cancel                                 |
-      | Automation1_Loc1 | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& | &FRIENDS_AND_FAMILY_BOOK_VISIT_APPOINTMENT& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_DETAILS& | &FRIENDS_AND_FAMILY_FUTURE_DATE& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Future Appointments | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_FOR_CANCEL& | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+      | Location         | Appointment_Reason | Appointment_Is_For_Details    | Appointment_Details                         | Details_For_Appointment                        | Future_Date                      | Appointment_Summary                            | Patient_User_Login   | Password   | Appointment         | Appointment_Cancel_Button                           | Appointment_After_Cancel                                 |
+      | Automation1_Loc1 | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& | &FRIENDS_AND_FAMILY_BOOK_VISIT_APPOINTMENT& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_DETAILS& | &FRIENDS_AND_FAMILY_FUTURE_DATE& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_USER_LOGIN& | &PASSWORD& | Future Appointments | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_FOR_CANCEL& | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
-  Scenario Template:S13-Provider Allow to book for family / friends verify Friends and Family option is displayed in Appointment is for dropdown
+  Scenario Template:S15-Provider Dont Allow to book for family / friends verify Friends and Family option is Not displayed in Appointment is for dropdown
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
     And I enable allow to book friends No radio button"<Location>" and click save button then I see Saved Successfully message
@@ -268,7 +286,7 @@ Feature: Appointment Setting
 
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
-  Scenario Template:S14-Provider Turn Off Online Appointments verify No Available appointment slot Text is displayed in Appointment Page
+  Scenario Template:S16-Provider Turn Off Online Appointments verify No Available appointment slot Text is displayed in Appointment Page
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
     And I navigate to Turn Off Online Appointments "<Location>" and Enable turn-off online appointments checkbox click save button then I see turned-off Message
@@ -281,7 +299,7 @@ Feature: Appointment Setting
 
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
-  Scenario Template:S15-Provider Turn on Online Appointments verify Available appointment slot Text is displayed in Appointment Page
+  Scenario Template:S17-Provider Turn on Online Appointments verify Available appointment slot Text is displayed in Appointment Page
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
     And I navigate to Turn On Online Appointments "<Location>" and Enable turn-on online appointments checkbox click save button then I see turned-off Message
@@ -293,7 +311,7 @@ Feature: Appointment Setting
       | Automation1_Loc1 | &PROVIDER_LOGIN_DETAILS& | &BOOK_VISIT_APPOINTMENT& | Book Appointment | Automation |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
-  Scenario Template:S16-Provider View Turn Off Appointments Audit verify Check Turn Off Appointments audit grid displayed
+  Scenario Template:S18-Provider View Turn Off Appointments Audit verify Check Turn Off Appointments audit grid displayed
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
     And I navigate to Turn Off Online Appointments "<Location>" and Enable turn-off online appointments checkbox click save button then I see turned-off Message
@@ -305,7 +323,7 @@ Feature: Appointment Setting
       | Automation1_Loc1 | &APPOINTMENT_AUDIT_DATA&   |
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
-  Scenario Template:S17-Provider View Turn On Appointments Audit verify Check Turn On Appointments audit grid view displayed
+  Scenario Template:S19-Provider View Turn On Appointments Audit verify Check Turn On Appointments audit grid view displayed
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
     And I navigate to Turn On Online Appointments "<Location>" and Enable turn-On online appointments checkbox click save button then I see turned-On Message
@@ -317,7 +335,7 @@ Feature: Appointment Setting
 
 
   @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_SETTING
-  Scenario Template:S18-Set Minimum notice for Cancellation
+  Scenario Template:S20-Set Minimum notice for Cancellation
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
     And I select Minimum notice for Cancellation and I click save button then I see Saved Successfully message"<SET_MINIMUM_DATA>"
@@ -330,12 +348,12 @@ Feature: Appointment Setting
     And I navigate to the "<Appointment>" Future Appointments page click cancel button for the created appointment "<Appointment_Cancel_Button>"
     And I click cancel your appointment button Very the Appointment cancelled message "<Appointment_After_Cancel>"
     Examples:
-      | SET_MINIMUM_DATA               | Location         | Appointment_Reason | Appointment_Is_For_Details    | Appointment_Details                         | Details_For_Appointment                        | Future_Date                      | Appointment_Summary                            | Patient_User_Login | Password           | Appointment         | Appointment_Cancel_Button                           | Appointment_After_Cancel                                 |
-      | &APPOINTMENT_SET_MINIMUM_DATA& | Automation1_Loc1 | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& | &FRIENDS_AND_FAMILY_BOOK_VISIT_APPOINTMENT& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_DETAILS& | &FRIENDS_AND_FAMILY_FUTURE_DATE& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_EMAIL&    | &PATIENT_PASSWORD& | Future Appointments | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_FOR_CANCEL& | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_AFTER_CANCELLED& |
+      | SET_MINIMUM_DATA               | Location         | Appointment_Reason | Appointment_Is_For_Details    | Appointment_Details                         | Details_For_Appointment                        | Future_Date                      | Appointment_Summary                            | Patient_User_Login   | Password   | Appointment         | Appointment_Cancel_Button                           | Appointment_After_Cancel                                 |
+      | &APPOINTMENT_SET_MINIMUM_DATA& | Automation1_Loc1 | A new issue        | &APPOINTMENT_IS_FOR_DROPDOWN& | &FRIENDS_AND_FAMILY_BOOK_VISIT_APPOINTMENT& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_DETAILS& | &FRIENDS_AND_FAMILY_FUTURE_DATE& | &FRIENDS_AND_FAMILY_VISIT_APPOINTMENT_SUMMARY& | &PATIENT_USER_LOGIN& | &PASSWORD& | Future Appointments | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_FOR_CANCEL& | &FRIENDS_AND_FAMILY_APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
 #=================================== Block Online Appointments for Provider=================IS NOT Working====================
   @WEB @PROVIDER_HAPPY_PATH11 @APPOINTMENTS_SETTING11
-  Scenario Template:S19-Provider Block & Unblock Appointments doctor Name verify Patient Side Block & Unblock Appointment Provider Name Is Displayed or Not Displayed
+  Scenario Template:S21-Provider Block & Unblock Appointments doctor Name verify Patient Side Block & Unblock Appointment Provider Name Is Displayed or Not Displayed
 
     Given As a Provider I am on HomePage and navigate to Appointment Setting page
     And I navigate to Block Appointments for Provider and enter the all details"<Appointment_Details>" click save button then i see Setting saved successfully message

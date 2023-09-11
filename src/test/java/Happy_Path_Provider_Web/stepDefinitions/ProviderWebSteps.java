@@ -615,8 +615,8 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     @Then("I should verify the Banner heading {string} and Banner Messages {string} are not displayed")
     public void iShouldVerifyTheBannerHeadingAndBannerMessagesAreNotDisplayed(String strBannerHeading, String strBannerMessage) {
 
-        Assert.assertFalse(providerPageContainer.appointmentMessagePage.verifyBannerHeading(strBannerHeading));
-        Assert.assertFalse(providerPageContainer.appointmentMessagePage.verifyBannerMessage(strBannerMessage));
+        Assert.assertFalse(providerPageContainer.appointmentMessagePage.verifyBannerHeading(TestDataUtil.getValue(strBannerHeading)));
+        Assert.assertFalse(providerPageContainer.appointmentMessagePage.verifyBannerMessage(TestDataUtil.getValue(strBannerMessage)));
     }
 
 
@@ -1613,7 +1613,7 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
         Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifyFirstAppointmentReminderEmailCheckBoxEnabled());
         Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifySecondAppoinmentReminderCheckBoxEnabled());
         Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectNumberSecondAppointmentReminder(strData.get(5)));
-        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectDaysSecondAppointmentReminder(strData.get(3)));
+        Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectHoursSecondAppointmentReminder(strData.get(2)));
         Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.verifySecondAppointmentReminderEmailCheckBoxEnabled());
         Assert.assertTrue(providerPageContainer.appointmentReminderSettingPage.SelectReminderTime(strData.get(4)));
 
@@ -1664,6 +1664,7 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     public void iEnableVideoConsultationsByClickingYesButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickHealthCenterLocation(LocationData));
         Assert.assertTrue((providerPageContainer.videoConsultationsSettingPage.EnableVideoConsultationYesButton()));
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickVideoConsultationSaveButton());
     }
 
     @Then("I should see Video appointment slots are displayed in All tab")
@@ -1675,10 +1676,77 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     public void iEnableVideoConsultationsByClickingNoButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickHealthCenterLocation(LocationData));
         Assert.assertTrue((providerPageContainer.videoConsultationsSettingPage.EnableVideoConsultationNoButton()));
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickVideoConsultationSaveButton());
     }
 
     @Then("I should see Video appointment slots are Not displayed in All tab")
     public void iShouldSeeVideoAppointmentSlotsAreNotDisplayedInAllTab() {
         Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.verifyPatientVideoAppointmentNotDisplayedInAllTab());
     }
+
+    @And("I enable face to face appointment on a Video Consultation slot by clicking yes button and I click save button then I see Saved Successfully message{string}")
+    public void iEnableFaceToFaceAppointmentOnAVideoConsultationSlotByClickingYesButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue((providerPageContainer.videoConsultationsSettingPage.EnablefacetofaceappointmentVideoConsultationYesButton()));
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickVideoConsultationSaveButton());
+
+    }
+
+    @And("I navigate to OnDemand Video consultations Settings tab")
+    public void iNavigateToOnDemandVideoConsultationsSettingsTab() {
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickOnDemandVideoconsultationsSettingstab());
+
+    }
+
+
+    @When("I click Edit button to select OnDemand Video Consultations by clicking Yes button {string}")
+    public void iClickEditButtonToSelectOnDemandVideoConsultationsByClickingYesButton(String strdata) {
+        List<String> data=TestDataUtil.getListOfValue(strdata);
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickHealthCenterLocation(data.get(0)));
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickServiceCategory(data.get(1)));
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickOnDemandVideoConsultationsYesButton());
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.EntertheMessage(data.get(2)));
+    }
+
+    @Then("I click save button should see saved successfully Message")
+    public void iClickSaveButtonShouldSeeSavedSuccessfullyMessage() {
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickVideoConsultationSaveButton());
+
+    }
+
+    @When("I click Edit button to select OnDemand Video Consultations by clicking No button {string}")
+    public void iClickEditButtonToSelectOnDemandVideoConsultationsByClickingNoButton(String strdata) {
+        List<String> data=TestDataUtil.getListOfValue(strdata);
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickHealthCenterLocation(data.get(0)));
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickServiceCategory(data.get(1)));
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickOnDemandVideoConsultationsNoButton());
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.EntertheMessage(data.get(2)));
+    }
+
+    @And("I navigate to SMS Video Invite Settings tab")
+    public void iNavigateToSMSVideoInviteSettingsTab() {
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickSMSVideoInviteSettingstab());
+    }
+
+    @When("I click Edit button to select SMS Video Invite Settings by clicking Yes button {string}")
+    public void iClickEditButtonToSelectSMSVideoInviteSettingsByClickingYesButton(String strdata) {
+        List<String> data=TestDataUtil.getListOfValue(strdata);
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickHealthCenterLocation(data.get(0)));
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickSMSVideoInviteYesButton());
+//        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.EntertheMessage(data.get(2)));
+    }
+
+    @When("I click Edit button to select SMS Video Invite Settings by clicking No button {string}")
+    public void iClickEditButtonToSelectSMSVideoInviteSettingsByClickingNoButton(String strdata) {
+        List<String> data=TestDataUtil.getListOfValue(strdata);
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickHealthCenterLocation(data.get(0)));
+        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.clickSMSVideoInviteNoButton());
+//        Assert.assertTrue(providerPageContainer.videoConsultationsSettingPage.EntertheMessage(data.get(2)));
+
+    }
+
 }

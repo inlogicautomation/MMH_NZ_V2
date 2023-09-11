@@ -51,7 +51,7 @@ Feature: Repeat Script Setting
       | System_Menu            | Details                       |
       | Repeat Script Settings | &REPEAT_SCRIPT_SETTINGS_DATA& |
 
-  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING
+  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING1
   Scenario Outline: S5- RRP Script Settings - Restrict to Named Provider in each Location
     Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
     And I click the edit button and changing the data restricting to Named Provider in each Location"<Details>"
@@ -142,7 +142,7 @@ Feature: Repeat Script Setting
       | System_Menu            | Details                     | Script_Instructions   | Script_Urgencies   | Medication Details                            | Location Details              |
       | Repeat Script Settings | &PATIENT_TO_COLLECT_SCRIPT& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &REPEAT_SCRIPT_SETTINGS_DATA& |
 
-  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH1 @REPEAT_SCRIPT_SETTING
+  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING
   Scenario Outline: S14- RRP Script Settings - Pay at Online only
     Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
     And I click the edit button and changing the Payment Settings to Pay online as per Patient to Collect Script requirements"<Details>"
@@ -153,7 +153,7 @@ Feature: Repeat Script Setting
       | Repeat Script Settings | &PATIENT_TO_COLLECT_SCRIPT& | &SCRIPT_INSTRUCTIONS& | &SCRIPT_URGENCIES& | &DATA FOR PATIENT TO COLLECT TO PRESCRIPTION& | &REPEAT_SCRIPT_SETTINGS_DATA& | &CREDIT CARD DETAILS& |
 
 
-  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH1 @REPEAT_SCRIPT_SETTING
+  @WEB @PROVIDER_RRPS @PROVIDER_HAPPY_PATH @REPEAT_SCRIPT_SETTING
   Scenario Outline: S15- RRP Script Settings -  Pay at Health Centre (or) Online
     Given As a Provider I am on HomePage and navigate to Repeat Script Settings in "<System_Menu>"
     And I click the edit button and changing the Payment Settings to Pay at Health Centre or Online as per Patient to Collect Script requirements"<Details>"

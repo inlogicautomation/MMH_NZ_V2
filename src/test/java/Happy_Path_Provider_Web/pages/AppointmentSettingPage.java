@@ -258,7 +258,7 @@ public class AppointmentSettingPage extends BasePage {
             System.out.println("Successfully Click RuleB Radio Button");
             jsScrollIntoView(elmntSaveButton);
             waitForElement(elmntSaveButton);
-            click(elmntSaveButton);
+            jsClick(elmntSaveButton);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(txtSuccessfullyMessagePopup);
             blresult = verifyElement(txtSuccessfullyMessagePopup);
@@ -379,6 +379,8 @@ public class AppointmentSettingPage extends BasePage {
     public boolean selectRestrictProviderscheckbox(String strLocation) {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(3);
             if (verifyElement(By.xpath(selectCovidPreScreeningPopup.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation))))) {
                 takeScreenshot(driver);
                 System.out.println("Appointment Restrict Provider CheckBox Already checked");
@@ -549,8 +551,7 @@ public class AppointmentSettingPage extends BasePage {
             jsClick(elmntTurnOffAppointments);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(elmntTurnOffAppointmentsHeader);
-           verifyElement(elmntTurnOffAppointmentsHeader);
-            blresult =true;
+            blresult = verifyElement(elmntTurnOffAppointmentsHeader);
         } catch (Exception e) {
             System.out.println("Failed to click Turn off Appointments >>> :: ");
             e.printStackTrace();

@@ -33,9 +33,6 @@ import java.util.Random;
 
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 
-/**
- * Created by codoid-pc on 6/20/2018.
- */
 public class BasePage {
 
     @Getter
