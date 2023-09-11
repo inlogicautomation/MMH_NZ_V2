@@ -188,6 +188,16 @@ Feature: Goal_Tracking
       | &SET_REMINDER_PREVIEW_DATA& |
 
 
+  @WEB  @GOAL_TRACKING @SANITY_PATH
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
+
         #Note:{342:Login as Existing patient & view/click on Health Tools
     #344:Click on Goal Tracking - Add New Goal enter goal name, type, description, start date, end date, unit of measurement, initial value, final value, privacy settings & click save & set reminder
     #345:Added goal must be displayed in goal tracking grid
@@ -228,6 +238,15 @@ Feature: Goal_Tracking
   #}
       #}
 
+  @WEB  @GOAL_TRACKING @SANITY_PATH
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 
   @WEB @GOAL_TRACKING @SANITY_PATH

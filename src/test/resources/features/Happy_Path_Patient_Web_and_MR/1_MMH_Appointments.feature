@@ -104,7 +104,7 @@ Feature: Appointments
     Given As a user I am on HomePage
     And I navigate to the "<Appointment>" page
     And I enter the video appointment details "<Appointment_Details>"
-    When I click confirm button
+    When I click confirm button "<Appointment_Details>"
     Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
     And I accept the terms & conditions and confirm my booking
     And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
@@ -135,8 +135,8 @@ Feature: Appointments
 #   Then I should see video consultation window with icons "<All_Icons>"
 
     Examples:
-      | Appointment           | Join_Consultation                | All_Icons     |
-      | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &VIDEO_ICONS& |
+      | Appointment           | Join_Consultation                      | All_Icons     |
+      | Upcoming Appointments | &VIDEO_APPOINTMENT_DETAILS_FOR_CANCEL& | &VIDEO_ICONS& |
 
   @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S3 - Patient Booking Appointment - Visit in video slot Appointment
@@ -144,7 +144,7 @@ Feature: Appointments
     Given As a user I am on HomePage
     And I navigate to the "<Appointment>" page
     And I enter the video appointment details "<Appointment_Details>"
-    When I click confirm button
+    When I click confirm button "<Appointment_Details>"
     Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
     And I accept the terms & conditions and confirm my booking
     And I should see booked appointment displayed under the future tab "<Appointment_Summary>"

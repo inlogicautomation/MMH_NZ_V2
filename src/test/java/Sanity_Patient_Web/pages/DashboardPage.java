@@ -587,7 +587,7 @@ click(elmntMyHealthCentre);
 
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            driver.navigate().refresh();
+//            driver.navigate().refresh();
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntUpcomingAppointments);
 //            15 Sep 2022 | 8:00 AM

@@ -57,6 +57,11 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome,') or contains(text(),'Start managing your health, today')])[1]")
     protected WebElement elmntVerifyHomePage;
 
+    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Important Update')]")
+    protected WebElement elmntTeamsConditionsHeader;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'ACCEPT')]")
+    protected WebElement elmntTeamsConditions;
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp2White!')]")
@@ -220,7 +225,7 @@ public class HomePage extends BasePage {
 //                System.out.println("Else Part ::::::Window Count 2");
                 driver.manage().deleteAllCookies();
                 visit(TestDataUtil.getValue("&URL&"));
-                driver.manage().deleteAllCookies();
+
             }
         }
         if (WindowsCount == 1) {
@@ -372,7 +377,20 @@ public class HomePage extends BasePage {
 
     }
 
-
+public boolean veriflyTeamscondition(){
+    boolean blResult = false;
+    waitForElementDisappear(driver, By.xpath(elmntSpinner));
+    waitForSeconds(4);
+        if (verifyElement(elmntTeamsConditionsHeader)){
+            click(elmntTeamsConditions);
+            blResult=true;
+        }
+        else {
+            System.out.println("Teams & Conditions Is Not Displayed");
+            blResult=true;
+        }
+        return blResult;
+}
 
     public boolean verifyHomePageOfMMHPortal() {
         waitForSeconds(5);

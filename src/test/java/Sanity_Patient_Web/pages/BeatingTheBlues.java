@@ -61,8 +61,9 @@ public class BeatingTheBlues extends BasePage {
     }
 
     public void clickViewsession() {
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(5);
-        waitForElementClickable(elmtviewsession1);
+     waitForElement(elmtviewsession1);
         jsClick(elmtviewsession1);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
 

@@ -239,7 +239,7 @@ Feature: My Health Records
     And  I should see all the Lab Results Entries From Health center Medicine Details in a grid view
       | &LAB_RESULT_TABLE_DATA& |
     Then I click on the more info icon on the grid & view the details of the Lab Results added
-      | &LAB_RESULT_TABLE_DATA& | &LAB_RESULT_ICON_DATA& | &LAB_RESULT_MOBILE_ICON_DATA& |
+      | &LAB_RESULT_TABLE_DATA& | &LAB_RESULT_ICON_DATA& | &LAB_RESULT_ICON_DATA& |
     And I click on the more info icon on the grid & view the details of the Test Results added
       | &LAB_RESULT_TABLE_DATA& | &TEST_RESULT_ICON_DATA& | &TEST_RESULT_ICON_DATA& |
     And I navigate to the Homepage

@@ -327,12 +327,13 @@ public class HomePage extends BasePage {
         waitForSeconds(2);
         jsScrollIntoView(elmntDashBoard);
         waitForElementClickable(elmntDashBoard);
-        mouseClick(elmntDashBoard);
+        jsClick(elmntDashBoard);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         driver.navigate().refresh();
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         waitForElement(elmntVerifyHomePage);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(5);
         return verifyElement(elmntVerifyHomePage);
     }

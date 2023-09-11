@@ -665,6 +665,7 @@ public class MyHealthIndicators extends BasePage {
     }
 
     public boolean clickInActiveTab() {
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         waitForElement(btnInactivetab);
         waitForElementClickable(btnInactivetab);
@@ -1033,9 +1034,11 @@ public class MyHealthIndicators extends BasePage {
         waitForSeconds(3);
         waitForElementClickable(btnStatus);
         jsClick(btnStatus);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         waitForElementClickable(btnActive);
         jsClick(btnActive);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
         waitForElementClickable(btnsave);
         jsClick(btnsave);
@@ -2977,6 +2980,7 @@ public class MyHealthIndicators extends BasePage {
             waitForElement(elmntActiveCardData);
             waitForSeconds(3);
             jsClick(elmntActiveCardData);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(elmtMyHealthIndicators);
         } catch (Exception e) {
             e.printStackTrace();
@@ -2987,9 +2991,11 @@ public class MyHealthIndicators extends BasePage {
     public boolean VerifyLDLActiveData(List<String> lstDetails) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntActiveCardData = waitForElement(By.xpath(ActiveCardElemnts
                     .replace("<<REPLACEMENT1>>", TestDataUtil.getValue(lstDetails.get(0)))));
-            waitForSeconds(3);
+            jsScrollIntoView(elmntActiveCardData);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntActiveCardData);
             verifyElement(elmntActiveCardData);
             blResult = true;
@@ -3019,10 +3025,12 @@ public class MyHealthIndicators extends BasePage {
             waitForSeconds(3);
             waitForElementClickable(btnStatus);
             click(btnStatus);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
             jsScrollIntoView(btnInActive);
             waitForElementClickable(btnInActive);
             jsClick(btnInActive);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
             waitForElementClickable(btnsave);
             click(btnsave);
@@ -4778,14 +4786,17 @@ public class MyHealthIndicators extends BasePage {
             waitForSeconds(6);
             waitForElement(elmntActiveCardData);
             jsClick(elmntActiveCardData);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
             waitForElement(elmtPrivacySetting);
             jsClick(elmtPrivacySetting);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             verifyElement(elmtPrivacySettingHeader);
             waitForSeconds(2);
             waitForElement(elmtShowthisentrytomycareproviders);
             jsClick(elmtShowthisentrytomycareproviders);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
             waitForElementClickable(btnsave);
             click(btnsave);

@@ -9,7 +9,7 @@ Feature: Health_Records
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB  @SANITY_PATH  @HEALTH_RECORDS
+  @WEB  @SANITY_PATH  @HEALTH_RECORDS1
   Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
     Given As a user I am on beta MMH login Page
     And I enter "<Email Address>" and "<Password>" For Beta
@@ -71,7 +71,6 @@ Feature: Health_Records
 
 #  @WEB  @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
-#
 #    Given I change Windows "<TimeZone>"
 #
 #    Examples:
@@ -450,6 +449,17 @@ Feature: Health_Records
     Examples:
       | Clinic Notes    |
       | Clinician Notes |
+
+  @WEB  @SANITY_PATH  @HEALTH_RECORDS
+  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+    Given As a user I am on beta MMH login Page
+    And I enter "<Email Address>" and "<Password>" For Beta
+    When I click SignIn button
+    Then I should see user successfully logs in to the MMH portal
+    Examples:
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
+
     #Note:{#128:My entries grid displays all the clinic notes added by patient in clinic notes tab
   #129:Click on add record & enter who I visited, visited location, visited date, additional info & share with doctor in clinic notes tab
   #130:Click on confirm & save button, Record is submitted & added in My entries grid in clinic notes tab
@@ -470,11 +480,11 @@ Feature: Health_Records
     And I click on Clinic Notes Confirm & Save Button
     When I click on "<Edit Icon>"edit icon & I Edit  Clinic Notes of My Entries records "<Records>"
     Then I should see all the  Clinic Notes My Entries Medicine details in more info
-      | &DATA_MY_ENTRIES_CLINIC_NOTES_1& | &SHARE_WITH_DOCTOR_CLINIC_NOTES_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLINIC_NOTES_1& |
+      | &DATA_MY_ENTRIES_CLINIC_NOTES& | &SHARE_WITH_DOCTOR_CLINIC_NOTES_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLINIC_NOTES& |
     And I click on Delete Icon "<Edit Icon>"& I verify the Clinic Notes My Entries Record is deleted
     Examples:
-      | My Entries      | Edit Icon      | Records         |
-      | Clinician Notes | &VISITED_NAME& | &EDIT_LOCATION& |
+      | My Entries      | Edit Icon     | Records         |
+      | Clinician Notes | &CLINIC_NAME& | &EDIT_LOCATION& |
 
 #  @WEB  @HEALTH_RECORDS @SANITY_PATH
 #  Scenario Template: Changing machines timezone
@@ -487,6 +497,8 @@ Feature: Health_Records
 #Note:{#131:If share with doctor is uncheck then the records is not shared to health centre/provider & kept private in clinic notes tab
    # These tests Case Covered The Scenario NO: S18
   #}
+
+
   @WEB  @HEALTH_RECORDS @SANITY_PATH
   Scenario Template: S18-Existing Patient Verify Medicine details and validate edit ,delete,Share WithOut Doctor in My entries Clinic Notes Medicine Details
 
@@ -499,11 +511,11 @@ Feature: Health_Records
     And I click on Clinic Notes Confirm & Save Button
     When I click on "<Edit Icon>"edit icon & I Edit  Clinic Notes of My Entries records "<Records>"
     Then I should see all the  Clinic Notes My Entries Medicine details in more info
-      | &DATA_MY_ENTRIES_CLINIC_NOTES_1& | &SHARE_WITH_OUT_DOCTOR_CLINIC_NOTES_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLINIC_NOTES_1& |
+      | &DATA_MY_ENTRIES_CLINIC_NOTES& | &SHARE_WITH_OUT_DOCTOR_CLINIC_NOTES_DATA& | &MOBILE_DATA_MY_ENTRIES_INSIDE_CLINIC_NOTES& |
     And I click on Delete Icon "<Edit Icon>"& I verify the Clinic Notes My Entries Record is deleted
     Examples:
-      | My Entries      | Edit Icon      | Records         |
-      | Clinician Notes | &VISITED_NAME& | &EDIT_LOCATION& |
+      | My Entries      | Edit Icon     | Records         |
+      | Clinician Notes | &CLINIC_NAME& | &EDIT_LOCATION& |
 #Note:{#135:Click on Recall
   #136:Health centre entries displays all the recall details scheduled by provider/updated from pms
   #137:View all the details in grid & click on more info icon for specific recall scheduled details in recall tab

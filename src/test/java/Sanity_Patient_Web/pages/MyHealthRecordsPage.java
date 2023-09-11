@@ -2542,6 +2542,7 @@ public class MyHealthRecordsPage extends BasePage {
         try {
             waitForSeconds(2);
             waitForElementClickable(elmntAllergicdrop);
+            waitForElement(elmntAllergicdrop);
             waitForSeconds(2);
             jsClick(elmntAllergicdrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntAddAllergicDrop.replace("<<REPLACEMENT>>", strFamilyMember)));

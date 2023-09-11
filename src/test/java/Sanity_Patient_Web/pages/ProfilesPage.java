@@ -636,14 +636,18 @@ click(btnAddresschangedOkPopup);
             for (WebElement delete: btnDeleteIcon) {
                 waitForSeconds(3);
 //                waitForElement(delete);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForElement(delete);
                 waitForElementClickable(delete);
                 jsClick(delete);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(1);
                 waitForElement(btnYes);
                 waitForSeconds(1);
                 waitForElementClickable(btnYes);
                 waitForSeconds(1);
                 jsClick(btnYes);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
                 waitForElement(successPopup);
                 waitForSeconds(3);
@@ -1402,7 +1406,7 @@ click(btnAddresschangedOkPopup);
             lstNewAddress.add(TestDataUtil.getValue(lstAddress.get(3)));
             lstNewAddress.add(TestDataUtil.getValue(lstAddress.get(4)));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForElement(txtViewProfile);
+//            waitForElement(txtViewProfile);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             List<String> lstEnteredAddress = new ArrayList<>();
             lstEnteredAddress.add(txtBoxStreetNumberName.getAttribute("value"));
