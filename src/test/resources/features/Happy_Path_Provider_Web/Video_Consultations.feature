@@ -10,7 +10,7 @@ Feature: Video Consultations
     Then I click SignIn button then I should see user successfully logs in to the MMH portal
 
 
-  @WEB @PROVIDER_HAPPY_PATH1 @VIDEO_CONSULTATIONS
+  @WEB @PROVIDER_HAPPY_PATH @VIDEO_CONSULTATIONS
   Scenario Template: Prep- Canceling all the appointments
 
     Given As a user I am on HomePage

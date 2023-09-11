@@ -25,7 +25,7 @@ public class PhoneAppointmentSettingPage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Dr. Gp2White!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp2White!')]")
     })
     protected WebElement txtProviderPortalWelcomePage;
 
@@ -262,6 +262,7 @@ public class PhoneAppointmentSettingPage extends BasePage {
         boolean blresult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(2);
             waitForElement(clickVM03LocationRule1);
             jsClick(clickVM03LocationRule1);
             blresult=true;

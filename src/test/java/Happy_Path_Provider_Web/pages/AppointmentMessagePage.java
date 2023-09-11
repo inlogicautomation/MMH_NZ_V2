@@ -153,6 +153,7 @@ public class AppointmentMessagePage extends BasePage {
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForElement(elmntBannerHeading);
             jsClick(elmntBannerHeading);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             waitForSeconds(2);
             elmntBannerHeading.clear();
             waitForSeconds(2);
@@ -286,6 +287,7 @@ public class AppointmentMessagePage extends BasePage {
         boolean blresult = false;
         try {
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            waitForSeconds(3);
             By bookedAppointment = By.xpath(elmntFindHealthCenterLocation.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strLocation)));
             System.out.println(">>>>>>>>>>>>bookedAppointment"+bookedAppointment);
             if (verifyElement(bookedAppointment)){
@@ -299,7 +301,7 @@ public class AppointmentMessagePage extends BasePage {
                 System.out.println(">>>>>>>>>>>>elmntLocation"+elmntLocation);
                 verifyElement(elmntLocation);
             }
-            blresult = verifyElement(elmntLocation);
+            blresult = verifyElement(bookedAppointment);
         } catch (Exception e) {
             System.out.println("Failed To verify Health Center Location >>> :: ");
             e.printStackTrace();
@@ -345,7 +347,6 @@ public class AppointmentMessagePage extends BasePage {
         try {
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             WebElement elmntBannerMessage = waitForElement(By.xpath(elmntVerifyBannerMessage.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
-
             blresult= verifyElement(elmntBannerMessage);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
         } catch (Exception e) {

@@ -493,6 +493,8 @@ public class DriverUtil {
         DesiredCapabilities cap = DesiredCapabilities.chrome();
         cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         cap.setCapability(ChromeOptions.CAPABILITY, options);
+//        options.addArguments("incognito");
+//        cap.setCapability(ChromeOptions.CAPABILITY, options);
         return options;
     }
 
@@ -594,6 +596,7 @@ public class DriverUtil {
         String strDownloadLocation = new StringBuilder(strWorkingDirectory)
                 .append(File.separator).append(Constants.DOWNLOAD_PATH).toString();
         ChromeOptions options = new ChromeOptions();
+
         HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
         // Hide save credentials prompt
         chromePrefs.put("credentials_enable_service", false);
@@ -614,6 +617,8 @@ public class DriverUtil {
         options.setExperimentalOption("mobileEmulation", mobileEmulation);
         DesiredCapabilities cap = DesiredCapabilities.chrome();
         cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        cap.setCapability(ChromeOptions.CAPABILITY, options);
+        options.addArguments("incognito");
         cap.setCapability(ChromeOptions.CAPABILITY, options);
         return options;
     }

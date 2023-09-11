@@ -13,15 +13,10 @@ public class RecallSettingPage extends BasePage {
         super(driver);
     }
 
-//    @FindAll({
-//            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"), //Desktop View
-//            @FindBy(how = How.XPATH, using = " //h1[contains(text(),'Welcome,')]//span[contains(text(),'Steve!')]"),
-//    })
-//    protected WebElement txtWelcome;
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Dr. Gp2White!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp2White!')]")
     })
     protected WebElement txtProviderPortalWelcomePage;
 
@@ -77,15 +72,16 @@ public class RecallSettingPage extends BasePage {
 
     public boolean  navigateToProviderHomepage() {
         boolean blResult = false;
-        try{
-
+        try{   waitForElementDisappear(driver, By.xpath(elmntSpinner));
             if (isElementDisplayed(txtProviderPortalWelcomePage)) {
+                waitForElement(txtProviderPortalWelcomePage);
                 verifyElement(txtProviderPortalWelcomePage);
-                waitForSeconds(3);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForElement(elmtMMHLogo);
                 waitForElementClickable(elmtMMHLogo);
                 jsClick(elmtMMHLogo);
-                waitForSeconds(3);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForElement(txtProviderPortalWelcomePage);
                 blResult = verifyElement(txtProviderPortalWelcomePage);
             }
             if (!isElementDisplayed(txtProviderPortalWelcomePage)){
@@ -94,8 +90,8 @@ public class RecallSettingPage extends BasePage {
                 waitForElement(elmtMMHLogo);
                 waitForElementClickable(elmtMMHLogo);
                 jsClick(elmtMMHLogo);
-                System.out.println("Successfully click Logo");
-                waitForSeconds(3);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+              waitForElement(txtProviderPortalWelcomePage);
                 blResult=verifyElement(txtProviderPortalWelcomePage);
             }
         } catch (Exception e) {
@@ -109,13 +105,14 @@ public class RecallSettingPage extends BasePage {
         try {
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmtSecureMessaging);
-            waitForSeconds(2);
+      waitForElement(elmtSecureMessaging);
             waitForElementClickable(elmtSecureMessaging);
-            System.out.println("Systems Menu is available to click");
             jsClick(elmtSecureMessaging);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmtRepeatScriptSettings);
-            System.out.println("scrolled ");
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             takeScreenshot(driver);
+   waitForElement(elmtRepeatScriptSettings);
             if (!verifyElement(elmtRepeatScriptSettings)){
                 click(elmtSecureMessaging);
             }
@@ -133,16 +130,15 @@ public class RecallSettingPage extends BasePage {
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(elmtSystemsMenu);
-            waitForSeconds(2);
+        waitForElement(elmtSystemsMenu);
             waitForElementClickable(elmtSystemsMenu);
-            System.out.println("Systems Menu is available to click");
             jsClick(elmtSystemsMenu);
-//            jsScrollIntoView(elmtRepeatScriptSettings);
-            System.out.println("scrolled ");
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             if (!verifyElement(elmtAppointmentSettings)){
                 click(elmntSystemMenu);
             }
             jsScrollIntoView(elmtAppointmentSettings);
+            waitForElement(elmtAppointmentSettings);
             blResult = verifyElement(elmtAppointmentSettings);
         } catch (Exception e) {
             System.out.println("Failed to click System Menu >>> :: ");
@@ -153,9 +149,11 @@ public class RecallSettingPage extends BasePage {
 
     public boolean clickRecallSetting() {
         boolean blresult = false;
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         try {jsScrollIntoView(elmntRecallSetting);
             waitForElement(elmntRecallSetting);
             click(elmntRecallSetting);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
              waitForElement(elmntRecallSettingPageHeader);
             blresult =verifyElement(elmntRecallSettingPageHeader);
         } catch (Exception e) {
@@ -167,8 +165,10 @@ public class RecallSettingPage extends BasePage {
     public boolean clickRecallRemindersYesRadioButton() {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntRecallReminderYesRadioButton);
             click(elmntRecallReminderYesRadioButton);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntRecallSettingPageHeader);
             blresult =verifyElement(elmntRecallSettingPageHeader);
         } catch (Exception e) {
@@ -180,6 +180,7 @@ public class RecallSettingPage extends BasePage {
     public boolean EnterRecallReminderValue(String Strdata) {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntRecallReminderTextbox);
           enterValue(elmntRecallReminderTextbox,Strdata);
           blresult = verifyElement(elmntRecallReminderTextbox);
@@ -193,12 +194,14 @@ public class RecallSettingPage extends BasePage {
     public boolean clickHealthCenterLocation(String Strdata) {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntHealthCentre);
             click(elmntHealthCentre);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntHealthCentreDrop.replace("<<REPLACEMENT>>", Strdata)));
             System.out.printf("elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
             mouseClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(elmntHealthCentre);
             blresult = verifyElement(elmntHealthCentre);
         } catch (Exception e) {
             e.printStackTrace();
@@ -210,8 +213,10 @@ public class RecallSettingPage extends BasePage {
     public boolean clickSaveButton() {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(clickSaveButton);
             click(clickSaveButton);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(Verifysavedsuccessfullypopup);
             blresult =verifyElement(Verifysavedsuccessfullypopup);
         } catch (Exception e) {
@@ -223,8 +228,10 @@ public class RecallSettingPage extends BasePage {
     public boolean clickEditButton() {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(clickEditButton);
             jsClick(clickEditButton);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(clickSaveButton);
             blresult =verifyElement(clickSaveButton);
         } catch (Exception e) {
@@ -236,8 +243,10 @@ public class RecallSettingPage extends BasePage {
     public boolean clickRecallRemindersNoRadioButton() {
         boolean blresult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntRecallReminderNoRadioButton);
             click(elmntRecallReminderNoRadioButton);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntRecallSettingPageHeader);
             blresult =verifyElement(elmntRecallSettingPageHeader);
         } catch (Exception e) {

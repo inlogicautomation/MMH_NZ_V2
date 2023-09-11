@@ -20,7 +20,7 @@ public class WaitTimeUtil {
 	}
 	/**The waits for an invisibilityelement to load for a specified duration..*/
 	public static int getWaitForInvisibilityTime(String strWaitVaribaleName){
-		int inWaitTime=60;
+		int inWaitTime=30;
 
 		try{
 			String strWaitNumber = System.getProperty(Constants.WAIT_NUMBER,"");
