@@ -595,9 +595,10 @@ public class RepeatPrescription extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(5);
             driver.switchTo().frame(CardPaymentFrame);
-            waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtPaymentCheckOut);
             blResult = verifyElement(txtPaymentCheckOut);
             System.out.println("Repeat Prescription was success  and Successfully to navigate the View History Page>>>>>>");

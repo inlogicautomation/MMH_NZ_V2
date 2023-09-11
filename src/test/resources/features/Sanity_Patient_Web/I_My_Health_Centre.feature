@@ -30,8 +30,8 @@ Feature: My Health Centre
     And I log out from Patient Portal
 
     Examples:
-      | Name                 | Names          |
-      | &HEALTH_CENTRE_NAME& | Automation_Pra |
+      | Name                 | Names            |
+      | &HEALTH_CENTRE_NAME& | Automation1_Loc1 |
 
   @WEB @MY_HEALTH_CENTRE @SANITY_PATH
   Scenario Template: S3- User successfully login into Doctor Portal

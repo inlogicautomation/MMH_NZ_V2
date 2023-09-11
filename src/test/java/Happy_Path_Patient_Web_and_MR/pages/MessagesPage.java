@@ -485,6 +485,12 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Enable Auto reply')]/preceding-sibling::div/input")
     protected WebElement chkboxAutomaticReply;
 
+
+    @FindBy(how = How.XPATH, using = "(//mat-panel-title[contains(text(),'Automatic replies')]//following::span)[1]")
+    protected WebElement clickAutomaticReplyoption;
+
+
+
     @FindBy(how = How.XPATH, using = "//div[@fxlayout='row']")
     protected WebElement calendarRow;
 
@@ -1960,8 +1966,13 @@ protected WebElement txtWelcome;
     public boolean verifyEnteredAutomaticRepliesMessage(String strMessage) {
         boolean blResult = false;
         try {
+            waitForSeconds(3);
+            waitForElement(clickAutomaticReplyoption);
+            jsClick(clickAutomaticReplyoption);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElement(chkboxAutomaticReply);
+//            click(chkboxAutomaticReply);
             driver.switchTo().frame(frameAutomaticReplies);
             waitForSeconds(3);
             System.out.println("Xpath for Text Out Of Office >>>> :: " + messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
@@ -2094,7 +2105,7 @@ protected WebElement txtWelcome;
             takeScreenshot(driver);
             waitForElementClickable(sentSubject);
             click(sentSubject);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(txtSentPatient);
             System.out.println("\nSuccessfully verified reply sent Message");
 
@@ -2117,7 +2128,7 @@ protected WebElement txtWelcome;
             takeScreenshot(driver);
             waitForElementClickable(sentSubject);
             click(sentSubject);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(txtMobileSentPatient);
             System.out.println("\nSuccessfully verified reply sent Message");
 

@@ -164,8 +164,8 @@ Feature: Dashboard
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address         | Password                 |
-      | &EMAIL FOR DASHBOARD& | &PASSWORD FOR DASHBOARD& |
+      | Email Address | Password   |
+      | &EMAIL&       | &PASSWORD& |
 
 
 
@@ -233,7 +233,7 @@ Feature: Dashboard
 #  21	Dashboard	View latest 3 updated Health records in Health records card
 #  23	Dashboard	View Specific health Record details
 
-  @WEB @DASHBOARD @SANITY_PATH1 @DASHBOARD_APPOINTMENTS @App
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS @App
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -242,7 +242,7 @@ Feature: Dashboard
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @DASHBOARD @SANITY_PATH1 @DASHBOARD_APPOINTMENTS @App
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS1 @App
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -253,7 +253,7 @@ Feature: Dashboard
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @DASHBOARD @SANITY_PATH1 @DASHBOARD_APPOINTMENTS @App
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS1 @App
   Scenario Template: Prep- Canceling all the appointments
 
     Given As a user I am on HomePage
@@ -264,7 +264,7 @@ Feature: Dashboard
       | Appointment           |
       | Upcoming Appointments |
 
-  @WEB @DASHBOARD @SANITY_PATH1 @DASHBOARD_APPOINTMENTS @App
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS1 @App
   Scenario Template: S1 Patient Booking Appointment - Visit Appointment
 
     Given As a user I am on HomePage
@@ -281,7 +281,7 @@ Feature: Dashboard
       | Book Appointment | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &VISIT_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
 
-  @WEB @DASHBOARD @SANITY_PATH1 @DASHBOARD_APPOINTMENTS @App
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS1 @App
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -290,7 +290,7 @@ Feature: Dashboard
       | TimeZone                  |
       | New Zealand Standard Time |
 #
-  @WEB @DASHBOARD @SANITY_PATH1 @DASHBOARD_APPOINTMENTS @App
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS1 @App
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
 
     Given As a user I am on beta MMH login Page
@@ -301,7 +301,7 @@ Feature: Dashboard
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @DASHBOARD @SANITY_PATH1 @DASHBOARD_APPOINTMENTS @App
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS1 @App
   Scenario Template: S6 - Patient Cancel Appointment
 
     Given I navigate to the "<Appointment>" Future Appointments page
@@ -314,13 +314,13 @@ Feature: Dashboard
       | Appointment           | Appointment_Cancel_Button        | Appointment_After_Cancel              |
       | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
-  @WEB @DASHBOARD @SANITY_PATH1 @DASHBOARD_APPOINTMENTS @App
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS @App
   Scenario Template: S2 - Patient Booking Appointment - Video Appointment
 
     Given As a user I am on HomePage
     And I navigate to the "<Appointment>" page
     And I enter the video appointment details "<Appointment_Details>"
-    When I click confirm button
+    When I click confirm button "<Appointment_Details>"
     Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
     And I accept the terms & conditions and confirm my booking
     And I should see booked appointment displayed under the future tab "<Appointment_Summary>"
@@ -331,14 +331,14 @@ Feature: Dashboard
       | Book Appointment | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
 
-  @WEB @DASHBOARD @SANITY_PATH1 @DASHBOARD_APPOINTMENTS @App
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS @App
   Scenario Template: Changing machines timezone
     Given I change Windows "<TimeZone>"
     Examples:
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @DASHBOARD @SANITY_PATH1 @DASHBOARD_APPOINTMENTS @App
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS @App
   Scenario Template: S1- User Successfully logs in to the beta v2 Portal.
     Given As a user I am on beta MMH login Page
     And I enter "<Email Address>" and "<Password>" For Beta
@@ -348,13 +348,13 @@ Feature: Dashboard
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @DASHBOARD @SANITY_PATH1 @DASHBOARD_APPOINTMENTS @App
+  @WEB @DASHBOARD @SANITY_PATH @DASHBOARD_APPOINTMENTS @App
   Scenario Template: S3 - Patient Booking Appointment - Visit in video slot Appointment
 
     Given As a user I am on HomePage
     And I navigate to the "<Appointment>" page
     And I enter the video appointment details "<Appointment_Details>"
-    When I click confirm button
+    When I click confirm button "<Appointment_Details>"
     Then I should see details of created appointment "<Details_For_Appointment>" "<Future_Date>"
     And I accept the terms & conditions and confirm my booking
     And I should see booked appointment displayed under the future tab "<Appointment_Summary>"

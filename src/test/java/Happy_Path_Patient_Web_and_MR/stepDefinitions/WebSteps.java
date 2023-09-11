@@ -39,6 +39,7 @@ public class WebSteps {
 
     @Then("I should see user successfully logs in to the MMH portal")
     public void iShouldSeeUserSuccessfullyLogsInToTheMMHPortal() {
+        Assert.assertTrue(demoPageContainer.homePage.veriflyTeamscondition());
         Assert.assertTrue(demoPageContainer.homePage.verifyHomePageOfMMHPortal());
     }
 
@@ -2668,7 +2669,7 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.homePage.clickDashBoard());
             Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
             Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
-            Assert.assertTrue(demoPageContainer.messagesPage.selectAutomaticRepliesSetting());
+//            Assert.assertTrue(demoPageContainer.messagesPage.selectAutomaticRepliesSetting());
             Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredAutomaticRepliesMessage(TestDataUtil.getValue(lstStrMessage.get(2))));
         }
 
@@ -2952,14 +2953,14 @@ public class WebSteps {
     public void iVerifyTheProviderSent(String strGroupMessage) {
         List<String> listGroupMessage = TestDataUtil.getListOfValue(strGroupMessage);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(0)), listGroupMessage.get(1)));
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessage((listGroupMessage.get(0)), listGroupMessage.get(5)));
         }
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessageForMobile((listGroupMessage.get(0)), listGroupMessage.get(1)));
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessageForMobile((listGroupMessage.get(0)), listGroupMessage.get(5)));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
-            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessageForMobile((listGroupMessage.get(0)), listGroupMessage.get(1)));
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyPatientReceivedGroupMessageForMobile((listGroupMessage.get(0)), listGroupMessage.get(5)));
         }
 
     }
@@ -4545,6 +4546,15 @@ public class WebSteps {
 
 
 
+
+    }
+
+
+    @When("I click confirm button {string}")
+    public void iClickConfirmButton(String strVideoAppointmentDetails) {
+        List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strVideoAppointmentDetails);
+        Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmButton());
+        Assert.assertTrue(demoPageContainer.appointmentsPage.selectTypeOfVideoAppointment(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
 
     }
 }

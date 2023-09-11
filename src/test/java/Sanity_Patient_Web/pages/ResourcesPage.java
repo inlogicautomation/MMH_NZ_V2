@@ -33,7 +33,7 @@ public class ResourcesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h5[contains(text(),'Patient Sheets')]/preceding-sibling::mat-icon")
     protected WebElement btnBackToResources;
 
-    @FindBy(how = How.XPATH, using = "//a[@href='https://www.healthnavigator.org.nz/']")
+    @FindBy(how = How.XPATH, using = "//a[@href='https://healthify.nz/']")
     protected WebElement elmntHealthNavigator;
 
     @FindBy(how = How.XPATH, using = "//a[@href='/pages/patient-sheets']")

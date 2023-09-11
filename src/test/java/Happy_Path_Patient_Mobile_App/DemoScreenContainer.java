@@ -57,6 +57,7 @@ public class DemoScreenContainer {
 
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("WEBMOBILE")) {
             driver = SharedDriver.getDriver();
+            driver = SharedDriver.getMobileDriver();
             initPages();
         }
     }

@@ -140,8 +140,8 @@ public class MessagesPage extends BasePage {
     protected String elmntbyDrop = new StringBuilder().append("(//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')])[3]").toString();
 
-    protected String elmntbyServiceName = new StringBuilder().append("//span[contains(text(),'")
-            .append("<<REPLACEMENT>>").append("')]").toString();
+    protected String elmntbyServiceName = new StringBuilder().append("(//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')])[2]").toString();
 
     @FindBy(how = How.XPATH, using = "//mat-select[@formcontrolname='serviceName']")
     protected WebElement drpDownServiceName;
@@ -1331,18 +1331,17 @@ public class MessagesPage extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(2);
             waitForElement(txtCompose);
             waitForElementClickable(drpDownServiceName);
             jsClick(drpDownServiceName);
-            waitForSeconds(1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            Select healthCentre = new Select(driver.findElement(By.xpath("//mat-select[@formcontrolname='serviceName']")));
 //            healthCentre.selectByVisibleText(strServiceName);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntbyServiceName.replace("<<REPLACEMENT>>", strServiceName)));
             System.out.println(">>>>>>>elmntEntriesFromHealthCentre"+elmntEntriesFromHealthCentre);
             jsScrollIntoView(elmntEntriesFromHealthCentre);
-            jsClick(elmntEntriesFromHealthCentre);
-
+            mouseClick(elmntEntriesFromHealthCentre);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
             blResult = true;
             System.out.println("\nSuccessfully selected the Service Name >>> :: ");
@@ -1357,16 +1356,16 @@ public class MessagesPage extends BasePage {
         boolean blResult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(2);
+
             waitForElement(txtCompose);
             waitForElementClickable(drpDownRole);
             jsClick(drpDownRole);
-            waitForSeconds(1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             //            Select healthCentre = new Select(driver.findElement(By.xpath("//mat-select[@formcontrolname='role']")));
 //            healthCentre.selectByVisibleText(strRole);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntRolebyDrop.replace("<<REPLACEMENT>>", strRole)));
             jsClick(elmntEntriesFromHealthCentre);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
             System.out.println("\nSuccessfully selected the Role>>> :: ");
         } catch (Exception e) {
