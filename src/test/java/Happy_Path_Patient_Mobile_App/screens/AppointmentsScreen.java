@@ -20,11 +20,13 @@ public class AppointmentsScreen extends BaseScreen {
         super(driver);
     }
 
+    //    public static String strTransactionRef = null;
+
     @AndroidFindBy(xpath = "//android.widget.Button[@text='Appointments']")
     @iOSXCUITFindBy(id = "Appointments")
     protected WebElement elmntAppointments;
 
-    @AndroidFindBy(xpath = "//android.widget.Button[@text='Future']")
+    @AndroidFindBy(xpath = "//android.view.View[@text='Future']")
     @iOSXCUITFindBy(id = "Future")
     protected WebElement elmntFuture;
 
@@ -32,16 +34,24 @@ public class AppointmentsScreen extends BaseScreen {
     @iOSXCUITFindBy(id = "Past")
     protected WebElement elmntPast;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Book an Appointment']")
+    @AndroidFindBy(xpath = "(//android.widget.Button)[2]")
     @iOSXCUITFindBy(id = "Book Appointment")
     protected WebElement btnBookAppointment;
 
 
-    @AndroidFindBy(xpath = "//android.widget.Button[@text='Select location']")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='Select Practice']")
     @iOSXCUITFindBy(id = "Select location")
     protected WebElement elmntSelectLocation;
 
-    @AndroidFindBy(xpath = "//android.widget.Button[@text='Appointment Pre-Screening']")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Appointment Policy']")
+    @iOSXCUITFindBy(id = "Select location")
+    protected WebElement elmntSelectAppointmentPolicy;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='OK']")
+    @iOSXCUITFindBy(id = "Select location")
+    protected WebElement elmntSelectAppointmentPolicyOkButton;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Appointment Pre-Screening']")
     @iOSXCUITFindBy(id = "Appointment Pre-Screening")
     protected WebElement elmntAppointmentPreScreening;
 
@@ -53,9 +63,17 @@ public class AppointmentsScreen extends BaseScreen {
     @iOSXCUITFindBy(id = "Select Provider")
     protected WebElement elmntSelectProvider;
 
-    @AndroidFindBy(xpath = "//android.widget.Button[@text='Visit']")
+    @AndroidFindBy(xpath = "//android.view.View[@text='Visit']")
     @iOSXCUITFindBy(id = "Visit")
     protected WebElement elmntVisit;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Video call options']")
+    @iOSXCUITFindBy(id = "Visit")
+    protected WebElement elmntVideocallOptions;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='OK']")
+    @iOSXCUITFindBy(id = "Visit")
+    protected WebElement elmntVideocallOptionsOkButton;
 
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'AM') or contains(@text,'PM')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[contains(@name,'AM') or contains(@name,'PM')]")
@@ -68,17 +86,27 @@ public class AppointmentsScreen extends BaseScreen {
     @iOSXCUITFindBy(id = "Continue")
     protected WebElement btnContinue;
 
-    @AndroidFindBy(xpath = "//android.widget.Button[@text='Appointment reason']")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='OK']")
+    @iOSXCUITFindBy(id = "Continue")
+    protected WebElement btnOk;
+
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Select Reason for appointment']")
     @iOSXCUITFindBy(id = "Appointment reason")
     protected WebElement elmntAppointmentReason;
+
+    @AndroidFindBy(xpath = "//android.view.View[@text='Select Reason']")
+    @iOSXCUITFindBy(id = "Appointment reason")
+    protected WebElement elmntAppointmentReasonDropdowm;
+
 
     @AndroidFindBy(xpath = "//android.widget.Button[@text='Confirm Appointment']")
     @iOSXCUITFindBy(id = "Confirm Appointment")
     protected WebElement elmntConfirmAppointment;
 
     @AndroidFindAll({
-            @AndroidBy(xpath = "(//android.widget.ToggleButton[contains(@text,'terms and conditions')])[1]"),
-            @AndroidBy(xpath = "(//android.widget.CheckBox[contains(@text,'terms and conditions')])[1]")
+            @AndroidBy(xpath = "(//android.widget.ToggleButton)[1]"),
+            @AndroidBy(xpath = "(//android.widget.ToggleButton)[2]")
     })
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeSwitch[contains(@name,'terms and conditions')]")
     protected WebElement toggleTermsAndConditions;
@@ -103,17 +131,23 @@ public class AppointmentsScreen extends BaseScreen {
     @iOSXCUITFindBy(id = "OK")
     protected WebElement popUpOk;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Services']")
+    @AndroidFindBy(xpath = "//android.widget.Image[@text='Book']")
     @iOSXCUITFindBy(id = "Services")
-    protected WebElement elmntServicesHeader;
+    protected WebElement elmntAppointmentBookIcon;
 
-    @AndroidFindBy(xpath = "(//android.view.View[@text='medkit Services'])[1]")
+    @AndroidFindBy(xpath = "//android.view.View[@text='Future']")
     @iOSXCUITFindBy(id = "medkit Services")
-    protected WebElement elmntServicesIcon;
+    protected WebElement elmntFutureTab;
 
     @AndroidFindBy(xpath = "//android.widget.Image[@text='pin']/following::android.widget.TextView[contains(@text,'Repeat prescriptions')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name='pin']//following::XCUIElementTypeStaticText[@name='Repeat prescriptions']")
     protected WebElement elmntRepeatPrescriptions;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Book an Appointment with previously consulted doctor.']")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name='pin']//following::XCUIElementTypeStaticText[@name='Repeat prescriptions']")
+    protected WebElement elmntBookAnAppointment;
+
+    //android.widget.TextView[@text='Book an Appointment with previously consulted doctor.']
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Contact Number*']/following::android.widget.EditText")
     @iOSXCUITFindBy(id = "Contact Number *")
@@ -134,6 +168,11 @@ public class AppointmentsScreen extends BaseScreen {
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'$')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[contains(@name,'$')]")
     protected WebElement elmntAmount;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[contains(@text,'Credit Card')]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[contains(@name,'$')]")
+    protected WebElement elmntCreditCardOption;
+
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Payment Checkout']")
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeStaticText[@name='Payment Checkout'])[1]")
@@ -207,6 +246,14 @@ public class AppointmentsScreen extends BaseScreen {
     protected WebElement btnDone;
 
     String strButtonTextLocator = new StringBuilder()
+            .append("//android.view.View[@text='")
+            .append("<<TEXT>>").append("']").toString();
+
+    String strVideoCallOptionsTextLocator = new StringBuilder()
+            .append("//android.widget.RadioButton[@text='")
+            .append("<<TEXT>>").append("']").toString();
+
+    String strProviderTextLocator = new StringBuilder()
             .append("//android.widget.Button[@text='")
             .append("<<TEXT>>").append("']").toString();
 
@@ -235,7 +282,7 @@ public class AppointmentsScreen extends BaseScreen {
             .append("<<LOCATION>>").append("'][1]").toString();
 
     String strRadioButtonTextLocator = new StringBuilder()
-            .append("//android.widget.RadioButton[@text='")
+            .append("//android.widget.CheckBox[@text='")
             .append("<<TEXT>>").append("']").toString();
 
     String strOtherTextLocatorIOS = new StringBuilder()
@@ -338,6 +385,16 @@ public class AppointmentsScreen extends BaseScreen {
         click(elmntLocation);
     }
 
+    public void selectAppointmentsPolicy() {
+
+
+        waitForElement(elmntSelectAppointmentPolicy);
+        verifyElement(elmntSelectAppointmentPolicy);
+        waitForElement(elmntSelectAppointmentPolicyOkButton);
+        click(elmntSelectAppointmentPolicyOkButton);
+
+    }
+
     public void tapNoInAppointmentPreScreening() {
         waitForSecond(5);
         waitForElement(elmntAppointmentPreScreening);
@@ -354,10 +411,10 @@ public class AppointmentsScreen extends BaseScreen {
     }
 
     public void selectAppointmentDate(String strProvider, String strFutureDate) {
-        waitForElement(By.xpath(strButtonTextLocator.replace("<<TEXT>>", strProvider)));
+        waitForElement(By.xpath(strProviderTextLocator.replace("<<TEXT>>", strProvider)));
         String strDatePattern1 = "MMMM E d";
         String strDate = strFutureDate;
-        waitForElement(elmntVisit);
+        verifyElementWithoutWait(elmntVisit);
 
         String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
         System.out.println("DATE: " + strDateValue);
@@ -375,6 +432,18 @@ public class AppointmentsScreen extends BaseScreen {
         click(elmntAppointment);
     }
 
+    public void selectAppointmentVideoCallOptions(String strAppointment) {
+        System.out.println("Appointment: " + strAppointment);
+        attachStepLog("Appointment", strAppointment);
+        waitForElement(elmntVideocallOptions);
+     verifyElementWithoutWait(elmntVideocallOptions);
+        waitForSecond(2);
+        WebElement elmntAppointment = waitForElement(By.xpath(strVideoCallOptionsTextLocator.replace("<<TEXT>>", strAppointment)));
+        click(elmntAppointment);
+        waitForElement(elmntVideocallOptionsOkButton);
+        click(elmntVideocallOptionsOkButton);
+    }
+
 
     public void selectAvailableTimeSlot() {
         waitForElement(elmntVisit);
@@ -385,6 +454,7 @@ public class AppointmentsScreen extends BaseScreen {
         System.out.println("Slot Date: " + strTimeSlot);
         waitForElement(lstAvailableTimeSlot.get(0));
         click(lstAvailableTimeSlot.get(0));
+
         waitForElement(btnContinue);
         click(btnContinue);
     }
@@ -405,11 +475,12 @@ public class AppointmentsScreen extends BaseScreen {
         System.out.println("Reason: " + strReason);
         attachStepLog("Reason", strReason);
         waitForElementIgnoreStale(elmntAppointmentReason);
-        waitForElement(elmntAppointmentReason);
+        waitForElement(elmntAppointmentReasonDropdowm);
+        click(elmntAppointmentReasonDropdowm);
         WebElement elmntReason = waitForElement(By.xpath(strRadioButtonTextLocator.replace("<<TEXT>>", strReason)));
         click(elmntReason);
-        waitForElement(btnContinue);
-        click(btnContinue);
+        waitForElement(btnOk);
+        click(btnOk);
     }
 
 
@@ -430,12 +501,13 @@ public class AppointmentsScreen extends BaseScreen {
             System.out.println("Append 0: " + strTimeSlot);
         }
         strDateValue = strDateValue + " " + strTimeSlot;
-        System.out.println("Appointment Time: " + strDateValue);
-        System.out.println("Appointment Date: " + strDateValue2);
+        String strDateTime = strDateValue2 +" | " + strDateValue;
+        System.out.println("Appointment Date & Time: " + strDateTime);
+//        System.out.println("Appointment Date: " + strDateValue2);
 
 
-        lstDetails.add(strDateValue);
-        lstDetails.add(strDateValue2);
+        lstDetails.add(strDateTime);
+//        lstDetails.add(strDateValue2);
 
 
         waitForSecond(5);
@@ -482,7 +554,7 @@ public class AppointmentsScreen extends BaseScreen {
     public static By elmntAppointmentDetails = null;
 
     public boolean verifyCreatedAppointmentInServiceTab(List<String> lstDetails, String strFutureDate, String strAppointment) {
-        waitForElement(elmntServicesHeader);
+
 
         String strDatePattern1 = "dd MMM yyyy";
         String strDate = strFutureDate;
@@ -496,8 +568,11 @@ public class AppointmentsScreen extends BaseScreen {
         waitForSecond(180);
 
         reLaunchAppAndroid();
-        waitForElement(elmntServicesIcon);
-        click(elmntServicesIcon);
+        waitForSecond(2);
+        waitForElement(elmntAppointmentBookIcon);
+        click(elmntAppointmentBookIcon);
+        waitForElement(elmntFutureTab);
+        click(elmntFutureTab);
 
         System.out.println("Before Swipe");
         waitForSecond(8);
@@ -550,7 +625,7 @@ public class AppointmentsScreen extends BaseScreen {
         long startTime = System.currentTimeMillis();
         while (!(verifyElement(elmntAppointmentDetails))) {
             swipeUpShort();
-            if (verifyElementWithoutWait(elmntRepeatPrescriptions)) {
+            if (verifyElementWithoutWait(elmntBookAnAppointment)) {
                 System.out.println("Loop Break 1");
                 break;
             }
@@ -614,6 +689,8 @@ public class AppointmentsScreen extends BaseScreen {
         attachStepLog("Amount", elmntAmount.getText());
         System.out.println("Amount: " + elmntAmount.getText());
         waitForSecond(2);
+        waitForElement(elmntCreditCardOption);
+        click(elmntCreditCardOption);
         waitForElement(txtCardNumber);
         enterValue(txtCardNumber, strCardNumber);
     }
@@ -668,7 +745,8 @@ public class AppointmentsScreen extends BaseScreen {
     }
 
     public boolean verifyCreatedPaymentAppointmentInServiceTab(List<String> lstDetails, String strFutureDate, String strAppointment) {
-        waitForElement(elmntServicesHeader);
+        waitForElement(elmntAppointmentBookIcon);
+        click(elmntAppointmentBookIcon);
 
         String strDatePattern1 = "dd MMM yyyy";
         String strDate = strFutureDate;
@@ -677,24 +755,27 @@ public class AppointmentsScreen extends BaseScreen {
         strDateValue = strDateValue + " " + strTimeSlot.trim();
         System.out.println("Appointment Time: " + strDateValue);
         attachStepLog("Appointment Time", strDateValue);
-
+        System.out.println("Appointment Amount: " + strAmount);
         lstDetails.add(strAmount);
         lstDetails.add(strDateValue);
 
         waitForSecond(180);
 
         reLaunchAppAndroid();
-        waitForElement(elmntServicesIcon);
-        click(elmntServicesIcon);
+        waitForSecond(3);
+        waitForElement(elmntAppointmentBookIcon);
+        click(elmntAppointmentBookIcon);
+        waitForElement(elmntFutureTab);
+        click(elmntFutureTab);
 
         System.out.println("Before Swipe");
-        waitForSecond(8);
+        waitForSecond(3);
         swipeUp();
         waitForSecond(2);
         swipeDown();
         waitForSecond(2);
 
-//        By elmntAppointmentDetails = null;
+        By elmntAppointmentDetails = null;
 
         if (strAppointment.equals("VISIT")) {
             System.out.println("Enter " + strAppointment);
@@ -738,7 +819,7 @@ public class AppointmentsScreen extends BaseScreen {
         long startTime = System.currentTimeMillis();
         while (!(verifyElement(elmntAppointmentDetails))) {
             swipeUpShort();
-            if (verifyElementWithoutWait(elmntRepeatPrescriptions)) {
+            if (verifyElementWithoutWait(elmntBookAnAppointment)) {
                 System.out.println("Loop Break 1");
                 break;
             }
@@ -759,12 +840,12 @@ public class AppointmentsScreen extends BaseScreen {
     }
 
     public boolean verifyServiceScreen() {
-        waitForElement(elmntServicesHeader);
-        return verifyElement(elmntServicesHeader);
+        waitForElement(elmntAppointmentBookIcon);
+        return verifyElement(elmntAppointmentBookIcon);
     }
 
     public void tapCancelAppointment() {
-        waitForElement(elmntServicesHeader);
+        waitForElement(elmntAppointmentBookIcon);
         System.out.println("Cancel: " + elmntAppointmentDetails);
         waitForElement(elmntAppointmentDetails);
         click(elmntAppointmentDetails);
@@ -850,7 +931,7 @@ public class AppointmentsScreen extends BaseScreen {
 
     public boolean verifyCreatedAppointmentInServiceTabIOS(List<String> lstDetails, String strFutureDate, String strAppointment) {
         waitForSecond(2);
-        waitForElementIgnoreStale(elmntServicesHeader);
+        waitForElementIgnoreStale(elmntAppointmentBookIcon);
 
         String strDatePattern1 = "dd MMM yyyy";
         String strDate = strFutureDate;
@@ -864,8 +945,8 @@ public class AppointmentsScreen extends BaseScreen {
         waitForSecond(180);
 
         reLaunchAppIOS();
-        waitForElement(elmntServicesIcon);
-        click(elmntServicesIcon);
+        waitForElement(elmntFutureTab);
+        click(elmntFutureTab);
 
         System.out.println("Before Swipe");
         waitForSecond(2);
@@ -915,7 +996,7 @@ public class AppointmentsScreen extends BaseScreen {
         long startTime = System.currentTimeMillis();
         while (!(verifyElement(elmntAppointmentDetails))) {
             swipeUpShort();
-            if (verifyElementWithoutWait(elmntRepeatPrescriptions)) {
+            if (verifyElementWithoutWait(elmntBookAnAppointment)) {
                 System.out.println("Loop Break 1");
                 break;
             }
@@ -971,7 +1052,7 @@ public class AppointmentsScreen extends BaseScreen {
 
     public boolean verifyCreatedPaymentAppointmentInServiceTabIOS(List<String> lstDetails, String strFutureDate, String strAppointment) {
         waitForSecond(2);
-        waitForElementIgnoreStale(elmntServicesHeader);
+        waitForElementIgnoreStale(elmntAppointmentBookIcon);
 
         String strDatePattern1 = "dd MMM yyyy";
         String strDate = strFutureDate;
@@ -987,8 +1068,8 @@ public class AppointmentsScreen extends BaseScreen {
         waitForSecond(180);
 
         reLaunchAppIOS();
-        waitForElement(elmntServicesIcon);
-        click(elmntServicesIcon);
+        waitForElement(elmntFutureTab);
+        click(elmntFutureTab);
 
         System.out.println("Before Swipe");
         waitForSecond(2);
@@ -1036,7 +1117,7 @@ public class AppointmentsScreen extends BaseScreen {
         long startTime = System.currentTimeMillis();
         while (!(verifyElement(elmntAppointmentDetails))) {
             swipeUpShort();
-            if (verifyElementWithoutWait(elmntRepeatPrescriptions)) {
+            if (verifyElementWithoutWait(elmntBookAnAppointment)) {
                 System.out.println("Loop Break 1");
                 break;
             }

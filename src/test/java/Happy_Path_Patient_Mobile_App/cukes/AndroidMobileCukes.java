@@ -16,4 +16,4 @@ public class AndroidMobileCukes extends AbstractTestNGCucumberTests {
 
 }
 
-//       clean test -Dapp=Happy_Path_Patient_Mobile_App -Drunner=AndroidMobileCukes -Dexecution_type=webmobile -Dconfig=local_android_Poco_M2_Android_App -Denv=QA -Dbrowser_name=chrome "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/MobileApp-QAResults.html -Dsysteminfo.AppName=Demo-QA"
+//       clean test -Dapp=Happy_Path_Patient_Mobile_App -Drunner=AndroidMobileCukes -Dexecution_type=webmobile -Dconfig=local_android_Galaxy_M53_Mobile_App -Denv=QA -Dbrowser_name=chrome "-DargLine=-Dextent.reporter.spark.out=reports/Extent-Report/MobileApp-QAResults.html -Dsysteminfo.AppName=Demo-QA"

@@ -168,8 +168,10 @@ public class MessageScreen extends BaseScreen {
 
 
     String strInboxTabLocator = new StringBuilder()
-            .append("//android.widget.TabWidget/descendant::android.widget.Button[@text='")
+            .append("//android.view.View[@text='")
             .append("<<TEXT>>").append("']").toString();
+
+    //android.view.View[@text='Inbox']
 
     String strInboxTabLocatorIOS = new StringBuilder()
             .append("//XCUIElementTypeOther[not(@name)]/XCUIElementTypeButton[@name='")
@@ -307,10 +309,13 @@ public class MessageScreen extends BaseScreen {
         pushFileToDevice(strImage);
         waitForElement(lnkAttachFiles);
         click(lnkAttachFiles);
+        waitForSecond(2);
         waitForElement(elmntChooseFromGallery);
         click(elmntChooseFromGallery);
+        waitForSecond(2);
         waitForElement(iconHamburger);
         click(iconHamburger);
+        waitForSecond(2);
         waitForElementIgnoreStale(optDownloads);
         click(optDownloads);
         waitForSecond(2);
@@ -345,7 +350,7 @@ public class MessageScreen extends BaseScreen {
     public boolean verifySuccessfullMessage() {
         waitForSecond(3);
         takeScreenshot(driver);
-//        waitForElementIgnoreStale(lblSuccessfullMessage);
+        waitForElementIgnoreStale(lblSuccessfullMessage);
         return verifyElement(lblSuccessfullMessage);
     }
 

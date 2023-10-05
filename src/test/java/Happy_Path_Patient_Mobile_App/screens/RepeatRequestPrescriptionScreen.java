@@ -16,7 +16,7 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
         super(driver);
     }
 
-    public static String strTransactionRef = null;
+//    public static String strTransactionRef = null;
 
     @AndroidFindBy(xpath = "//android.widget.Button[@text='Repeat Prescriptions']")
     @iOSXCUITFindBy(id = "Repeat Prescriptions")
@@ -25,6 +25,10 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Select Location']")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name='Select Location']")
     protected WebElement elmntSelectLocation;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Repeat New Prescription']")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name='Select Location']")
+    protected WebElement elmntSelectRepeatNewPrescriptionOption;
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Select Provider']")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name='Select Provider']")
@@ -50,11 +54,11 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
 //    @iOSXCUITFindBy(id = "")
     protected WebElement elmntPickupMethodUrgency;
 
-    @AndroidFindBy(xpath = "//android.view.View[@text='Customer number:*']/following-sibling::android.view.View//android.widget.EditText")
+    @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name='Customer number:']/following:: XCUIElementTypeTextField")
     protected WebElement txtBoxCustomerNumber;
 
-    @AndroidFindBy(xpath = "//android.view.View[@text='Password:*']/following-sibling::android.view.View//android.widget.EditText")
+    @AndroidFindBy(xpath = "(//android.widget.EditText)[2]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name='Password:']/following:: XCUIElementTypeSecureTextField")
     protected WebElement txtBoxPassword;
 
@@ -66,7 +70,7 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name='Select script urgency']")
     protected WebElement elmntSelectScriptUrgency;
 
-    @AndroidFindBy(xpath = "//android.widget.Button[@text='Repeat prescription request']")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='SEND PRESCRIPTION REQUEST']")
     @iOSXCUITFindBy(id = "Repeat prescription request")
     protected WebElement elmntRepeatPrescriptionRequest;
 
@@ -93,13 +97,18 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
     @iOSXCUITFindBy(id = "Services")
     protected WebElement elmntServicesHeader;
 
-    @AndroidFindBy(xpath = "//android.widget.Image[@text='sync']/following::android.view.View[1]")
+    @AndroidFindBy(xpath = "//android.widget.Image[@text='sync']")
     @iOSXCUITFindBy(id = "sync")
     protected WebElement elmntSyncView;
 
     @AndroidFindBy(xpath = "//android.widget.Button[@text='Repeat prescription status']")
     @iOSXCUITFindBy(id = "Repeat prescription status")
     protected WebElement elmntRepeatPrescriptionStatus;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'Repeat Prescriptions')]")
+    @iOSXCUITFindBy(id = "Repeat prescription status")
+    protected WebElement elmntRepeatPrescription;
+
 
     @AndroidFindBy(xpath = "(//android.view.View[@text='medkit Services'])[1]")
     @iOSXCUITFindBy(id = "medkit Services")
@@ -109,7 +118,7 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name='Select Pharmacy']")
     protected WebElement elmntSelectPharmacyHearder;
 
-    @AndroidFindBy(xpath = "//android.widget.Button[@text='Find A Pharmacy']")
+    @AndroidFindBy(xpath = "//android.view.View[@text='Find A Pharmacy']")
     @iOSXCUITFindBy(id = "Find A Pharmacy")
     protected WebElement elmntFindAPharmacy;
 
@@ -125,7 +134,7 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
     @iOSXCUITFindBy(id = "Select Pharmacy*")
     protected WebElement elmntSelectPharmacy;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'Select Payment Method')]/following-sibling::android.view.View")
+    @AndroidFindBy(xpath = "//android.widget.Button[contains(@text,'Account2Account')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name='Account2Account']")
     protected WebElement elmntAccount2Account;
 
@@ -141,7 +150,7 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
     @iOSXCUITFindBy(id = "Continue")
     protected WebElement btnContinueInPharmacy;
 
-    @AndroidFindBy(xpath = "//android.widget.Button[@text='Select Delivery Address']")
+    @AndroidFindBy(xpath = "//android.view.View[@text='Add Delivery Address']")
     @iOSXCUITFindBy(id = "Select Delivery Address")
     protected WebElement elmntSelectDeliveryAddress;
 
@@ -254,8 +263,15 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
 
     //android.widget.RadioButton[contains(@text,'ANZ')]
     String rdoBtnSelectBank = new StringBuilder()
-            .append("//android.widget.RadioButton[contains(@text,'")
+            .append("//android.widget.CheckedTextView[contains(@text,'")
             .append("<<TEXT>>").append("')]").toString();
+
+    @AndroidFindBy(xpath = "(//android.view.View[contains(@text,'Available Banks: required')])[2]")
+    @iOSXCUITFindBy(id = "Please enter the A2A test credentials:")
+    protected WebElement SelectAvailableBank;
+
+
+
 
     String strRdoBtnSelectBankIOS = new StringBuilder()
             .append("//XCUIElementTypeStaticText[@name='")
@@ -267,8 +283,16 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
             .append("<<TEXT>>").append("']").toString();
 
     String strContainsRadioButtonTextLocator = new StringBuilder()
-            .append("//android.widget.RadioButton[contains(@text,'")
-            .append("<<TEXT>>").append("')]").toString();
+            .append("(//android.view.View//following::android.widget.RadioButton[contains(@text,'")
+            .append("<<TEXT>>").append("')])[1]").toString();
+
+
+    @AndroidFindBy(xpath = "(//android.widget.RadioButton[@checked='true'])[3]")
+    @iOSXCUITFindBy(xpath = "//android.widget.TextView[contains(@text,'Select script urgency')]")
+    protected WebElement elmntSelectscripturgencyText;
+
+    //android.widget.RadioButton[@checked='true']
+
 
     String strContainsOtherTextLocatorIOS = new StringBuilder()
             .append("//XCUIElementTypeOther[contains(@name,'")
@@ -291,6 +315,13 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
         waitForElement(elmntSelectLocation);
         WebElement elmntLocation = waitForElement(By.xpath(strLocationLocator.replace("<<LOCATION>>", strLocation)));
         click(elmntLocation);
+    }
+
+    public void selectRepeatNewPrescription() {
+        waitForSecond(4);
+        waitForElement(elmntSelectRepeatNewPrescriptionOption);
+        click(elmntSelectRepeatNewPrescriptionOption);
+
     }
 
     public void selectLocationIOS(String strLocation) {
@@ -349,6 +380,7 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
 //        waitForElement(elmntPickupMethodUrgency);
         WebElement elmntPickUpMethod = waitForElement(By.xpath(strRadioButtonTextLocator.replace("<<TEXT>>", strPickUpMethod)));
         click(elmntPickUpMethod);
+        waitForSecond(3);
     }
 
     public void selectPickUpMethodIOS(String strPickUpMethod) {
@@ -361,29 +393,32 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
         click(elmntPickUpMethod);
     }
 
-    public static String strAmount = null;
+//    public static String strAmount = null;
 
     public void selectUrgency(String strUrgency) {
         System.out.println("Urgency: " + strUrgency);
         attachStepLog("Urgency", strUrgency);
-        waitForElement(elmntSelectScriptUrgency);
-        WebElement elmntUrgency = waitForElement(By.xpath(strContainsRadioButtonTextLocator.replace("<<TEXT>>", strUrgency)));
 
-        String strUrgencyAmount = elmntUrgency.getText().trim();
-        System.out.println("strUrgencyAmount>>>>>>>>>"+strUrgencyAmount);
+tapByCoordinates(88,1578);
+//        WebElement elmntUrgency =waitForElement(By.xpath(strContainsRadioButtonTextLocator.replace("<<TEXT>>", strUrgency)));
+////        click(elmntUrgency);
 
+
+//        WebElement elmntUrgency = waitForElement(By.xpath("(//android.widget.RadioButton[@checked='true'])[3]"));
+//        String strUrgencyAmount = elmntUrgency.getText().trim();
+//        System.out.println("strUrgencyAmount>>>>>>>>>"+strUrgencyAmount);
 //        Matcher matcher = Pattern.compile("\\d+,0").matcher(strUrgencyAmount);
-        Matcher matcher = Pattern.compile("\\d+.00").matcher(strUrgencyAmount);
-        System.out.println("Matcher>>>>>>>>>>>>>>>>"+matcher);
-
-        while (matcher.find()) {
-            strAmount = matcher.group();
+//        Matcher matcher = Pattern.compile("\\d+.00").matcher(strUrgencyAmount);
+//        System.out.println("Matcher>>>>>>>>>>>>>>>>"+matcher);
+//        while (matcher.find()) {
+//            strAmount = matcher.group();
 //            strAmount = strAmount.split("0")[0];
-            strAmount = strAmount.split("00")[0];
-            System.out.println("Amount: " + strAmount);
-        }
-
-        click(elmntUrgency);
+//            strAmount = strAmount.split("00")[0];
+//            System.out.println("Amount: " + strAmount);
+//        }
+//
+//        click(elmntUrgency);
+//        click(elmntSelectscripturgencyText);
         waitForElement(btnContinue);
         click(btnContinue);
     }
@@ -395,15 +430,15 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
         System.out.println("elmntUrgency>> "+By.xpath(strContainsOtherTextLocatorIOS.replace("<<TEXT>>", strUrgency)));
         WebElement elmntUrgency = waitForElement(By.xpath(strContainsOtherTextLocatorIOS.replace("<<TEXT>>", strUrgency)));
 
-        String strUrgencyAmount = elmntUrgency.getAttribute("name");
+//        String strUrgencyAmount = elmntUrgency.getAttribute("name");
+//
+//        Matcher matcher = Pattern.compile("\\d+.00").matcher(strUrgencyAmount);
 
-        Matcher matcher = Pattern.compile("\\d+.00").matcher(strUrgencyAmount);
-
-        while (matcher.find()) {
-            strAmount = matcher.group();
-            strAmount = strAmount.split("00")[0];
-            System.out.println("Amount: " + strAmount);
-        }
+//        while (matcher.find()) {
+//            strAmount = matcher.group();
+//            strAmount = strAmount.split("00")[0];
+//            System.out.println("Amount: " + strAmount);
+//        }
 
         click(elmntUrgency);
         waitForElement(btnContinue);
@@ -413,6 +448,8 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
     public void enterMessage(String strMessage) {
         System.out.println("Message: " + strMessage);
         attachStepLog("Message", strMessage);
+        swipeUp();
+        swipeUp();
         waitForElement(elmntRepeatPrescriptionRequest);
         takeScreenshot(driver);
         swipeUp();
@@ -456,6 +493,8 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
 
     public boolean selectBank(String strBank) {
         waitForElement(txtAccount2Account);
+        waitForElement(SelectAvailableBank);
+        click(SelectAvailableBank);
         System.out.println("Xpath for bank >>> :: "+rdoBtnSelectBank.replace("<<TEXT>>",strBank));
         WebElement bank = waitForElement(By.xpath(rdoBtnSelectBank.replace("<<TEXT>>",strBank)));
         waitForElement(bank);
@@ -497,26 +536,32 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
     public boolean verifyRPStatus(List<String> lstRPDetails) {
         boolean blResult = false;
 
-        waitForElementIgnoreStale(elmntServicesHeader);
-        waitForSecond(3);
-        waitForElement(elmntServicesIcon);
-        click(elmntServicesIcon);
+//        waitForElementIgnoreStale(elmntServicesHeader);
+//        waitForSecond(3);
+//        waitForElement(elmntServicesIcon);
+//        click(elmntServicesIcon);
 
-        long startTime = System.currentTimeMillis();
-        while (!(verifyElementWithoutWait(elmntSyncView))) {
-            swipeUp();
-            swipeUp();
-            swipeUp();
-            swipeUp();
-            if (!exitLoop(600000, startTime)) {
-                System.out.println("Loop Break 1");
-                break;
-            }
+//        long startTime = System.currentTimeMillis();
+//        while (!(verifyElementWithoutWait(elmntSyncView))) {
+//            swipeUp();
+//            swipeUp();
+//            swipeUp();
+//            swipeUp();
+//            if (!exitLoop(600000, startTime)) {
+//                System.out.println("Loop Break 1");
+//                break;
+//            }
+//        }
+//        swipeUp();
+        if(verifyElement(elmntRepeatPrescription)) {
+            waitForElement(elmntRepeatPrescription);
+            click(elmntRepeatPrescription);
         }
-        swipeUp();
+        waitForSecond(3);
+        waitForElement(elmntSyncView);
         click(elmntSyncView);
+        waitForSecond(3);
         waitForElement(elmntRepeatPrescriptionStatus);
-
         waitForSecond(3);
 
         if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
@@ -528,13 +573,14 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
         }
 
 //        strAmount = "NZ$" + strAmount + "0";
-        strAmount = "NZ$" + strAmount + "00";
+//        strAmount = "NZ$" + strAmount + "0";
+//System.out.println("RRP VerifyPayment"+strAmount);
+//        lstRPDetails.add(strAmount);
 
-        lstRPDetails.add(strAmount);
-
-        if (strTransactionRef != null) {
-            lstRPDetails.add(strTransactionRef);
-        }
+//
+//        if (strTransactionRef != null) {
+//            lstRPDetails.add(strTransactionRef);
+//        }
 
         for (String strRecordDetail : lstRPDetails) {
             if (System.getProperty("PLATFORM").equalsIgnoreCase("android")) {
@@ -618,8 +664,8 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
         WebElement elmntCity = waitForElement(By.xpath(strTextViewLocator.replace("<<TEXT>>", lstPharmacy.get(0))));
 //        waitForSecond(2);
         System.out.println("elmntCity>>>>>>>>>>"+elmntCity);
-        waitForElementIgnoreStale(elmntCity);
-//        waitForElement(elmntCity);
+//        waitForElementIgnoreStale(elmntCity);
+        waitForElement(elmntCity);
         click(elmntCity);
 
 
@@ -631,19 +677,21 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
         click(btnContinueInPharmacy);
 
         waitForElement(elmntSelectDeliveryAddress);
-        waitForElement(elmntAddDeliveryAddress);
-        click(elmntAddDeliveryAddress);
+//        waitForElement(elmntAddDeliveryAddress);
+        click(elmntSelectDeliveryAddress);
         waitForElement(rdoHome);
-//        click(rdoHome);
+        click(rdoHome);
         waitForElement(txtUnitNo);
         enterValue(txtUnitNo, lstPharmacy.get(1));
         enterValue(txtStreet, lstPharmacy.get(2));
         enterValue(txtCity, lstPharmacy.get(3));
+        swipeUp();
+        swipeUp();
         waitForElement(btnSelect);
         click(btnSelect);
-        waitForElement(elmntBackToAddress);
-        waitForElement(chkPharmacy);
-        click(chkPharmacy);
+//        waitForElement(elmntBackToAddress);
+//        waitForElement(chkPharmacy);
+//        click(chkPharmacy);
         takeScreenshot(driver);
         waitForElement(btnContinueInPharmacy);
         click(btnContinueInPharmacy);
@@ -701,14 +749,14 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
         attachStepLog("Payment Status: ", elmntStatusApproved.getText());
         System.out.println("Payment Status: " + elmntStatusApproved.getText());
 
-        String strPaymentStatus = elmntStatusApproved.getText().trim();
-        Matcher matcher = Pattern.compile("(\\d+)-(\\d+)-(\\d+)-(\\d+)").matcher(strPaymentStatus);
+//        String strPaymentStatus = elmntStatusApproved.getText().trim();
+//        Matcher matcher = Pattern.compile("(\\d+)-(\\d+)-(\\d+)-(\\d+)").matcher(strPaymentStatus);
 
-        while (matcher.find()) {
-            strTransactionRef = matcher.group();
-            System.out.println("Transaction Ref: " + strTransactionRef);
-            attachStepLog("Transaction Ref", strTransactionRef);
-        }
+//        while (matcher.find()) {
+//            strTransactionRef = matcher.group();
+//            System.out.println("Transaction Ref: " + strTransactionRef);
+//            attachStepLog("Transaction Ref", strTransactionRef);
+//        }
         takeScreenshot(driver);
         return verifyElement(elmntStatusApproved);
     }
@@ -717,9 +765,9 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
         waitForElementIgnoreStale(elmntSelectDeliveryAddress);
 
         waitForElement(elmntSelectDeliveryAddress);
-        waitForElement(elmntAddDeliveryAddress);
+//        waitForElement(elmntAddDeliveryAddress);
         waitForSecond(2);
-        click(elmntAddDeliveryAddress);
+        click(elmntSelectDeliveryAddress);
         waitForElement(rdoHome);
 //        click(rdoHome);
         waitForElement(txtUnitNo);
@@ -733,10 +781,11 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
             waitForSecond(2);
             swipeUp();
         }
-
+        swipeUp();
+        swipeUp();
         waitForElement(btnSelect);
         click(btnSelect);
-        waitForElement(elmntBackToAddress);
+//        waitForElement(elmntBackToAddress);
         waitForElement(chkPharmacy);
         click(chkPharmacy);
         takeScreenshot(driver);
@@ -802,7 +851,9 @@ public class RepeatRequestPrescriptionScreen extends BaseScreen {
         boolean blResult=false;
 
         try {
-            waitForSecond(5);
+            swipeUp();
+            waitForSecond(3);
+            swipeUp();
             waitForElement(btnNext);
             click(btnNext);
             blResult=true;

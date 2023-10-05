@@ -111,7 +111,7 @@ public class HealthRecordsScreen extends BaseScreen {
     public boolean verifyRecordDetails(List<String> lstRecordDetails) {
         boolean blResult = false;
         waitForSecond(3);
-        swipeUpShort();
+//        swipeUpShort();
         for (String strRecordDetail : lstRecordDetails) {
             WebElement elmntDetail = waitForElement(By.xpath(strContainsTextViewLocator.replace("<<TEXT>>", strRecordDetail)));
             blResult = verifyElement(elmntDetail);

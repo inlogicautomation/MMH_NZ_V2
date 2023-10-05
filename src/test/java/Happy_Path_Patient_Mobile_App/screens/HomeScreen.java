@@ -33,6 +33,12 @@ public class HomeScreen extends BaseScreen {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"home Home\"]")
     protected WebElement iconHome;
 
+    @AndroidFindBy(xpath = "(//android.widget.Button)[1]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"home Home\"]")
+    protected WebElement NavigateToBack;
+
+
+
     By byconfirmPopUp = By.xpath("//android.widget.TextView[@text='Confirm!']");
 
     @AndroidFindBy(xpath = "//android.widget.Button[@text='YES']")
@@ -41,7 +47,7 @@ public class HomeScreen extends BaseScreen {
 
     String strOptionsInHomeScreenLocator = new StringBuilder()
             .append("//android.widget.TextView[@text='")
-            .append("<<OPTION>>").append("']/preceding-sibling::android.widget.Image").toString();
+            .append("<<OPTION>>").append("']").toString();
 
     String strOptionsInHomeScreenLocatoriOS = new StringBuilder()
             .append("//XCUIElementTypeStaticText[@name='")
@@ -69,7 +75,9 @@ public class HomeScreen extends BaseScreen {
         waitForSecond(1);
         int i = 1;
         while (!(verifyElementWithoutWait(iconHome) && i <= 10)) {
-            navigateToBack();
+//            navigateToBack();
+            waitForElement(NavigateToBack);
+            click(NavigateToBack);
             i++;
 //            if (verifyElement(iconHome)) {
 //                System.out.println("Loop Break 1");
@@ -86,6 +94,7 @@ public class HomeScreen extends BaseScreen {
     public void tapOptionsInHomeScreen(String strOptions) {
 //        reLaunchAppAndroid();
         WebElement elmntOption = waitForElement(By.xpath(strOptionsInHomeScreenLocator.replace("<<OPTION>>", strOptions)));
+        System.out.println(">>>>"+elmntOption);
         click(elmntOption);
     }
 

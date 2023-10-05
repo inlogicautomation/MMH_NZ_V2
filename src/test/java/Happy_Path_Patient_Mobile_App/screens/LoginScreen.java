@@ -16,6 +16,16 @@ public class LoginScreen extends BaseScreen {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"main\"]/XCUIElementTypeOther[1]/XCUIElementTypeImage")
     protected WebElement logoMMH;
 
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='log out outline']")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"main\"]/XCUIElementTypeOther[1]/XCUIElementTypeImage")
+    protected WebElement logoSignOut;
+
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='YES']")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"main\"]/XCUIElementTypeOther[1]/XCUIElementTypeImage")
+    protected WebElement logoSignOutYesButton;
+
 //   (//android.view.View/following::android.widget.Image)[1]
 
     @AndroidFindBy(xpath= "//android.widget.Image[@text='person']/following-sibling::android.widget.EditText")
@@ -45,19 +55,36 @@ public class LoginScreen extends BaseScreen {
 
 
     public boolean verifyMMHLoginScreen() {
-        waitForElement(logoMMH);
-        return verifyElement(logoMMH);
+        boolean blruselts = false;
+        waitForSecond(2);
+      if (verifyElement(logoMMH)){
+          waitForElement(logoMMH);
+          blruselts= true;
+      }else {
+          waitForElement(logoSignOut);
+          verifyElement(logoSignOut);
+          click(logoSignOut);
+          waitForElement(logoSignOutYesButton);
+          verifyElement(logoSignOutYesButton);
+          click(logoSignOutYesButton);
+          waitForElement(logoMMH);
+          blruselts=verifyElement(logoMMH);
+      }
+
+        return blruselts;
     }
 
     public void enterUserName(String strUserName) {
         takeScreenshot(driver);
      waitForElement(txtUserName);
         enterValue(txtUserName, strUserName);
+
     }
 
     public void enterPassword(String strPassword) {
         waitForElement(txtPassword);
         enterValue(txtPassword, strPassword);
+
     }
 
     public void tapSignIn() {

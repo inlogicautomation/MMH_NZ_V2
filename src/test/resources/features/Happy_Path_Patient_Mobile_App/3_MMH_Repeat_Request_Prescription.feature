@@ -251,8 +251,8 @@ Feature: Repeat_Request_Prescription_Scenarios
     And I should see "<Repeat Prescription Status>" displayed under Service Tab
 
     Examples:
-      | Repeat Prescription Status                    | Card Details   |
-      | &RP_PATIENT_TO_COLLECT_SCRIPT_STATUS_PAYMENT& | &CARD_DETAILS& |
+      | Repeat Prescription Status              | Card Details   |
+      | &RP_SEND_SCRIPT_BY_POST_STATUS_PAYMENT& | &CARD_DETAILS& |
 
   @MOBILE @Mobile_RRP @HAPPY_PATH_MOBILE
   Scenario Outline: S8 - Patient Send Prescription Request - Send script to Pharmacy
