@@ -226,7 +226,7 @@ public class AppointmentSettingPage extends BasePage {
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntRuleARadioButton);
             waitForElement(elmntRuleARadioButton);
-            takeScreenshot(driver);
+//            takeScreenshot(driver);
             jsClick(elmntRuleARadioButton);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             System.out.println("Successfully Click RuleA Radio Button");
@@ -234,7 +234,7 @@ public class AppointmentSettingPage extends BasePage {
             waitForElement(elmntSaveButton);
             click(elmntSaveButton);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
-            takeScreenshot(driver);
+//            takeScreenshot(driver);
             waitForElement(txtSuccessfullyMessagePopup);
             blresult =verifyElement(txtSuccessfullyMessagePopup);
             System.out.println("Verify Changes saved successfully. Popup");
@@ -252,7 +252,7 @@ public class AppointmentSettingPage extends BasePage {
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntRuleBRadioButton);
             waitForElement(elmntRuleBRadioButton);
-            takeScreenshot(driver);
+//            takeScreenshot(driver);
             jsClick(elmntRuleBRadioButton);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             System.out.println("Successfully Click RuleB Radio Button");
@@ -274,7 +274,7 @@ public class AppointmentSettingPage extends BasePage {
         try {
             jsScrollIntoView(elmntRuleCRadioButton);
             waitForElement(elmntRuleCRadioButton);
-            takeScreenshot(driver);
+//            takeScreenshot(driver);
             jsClick(elmntRuleCRadioButton);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             System.out.println("Successfully Click RuleC Radio Button");

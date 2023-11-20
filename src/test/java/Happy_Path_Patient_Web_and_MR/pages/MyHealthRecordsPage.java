@@ -33,7 +33,7 @@ public class MyHealthRecordsPage extends BasePage {
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
-    @FindBy(how = How.XPATH, using = "//a[@class='menu-header ng-star-inserted']/following::span[text()='My Health Records']")
+    @FindBy(how = How.XPATH, using = "(//a[@class='menu-header ng-star-inserted']/following::span[text()='My Health Records']//following::mat-icon)[1]")
     protected WebElement btnMyHealthRecordsExpand;
 
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")
@@ -1401,7 +1401,7 @@ jsScrollIntoView(elmntClinicianNotes);
     public void clickMyHealthRecordsOptionFromMenuImmunisations(String strdata) {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
             waitForElement(btnMyHealthRecordsExpand);
-            click(btnMyHealthRecordsExpand);
+            jsClick(btnMyHealthRecordsExpand);
 //            waitForElementClickable(elmntImmunisations);
 //            jsClick(elmntImmunisations);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntFilterbyAllergiesDrop.replace("<<REPLACEMENT>>", strdata)));
@@ -2961,6 +2961,7 @@ jsScrollIntoView(elmntClinicianNotes);
             jsClick(elmntMobilePrescriptiondrop);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntAddPrescriptionDrop.replace("<<REPLACEMENT>>", strFamilyMember)));
             mouseClick(elmntEntriesFromHealthCentre);
+
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -3780,6 +3781,7 @@ jsScrollIntoView(elmntClinicianNotes);
 
     public void clickPrescriptionsSaveButton() {
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+
             waitForElement(btnPrescriptionsSave);
             click(btnPrescriptionsSave);
 
@@ -3948,17 +3950,20 @@ jsScrollIntoView(elmntClinicianNotes);
             waitAndClick(btnYes);
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                waitForSeconds(5);
             String strMedicationName = strCreatedRecord.concat(strExecutionID);
             WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
             jsClick(btnEdit);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            waitForSeconds(4);
+            waitForSeconds(2);
             jsScrollIntoView(btnMobilePrescriptionDelete);
             waitForElementClickable(btnMobilePrescriptionDelete);
             jsClick(btnMobilePrescriptionDelete);
-            waitForSeconds(4);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(2);
             waitForElement(btnYes);
             waitAndClick(btnYes);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         }
     }
 

@@ -3,9 +3,6 @@ package cap.utilities;
 import cap.helpers.Constants;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Created by codoid-pc on 6/5/2018.
- */
 
 /** The share driver util is used to determine which Execution Type run in your program receives a run time.Like BROWSER,MOBILEVIEW,MOBILE */
 public class SharedDriver {

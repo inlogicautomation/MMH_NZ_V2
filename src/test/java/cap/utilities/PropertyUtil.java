@@ -6,9 +6,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-/**
- * Created by codoid-pc on 2/27/2018.
- */
+
 
 /**Propertyutil is used to get property files into your system.*/
 public class PropertyUtil {

@@ -1749,4 +1749,22 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
 
     }
 
+    @And("I select Health Center {string} and I enable Patient Portal Mobile Apps Banner Message to yes")
+    public void iSelectHealthCenterAndIEnablePatientPortalMobileAppsBannerMessageToYes(String strHealthCentre) {
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.preScreeningPage.clickHealthCentreDropDown());
+        Assert.assertTrue(providerPageContainer.preScreeningPage.selectHealthCentre(strHealthCentre));
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.clickPatientMobileAppsBannerMessageYesRadioBtn());
+
+
+    }
+
+    @Then("I fill Patient Portal Mobile Apps Banner Heading {string} and Banner Message fields {string}")
+    public void iFillPatientPortalMobileAppsBannerHeadingAndBannerMessageFields(String strBannerHeading, String strBannerMssg) {
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.enterMobileAppsBannerHeading(TestDataUtil.getValue(strBannerHeading)));
+        Assert.assertTrue(providerPageContainer.appointmentMessagePage.enterWebBannerMessage(TestDataUtil.getValue(strBannerMssg)));
+        Assert.assertTrue(providerPageContainer.preScreeningPage.clickUpdateButton());
+
+
+    }
 }

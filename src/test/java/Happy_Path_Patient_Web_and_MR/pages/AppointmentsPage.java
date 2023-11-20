@@ -391,6 +391,10 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div/p[contains(text(),'Thank you. Your payment has been processed successfully.')]")
     protected WebElement elmntPaymentSuccess;
 
+    @FindBy(how = How.XPATH, using = "//a[text()='Next']")
+    protected WebElement btnNextA2A;
+
+
     protected String eleAppointmentSummaryDetails = new StringBuilder().append("//div/p[contains(text(),'")
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
@@ -530,6 +534,9 @@ public class AppointmentsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//h3[contains(text(),' Upcoming Appointments')])[2]")
     protected WebElement elmntMobileUpComingAppointmentHeader;
+
+    @FindBy(how = How.XPATH, using = "//span[@class='interstitial-close-button']")
+    protected WebElement elmntMobileUpComingAppointmentAdd;
 
     @FindBy(how = How.XPATH, using = "(//button[@class='mat-focus-indicator mat-tooltip-trigger btn mat-button mat-button-base']/span[text()=' Cancel Appointment'])[1]")
     protected WebElement elmntCancelAppointments;
@@ -792,12 +799,12 @@ public class AppointmentsPage extends BasePage {
     public boolean declineCovidPreScreeningPopup() {
         boolean blResult = false;
         try {
-            waitForSeconds(3);
+            waitForSeconds(5);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
          if (isElementDisplayed(elmntAppointmentPreScreening)) {
              System.out.println("Covid Prescreening popup is displayed");
              waitForElementDisappear(driver, By.xpath(elmntSpinner));
-             waitForElementClickable(elmntDeclineCovidPreScreening);
+             waitForElement(elmntDeclineCovidPreScreening);
              jsClick(elmntDeclineCovidPreScreening);
          }
          if (!isElementDisplayed(elmntAppointmentPreScreening)){
@@ -1601,6 +1608,12 @@ public class AppointmentsPage extends BasePage {
     public boolean verifyMobileCreatedAppointmentInFutureAppointmentTab(List<String> lstDetails) {
         boolean blResult = false;
         try {
+            waitForSeconds(5);
+            if (verifyElement(elmntMobileUpComingAppointmentAdd)) {
+                waitForElement(elmntMobileUpComingAppointmentAdd);
+            verifyElement(elmntMobileUpComingAppointmentAdd);
+            click(elmntMobileUpComingAppointmentAdd);
+        }
             if (verifyElement(clickMobileFutureAppointmentTab)) {
                 waitForElement(clickMobileFutureAppointmentTab);
                 click(clickMobileFutureAppointmentTab);
@@ -1608,6 +1621,7 @@ public class AppointmentsPage extends BasePage {
                 System.out.println("User Already Upcomming Appointments Page");
             }
             waitForSeconds(2);
+
             waitForElement(elmntMobileUpComingAppointmentHeader);
             String strDatePattern1 = "dd MMM yyyy";
             String strDate = TestDataUtil.getValue(lstDetails.get(2));
@@ -1960,8 +1974,11 @@ public class AppointmentsPage extends BasePage {
         boolean isVerifed = false;
         for (String strDate : listAllAppoinmentDatesInCard) {
             LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+            System.out.println(">>>localDate1"+localDate1);
             DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+            System.out.println(">>>>>dtf1"+dtf1);
             LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+            System.out.println(">>>>>"+inputDate1);
             boolean isDateCorrect = inputDate1.isAfter(localDate1);
             if (!isDateCorrect) {
                 isDateCorrect = inputDate1.isEqual(localDate1);
@@ -2003,15 +2020,23 @@ public class AppointmentsPage extends BasePage {
     public boolean verifyAllAppointmentDatesInCardForPast() {
         boolean isVerifed = false;
         for (String strDate : listAllAppoinmentDatesInCard) {
+
             LocalDate localDate1 = LocalDate.now(ZoneId.systemDefault());
+
             DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+
             LocalDate inputDate1 = LocalDate.parse(strDate, dtf1);
+
             boolean isDateCorrect = inputDate1.isBefore(localDate1);
+
             if (!isDateCorrect) {
                 isDateCorrect = inputDate1.isEqual(localDate1);
+
             }
             System.out.println("Card Date is Before Equal::" + isDateCorrect);
+
             isVerifed = isDateCorrect;
+
             if (!isDateCorrect) {
                 isVerifed = false;
             }
@@ -2476,7 +2501,7 @@ public class AppointmentsPage extends BasePage {
             waitForElement(btnSubmit);
             jsClick(btnSubmit);
             waitForSeconds(2);
-            driver.switchTo().defaultContent();
+//            driver.switchTo().defaultContent();
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -2601,7 +2626,7 @@ public class AppointmentsPage extends BasePage {
             String strDateMonth = strDateValue;
             String strTime = strSlotDate;
             System.out.println("CANCEL TIME : " + strTime);
-//            String strConvertedTime = strTime;
+            String strConvertedTime = strTime;
 //            strConvertedTime = "0" + strConvertedTime;
 //            String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
 //            System.out.println(strFinalOutDateTime);
@@ -2950,6 +2975,10 @@ public class AppointmentsPage extends BasePage {
     public boolean verifySucessMessage() {
         boolean blResult = false;
         try {
+            if (verifyElement(btnNextA2A)) {
+                waitForElement(btnNextA2A);
+                jsClick(btnNextA2A);
+            }
             driver.switchTo().defaultContent();
             waitForSeconds(2);
             waitForElement(elmntPaymentSuccess);
@@ -3034,7 +3063,16 @@ public class AppointmentsPage extends BasePage {
         return blResult;
     }
 
-    public void clickFirstVideoInvite() {
+//    public void clickFirstVideoInvite() {
+//        waitForElement(elmntFirstVideoInvite);
+//        click(elmntFirstVideoInvite);
+//        waitForElement(elmntVideoInviteDetailsGrid);
+//        waitAndClick(elmntVideoInviteDetailsGrid);
+//        waitForElement(elmntVideoIconMobileView);
+//        click(elmntVideoIconMobileView);
+//    }
+
+    public void clickFirstVideoInvite(String date) {
         waitForElement(elmntFirstVideoInvite);
         click(elmntFirstVideoInvite);
         waitForElement(elmntVideoInviteDetailsGrid);

@@ -222,8 +222,8 @@ Feature: Appointments
     When I navigate to the Video "<Appointments>" page Card View
     Then I should see all the all the video appointments invites sent from PMS Provider in grid view
 #   And I join Video Consultation by clicking Join now Icon in Video invitations Gid "<All_Icons>"
-    And I should see Appointment is not for today popup
+    And I should see Appointment is not for today popup "<Future>"
 
     Examples:
-      | Appointments      | All_Icons     |
+      | Appointments      | Future     |
       | Video invitations | &VIDEO_ICONS& |

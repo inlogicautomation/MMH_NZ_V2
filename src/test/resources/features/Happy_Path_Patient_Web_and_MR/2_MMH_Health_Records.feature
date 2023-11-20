@@ -132,7 +132,7 @@ Feature: My Health Records
       | Immunisations |
       | Immunisations |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @test
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Immunisations Details
 
     Given As a user I am on HomePage
@@ -178,7 +178,7 @@ Feature: My Health Records
     And I should see all the COVIDImmunisations Edit My Entries Medicine details in more info
       | &MY_ENTRIES_COVID_IMMUNISATIONS_DATA& | &EDIT_COVID_IMMUNISATIONS_INFO_ICON_DATA& | &EDIT_MOBILE_DATA_MY_ENTRIES_INSIDE_COVID_IMMUNISATIONS& |
     And I delete Created "<Record>" in CovidImmunisations page
-    And I navigate to the Homepage
+#    And I navigate to the Homepage
     Examples:
       | Tab           | Record                                     | AdditionalName    |
       | Immunisations | Comirnaty, COVID-19 mRNA (Pfizer-BioNTech) | &EDIT_ADDITIONAL& |
@@ -289,8 +289,8 @@ Feature: My Health Records
     Then I should see Patient Record is deleted
     And I navigate to the Homepage
     Examples:
-      | Tab             | Record        | Location        |
-      | Clinician Notes | &CLINIC_NAME& | &EDIT_LOCATION& |
+      | Tab             | Record        | Location          |
+      | Clinician Notes | &CLINIC_NAME& | &CLINIC_LOCATION& |
 
 #  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
 #  Scenario Template: User Successfully logs in to the MMH Portal.

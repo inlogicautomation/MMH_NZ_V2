@@ -882,7 +882,7 @@ public class ProviderHomePage extends BasePage {
             jsClick(elmtSecureMessaging);
             jsScrollIntoView(elmtRepeatScriptSettings);
             System.out.println("scrolled ");
-            takeScreenshot(driver);
+//            takeScreenshot(driver);
             if (!verifyElement(elmtRepeatScriptSettings)){
                 click(elmtSecureMessaging);
             }

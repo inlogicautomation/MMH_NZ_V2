@@ -28,9 +28,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by codoid-pc on 6/20/2018.
- */
+
 
 
 public class DriverUtil {
@@ -478,7 +476,7 @@ public class DriverUtil {
         options.setExperimentalOption("excludeSwitches",
                 Collections.singletonList("enable-automation"));
         options.setExperimentalOption("prefs", chromePrefs);
-        DesiredCapabilities capabilities = new DesiredCapabilities();
+      /*  DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("deviceName", "Galaxy M53");
         capabilities.setCapability("browser", "Chrome");
@@ -488,7 +486,7 @@ public class DriverUtil {
         capabilities.setCapability("autoDismissAlerts", true);
         capabilities.setCapability("unicodeKeyboard", true);
         capabilities.setCapability("resetKeyboard", true);
-
+*/
 
         DesiredCapabilities cap = DesiredCapabilities.chrome();
         cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);

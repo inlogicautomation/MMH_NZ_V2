@@ -51,9 +51,11 @@ public class BeatingTheBlues extends BasePage {
 
     public boolean clickViewsummary() {
         waitForSeconds(3);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         jsScrollIntoView(elmtBeatingTheBlues);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForElementClickable(elmtBeatingTheBlues);
-        jsClick(elmtBeatingTheBlues);
+        waitAndClick(elmtBeatingTheBlues);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(2);
         waitForElement(elmtBeatingTheBluesHeader);
