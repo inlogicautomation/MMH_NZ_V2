@@ -283,7 +283,7 @@ Feature: Messages
 
   #============================================================================
 
-  @WEB @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE1
+  @WEB @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -319,7 +319,7 @@ Feature: Messages
       | Reply                           |
       | &MOBILE_RESPONSE_REPLY_MESSAGE& |
 
-  @WEB @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE1
+  @WEB @HAPPY_PATH_MOBILE_RESPONSE @MESSAGES_MOBILE
   Scenario Template: S5-  User verifies the Patient Group Message
 
     Given As a user I am on HomePage and navigate to GroupMessage

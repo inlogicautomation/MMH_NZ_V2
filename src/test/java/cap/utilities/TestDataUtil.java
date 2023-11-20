@@ -10,10 +10,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by codoid-   pc on 30/12/2021.
- */
-
 /**Testdatautil is used to get TestData files, such as XML, into your system..*/
 public class TestDataUtil {
 

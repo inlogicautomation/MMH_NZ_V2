@@ -9,7 +9,7 @@ Feature: Health_Records
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB  @SANITY_PATH  @HEALTH_RECORDS1
+  @WEB  @SANITY_PATH  @HEALTH_RECORDS
   Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
     Given As a user I am on beta MMH login Page
     And I enter "<Email Address>" and "<Password>" For Beta

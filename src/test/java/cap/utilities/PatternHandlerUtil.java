@@ -3,9 +3,6 @@ package cap.utilities;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by codoid-pc on 6/20/2018.
- */
 public class PatternHandlerUtil {
 
     public static String getFirstMatch(String strPattern, String strValue) {

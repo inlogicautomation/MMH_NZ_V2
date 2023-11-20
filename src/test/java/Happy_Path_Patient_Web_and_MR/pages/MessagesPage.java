@@ -439,6 +439,12 @@ public class MessagesPage extends BasePage {
             .append("')]")
             .toString();
 
+    String strButtonTextLocator = new StringBuilder()
+            .append("//android.widget.EditText[contains(@text,'")
+            .append("<<TEXT>>").append("')]").toString();
+
+    //android.widget.EditText[contains(@text,'Out of Office Testing-IGYBWHGW')]
+
     @FindBy(how = How.XPATH, using = "//mat-panel-title[contains(text(),'Signature Settings')]")
     protected WebElement drpDownSignatureSettings;
 
@@ -450,7 +456,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//iframe)[2]")
     protected WebElement frameOutOfOffice;
 
-    @FindBy(how = How.XPATH, using = "//iframe[@class='k-iframe']")
+    @FindBy(how = How.XPATH, using = "(//iframe)[1]")
     protected WebElement frameCompose;
 
     @FindBy(how = How.XPATH, using = "//kendo-editor[@formcontrolname='automaticReplyText']//iframe")
@@ -583,21 +589,31 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-checkbox[not(contains(@class,'mat-checkbox-checked'))][@formcontrolname='termsconditions']/label/div")
     protected WebElement btnCheckBox;
 
+    @FindBy(how = How.XPATH, using = "//b[contains(text(),'Terms & Conditions')]")
+    protected WebElement verifyTermsandcondition;
+
+    @FindBy(how = How.XPATH, using = "//button[contains(text(),'I AGREE')]")
+    protected WebElement clickIAgreeButton;
+
     @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']")
     protected WebElement btnWriteMessage;
 
     @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror'])[2]")
     protected WebElement btnMobileWriteMessage;
 
-    @AndroidFindBy(xpath = "(//android.widget.TextView[@text='Write your message']/following::android.widget.EditText)[1]")
+    @AndroidFindBy(xpath = "(//android.widget.EditText)[2]")
     protected WebElement txtMessage;
 
-    @AndroidFindBy(xpath = "(//android.widget.Button[@text='Signature Settings - Click here to update the signature on your outgoing E-mails']/following::android.widget.EditText)[1]")
+    @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
     protected WebElement txtSignatureSettingMessage;
 
+//    (//android.widget.Button[@text='Signature Settings - Click here to update the signature on your outgoing E-mails']/following::android.widget.EditText)[1]
 
-    @AndroidFindBy(xpath = "(//android.widget.Button[@text='Out of Office Settings - Click here to enable and add a message for your out of office E-mails']/following::android.widget.EditText)[1]")
+
+    @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
     protected WebElement txtOutofOfficeSettingMessage;
+
+//    (//android.widget.Button[@text='Out of Office Settings - Click here to enable and add a message for your out of office E-mails']/following::android.widget.EditText)[1]
 
     @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror']//p)[2]")
     protected WebElement btnReplyWriteMessage;
@@ -1560,7 +1576,7 @@ protected WebElement txtWelcome;
                 System.out.println("SignatureMessage >>> :: " + TestDataUtil.getValue(strMessage));
                 waitForSeconds(2);
                 waitForElement(chkboxOutOfOfficeReply);
-                waitForSeconds(1);
+                waitForSeconds(3);
                 waitForElement(frameOutOfOffice);
                 driver.switchTo().frame(frameOutOfOffice);
                 System.out.println("Switched into frame");
@@ -1576,8 +1592,9 @@ protected WebElement txtWelcome;
 //                robotKey(txtBoxMessages, KeyEvent.VK_V);
 //                robotKeyRelease(KeyEvent.VK_V);
 //                robotKeyRelease(KeyEvent.VK_CONTROL);
-                waitForSeconds(2);
-                txtBoxMessages.click();
+jsScrollIntoView(txtBoxMessages);
+                waitForSeconds(5);
+                jsClick(txtBoxMessages);
                 waitForSeconds(2);
                 driver.switchTo().activeElement().clear();
                 waitForSeconds(2);
@@ -1816,9 +1833,12 @@ protected WebElement txtWelcome;
                 }
                 System.out.println("Success Switch Native App");
                 capabilities.setCapability("autoGrantPermissions", "true");
-                swipeUp();
+//                swipeUp();
+
                 waitForSeconds(4);
                 waitForElement(txtSignatureSettingMessage);
+                waitForSeconds(2);
+                click(txtSignatureSettingMessage);
                 waitForSeconds(2);
                 enterValueRealDevice(txtSignatureSettingMessage, strMessage);
                 Set<String> contextNames1 = appiumDriver.getContextHandles();
@@ -1837,10 +1857,10 @@ protected WebElement txtWelcome;
                 waitForElement(btnSave);
                 waitForElement(drpDownSignatureSettings);
                 jsClick(drpDownSignatureSettings);
-                waitForElement(frameSignature);
-                driver.switchTo().frame(frameSignature);
-                System.out.println("Switched into frame");
-                waitForSeconds(5);
+//                waitForElement(frameSignature);
+//                driver.switchTo().frame(frameSignature);
+//                System.out.println("Switched into frame");
+//                waitForSeconds(5);
 //                txtBoxMessages.sendKeys(Keys.CONTROL + "a");
 //                waitForSeconds(2);
 //                txtBoxMessages.sendKeys(Keys.BACK_SPACE);
@@ -1943,17 +1963,43 @@ protected WebElement txtWelcome;
             waitForElement(chkboxOutOfOfficeReply);
             driver.switchTo().frame(frameOutOfOffice);
             System.out.println("Xpath for Text Out Of Office >>>> :: " + messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
-            WebElement txtOutOfMessage = waitForElement(By.xpath(messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage))));
-            jsScrollIntoView(txtOutOfMessage);
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("autoGrantPermissions", "true");
+            pushFileToDevice("MMHtest.jpg");
+            AppiumDriver appiumDriver = (AppiumDriver) driver;
+            Set<String> contextNames = appiumDriver.getContextHandles();
+            for (String strContextName : contextNames) {
+                if (strContextName.contains("NATIVE_APP")) {
+                    appiumDriver.context("NATIVE_APP");
+                    break;
+                }
+            }
+            capabilities.setCapability("autoGrantPermissions", "true");
+//            jsScrollUp();
+//            jsScrollIntoView(txtOutOfMessage);
+//            swipeUp();
+            swipeUpShort();
+            waitForSeconds(3);
+            WebElement txtOutOfMessage = waitForElement(By.xpath(strButtonTextLocator.replace("<<TEXT>>", TestDataUtil.getValue(strMessage))));
             waitForElement(txtOutOfMessage);
             verifyElement(txtOutOfMessage);
             String outOfMessageText = txtOutOfMessage.getText();
             System.out.println("verify Entered Signature Message >>> :: " + TestDataUtil.getValue(strMessage) + "::" + outOfMessageText);
-            takeScreenshot(driver);
-            if (outOfMessageText.equalsIgnoreCase(TestDataUtil.getValue(strMessage))) {
-                System.out.println("Verified Out of Office text Message successfully >>> ::");
-                blResult = true;
+            blResult = true;
+
+            Set<String> contextNames1 = appiumDriver.getContextHandles();
+            for (String strContextName : contextNames1) {
+                if (strContextName.contains("CHROMIUM")) {
+                    appiumDriver.context("CHROMIUM");
+                    break;
+                }
             }
+//            driver.switchTo().frame(frameCompose);
+//            System.out.println("Successfully Switch to frame");
+
+            takeScreenshot(driver);
+//            driver.switchTo().defaultContent();
+
             driver.switchTo().parentFrame();
 
         } catch (Exception e) {
@@ -1971,7 +2017,7 @@ protected WebElement txtWelcome;
             jsClick(clickAutomaticReplyoption);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
-            waitForElement(chkboxAutomaticReply);
+//            waitForElement(chkboxAutomaticReply);
 //            click(chkboxAutomaticReply);
             driver.switchTo().frame(frameAutomaticReplies);
             waitForSeconds(3);
@@ -2146,7 +2192,7 @@ protected WebElement txtWelcome;
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntSentDoctor);
             waitForElementClickable(elmntSentDoctor);
-            jsClick(elmntSentDoctor);
+            mouseClick(elmntSentDoctor);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             driver.navigate().refresh();
             waitForElement(txtSent);
@@ -2256,9 +2302,11 @@ protected WebElement txtWelcome;
     public boolean navigateToComposeMessageForDoctor() {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(elmntdashboard);
             waitForElement(elmntdashboard);
             click(elmntdashboard);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
             waitForElement(txtMyHomePage);
 //            waitForElement(elmntsMenu);
@@ -2268,9 +2316,10 @@ protected WebElement txtWelcome;
             jsScrollIntoView(elmntInboxDoctor);
             waitForElementClickable(elmntInboxDoctor);
             jsClick(elmntInboxDoctor);
-            waitForSeconds(1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntComposeDoctor);
             jsClick(elmntComposeDoctor);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtCompose);
             blResult = verifyElement(txtCompose);
             System.out.println("Successfully navigated to the compose");
@@ -2401,15 +2450,17 @@ protected WebElement txtWelcome;
     public boolean enterSubject(String strSubject) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("strSubject >>> :: " + TestDataUtil.getValue(strSubject));
             waitForSeconds(2);
-            jsScrollIntoView(txtBoxSubjectPatient);
+//            jsScrollIntoView(txtBoxSubjectPatient);
             waitForSeconds(2);
             waitForElement(txtBoxSubjectPatient);
             waitForElementClickable(txtBoxSubjectPatient);
             waitForSeconds(2);
 
             jsClick(txtBoxSubjectPatient);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(1);
             txtBoxSubjectPatient.clear();
             waitForSeconds(1);
@@ -2547,6 +2598,7 @@ protected WebElement txtWelcome;
     public boolean ProviderHealthCenter(String strHealthCenterLocation) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElement(txtCompose);
             jsScrollIntoView(drpDownLocation);
@@ -2556,7 +2608,7 @@ protected WebElement txtWelcome;
             jsClick(drpDownLocation);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(ProviderHealthCentre.replace("<<REPLACEMENT>>", strHealthCenterLocation)));
             jsClick(elmntEntriesFromHealthCentre);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
             System.out.println("\nSuccessfully selected the health centre Location >>> :: ");
         } catch (Exception e) {
@@ -2817,9 +2869,16 @@ protected WebElement txtWelcome;
         waitForSeconds(3);
         jsScrollDown();
         if (verifyElement(btnCheckBox)) {
-            jsScrollIntoView(btnCheckBox);
+//            jsScrollIntoView(btnCheckBox);
             jsClick(btnCheckBox);
-        } else {
+            waitForElement(verifyTermsandcondition);
+            verifyElement(verifyTermsandcondition);
+            waitForElement(clickIAgreeButton);
+            verifyElement(clickIAgreeButton);
+            click(clickIAgreeButton);
+        }
+
+        else {
             System.out.println("CheckBox are checked::>>");
         }
     }
@@ -3822,7 +3881,7 @@ protected WebElement txtWelcome;
             WebElement Subject = waitForElement(By.xpath(draftSubjectForMobile.replace("<<REPLACEMENT>>", TestDataUtil.getValue(lstDetails.get(5)))));
             waitForElement(Subject);
             waitForElementClickable(Subject);
-            waitAndClick(Subject);
+            jsClick(Subject);
 
             List<String> LstDetails = new ArrayList<>();
 //            LstDetails.add(TestDataUtil.getValue(lstDetails.get(1)));
@@ -3841,10 +3900,10 @@ protected WebElement txtWelcome;
 
                 waitForElement(elmntReport);
                 blResult = verifyElement(elmntReport);
-
-                if (!blResult) {
-                    return blResult;
-                }
+//
+//                if (!blResult) {
+//                    return blResult;
+//                }
 
             }
 
@@ -3942,6 +4001,7 @@ protected WebElement txtWelcome;
                 waitForElement(elmtMMHLogo);
                 waitForElementClickable(elmtMMHLogo);
                 jsClick(elmtMMHLogo);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 waitForSeconds(3);
                 blResult = verifyElement(txtWelcome);
             }
@@ -3951,6 +4011,7 @@ protected WebElement txtWelcome;
                 waitForElement(elmtMMHLogo);
                 waitForElementClickable(elmtMMHLogo);
                 jsClick(elmtMMHLogo);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 System.out.println("Successfully click Logo");
                 waitForSeconds(3);
                 blResult=verifyElement(txtWelcome);

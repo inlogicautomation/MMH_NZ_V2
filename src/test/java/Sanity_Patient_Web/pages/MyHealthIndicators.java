@@ -2419,6 +2419,7 @@ public class MyHealthIndicators extends BasePage {
 
     public boolean clickHDLYesButton() {
         waitForSeconds(3);
+        waitForElement(btnBloodPressureyes);
         waitForElementClickable(btnBloodPressureyes);
         jsClick(btnBloodPressureyes);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));

@@ -74,7 +74,7 @@ public class HomePage extends BasePage {
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Harry Harry!')]"),
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Autochrisc1!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Christopher Michael!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Autochrisc1!')]")
 
     })
     protected WebElement txtPatientWelcomePage;
@@ -229,12 +229,16 @@ public class HomePage extends BasePage {
             }
         }
         if (WindowsCount == 1) {
-            if (verifyElement(txtPatientWelcomePage)) {
+            visit(TestDataUtil.getValue("&URL&"));
+            System.out.println("Enter Windows 1 ");
+            waitForSeconds(3);
+            if (isElementDisplayed(txtPatientWelcomePage)) {
                 driver.manage().deleteAllCookies();
                 System.out.println("User here in Provider home page");
                 takeScreenshot(driver);
             }
             else{
+                waitForSeconds(3);
                 visit(TestDataUtil.getValue("&URL&"));
                 driver.manage().deleteAllCookies();
             }
@@ -434,12 +438,15 @@ public boolean veriflyTeamscondition(){
         boolean blResult = false;
         try {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForSeconds(3);
                 jsScrollIntoView(elmntDashboard);
+                waitForElement(elmntDashboard);
                 verifyElement(elmntDashboard);
                 waitForSeconds(3);
                 waitForElement(elmntDashboard);
                 jsClick(elmntDashboard);
-//            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
                 if (verifyElement(txtWelcome)) {
                     verifyElement(elmntDashboard);
                     waitForElementClickable(elmntDashboard);
@@ -614,6 +621,7 @@ public boolean veriflyTeamscondition(){
     }
 
     public boolean clickDashBoardForMobile() {
+        System.out.println("Enetr");
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(5);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -636,7 +644,7 @@ public boolean veriflyTeamscondition(){
         jsScrollIntoView(elmntDashboard);
         waitForElement(elmntDashboard);
         jsClick(elmntDashboard);
-if (verifyElement(txtPatientWelcomePage)) {
+if (isElementDisplayed(txtPatientWelcomePage)) {
     waitForElementDisappear(driver, By.xpath(elmntSpinner));
     jsScrollIntoView(elmntDashboard);
     waitForElement(elmntDashboard);
@@ -648,7 +656,7 @@ if (verifyElement(txtPatientWelcomePage)) {
     waitForElement(elmntVerifyHomePage);
     isVerified = verifyElement(elmntVerifyHomePage);
 }
-if(!verifyElement(txtPatientWelcomePage)){
+if(!isElementDisplayed(txtPatientWelcomePage)){
     focusWindow(2);
     waitForElementDisappear(driver, By.xpath(elmntSpinner));
     jsScrollIntoView(elmntDashboard);

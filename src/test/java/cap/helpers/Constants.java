@@ -3,9 +3,7 @@ package cap.helpers;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
-/**
- * Created by codoid-pc on 6/20/2018.
- */
+
 public class Constants {
 
     public static final String ENV_VARIABLE_EXECUTION_TYPE = "execution_type";

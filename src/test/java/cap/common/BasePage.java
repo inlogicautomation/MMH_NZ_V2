@@ -710,6 +710,22 @@ public class BasePage {
 
 
     }
+
+    public void swipeUpShort() {
+        Dimension size = driver.manage().window().getSize();
+        System.out.println("Swipe Up");
+
+        int startx = (int) (size.width * 0.2);
+        int starty = (int) (size.height * 0.6);
+
+        int endx = (int) (size.width * 0.2);
+        int endy = (int) (size.height * 0.2);
+
+        TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
+        touchAction.press(PointOption.point(startx, starty))
+                .waitAction(waitOptions(Duration.ofSeconds(1)))
+                .moveTo(PointOption.point(endx, endy)).release().perform();
+    }
     public void swipeUp() {
         Dimension size = driver.manage().window().getSize();
         System.out.println(size);

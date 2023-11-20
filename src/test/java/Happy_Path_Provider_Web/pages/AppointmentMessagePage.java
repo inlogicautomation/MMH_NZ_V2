@@ -33,11 +33,18 @@ public class AppointmentMessagePage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='easyBookingBanner']//following::input)[4]")
     protected WebElement elmntEnableWebBannerMessage;
+
+    @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='easyBookingBanner']//following::input)[7]")
+    protected WebElement elmntEnableMobileAppsBannerMessage;
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='easyBookingHeading']")
     protected WebElement elmntBannerHeading;
 
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='WebAppointmentBannerHeading']")
     protected WebElement elmntWebBannerHeading;
+
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='mobileAppointmentBannerHeading']")
+    protected WebElement elmntMobileAppsBannerHeading;
+
 
     @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='easyBookingBanner']//following::input)[5]")
     protected WebElement elmntDisableWebBannerMessage;
@@ -48,11 +55,17 @@ public class AppointmentMessagePage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//iframe[@class='k-iframe'])[2]")
     protected WebElement frameWebBannerMessage;
 
+    @FindBy(how = How.XPATH, using = "(//iframe[@class='k-iframe'])[3]")
+    protected WebElement frameMobileAppsBannerMessage;
+
     @FindBy(how = How.XPATH, using = "//kendo-editor[@formcontrolname='easyBookingBannerMessage']/descendant::div")
     protected WebElement elmntBannerMessage;
 
     @FindBy(how = How.XPATH, using = "//kendo-editor[@formcontrolname='webAppointmentBannerMessage']")
     protected WebElement elmntWebBannerMessage;
+    @FindBy(how = How.XPATH, using = "//kendo-editor[@formcontrolname='mobileAppointmentBannerMessage']")
+    protected WebElement elmntMobileAppsBannerMessage;
+
 
     @FindBy(how = How.XPATH, using = "(//div[@class='ProseMirror']//p)[1]")
     protected WebElement elmntWriteBannerMessage;
@@ -331,7 +344,7 @@ public class AppointmentMessagePage extends BasePage {
         boolean blresult = false;
         try {
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
-            WebElement elmntBannerHeading = waitForElement(By.xpath(elmntVerifyBannerHeading.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strHeading.concat(strExecutionID)))));
+            WebElement elmntBannerHeading = driver.findElement(By.xpath(elmntVerifyBannerHeading.replaceAll("<<REPLACEMENT>>", TestDataUtil.getValue(strHeading.concat(strExecutionID)))));
             blresult=verifyElement(elmntBannerHeading);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
         } catch (Exception e) {
@@ -373,6 +386,23 @@ public class AppointmentMessagePage extends BasePage {
         return blresult;
     }
 
+    public boolean clickPatientMobileAppsBannerMessageYesRadioBtn() {
+        boolean blresult = false;
+        try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            jsScrollIntoView(elmntEnableMobileAppsBannerMessage);
+            waitForElement(elmntEnableMobileAppsBannerMessage);
+            jsClick(elmntEnableMobileAppsBannerMessage);
+//            takeScreenshot(driver);
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            blresult = true;
+        } catch (Exception e) {
+            System.out.println("Failed To click Patient Web Banner Message Yes Radio Button >>> :: ");
+            e.printStackTrace();
+        }
+        return blresult;
+    }
+
     public boolean enterWebBannerHeading(String strHeading) {
         boolean blresult = false;
         try {
@@ -392,13 +422,36 @@ public class AppointmentMessagePage extends BasePage {
         return blresult;
     }
 
+    public boolean enterMobileAppsBannerHeading(String strHeading) {
+        boolean blresult = false;
+        try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            jsScrollIntoView(elmntMobileAppsBannerHeading);
+            waitForElement(elmntMobileAppsBannerHeading);
+            click(elmntMobileAppsBannerHeading);
+            waitForSeconds(2);
+            waitForElement(elmntMobileAppsBannerHeading);
+            elmntMobileAppsBannerHeading.click();
+            waitForSeconds(2);
+            elmntMobileAppsBannerHeading.clear();
+            waitForSeconds(2);
+            elmntMobileAppsBannerHeading.sendKeys(strHeading.concat(strExecutionID));
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            blresult = true;
+        } catch (Exception e) {
+            System.out.println("Failed To Enter Web Banner Heading Text Box >>> :: ");
+            e.printStackTrace();
+        }
+        return blresult;
+    }
+
     public boolean enterWebBannerMessage(String strBannerMssg) {
         boolean blresult = false;
         try {
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             jsScrollIntoView(elmntWebBannerMessage);
             waitForElement(elmntWebBannerMessage);
-            driver.switchTo().frame(frameWebBannerMessage);
+            driver.switchTo().frame(frameMobileAppsBannerMessage);
             waitForSeconds(2);
             click(elmntWriteWebBannerMessage);
             waitForSeconds(2);
@@ -416,6 +469,32 @@ public class AppointmentMessagePage extends BasePage {
         }
         return blresult;
     }
+
+    public boolean enterMobileAppsBannerMessage(String strBannerMssg) {
+        boolean blresult = false;
+        try {
+            waitForElementDisappear(driver,By.xpath(elmntSpinner));
+            jsScrollIntoView(elmntMobileAppsBannerHeading);
+            waitForElement(elmntMobileAppsBannerHeading);
+            driver.switchTo().frame(frameWebBannerMessage);
+            waitForSeconds(2);
+            click(elmntMobileAppsBannerMessage);
+            waitForSeconds(2);
+            driver.switchTo().activeElement().clear();
+            waitForSeconds(2);
+            elmntMobileAppsBannerMessage.click();
+            waitForSeconds(2);
+            driver.switchTo().activeElement().sendKeys(strBannerMssg.concat(strExecutionID));
+            waitForSeconds(2);
+            driver.switchTo().defaultContent();
+            blresult = true;
+        } catch (Exception e) {
+            System.out.println("Failed To Enter Web Banner Heading Text Box >>> :: ");
+            e.printStackTrace();
+        }
+        return blresult;
+    }
+
 
     public boolean verifyWebBannerHeading(String strHeading) {
         boolean blresult = false;
