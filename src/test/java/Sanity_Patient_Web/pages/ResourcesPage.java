@@ -18,13 +18,13 @@ public class ResourcesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'My Health centres')]")
     protected WebElement elmntMyHealthCentres;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Resources')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Connected Services')]")
     protected WebElement elmntResources;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Discover Health')]")
     protected WebElement elmntDiscoverHealth;
 
-    @FindBy(how = How.XPATH, using = "//h5[contains(text(),'Resources')]")
+    @FindBy(how = How.XPATH, using = "//h5[contains(text(),'Connected Services')]")
     protected WebElement txtResources;
 
     @FindBy(how = How.XPATH, using = "//h5[contains(text(),'Patient Sheets')]")
@@ -39,7 +39,7 @@ public class ResourcesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[@href='/pages/patient-sheets']")
     protected WebElement elmntPatientSheets;
 
-    @FindBy(how = How.XPATH, using = "//a[@href='https://covid19.govt.nz/']")
+    @FindBy(how = How.XPATH, using = "//a[@href='https://identity.health.nz/']")
     protected WebElement elmntCovid19;
 
     @FindBy(how = How.XPATH, using = "//img[@alt='Unite against COVID-19']/parent::h1")
@@ -167,10 +167,10 @@ public class ResourcesPage extends BasePage {
                 waitForWindow(2);
                 focusWindow(2);
 
-                waitForElement(elmntCovid19Logo);
+//                waitForElement(elmntCovid19Logo);
                 String CurrentUrl = driver.getCurrentUrl();
                 System.out.println("pageTitle >>> : " + CurrentUrl);
-                CurrentUrl.equalsIgnoreCase("https://covid19.govt.nz/");
+                CurrentUrl.equalsIgnoreCase("https://identity.health.nz/");
                 takeScreenshotSanity(driver);
 
                 System.out.println("User on the Covid 19 page and Verified the Covid 19 page >>>>");

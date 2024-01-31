@@ -141,7 +141,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Message Settings')]")
     protected WebElement txtDoctorMessageSetting;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Communications']")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Communications')]")
     protected WebElement elmntPraticeMenuDoctor;
 
 
@@ -453,7 +453,7 @@ public class MessagesPage extends BasePage {
     protected WebElement frameSignature;
 
 
-    @FindBy(how = How.XPATH, using = "(//iframe)[2]")
+    @FindBy(how = How.XPATH, using = "(//iframe)[1]")
     protected WebElement frameOutOfOffice;
 
     @FindBy(how = How.XPATH, using = "(//iframe)[1]")
@@ -663,7 +663,7 @@ public class MessagesPage extends BasePage {
     @FindBy(xpath = "//android.widget.TextView[@text='Files']")
     protected WebElement FileIcon;
 
-    @AndroidFindBy(xpath = "(//android.widget.ImageView[@resource-id='android:id/icon'])[3]")
+    @AndroidFindBy(xpath = "(//android.widget.ImageView)[5]")
     protected WebElement MediaIcon;
 
     @AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc='Show roots']")
@@ -898,8 +898,8 @@ public class MessagesPage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Timprefer!')]"),
-            @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Steve!')]"),
-            @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp2White!')]")
+            @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome')]//span[contains(text(),'Barry')]"),
+            @FindBy(how = How.XPATH,using = "//h1[contains(text(),'Welcome')]//span[contains(text(),'Gp2White')]")
     })
 protected WebElement txtWelcome;
 
@@ -1594,7 +1594,7 @@ protected WebElement txtWelcome;
 //                robotKeyRelease(KeyEvent.VK_CONTROL);
 jsScrollIntoView(txtBoxMessages);
                 waitForSeconds(5);
-                jsClick(txtBoxMessages);
+                txtBoxMessages.click();
                 waitForSeconds(2);
                 driver.switchTo().activeElement().clear();
                 waitForSeconds(2);
@@ -2009,6 +2009,59 @@ jsScrollIntoView(txtBoxMessages);
         return blResult;
     }
 
+    public boolean verifyWebEnteredOutOfOfficeMessage(String strMessage) {
+        boolean blResult = false;
+        try {
+            waitForSeconds(2);
+            waitForElement(chkboxOutOfOfficeReply);
+            driver.switchTo().frame(frameOutOfOffice);
+            System.out.println("Xpath for Text Out Of Office >>>> :: " + messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("autoGrantPermissions", "true");
+            pushFileToDevice("MMHtest.jpg");
+            AppiumDriver appiumDriver = (AppiumDriver) driver;
+            Set<String> contextNames = appiumDriver.getContextHandles();
+            for (String strContextName : contextNames) {
+                if (strContextName.contains("NATIVE_APP")) {
+                    appiumDriver.context("NATIVE_APP");
+                    break;
+                }
+            }
+            capabilities.setCapability("autoGrantPermissions", "true");
+//            jsScrollUp();
+//            jsScrollIntoView(txtOutOfMessage);
+//            swipeUp();
+            swipeUpShort();
+            waitForSeconds(3);
+            WebElement txtOutOfMessage = waitForElement(By.xpath(strButtonTextLocator.replace("<<TEXT>>", TestDataUtil.getValue(strMessage))));
+            waitForElement(txtOutOfMessage);
+            verifyElement(txtOutOfMessage);
+            String outOfMessageText = txtOutOfMessage.getText();
+            System.out.println("verify Entered Signature Message >>> :: " + TestDataUtil.getValue(strMessage) + "::" + outOfMessageText);
+            blResult = true;
+
+            Set<String> contextNames1 = appiumDriver.getContextHandles();
+            for (String strContextName : contextNames1) {
+                if (strContextName.contains("CHROMIUM")) {
+                    appiumDriver.context("CHROMIUM");
+                    break;
+                }
+            }
+//            driver.switchTo().frame(frameCompose);
+//            System.out.println("Successfully Switch to frame");
+
+            takeScreenshot(driver);
+//            driver.switchTo().defaultContent();
+
+            driver.switchTo().parentFrame();
+
+        } catch (Exception e) {
+            System.out.println("Failed to verify Out Of Office text message");
+            e.printStackTrace();
+        }
+        return blResult;
+    }
+
     public boolean verifyEnteredAutomaticRepliesMessage(String strMessage) {
         boolean blResult = false;
         try {
@@ -2308,13 +2361,13 @@ jsScrollIntoView(txtBoxMessages);
             click(elmntdashboard);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(3);
-            waitForElement(txtMyHomePage);
+//            waitForElement(txtMyHomePage);
 //            waitForElement(elmntsMenu);
 //            waitForElement(elmntPraticeMenuDoctor);
 //            jsClick(elmntPraticeMenuDoctor);
             waitForSeconds(3);
             jsScrollIntoView(elmntInboxDoctor);
-            waitForElementClickable(elmntInboxDoctor);
+         waitForElement(elmntInboxDoctor);
             jsClick(elmntInboxDoctor);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntComposeDoctor);
@@ -2375,8 +2428,10 @@ jsScrollIntoView(txtBoxMessages);
     public boolean selectServiceName(String strServiceName) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(5);
             waitForElement(txtCompose);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(drpDownServiceName);
             jsClick(drpDownServiceName);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -2387,6 +2442,7 @@ jsScrollIntoView(txtBoxMessages);
             mouseClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
            blResult=verifyElement(drpDownServiceName);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         } catch (Exception e) {
             System.out.println("\nFailed to select the sService Name >>> :: ");
             e.printStackTrace();
@@ -2397,17 +2453,21 @@ jsScrollIntoView(txtBoxMessages);
     public boolean selectRole(String strRole) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            waitForSeconds(5);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(5);
             waitForElement(txtCompose);
-            waitForElementClickable(drpDownRole);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElement(drpDownRole);
             jsClick(drpDownRole);
-            waitForSeconds(1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+
             //            Select healthCentre = new Select(driver.findElement(By.xpath("//mat-select[@formcontrolname='role']")));
 //            healthCentre.selectByVisibleText(strRole);
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntRolebyDrop.replace("<<REPLACEMENT>>", strRole)));
             jsClick(elmntEntriesFromHealthCentre);
             blResult = verifyElement(drpDownRole);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
         } catch (Exception e) {
             System.out.println("\nFailed to select the Role >>> :: ");
             e.printStackTrace();
@@ -2417,9 +2477,11 @@ jsScrollIntoView(txtBoxMessages);
 
     public boolean selectTo(String strTo) {
         boolean blResult = false;
-        try {
+        try { waitForSeconds(5);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             waitForElement(txtCompose);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(txtBoxTo);
             click(txtBoxTo);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -2437,6 +2499,7 @@ jsScrollIntoView(txtBoxMessages);
 //            waitForElementClickable(patient);
 //            click(patient);
 //            waitForSeconds(1);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
             System.out.println("\nSuccessfully Entered To>>> :: ");
         } catch (Exception e) {
@@ -2479,15 +2542,19 @@ jsScrollIntoView(txtBoxMessages);
     public boolean enterSubjectDoctor(String strSubject) {
         boolean blResult = false;
         try {
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             System.out.println("strSubject >>> :: " + TestDataUtil.getValue(strSubject));
-            waitForSeconds(2);
+            waitForSeconds(5);
             waitForElement(txtBoxSubjectPatient);
             waitForElementClickable(txtBoxSubjectPatient);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             txtBoxSubjectPatient.clear();
             waitForSeconds(2);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            txtBoxSubject.click();
 //            waitForSeconds(1);
             txtBoxSubjectPatient.sendKeys(TestDataUtil.getValue(strSubject));
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             takeScreenshot(driver);
             waitForSeconds(3);
             blResult = true;
@@ -2503,14 +2570,16 @@ jsScrollIntoView(txtBoxMessages);
     public boolean enableTermAndConditions() {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(5);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtCompose);
             waitForElementClickable(chkBoxTermsAndCondition);
             if (!chkBoxTermsAndCondition.isSelected()) {
                 click(chkBoxTermsAndCondition);
             }
-            waitForSeconds(1);
 
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult=true;
             System.out.println("\nSuccessfully Enabled the terms and conditions >>> :: ");} catch (Exception e) {
             System.out.println("\nFailed to Enable the terms and conditions >>> :: ");
@@ -2548,13 +2617,16 @@ jsScrollIntoView(txtBoxMessages);
     public boolean enterBodyMessage(String strBodyMessage) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(5);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtCompose);
 //            driver.switchTo().frame(frameComposeForDoctor);
             waitForSeconds(2);
             jsScrollUp();
             waitForElementClickable(txtBoxMessageBody);
             txtBoxMessageBody.click();
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(2);
             driver.switchTo().activeElement().clear();
             waitForSeconds(2);
@@ -2563,6 +2635,7 @@ jsScrollIntoView(txtBoxMessages);
             driver.switchTo().activeElement().sendKeys(strBodyMessage);
             takeScreenshot(driver);
             waitForSeconds(3);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
 //            driver.switchTo().parentFrame();
 
             blResult = true;
@@ -2577,15 +2650,17 @@ jsScrollIntoView(txtBoxMessages);
     public boolean selectHealthCenterLocation(String strHealthCenterLocation) {
         boolean blResult = false;
         try {
-            waitForSeconds(2);
+            waitForSeconds(5);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtCompose);
             waitForElementClickable(ProviderLocation);
 //            Select healthCentre = new Select(driver.findElement(By.xpath("//mat-select[@formcontrolname='healthCenter']")));
 //            healthCentre.selectByVisibleText(strHealthCenterLocation);
             jsClick(ProviderLocation);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(ProviderHealthCentre.replace("<<REPLACEMENT>>", strHealthCenterLocation)));
             jsClick(elmntEntriesFromHealthCentre);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
             System.out.println("\nSuccessfully selected the health centre Location >>> :: ");
         } catch (Exception e) {

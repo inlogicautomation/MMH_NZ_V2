@@ -13,6 +13,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static cap.utilities.SharedDriver.strExecutionID;
+
 public class AppointmentsScreen extends BaseScreen {
     public static String strTimeSlot;
 
@@ -277,6 +279,14 @@ public class AppointmentsScreen extends BaseScreen {
             .append("//android.widget.Image/preceding-sibling::android.view.View/android.widget.TextView[@text='")
             .append("<<LOCATION>>").append("']").toString();
 
+    String VeriflyLocation = new StringBuilder()
+            .append("//android.widget.TextView[@text='")
+            .append("<<LOCATION>>").append("']").toString();
+
+
+    String strBannerMessage = new StringBuilder()
+            .append("//android.view.View[@text='")
+            .append("<<BANNERMESSAGE>>").append("']").toString();
     String strLocationLocatorIOS = new StringBuilder()
             .append("//XCUIElementTypeImage[@name='cart']/preceding::XCUIElementTypeStaticText[@name='")
             .append("<<LOCATION>>").append("'][1]").toString();
@@ -353,6 +363,14 @@ public class AppointmentsScreen extends BaseScreen {
             .append("<<REASON>>")
             .append("']").toString();
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='HEALTH SUMMARY']")
+    @iOSXCUITFindBy(id = "Select location")
+    protected WebElement elmntHealthSummaryHeader;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='EXPORT']")
+    @iOSXCUITFindBy(id = "Select location")
+    protected WebElement elmntExportButtonButton;
+
 
     public boolean verifyFutureAndPastTab() {
         waitForElement(elmntAppointments);
@@ -385,6 +403,47 @@ public class AppointmentsScreen extends BaseScreen {
         click(elmntLocation);
     }
 
+    public void VerifyBannerMessage(String strBannerMessages) {
+        System.out.println("Location: " + strBannerMessages);
+        attachStepLog("Location", strBannerMessages);
+        waitForSecond(2);
+        String data="information circle outline "+strBannerMessages.concat(strExecutionID);
+        WebElement elmntBannerMessage = waitForElement(By.xpath(strBannerMessage.replace("<<BANNERMESSAGE>>", data)));
+      verifyElement(elmntBannerMessage);
+    }
+
+    public void VerifyAllLocationDisplayed(List<String> strLocationDetails) {
+        System.out.println("Location: " + strLocationDetails);
+
+    WebElement elmntLocation1 = waitForElement(By.xpath(VeriflyLocation.replace("<<LOCATION>>",strLocationDetails.get(0))));
+    verifyElement(elmntLocation1);
+
+        WebElement elmntLocation2= waitForElement(By.xpath(VeriflyLocation.replace("<<LOCATION>>",strLocationDetails.get(5))));
+        verifyElement(elmntLocation2);
+
+        WebElement elmntLocation3= waitForElement(By.xpath(VeriflyLocation.replace("<<LOCATION>>",strLocationDetails.get(6))));
+        verifyElement(elmntLocation3);
+    }
+    public boolean VerifydefaultLocationDisplayed(List<String> strLocationDetails) {
+        boolean blresults=false;
+        boolean blresults1=false;
+        boolean blresults2=false;
+        System.out.println("Location: " + strLocationDetails);
+
+            WebElement elmntLocation1 = waitForElement(By.xpath(VeriflyLocation.replace("<<LOCATION>>", strLocationDetails.get(0))));
+            blresults=verifyElement(elmntLocation1);
+
+            WebElement elmntLocation2 = waitForElement(By.xpath(VeriflyLocation.replace("<<LOCATION>>", strLocationDetails.get(5))));
+            blresults1=!verifyElement(elmntLocation2);
+
+            WebElement elmntLocation3 = waitForElement(By.xpath(VeriflyLocation.replace("<<LOCATION>>", strLocationDetails.get(6))));
+            blresults2=!verifyElement(elmntLocation3);
+
+        return blresults && blresults1 && blresults2 ;
+
+    }
+
+
     public void selectAppointmentsPolicy() {
 
 
@@ -398,6 +457,7 @@ public class AppointmentsScreen extends BaseScreen {
     public void tapNoInAppointmentPreScreening() {
         waitForSecond(5);
         waitForElement(elmntAppointmentPreScreening);
+        waitForSecond(3);
         waitForElement(btnNO);
         click(btnNO);
     }
@@ -426,7 +486,7 @@ public class AppointmentsScreen extends BaseScreen {
         System.out.println("Appointment: " + strAppointment);
         attachStepLog("Appointment", strAppointment);
         waitForElement(elmntVisit);
-        waitForElements(lstAvailableTimeSlot);
+     /*   waitForElements(lstAvailableTimeSlot);*/
         waitForSecond(2);
         WebElement elmntAppointment = waitForElement(By.xpath(strButtonTextLocator.replace("<<TEXT>>", strAppointment)));
         click(elmntAppointment);
@@ -1129,5 +1189,14 @@ public class AppointmentsScreen extends BaseScreen {
 
         takeScreenshot(driver);
         return verifyElement(elmntAppointmentDetails);
+    }
+
+
+    public void selectHealthSummaryExport() {
+        waitForElement(elmntHealthSummaryHeader);
+        verifyElement(elmntHealthSummaryHeader);
+        waitForElement(elmntExportButtonButton);
+        click(elmntExportButtonButton);
+
     }
 }

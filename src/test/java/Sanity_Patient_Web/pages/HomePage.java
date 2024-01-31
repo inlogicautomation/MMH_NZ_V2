@@ -43,7 +43,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Login']")
     protected WebElement betaLoginBtn;
 
-    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health, today')]")
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health today')]")
     protected WebElement elmntVerifyHomePage;
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";

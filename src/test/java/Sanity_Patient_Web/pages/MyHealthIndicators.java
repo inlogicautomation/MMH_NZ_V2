@@ -22,7 +22,7 @@ public class MyHealthIndicators extends BasePage {
 
     public static String SystolicMedicationName = "";
 
-    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health, today')]")
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health today')]")
     protected WebElement elmntVerifyHomePage;
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";

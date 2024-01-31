@@ -33,7 +33,7 @@ public class RRPScriptFeeSettingsPage extends BasePage {
     @FindBy(xpath = "//div[contains(text(),'RRP Script Instructions Fee Setup')]")
     protected WebElement elmntRRPScriptInstructionsFeeSetup;
 
-    @FindBy(xpath = " //mat-label[contains(text(),'Health Centre')]//preceding::mat-select")
+    @FindBy(xpath = "//mat-label[contains(text(),'Health centre')]//preceding::mat-select")
     protected WebElement elmntHealthCentre;
 
     protected String SelectHealthCentre = new StringBuilder().append("//span[contains(text(),'")

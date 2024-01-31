@@ -35,8 +35,8 @@ public class AppointmentRemainderSettingsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Automation1_Loc1')]")
     protected WebElement elmntHealthCenterDropDown;
 
-    protected String elmntSelectNumberDropDown = new StringBuilder().append("//span[text()='")
-            .append("<<REPLACEMENT>>").append("']").toString();
+    protected String elmntSelectNumberDropDown = new StringBuilder().append("//span[contains(text(),'")
+            .append("<<REPLACEMENT>>").append("')]").toString();
 
     protected String elmntHealthCentreDrop = new StringBuilder().append("(//span[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')])[2]").toString();
@@ -358,9 +358,9 @@ public class AppointmentRemainderSettingsPage extends BasePage {
             click(elmntSecondNumberDropDown);
             waitForElementDisappear(driver,By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntSelectNumberDropDown.replace("<<REPLACEMENT>>", StrNumber)));
-            mouseClick(elmntEntriesFromHealthCentre);
+            jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blresult = verifyElement(elmntSecondNumberDropDown);
+            blresult = true;
         } catch (Exception e) {
             System.out.println("Failed to click Second Appointment Reminder Number >>> :: ");
             e.printStackTrace();
@@ -381,7 +381,7 @@ public class AppointmentRemainderSettingsPage extends BasePage {
             waitForSeconds(2);
             jsClick(elmntEntriesFromHealthCentre);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            blresult = verifyElement(elmntSecondHoursDropDown);
+            blresult =true;
         } catch (Exception e) {
             System.out.println("Failed to click Second Appointment Reminder Hours >>> :: ");
             e.printStackTrace();

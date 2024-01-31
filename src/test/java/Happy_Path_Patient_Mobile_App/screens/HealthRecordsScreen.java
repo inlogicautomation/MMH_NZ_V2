@@ -72,7 +72,7 @@ public class HealthRecordsScreen extends BaseScreen {
             .append("<<TEXT2>>").append("']//following::XCUIElementTypeStaticText[@name='View'])[1]").toString();
 
     public void tapHealthRecordOption(String strHealthRecordOption) {
-        waitForElements(lstHealthRecordNo);
+//        waitForElements(lstHealthRecordNo);
         waitForSecond(2);
         waitForElement(elmntHealthRecords);
         waitForElementIgnoreStale(elmntHealthRecords);
@@ -141,7 +141,7 @@ public class HealthRecordsScreen extends BaseScreen {
     }
 
     public void tapHealthRecordOptionIOS(String strHealthRecordOption) {
-        waitForElements(lstHealthRecordNo);
+//        waitForElements(lstHealthRecordNo);
         waitForSecond(2);
         waitForElement(elmntHealthRecords);
         waitForElementIgnoreStale(elmntHealthRecords);

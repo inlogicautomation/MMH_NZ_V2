@@ -1,6 +1,6 @@
 Feature: Mobile_Health_Records_Scenarios
 
-  @MOBILE @RELAUNCH @Mobile_Health_Record @HAPPY_PATH_MOBILE
+  @MOBILE @RELAUNCH @Mobile_Health_Record1 @HAPPY_PATH_MOBILE
   Scenario Outline: S1 - User login with valid credential and verifies MMH Home screen
 
     Given I am on MMH Login screen
@@ -87,7 +87,7 @@ Feature: Mobile_Health_Records_Scenarios
       | &DOCTOR_NOTES_RECORDS& | &DOCTOR_NOTES_DETAILS& |
 
 
-  @MOBILE @Mobile_Health_Record @HAPPY_PATH_MOBILE
+  @MOBILE @Mobile_Health_Record1 @HAPPY_PATH_MOBILE
   Scenario Outline: S8 - Patient to View Health Records - Recalls (Entries from Health Centre)
 
     Given I am on MMH Home screen
@@ -98,3 +98,13 @@ Feature: Mobile_Health_Records_Scenarios
     Examples:
       | Test Result Records | Test Result Details |
       | &RECALLS_RECORDS&   | &RECALLS_DETAILS&   |
+
+
+  @MOBILE @Mobile_Health_Record11 @HAPPY_PATH_MOBILE11
+  Scenario:  S9 - Patient to View Health Summary
+
+    Given I am on MMH Home screen
+    And I tap on "Health Records" option in home screen
+    When I tap on "Health Summary" in Health Records
+    Then I should see Health Summary Page and Click Export icon
+

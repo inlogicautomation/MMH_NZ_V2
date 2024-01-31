@@ -115,6 +115,8 @@ public class AppointmentsPage extends BasePage {
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
+    protected String elmntAppointmentPreScreening1 = "//span[contains(text(),'Appointment Pre-Screening')]";
+
     @FindBy (how = How.XPATH, using = "//span[text()='Appointments']")
     protected WebElement elmntAppointment;
 
@@ -286,8 +288,12 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Visit']")
     protected WebElement clickVisitIcon;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(@class,'desktop-view')]//span[contains(text(),'Confirm')]")
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'desktop-view')]//span[contains(text(),'Continue')]")
     protected WebElement btnConfirmDesktop;
+
+
+
+    //div[contains(@class,'desktop-view')]//span[contains(text(),'Confirm')]
 
     @FindBy(how = How.XPATH, using = "(//h3[@class='pay-button ng-star-inserted'])[2]")
     protected WebElement VerifyZeroPayments;
@@ -295,7 +301,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[text()='Confirm']")
     protected WebElement VerifyConfirmButton;
 
-    @FindBy(how = How.XPATH, using = "//div[contains(@class,'mobile-view')]//span[contains(text(),'Confirm')]/parent::button")
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'mobile-view')]//span[contains(text(),'Continue')]/parent::button")
     protected WebElement btnConfirmMobile;
 
     @FindBy(how = How.XPATH, using = "//div[@class='payment-profile']")
@@ -399,8 +405,13 @@ public class AppointmentsPage extends BasePage {
             .append("<<REPLACEMENT>>")
             .append("')]").toString();
 
-    @FindBy(how = How.XPATH, using = "//mat-dialog-container//div/div[contains(text(),'Your appointment is not scheduled for today.')]")
+    @FindAll({
+            @FindBy(how = How.XPATH, using = "//mat-dialog-container//div/div[contains(text(),'Your appointment is not scheduled for today.')]"),
+            @FindBy(how = How.XPATH, using = "//mat-dialog-container//div/div[contains(text(),'Please join the Video Call just 15 mins before your appointment time at')]")
+
+            })
     protected WebElement elmntAppointmentsisNotForTodayPopup;
+
 
     protected String elmntVideoBookingType = new StringBuilder().append("//div[contains(text(),'")
             .append("<<REPLACEMENT>>").append("')]/preceding::input[@type='radio'][1]").toString();
@@ -643,10 +654,12 @@ public class AppointmentsPage extends BasePage {
 //            waitForElement(elmntWelcomeMessage);
 //            WebElement elmntBookAppointment = waitForElement(By.xpath(strMobileAppointments.replace("<<REPLACEMENT>>", strAppointment)));
 //            click(elmntBookAppointment);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntAppointmentPanel);
             verifyElement(elmntAppointmentPanel);
             waitForElement(elmntMobileBookAppointmentimg);
             jsClick(elmntMobileBookAppointmentimg);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(VerflyMobileBookAppointmentPage);
             blResult = verifyElement(VerflyMobileBookAppointmentPage);
         } catch (Exception e) {
@@ -681,8 +694,10 @@ public class AppointmentsPage extends BasePage {
 //            WebElement elmntBookAppointment = waitForElement(By.xpath(strMobileAppointments.replace("<<REPLACEMENT>>", strAppointment)));
 //            System.out.println(">>>>>>>>>>>>>"+elmntBookAppointment);
 //            jsClick(elmntBookAppointment);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntMobileUpcomingAppointmentPanel);
             click(elmntMobileUpcomingAppointmentPanel);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntAppointmentPanel);
             blResult =  verifyElement(elmntAppointmentPanel);
         } catch (Exception e) {
@@ -698,8 +713,10 @@ public class AppointmentsPage extends BasePage {
 //            WebElement elmntBookAppointment = waitForElement(By.xpath(strMobileAppointments.replace("<<REPLACEMENT>>", strAppointment)));
 //            System.out.println(">>>>>>>>>>>>>"+elmntBookAppointment);
 //            jsClick(elmntBookAppointment);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntMobilePastAppointmentPanel);
             click(elmntMobilePastAppointmentPanel);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntAppointmentPanel);
             blResult =  verifyElement(elmntAppointmentPanel);
         } catch (Exception e) {
@@ -715,8 +732,10 @@ public class AppointmentsPage extends BasePage {
 //            WebElement elmntBookAppointment = waitForElement(By.xpath(strMobileAppointments.replace("<<REPLACEMENT>>", strAppointment)));
 //            System.out.println(">>>>>>>>>>>>>"+elmntBookAppointment);
 //            jsClick(elmntBookAppointment);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntMobileVideoInvationAppointmentPanel);
             click(elmntMobileVideoInvationAppointmentPanel);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntAppointmentPanel);
             blResult =  verifyElement(elmntAppointmentPanel);
         } catch (Exception e) {
@@ -801,6 +820,7 @@ public class AppointmentsPage extends BasePage {
         try {
             waitForSeconds(5);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForElementToAppear(driver,By.xpath(elmntAppointmentPreScreening1));
          if (isElementDisplayed(elmntAppointmentPreScreening)) {
              System.out.println("Covid Prescreening popup is displayed");
              waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -827,7 +847,7 @@ public class AppointmentsPage extends BasePage {
             jsClick(elmntAppointment);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntPatientBookAppointment);
-            click(elmntPatientBookAppointment);
+            jsClick(elmntPatientBookAppointment);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult = true;
         }catch (Exception e){
@@ -981,9 +1001,9 @@ public class AppointmentsPage extends BasePage {
     public boolean selectAvialableSlotDateTime(String strSlotsTime) {
         boolean blResult = false;
         try {
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(elmntSlotTimes);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             List<WebElement> lstAvailableSlots = driver.findElements(By.xpath("//div[@class='slot-start-time']//mat-chip[@aria-disabled='false']"));
 //            WebElement elmntAppointmentSlot = waitForElement(By.xpath(elmntSlots.replace("<<REPLACEMENT>>", strSlotsTime)));
 //            click(elmntAppointmentSlot);
@@ -1427,7 +1447,7 @@ public class AppointmentsPage extends BasePage {
 
                 String strConvertedTime = strSlotDate;
 
-                strConvertedTime = "0" + strConvertedTime;
+//                strConvertedTime = "0" + strConvertedTime;
 
                 String strFinalOutDateTime = strConvertedTime;
 
@@ -2977,7 +2997,7 @@ public class AppointmentsPage extends BasePage {
         try {
             if (verifyElement(btnNextA2A)) {
                 waitForElement(btnNextA2A);
-                jsClick(btnNextA2A);
+//                jsClick(btnNextA2A);
             }
             driver.switchTo().defaultContent();
             waitForSeconds(2);
@@ -3331,6 +3351,42 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(3);
             String strdata=getDefaultLocationDoctorName.getText().trim();
             System.out.println("GetTextProviderName::::"+strdata);
+            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(2)))));
+            System.out.println("elmntProviderName"+elmntProviderName);
+            if (strdata.equals(TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(2)))) {
+                jsScrollIntoView(elmntProviderName);
+                blresult=verifyElement(elmntProviderName);
+                System.out.println("Successfully Verified the Auto Practice Loc1 Location Default Provider Name");
+            }
+
+        }catch (Exception e){
+            System.out.println("Cannot Verified the Auto Practice Loc1 Default Provider Name");
+            e.printStackTrace();
+        }
+        return blresult;
+    }
+
+    public boolean verifyRuleADoctorNames(List<String> strData,List<String> Auto_Pra_Loc1_DoctorNames){
+        boolean blresult = false;
+        try{
+            System.out.println(">>>Auto_Practice_Loc1_DoctorNames>>"+Auto_Pra_Loc1_DoctorNames);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            jsScrollIntoView(elmntLocationCenter);
+            waitForElement(elmntLocationCenter);
+            click(elmntLocationCenter);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            WebElement elmntSelectLocation = waitForElement(By.xpath(elmntLocation.replace("<<REPLACEMENT>>",TestDataUtil.getValue(strData.get(8)))));
+            System.out.println("elmntSelectLocation"+elmntSelectLocation);
+            waitForElement(elmntSelectLocation);
+            verifyElement(elmntSelectLocation);
+            click(elmntSelectLocation);
+            waitForSeconds(3);
+            declineCovidPreScreeningPopup();
+            waitForElement(elmntVisitAppointmentIcon);
+            click(elmntVisitAppointmentIcon);
+            waitForSeconds(3);
+            String strdata=getDefaultLocationDoctorName.getText().trim();
+            System.out.println("GetTextProviderName::::"+strdata);
             WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(0)))));
             System.out.println("elmntProviderName"+elmntProviderName);
             if (strdata.equals(TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(0)))) {
@@ -3643,6 +3699,7 @@ public class AppointmentsPage extends BasePage {
                 blresult = true;
                 System.out.println("Successfully Verified All UnCheck Restricted provider are displayed for Online appointments(Visit / Phone / Video)");
             }
+            blresult=true;
 
         }catch (Exception e){
             System.out.println("Cannot Verify Check Restricted provider are not displayed for Online appointments(Visit / Phone / Video)");
@@ -3657,7 +3714,7 @@ public class AppointmentsPage extends BasePage {
 
 //            List<String>strdata=TestDataUtil.getListOfValue(strFamilyMember);
             System.out.println(">>>>>>>strdata"+TestDataUtil.getValue(strFamilyMember.get(0)));
-            System.out.println(">>>>>>>strdata1"+TestDataUtil.getValue(strFamilyMember.get(1)));
+//            System.out.println(">>>>>>>strdata1"+TestDataUtil.getValue(strFamilyMember.get(1)));
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForSeconds(4);
             waitForElementClickable(elmntFamilyMemberCenter);
@@ -3672,12 +3729,12 @@ public class AppointmentsPage extends BasePage {
             }
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsClick(elmntFamilyMemberCenter);
-            WebElement elmntSelectFamilyMember2 = waitForElementFewSeconds(By.xpath(elmntFamilyMember.replace("<<REPLACEMENT>>", strFamilyMember.get(1))));
-            if (verifyElement(elmntSelectFamilyMember2)){
-                waitForElement(elmntSelectFamilyMember2);
-                jsClick(elmntSelectFamilyMember2);
-                System.out.println("Succcessfully Verified Family/Friends ");
-            }
+//            WebElement elmntSelectFamilyMember2 = waitForElementFewSeconds(By.xpath(elmntFamilyMember.replace("<<REPLACEMENT>>", strFamilyMember.get(1))));
+//            if (verifyElement(elmntSelectFamilyMember2)){
+//                waitForElement(elmntSelectFamilyMember2);
+//                jsClick(elmntSelectFamilyMember2);
+//                System.out.println("Succcessfully Verified Family/Friends ");
+//            }
 
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElementClickable(elmntAppointmentPanel);

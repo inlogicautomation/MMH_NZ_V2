@@ -33,7 +33,7 @@ public class MyHealthRecordsPage extends BasePage {
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
-    @FindBy(how = How.XPATH, using = "(//a[@class='menu-header ng-star-inserted']/following::span[text()='My Health Records']//following::mat-icon)[1]")
+    @FindBy(how = How.XPATH, using = "(//a[@class='menu-header ng-star-inserted']/following::span[contains(text(),'My Health Records')]//following::mat-icon)[1]")
     protected WebElement btnMyHealthRecordsExpand;
 
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")
@@ -758,7 +758,7 @@ public class MyHealthRecordsPage extends BasePage {
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Files']")
     protected WebElement FileIcon;
 
-    @AndroidFindBy(xpath = "(//android.widget.ImageView[@resource-id='android:id/icon'])[3]")
+    @AndroidFindBy(xpath = "(//android.widget.ImageView)[5]")
     protected WebElement MediaIcon;
 
 //

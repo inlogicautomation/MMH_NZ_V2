@@ -27,7 +27,7 @@ public class ViewJournal extends BasePage {
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
-    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health, today')]")
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health today')]")
     protected WebElement elmntVerifyHomePage;
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Health Tools')]")

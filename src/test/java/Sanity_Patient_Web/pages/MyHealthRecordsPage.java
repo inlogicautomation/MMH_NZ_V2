@@ -29,7 +29,7 @@ public class MyHealthRecordsPage extends BasePage {
     static Process pb = null;
 
 
-    @FindBy(how = How.XPATH, using = "//a[@class='menu-header ng-star-inserted']/following::span[text()='My Health Records']")
+    @FindBy(how = How.XPATH, using = "//a[@class='menu-header ng-star-inserted']/following::span[contains(text(),'My Health Records')]")
     protected WebElement btnMyHealthRecordsExpand;
 
     @FindBy(how = How.XPATH, using = "//mat-icon[text()='menu']")

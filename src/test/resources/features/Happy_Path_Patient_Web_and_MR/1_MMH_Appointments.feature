@@ -9,7 +9,7 @@ Feature: Appointments
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -17,10 +17,10 @@ Feature: Appointments
     When I click SignIn button
     Then I should see user successfully logs in to the MMH portal
     Examples:
-      | Email Address | Password   |
-      | &EMAIL&       | &PASSWORD& |
+      | Email Address | Password   | ui         |
+      | &EMAIL&       | &PASSWORD& | &UI_EMAIL& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: Prep- Canceling all the appointments
 
     Given As a user I am on HomePage
@@ -98,7 +98,7 @@ Feature: Appointments
       | Appointment           | Appointment_Cancel_Button        | Appointment_After_Cancel              |
       | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @APP @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S2 - Patient Booking Appointment - Video Appointment
 
     Given As a user I am on HomePage
@@ -114,7 +114,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
       | Book Appointment | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S2- User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -126,7 +126,7 @@ Feature: Appointments
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S2 - Join Video Appointment
 
     And I navigate to the "<Appointment>" Future Appointments page
@@ -215,7 +215,7 @@ Feature: Appointments
       | Tab               |
       | Past Appointments |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @APP @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S9 - Patient can view all the video appointments invites sent from PMS/Provider in grid view
 
     Given As a user I am on HomePage

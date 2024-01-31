@@ -75,9 +75,9 @@ public class HomeScreen extends BaseScreen {
         waitForSecond(1);
         int i = 1;
         while (!(verifyElementWithoutWait(iconHome) && i <= 10)) {
-//            navigateToBack();
-            waitForElement(NavigateToBack);
-            click(NavigateToBack);
+            navigateToBack();
+//            waitForElement(NavigateToBack);
+//            click(NavigateToBack);
             i++;
 //            if (verifyElement(iconHome)) {
 //                System.out.println("Loop Break 1");

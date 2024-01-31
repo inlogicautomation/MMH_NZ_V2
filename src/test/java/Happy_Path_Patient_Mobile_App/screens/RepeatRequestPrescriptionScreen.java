@@ -557,7 +557,7 @@ tapByCoordinates(88,1578);
             waitForElement(elmntRepeatPrescription);
             click(elmntRepeatPrescription);
         }
-        waitForSecond(3);
+        waitForSecond(5);
         waitForElement(elmntSyncView);
         click(elmntSyncView);
         waitForSecond(3);

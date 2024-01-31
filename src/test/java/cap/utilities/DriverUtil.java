@@ -403,13 +403,23 @@ public class DriverUtil {
 
 
             } else {
-                strURL = new StringBuilder()
-                        .append("http://")
-                        .append(strRemoteIP)
-                        .append(":")
-                        .append(strRemotePort)
-                        .append("/wd/hub")
-                        .toString();
+                if (capability.getPlatform().toString().equalsIgnoreCase(Constants.ANDROID.toUpperCase())) {
+                    strURL = new StringBuilder()
+                            .append("http://")
+                            .append(strRemoteIP)
+                            .append(":")
+                            .append(strRemotePort)
+                            .append("/wd/hub")
+                            .toString();
+                }
+                if (capability.getPlatform().toString().equalsIgnoreCase(Constants.IOS.toUpperCase())) {
+                    strURL = new StringBuilder()
+                            .append("http://")
+                            .append(strRemoteIP)
+                            .append(":")
+                            .append(strRemotePort)
+                            .toString();
+                }
             }
             if (capability.getPlatform().toString().equalsIgnoreCase(Constants.ANDROID.toUpperCase())) {
                 driver = new AndroidDriver(new URL(strURL), capability);

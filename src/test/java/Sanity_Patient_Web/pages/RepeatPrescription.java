@@ -363,7 +363,7 @@ public class RepeatPrescription extends BasePage {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(drpdownLocation);
             waitForElementClickable(drpdownLocation);
-            click(drpdownLocation);
+            jsClick(drpdownLocation);
             waitForSeconds(4);
             System.out.println(" select Location Locator :: " + selectLocation.replace("<<REPLACEMENT>>", strLocation) + "\n");
             WebElement ddlLocation = waitForElement(By.xpath(selectLocation.replace("<<REPLACEMENT>>", strLocation)));

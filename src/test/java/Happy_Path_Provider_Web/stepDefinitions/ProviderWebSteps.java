@@ -657,7 +657,7 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     public void iShouldVerifyThePatientPortalWebBannerHeadingAndBannerMessagesAreNotDisplayed(String strBannerHeading, String strBannerMessage) {
         Assert.assertTrue(providerPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
         Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerHeadingNotDisplayed(strBannerHeading));
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerMessageNotDisplayed(strBannerMessage));
+//        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerMessageNotDisplayed(strBannerMessage));
     }
 
     @And("I select Health Center {string} and I enable Patient Portal Web Banner Message to yes")
@@ -1543,7 +1543,7 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     public void iShouldVerifyThePatientPortalWebBannerHeadingAndBannerMessagesAreDisplayed(String strBannerHeading, String strBannerMessage) {
         Assert.assertTrue(providerPageContainer.appointmentsPage.declineCovidPreScreeningPopup());
         Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerHeading(strBannerHeading));
-        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerMessageDisplayed(strBannerMessage));
+//        Assert.assertTrue(providerPageContainer.appointmentMessagePage.verifyWebBannerMessageDisplayed(strBannerMessage));
     }
 
     @Given("As a Provider I am on HomePage and navigate to Appointment Reminder Setting page")

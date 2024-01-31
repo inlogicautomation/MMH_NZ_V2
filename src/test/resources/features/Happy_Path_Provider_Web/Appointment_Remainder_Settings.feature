@@ -20,7 +20,7 @@ Feature: Appointment Reminder Setting Page
       | Appointment           |
       | Upcoming Appointments |
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_REMINDER_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_REMINDER_SETTING
   Scenario Template:S1- Set First Appointment Remainder without Remainder Time
 
     Given As a Provider I am on HomePage and navigate to Appointment Reminder Setting page
@@ -36,7 +36,7 @@ Feature: Appointment Reminder Setting Page
       | &APPOINTMENT_REMINDER_DATA&  | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &PATIENT_USER_LOGIN& | &PASSWORD& | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &VISIT_APPOINTMENT_SUMMARY& |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_REMINDER_SETTING1
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_REMINDER_SETTING
   Scenario Template:S2- Set First Appointment Remainder with Remainder Time
 
     Given As a Provider I am on HomePage and navigate to Appointment Reminder Setting page
@@ -83,7 +83,7 @@ Feature: Appointment Reminder Setting Page
       | &APPOINTMENT_REMINDER_DATA&  | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &FUTURE_DATE& | &PATIENT_USER_LOGIN& | &PASSWORD& | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &VISIT_APPOINTMENT_SUMMARY& |
 
 
-  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_REMINDER_SETTING
+  @WEB @PROVIDER_HAPPY_PATH @APPOINTMENTS_REMINDER_SETTING1
   Scenario Template:S5- Set First Appointment Remainder and set Remainder Time then I Enable Skip weekends
 
     Given As a Provider I am on HomePage and navigate to Appointment Reminder Setting page

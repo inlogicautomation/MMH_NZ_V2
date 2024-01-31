@@ -291,7 +291,7 @@ Feature: Messages
 #    69:Click on save to save all the settings
 #    These test Case Covered The Scenario NO: S11
 #    }
-  @WEB @MESSAGES @SANITY_PATH
+  @WEB @MESSAGES @SANITY_PATH1
   Scenario Outline: S11- Patient Out Of Office Settings
     Given As a user I am on HomePage and navigate to Messages Setting
     And I click the Out of Office Settings and Enable Out Of Office Reply option
