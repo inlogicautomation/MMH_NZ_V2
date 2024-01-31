@@ -2066,9 +2066,8 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
     public boolean enterCardDetails(String strCardNumber, String strNameOnCard, String strExpiryMonth, String strExpiryYear, String strCVC) {
         boolean blResult = false;
         try {
-            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(SelectCreditCardPayment);
-            jsClick(SelectCreditCardPayment);
+            click(SelectCreditCardPayment);
             waitForSeconds(2);
             waitForElement(txtCreditCardPayment);
             verifyElement(txtCreditCardPayment);
@@ -2322,7 +2321,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             waitForSeconds(5);
             if (verifyElement(btnNextA2A)) {
                 waitForElement(btnNextA2A);
-//                jsClick(btnNextA2A);
+                jsClick(btnNextA2A);
             }
 //            waitForElement(elmntSuccessA2A);
             System.out.println("Reference details was Successful >>>");

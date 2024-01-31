@@ -16,12 +16,12 @@ public class BeatingTheBlues extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Beating the Blues')]")
     protected WebElement elmtBeatingTheBlues;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Helping you get better and stay well')]")
+    @FindBy(how = How.XPATH, using = " //h5[contains(text(),'Beating The Blues')]")
     protected WebElement elmtBeatingTheBluesHeader;
 
     protected String elmntSpinner = "//mat-progress-spinner[@role='progressbar']";
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Resume Session')]")
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'View Session 1')]//parent::a")
     protected WebElement elmtviewsession1;
 
 //    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Hi TOM KARRIE')]")
@@ -33,7 +33,7 @@ public class BeatingTheBlues extends BasePage {
     @FindBy(how = How.XPATH, using = "//iframe[@title='Beating The Blues']")
     protected WebElement getElmtBeatingTheBluesFrame;
 
-    @FindBy(how = How.XPATH, using = "(//button[@type='button'])[1]")
+    @FindBy(how = How.XPATH, using = "//button[@type='button']")
     protected WebElement getElmtBeatingTheBluesCloseButton;
 
     //iframe[@title='Beating The Blues']
@@ -50,8 +50,7 @@ public class BeatingTheBlues extends BasePage {
 
 
     public boolean clickViewsummary() {
-        waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        waitForSeconds(5);
+        waitForSeconds(3);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         jsScrollIntoView(elmtBeatingTheBlues);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
@@ -59,21 +58,20 @@ public class BeatingTheBlues extends BasePage {
         waitAndClick(elmtBeatingTheBlues);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(2);
-        return verifyElement(elmtBeatingTheBlues);
+        waitForElement(elmtBeatingTheBluesHeader);
+        return verifyElement(elmtBeatingTheBluesHeader);
     }
 
     public void clickViewsession() {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
-        waitForSeconds(10);
+        waitForSeconds(5);
      waitForElement(elmtviewsession1);
         jsClick(elmtviewsession1);
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
 
-
     }
 
     public boolean clickContinuesession1() {
-        waitForSeconds(10);
 //        focusWindow(2);
         driver.switchTo().frame(getElmtBeatingTheBluesFrame);
         waitForSeconds(3);
@@ -82,14 +80,11 @@ public class BeatingTheBlues extends BasePage {
         jsClick(elmtContinuesession1);
         waitForSeconds(2);
 //        waitForElementDisappear(driver, By.xpath(elmntSpinner));
-
-
+        waitForSeconds(2);
+        jsClick(getElmtBeatingTheBluesCloseButton);
 //        closeWindow(2);
 //        waitForSeconds(3);
         driver.switchTo().defaultContent();
-        waitForSeconds(2);
-        waitForElement(getElmtBeatingTheBluesCloseButton);
-        jsClick(getElmtBeatingTheBluesCloseButton);
 //        focusWindow(1);
         waitForSeconds(3);
         return true;

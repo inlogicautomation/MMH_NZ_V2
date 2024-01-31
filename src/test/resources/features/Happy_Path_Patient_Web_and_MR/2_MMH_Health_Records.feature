@@ -1,6 +1,6 @@
 Feature: My Health Records
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @JENKINS
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature: My Health Records
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @test @JENKINS
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -132,7 +132,7 @@ Feature: My Health Records
       | Immunisations |
       | Immunisations |
 
-  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S6-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Immunisations Details
 
     Given As a user I am on HomePage
@@ -149,7 +149,7 @@ Feature: My Health Records
       | Header        |
       | Immunisations |
 
-  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @test
   Scenario Template: S6-Patient validate edit and delete in My entries Immunisation Details
 
     Given I am on "<Tab>" Immunisation page
@@ -162,7 +162,7 @@ Feature: My Health Records
       | Tab           | Record                      | AdditionalName    |
       | Immunisations | &IMMUNISATION_VACCINE_NAME& | &EDIT_ADDITIONAL& |
 
-  @WEB @Mobile @HEALTH_RECORDS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @test
   Scenario Template: S6-Patient validate edit and delete in My entries COVID Immunisation Details
 
     Given I am on "<Tab>" CovidImmunisation page
@@ -183,7 +183,7 @@ Feature: My Health Records
       | Tab           | Record                                     | AdditionalName    |
       | Immunisations | Comirnaty, COVID-19 mRNA (Pfizer-BioNTech) | &EDIT_ADDITIONAL& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE @test
   Scenario Template: S7-Patient to View Health Records & Verify the Conditions Entries from Health Centre Medicine Details
 
     Given As a user I am on HomePage

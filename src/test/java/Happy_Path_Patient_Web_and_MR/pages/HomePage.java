@@ -6,11 +6,9 @@ import cap.utilities.TestDataUtil;
 import cap.utilities.WindowsProcessUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -56,7 +54,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='appVersion']/small")
     protected WebElement txtAppVersion;
 
-    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Start managing your health today')]")
+    @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome,') or contains(text(),'Start managing your health, today')])[1]")
     protected WebElement elmntVerifyHomePage;
 
     @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Important Update')]")
@@ -65,8 +63,8 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'ACCEPT')]")
     protected WebElement elmntTeamsConditions;
     @FindAll({
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp2White!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Gp3!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp2White!')]")
     })
     protected WebElement txtProviderPortalWelcomePage;
 
@@ -75,8 +73,8 @@ public class HomePage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Harry Harry!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]//span[contains(text(),'Arnold')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome ')]//span[contains(text(),'Auto Autochrisc1')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Autochrisc1!')]"),
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Autochrisc1!')]")
 
     })
     protected WebElement txtPatientWelcomePage;
@@ -95,8 +93,8 @@ public class HomePage extends BasePage {
         @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Harry Harry!']"),
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Christopher Michael!']"),
-                @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]//span[contains(text(),'Arnold')]"),
-                @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]//span[contains(text(),'Auto Autochrisc1')]")
+                @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Ben!']"),
+                @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Auto Autochrisc1!']")
 
     })
     protected WebElement txtWelcome;
@@ -281,18 +279,6 @@ public class HomePage extends BasePage {
     public void enterEmailForBeta(String strEmail) {
         waitForElementDisappear(driver, By.xpath(elmntSpinner));
         waitForSeconds(3);
-//        String UIData= TestDataUtil.getListOfValue("&UI_EMAIL&");
-
-
-//        WebElement element=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@data-placeholder='Email Address']")));
-//        System.out.println(">>>>color"+element.getCssValue("color"));
-//        String S = element.getCssValue("color");
-//        String c= Color.fromString(S).asHex();
-//        System.out.println("C:::"+c);
-//        System.out.println(">>>>font-weight"+element.getCssValue("font-weight"));
-//        System.out.println(">>>>font-size"+element.getCssValue("font-size"));
-//        System.out.println(">>>>height"+element.getCssValue("height"));
-
         if (verifyElement(txtBoxEmail)) {
             waitForSeconds(3);
             waitForElementClickable(txtBoxEmail);
@@ -412,7 +398,7 @@ public boolean veriflyTeamscondition(){
 
     public boolean verifyHomePageOfMMHPortal() {
         waitForSeconds(5);
-//        waitForElement(elmntVerifyHomePage);
+        waitForElement(elmntVerifyHomePage);
         if (verifyElement(txtAppVersion)) {
             strAppVersion = txtAppVersion.getText();
             System.out.printf("TxtAPPVersion"+strAppVersion);
@@ -426,7 +412,7 @@ public boolean veriflyTeamscondition(){
             e.printStackTrace();
         }
         takeScreenshot(driver);
-        return true;
+        return verifyElement(elmntVerifyHomePage);
     }
 
     public boolean verifyHomePageOfProviderPortal() {
@@ -655,7 +641,6 @@ public boolean veriflyTeamscondition(){
 
     public boolean clickDashBoard() {
         boolean isVerified = false;
-        waitForSeconds(5);
         jsScrollIntoView(elmntDashboard);
         waitForElement(elmntDashboard);
         jsClick(elmntDashboard);
