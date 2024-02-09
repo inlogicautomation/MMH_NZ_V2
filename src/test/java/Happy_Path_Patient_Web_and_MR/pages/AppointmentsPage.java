@@ -298,7 +298,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "(//h3[@class='pay-button ng-star-inserted'])[2]")
     protected WebElement VerifyZeroPayments;
 
-    @FindBy(how = How.XPATH, using = "//span[text()='Confirm']")
+    @FindBy(how = How.XPATH, using = "//span[text()='Continue']")
     protected WebElement VerifyConfirmButton;
 
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'mobile-view')]//span[contains(text(),'Continue')]/parent::button")
@@ -768,8 +768,8 @@ public class AppointmentsPage extends BasePage {
             waitForElement(elmntHealtCenter);
             click(elmntHealtCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            WebElement elmntSelectHealthCenter = waitForElementFewSeconds(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", strHealthCenter)));
-            mouseClick(elmntSelectHealthCenter);
+            WebElement elmntSelectHealthCenter = waitForElement(By.xpath(elmntHealthCenter.replace("<<REPLACEMENT>>", strHealthCenter)));
+            jsClick(elmntSelectHealthCenter);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = verifyElement(elmntPatientLocationCenter);
         } catch (Exception e) {

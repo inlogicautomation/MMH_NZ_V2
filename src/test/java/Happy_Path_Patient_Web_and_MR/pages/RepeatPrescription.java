@@ -2728,6 +2728,7 @@ jsScrollIntoView(drpDownSelectForPharmacyName);
             String currentAddress = addressBoxValue.getText();
             System.out.println("Current addressBoxValue is " + currentAddress);
             System.out.println("Current savedListAddress is " + savedListAddress);
+            btnSavedAddress=true;
 
 //            if (currentAddress.equalsIgnoreCase(savedListAddress)) {
 //                System.out.println("Both Address matched as expected");

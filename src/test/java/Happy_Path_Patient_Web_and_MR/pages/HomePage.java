@@ -54,7 +54,7 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='appVersion']/small")
     protected WebElement txtAppVersion;
 
-    @FindBy(how = How.XPATH, using = "(//*[contains(text(),'My Home page') or contains(text(),'Welcome,') or contains(text(),'Start managing your health, today')])[1]")
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'My Home page') or contains(text(),'Welcome') or contains(text(),'Start managing your health today')]")
     protected WebElement elmntVerifyHomePage;
 
     @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Important Update')]")
@@ -63,18 +63,23 @@ public class HomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'ACCEPT')]")
     protected WebElement elmntTeamsConditions;
     @FindAll({
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp2White!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]//span[contains(text(),'Testpreferred')]"),
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]//span[contains(text(),'Gp2White')]")
     })
     protected WebElement txtProviderPortalWelcomePage;
 
     @FindBy(how = How.XPATH, using = "//a/span[contains(text(),'Dashboard')]")
     protected WebElement elmntDashboard;
 
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'SIGN OUT')]")
+    protected WebElement elmntSignOut;
+
+
+
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Harry Harry!')]"),
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Autochrisc1!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Autochrisc1!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]//span[contains(text(),'Auto Autochrisc1')]")
 
     })
     protected WebElement txtPatientWelcomePage;
@@ -94,7 +99,7 @@ public class HomePage extends BasePage {
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Harry Harry!']"),
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Christopher Michael!']"),
                 @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Ben!']"),
-                @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[text()=' Auto Autochrisc1!']")
+                @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]//span[text()=' Auto Autochrisc1']")
 
     })
     protected WebElement txtWelcome;

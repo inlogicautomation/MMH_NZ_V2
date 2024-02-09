@@ -110,7 +110,7 @@ Feature: Provider_Messages
       | Message                   | Compose Details            |
       | &AUTOMATIC REPLY MESSAGE& | &PROVIDER_COMPOSE_MESSAGE& |
 
-  @WEB @PROVIDER_HAPPY_PATH1 @PROVIDER_MESSAGES
+  @WEB @PROVIDER_HAPPY_PATH1 @PROVIDER_MESSAGES1
   Scenario Outline: S9-Allow Patient to Send Message when provider enabled Out of Office
 
     Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
@@ -126,7 +126,7 @@ Feature: Provider_Messages
       | Start Date   | End Date   | Message                   | Compose Details   |
       | &START DATE& | &END DATE& | &AUTOMATIC REPLY MESSAGE& | &COMPOSE_MESSAGE& |
 
-  @WEB @PROVIDER_HAPPY_PATH1 @PROVIDER_MESSAGES
+  @WEB @PROVIDER_HAPPY_PATH1 @PROVIDER_MESSAGES1
   Scenario Outline: S10-Do not Allow Patient to Send Message to Provider when provider enabled Out of Office
 
     Given As a user I am on Doctor portal HomePage and navigate to Messages Setting
@@ -142,7 +142,7 @@ Feature: Provider_Messages
       | Start Date   | End Date   | Message                   | Compose Details   |
       | &START DATE& | &END DATE& | &AUTOMATIC REPLY MESSAGE& | &COMPOSE_MESSAGE& |
 
-  @WEB @PROVIDER_HAPPY_PATH1 @PROVIDER_MESSAGES
+  @WEB @PROVIDER_HAPPY_PATH1 @PROVIDER_MESSAGES1
   Scenario Outline: S11-Do not Allow Patient to Send Message to Provider when provider enabled Out of Office
 
     Given As a user I am on Doctor portal HomePage and navigate to Messages Setting

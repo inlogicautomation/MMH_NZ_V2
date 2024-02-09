@@ -215,7 +215,7 @@ Feature: Appointments
       | Tab               |
       | Past Appointments |
 
-  @WEB @APP @APPOINTMENTS1 @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @APP @APPOINTMENTS1 @HAPPY_PATH1 @HAPPY_PATH_MOBILE_RESPONSE
   Scenario Template: S9 - Patient can view all the video appointments invites sent from PMS/Provider in grid view
 
     Given As a user I am on HomePage

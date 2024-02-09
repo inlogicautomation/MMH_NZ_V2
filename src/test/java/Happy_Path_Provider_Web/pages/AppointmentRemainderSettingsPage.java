@@ -440,7 +440,6 @@ public class AppointmentRemainderSettingsPage extends BasePage {
                 waitForElement(elmntSkipWeekEndsCheckBoxDisabled);
                 verifyElement(elmntSkipWeekEndsCheckBoxDisabled);
                 jsClick(elmntSkipWeekEndsCheckBoxDisabled);
-                waitForElement(elmntSkipWeekEndsCheckBoxEnabled);
                 blresult=verifyElement(elmntSkipWeekEndsCheckBoxEnabled);
             }
 

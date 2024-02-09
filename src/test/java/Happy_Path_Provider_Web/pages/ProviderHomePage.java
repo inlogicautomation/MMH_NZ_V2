@@ -73,14 +73,14 @@ public class ProviderHomePage extends BasePage {
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),' Timprefer!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Gp2White!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]//span[contains(text(),'Gp2White')]")
     })
     protected WebElement txtProviderPortalWelcomePage;
 
 
     @FindAll({
             @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Harry Harry!')]"),
-            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome,')]//span[contains(text(),'Auto Autochrisc1!')]")
+            @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Welcome')]//span[contains(text(),'Auto Autochrisc1')]")
     })
     protected WebElement txtHarryHarryWelcome;
 
@@ -102,7 +102,7 @@ public class ProviderHomePage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'Repeat Prescriptions')]")
     protected WebElement elmtRepeatScriptSettings;
 
-    @FindBy(xpath = "//span[contains(text(),'SMS Credit Facility')]")
+    @FindBy(xpath = "//span[contains(text(),'SMS Credits')]")
     protected WebElement elmtSMSCreditFacility;
 
     @FindBy(xpath = "//button//span[contains(text(),'Edit')]")
@@ -177,7 +177,7 @@ public class ProviderHomePage extends BasePage {
     @FindBy (how = How.XPATH, using = "//h1[contains(text(),'Appointment Message')]")
     protected WebElement elmntAppoitmentMssgHeading;
 
-    @FindBy (how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health, today')]")
+    @FindBy (how = How.XPATH, using = "//*[contains(text(),'Home')and contains(text(),'My Home page') or contains(text(),'Start managing your health today')]")
     protected WebElement verifyPatientHomePage;
 
     @FindBy (how = How.XPATH, using = "//span[text()='Appointments']")
@@ -529,20 +529,36 @@ public class ProviderHomePage extends BasePage {
                     ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
                     driver.switchTo().window(tabs.get(1));
                     visit(TestDataUtil.getValue("&URL&"));
+                    driver.manage().deleteAllCookies();
                     waitForSeconds(4);
                     int WindowsCounts = driver.getWindowHandles().size();
                     System.out.println("===============>WindowsCount::" + WindowsCounts);
                     if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
-                        if (verifyElement(txtProviderPortalWelcomePage)) {
-                            waitForElement(elmntLogOut);
-                            click(elmntLogOut);
-                            waitForSeconds(2);
-                            visit(TestDataUtil.getValue("&URL&"));
+                        if (isElementDisplayed(txtHarryHarryWelcome)) {
+                            driver.manage().deleteAllCookies();
+                            System.out.println("User here in Provider home page");
+                            takeScreenshot(driver);
+                        }
+                        else{
+                            if (verifyElement(btnExitApp)) {
+                                waitForSeconds(3);
+                                waitForElement(btnExitApp);
+                                verifyElement(btnExitApp);
+                                click(btnExitApp);
+                                waitForSeconds(3);
+                                visit(TestDataUtil.getValue("&URL&"));
+                                driver.manage().deleteAllCookies();
+                            }else {
+                                waitForSeconds(3);
+                                visit(TestDataUtil.getValue("&URL&"));
+                                driver.manage().deleteAllCookies();
+
+                            }
                         }
 
                     }
                     if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
-                        if (verifyElement(txtProviderPortalWelcomePage)) {
+                        if (verifyElement(txtHarryHarryWelcome)) {
                             waitForElementClickable(elmntMobileLogOut);
                             jsClick(elmntMobileLogOut);
                             waitForSeconds(2);
@@ -551,7 +567,7 @@ public class ProviderHomePage extends BasePage {
 
                     }
                     if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
-                        if (verifyElement(txtProviderPortalWelcomePage)) {
+                        if (verifyElement(txtHarryHarryWelcome)) {
                             waitForElementClickable(elmntMobileLogOut);
                             jsClick(elmntMobileLogOut);
                             waitForSeconds(2);
