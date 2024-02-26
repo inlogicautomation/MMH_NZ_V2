@@ -291,7 +291,14 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(@class,'desktop-view')]//span[contains(text(),'Continue')]")
     protected WebElement btnConfirmDesktop;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Future appointment(s)')]")
+    protected WebElement elmtFutureAppointmentHeader;
 
+    @FindBy(how = How.XPATH, using = "//p[text()='Auto Autochrisc1 (1) has future appointment(s). ']")
+    protected WebElement elmtAppointmentPopup;
+
+    @FindBy(how = How.XPATH, using = "//button[contains(text(),'CANCEL')]")
+    protected WebElement elmtCancelButton;
 
     //div[contains(@class,'desktop-view')]//span[contains(text(),'Confirm')]
 
@@ -445,7 +452,7 @@ public class AppointmentsPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Video Invitations')]")
     protected WebElement elmntVideoPage;
 
-    @FindBy(how = How.XPATH, using = "//td/mat-icon[contains(text(),'videocam')]")
+    @FindBy(how = How.XPATH, using = "//td//mat-icon[contains(text(),'videocam')]")
     protected List<WebElement> elmntsVideoIcons;
 
     @FindBy(how = How.XPATH, using = "//mat-expansion-panel-header[contains(@class,'mat-expansion-panel')]")
@@ -574,6 +581,14 @@ public class AppointmentsPage extends BasePage {
             .append("<<REPLACEMENT5>>").append("')]//following::td//following::td[contains(text(),'")
             .append("<<REPLACEMENT6>>").append("')]//following::td[contains(text(),'")
             .append("<<REPLACEMENT7>>").append("')])[1]").toString();
+
+    protected String elmntVideoAppointment = new StringBuilder().append("//td[contains(text(),'")
+            .append("<<REPLACEMENT1>>")
+            .append("')]//following::td//following::td//span[contains(text(),'")
+            .append("<<REPLACEMENT2>>")
+            .append("')]").toString();
+
+    //td[contains(text(),'24 Feb 2024')]//following::td//following::td//span[contains(text(),'Join')]
 
 
 
@@ -1005,6 +1020,7 @@ public class AppointmentsPage extends BasePage {
             waitForElement(elmntSlotTimes);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             List<WebElement> lstAvailableSlots = driver.findElements(By.xpath("//div[@class='slot-start-time']//mat-chip[@aria-disabled='false']"));
+            waitForSeconds(3);
 //            WebElement elmntAppointmentSlot = waitForElement(By.xpath(elmntSlots.replace("<<REPLACEMENT>>", strSlotsTime)));
 //            click(elmntAppointmentSlot);
             for (WebElement ele: lstAvailableSlots) {
@@ -1373,6 +1389,31 @@ public class AppointmentsPage extends BasePage {
 
     }
 
+    public boolean verifyNoOfAppointmentAllowedPerdayPopup() {
+        boolean blResult = false;
+        try {
+            if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForElement(elmtFutureAppointmentHeader);
+                verifyElement(elmtFutureAppointmentHeader);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForElement(elmtAppointmentPopup);
+                verifyElement(elmtAppointmentPopup);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                waitForElement(elmtCancelButton);
+                click(elmtCancelButton);
+                waitForElementDisappear(driver, By.xpath(elmntSpinner));
+                blResult = true;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
+
+    }
+
     public boolean verifyDetailsOfCreatedAppointment(List<String> lstDetails, String strFutureDate) {
         boolean blResult = false;
         try {
@@ -1472,6 +1513,21 @@ public class AppointmentsPage extends BasePage {
         }
         return blResult;
 
+    }
+    public boolean VerifyTypeOfVideoAppointmentPopupNotDisplayed() {
+        boolean blResult = false;
+        try {
+            if (!verifyElement(elmntVideoBookingTypeOkButton)) {
+                blResult = true;
+            }
+            else{
+                blResult=false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blResult;
     }
 
 
@@ -2226,9 +2282,17 @@ public class AppointmentsPage extends BasePage {
     }
 
 
-    public void clickFirstIcon() {
-        waitForElement(elmntFirstVideoIcon);
-        click(elmntFirstVideoIcon);
+    public void clickFirstIcon(List<String> data) {
+//        List<String>Datevalue=TestDataUtil.getListOfValue(data);
+        String strDatePattern1 = "dd MMM yyyy";
+        String strDate = TestDataUtil.getValue(data.get(0));
+        String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+        System.out.println(">>>>>>>>>strDateValue"+strDateValue);
+        WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntVideoAppointment.replace("<<REPLACEMENT1>>", strDateValue).replace("<<REPLACEMENT2>>", data.get(1))));
+        System.out.println(">>>>>>>>>elmntAppointmentDetails"+elmntAppointmentDetails);
+        waitForElement(elmntAppointmentDetails);
+        verifyElement(elmntAppointmentDetails);
+        click(elmntAppointmentDetails);
     }
 
     public boolean verifyAllIcons(List<String> strAllIcons) {
@@ -2381,6 +2445,17 @@ public class AppointmentsPage extends BasePage {
         boolean blResult = false;
         try {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+
+//                if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy M52")) {
+//                    waitForSeconds(2);
+//                    jsScrollUp();
+//                    Select DateExpiryMonth = new Select(driver.findElement(By.id("DateExpiry_1")));
+//                    DateExpiryMonth.selectByVisibleText("02");
+//                    jsScrollUp();
+//                    Select DateExpiryYear = new Select(driver.findElement(By.id("DateExpiry_2")));
+//                    DateExpiryYear.selectByVisibleText("24");
+//                    System.out.printf("Successflly select DateExpiryMonth");
+//                }
 
                 if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy M53")) {
                     DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -2682,6 +2757,80 @@ public class AppointmentsPage extends BasePage {
             strConvertedTime = "0" + strConvertedTime;
             String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
             System.out.println(strFinalOutDateTime);
+//                String strFinalOutDateTime = strDateMonth + " " + strTime;
+//                System.out.println(strFinalOutDateTime);
+                WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
+                verifyElement(elmntAppointmentDetails);
+                jsScrollIntoView(elmntAppointmentDetails);
+
+                System.out.println("TEST" + lstDetails.get(1));
+                WebElement elmntReservationDetails = waitForElement(By.xpath(btnCancelForCreatedAppointment
+                        .replace("<<REPLACEMENT1>>", strFinalOutDateTime)
+                        .replace("<<REPLACEMENT2>>", lstDetails.get(0))
+                        .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
+                System.out.println("TEST" + lstDetails.get(1));
+                verifyElement(elmntReservationDetails);
+                takeScreenshot(driver);
+                click(elmntReservationDetails);
+                waitForSeconds(3);
+                blResult = true;
+            } catch (Exception d) {
+                e.printStackTrace();
+            }
+
+        }
+        return blResult;
+    }
+
+    public boolean verifyApprovedForTheCreatedAppointment(List<String> lstDetails) {
+        boolean blResult = false;
+
+        try {
+
+            String strDatePattern1 = "dd MMM yyyy";
+            String strDate = TestDataUtil.getValue(lstDetails.get(2));
+            String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+            System.out.println("DATE : " + strDateValue);
+
+            String strDateMonth = strDateValue;
+            String strTime = strSlotDate;
+            System.out.println("CANCEL TIME : " + strTime);
+            String strConvertedTime = strTime;
+//            strConvertedTime = "0" + strConvertedTime;
+//            String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
+//            System.out.println(strFinalOutDateTime);
+            String strFinalOutDateTime = strDateMonth + " " + strTime;
+            System.out.println(strFinalOutDateTime);
+            WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
+            verifyElement(elmntAppointmentDetails);
+            jsScrollIntoView(elmntAppointmentDetails);
+
+            System.out.println("TEST" + lstDetails.get(1));
+            WebElement elmntReservationDetails = waitForElement(By.xpath(btnCancelForCreatedAppointment
+                    .replace("<<REPLACEMENT1>>", strFinalOutDateTime)
+                    .replace("<<REPLACEMENT2>>", lstDetails.get(0))
+                    .replace("<<REPLACEMENT3>>", lstDetails.get(1))));
+            System.out.println("TEST" + lstDetails.get(1));
+            verifyElement(elmntReservationDetails);
+            takeScreenshot(driver);
+            click(elmntReservationDetails);
+            waitForSeconds(3);
+            blResult = true;
+
+        } catch (Exception e) {
+            try {
+                waitForSeconds(2);
+//                waitForElement(elmntMobileUpComingAppointmentHeader);
+                String strDatePattern1 = "dd MMM yyyy";
+                String strDate = TestDataUtil.getValue(lstDetails.get(2));
+                String strDateValue = DateUtil.getDate(strDate, strDatePattern1);
+                System.out.println("DATE" + strDateValue);
+                String strDateMonth = strDateValue;
+                String strTime = strSlotDate;
+                String strConvertedTime = strTime;
+                strConvertedTime = "0" + strConvertedTime;
+                String strFinalOutDateTime = strDateMonth + " " + strConvertedTime;
+                System.out.println(strFinalOutDateTime);
 //                String strFinalOutDateTime = strDateMonth + " " + strTime;
 //                System.out.println(strFinalOutDateTime);
                 WebElement elmntAppointmentDetails = waitForElement(By.xpath(elmntFutureAppointmentDetail.replace("<<REPLACEMENT1>>", strFinalOutDateTime).replace("<<REPLACEMENT2>>", lstDetails.get(0))));
@@ -3369,6 +3518,7 @@ public class AppointmentsPage extends BasePage {
     public boolean verifyRuleADoctorNames(List<String> strData,List<String> Auto_Pra_Loc1_DoctorNames){
         boolean blresult = false;
         try{
+            System.out.println(">>>strData>>"+strData);
             System.out.println(">>>Auto_Practice_Loc1_DoctorNames>>"+Auto_Pra_Loc1_DoctorNames);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             jsScrollIntoView(elmntLocationCenter);
@@ -3387,9 +3537,9 @@ public class AppointmentsPage extends BasePage {
             waitForSeconds(3);
             String strdata=getDefaultLocationDoctorName.getText().trim();
             System.out.println("GetTextProviderName::::"+strdata);
-            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(0)))));
+            WebElement elmntProviderName = waitForElement(By.xpath(elmntProviderNames.replace("<<REPLACEMENT>>",TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(2)))));
             System.out.println("elmntProviderName"+elmntProviderName);
-            if (strdata.equals(TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(0)))) {
+            if (strdata.equals(TestDataUtil.getValue(Auto_Pra_Loc1_DoctorNames.get(2)))) {
                 jsScrollIntoView(elmntProviderName);
                 blresult=verifyElement(elmntProviderName);
                 System.out.println("Successfully Verified the Auto Practice Loc1 Location Default Provider Name");

@@ -1673,7 +1673,7 @@ public class MessagesPage extends BasePage {
             jsClick(btnSendMessage);
             waitForSeconds(4);
             verifyElement(txtInboxPage);
-
+            waitForSeconds(2);
 //            waitForElement(txtComposeSuccessMessage);
 //            waitForElement(btnHome);
 //            waitForElementClickable(btnHome);

@@ -277,8 +277,9 @@ public class PhoneAppointmentSettingPage extends BasePage {
         boolean blresult = false;
         try {
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
+            waitForSeconds(3);
             waitForElement(clickVM03LocationRule2);
-            jsClick(clickVM03LocationRule2);
+            mouseClick(clickVM03LocationRule2);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blresult=verifyElement(clickVM03LocationRule2);
         } catch (Exception e) {

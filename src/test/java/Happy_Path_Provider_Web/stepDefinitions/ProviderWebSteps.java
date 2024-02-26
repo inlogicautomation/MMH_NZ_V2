@@ -891,13 +891,28 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     @And("I enable RuleA Radio button and I click save button then I see Saved Successfully message{string}")
     public void iEnableRuleARadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickNumberofAppointmentDropDown());
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleAButton());
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+    }
+
+
+    @And("I enable RuleA Radio button select the no of appointments and I click save button then I see Saved Successfully message{string}")
+    public void iEnableRuleARadioButtonSelectTheNoOfAppointmentsAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickNumber1ofAppointmentDropDown());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleAButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+
+
+
+
     }
 
     @And("I enable RuleB Radio button and I click save button then I see Saved Successfully message{string}")
     public void iEnableRuleBRadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickNumberofAppointmentDropDown());
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleBButton());
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }
@@ -951,6 +966,7 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     @And("I enable RuleC Radio button and I click save button then I see Saved Successfully message{string}")
     public void iEnableRuleCRadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickNumberofAppointmentDropDown());
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleCButton());
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }
@@ -964,6 +980,7 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
     @And("I enable RuleD Radio button and I click save button then I see Saved Successfully message{string}")
     public void iEnableRuleDRadioButtonAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickNumberofAppointmentDropDown());
         Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickRuleDButton());
         Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }
@@ -1766,5 +1783,36 @@ List<String>data=TestDataUtil.getListOfValue(strLocation);
         Assert.assertTrue(providerPageContainer.preScreeningPage.clickUpdateButton());
 
 
+    }
+
+    @Then("Verify if Location {string} and Provider are Displayed based on Rule A {string} {string}")
+    public void verifyIfLocationAndProviderAreDisplayedBasedOnRuleA(String strHealthCenter, String VM03ProviderNames, String VM032ProviderNames) {
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("BROWSER")) {
+            List<String> lstAppointmentDetails = TestDataUtil.getListOfValue(strHealthCenter);
+            System.out.printf("lstAppointmentDetails"+lstAppointmentDetails);
+            Assert.assertTrue(providerPageContainer.appointmentSettingPage.declineCovidPreScreeningPopup());
+            Assert.assertTrue(providerPageContainer.appointmentSettingPage.selectHealthCenter(TestDataUtil.getValue(lstAppointmentDetails.get(0))));
+            Assert.assertTrue(providerPageContainer.appointmentSettingPage.declineCovidPreScreeningPopup());
+            Assert.assertTrue(providerPageContainer.appointmentSettingPage.verifyPatientvisitAppointmentsLocation(TestDataUtil.getListOfValue(strHealthCenter)));
+            Assert.assertTrue(providerPageContainer.appointmentSettingPage.verifyPatientDoctorNamesforvisitappoinments(TestDataUtil.getListOfValue(strHealthCenter),TestDataUtil.getListOfValue(VM03ProviderNames),TestDataUtil.getListOfValue(VM032ProviderNames)));
+        }
+    }
+
+
+
+    @And("I enable Reason Mandatory No Radio button select the no of appointments and I click save button then I see Saved Successfully message{string}")
+    public void iEnableReasonMandatoryNoRadioButtonSelectTheNoOfAppointmentsAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+//        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickReasonForMandatoryNoButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
+    }
+
+    @And("I enable Reason Mandatory yes Radio button select the no of appointments and I click save button then I see Saved Successfully message{string}")
+    public void iEnableReasonMandatoryYesRadioButtonSelectTheNoOfAppointmentsAndIClickSaveButtonThenISeeSavedSuccessfullyMessage(String LocationData) {
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickHealthCenterLocation(LocationData));
+//        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickEditButton());
+        Assert.assertTrue(providerPageContainer.appointmentSettingPage.clickReasonForMandatoryButton());
+        Assert.assertTrue(providerPageContainer.repeatScriptSettingPage.backToHomePage());
     }
 }

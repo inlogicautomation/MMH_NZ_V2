@@ -35,7 +35,7 @@ public class SharedDriver {
 
         if (strExecutionType.equalsIgnoreCase("BROWSER")
                 || strExecutionType.equalsIgnoreCase("MOBILEVIEW")
-                || strExecutionType.equalsIgnoreCase("TABLETVIEW")) {
+                || strExecutionType.equalsIgnoreCase("TABVIEW")) {
 
             //Launch WebDriver
             driver = DriverUtil.getDriver();
@@ -69,6 +69,11 @@ public class SharedDriver {
         } else if (strExecutionType.equalsIgnoreCase("API")) {
             System.out.println("<------------- API Suite started... ------------->");
         }
+        else if (strExecutionType.equalsIgnoreCase("TABLETVIEW")) {
+            // Mobile Driver
+            mobileDriver = DriverUtil.getMobileDriver();
+            System.out.println("<----------------------Mobile Driver is launched---------------------->");
+        }
     }
 
     private static final Thread CLOSE_THREAD = new Thread() {
@@ -92,6 +97,10 @@ public class SharedDriver {
                 mobileDriver.quit();
             } else if(strExecutionType.equalsIgnoreCase("API")){
                 System.out.println("<------------- API Suite Completed... ------------->");
+            }
+            else if (strExecutionType.equalsIgnoreCase("TABLETVIEW")) {
+                driver.quit();
+                mobileDriver.quit();
             }
         }
     };

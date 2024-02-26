@@ -34,7 +34,6 @@ public class DemoWebCukes extends AbstractTestNGCucumberTests {
         ExtentService.getInstance().setSystemInfo("Execution Machine", strSystemName);
         ExtentService.getInstance().setSystemInfo("Automation QA", System.getProperty("user.name"));
 
-
     }
 }
 

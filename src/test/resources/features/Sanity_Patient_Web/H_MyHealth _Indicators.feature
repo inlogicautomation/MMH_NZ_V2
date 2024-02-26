@@ -408,6 +408,16 @@ Feature:MyHealth_Indicators
            # These tests Case Covered The Scenario NO: S15
       #}
 
+#  @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
+#  Scenario Template:Pref- User Successfully logs in to the beta v2 Portal.
+#    Given As a user I am on beta MMH login Page
+#    And I enter "<Email Address>" and "<Password>" For Beta
+#    When I click SignIn button
+#    Then I should see user successfully logs in to the MMH portal
+#    Examples:
+#      | Email Address | Password   |
+#      | &EMAIL_MMH&   | &PASSWORD& |
+
   @WEB  @SANITY_PATH  @MY_HEALTH_INDICATORS
   Scenario Template: S15-Existing Patient Verify Medicine details and validate Add, edit, delete, change status, set reminder,privacy settings in My entries Peak Flow Details
 

@@ -257,6 +257,43 @@ public class DriverUtil {
                 }
                 break;
 
+            case "tabletview":
+                try {
+                    config_inputStream = new FileInputStream(new StringBuilder()
+                            .append(Constants.CONFIG_FOLDER)
+                            .append("/")
+                            .append(Constants.ENV_VARIABLE_MOBILE)
+                            .append("/")
+                            .append(strConfig).append(".properties").toString());
+
+                    config_prop.load(config_inputStream);
+
+                    if (!strBrowser.isEmpty()) {
+                        capability.setBrowserName(strBrowser);
+                    }
+
+                    // set capabilities
+                    Enumeration<Object> enuKeys = config_prop.keys();
+                    while (enuKeys.hasMoreElements()) {
+                        String key = (String) enuKeys.nextElement();
+                        String value = config_prop.getProperty(key);
+                        capability.setCapability(key, value);
+                        System.setProperty(key, value);
+                        System.out.println(key +" : "+ value);
+                    }
+                    capability.setCapability("newCommandTimeout", 15000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("\nCAP Fatal Error : File not present or Invalid config file name " + strConfig + ".properties");
+                    System.exit(0);
+                } finally {
+                    try {
+                        config_inputStream.close();
+                    } catch (Exception e) {
+                    }
+                }
+                break;
+
 
             case "WINDOWS":
                 System.out.println(" - Caps - Windows");
@@ -388,19 +425,11 @@ public class DriverUtil {
             String strURL = "";
             if (System.getProperty(Constants.ENV_VARIABLE_CONFIG, "").contains("remote_")) {
                 System.out.println("\n enter if... remote Execut");
-                /*String USERNAME = "dineshn_1gY3Ft";
-                String AUTOMATE_KEY = "MRFxtxpyyzbpg8p6rfKB";*/
-                String USERNAME = "patrickfernandez2";
-                String AUTOMATE_KEY = "YeVMjcoDUTGYkx7zkXMj";
+
+                String USERNAME = "rdevanathan_NS9RGC";
+                String AUTOMATE_KEY = "6HKdZhsteHb6zMAykmyY";
                 strURL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
                 System.out.println("URL   " + strURL);
-                // strURL = new StringBuilder().append(Constants.KOBITONURL).toString();
-                int connectionTimeout = 20 * 60 * 1000;
-                int socketTimeout = 90 * 1000;
-
-                // ApacheHttpClient.Factory clientFactory = new ApacheHttpClient.Factory(new HttpClientFactory(connectionTimeout, socketTimeout));
-                // AppiumCommandExecutor executor = new AppiumCommandExecutor(new HashMap<String, AppiumCommandInfo>(), new URL(strURL));
-
 
             } else {
                 if (capability.getPlatform().toString().equalsIgnoreCase(Constants.ANDROID.toUpperCase())) {

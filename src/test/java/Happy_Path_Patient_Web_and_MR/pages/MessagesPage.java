@@ -151,7 +151,7 @@ public class MessagesPage extends BasePage {
     protected WebElement elmntGroupMessageDoctor;
 
 
-    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Sent')]")
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Sent Messages')]")
     protected WebElement elmntSentDoctor;
 
     @FindBy(how = How.XPATH, using = "//button[@text='Refresh']")
@@ -2264,6 +2264,7 @@ jsScrollIntoView(txtBoxMessages);
         try {
 //            waitForSeconds(3);
             waitForElement(txtSent);
+//            click(txtSent);
 //            waitForSeconds(3);
             driver.navigate().refresh();
             waitForElement(txtSent);
@@ -2622,7 +2623,7 @@ jsScrollIntoView(txtBoxMessages);
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
             waitForElement(txtCompose);
 //            driver.switchTo().frame(frameComposeForDoctor);
-            waitForSeconds(2);
+            waitForSeconds(3);
             jsScrollUp();
             waitForElementClickable(txtBoxMessageBody);
             txtBoxMessageBody.click();

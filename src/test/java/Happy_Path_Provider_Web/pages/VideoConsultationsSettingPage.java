@@ -69,6 +69,11 @@ public class VideoConsultationsSettingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='ProseMirror']")
     protected WebElement EnterMessageText;
 
+    @FindBy(how = How.XPATH, using = "//iframe[@class='k-iframe']")
+    protected WebElement elmntiframe;
+
+
+
     @FindBy(how = How.XPATH, using = "(//mat-radio-group[@formcontrolname='ondemandVCEnable']//input)[2]")
     protected WebElement elmntOnDemandVideoConsultationsNoRadioButton;
 
@@ -293,10 +298,18 @@ click(elmntVideoConsultationSetting);
         boolean blresult = false;
         try{
             waitForElementDisappear(driver, By.xpath(elmntSpinner));
-            jsScrollIntoView(EnterMessageText);
+            waitForSeconds(3);
+            driver.switchTo().frame(elmntiframe);
+//            jsScrollIntoView(EnterMessageText);
             waitForElement(EnterMessageText);
-            enterValue(EnterMessageText,strdata);
-            blresult =   verifyElement(EnterMessageText);
+           mouseClick(EnterMessageText);
+            driver.switchTo().activeElement().clear();
+            waitForSeconds(2);
+            driver.switchTo().activeElement().sendKeys(strdata);
+            waitForSeconds(2);
+            driver.switchTo().defaultContent();
+//            enterValue(EnterMessageText,strdata);
+            blresult =   true;
         }catch (Exception e){
 
             e.printStackTrace();

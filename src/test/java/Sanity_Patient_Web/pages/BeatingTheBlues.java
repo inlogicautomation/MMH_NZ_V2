@@ -73,6 +73,8 @@ public class BeatingTheBlues extends BasePage {
 
     public boolean clickContinuesession1() {
 //        focusWindow(2);
+        waitForSeconds(3);
+        waitForElementDisappear(driver, By.xpath(elmntSpinner));
         driver.switchTo().frame(getElmtBeatingTheBluesFrame);
         waitForSeconds(3);
         waitForElementToAppear(driver,By.xpath(elmtContinuesession));

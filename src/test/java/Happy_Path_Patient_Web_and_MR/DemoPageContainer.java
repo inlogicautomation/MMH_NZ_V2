@@ -52,6 +52,11 @@ public class DemoPageContainer {
             driver = SharedDriver.getMobileDriver();
             initPages();
         }
+        if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("TABLETVIEW")) {
+            driver = SharedDriver.getDriver();
+            driver = SharedDriver.getMobileDriver();
+            initPages();
+        }
 
 
     }
