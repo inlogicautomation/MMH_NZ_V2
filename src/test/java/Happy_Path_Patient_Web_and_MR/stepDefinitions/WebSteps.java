@@ -7,9 +7,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import Happy_Path_Patient_Web_and_MR.DemoPageContainer;
 
+import java.time.Duration;
 import java.util.List;
 
 /*
@@ -2285,7 +2289,7 @@ public class WebSteps {
             Assert.assertTrue(demoPageContainer.homePage.navigateToHomePage());
             Assert.assertTrue(demoPageContainer.messagesPage.navigateToMessageSetting());
             Assert.assertTrue(demoPageContainer.messagesPage.selectOutOfOfficeSetting());
-//            Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredOutOfOfficeMessage(TestDataUtil.getValue(lstStrMessage.get(0))));
+            Assert.assertTrue(demoPageContainer.messagesPage.verifyEnteredOutOfOfficeMessage(TestDataUtil.getValue(lstStrMessage.get(0))));
         }
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILEVIEW")) {
             Assert.assertTrue(demoPageContainer.homePage.clickHamburgerIcon());
@@ -4732,6 +4736,17 @@ public class WebSteps {
         Assert.assertTrue(demoPageContainer.appointmentsPage.selectAvialableSlotDateTime(TestDataUtil.getValue(lstAppointmentDetails.get(5))));
         Assert.assertTrue(demoPageContainer.appointmentsPage.clickConfirmButton());
         Assert.assertTrue(demoPageContainer.appointmentsPage.selectTypeOfVideoAppointment(TestDataUtil.getValue(lstAppointmentDetails.get(6))));
+    }
+
+    @When("I click on video join Button")
+    public void iClickOnVideoJoinButton() {
+        demoPageContainer.homePage.JoinButton();
+    }
+
+    @Then("I Enter Captcha Details")
+    public void iEnterCaptchaDetails() {
+        demoPageContainer.homePage.JoinButton();
+
     }
 }
 

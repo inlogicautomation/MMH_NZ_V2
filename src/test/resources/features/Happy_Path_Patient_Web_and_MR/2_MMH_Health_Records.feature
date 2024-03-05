@@ -20,7 +20,7 @@ Feature: My Health Records
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template:S1-Patient to View Health Records & Verify the Prescription Entries from Health Centre Medicine Details
 
     Given As a user I am on HomePage
@@ -34,7 +34,7 @@ Feature: My Health Records
       | Prescription  |
       | Prescriptions |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S2 -Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Prescriptions Details
 
     Given As a user I am on HomePage
@@ -55,7 +55,7 @@ Feature: My Health Records
       | Header        |
       | Prescriptions |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S2 -Patient validate edit and delete in My entries Prescriptions Details
 
     Given I am on "<Tab>" Prescriptions page
@@ -70,7 +70,7 @@ Feature: My Health Records
       | Tab           | Record         | FrequencyDrop |
       | Prescriptions | &VISITED_NAME& | 3 time        |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S3-Patient to View Health Records & Verify the Allergies Entries from Health Centre Medicine Details
 
     Given As a user I am on HomePage
@@ -85,7 +85,7 @@ Feature: My Health Records
       | Allergies |
       | Allergies |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S4-Verify Entries from Health Centre Medicine details and validate Add health Records in My entries Allergies Details
 
     Given As a user I am on HomePage
@@ -104,7 +104,7 @@ Feature: My Health Records
       | Header    |
       | Allergies |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S4-Patient validate edit and delete in My entries Allergies Details
 
     Given I am on "<Tab>" Allergies page
@@ -118,7 +118,7 @@ Feature: My Health Records
       | Tab       | Record           | SeverityDrop |
       | Allergies | &ALLERGIES_NAME& | Low          |
 
-  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @HEALTH_RECORDS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S5-Patient to View Health Records & Verify the Immunisations Entries from Health Centre Medicine Details
 
     Given As a user I am on HomePage

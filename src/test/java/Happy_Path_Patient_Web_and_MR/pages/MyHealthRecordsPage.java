@@ -577,6 +577,12 @@ public class MyHealthRecordsPage extends BasePage {
             .append(Constants.IMAGES_FOLDER).append(File.separator)
             .append("<<FILENAME>>").toString();
 
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Attach Files')]/parent::button")
+    protected WebElement btnAttachClick;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Attach ']")
+    protected WebElement btnAttachUpload;
+
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='uploadDocument']")
     protected WebElement btnFloorplanUpload;
 
@@ -2528,9 +2534,10 @@ jsScrollIntoView(elmntClinicianNotes);
             waitForElementClickable(elmntclassificationdrop);
             waitForSeconds(2);
             jsClick(elmntclassificationdrop);
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             WebElement elmntEntriesFromHealthCentre = waitForElement(By.xpath(elmntAddclassiDrop.replace("<<REPLACEMENT>>", strSeverity)));
             jsClick(elmntEntriesFromHealthCentre);
-
+            waitForElementDisappear(driver, By.xpath(elmntSpinner));
             blResult = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -3186,6 +3193,21 @@ jsScrollIntoView(elmntClinicianNotes);
         boolean blResult = false;
         try {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy M52")) {
+                    System.out.println("Member " + strUploadDocumentName);
+                    System.out.println(strUploadDocumentName);
+                    waitForSeconds(3);
+                    waitForElement(btnAttachClick);
+                    jsClick(btnAttachClick);
+                    String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
+                    System.out.println(strFloorplanDocumentName);
+                    btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
+                    waitForSeconds(3);
+                    waitForElement(btnAttachUpload);
+                    click(btnAttachUpload);
+                }
+
+
                 waitForSeconds(3);
                 click(btnFloorplanUploadMobile);
                 waitForSeconds(4);
@@ -3765,7 +3787,7 @@ jsScrollIntoView(elmntClinicianNotes);
         if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
             String strMedicationName = strCreatedRecord.concat(strExecutionID);
             WebElement btnEdit = waitForElement(By.xpath(elmntMobilePrescriptionsEdit.replace("<<REPLACEMENT>>", strMedicationName)));
-            click(btnEdit);
+            jsClick(btnEdit);
             waitForSeconds(3);
             jsScrollIntoView(btnMobilePrescriptionsEdit);
             click(btnMobilePrescriptionsEdit);

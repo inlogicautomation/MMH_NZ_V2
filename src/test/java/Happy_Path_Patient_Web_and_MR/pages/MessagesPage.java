@@ -634,6 +634,7 @@ public class MessagesPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@type='file']")
     protected WebElement btnFloorplanUpload;
 
+    //(//mat-icon[contains(text(),'attachment')])[2]
 
     @FindBy(how = How.XPATH, using = "(//mat-icon[text()='attachment'])[2]")
     protected WebElement btnAddFileForMobile;
@@ -1540,6 +1541,33 @@ protected WebElement txtWelcome;
         boolean blResult = false;
         try {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+
+                if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy M52")){
+                    System.out.println("SignatureMessage >>> :: " + TestDataUtil.getValue(strMessage));
+                    waitForSeconds(2);
+                    waitForElement(chkboxOutOfOfficeReply);
+                    waitForSeconds(3);
+                    waitForElement(frameOutOfOffice);
+                    driver.switchTo().frame(frameOutOfOffice);
+                    System.out.println("Switched into frame");
+                    waitForSeconds(5);
+                    jsScrollIntoView(txtBoxMessages);
+                    waitForSeconds(5);
+                    txtBoxMessages.click();
+                    waitForSeconds(2);
+                    driver.switchTo().activeElement().clear();
+                    waitForSeconds(2);
+                    txtBoxMessages.click();
+                    waitForSeconds(2);
+                    driver.switchTo().activeElement().sendKeys(strMessage);
+                    waitForSeconds(2);
+                    takeScreenshot(driver);
+                    waitForSeconds(2);
+                    System.out.println("Out Of Office Message was Entered successfully >>> ::");
+                    blResult = true;
+                    driver.switchTo().defaultContent();
+
+                }
                 waitForSeconds(2);
                 waitForElement(chkboxOutOfOfficeReply);
                 waitForSeconds(1);
@@ -1959,6 +1987,19 @@ jsScrollIntoView(txtBoxMessages);
     public boolean verifyEnteredOutOfOfficeMessage(String strMessage) {
         boolean blResult = false;
         try {
+            if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy M52")) {
+                waitForElement(chkboxOutOfOfficeReply);
+                driver.switchTo().frame(frameOutOfOffice);
+                System.out.println("Xpath for Text Out Of Office >>>> :: " + messageText.replace("<<REPLACEMENT>>", TestDataUtil.getValue(strMessage)));
+                WebElement txtOutOfMessage = waitForElement(By.xpath(messageText.replace("<<TEXT>>", TestDataUtil.getValue(strMessage))));
+                waitForElement(txtOutOfMessage);
+                verifyElement(txtOutOfMessage);
+                String outOfMessageText = txtOutOfMessage.getText();
+                System.out.println("verify Entered Signature Message >>> :: " + TestDataUtil.getValue(strMessage) + "::" + outOfMessageText);
+                blResult = true;
+
+
+            }
             waitForSeconds(2);
             waitForElement(chkboxOutOfOfficeReply);
             driver.switchTo().frame(frameOutOfOffice);
@@ -3050,6 +3091,19 @@ jsScrollIntoView(txtBoxMessages);
         boolean blResult = false;
         try {
             if (System.getProperty(Constants.ENV_VARIABLE_EXECUTION_TYPE, "").equalsIgnoreCase("MOBILE")) {
+                if (System.getProperty("deviceName").equalsIgnoreCase("Galaxy M52")) {
+                    System.out.println("Member " + strUploadDocumentName);
+                    System.out.println(strUploadDocumentName);
+                    waitForSeconds(3);
+                    waitForElement(btnAttachClick);
+                    jsClick(btnAttachClick);
+                    String strFloorplanDocumentName = strFloorplanFilePath.replace("<<FILENAME>>", strUploadDocumentName);
+                    System.out.println(strFloorplanDocumentName);
+                    btnFloorplanUpload.sendKeys(strFloorplanDocumentName);
+                    waitForSeconds(3);
+                    waitForElement(btnAttachUpload);
+                    jsClick(btnAttachUpload);
+                }
 
                 waitForSeconds(3);
                 jsScrollIntoView(btnAttachClick);

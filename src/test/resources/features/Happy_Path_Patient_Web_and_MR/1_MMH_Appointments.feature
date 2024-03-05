@@ -1,6 +1,6 @@
 Feature: Appointments
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: Changing machines timezone
 
     Given I change Windows "<TimeZone>"
@@ -9,7 +9,7 @@ Feature: Appointments
       | TimeZone                  |
       | New Zealand Standard Time |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -20,7 +20,7 @@ Feature: Appointments
       | Email Address | Password   | ui         |
       | &EMAIL&       | &PASSWORD& | &UI_EMAIL& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: Prep- Canceling all the appointments
 
     Given As a user I am on HomePage
@@ -31,7 +31,7 @@ Feature: Appointments
       | Appointment           |
       | Upcoming Appointments |
 
-  @WEB @Mobile  @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile  @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S5 - Patient Booking Appointment - Using Card Payment
 
     Given As a user I am on HomePage
@@ -44,7 +44,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details                         | Details_For_Appointment                        | Future_Date   |
       | Book Appointment | &BOOK_VISIT_APPOINTMENT_USING_CARD_PAYMENT& | &VISIT_APPOINTMENT_DETAILS_USING_CARD_PAYMENT& | &FUTURE_DATE& |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S5 - Patient Booking Appointment - Using Card Payment
 
     And I select payment option "<Payment_Option>"
@@ -57,7 +57,7 @@ Feature: Appointments
       | Payment_Option   | Payment_Details | Appointment_Details        | Future_Date   |
       | &PAYMENT_OPTION& | &CARD_DETAILS&  | &CARD_APPOINTMENT_DETAILS& | &FUTURE_DATE& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S1 Patient Booking Appointment - Visit Appointment
 
     Given As a user I am on HomePage
@@ -73,7 +73,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
       | Book Appointment | &BOOK_VISIT_APPOINTMENT& | &VISIT_APPOINTMENT_DETAILS& | &VISIT_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S1- User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -85,7 +85,7 @@ Feature: Appointments
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S6 - Patient Cancel Appointment
 
     And I navigate to the "<Appointment>" Future Appointments page
@@ -98,7 +98,7 @@ Feature: Appointments
       | Appointment           | Appointment_Cancel_Button        | Appointment_After_Cancel              |
       | Upcoming Appointments | &APPOINTMENT_DETAILS_FOR_CANCEL& | &APPOINTMENT_DETAILS_AFTER_CANCELLED& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S2 - Patient Booking Appointment - Video Appointment
 
     Given As a user I am on HomePage
@@ -114,7 +114,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details      | Details_For_Appointment     | Appointment_Summary         | Future_Date   |
       | Book Appointment | &BOOK_VIDEO_APPOINTMENT& | &VIDEO_APPOINTMENT_DETAILS& | &VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S2- User Successfully logs in to the MMH Portal.
 
     Given As a user I am on MMH login Page
@@ -126,7 +126,7 @@ Feature: Appointments
       | Email Address | Password   |
       | &EMAIL&       | &PASSWORD& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S2 - Join Video Appointment
 
     And I navigate to the "<Appointment>" Future Appointments page
@@ -138,7 +138,7 @@ Feature: Appointments
       | Appointment           | Join_Consultation                      | All_Icons     |
       | Upcoming Appointments | &VIDEO_APPOINTMENT_DETAILS_FOR_CANCEL& | &VIDEO_ICONS& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S3 - Patient Booking Appointment - Visit in video slot Appointment
 
     Given As a user I am on HomePage
@@ -153,7 +153,7 @@ Feature: Appointments
       | Appointment      | Appointment_Details               | Details_For_Appointment              | Appointment_Summary                  | Future_Date   |
       | Book Appointment | &BOOK_VISIT_IN_VIDEO_APPOINTMENT& | &VISIT_IN_VIDEO_APPOINTMENT_DETAILS& | &VISIT_IN_VIDEO_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S4 - Patient Booking Appointment - Phone Appointment
 
     Given As a user I am on HomePage
@@ -169,7 +169,7 @@ Feature: Appointments
       | Book Appointment | &BOOK_PHONE_APPOINTMENT& | &PHONE_APPOINTMENT_DETAILS& | &PHONE_APPOINTMENT_SUMMARY& | &FUTURE_DATE& |
 
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S7 - Patient can view all the future date booked appointments in card view
 
     Given As a user I am on HomePage
@@ -181,7 +181,7 @@ Feature: Appointments
       | Appointments          |
       | Upcoming Appointments |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S7 - Patient can view all the future date booked appointments in grid view
 
     Given I am on "<Tab>" page
@@ -192,7 +192,7 @@ Feature: Appointments
       | Tab                   |
       | Upcoming Appointments |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S8 - Patient can view all the past date booked appointments in card view
 
     Given As a user I am on HomePage
@@ -204,7 +204,7 @@ Feature: Appointments
       | Appointments      |
       | Past appointments |
 
-  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @APP @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S8 - Patient can view all the past date booked appointments in card view
 
     Given I am on "<Tab>" page
@@ -215,7 +215,7 @@ Feature: Appointments
       | Tab               |
       | Past Appointments |
 
-  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE
+  @WEB @Mobile @APPOINTMENTS @HAPPY_PATH @HAPPY_PATH_MOBILE_RESPONSE1
   Scenario Template: S9 - Patient can view all the video appointments invites sent from PMS/Provider in grid view
 
     Given As a user I am on HomePage
@@ -226,3 +226,12 @@ Feature: Appointments
     Examples:
       | Appointments      | Future        |
       | Video invitations | &VIDEO_ICONS& |
+
+  @WEB @Mobile @CAPTCHA
+  Scenario: User Successfully logs in to the MMH Portal.
+
+    Given As a user I am on MMH login Page
+    When I click on video join Button
+    Then I Enter Captcha Details
+
+

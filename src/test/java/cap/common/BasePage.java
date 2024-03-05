@@ -782,4 +782,16 @@ public class BasePage {
                 .perform();
     }
 
+    public void Captcha(){
+        WebDriverWait wait = new WebDriverWait(driver, 25);
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(
+                By.xpath("//iframe[starts-with(@name, 'a-') and starts-with(@src, 'https://www.google.com/recaptcha')]")));
+
+        wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[@class='recaptcha-checkbox-border']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.recaptcha-checkbox-checkmark"))).click();
+
+        System.out.println("Successfully Enter the Captcha");
+    }
+
 }

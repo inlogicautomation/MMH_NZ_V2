@@ -9,6 +9,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -38,6 +40,9 @@ public class HomePage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//span[text()='Login']")
     protected WebElement elmntLoginBtn;
+
+    @FindBy(how = How.XPATH, using = "//span[text()='Join meeting']")
+    protected WebElement elmntJoinBtn;
 
     @FindBy(how = How.XPATH, using = "//span[text()='Login']")
     protected WebElement elmntMobileLoginBtn;
@@ -307,6 +312,18 @@ public class HomePage extends BasePage {
         waitForElementClickable(btnLogin);
         return click(btnLogin);
     }
+
+    public void JoinButton(){
+        waitForElement(elmntJoinBtn);
+        click(elmntJoinBtn);
+        waitForSeconds(5);
+        Captcha();
+        System.out.println("Sucess Captcha Click");
+
+
+    }
+
+
 
     public boolean clickBetaLoginButton() {
         boolean blResult = false;
